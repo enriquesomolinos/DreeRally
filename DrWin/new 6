@@ -1,0 +1,1365 @@
+dword_445968 continuacion
+
+.data:004459AC                 db 6ADh ; ¡
+.data:004459B0                 db 6B1h ; ¦
+.data:004459B4                 db 6C3h ; +
+.data:004459B8                 db 6C3h ; +
+.data:004459BC                 db 6D1h ; Ð
+.data:004459C0                 db 6C1h ; -
+.data:004459C4                 db 6B8h ; ©
+.data:004459C8                 db 6BCh ; +
+.data:004459CC                 db 6BBh ; +
+.data:004459D0                 db 6BDh ; ¢
+.data:004459D4                 db 6C3h ; +
+.data:004459D8                 db 6B8h ; ©
+.data:004459DC                 db 6B0h ; ¦
+.data:004459E0                 db 695h ; ò
+.data:004459E4                 db 668h ; h
+.data:004459E8                 db 694h ; ö
+.data:004459EC                 db 697h ; ù
+.data:004459F0                 db 6A7h ; º
+.data:004459F4                 db 6C6h ; ã
+.data:004459F8                 db 6D5h ; i
+.data:004459FC                 db 6C1h ; -
+.data:00445A00                 db 6ADh ; ¡
+.data:00445A04                 db 686h ; å
+.data:00445A08                 db 697h ; ù
+.data:00445A0C                 db 681h ; ü
+.data:00445A10                 db 689h ; ë
+.data:00445A14                 db 68Ch ; î
+.data:00445A18                 db 676h ; v
+.data:00445A1C                 db 684h ; ä
+.data:00445A20                 db 69Fh ; ƒ
+.data:00445A24                 db 69Ch ; £
+.data:00445A28                 db 69Eh ; ×
+.data:00445A2C                 db 6D7h ; Î
+.data:00445A30                 db 6D2h ; Ê
+.data:00445A34                 db 6F8h ; °
+.data:00445A38                 db    2
+.data:00445A39                 db    7
+.data:00445A3A                 db    0
+.data:00445A3B                 db    0
+.data:00445A3C                 db 0FFh
+.data:00445A3D                 db    6
+.data:00445A3E                 db    0
+.data:00445A3F                 db    0
+.data:00445A40                 db    1
+.data:00445A41                 db    7
+.data:00445A42                 db    0
+.data:00445A43                 db    0
+.data:00445A44                 db  0Dh
+.data:00445A45                 db    7
+.data:00445A46                 db    0
+.data:00445A47                 db    0
+.data:00445A48                 db  0Dh
+.data:00445A49                 db    7
+.data:00445A4A                 db    0
+.data:00445A4B                 db    0
+.data:00445A4C                 db 0FEh ; ¦
+.data:00445A4D                 db    6
+.data:00445A4E                 db    0
+.data:00445A4F                 db    0
+.data:00445A50                 db  10h
+.data:00445A51                 db    7
+.data:00445A52                 db    0
+.data:00445A53                 db    0
+.data:00445A54                 db 0FEh ; ¦
+.data:00445A55                 db    6
+.data:00445A56                 db    0
+.data:00445A57                 db    0
+.data:00445A58                 db 0E4h ; õ
+.data:00445A59                 db    6
+.data:00445A5A                 db    0
+.data:00445A5B                 db    0
+.data:00445A5C                 db 0CCh ; ¦
+.data:00445A5D                 db    6
+.data:00445A5E                 db    0
+.data:00445A5F                 db    0
+.data:00445A60                 db  90h ; É
+.data:00445A61                 db    6
+.data:00445A62                 db    0
+.data:00445A63                 db    0
+.data:00445A64                 db  89h ; ë
+.data:00445A65                 db    6
+.data:00445A66                 db    0
+.data:00445A67                 db    0
+.data:00445A68                 db  76h ; v
+.data:00445A69                 db    6
+.data:00445A6A                 db    0
+.data:00445A6B                 db    0
+.data:00445A6C                 db  94h ; ö
+.data:00445A6D                 db    6
+.data:00445A6E                 db    0
+.data:00445A6F                 db    0
+.data:00445A70                 db 0C0h ; +
+.data:00445A71                 db    6
+.data:00445A72                 db    0
+.data:00445A73                 db    0
+.data:00445A74                 db  1Fh
+.data:00445A75                 db    7
+.data:00445A76                 db    0
+.data:00445A77                 db    0
+.data:00445A78                 db  3Ch ; <
+.data:00445A79                 db    7
+.data:00445A7A                 db    0
+.data:00445A7B                 db    0
+.data:00445A7C                 db  59h ; Y
+.data:00445A7D                 db    7
+.data:00445A7E                 db    0
+.data:00445A7F                 db    0
+.data:00445A80                 db  6Dh ; m
+.data:00445A81                 db    7
+.data:00445A82                 db    0
+.data:00445A83                 db    0
+.data:00445A84                 db  71h ; q
+.data:00445A85                 db    7
+.data:00445A86                 db    0
+.data:00445A87                 db    0
+.data:00445A88                 db  77h ; w
+.data:00445A89                 db    7
+.data:00445A8A                 db    0
+.data:00445A8B                 db    0
+.data:00445A8C                 db  44h ; D
+.data:00445A8D                 db    7
+.data:00445A8E                 db    0
+.data:00445A8F                 db    0
+.data:00445A90                 db  0Dh
+.data:00445A91                 db    7
+.data:00445A92                 db    0
+.data:00445A93                 db    0
+.data:00445A94                 db    5
+.data:00445A95                 db    7
+.data:00445A96                 db    0
+.data:00445A97                 db    0
+.data:00445A98                 db    9
+.data:00445A99                 db    7
+.data:00445A9A                 db    0
+.data:00445A9B                 db    0
+.data:00445A9C                 db 0CAh ; -
+.data:00445A9D                 db    6
+.data:00445A9E                 db    0
+.data:00445A9F                 db    0
+.data:00445AA0                 db  81h ; ü
+.data:00445AA1                 db    6
+.data:00445AA2                 db    0
+.data:00445AA3                 db    0
+.data:00445AA4                 db  5Ch ; \
+.data:00445AA5                 db    6
+.data:00445AA6                 db    0
+.data:00445AA7                 db    0
+.data:00445AA8                 db  5Ch ; \
+.data:00445AA9                 db    6
+.data:00445AAA                 db    0
+.data:00445AAB                 db    0
+.data:00445AAC                 db  76h ; v
+.data:00445AAD                 db    6
+.data:00445AAE                 db    0
+.data:00445AAF                 db    0
+.data:00445AB0                 db  95h ; ò
+.data:00445AB1                 db    6
+.data:00445AB2                 db    0
+.data:00445AB3                 db    0
+.data:00445AB4                 db  8Ch ; î
+.data:00445AB5                 db    6
+.data:00445AB6                 db    0
+.data:00445AB7                 db    0
+.data:00445AB8                 db 0A2h ; ó
+.data:00445AB9                 db    6
+.data:00445ABA                 db    0
+.data:00445ABB                 db    0
+.data:00445ABC                 db 0B8h ; ©
+.data:00445ABD                 db    6
+.data:00445ABE                 db    0
+.data:00445ABF                 db    0
+.data:00445AC0                 db 0AAh ; ¬
+.data:00445AC1                 db    6
+.data:00445AC2                 db    0
+.data:00445AC3                 db    0
+.data:00445AC4                 db 0ABh ; ½
+.data:00445AC5                 db    6
+.data:00445AC6                 db    0
+.data:00445AC7                 db    0
+.data:00445AC8                 db  94h ; ö
+.data:00445AC9                 db    6
+.data:00445ACA                 db    0
+.data:00445ACB                 db    0
+.data:00445ACC                 db  7Bh ; {
+.data:00445ACD                 db    6
+.data:00445ACE                 db    0
+.data:00445ACF                 db    0
+.data:00445AD0                 db  6Fh ; o
+.data:00445AD1                 db    6
+.data:00445AD2                 db    0
+.data:00445AD3                 db    0
+.data:00445AD4                 db  59h ; Y
+.data:00445AD5                 db    6
+.data:00445AD6                 db    0
+.data:00445AD7                 db    0
+.data:00445AD8                 db  21h ; !
+.data:00445AD9                 db    6
+.data:00445ADA                 db    0
+.data:00445ADB                 db    0
+.data:00445ADC                 db 0E3h ; Ò
+.data:00445ADD                 db    5
+.data:00445ADE                 db    0
+.data:00445ADF                 db    0
+.data:00445AE0                 db 0A5h ; Ñ
+.data:00445AE1                 db    5
+.data:00445AE2                 db    0
+.data:00445AE3                 db    0
+.data:00445AE4                 db  3Fh ; ?
+.data:00445AE5                 db    5
+.data:00445AE6                 db    0
+.data:00445AE7                 db    0
+.data:00445AE8                 db  1Ah
+.data:00445AE9                 db    5
+.data:00445AEA                 db    0
+.data:00445AEB                 db    0
+.data:00445AEC                 db  4Dh ; M
+.data:00445AED                 db    5
+.data:00445AEE                 db    0
+.data:00445AEF                 db    0
+.data:00445AF0                 db  79h ; y
+.data:00445AF1                 db    5
+.data:00445AF2                 db    0
+.data:00445AF3                 db    0
+.data:00445AF4                 db 0C4h ; -
+.data:00445AF5                 db    5
+.data:00445AF6                 db    0
+.data:00445AF7                 db    0
+.data:00445AF8                 db 0EFh ; ´
+.data:00445AF9                 db    5
+.data:00445AFA                 db    0
+.data:00445AFB                 db    0
+.data:00445AFC                 db  16h
+.data:00445AFD                 db    6
+.data:00445AFE                 db    0
+.data:00445AFF                 db    0
+.data:00445B00                 db  17h
+.data:00445B01                 db    6
+.data:00445B02                 db    0
+.data:00445B03                 db    0
+.data:00445B04                 db  3Bh ; ;
+.data:00445B05                 db    6
+.data:00445B06                 db    0
+.data:00445B07                 db    0
+.data:00445B08                 db  53h ; S
+.data:00445B09                 db    6
+.data:00445B0A                 db    0
+.data:00445B0B                 db    0
+.data:00445B0C                 db  65h ; e
+.data:00445B0D                 db    6
+.data:00445B0E                 db    0
+.data:00445B0F                 db    0
+.data:00445B10                 db  72h ; r
+.data:00445B11                 db    6
+.data:00445B12                 db    0
+.data:00445B13                 db    0
+.data:00445B14                 db  5Dh ; ]
+.data:00445B15                 db    6
+.data:00445B16                 db    0
+.data:00445B17                 db    0
+.data:00445B18                 db  70h ; p
+.data:00445B19                 db    6
+.data:00445B1A                 db    0
+.data:00445B1B                 db    0
+.data:00445B1C                 db  58h ; X
+.data:00445B1D                 db    6
+.data:00445B1E                 db    0
+.data:00445B1F                 db    0
+.data:00445B20                 db  5Ah ; Z
+.data:00445B21                 db    6
+.data:00445B22                 db    0
+.data:00445B23                 db    0
+.data:00445B24                 db  4Dh ; M
+.data:00445B25                 db    6
+.data:00445B26                 db    0
+.data:00445B27                 db    0
+.data:00445B28                 db  5Ah ; Z
+.data:00445B29                 db    6
+.data:00445B2A                 db    0
+.data:00445B2B                 db    0
+.data:00445B2C                 db  74h ; t
+.data:00445B2D                 db    6
+.data:00445B2E                 db    0
+.data:00445B2F                 db    0
+.data:00445B30                 db  88h ; ê
+.data:00445B31                 db    6
+.data:00445B32                 db    0
+.data:00445B33                 db    0
+.data:00445B34                 db 0C3h ; +
+.data:00445B35                 db    6
+.data:00445B36                 db    0
+.data:00445B37                 db    0
+.data:00445B38                 db  10h
+.data:00445B39                 db    7
+.data:00445B3A                 db    0
+.data:00445B3B                 db    0
+.data:00445B3C                 db  20h
+.data:00445B3D                 db    7
+.data:00445B3E                 db    0
+.data:00445B3F                 db    0
+.data:00445B40                 db  34h ; 4
+.data:00445B41                 db    7
+.data:00445B42                 db    0
+.data:00445B43                 db    0
+.data:00445B44                 db  5Dh ; ]
+.data:00445B45                 db    7
+.data:00445B46                 db    0
+.data:00445B47                 db    0
+.data:00445B48                 db 0C4h ; -
+.data:00445B49                 db    7
+.data:00445B4A                 db    0
+.data:00445B4B                 db    0
+.data:00445B4C                 db 0B8h ; ©
+.data:00445B4D                 db    7
+.data:00445B4E                 db    0
+.data:00445B4F                 db    0
+.data:00445B50                 db 0A8h ; ¿
+.data:00445B51                 db    7
+.data:00445B52                 db    0
+.data:00445B53                 db    0
+.data:00445B54                 db  87h ; ç
+.data:00445B55                 db    7
+.data:00445B56                 db    0
+.data:00445B57                 db    0
+.data:00445B58                 db  65h ; e
+.data:00445B59                 db    7
+.data:00445B5A                 db    0
+.data:00445B5B                 db    0
+.data:00445B5C                 db  36h ; 6
+.data:00445B5D                 db    7
+.data:00445B5E                 db    0
+.data:00445B5F                 db    0
+.data:00445B60                 db 0B5h ; Á
+.data:00445B61                 db    6
+.data:00445B62                 db    0
+.data:00445B63                 db    0
+.data:00445B64                 db  7Bh ; {
+.data:00445B65                 db    6
+.data:00445B66                 db    0
+.data:00445B67                 db    0
+.data:00445B68                 db  11h
+.data:00445B69                 db    6
+.data:00445B6A                 db    0
+.data:00445B6B                 db    0
+.data:00445B6C                 db  1Eh
+.data:00445B6D                 db    6
+.data:00445B6E                 db    0
+.data:00445B6F                 db    0
+.data:00445B70                 db  42h ; B
+.data:00445B71                 db    6
+.data:00445B72                 db    0
+.data:00445B73                 db    0
+.data:00445B74                 db  90h ; É
+.data:00445B75                 db    6
+.data:00445B76                 db    0
+.data:00445B77                 db    0
+.data:00445B78                 db 0ADh ; ¡
+.data:00445B79                 db    6
+.data:00445B7A                 db    0
+.data:00445B7B                 db    0
+.data:00445B7C                 db 0C3h ; +
+.data:00445B7D                 db    6
+.data:00445B7E                 db    0
+.data:00445B7F                 db    0
+.data:00445B80                 db 0BBh ; +
+.data:00445B81                 db    6
+.data:00445B82                 db    0
+.data:00445B83                 db    0
+.data:00445B84                 db 0CBh ; -
+.data:00445B85                 db    6
+.data:00445B86                 db    0
+.data:00445B87                 db    0
+.data:00445B88                 db 0ABh ; ½
+.data:00445B89                 db    6
+.data:00445B8A                 db    0
+.data:00445B8B                 db    0
+.data:00445B8C                 db 0B5h ; Á
+.data:00445B8D                 db    6
+.data:00445B8E                 db    0
+.data:00445B8F                 db    0
+.data:00445B90                 db  93h ; ô
+.data:00445B91                 db    6
+.data:00445B92                 db    0
+.data:00445B93                 db    0
+.data:00445B94                 db  7Bh ; {
+.data:00445B95                 db    6
+.data:00445B96                 db    0
+.data:00445B97                 db    0
+.data:00445B98                 db  5Dh ; ]
+.data:00445B99                 db    6
+.data:00445B9A                 db    0
+.data:00445B9B                 db    0
+.data:00445B9C                 db  5Ah ; Z
+.data:00445B9D                 db    6
+.data:00445B9E                 db    0
+.data:00445B9F                 db    0
+.data:00445BA0                 db  6Bh ; k
+.data:00445BA1                 db    6
+.data:00445BA2                 db    0
+.data:00445BA3                 db    0
+.data:00445BA4                 db  64h ; d
+.data:00445BA5                 db    6
+.data:00445BA6                 db    0
+.data:00445BA7                 db    0
+.data:00445BA8                 db  4Dh ; M
+.data:00445BA9                 db    6
+.data:00445BAA                 db    0
+.data:00445BAB                 db    0
+.data:00445BAC                 db  3Fh ; ?
+.data:00445BAD                 db    6
+.data:00445BAE                 db    0
+.data:00445BAF                 db    0
+.data:00445BB0                 db  3Fh ; ?
+.data:00445BB1                 db    6
+.data:00445BB2                 db    0
+.data:00445BB3                 db    0
+.data:00445BB4                 db  43h ; C
+.data:00445BB5                 db    6
+.data:00445BB6                 db    0
+.data:00445BB7                 db    0
+.data:00445BB8                 db  48h ; H
+.data:00445BB9                 db    6
+.data:00445BBA                 db    0
+.data:00445BBB                 db    0
+.data:00445BBC                 db  63h ; c
+.data:00445BBD                 db    6
+.data:00445BBE                 db    0
+.data:00445BBF                 db    0
+.data:00445BC0                 db  64h ; d
+.data:00445BC1                 db    6
+.data:00445BC2                 db    0
+.data:00445BC3                 db    0
+.data:00445BC4                 db  5Ch ; \
+.data:00445BC5                 db    6
+.data:00445BC6                 db    0
+.data:00445BC7                 db    0
+.data:00445BC8                 db  51h ; Q
+.data:00445BC9                 db    6
+.data:00445BCA                 db    0
+.data:00445BCB                 db    0
+.data:00445BCC                 db  39h ; 9
+.data:00445BCD                 db    6
+.data:00445BCE                 db    0
+.data:00445BCF                 db    0
+.data:00445BD0                 db  1Bh
+.data:00445BD1                 db    6
+.data:00445BD2                 db    0
+.data:00445BD3                 db    0
+.data:00445BD4                 db 0E5h ; Õ
+.data:00445BD5                 db    5
+.data:00445BD6                 db    0
+.data:00445BD7                 db    0
+.data:00445BD8                 db 0E1h ; ß
+.data:00445BD9                 db    5
+.data:00445BDA                 db    0
+.data:00445BDB                 db    0
+.data:00445BDC                 db 0CEh ; +
+.data:00445BDD                 db    5
+.data:00445BDE                 db    0
+.data:00445BDF                 db    0
+.data:00445BE0                 db  9Ah ; Ü
+.data:00445BE1                 db    5
+.data:00445BE2                 db    0
+.data:00445BE3                 db    0
+.data:00445BE4                 db  66h ; f
+.data:00445BE5                 db    5
+.data:00445BE6                 db    0
+.data:00445BE7                 db    0
+.data:00445BE8                 db  80h ; Ç
+.data:00445BE9                 db    5
+.data:00445BEA                 db    0
+.data:00445BEB                 db    0
+.data:00445BEC                 db 0B4h ; ¦
+.data:00445BED                 db    5
+.data:00445BEE                 db    0
+.data:00445BEF                 db    0
+.data:00445BF0                 db 0CAh ; -
+.data:00445BF1                 db    5
+.data:00445BF2                 db    0
+.data:00445BF3                 db    0
+.data:00445BF4                 db 0D8h ; Ï
+.data:00445BF5                 db    5
+.data:00445BF6                 db    0
+.data:00445BF7                 db    0
+.data:00445BF8                 db 0E3h ; Ò
+.data:00445BF9                 db    5
+.data:00445BFA                 db    0
+.data:00445BFB                 db    0
+.data:00445BFC                 db 0D6h ; Í
+.data:00445BFD                 db    5
+.data:00445BFE                 db    0
+.data:00445BFF                 db    0
+.data:00445C00                 db 0C2h ; -
+.data:00445C01                 db    5
+.data:00445C02                 db    0
+.data:00445C03                 db    0
+.data:00445C04                 db 0BEh ; ¥
+.data:00445C05                 db    5
+.data:00445C06                 db    0
+.data:00445C07                 db    0
+.data:00445C08                 db 0E1h ; ß
+.data:00445C09                 db    5
+.data:00445C0A                 db    0
+.data:00445C0B                 db    0
+.data:00445C0C                 db 0DFh ; ¯
+.data:00445C0D                 db    5
+.data:00445C0E                 db    0
+.data:00445C0F                 db    0
+.data:00445C10                 db 0F2h ; =
+.data:00445C11                 db    5
+.data:00445C12                 db    0
+.data:00445C13                 db    0
+.data:00445C14                 db 0F5h ; §
+.data:00445C15                 db    5
+.data:00445C16                 db    0
+.data:00445C17                 db    0
+.data:00445C18                 db 0E4h ; õ
+.data:00445C19                 db    5
+.data:00445C1A                 db    0
+.data:00445C1B                 db    0
+.data:00445C1C                 db  1Ah
+.data:00445C1D                 db    6
+.data:00445C1E                 db    0
+.data:00445C1F                 db    0
+.data:00445C20                 db  31h ; 1
+.data:00445C21                 db    6
+.data:00445C22                 db    0
+.data:00445C23                 db    0
+.data:00445C24                 db  21h ; !
+.data:00445C25                 db    6
+.data:00445C26                 db    0
+.data:00445C27                 db    0
+.data:00445C28                 db  3Dh ; =
+.data:00445C29                 db    6
+.data:00445C2A                 db    0
+.data:00445C2B                 db    0
+.data:00445C2C                 db  60h ; `
+.data:00445C2D                 db    6
+.data:00445C2E                 db    0
+.data:00445C2F                 db    0
+.data:00445C30                 db  73h ; s
+.data:00445C31                 db    6
+.data:00445C32                 db    0
+.data:00445C33                 db    0
+.data:00445C34                 db  6Bh ; k
+.data:00445C35                 db    6
+.data:00445C36                 db    0
+.data:00445C37                 db    0
+.data:00445C38                 db  6Eh ; n
+.data:00445C39                 db    6
+.data:00445C3A                 db    0
+.data:00445C3B                 db    0
+.data:00445C3C                 db 0A2h ; ó
+.data:00445C3D                 db    6
+.data:00445C3E                 db    0
+.data:00445C3F                 db    0
+.data:00445C40                 db 0B1h ; ¦
+.data:00445C41                 db    6
+.data:00445C42                 db    0
+.data:00445C43                 db    0
+.data:00445C44                 db 0A6h ; ª
+.data:00445C45                 db    6
+.data:00445C46                 db    0
+.data:00445C47                 db    0
+.data:00445C48                 db  9Eh ; ×
+.data:00445C49                 db    6
+.data:00445C4A                 db    0
+.data:00445C4B                 db    0
+.data:00445C4C                 db  8Ah ; è
+.data:00445C4D                 db    6
+.data:00445C4E                 db    0
+.data:00445C4F                 db    0
+.data:00445C50                 db 0A7h ; º
+.data:00445C51                 db    6
+.data:00445C52                 db    0
+.data:00445C53                 db    0
+.data:00445C54                 db  97h ; ù
+.data:00445C55                 db    6
+.data:00445C56                 db    0
+.data:00445C57                 db    0
+.data:00445C58                 db 0A0h ; á
+.data:00445C59                 db    6
+.data:00445C5A                 db    0
+.data:00445C5B                 db    0
+.data:00445C5C                 db  60h ; `
+.data:00445C5D                 db    6
+.data:00445C5E                 db    0
+.data:00445C5F                 db    0
+.data:00445C60                 db  32h ; 2
+.data:00445C61                 db    6
+.data:00445C62                 db    0
+.data:00445C63                 db    0
+.data:00445C64                 db 0F7h ; ¸
+.data:00445C65                 db    5
+.data:00445C66                 db    0
+.data:00445C67                 db    0
+.data:00445C68                 db  60h ; `
+.data:00445C69                 db    6
+.data:00445C6A                 db    0
+.data:00445C6B                 db    0
+.data:00445C6C                 db  4Ah ; J
+.data:00445C6D                 db    6
+.data:00445C6E                 db    0
+.data:00445C6F                 db    0
+.data:00445C70                 db  73h ; s
+.data:00445C71                 db    6
+.data:00445C72                 db    0
+.data:00445C73                 db    0
+.data:00445C74                 db  97h ; ù
+.data:00445C75                 db    6
+.data:00445C76                 db    0
+.data:00445C77                 db    0
+.data:00445C78                 db 0D9h ; +
+.data:00445C79                 db    6
+.data:00445C7A                 db    0
+.data:00445C7B                 db    0
+.data:00445C7C                 db  15h
+.data:00445C7D                 db    7
+.data:00445C7E                 db    0
+.data:00445C7F                 db    0
+.data:00445C80                 db  26h ; &
+.data:00445C81                 db    7
+.data:00445C82                 db    0
+.data:00445C83                 db    0
+.data:00445C84                 db  10h
+.data:00445C85                 db    7
+.data:00445C86                 db    0
+.data:00445C87                 db    0
+.data:00445C88                 db    1
+.data:00445C89                 db    7
+.data:00445C8A                 db    0
+.data:00445C8B                 db    0
+.data:00445C8C                 db 0D7h ; Î
+.data:00445C8D                 db    6
+.data:00445C8E                 db    0
+.data:00445C8F                 db    0
+.data:00445C90                 db 0B6h ; Â
+.data:00445C91                 db    6
+.data:00445C92                 db    0
+.data:00445C93                 db    0
+.data:00445C94                 db  6Fh ; o
+.data:00445C95                 db    6
+.data:00445C96                 db    0
+.data:00445C97                 db    0
+.data:00445C98                 db  4Dh ; M
+.data:00445C99                 db    6
+.data:00445C9A                 db    0
+.data:00445C9B                 db    0
+.data:00445C9C                 db  34h ; 4
+.data:00445C9D                 db    6
+.data:00445C9E                 db    0
+.data:00445C9F                 db    0
+.data:00445CA0                 db  3Ch ; <
+.data:00445CA1                 db    6
+.data:00445CA2                 db    0
+.data:00445CA3                 db    0
+.data:00445CA4                 db  29h ; )
+.data:00445CA5                 db    6
+.data:00445CA6                 db    0
+.data:00445CA7                 db    0
+.data:00445CA8                 db  2Dh ; -
+.data:00445CA9                 db    6
+.data:00445CAA                 db    0
+.data:00445CAB                 db    0
+.data:00445CAC                 db  37h ; 7
+.data:00445CAD                 db    6
+.data:00445CAE                 db    0
+.data:00445CAF                 db    0
+.data:00445CB0                 db  44h ; D
+.data:00445CB1                 db    6
+.data:00445CB2                 db    0
+.data:00445CB3                 db    0
+.data:00445CB4                 db  3Dh ; =
+.data:00445CB5                 db    6
+.data:00445CB6                 db    0
+.data:00445CB7                 db    0
+.data:00445CB8                 db  42h ; B
+.data:00445CB9                 db    6
+.data:00445CBA                 db    0
+.data:00445CBB                 db    0
+.data:00445CBC                 db  4Fh ; O
+.data:00445CBD                 db    6
+.data:00445CBE                 db    0
+.data:00445CBF                 db    0
+.data:00445CC0                 db  3Bh ; ;
+.data:00445CC1                 db    6
+.data:00445CC2                 db    0
+.data:00445CC3                 db    0
+.data:00445CC4                 db  23h ; #
+.data:00445CC5                 db    6
+.data:00445CC6                 db    0
+.data:00445CC7                 db    0
+.data:00445CC8                 db  1Eh
+.data:00445CC9                 db    6
+.data:00445CCA                 db    0
+.data:00445CCB                 db    0
+.data:00445CCC                 db 0FAh ; ·
+.data:00445CCD                 db    5
+.data:00445CCE                 db    0
+.data:00445CCF                 db    0
+.data:00445CD0                 db 0C9h ; +
+.data:00445CD1                 db    5
+.data:00445CD2                 db    0
+.data:00445CD3                 db    0
+.data:00445CD4                 db 0A9h ; ®
+.data:00445CD5                 db    5
+.data:00445CD6                 db    0
+.data:00445CD7                 db    0
+.data:00445CD8                 db  98h ; ÿ
+.data:00445CD9                 db    5
+.data:00445CDA                 db    0
+.data:00445CDB                 db    0
+.data:00445CDC                 db  66h ; f
+.data:00445CDD                 db    5
+.data:00445CDE                 db    0
+.data:00445CDF                 db    0
+.data:00445CE0                 db  30h ; 0
+.data:00445CE1                 db    5
+.data:00445CE2                 db    0
+.data:00445CE3                 db    0
+.data:00445CE4                 db 0F2h ; =
+.data:00445CE5                 db    4
+.data:00445CE6                 db    0
+.data:00445CE7                 db    0
+.data:00445CE8                 db 0EDh ; Ý
+.data:00445CE9                 db    4
+.data:00445CEA                 db    0
+.data:00445CEB                 db    0
+.data:00445CEC                 db    5
+.data:00445CED                 db    5
+.data:00445CEE                 db    0
+.data:00445CEF                 db    0
+.data:00445CF0                 db  45h ; E
+.data:00445CF1                 db    5
+.data:00445CF2                 db    0
+.data:00445CF3                 db    0
+.data:00445CF4                 db  5Dh ; ]
+.data:00445CF5                 db    5
+.data:00445CF6                 db    0
+.data:00445CF7                 db    0
+.data:00445CF8                 db  9Ah ; Ü
+.data:00445CF9                 db    5
+.data:00445CFA                 db    0
+.data:00445CFB                 db    0
+.data:00445CFC                 db 0BBh ; +
+.data:00445CFD                 db    5
+.data:00445CFE                 db    0
+.data:00445CFF                 db    0
+.data:00445D00                 db 0D8h ; Ï
+.data:00445D01                 db    5
+.data:00445D02                 db    0
+.data:00445D03                 db    0
+.data:00445D04                 db 0DAh ; +
+.data:00445D05                 db    5
+.data:00445D06                 db    0
+.data:00445D07                 db    0
+.data:00445D08                 db 0F5h ; §
+.data:00445D09                 db    5
+.data:00445D0A                 db    0
+.data:00445D0B                 db    0
+.data:00445D0C                 db  10h
+.data:00445D0D                 db    6
+.data:00445D0E                 db    0
+.data:00445D0F                 db    0
+.data:00445D10                 db  23h ; #
+.data:00445D11                 db    6
+.data:00445D12                 db    0
+.data:00445D13                 db    0
+.data:00445D14                 db  30h ; 0
+.data:00445D15                 db    6
+.data:00445D16                 db    0
+.data:00445D17                 db    0
+.data:00445D18                 db  26h ; &
+.data:00445D19                 db    6
+.data:00445D1A                 db    0
+.data:00445D1B                 db    0
+.data:00445D1C                 db  16h
+.data:00445D1D                 db    6
+.data:00445D1E                 db    0
+.data:00445D1F                 db    0
+.data:00445D20                 db  29h ; )
+.data:00445D21                 db    6
+.data:00445D22                 db    0
+.data:00445D23                 db    0
+.data:00445D24                 db  29h ; )
+.data:00445D25                 db    6
+.data:00445D26                 db    0
+.data:00445D27                 db    0
+.data:00445D28                 db  2Eh ; .
+.data:00445D29                 db    6
+.data:00445D2A                 db    0
+.data:00445D2B                 db    0
+.data:00445D2C                 db  2Eh ; .
+.data:00445D2D                 db    6
+.data:00445D2E                 db    0
+.data:00445D2F                 db    0
+.data:00445D30                 db  58h ; X
+.data:00445D31                 db    6
+.data:00445D32                 db    0
+.data:00445D33                 db    0
+.data:00445D34                 db  3Fh ; ?
+.data:00445D35                 db    6
+.data:00445D36                 db    0
+.data:00445D37                 db    0
+.data:00445D38                 db  76h ; v
+.data:00445D39                 db    6
+.data:00445D3A                 db    0
+.data:00445D3B                 db    0
+.data:00445D3C                 db  90h ; É
+.data:00445D3D                 db    6
+.data:00445D3E                 db    0
+.data:00445D3F                 db    0
+.data:00445D40                 db 0D6h ; Í
+.data:00445D41                 db    6
+.data:00445D42                 db    0
+.data:00445D43                 db    0
+.data:00445D44                 db 0E9h ; Ú
+.data:00445D45                 db    6
+.data:00445D46                 db    0
+.data:00445D47                 db    0
+.data:00445D48                 db    5
+.data:00445D49                 db    7
+.data:00445D4A                 db    0
+.data:00445D4B                 db    0
+.data:00445D4C                 db    2
+.data:00445D4D                 db    7
+.data:00445D4E                 db    0
+.data:00445D4F                 db    0
+.data:00445D50                 db  15h
+.data:00445D51                 db    7
+.data:00445D52                 db    0
+.data:00445D53                 db    0
+.data:00445D54                 db  17h
+.data:00445D55                 db    7
+.data:00445D56                 db    0
+.data:00445D57                 db    0
+.data:00445D58                 db 0FAh ; ·
+.data:00445D59                 db    6
+.data:00445D5A                 db    0
+.data:00445D5B                 db    0
+.data:00445D5C                 db 0C3h ; +
+.data:00445D5D                 db    6
+.data:00445D5E                 db    0
+.data:00445D5F                 db    0
+.data:00445D60                 db  7Fh ; 
+.data:00445D61                 db    6
+.data:00445D62                 db    0
+.data:00445D63                 db    0
+.data:00445D64                 db  70h ; p
+.data:00445D65                 db    6
+.data:00445D66                 db    0
+.data:00445D67                 db    0
+.data:00445D68                 db 0CCh ; ¦
+.data:00445D69                 db    6
+.data:00445D6A                 db    0
+.data:00445D6B                 db    0
+.data:00445D6C                 db 0E0h ; Ó
+.data:00445D6D                 db    6
+.data:00445D6E                 db    0
+.data:00445D6F                 db    0
+.data:00445D70                 db  0Ah
+.data:00445D71                 db    7
+.data:00445D72                 db    0
+.data:00445D73                 db    0
+.data:00445D74                 db  31h ; 1
+.data:00445D75                 db    7
+.data:00445D76                 db    0
+.data:00445D77                 db    0
+.data:00445D78                 db  43h ; C
+.data:00445D79                 db    7
+.data:00445D7A                 db    0
+.data:00445D7B                 db    0
+.data:00445D7C                 db  47h ; G
+.data:00445D7D                 db    7
+.data:00445D7E                 db    0
+.data:00445D7F                 db    0
+.data:00445D80                 db  36h ; 6
+.data:00445D81                 db    7
+.data:00445D82                 db    0
+.data:00445D83                 db    0
+.data:00445D84                 db  1Fh
+.data:00445D85                 db    7
+.data:00445D86                 db    0
+.data:00445D87                 db    0
+.data:00445D88                 db  22h ; "
+.data:00445D89                 db    7
+.data:00445D8A                 db    0
+.data:00445D8B                 db    0
+.data:00445D8C                 db 0E7h ; þ
+.data:00445D8D                 db    6
+.data:00445D8E                 db    0
+.data:00445D8F                 db    0
+.data:00445D90                 db 0D9h ; +
+.data:00445D91                 db    6
+.data:00445D92                 db    0
+.data:00445D93                 db    0
+.data:00445D94                 db  79h ; y
+.data:00445D95                 db    6
+.data:00445D96                 db    0
+.data:00445D97                 db    0
+.data:00445D98                 db  4Ah ; J
+.data:00445D99                 db    6
+.data:00445D9A                 db    0
+.data:00445D9B                 db    0
+.data:00445D9C                 db  2Dh ; -
+.data:00445D9D                 db    6
+.data:00445D9E                 db    0
+.data:00445D9F                 db    0
+.data:00445DA0                 db  1Eh
+.data:00445DA1                 db    6
+.data:00445DA2                 db    0
+.data:00445DA3                 db    0
+.data:00445DA4                 db  22h ; "
+.data:00445DA5                 db    6
+.data:00445DA6                 db    0
+.data:00445DA7                 db    0
+.data:00445DA8                 db    4
+.data:00445DA9                 db    6
+.data:00445DAA                 db    0
+.data:00445DAB                 db    0
+.data:00445DAC                 db    8
+.data:00445DAD                 db    6
+.data:00445DAE                 db    0
+.data:00445DAF                 db    0
+.data:00445DB0                 db  1Bh
+.data:00445DB1                 db    6
+.data:00445DB2                 db    0
+.data:00445DB3                 db    0
+.data:00445DB4                 db  29h ; )
+.data:00445DB5                 db    6
+.data:00445DB6                 db    0
+.data:00445DB7                 db    0
+.data:00445DB8                 db  47h ; G
+.data:00445DB9                 db    6
+.data:00445DBA                 db    0
+.data:00445DBB                 db    0
+.data:00445DBC                 db  51h ; Q
+.data:00445DBD                 db    6
+.data:00445DBE                 db    0
+.data:00445DBF                 db    0
+.data:00445DC0                 db  60h ; `
+.data:00445DC1                 db    6
+.data:00445DC2                 db    0
+.data:00445DC3                 db    0
+.data:00445DC4                 db  72h ; r
+.data:00445DC5                 db    6
+.data:00445DC6                 db    0
+.data:00445DC7                 db    0
+.data:00445DC8                 db  73h ; s
+.data:00445DC9                 db    6
+.data:00445DCA                 db    0
+.data:00445DCB                 db    0
+.data:00445DCC                 db  73h ; s
+.data:00445DCD                 db    6
+.data:00445DCE                 db    0
+.data:00445DCF                 db    0
+.data:00445DD0                 db  6Fh ; o
+.data:00445DD1                 db    6
+.data:00445DD2                 db    0
+.data:00445DD3                 db    0
+.data:00445DD4                 db  6Bh ; k
+.data:00445DD5                 db    6
+.data:00445DD6                 db    0
+.data:00445DD7                 db    0
+.data:00445DD8                 db  55h ; U
+.data:00445DD9                 db    6
+.data:00445DDA                 db    0
+.data:00445DDB                 db    0
+.data:00445DDC                 db  23h ; #
+.data:00445DDD                 db    6
+.data:00445DDE                 db    0
+.data:00445DDF                 db    0
+.data:00445DE0                 db    6
+.data:00445DE1                 db    6
+.data:00445DE2                 db    0
+.data:00445DE3                 db    0
+.data:00445DE4                 db    4
+.data:00445DE5                 db    6
+.data:00445DE6                 db    0
+.data:00445DE7                 db    0
+.data:00445DE8                 db  22h ; "
+.data:00445DE9                 db    6
+.data:00445DEA                 db    0
+.data:00445DEB                 db    0
+.data:00445DEC                 db  21h ; !
+.data:00445DED                 db    6
+.data:00445DEE                 db    0
+.data:00445DEF                 db    0
+.data:00445DF0                 db  2Dh ; -
+.data:00445DF1                 db    6
+.data:00445DF2                 db    0
+.data:00445DF3                 db    0
+.data:00445DF4                 db  52h ; R
+.data:00445DF5                 db    6
+.data:00445DF6                 db    0
+.data:00445DF7                 db    0
+.data:00445DF8                 db  64h ; d
+.data:00445DF9                 db    6
+.data:00445DFA                 db    0
+.data:00445DFB                 db    0
+.data:00445DFC                 db  59h ; Y
+.data:00445DFD                 db    6
+.data:00445DFE                 db    0
+.data:00445DFF                 db    0
+.data:00445E00                 db  5Eh ; ^
+.data:00445E01                 db    6
+.data:00445E02                 db    0
+.data:00445E03                 db    0
+.data:00445E04                 db  53h ; S
+.data:00445E05                 db    6
+.data:00445E06                 db    0
+.data:00445E07                 db    0
+.data:00445E08                 db  5Dh ; ]
+.data:00445E09                 db    6
+.data:00445E0A                 db    0
+.data:00445E0B                 db    0
+.data:00445E0C                 db  3Bh ; ;
+.data:00445E0D                 db    6
+.data:00445E0E                 db    0
+.data:00445E0F                 db    0
+.data:00445E10                 db  53h ; S
+.data:00445E11                 db    6
+.data:00445E12                 db    0
+.data:00445E13                 db    0
+.data:00445E14                 db  3Fh ; ?
+.data:00445E15                 db    6
+.data:00445E16                 db    0
+.data:00445E17                 db    0
+.data:00445E18                 db  3Dh ; =
+.data:00445E19                 db    6
+.data:00445E1A                 db    0
+.data:00445E1B                 db    0
+.data:00445E1C                 db  3Dh ; =
+.data:00445E1D                 db    6
+.data:00445E1E                 db    0
+.data:00445E1F                 db    0
+.data:00445E20                 db  27h ; '
+.data:00445E21                 db    6
+.data:00445E22                 db    0
+.data:00445E23                 db    0
+.data:00445E24                 db  1Ah
+.data:00445E25                 db    6
+.data:00445E26                 db    0
+.data:00445E27                 db    0
+.data:00445E28                 db  0Ch
+.data:00445E29                 db    6
+.data:00445E2A                 db    0
+.data:00445E2B                 db    0
+.data:00445E2C                 db  16h
+.data:00445E2D                 db    6
+.data:00445E2E                 db    0
+.data:00445E2F                 db    0
+.data:00445E30                 db  13h
+.data:00445E31                 db    6
+.data:00445E32                 db    0
+.data:00445E33                 db    0
+.data:00445E34                 db  3Ch ; <
+.data:00445E35                 db    6
+.data:00445E36                 db    0
+.data:00445E37                 db    0
+.data:00445E38                 db  58h ; X
+.data:00445E39                 db    6
+.data:00445E3A                 db    0
+.data:00445E3B                 db    0
+.data:00445E3C                 db 0A9h ; ®
+.data:00445E3D                 db    6
+.data:00445E3E                 db    0
+.data:00445E3F                 db    0
+.data:00445E40                 db 0D1h ; Ð
+.data:00445E41                 db    6
+.data:00445E42                 db    0
+.data:00445E43                 db    0
+.data:00445E44                 db    1
+.data:00445E45                 db    7
+.data:00445E46                 db    0
+.data:00445E47                 db    0
+.data:00445E48                 db  1Bh
+.data:00445E49                 db    7
+.data:00445E4A                 db    0
+.data:00445E4B                 db    0
+.data:00445E4C                 db  2Ah ; *
+.data:00445E4D                 db    7
+.data:00445E4E                 db    0
+.data:00445E4F                 db    0
+.data:00445E50                 db  20h
+.data:00445E51                 db    7
+.data:00445E52                 db    0
+.data:00445E53                 db    0
+.data:00445E54                 db  1Bh
+.data:00445E55                 db    7
+.data:00445E56                 db    0
+.data:00445E57                 db    0
+.data:00445E58                 db    9
+.data:00445E59                 db    7
+.data:00445E5A                 db    0
+.data:00445E5B                 db    0
+.data:00445E5C                 db 0F3h ; ¾
+.data:00445E5D                 db    6
+.data:00445E5E                 db    0
+.data:00445E5F                 db    0
+.data:00445E60                 db 0DCh ; _
+.data:00445E61                 db    6
+.data:00445E62                 db    0
+.data:00445E63                 db    0
+.data:00445E64                 db 0C7h ; Ã
+.data:00445E65                 db    6
+.data:00445E66                 db    0
+.data:00445E67                 db    0
+.data:00445E68                 db  6Bh ; k
+.data:00445E69                 db    7
+.data:00445E6A                 db    0
+.data:00445E6B                 db    0
+.data:00445E6C                 db  57h ; W
+.data:00445E6D                 db    7
+.data:00445E6E                 db    0
+.data:00445E6F                 db    0
+.data:00445E70                 db  6Bh ; k
+.data:00445E71                 db    7
+.data:00445E72                 db    0
+.data:00445E73                 db    0
+.data:00445E74                 db  6Ch ; l
+.data:00445E75                 db    7
+.data:00445E76                 db    0
+.data:00445E77                 db    0
+.data:00445E78                 db  7Eh ; ~
+.data:00445E79                 db    7
+.data:00445E7A                 db    0
+.data:00445E7B                 db    0
+.data:00445E7C                 db  77h ; w
+.data:00445E7D                 db    7
+.data:00445E7E                 db    0
+.data:00445E7F                 db    0
+.data:00445E80                 db  6Bh ; k
+.data:00445E81                 db    7
+.data:00445E82                 db    0
+.data:00445E83                 db    0
+.data:00445E84                 db  7Ah ; z
+.data:00445E85                 db    7
+.data:00445E86                 db    0
+.data:00445E87                 db    0
+.data:00445E88                 db  4Fh ; O
+.data:00445E89                 db    7
+.data:00445E8A                 db    0
+.data:00445E8B                 db    0
+.data:00445E8C                 db  56h ; V
+.data:00445E8D                 db    7
+.data:00445E8E                 db    0
+.data:00445E8F                 db    0
+.data:00445E90                 db  60h ; `
+.data:00445E91                 db    7
+.data:00445E92                 db    0
+.data:00445E93                 db    0
+.data:00445E94                 db  2Dh ; -
+.data:00445E95                 db    7
+.data:00445E96                 db    0
+.data:00445E97                 db    0
+.data:00445E98                 db  3Ah ; :
+.data:00445E99                 db    7
+.data:00445E9A                 db    0
+.data:00445E9B                 db    0
+.data:00445E9C                 db  22h ; "
+.data:00445E9D                 db    7
+.data:00445E9E                 db    0
+.data:00445E9F                 db    0
+.data:00445EA0                 db  10h
+.data:00445EA1                 db    7
+.data:00445EA2                 db    0
+.data:00445EA3                 db    0
+.data:00445EA4                 db    8
+.data:00445EA5                 db    7
+.data:00445EA6                 db    0
+.data:00445EA7                 db    0
+.data:00445EA8                 db    3
+.data:00445EA9                 db    7
+.data:00445EAA                 db    0
+.data:00445EAB                 db    0
+.data:00445EAC                 db 0FAh ; ·
+.data:00445EAD                 db    6
+.data:00445EAE                 db    0
+.data:00445EAF                 db    0
+.data:00445EB0                 db 0FAh ; ·
+.data:00445EB1                 db    6
+.data:00445EB2                 db    0
+.data:00445EB3                 db    0
+.data:00445EB4                 db 0EFh ; ´
+.data:00445EB5                 db    6
+.data:00445EB6                 db    0
+.data:00445EB7                 db    0
+.data:00445EB8                 db 0F8h ; °
+.data:00445EB9                 db    6
+.data:00445EBA                 db    0
+.data:00445EBB                 db    0
+.data:00445EBC                 db 0D9h ; +
+.data:00445EBD                 db    6
+.data:00445EBE                 db    0
+.data:00445EBF                 db    0
+.data:00445EC0                 db 0CEh ; +
+.data:00445EC1                 db    6
+.data:00445EC2                 db    0
+.data:00445EC3                 db    0
+.data:00445EC4                 db 0C8h ; +
+.data:00445EC5                 db    6
+.data:00445EC6                 db    0
+.data:00445EC7                 db    0
+.data:00445EC8                 db 0A5h ; Ñ
+.data:00445EC9                 db    6
+.data:00445ECA                 db    0
+.data:00445ECB                 db    0
+.data:00445ECC                 db 0B1h ; ¦
+.data:00445ECD                 db    6
+.data:00445ECE                 db    0
+.data:00445ECF                 db    0
+.data:00445ED0                 db  8Ah ; è
+.data:00445ED1                 db    6
+.data:00445ED2                 db    0
+.data:00445ED3                 db    0
+.data:00445ED4                 db  7Eh ; ~
+.data:00445ED5                 db    6
+.data:00445ED6                 db    0
+.data:00445ED7                 db    0
+.data:00445ED8                 db  4Eh ; N
+.data:00445ED9                 db    6
+.data:00445EDA                 db    0
+.data:00445EDB                 db    0
+.data:00445EDC                 db  3Dh ; =
+.data:00445EDD                 db    6
+.data:00445EDE                 db    0
+.data:00445EDF                 db    0
+.data:00445EE0                 db  1Eh
+.data:00445EE1                 db    6
+.data:00445EE2                 db    0
+.data:00445EE3                 db    0
+.data:00445EE4                 db  34h ; 4
+.data:00445EE5                 db    6
+.data:00445EE6                 db    0
+.data:00445EE7                 db    0
+.data:00445EE8                 db  48h ; H
+.data:00445EE9                 db    6
+.data:00445EEA                 db    0
+.data:00445EEB                 db    0
+.data:00445EEC                 db  27h ; '
+.data:00445EED                 db    6
+.data:00445EEE                 db    0
+.data:00445EEF                 db    0
+.data:00445EF0                 db  52h ; R
+.data:00445EF1                 db    6
+.data:00445EF2                 db    0
+.data:00445EF3                 db    0
+.data:00445EF4                 db  3Ch ; <
+.data:00445EF5                 db    6
+.data:00445EF6                 db    0
+.data:00445EF7                 db    0
+.data:00445EF8                 db  4Dh ; M
+.data:00445EF9                 db    6
+.data:00445EFA                 db    0
+.data:00445EFB                 db    0
+.data:00445EFC                 db  4Ah ; J
+.data:00445EFD                 db    6
+.data:00445EFE                 db    0
+.data:00445EFF                 db    0
+.data:00445F00                 db  5Ch ; \
+.data:00445F01                 db    6
+.data:00445F02                 db    0
+.data:00445F03                 db    0
+.data:00445F04                 db  79h ; y
+.data:00445F05                 db    6
+.data:00445F06                 db    0
+.data:00445F07                 db    0
+.data:00445F08                 db  9Bh ; ø
+.data:00445F09                 db    6
+.data:00445F0A                 db    0
+.data:00445F0B                 db    0
+.data:00445F0C                 db 0A5h ; Ñ
+.data:00445F0D                 db    6
+.data:00445F0E                 db    0
+.data:00445F0F                 db    0
+.data:00445F10                 db 0C1h ; -
+.data:00445F11                 db    6
+.data:00445F12                 db    0
+.data:00445F13                 db    0
+.data:00445F14                 db 0BDh ; ¢
+.data:00445F15                 db    6
+.data:00445F16                 db    0
+.data:00445F17                 db    0
+.data:00445F18                 db 0AAh ; ¬
+.data:00445F19                 db    6
+.data:00445F1A                 db    0
+.data:00445F1B                 db    0
+.data:00445F1C                 db 0C7h ; Ã
+.data:00445F1D                 db    6
+.data:00445F1E                 db    0
+.data:00445F1F                 db    0
+.data:00445F20                 db 0E8h ; Þ
+.data:00445F21                 db    6
+.data:00445F22                 db    0
+.data:00445F23                 db    0
+.data:00445F24                 db    1
+.data:00445F25                 db    7
+.data:00445F26                 db    0
+.data:00445F27                 db    0
+.data:00445F28                 db    2
+.data:00445F29                 db    7
+.data:00445F2A                 db    0
+.data:00445F2B                 db    0
+.data:00445F2C                 db  15h
+.data:00445F2D                 db    7
+.data:00445F2E                 db    0
+.data:00445F2F                 db    0
+.data:00445F30                 db  10h
+.data:00445F31                 db    7
+.data:00445F32                 db    0
+.data:00445F33                 db    0
+.data:00445F34                 db  43h ; C
+.data:00445F35                 db    7
+.data:00445F36                 db    0
+.data:00445F37                 db    0
+.data:00445F38                 db  4Eh ; N
+.data:00445F39                 db    7
+.data:00445F3A                 db    0
+.data:00445F3B                 db    0
+.data:00445F3C                 db  7Ch ; |
+.data:00445F3D                 db    7
+.data:00445F3E                 db    0
+.data:00445F3F                 db    0
+.data:00445F40                 db  70h ; p
+.data:00445F41                 db    7
+.data:00445F42                 db    0
+.data:00445F43                 db    0
+.data:00445F44                 db  81h ; ü
+.data:00445F45                 db    7
+.data:00445F46                 db    0
+.data:00445F47                 db    0
+.data:00445F48                 db  98h ; ÿ
+.data:00445F49                 db    7
+.data:00445F4A                 db    0
+.data:00445F4B                 db    0
+.data:00445F4C                 db 0BAh ; ¦
+.data:00445F4D                 db    7
+.data:00445F4E                 db    0
+.data:00445F4F                 db    0
+.data:00445F50                 db 0BAh ; ¦
+.data:00445F51                 db    7
+.data:00445F52                 db    0
+.data:00445F53                 db    0
+.data:00445F54                 db 0A4h ; ñ
+.data:00445F55                 db    7
+.data:00445F56                 db    0
+.data:00445F57                 db    0
+.data:00445F58                 db  92h ; Æ
+.data:00445F59                 db    7
+.data:00445F5A                 db    0
+.data:00445F5B                 db    0
+.data:00445F5C                 db  5Bh ; [
+.data:00445F5D                 db    7
+.data:00445F5E                 db    0
+.data:00445F5F                 db    0
+.data:00445F60                 db  61h ; a
+.data:00445F61                 db    7
+.data:00445F62                 db    0
+.data:00445F63                 db    0
+.data:00445F64                 db  5Dh ; ]
+.data:00445F65                 db    7
+.data:00445F66                 db    0
+.data:00445F67                 db    0

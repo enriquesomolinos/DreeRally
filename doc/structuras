@@ -1,0 +1,79 @@
+typedef struct SDL_Surface {
+        Uint32 flags;                           /* Read-only */					+0
+        SDL_PixelFormat *format;                /* Read-only */					+4
+        int w, 																	+8
+		h;                               /* Read-only */						+12
+        Uint16 pitch;                           /* Read-only */					+16
+        void *pixels;                           /* Read-write */				+20
+
+        /* clipping information */
+        SDL_Rect clip_rect;                     /* Read-only */
+
+        /* Reference count -- used when freeing surface */
+        int refcount;                           /* Read-mostly */
+
+	/* This structure also contains private fields not shown here */
+} SDL_Surface;
+
+
+anim file
+
+	cabecera los 2 primeros bytes contiene el numero de frames en big endian
+	20 frames por segundo
+	
+	
+	headerOffset = (const char *)&unk_463E20;
+  while ( strcmp(headerOffset, fileNameUpper) || fileOrd == -1 )
+  {
+    ++fileOrd;
+	headerOffset += 17;
+    if (fileOrd >= DstBuf )
+    {
+	 //salimos con error		
+      v2 = filename;
+      goto LABEL_9;
+    }
+  }
+  bpa = fopen(bpaFile, "rb");
+  fseek(bpa, 4339, 0);
+  fileHeaderStart = 0;
+  if (fileOrd > 0 )
+  {
+    //v19 = &dword_463E2D; -> apunta a la primera posicion de tamaño de la cabecera deberia ser 18
+	 fileHeaderStart = 17;
+    v20 = fileOrd;
+    do
+    {
+		//fileHeaderStart += *v19;
+		fileHeaderStart = fileHeaderStart + 17;
+      --v20;
+    }
+    while ( v20 );
+  }
+  fseek(bpa, fileHeaderStart, 0);
+  fread(&filseSize, 4u, 1u, bpa);
+  
+ // filseSize = *(int *)((char *)&dword_463E2D + 17 * fileOrd);
+  fclose(bpa);
+  return filseSize;
+  
+  dword_45FC40[v1] = sub_43B290((unsigned __int8)*(&v0 - 1) << 16, 6553600);
+    v2 <<= 16;
+    dword_45FC44[v1] = sub_43B290(v4, 6553600);
+    dword_45FC48[v1] = sub_43B290(v2, 6553600);
+    dword_4612A0[v1] = sub_43B290(v3, 6553600);
+    dword_4612A4[v1] = sub_43B290(v4, 6553600);
+	
+	int palette1[768]
+int palette2[768]
+/*int dword_45FC40[768]; // weak
+int dword_45FC44[768]; // weak
+int dword_45FC48[768]; // weak
+int dword_45FD00[256]; // weak
+int dword_45FD04[256]; // weak
+int dword_45FD08[256]; // weak*/
+
+
+unk_4600C4 es tamaño de paleta 768
+unk_4602441
+unk_45FDC4
