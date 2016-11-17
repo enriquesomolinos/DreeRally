@@ -42,7 +42,7 @@ typedef struct Driver {
 	int rank;
 	int racesWon;
 	int totalRaces;
-	int unk_460894;
+	int lastRaceIncome;
 	int totalIncome;
 	int mines;
 	int spikes;
@@ -52,7 +52,7 @@ typedef struct Driver {
 	
 } Driver;
 char * getDifficultyText(int difficulty);
-
+int getMaxDriverPoints(int userDriverId);
 
 /*460840 contiene 16 bytes el nombre
 46084c daño del coche
@@ -71,7 +71,7 @@ char * getDifficultyText(int difficulty);
 
 46088c racesWon
 460890 totalRaces
-460894?
+460894 dinero ganado en la ultima carreras
 460898 totalIncome
 46089c minas compradas (numero)
 4608a0 spikes

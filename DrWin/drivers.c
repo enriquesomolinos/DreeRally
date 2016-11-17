@@ -42,3 +42,18 @@ char * getDifficultyText(int difficulty) {
 		return HARD_DIFFICULTY_TEXT;
 	}
 }
+
+
+int getMaxDriverPoints(int userDriverId) {
+	int maxDriverPoints = 0;
+	int indexDriver = 0;
+
+	do {
+		if (drivers[indexDriver].points > maxDriverPoints && indexDriver != userDriverId) {
+			maxDriverPoints = drivers[indexDriver].points;
+		}
+
+		indexDriver++;
+	} while (indexDriver < 20);
+	return maxDriverPoints;
+}

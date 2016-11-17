@@ -154,7 +154,7 @@ int sub_414FC0();
 void sub_4151C0();
 int sub_415280();
 int sub_4156B0();
-void __cdecl sub_415710(int a1, int a2);
+void __cdecl startRace(int a1, int a2);
 int __cdecl getFileSizeFromBpa(char *Filename, int); // idb
 int __cdecl getSizeMusic(int a1);
 void *__cdecl getMusicStream(int a1);
@@ -254,7 +254,7 @@ int drawBlackMarketElement3();
 int sub_423350();
 void underGroundMenuLeft();
 void underGroundMenuRight();
-int sub_4236D0(void); // weak
+int reInitUnderGroundMarketStock(void); // weak
 int drawBlackMarketScreen();
 
 void __cdecl addParticipantToRace(signed int a1);
@@ -1891,11 +1891,12 @@ int dword_46125C; // weak
 
 void *recotxtBpk; // idb
 void *facearr1Bpk; // idb
-char byte_46126C[3]; // weak
 
-//estos dos no se usan
-char byte_46126D; // weak
-char byte_46126E; // weak
+char circuitsToSelect_46126C[3]; 
+//estos dos no se usan contiene los 3 circuitos que se muestran en la pantalla de seleccion
+//char byte_46126C[3]; // weak
+//char byte_46126D; // weak
+//char byte_46126E; // weak
 
 
 int undergroundOptionSelected_dword_461278; // weak
@@ -9514,7 +9515,7 @@ signed int sub_409BF0()
   do
     v3 = (v2++)[1];
   while ( v3 );
-  *(_DWORD *)v2 = 1095778862;
+  *(_DWORD *)v2 = 1095778862;//.bpa
   v2[4] = 0;
   v4 = 0;
   do
@@ -9527,8 +9528,8 @@ signed int sub_409BF0()
   do
     v7 = (v6++)[1];
   while ( v7 );
-  *(_DWORD *)v6 = 1179535661;
-  *((_DWORD *)v6 + 1) = 1313423918;
+  *(_DWORD *)v6 = 1179535661;//-inf.bin
+  *((_DWORD *)v6 + 1) = 1313423918; //bin
   v6[8] = 0;
   extractFromBpa(&byte_464F50, textureTemp, (int)byte_5034E0);
   v8 = textureTemp[0];
@@ -17164,7 +17165,7 @@ int sub_4156B0()
 
 
 //----- (00415710) --------------------------------------------------------
-void __cdecl sub_415710(int a1, int a2)
+void __cdecl startRace(int a1, int numberOfParticipants)
 {
   int v2; // edx@2
   unsigned int v3; // eax@2
@@ -17278,9 +17279,9 @@ void __cdecl sub_415710(int a1, int a2)
   char v111[16]; // [sp+10h] [bp-10h]@143
 
   dword_4A9EA8 = a1;
-  dword_508D24 = a2;
-  sub_401060();
-  sub_409A90();
+  dword_508D24 = numberOfParticipants;
+  sub_401060(); ///esto es muy muy abstracto hay que hacer las estrcuturas primero porque sino nada. initRaceValues
+  sub_409A90();//mas init values
   if ( isMultiplayerGame )
   {
     v2 = dword_508D24;
@@ -17352,8 +17353,8 @@ void __cdecl sub_415710(int a1, int a2)
   stopSong();
   stopAndOpenMusic();
   nullsub_1();
-  sub_43BEE0();
-  sub_43C740();
+  sub_43BEE0();//cambiar el caption
+  sub_43C740();//evento de teclado
   v41 = 0;
   do
   {
@@ -17365,7 +17366,7 @@ void __cdecl sub_415710(int a1, int a2)
   do
     v44 = (v43++)[1];
   while ( v44 );
-  *(_DWORD *)v43 = 1398099245;
+  *(_DWORD *)v43 = 1398099245; //-mus.cmf
   *((_DWORD *)v43 + 1) = 1179468590;
   v43[8] = 0;
   loadMusic(1, (int)v111, 2, (int)"GEN-EFE.CMF");
@@ -17380,7 +17381,7 @@ void __cdecl sub_415710(int a1, int a2)
     musicSetMasterVolume(0);
   if ( !dword_445024 )
     musicSetVolume(0);
-  sub_4049F0();
+  sub_4049F0();//seteo de colores
   if ( dword_456AA8 )
     sub_40A9A0();
   sub_409460();
@@ -19314,7 +19315,7 @@ int __cdecl sub_418B00(float a1, float a2, float a3)
 
 void freeMemoryGraphics() 
 {
-	free(dword_45EB5C); //es una textura pero vete a saber
+	//TODO peta a veces por eso lo quito free(dword_45EB5C); //es una textura pero vete a saber
 	free(screenBuffer);
 }
 
@@ -19461,11 +19462,11 @@ int __cdecl loadPaletteMenu()
 void freeMemoryGraphics2()
 {
   free(chattextBpk);
-  free(fasesel1Bpk);
+  //TODO FIX peta no se porque free(fasesel1Bpk);
   free(facearr1Bpk);
   free(enterx2Bpk);
   free(shoptxt1Bpk);
-  free(shoptxt2Bpk);
+  //TODO FIX peta no se porque free(shoptxt2Bpk);
   free(fametxtBpk);
   free(recotxtBpk);
   free(recobarBpk);
@@ -22853,7 +22854,7 @@ void freeMemoryGraphics3()
   free(slidcur3Bpk);
   free(slidcop2Bpk);
   free(slidmus2Bpk);
-  free(carnameBpk);
+  //TODO FIX peta no se porque   free(carnameBpk);
   free(carbas2Bpk);
   free(bases41Bpk);
   free(bases42Bpk);
@@ -24792,120 +24793,101 @@ int drawBlackMarketElement1()
   int result; // eax@5
   char v5; // [sp-1h] [bp-29h]@2
   __int16 v6; // [sp+0h] [bp-28h]@2
-  char *DstBuf = malloc(100); // [sp+14h] [bp-14h]@2
+char *DstBuf = malloc(100); // [sp+14h] [bp-14h]@2
 
-  if ( spikesAvailable_45EFF4 == 1 )
-  {
-    drawImageWithPosition2((int)((char *)maret1eBpk + 9216), 96, 96, (int)((char *)screenBuffer + 162040));
-    getBlackMarketElementText(1);
-    itoa(spikesCost_dword_462D44, DstBuf, 10);
-    v6 = 36;
-    v0 = strlen(DstBuf) + 1;
-    v1 = &v5;
-    do
-    {
-      v2 = *((byte *)v1 + 1);
-      v1 = (char *)v1 + 1;
-    }
-    while ( v2 );
-    memcpy(v1, DstBuf, v0);
-    v3 = sub_41FAB0((const char *)&v6);
-    sub_41A370((const char *)&v6, v3 + 214520);
-  }
-  result = spikesAvailable_45EFF4;
-  if ( !spikesAvailable_45EFF4 )
-  {
-    drawImageWithPosition2((int)((char *)maret1eBpk + 82944), 96, 96, (int)((char *)screenBuffer + 162040));
-    result = sub_422930();
-  }
-  if ( spikesAvailable_45EFF4 == -1 )
-  {
-    drawImageWithPosition2((int)((char *)maret1eBpk + 46080), 96, 96, (int)((char *)screenBuffer + 162040));
-    result = sub_4229B0();
-  }
-  return result;
+if (spikesAvailable_45EFF4 == 1)
+{
+	drawImageWithPosition2((int)((char *)maret1eBpk + 9216), 96, 96, (int)((char *)screenBuffer + 162040));
+	getBlackMarketElementText(1);
+	itoa(spikesCost_dword_462D44, DstBuf, 10);
+	v6 = 36;
+	v0 = strlen(DstBuf) + 1;
+	v1 = &v5;
+	do
+	{
+		v2 = *((byte *)v1 + 1);
+		v1 = (char *)v1 + 1;
+	} while (v2);
+	memcpy(v1, DstBuf, v0);
+	v3 = sub_41FAB0((const char *)&v6);
+	sub_41A370((const char *)&v6, v3 + 214520);
+}
+result = spikesAvailable_45EFF4;
+if (!spikesAvailable_45EFF4)
+{
+	drawImageWithPosition2((int)((char *)maret1eBpk + 82944), 96, 96, (int)((char *)screenBuffer + 162040));
+	result = sub_422930();
+}
+if (spikesAvailable_45EFF4 == -1)
+{
+	drawImageWithPosition2((int)((char *)maret1eBpk + 46080), 96, 96, (int)((char *)screenBuffer + 162040));
+	result = sub_4229B0();
+}
+return result;
 }
 // 45EFF4: using guessed type int spikesAvailable_45EFF4;
 
 //----- (00423020) --------------------------------------------------------
 int drawBlackMarketElement2()
 {
-  unsigned int v0; // eax@2
-  void *v1; // edi@2
-  char v2; // cl@3
-  int v3; // eax@4
-  int result; // eax@5
-  char v5; // [sp-1h] [bp-29h]@2
-  __int16 v6; // [sp+0h] [bp-28h]@2
-  char *DstBuf = malloc(100); // [sp+14h] [bp-14h]@2
+	unsigned int v0; // eax@2
+	void *v1; // edi@2
+	char v2; // cl@3
+	int v3; // eax@4
+	int result; // eax@5
+	char v5; // [sp-1h] [bp-29h]@2
+	__int16 v6; // [sp+0h] [bp-28h]@2
+	char *DstBuf = malloc(100); // [sp+14h] [bp-14h]@2
 
-  if ( rocketAvailable_45EFF8 == 1 )
-  {
-    drawImageWithPosition2((int)((char *)maret1eBpk + 18432), 96, 96, (int)((char *)screenBuffer + 162144));
-    getBlackMarketElementText(2);
-    itoa(rocket_462D48, DstBuf, 10);
-    v6 = 36;
-    v0 = strlen(DstBuf) + 1;
-    v1 = &v5;
-    do
-    {
-      v2 = *((byte *)v1 + 1);
-      v1 = (char *)v1 + 1;
-    }
-    while ( v2 );
-    memcpy(v1, DstBuf, v0);
-    v3 = sub_41FAB0((const char *)&v6);
-    sub_41A370((const char *)&v6, v3 + 214624);
-  }
-  result = rocketAvailable_45EFF8;
-  if ( !rocketAvailable_45EFF8 )
-  {
-    drawImageWithPosition2((int)((char *)maret1eBpk + 92160), 96, 96, (int)((char *)screenBuffer + 162144));
-    result = sub_422930();
-  }
-  if ( rocketAvailable_45EFF8 == -1 )
-  {
-    drawImageWithPosition2((int)((char *)maret1eBpk + 55296), 96, 96, (int)((char *)screenBuffer + 162144));
-    result = sub_4229B0();
-  }
-  return result;
+	if (rocketAvailable_45EFF8 == 1)
+	{
+		drawImageWithPosition2((int)((char *)maret1eBpk + 18432), 96, 96, (int)((char *)screenBuffer + 162144));
+		getBlackMarketElementText(2);
+		itoa(rocket_462D48, DstBuf, 10);
+		v6 = 36;
+		v0 = strlen(DstBuf) + 1;
+		v1 = &v5;
+		do
+		{
+			v2 = *((byte *)v1 + 1);
+			v1 = (char *)v1 + 1;
+		} while (v2);
+		memcpy(v1, DstBuf, v0);
+		v3 = sub_41FAB0((const char *)&v6);
+		sub_41A370((const char *)&v6, v3 + 214624);
+	}
+	result = rocketAvailable_45EFF8;
+	if (!rocketAvailable_45EFF8)
+	{
+		drawImageWithPosition2((int)((char *)maret1eBpk + 92160), 96, 96, (int)((char *)screenBuffer + 162144));
+		result = sub_422930();
+	}
+	if (rocketAvailable_45EFF8 == -1)
+	{
+		drawImageWithPosition2((int)((char *)maret1eBpk + 55296), 96, 96, (int)((char *)screenBuffer + 162144));
+		result = sub_4229B0();
+	}
+	return result;
 }
 // 45EFF8: using guessed type int rocketAvailable_45EFF8;
 
 //----- (00423130) --------------------------------------------------------
 int drawBlackMarketElement3()
 {
-  int v0; // ebx@1
-  signed int v1; // ecx@1
-  int v2; // eax@1
-  unsigned int v3; // eax@19
-  void *v4; // edi@19
-  char v5; // cl@20
-  int v6; // eax@21
-  int result; // eax@22
-  char v8; // [sp+Bh] [bp-29h]@19
-  __int16 v9; // [sp+Ch] [bp-28h]@19
-  char *DstBuf = malloc(100); // [sp+14h] [bp-14h]@2
 
-  v0 = 0;
-  v1 = 2;
-  v2 = (int)dword_4608F0;
-  do
-  {
-    if ( *(_DWORD *)(v2 - 108) > v0 && v1 - 2 != driverId )
-      v0 = *(_DWORD *)(v2 - 108);
-    if ( *(_DWORD *)v2 > v0 && v1 - 1 != driverId )
-      v0 = *(_DWORD *)v2;
-    if ( *(_DWORD *)(v2 + 108) > v0 && v1 != driverId )
-      v0 = *(_DWORD *)(v2 + 108);
-    if ( *(_DWORD *)(v2 + 216) > v0 && v1 + 1 != driverId )
-      v0 = *(_DWORD *)(v2 + 216);
-    if ( *(_DWORD *)(v2 + 324) > v0 && v1 + 2 != driverId )
-      v0 = *(_DWORD *)(v2 + 324);
-    v1 += 5;
-    v2 += 540;
-  }
-  while ( v1 - 2 < 20 );
+	signed int v1; // ecx@1
+	int v2; // eax@1
+	unsigned int v3; // eax@19
+	void *v4; // edi@19
+	char v5; // cl@20
+	int v6; // eax@21
+	int result; // eax@22
+	char v8; // [sp+Bh] [bp-29h]@19
+	__int16 v9; // [sp+Ch] [bp-28h]@19
+	char *DstBuf = malloc(100); // [sp+14h] [bp-14h]@2
+
+	int maxDriverPoints = getMaxDriverPoints(driverId);
+  
   if ( sabotageAvailable_45EFFC == 1 )
   {
     drawImageWithPosition2((int)((char *)maret1eBpk + 27648), 96, 96, (int)((char *)screenBuffer + 162248));
@@ -24928,7 +24910,7 @@ int drawBlackMarketElement3()
   if ( !sabotageAvailable_45EFFC )
   {
     drawImageWithPosition2((int)((char *)maret1eBpk + 101376), 96, 96, (int)((char *)screenBuffer + 162248));
-    if ( isMultiplayerGame || drivers[driverId].points <= v0 )
+    if ( isMultiplayerGame || drivers[driverId].points <= maxDriverPoints)
     {
       result = sub_422930();
     }
@@ -25062,11 +25044,10 @@ void underGroundMenuRight()
 // 461278: using guessed type int undergroundOptionSelected_dword_461278;
 
 //----- (004236D0) --------------------------------------------------------
-int sub_4236D0()
+int reInitUnderGroundMarketStock()
 {
-  int result; // eax@3
   signed int v1; // edx@3
-  int v2; // ecx@3
+ // int v2; // ecx@3
 
   minesAvailable_45EFF0 = 1;
   spikesAvailable_45EFF4 = 1;
@@ -25077,28 +25058,12 @@ int sub_4236D0()
     spikesAvailable_45EFF4 = 1;
     rocketAvailable_45EFF8 = 1;
   }
-  result = 0;
-  v1 = 2;
-  v2 = (int)dword_4608F0;
-  do
-  {
-    if ( *(_DWORD *)(v2 - 108) > result && v1 - 2 != driverId )
-      result = *(_DWORD *)(v2 - 108);
-    if ( *(_DWORD *)v2 > result && v1 - 1 != driverId )
-      result = *(_DWORD *)v2;
-    if ( *(_DWORD *)(v2 + 108) > result && v1 != driverId )
-      result = *(_DWORD *)(v2 + 108);
-    if ( *(_DWORD *)(v2 + 216) > result && v1 + 1 != driverId )
-      result = *(_DWORD *)(v2 + 216);
-    if ( *(_DWORD *)(v2 + 324) > result && v1 + 2 != driverId )
-      result = *(_DWORD *)(v2 + 324);
-    v1 += 5;
-    v2 += 540;
-  }
-  while ( v1 - 2 < 20 );
-  if ( !isMultiplayerGame && dword_460884[27 * driverId] > result || (sabotageAvailable_45EFFC = 1, isMultiplayerGame) )
+ 
+  int maxDriverPoints = getMaxDriverPoints(driverId);
+
+  if ( !isMultiplayerGame && drivers[driverId].points > maxDriverPoints || (sabotageAvailable_45EFFC = 1, isMultiplayerGame) )
     sabotageAvailable_45EFFC = 0;
-  return result;
+  return maxDriverPoints;
 }
 
 
@@ -25517,9 +25482,9 @@ int drawSelectRaceScreen()
   memcpy((char *)screenBuffer + 234880, (char *)graphicsGeneral.menubg5Bpk + 234880, 0x2800u);
   drawTransparentBlock(0, 371, 639, 109);
   drawBottomMenuText();
-  drawImageWithPosition2(trsnap2m1Bpk[byte_46126C[0]], 128, 112, (int)((char *)screenBuffer + 81952));
-  drawImageWithPosition2(trsnap2m1Bpk[byte_46126C[1]], 128, 112, (int)((char *)screenBuffer + 82112));
-  drawImageWithPosition2(trsnap2m1Bpk[byte_46126C[2]], 128, 112, (int)((char *)screenBuffer + 82272));
+  drawImageWithPosition2(trsnap2m1Bpk[circuitsToSelect_46126C[0]], 128, 112, (int)((char *)screenBuffer + 81952));
+  drawImageWithPosition2(trsnap2m1Bpk[circuitsToSelect_46126C[1]], 128, 112, (int)((char *)screenBuffer + 82112));
+  drawImageWithPosition2(trsnap2m1Bpk[circuitsToSelect_46126C[2]], 128, 112, (int)((char *)screenBuffer + 82272));
   /*drawImageWithPosition2((int)*(&trsnap2m1Bpk + (unsigned __int8)byte_46126D), 128, 112, (int)((char *)screenBuffer + 82112));
   drawImageWithPosition2((int)*(&trsnap2m1Bpk + (unsigned __int8)byte_46126E), 128, 112, (int)((char *)screenBuffer + 82272));*/
   drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&byte_4458B0, "$750", 143433);
@@ -25600,62 +25565,62 @@ int calculateNextRaces()
  
   do
   {
-    byte_46126C[0] = circuitOrder_45673C[rand() % 5];
+    circuitsToSelect_46126C[0] = circuitOrder_45673C[rand() % 5];
     v6 = rand() & 0x80000001;
     v5 = v6 == 0;
     if ( (v6 & 0x80000000) != 0 )
       v5 = (((byte)v6 - 1) | 0xFFFFFFFE) == -1;
     if ( v5 )
-      byte_46126C[0] += 9;
+      circuitsToSelect_46126C[0] += 9;
   }  
-  while (dword_456780 == (unsigned __int8)byte_46126C[0]);
-  dword_456780 = (unsigned __int8)byte_46126C[0];
+  while (dword_456780 == (unsigned __int8)circuitsToSelect_46126C[0]);
+  dword_456780 = (unsigned __int8)circuitsToSelect_46126C[0];
   do
   {
-    byte_46126C[1] = circuitOrder_45673C[rand() % 6];
-	//byte_46126C[1] = byte_45673E[rand() % 6];
+    circuitsToSelect_46126C[1] = circuitOrder_45673C[rand() % 6];
+	//circuitsToSelect_46126C[1] = byte_45673E[rand() % 6];
 	//byte_46126D = byte_45673E[rand() % 6];
     v8 = rand() & 0x80000001;
     v7 = v8 == 0;
     if ( (v8 & 0x80000000) != 0 )
       v7 = (((byte)v8 - 1) | 0xFFFFFFFE) == -1;
-    v9 = byte_46126C[1];
+    v9 = circuitsToSelect_46126C[1];
 	//v9 = byte_46126D;
     if ( v7 )
     {
-      v9 = byte_46126C[1] + 9;
-	  byte_46126C[1] += 9;
+      v9 = circuitsToSelect_46126C[1] + 9;
+	  circuitsToSelect_46126C[1] += 9;
 	  /*v9 = byte_46126D + 9;
 	  byte_46126D += 9;*/
     }
   }
-  while (dword_456784 == (unsigned __int8)v9 || byte_46126C[0] == v9);
+  while (dword_456784 == (unsigned __int8)v9 || circuitsToSelect_46126C[0] == v9);
   dword_456784 = (unsigned __int8)v9;
   do
   {
-    byte_46126C[2] = circuitOrder_45673C[rand() % 4];
+    circuitsToSelect_46126C[2] = circuitOrder_45673C[rand() % 4];
 	//byte_46126E = byte_456741[rand() % 4];
     result = rand() % 2;
     v5 = result == 0;
-    LOBYTE(result) = byte_46126C[2];
+    LOBYTE(result) = circuitsToSelect_46126C[2];
 	//LOBYTE(result) = byte_46126E;
     if ( v5 )
     {
-      LOBYTE(result) = byte_46126C[2] + 9;
-	  byte_46126C[2] += 9;
+      LOBYTE(result) = circuitsToSelect_46126C[2] + 9;
+	  circuitsToSelect_46126C[2] += 9;
 	  //LOBYTE(result) = byte_46126E + 9;
 	  //byte_46126E += 9;
     }
   }
   //while ( dword_456788 == (unsigned __int8)result || byte_46126D == (byte)result );
-  while (dword_456788 == (unsigned __int8)result || byte_46126C[1] == (byte)result);
+  while (dword_456788 == (unsigned __int8)result || circuitsToSelect_46126C[1] == (byte)result);
   dword_456788 = (unsigned __int8)result;
 
   //TODO esto es para que salgan fijas
 
-  /*byte_46126C[0] = 0;
-  byte_46126C[1] = 1;
-  byte_46126C[2] = 2;*/
+  /*circuitsToSelect_46126C[0] = 0;
+  circuitsToSelect_46126C[1] = 1;
+  circuitsToSelect_46126C[2] = 2;*/
   return result;
 }
 
@@ -26222,6 +26187,7 @@ unsigned int drawStadistics()
  // memcpy(v31, DstBuf, v30);
   drawTextWithFont(v33, (int)&byte_4458B0, DstBuf, 133006);
   result = dword_456BD8;
+  
   if ( dword_456BD8 <= 0 )
   {
     dword_456BD8 = 0;
@@ -26229,7 +26195,7 @@ unsigned int drawStadistics()
   else
   {
     v35 = selectedRace_462CE8;
-    v36 = (unsigned __int8)byte_46126C[selectedRace_462CE8];
+    v36 = (unsigned __int8)circuitsToSelect_46126C[selectedRace_462CE8];
     v37 = &aSuburbia[15 * v36];
     v38 = (char *)&v173 - 15 * v36 - aSuburbia;
     do
@@ -26267,7 +26233,7 @@ unsigned int drawStadistics()
       do
         v50 = (v49++)[1];
       while ( v50 );
-      *(_DWORD *)v49 = 1634496557;
+      *(_DWORD *)v49 = 1634496557;//easy race
       *((_DWORD *)v49 + 1) = 544367993;
       *((_DWORD *)v49 + 2) = 1701011826;
       *((_WORD *)v49 + 6) = 58;
@@ -26281,7 +26247,7 @@ unsigned int drawStadistics()
           do
             v112 = (v111++)[1];
           while ( v112 );
-          *(_DWORD *)v111 = 1684368672;
+          *(_DWORD *)v111 = 1684368672;//race medium
           *((_DWORD *)v111 + 1) = 544044393;
           *((_DWORD *)v111 + 2) = 1701011826;
           *((_WORD *)v111 + 6) = 58;
@@ -26291,12 +26257,12 @@ unsigned int drawStadistics()
           do
             v114 = (v113++)[1];
           while ( v114 );
-          *(_DWORD *)v113 = 1918986272;
+          *(_DWORD *)v113 = 1918986272;//race hard
           *((_DWORD *)v113 + 1) = 1634869348;
           *((_DWORD *)v113 + 2) = 3827043;
           break;
         case 3:
-          v173 = 543516756;
+          v173 = 543516756;//the arena
           v174 = 1852142145;
           LOWORD(v175) = 14945;
           BYTE2(v175) = 0;
@@ -26465,8 +26431,8 @@ unsigned int drawStadistics()
     memcpy(v84, DstBuf, v83);
     drawTextWithFont(v86, (int)&byte_4458B0, (const char *)&v173, 246926);
     v87 = 27 * driverId;
-    v88 = &byte_46126C[selectedRace_462CE8];
-    v89 = 24 * ((unsigned __int8)byte_46126C[selectedRace_462CE8] + 18 * drivers[driverId].carType);
+    v88 = &circuitsToSelect_46126C[selectedRace_462CE8];
+    v89 = 24 * ((unsigned __int8)circuitsToSelect_46126C[selectedRace_462CE8] + 18 * drivers[driverId].carType);
     v90 = dword_45EB48;
     v91 = dword_463CAC;
     if ( dword_461FEC + 100 * (dword_45EB48 + 60 * dword_463CAC) < *(int *)((char *)&dword_45F054 + v89)
@@ -26490,9 +26456,9 @@ unsigned int drawStadistics()
       v87 = 27 * driverId;
       v90 = dword_45EB48;
       v97 = dword_461FEC;
-      v88 = &byte_46126C[selectedRace_462CE8];
+      v88 = &circuitsToSelect_46126C[selectedRace_462CE8];
       v91 = dword_463CAC;
-      v98 = 24 * ((unsigned __int8)byte_46126C[selectedRace_462CE8] + 18 * drivers[driverId].carType);
+      v98 = 24 * ((unsigned __int8)circuitsToSelect_46126C[selectedRace_462CE8] + 18 * drivers[driverId].carType);
       *(int *)((char *)&dword_45F04C + v98) = dword_463CAC;
       *(int *)((char *)&dword_45F050 + v98) = v90;
       *(int *)((char *)&dword_45F054 + v98) = v97;
@@ -26523,7 +26489,7 @@ unsigned int drawStadistics()
       v91 = dword_463CAC;
       v106 = dword_461FEC;
       v107 = dword_45EB48;
-      v108 = 24 * ((unsigned __int8)byte_46126C[selectedRace_462CE8] + 18 * drivers[driverId].carType);
+      v108 = 24 * ((unsigned __int8)circuitsToSelect_46126C[selectedRace_462CE8] + 18 * drivers[driverId].carType);
       *(int *)((char *)&dword_45F04C + v108) = dword_463CAC;
       *(int *)((char *)&dword_45F050 + v108) = v107;
       *(int *)((char *)&dword_45F054 + v108) = v106;
@@ -26624,15 +26590,15 @@ unsigned int drawStadistics()
     memcpy(&v140[4 * (v139 >> 2)], &DstBuf[4 * (v139 >> 2)], v139 & 3);
     drawTextWithFont(v142, (int)&byte_4458B0, (const char *)&v173, 261646);
     itoa(
-      *(&dword_45F04C + 6 * ((unsigned __int8)byte_46126C[selectedRace_462CE8] + 18 * dword_46085C[27 * driverId])),
+      *(&dword_45F04C + 6 * ((unsigned __int8)circuitsToSelect_46126C[selectedRace_462CE8] + 18 * dword_46085C[27 * driverId])),
       &v184,
       10);
     itoa(
-      *(&dword_45F050 + 6 * ((unsigned __int8)byte_46126C[selectedRace_462CE8] + 18 * dword_46085C[27 * driverId])),
+      *(&dword_45F050 + 6 * ((unsigned __int8)circuitsToSelect_46126C[selectedRace_462CE8] + 18 * dword_46085C[27 * driverId])),
       &v178,
       10);
     itoa(
-      *(&dword_45F054 + 6 * ((unsigned __int8)byte_46126C[selectedRace_462CE8] + 18 * dword_46085C[27 * driverId])),
+      *(&dword_45F054 + 6 * ((unsigned __int8)circuitsToSelect_46126C[selectedRace_462CE8] + 18 * dword_46085C[27 * driverId])),
       &v181,
       10);
     v143 = &v184;
@@ -28761,7 +28727,7 @@ int initDrivers()
   noPaintJob_456BAC = 0;
   allCarsCrash_456BB0 = 0;
   selectedRaceId = 0;
-  sub_4236D0(); //esto calcula la posicion con los putnos pero no se usa :S
+  reInitUnderGroundMarketStock(); //esto calcula la posicion con los putnos pero no se usa :S
   dword_456B10 = 0;
   dword_456B68 = 0;
 
@@ -28890,7 +28856,7 @@ int initDrivers()
 	  memcpy(drivers[index].name, driverNames[index+ offset], strlen(driverNames[index+offset]));
 	  drivers[index].racesWon = 0;
 	  drivers[index].totalRaces = 0;
-	  drivers[index].unk_460894 = 0;
+	  drivers[index].lastRaceIncome = 0;
 	  drivers[index].totalIncome = 0;
 	  v6 = rand();
 	  drivers[index].damage = 0;
@@ -28966,7 +28932,7 @@ int initDrivers()
   drivers[19].armour= 0;
   drivers[19].carType = 0;
   drivers[19].totalRaces = 0;
-  drivers[19].unk_460894 = 0;
+  drivers[19].lastRaceIncome = 0;
   drivers[19].points = 0;
   drivers[19].totalIncome = 0;
   drivers[19].loanType = NO_LOAN;
@@ -30730,7 +30696,7 @@ int __cdecl main(int argc, const char **argv, const char **envp)
   int v57; // edx@43
   int v58; // ecx@43
   char v59; // al@44
-  int v60; // eax@49
+  int maxDriverPoints = 0; // ebx@1
   signed int v61; // edx@50
   int v62; // ecx@50
   int v63; // ecx@67
@@ -30938,7 +30904,7 @@ int __cdecl main(int argc, const char **argv, const char **envp)
   drawStadistics();
   writeDriverList(20);
   refreshAllScreen();
-  v60 = argc;
+  maxDriverPoints = argc;
   if ( argc )
   {
     if ( argc != 1 )
@@ -30947,28 +30913,13 @@ int __cdecl main(int argc, const char **argv, const char **envp)
   }
   else
   {
-    v61 = 2;
-    v62 = (int)dword_4608F0;
-    do
-    {
-      if ( *(_DWORD *)(v62 - 108) > v60 && v61 - 2 != driverId )
-        v60 = *(_DWORD *)(v62 - 108);
-      if ( *(_DWORD *)v62 > v60 && v61 - 1 != driverId )
-        v60 = *(_DWORD *)v62;
-      if ( *(_DWORD *)(v62 + 108) > v60 && v61 != driverId )
-        v60 = *(_DWORD *)(v62 + 108);
-      if ( *(_DWORD *)(v62 + 216) > v60 && v61 + 1 != driverId )
-        v60 = *(_DWORD *)(v62 + 216);
-      if ( *(_DWORD *)(v62 + 324) > v60 && v61 + 2 != driverId )
-        v60 = *(_DWORD *)(v62 + 324);
-      v61 += 5;
-      v62 += 540;
-    }
-    while ( v61 - 2 < 20 );
-    v63 = dword_460884[27 * driverId];
-    if ( v63 > v60 && !dword_456BC4 )
+	  
+	  maxDriverPoints = getMaxDriverPoints(driverId);
+
+    v63 = drivers[ driverId].points;
+    if ( v63 > maxDriverPoints && !dword_456BC4 )
       byte_463DF8 = 1;
-    dword_456BC4 = v63 > v60;
+    dword_456BC4 = v63 > maxDriverPoints;
     sub_426080();
     drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&byte_4458B0, "Please wait while loading...", 289646);
     refreshAllScreen();
@@ -32775,7 +32726,7 @@ int sabotageScreen()
   int v5; // ecx@1
   signed int v6; // eax@1
   int result; // eax@7
-  int v8; // eax@8
+  
   signed int v9; // esi@8
   int v10; // ecx@8
   int v11; // edx@26
@@ -32846,39 +32797,21 @@ int sabotageScreen()
   else
   {
     v44 = 1;
-    v8 = 0;
-    v9 = 2;
-    v10 = (int)dword_4608F0;
-    do
-    {
-      if ( *(_DWORD *)(v10 - 108) > v8 && v9 - 2 != v4 )
-        v8 = *(_DWORD *)(v10 - 108);
-      if ( *(_DWORD *)v10 > v8 && v9 - 1 != v4 )
-        v8 = *(_DWORD *)v10;
-      if ( *(_DWORD *)(v10 + 108) > v8 && v9 != v4 )
-        v8 = *(_DWORD *)(v10 + 108);
-      if ( *(_DWORD *)(v10 + 216) > v8 && v9 + 1 != v4 )
-        v8 = *(_DWORD *)(v10 + 216);
-      if ( *(_DWORD *)(v10 + 324) > v8 && v9 + 2 != v4 )
-        v8 = *(_DWORD *)(v10 + 324);
-      v9 += 5;
-      v10 += 540;
-    }
-    while ( v9 - 2 < 20 );
-    if ( isMultiplayerGame || (v11 = 27 * v4, dword_460884[v11] > v8) || !useWeapons || dword_4608A8[v11] != 1 )
+	int maxDriverPoints = getMaxDriverPoints(driverId);
+    if ( isMultiplayerGame || (v11 = 27 * v4, drivers[v11].points > maxDriverPoints) || !useWeapons || drivers[v11].sabotage != 1 )
     {
       result = 0;
     }
     else
     {
       v12 = (unsigned __int8)v1;
-      v13 = LOBYTE(dword_460888[27 * v41]);
+      v13 = LOBYTE(drivers[v41].rank);
       v12 *= 108;
       LOBYTE(v17) = *((byte *)dword_460888 + v12);
       v14 = dword_460888[v11];
-      v48 = LOBYTE(dword_460888[27 * v42]);
+      v48 = LOBYTE(drivers[v42].rank);
       v15 = (char *)dword_460888 + v12;
-      v49 = LOBYTE(dword_460888[27 * v43]);
+      v49 = LOBYTE(drivers[v43].rank);
       v16 = (unsigned __int8)v17;
       v17 = (unsigned __int8)v17;
       if ( (unsigned __int8)v17 == v14 )
@@ -32896,7 +32829,7 @@ int sabotageScreen()
       {
         do
           v19 = *(&v41 + v18++);
-        while ( dword_460888[27 * v19] != v17 );
+        while (drivers[v19].rank != v17 );
       }
       v20 = SDL_GetTicks();
       srand(v20);
@@ -35732,10 +35665,10 @@ void __cdecl previewRaceScreen(signed int participants)
   int v94; // edi@100
   signed int v95; // esi@100
   int v96; // edx@112
-  int v97; // eax@112
+
   signed int v98; // esi@112
   int v99; // ecx@112
-  int v100; // ebp@132
+  int numberOfParticipants; // ebp@132
   signed int v101; // ebx@132
   int v102; // esi@133
   int v103; // edi@134
@@ -35753,14 +35686,14 @@ void __cdecl previewRaceScreen(signed int participants)
   int v115; // eax@152
   char *v116; // eax@153
   signed int v117; // eax@162
-  int v118; // ebx@164
+  int maxPoints; // ebx@164
   int v119; // eax@164
-  int *v120; // edi@165
+  
   int v121; // edx@170
-  int v122; // esi@170
+  int userPoints; // esi@170
   int v123; // eax@173
   int v124; // edi@173
-  int v125; // edx@177
+  
   int v126; // edi@207
   int v127; // ebx@207
   int v128; // eax@207
@@ -35854,7 +35787,7 @@ void __cdecl previewRaceScreen(signed int participants)
   int v216; // eax@474
   int v217; // ebx@474
   void *v218 = malloc(0x4B000u); // eax@477
-  int v219; // eax@477
+  
   signed int v220; // edx@477
   int v221; // ecx@477
   int v222; // eax@497
@@ -35866,7 +35799,7 @@ void __cdecl previewRaceScreen(signed int participants)
   float v228; // ST2C_4@497
   float v229; // ST28_4@497
   signed int v230; // esi@498
-  int v231; // eax@503
+  
   signed int v232; // edx@503
   int v233; // ecx@503
   signed int v234; // esi@525
@@ -36058,12 +35991,12 @@ void __cdecl previewRaceScreen(signed int participants)
   else
   {
     v23 = selectedRace_462CE8;
-    dword_4A7AA8 = (unsigned __int8)byte_46126C[selectedRace_462CE8] > 8u;
+    dword_4A7AA8 = (unsigned __int8)circuitsToSelect_46126C[selectedRace_462CE8] > 8u;
     switch ( selectedRace_462CE8 )
     {
       case 0:
-       /* v24 = &aTshape01[9 * (unsigned __int8)byte_46126C[0]];
-        v25 = &Str[-9 * (unsigned __int8)byte_46126C[0]] - aTshape01;
+       /* v24 = &aTshape01[9 * (unsigned __int8)circuitsToSelect_46126C[0]];
+        v25 = &Str[-9 * (unsigned __int8)circuitsToSelect_46126C[0]] - aTshape01;
         do
         {
           v26 = *v24;
@@ -36077,15 +36010,15 @@ void __cdecl previewRaceScreen(signed int participants)
         while ( v28 );
         *(_DWORD *)v27 = 1802527278; //bpk
         v27[4] = 0;*/
-		  v24 = tShape[(unsigned __int8)byte_46126C[0]];
+		  v24 = tShape[(unsigned __int8)circuitsToSelect_46126C[0]];
 		  strcpy(Str, v24);
 		  strcat(Str, ".bpk");
 		  extractFromBpa("MENU.BPA", textureTemp, Str);
         //extractFromBpa("MENU.BPA", textureTemp, (int)Str);
         copyImageToBuffer((int)textureTemp, (int)dword_45EB5C);
         drawImageWithPosition((int)dword_45EB5C, 360, 274, (int)((char *)screenBuffer + 64264));
-        v29 = &v251 + (unsigned __int8)byte_46126C[0];
-        v30 = (char *)&dword_45EA50[-(unsigned __int8)byte_46126C[0]] - (char *)&v251;
+        v29 = &v251 + (unsigned __int8)circuitsToSelect_46126C[0];
+        v30 = (char *)&dword_45EA50[-(unsigned __int8)circuitsToSelect_46126C[0]] - (char *)&v251;
         do
         {
           v31 = *(byte *)v29;
@@ -36096,9 +36029,9 @@ void __cdecl previewRaceScreen(signed int participants)
         numberOfLaps = 4;
         goto LABEL_44;
       case 1:
-        v32 = &aTshape01[9 * (unsigned __int8)byte_46126C[1]]; //TSHAPE01-19 9 bytes por texto
+        /*v32 = &aTshape01[9 * (unsigned __int8)circuitsToSelect_46126C[1]]; //TSHAPE01-19 9 bytes por texto
 		//v32 = &aTshape01[9 * (unsigned __int8)byte_46126D];
-        v33 = &Str[-9 * (unsigned __int8)byte_46126C[1]] - aTshape01;
+        v33 = &Str[-9 * (unsigned __int8)circuitsToSelect_46126C[1]] - aTshape01;
 		//v33 = &Str[-9 * (unsigned __int8)byte_46126D] - aTshape01;
         do
         {
@@ -36113,12 +36046,16 @@ void __cdecl previewRaceScreen(signed int participants)
         while ( v36 );
         *(_DWORD *)v35 = 1802527278; //.bpk
         v35[4] = 0;
-        extractFromBpa("MENU.BPA", textureTemp, (int)Str);
+        extractFromBpa("MENU.BPA", textureTemp, (int)Str);*/
+		v24 = tShape[(unsigned __int8)circuitsToSelect_46126C[1]];
+		strcpy(Str, v24);
+		strcat(Str, ".bpk");
+		extractFromBpa("MENU.BPA", textureTemp, Str);
         copyImageToBuffer((int)textureTemp, (int)dword_45EB5C);
         drawImageWithPosition((int)dword_45EB5C, 360, 274, (int)((char *)screenBuffer + 64264));
-        v37 = &v251 + (unsigned __int8)byte_46126C[1];
+        v37 = &v251 + (unsigned __int8)circuitsToSelect_46126C[1];
 		//v37 = &v251 + (unsigned __int8)byte_46126D;
-        v38 = (char *)&dword_45EA50[-(unsigned __int8)byte_46126C[1]] - (char *)&v251;
+        v38 = (char *)&dword_45EA50[-(unsigned __int8)circuitsToSelect_46126C[1]] - (char *)&v251;
 		//v38 = (char *)&dword_45EA50[-(unsigned __int8)byte_46126D] - (char *)&v251;
         do
         {
@@ -36130,11 +36067,11 @@ void __cdecl previewRaceScreen(signed int participants)
         numberOfLaps = 5;
         goto LABEL_44;
       case 2:
-		  v24 = tShape[(unsigned __int8)byte_46126C[2]];
+		  v24 = tShape[(unsigned __int8)circuitsToSelect_46126C[2]];
 		  strcpy(Str, v24);
 		  strcat(Str, ".bpk");
-       // v40 = &aTshape01[9 * (unsigned __int8)byte_46126C[2]];
-       // v41 = &Str[-9 * (unsigned __int8)byte_46126C[2]] - aTshape01;
+       // v40 = &aTshape01[9 * (unsigned __int8)circuitsToSelect_46126C[2]];
+       // v41 = &Str[-9 * (unsigned __int8)circuitsToSelect_46126C[2]] - aTshape01;
 		///v40 = &aTshape01[9 * (unsigned __int8)byte_46126E];
 		//v41 = &Str[-9 * (unsigned __int8)byte_46126E] - aTshape01;
         /*do
@@ -36153,8 +36090,8 @@ void __cdecl previewRaceScreen(signed int participants)
         extractFromBpa("MENU.BPA", textureTemp, (int)Str);
         copyImageToBuffer((int)textureTemp, (int)dword_45EB5C);
         drawImageWithPosition((int)dword_45EB5C, 360, 274, (int)((char *)screenBuffer + 64264));
-        v45 = &v251 + (unsigned __int8)byte_46126C[2];
-        v46 = (char *)&dword_45EA50[-(unsigned __int8)byte_46126C[2]] - (char *)&v251;
+        v45 = &v251 + (unsigned __int8)circuitsToSelect_46126C[2];
+        v46 = (char *)&dword_45EA50[-(unsigned __int8)circuitsToSelect_46126C[2]] - (char *)&v251;
 		//v45 = &v251 + (unsigned __int8)byte_46126E;
 		//v46 = (char *)&dword_45EA50[-(unsigned __int8)byte_46126E] - (char *)&v251;
         do
@@ -36445,37 +36382,20 @@ LABEL_112:
   dword_45EEBC = 0;
   dword_45EEC0 = 0;
   lapped_456BC0 = 0;
-  v97 = 0;
-  v98 = 2;
-  int dirversIdIndex = 1;
-  v99 = (int)dword_4608F0;//inicio de drivers + 176 //son los puntos 
-  do
-  {
-    if (drivers[dirversIdIndex-1].points > v97 && v98 - 2 != driverId )
-      v97 = drivers[dirversIdIndex - 1].points;
-    if (drivers[dirversIdIndex ].points > v97 && v98 - 1 != driverId )
-      v97 = drivers[dirversIdIndex].points;
-    if (drivers[dirversIdIndex+1].points > v97 && v98 != driverId )
-      v97 = drivers[dirversIdIndex + 1].points;
-    if (drivers[dirversIdIndex + 2].points> v97 && v98 + 1 != driverId )
-      v97 = drivers[dirversIdIndex + 2].points;
-    if (drivers[dirversIdIndex + 3].points > v97 && v98 + 2 != driverId )
-      v97 = drivers[dirversIdIndex + 3].points;
-    v98 += 5;
-    v99 += 540;
-	dirversIdIndex += 5;
-  }
-  while ( v98 - 2 < 20 );
-  if ( isMultiplayerGame || (dword_4A7AAC = 1, drugQuest_456BB4 <= 0) )
+ 
+  int maxDriverPoints = getMaxDriverPoints(driverId);
+  if ( isMultiplayerGame || (dword_4A7AAC = 1, drugQuest_456BB4 <= 0) )//dword_4A7AAC offset de 76 en la estructura de participante
     dword_4A7AAC = 0;
-  v100 = participants;
+  numberOfParticipants = participants;
   v101 = 0;
   if (participants > 0 )
   {
     v102 = (int)dword_4A7A60;
     while ( 1 )
     {
-      v103 = *(&v240 + v101);
+		v103 = *(&v240 + v101);
+		//esto no se usa puede que este copiando le nombre!
+      /*v103 = *(&v240 	  + v101);
       v104 = &byte_460840[108 * v103];
       do
       {
@@ -36483,14 +36403,14 @@ LABEL_112:
         v104[v102 - 108 * v103 - (_DWORD)byte_460840] = *v104;
         ++v104;
       }
-      while ( v105 );
+      while ( v105 );*/
       strupr((char *)v102);
       v106 = *(&v240 + v101);
-      *(_DWORD *)(v102 + 16) = dword_46084C[27 * v106];
-      *(_DWORD *)(v102 + 20) = dword_460850[27 * v106];
-      *(_DWORD *)(v102 + 24) = dword_460854[27 * v106];
-      v107 = dword_46085C[27 * v106];
-      *(_DWORD *)(v102 + 28) = dword_460858[27 * v106];
+      *(_DWORD *)(v102 + 16) = drivers[v106].damage;
+      *(_DWORD *)(v102 + 20) = drivers[v106].engine;
+      *(_DWORD *)(v102 + 24) = drivers[v106].tire;
+      v107 = drivers[v106].carType;
+      *(_DWORD *)(v102 + 28) = drivers[v106].armour;
       v96 = driverId;
       v108 = v106 == driverId;
       *(_DWORD *)(v102 + 48) = v107;
@@ -36500,28 +36420,30 @@ LABEL_112:
         *(_DWORD *)(v102 + 68) = configuration.difficulty;
       v109 = *(&v240 + v101);
       *(_DWORD *)(v102 + 44) = useWeapons;
-      *(_DWORD *)(v102 + 32) = dword_4608A4[27 * v109];
-      v110 = dword_46089C[27 * v109];
-      *(_DWORD *)(v102 + 36) = dword_4608A0[27 * v109];
+      *(_DWORD *)(v102 + 32) = drivers[v109].rocket;
+      v110 = drivers[v109].mines;
+      *(_DWORD *)(v102 + 36) = drivers[v109].spikes;
       *(_DWORD *)(v102 + 40) = v110;
+	  //asigna aleatoriamente a los contrincantes los mines rocket y spikes
       if ( v109 != v96 && !isMultiplayerGame )
       {
         *(_DWORD *)(v102 + 40) = 0;
         *(_DWORD *)(v102 + 36) = 0;
-        *(_DWORD *)(v102 + 32) = 0;
+        *(_DWORD *)(v102 + 32) = 0; //rocket
         if ( !(rand() % 5) && useWeapons )
           *(_DWORD *)(v102 + 32) = 1;
         if ( !(rand() % 5) && useWeapons )
-          *(_DWORD *)(v102 + 36) = 1;
+          *(_DWORD *)(v102 + 36) = 1;//spikes
         v111 = rand();
         v96 = driverId;
         if ( !(v111 % 5) && useWeapons )
-          *(_DWORD *)(v102 + 40) = 8;
+          *(_DWORD *)(v102 + 40) = 8;//mines
       }
       v112 = graphicsGeneral.carcolPal;
+	  //aqui se asigna el color rgb
       if ( v103 == v96 || isMultiplayerGame )
       {
-        v116 = (char *)graphicsGeneral.copperPal + 2 * dword_46086C[27 * *(&v240 + v101)] + dword_46086C[27 * *(&v240 + v101)];
+        v116 = (char *)graphicsGeneral.copperPal + 2 * drivers[*(&v240 + v101)].colour + drivers[ *(&v240 + v101)].colour;
         *(_DWORD *)(v102 + 52) = (unsigned __int8)*v116;
         *(_DWORD *)(v102 + 56) = (unsigned __int8)v116[1];
         *(_DWORD *)(v102 + 60) = (unsigned __int8)v116[2];
@@ -36533,7 +36455,7 @@ LABEL_112:
       }
       else
       {
-        v113 = dword_46086C[27 * *(&v240 + v101)];
+        v113 = drivers[*(&v240 + v101)].colour;
         v114 = (char *)graphicsGeneral.carcolPal + 2 * v113 + v113;
         *(_DWORD *)(v102 + 52) = (unsigned __int8)*v114;
         *(_DWORD *)(v102 + 56) = (unsigned __int8)v114[1];
@@ -36541,7 +36463,7 @@ LABEL_112:
       }
       *(_DWORD *)(v102 + 60) = v115;
 LABEL_157:
-      v100 = participants;
+	  numberOfParticipants = participants;
       ++v101;
       v102 += 84;
       if ( v101 >= participants)
@@ -36550,9 +36472,9 @@ LABEL_157:
   }
   v112 = graphicsGeneral.carcolPal;
 LABEL_160:
-  if ( isMultiplayerGame && v100 < 4 )
+  if ( isMultiplayerGame && numberOfParticipants < 4 )//claramente setea los colores de los participantes
   {
-    v117 = (signed int)&dword_4A7A98[21 * v100];
+    v117 = (signed int)&dword_4A7A98[21 * numberOfParticipants];
     do
     {
       *(_DWORD *)(v117 - 4) = *((byte *)v112 + 30);
@@ -36562,23 +36484,25 @@ LABEL_160:
     }
     while ( v117 < (signed int)&unk_4A7BE8 );
   }
-  v118 = 0;
+  maxPoints = 0;
   v119 = 0;
-  if ( v100 > 0 )
+  //saca el maximo de puntos
+  if (numberOfParticipants > 0 )
   {
-    v120 = dword_460884;
+	  int driverIndex = 0;
+    
     do
     {
-      if ( *v120 > v118 && v119 != v96 )
-        v118 = *v120;
+      if (drivers[driverIndex].points > maxPoints && v119 != v96 )
+		  maxPoints = drivers[driverIndex].points;
       ++v119;
-      v120 += 27;
+	  driverIndex = driverIndex + 1;
     }
-    while ( v119 < v100 );
+    while ( v119 < numberOfParticipants);
   }
   v121 =  v96;
-  v122 = dword_460884[v121];
-  if ( v122 > v118 && !isMultiplayerGame )
+  userPoints = drivers[v121].points;
+  if (userPoints > maxPoints && !isMultiplayerGame )
   {
     *(_DWORD *)dword_4A7A60 = 1163281473; ///adversary
     dword_4A7A64 = 1380012882;
@@ -36597,7 +36521,7 @@ LABEL_160:
     dword_4A7B94 = *((byte *)v112 + 31);
     dword_4A7B98 = *((byte *)v112 + 32);
   }
-  v123 = 24 * ((unsigned __int8)byte_46126C[selectedRace_462CE8] + 18 * dword_46085C[v121]);
+  v123 = 24 * ((unsigned __int8)circuitsToSelect_46126C[selectedRace_462CE8] + 18 * drivers[v121].carType);
   dword_50A160 = *(int *)((char *)&dword_45F04C + v123);
   v124 = *(int *)((char *)&dword_45F050 + v123);
   dword_4A9B8C = *(int *)((char *)&dword_45F054 + v123);
@@ -36609,12 +36533,12 @@ LABEL_160:
   }
   else
   {
-    if ( v122 > v118 )
+    if (userPoints > maxPoints)
       goto LABEL_534;
     if ( !selectedRace_462CE8 )
       Val = 50;
-    v125 = dword_460888[v121];
-    if ( v125 > 0 && v125 < 6 )
+    
+    if (drivers[driverId].rank > 0 && drivers[driverId].rank < 6 )
     {
       if ( selectedRace_462CE8 == 1 )
       {
@@ -36625,7 +36549,7 @@ LABEL_160:
         Val = 500;
       }
     }
-    if ( v125 > 5 && v125 < 11 )
+    if (drivers[driverId].rank > 5 && drivers[driverId].rank < 11 )
     {
       if ( selectedRace_462CE8 == 1 )
       {
@@ -36636,7 +36560,7 @@ LABEL_160:
         Val = 300;
       }
     }
-    if ( v125 > 10 && v125 < 16 )
+    if (drivers[driverId].rank > 10 && drivers[driverId].rank < 16 )
     {
       if ( selectedRace_462CE8 == 1 )
       {
@@ -36647,7 +36571,7 @@ LABEL_160:
         Val = 150;
       }
     }
-    if ( v125 > 15 && v125 < 21 )
+    if (drivers[driverId].rank > 15 && drivers[driverId].rank < 21 )
     {
       if ( selectedRace_462CE8 == 1 )
       {
@@ -36658,7 +36582,7 @@ LABEL_160:
         Val = 80;
       }
     }
-    if ( v122 > v118 )
+    if (userPoints > maxPoints)
 LABEL_534:
       Val = 400;
   }
@@ -36673,7 +36597,7 @@ LABEL_534:
     if ( dword_45E0A8 == 2 )
       sub_43C730();
   }
-  sub_415710(dword_45FC20, v100);
+//TODO esto inicia la carrera  startRace(dword_45FC20, numberOfParticipants);
   if ( isMultiplayerGame && dword_45E0A8 == 2 )
     sub_43C7B0((int (*)(void))sub_4181B0);
   v126 = dword_45FC20;
@@ -36684,7 +36608,7 @@ LABEL_534:
   dword_456BD8 = v128;
   v129 = 0;
   v130 = 2;
-  v131 = (int)dword_4608F0;
+  v131 = (int)dword_4608F0;//bucle puntos piloto
   do
   {
     if ( *(_DWORD *)(v131 - 108) > v129 )
@@ -36723,7 +36647,7 @@ LABEL_534:
   {
     v133 = 0;
     v134 = 0;
-    if ( v100 > 0 )
+    if (numberOfParticipants > 0 )
     {
       v135 = (int)dword_4A7A70;
       do
@@ -36733,9 +36657,9 @@ LABEL_534:
         ++v134;
         v135 += 84;
       }
-      while ( v134 < v100 );
+      while ( v134 < numberOfParticipants);
     }
-    if ( v133 == v100 - 1 && *(int *)((char *)dword_4A7A70 + v244) < 100 )
+    if ( v133 == numberOfParticipants - 1 && *(int *)((char *)dword_4A7A70 + v244) < 100 )
       allCarsCrash_456BB0 = 1;
     if ( (isMultiplayerGame || dword_456B50 != 4) && *(int *)((char *)dword_4A7A70 + v244) < 3 && useWeapons == 1 )
       noPaintJob_456BAC = 1;
@@ -36766,6 +36690,7 @@ LABEL_534:
   if ( *(int *)((char *)dword_460874 + v245) != -1 )
     ++*(int *)((char *)dword_460878 + v245);
   dword_464F44 = 0;
+  //pone a 0 las cosas del underground
   v136 = (signed int)dword_4608A0;
   do
   {
@@ -36776,7 +36701,7 @@ LABEL_534:
     v136 += 108;
   }
   while ( v136 < (signed int)&unk_461110 );
-  sub_4236D0();
+  reInitUnderGroundMarketStock();
   v137 = v242;
   v138 = 27 * v241;
   dword_460894[27 * v240] = 0;
@@ -36789,7 +36714,7 @@ LABEL_534:
   dword_456BDC = 0;
   v246 = 0;
   v141 = 2;
-  v142 = (int)dword_4608F0;
+  v142 = (int)dword_4608F0; //bucle puntos de polotos
   do
   {
     if ( *(_DWORD *)(v142 - 108) > v140 )
@@ -37098,7 +37023,7 @@ LABEL_534:
     }
   }
   else
-  {
+  {//calculo del dinero ganado en la carrera
     if ( *(int *)((char *)dword_460884 + v245) <= v140 && !lapped_456BC0 )
     {
       v143 = selectedRace_462CE8;
@@ -37302,7 +37227,7 @@ LABEL_348:
   }
   v209 = 0;
   v210 = 2;
-  v211 = (int)dword_4608F0;
+  v211 = (int)dword_4608F0; //bucle de puntos de pilotos
   do
   {
     if ( *(_DWORD *)(v211 - 108) > v209 && v210 - 2 != driverId )
@@ -37345,32 +37270,15 @@ LABEL_348:
     ++*(int *)((char *)dword_460890 + v245);
     *(int *)((char *)dword_46084C + v213) = dword_4A7AC4;
   }
-  sub_4279C0();
+  sub_4279C0();//parece que abre el popup de terminar porque no tienes pasta
 LABEL_477:
   //allocateMemory(0x4B000u);
   screenBuffer = v218;
   dword_461250 = (int)v218;
   loadGraphics1();
-  v219 = 0;
-  v220 = 2;
-  v221 = (int)dword_4608F0;
-  do
-  {
-    if ( *(_DWORD *)(v221 - 108) > v219 && v220 - 2 != driverId )
-      v219 = *(_DWORD *)(v221 - 108);
-    if ( *(_DWORD *)v221 > v219 && v220 - 1 != driverId )
-      v219 = *(_DWORD *)v221;
-    if ( *(_DWORD *)(v221 + 108) > v219 && v220 != driverId )
-      v219 = *(_DWORD *)(v221 + 108);
-    if ( *(_DWORD *)(v221 + 216) > v219 && v220 + 1 != driverId )
-      v219 = *(_DWORD *)(v221 + 216);
-    if ( *(_DWORD *)(v221 + 324) > v219 && v220 + 2 != driverId )
-      v219 = *(_DWORD *)(v221 + 324);
-    v220 += 5;
-    v221 += 540;
-  }
-  while ( v220 - 2 < 20 );
-  if ( dword_460884[27 * driverId] <= v219 || dword_456BD8 != 1 || isMultiplayerGame )
+  
+  maxDriverPoints = getMaxDriverPoints(driverId);
+  if ( drivers[driverId].points <= maxDriverPoints || dword_456BD8 != 1 || isMultiplayerGame )
   {
     v222 = dword_46086C[27 * driverId];
     v223 = (char *)graphicsGeneral.copperPal + 2 * v222;
@@ -37404,28 +37312,11 @@ LABEL_477:
   }
   else
   {
-    v231 = 0;
-    v232 = 2;
-    v233 = (int)dword_4608F0;
-    do
+    
+	maxDriverPoints = getMaxDriverPoints(driverId);
+    if ( drivers[driverId].points <= maxDriverPoints)
     {
-      if ( *(_DWORD *)(v233 - 108) > v231 && v232 - 2 != driverId )
-        v231 = *(_DWORD *)(v233 - 108);
-      if ( *(_DWORD *)v233 > v231 && v232 - 1 != driverId )
-        v231 = *(_DWORD *)v233;
-      if ( *(_DWORD *)(v233 + 108) > v231 && v232 != driverId )
-        v231 = *(_DWORD *)(v233 + 108);
-      if ( *(_DWORD *)(v233 + 216) > v231 && v232 + 1 != driverId )
-        v231 = *(_DWORD *)(v233 + 216);
-      if ( *(_DWORD *)(v233 + 324) > v231 && v232 + 2 != driverId )
-        v231 = *(_DWORD *)(v233 + 324);
-      v232 += 5;
-      v233 += 540;
-    }
-    while ( v232 - 2 < 20 );
-    if ( dword_460884[27 * driverId] <= v231 )
-    {
-      main(0, v238, v239);
+      main(0, "", "");
     }
     else
     {
@@ -37461,7 +37352,7 @@ LABEL_477:
       }
       else
       {
-        main(0, v238, v239);
+        main(0, "", "");
         dword_456B58 = 1;
       }
     }
@@ -38049,24 +37940,7 @@ LABEL_11:
   while ( v17 < (signed int)&unk_4A7BF0 );
   main(1, v26, v27);
   result = 0;
-  v21 = 2;
-  v22 = (int)dword_4608F0;
-  do
-  {
-    if ( *(_DWORD *)(v22 - 108) > result && v21 - 2 != driverId )
-      result = *(_DWORD *)(v22 - 108);
-    if ( *(_DWORD *)v22 > result && v21 - 1 != driverId )
-      result = *(_DWORD *)v22;
-    if ( *(_DWORD *)(v22 + 108) > result && v21 != driverId )
-      result = *(_DWORD *)(v22 + 108);
-    if ( *(_DWORD *)(v22 + 216) > result && v21 + 1 != driverId )
-      result = *(_DWORD *)(v22 + 216);
-    if ( *(_DWORD *)(v22 + 324) > result && v21 + 2 != driverId )
-      result = *(_DWORD *)(v22 + 324);
-    v21 += 5;
-    v22 += 540;
-  }
-  while ( v21 - 2 < 20 );
+  result = getMaxDriverPoints(driverId);
   if ( isMultiplayerGame
     || (v25 = __OFSUB__(drivers[driverId].points, result),
         v23 = drivers[driverId].points == result,
@@ -38130,7 +38004,7 @@ void selectRaceScreen()
   char v46; // [sp+11h] [bp-5Bh]@62
   char v47; // [sp+12h] [bp-5Ah]@62
   char v48; // [sp+13h] [bp-59h]@62
-  char DstBuf[4]; // [sp+1Ch] [bp-50h]@45
+  char DstBuf[256]; // [sp+1Ch] [bp-50h]@45
   int v50; // [sp+20h] [bp-4Ch]@62
   int v51; // [sp+24h] [bp-48h]@62
   int v52; // [sp+28h] [bp-44h]@62
@@ -38406,7 +38280,7 @@ void selectRaceScreen()
               v40 = (unsigned __int8)v33;
             v41 = v40 == driverId;
             DstBuf[v40] = 1;
-            *(byte *)(v31 + v36 - 2) = v40;
+           //>TODO FIX LO HE QUITADO PORQU PETA *(byte *)(v31 + v36 - 2) = v40;
             if ( v41 )
               dword_45FC20 = v36;
             ++v36;
@@ -38771,26 +38645,9 @@ void enterBlackMarketScreen()
   signed int v61; // [sp+10h] [bp-8h]@114
   signed int v62; // [sp+14h] [bp-4h]@52
 
-  v0 = 0;
-  v1 = 2;
-  v2 = (int)dword_4608F0;
-  do
-  {
-    if ( *(_DWORD *)(v2 - 108) > v0 && v1 - 2 != driverId )
-      v0 = *(_DWORD *)(v2 - 108);
-    if ( *(_DWORD *)v2 > v0 && v1 - 1 != driverId )
-      v0 = *(_DWORD *)v2;
-    if ( *(_DWORD *)(v2 + 108) > v0 && v1 != driverId )
-      v0 = *(_DWORD *)(v2 + 108);
-    if ( *(_DWORD *)(v2 + 216) > v0 && v1 + 1 != driverId )
-      v0 = *(_DWORD *)(v2 + 216);
-    if ( *(_DWORD *)(v2 + 324) > v0 && v1 + 2 != driverId )
-      v0 = *(_DWORD *)(v2 + 324);
-    v1 += 5;
-    v2 += 540;
-  }
-  while ( v1 - 2 < 20 );
-  if ( !isMultiplayerGame && drivers[driverId].rank > v0 )
+ 
+  int maxDriverPoints = getMaxDriverPoints(driverId);
+  if ( !isMultiplayerGame && drivers[driverId].points > maxDriverPoints )
     sabotageAvailable_45EFFC = 0;
   sub_4224E0();
   v59 = 50;
@@ -39821,7 +39678,7 @@ LABEL_154:
             loadMenuSoundEffect(1u, 24, 0, configuration.musicVolume, dword_445190);
             v93 = 0;
             v94 = 2;
-            v95 = (int)dword_4608F0;
+            v95 = (int)dword_4608F0;///bucle de puntos de puloto
             do
             {
               if ( *(_DWORD *)(v95 - 108) > v93 )
