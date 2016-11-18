@@ -28,7 +28,7 @@
 #include <stdlib.h>
 #include "util.h"
 #include "savegame.h"
-
+#include "raceParticipant.h"
 
 #include <string.h>
 
@@ -43,6 +43,7 @@ Graphics4 graphics4;
 Car cars[6];
 char driverNames[20][20];
 Driver drivers[20];
+RaceParticipant raceParticipant[4];
 
 int textureTemp[0xFFFFFu]; // weak
 int screenSurface; // weak
@@ -1490,7 +1491,7 @@ int noPaintJob_456BAC = 0; // weak
 int allCarsCrash_456BB0 = 0; // weak
 int drugQuest_456BB4 = 0; // weak
 int killOneQuest_456BB8 = 0; // weak
-int dword_456BBC = 0; // weak
+int killQuestDriverId_456BBC = 0; // weak
 int lapped_456BC0 = 0; // weak
 int dword_456BC4 = 0; // weak
 int dword_456BC8 = 0; // idb
@@ -1498,8 +1499,8 @@ int dword_456BCC = 0; // weak
 int dword_456BD0 = 0; // weak
 int dword_456BD4 = 0; // weak
 int dword_456BD8 = 0; // weak
-int dword_456BDC = 0; // weak
-int dword_456BE0 = 0; // weak
+int userLasRacePriceIncome_456BDC = 0; // weak
+int userLastRaceIncomeNoPrice_456BE0 = 0; // weak
 int dword_456BE4 = 0; // weak
 int dword_456BE8 = 0; // weak
 int screenPtr = 0; // weak
@@ -3051,6 +3052,9 @@ int dword_4A7A40; // weak
 int dword_4A7A44; // weak
 int dword_4A7A48; // weak
 int dword_4A7A4C; // weak
+
+
+///RaceParticipant.h
 char dword_4A7A60[256];
 int dword_4A7A64; // weak
 __int16 word_4A7A68; // weak
@@ -3069,7 +3073,7 @@ int dword_4A7AA0[256]; // weak
 int dword_4A7AA4; // weak
 int dword_4A7AA8; // weak
 int dword_4A7AAC; // weak
-int Val; // idb
+int Val; // idb  //parece que es dword_4A7AB0
 char byte_4A7AB4[256]; // weak
 int dword_4A7AC4; // weak
 int dword_4A7AC8; // weak
@@ -3088,6 +3092,12 @@ int dword_4A7B90; // weak
 int dword_4A7B94; // weak
 int dword_4A7B98; // weak
 int dword_4A7B9C; // weak
+
+
+
+
+
+
 _UNKNOWN unk_4A7BBC; // weak
 _UNKNOWN unk_4A7BC0; // weak
 _UNKNOWN unk_4A7BC4; // weak
@@ -4126,7 +4136,7 @@ int sub_401060()
   if ( dword_508D24 > 0 )
   {
     v0 = (int)dword_4A689C;
-    v1 = &dword_4A7AA4;
+    v1 = &dword_4A7AA4; //raceParticipant[0].difficulty
     do
     {
       v2 = *v1;
@@ -4228,13 +4238,13 @@ int sub_401060()
   {
     if ( dword_4A68AC[37 * dword_4A9EA8] )
     {
-      if ( dword_4A7AA4 )
+      if ( raceParticipant[0].difficulty )
       {
-        if ( dword_4A7AA4 == 1 )
+        if (raceParticipant[0].difficulty == 1 )
         {
           dword_4A6884[0] = 1083388723;
         }
-        else if ( dword_4A7AA4 == 2 )
+        else if (raceParticipant[0].difficulty == 2 )
         {
           dword_4A6884[0] = 1083598438;
         }
@@ -4242,13 +4252,13 @@ int sub_401060()
       }
       goto LABEL_35;
     }
-    if ( dword_4A7AA4 )
+    if (raceParticipant[0].difficulty)
     {
-      if ( dword_4A7AA4 == 1 )
+      if (raceParticipant[0].difficulty == 1 )
       {
         dword_4A6884[0] = 1082969293;
       }
-      else if ( dword_4A7AA4 == 2 )
+      else if (raceParticipant[0].difficulty == 2 )
       {
 LABEL_35:
         dword_4A6884[0] = 1083179008;
@@ -4286,6 +4296,7 @@ LABEL_36:
     dword_4A68F8 = 19;
     dword_4A6908 = 4;
   }
+  //esta copiando los colores de los 4 participantes
   dword_4A68B8 = dword_4A7A94;
   dword_4A68BC = dword_4A7A98[0];
   dword_4A68C0 = dword_4A7A9C;
@@ -4301,7 +4312,8 @@ LABEL_36:
   v20 = 0;
   do
   {
-    v21 = dword_4A7A60[v20];
+    
+	v21 = dword_4A7A60[v20];
     byte_4A68C4[v20++] = v21;
   }
   while ( v21 );
@@ -10959,7 +10971,7 @@ int sub_40B920()
   v19 = 1022739087;
   v20 = 1031127695;
   if ( dword_4A9EA8 )
-    v8 = dword_4A7AA4;
+    v8 = raceParticipant[0].difficulty;
   else
     v8 = dword_4A7AF8;
   v1 = 0;
@@ -18249,7 +18261,7 @@ LABEL_458:
         sub_406410(0, 8, "      PRESS ENTER TO ABORT      ");
         sub_406D30(0);
         dword_464F68 = 1;
-        dword_4A7AA4 = -1;
+		raceParticipant[0].difficulty = -1;
       }
     }
 LABEL_460:
@@ -26298,7 +26310,7 @@ unsigned int drawStadistics()
     while ( v55 );
     memcpy(v54, DstBuf, v53);
     drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&byte_4458B0, (const char *)&v173, 173326);
-    itoa(dword_456BDC, DstBuf, 10);
+    itoa(userLasRacePriceIncome_456BDC, DstBuf, 10);
     v173 = 1701011794;
     v174 = 1668180256;
     v175 = 6647151;
@@ -26311,7 +26323,7 @@ unsigned int drawStadistics()
     while ( v58 );
     memcpy(v57, DstBuf, v56);
     drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&byte_4458B0, (const char *)&v173, 188046);
-    itoa(dword_456BE0, DstBuf, 10);
+    itoa(userLastRaceIncomeNoPrice_456BE0, DstBuf, 10);
     v174 = 1852383347;
     v175 = 1701670755;
     v173 = 1970171714;
@@ -26326,7 +26338,7 @@ unsigned int drawStadistics()
     v62 = (int)graphicsGeneral.fsma3aBpk;
     memcpy(v60, DstBuf, v59);
     drawTextWithFont(v62, (int)&byte_4458B0, (const char *)&v173, 202766);
-    itoa(dword_456BDC + dword_456BE0, DstBuf, 10);
+    itoa(userLasRacePriceIncome_456BDC + userLastRaceIncomeNoPrice_456BE0, DstBuf, 10);
     v173 = 1635020628;
     v175 = 1763730787;
     v176 = 1836016494;
@@ -31514,7 +31526,7 @@ char sub_42BD10()
     sub_4260D0();
   }
   while ( !eventDetected() );
-  v49 = (signed int)&dword_4A7AA4;
+  v49 = (signed int)&dword_4A7AA4; ///raceParticipant[0].difficulty
   while ( *(_DWORD *)v49 != -1 || dword_456B9C )
   {
     v49 += 84;
@@ -35434,7 +35446,7 @@ int showHitmanScreen()
       if ( v39 == 1 )
       {
         v35 = *((byte *)&dword_45EB50[selectedRace_462CE8] + v14);
-        dword_456BBC = v35;
+        killQuestDriverId_456BBC = v35;
         v36 = &byte_460840[108 * v35];
         killOneQuest_456BB8 = v13;
         v37 = (char *)(&unk_45FBE0 - (_UNKNOWN *)v36);
@@ -35628,13 +35640,13 @@ void __cdecl previewRaceScreen(signed int participants)
   unsigned int v57; // eax@52
   char *v58; // edi@52
   char v59; // cl@53
-  char *v60; // edi@56
+  char *v60=malloc(10); // edi@56
   char v61; // al@57
-  char *v62; // edi@60
+  char *v62 = malloc(10); // edi@60
   char v63; // al@61
-  char *v64; // edi@64
+  char *v64 = malloc(10); // edi@64
   char v65; // al@65
-  char *v66; // edi@68
+  char *v66 = malloc(10); // edi@68
   char v67; // al@69
   char *v68; // eax@71
   int v69; // edi@71
@@ -35806,12 +35818,14 @@ void __cdecl previewRaceScreen(signed int participants)
   int v235; // eax@526
   char v236; // cl@526
   int v237; // eax@526
-  const char **v238; // [sp+Ch] [bp-E8h]@0
-  const char **v239; // [sp+10h] [bp-E4h]@0
-  unsigned __int8 v240; // [sp+1Ch] [bp-D8h]@14
+ // const char **v238; // [sp+Ch] [bp-E8h]@0
+ // const char **v239; // [sp+10h] [bp-E4h]@0
+ /* unsigned __int8 v240; // [sp+1Ch] [bp-D8h]@14
   unsigned __int8 v241; // [sp+1Dh] [bp-D7h]@14
   unsigned __int8 v242; // [sp+1Eh] [bp-D6h]@14
-  unsigned __int8 v243; // [sp+1Fh] [bp-D5h]@14
+  unsigned __int8 v243; // [sp+1Fh] [bp-D5h]@14*/
+
+  int raceIdParticipants[4];
   int v244; // [sp+20h] [bp-D4h]@73
   int v245; // [sp+24h] [bp-D0h]@88
   int v246; // [sp+28h] [bp-CCh]@16
@@ -35943,10 +35957,10 @@ void __cdecl previewRaceScreen(signed int participants)
   }
   if ( isMultiplayerGame )
   {
-    v240 = 0;
-    v241 = 1;
-    v242 = 2;
-    v243 = 3;
+	raceIdParticipants[0] = 0;
+	raceIdParticipants[1] = 1;
+	raceIdParticipants[2] = 2;
+	raceIdParticipants[3] = 3;
     //allocateMemoryPtr((void*)&v11,4u);
     //TODO fix
    // Str = v11;
@@ -36121,27 +36135,38 @@ LABEL_44:
         break;
     }
 	//cambiar a racePositions[0][0];
-    v48 = BYTE1(dword_45EB50[v23]);
-    v240 = LOBYTE(dword_45EB50[v23]);
+    /*v48 = BYTE1(dword_45EB50[v23]);
+	raceIdParticipants[0] = LOBYTE(dword_45EB50[v23]);
     v49 = BYTE2(dword_45EB50[v23]);
-    v241 = v48;
+	raceIdParticipants[1] = v48;
     v50 = BYTE3(dword_45EB50[v23]);
-    v242 = v49;
-    v243 = v50;
+	raceIdParticipants[2] = v49;
+	raceIdParticipants[3] = v50;*/
+
+	
+	raceIdParticipants[0] = racePositions[selectedRaceId][0];
+	
+	raceIdParticipants[1] = racePositions[selectedRaceId][1];
+	
+	raceIdParticipants[2] = racePositions[selectedRaceId][2];
+	raceIdParticipants[3] = racePositions[selectedRaceId][3];
+
+	//si la carrera es con adversary
     if ( v23 == 3 )
     {
-      v241 = driverId;
-      v240 = driverId;
+		raceIdParticipants[1] = driverId;
+		raceIdParticipants[0] = driverId;
     }
   }
   strcpy(Str, "NUMBER OF LAPS: ");
   itoa(numberOfLaps, &DstBuf, 10);
-  v51 = strlen(&DstBuf) + 1;
+  strcat(Str, &DstBuf);
+  /*v51 = strlen(&DstBuf) + 1;
   v52 = (char *)&v246 + 3;
   do
     v53 = (v52++)[1];
   while ( v53 );
-  memcpy(v52, &DstBuf, v51);
+  memcpy(v52, &DstBuf, v51);*/
   drawTextWithFont((int)graphicsGeneral.fmed1aBpk, (int)&unk_445928, Str, 229389);
   v248 = 1330454597; //duke
   *(_DWORD *)Str = 1514754640;//nukem
@@ -36168,40 +36193,44 @@ LABEL_44:
     switch ( selectedRace_462CE8 )
     {
       case 1: //race medium
-        v62 = (char *)&v246 + 3;
+       /* v62 = (char *)&v246 + 3;
         do
           v63 = (v62++)[1];
         while ( v63 );
         *(_DWORD *)v62 = *(_DWORD *)"$3000";
-        *((_WORD *)v62 + 2) = *(_WORD *)"0";
+        *((_WORD *)v62 + 2) = *(_WORD *)"0";*/
+		strcpy(v62, "$3000");
         break;
       case 2: //race hard
-        v64 = (char *)&v246 + 3;
+        /*v64 = (char *)&v246 + 3;
         do
           v65 = (v64++)[1];
         while ( v65 );
         *(_DWORD *)v64 = *(_DWORD *)"$12000";
         *((_WORD *)v64 + 2) = *(_WORD *)"00";
-        v64[6] = a12000[6];
+        v64[6] = a12000[6];*/
+		strcpy(v64, "$12000");
         break;
       case 3:
-        v66 = (char *)&v246 + 3;
+        /*v66 = (char *)&v246 + 3;
         do
           v67 = (v66++)[1];
         while ( v67 );
         *(_DWORD *)v66 = 1380928583; //GLORY
-        *((_WORD *)v66 + 2) = 89;
+        *((_WORD *)v66 + 2) = 89;*/
+		strcpy(v66, "GLORY");
         break;
     }
   }
   else //race 0 easy
   {
-    v60 = (char *)&v246 + 3;
+    /*v60 = (char *)&v246 + 3;
     do
       v61 = (v60++)[1];
     while ( v61 );
     *(_DWORD *)v60 = *(_DWORD *)"$750";
-    v60[4] = a750[4];
+    v60[4] = a750[4];*/
+	  strcpy(v60, "$750");
   }
   v68 = Str;
   v69 = 0;
@@ -36223,9 +36252,9 @@ LABEL_44:
     strupr(Str);
     drawTextWithFont((int)graphicsGeneral.fmed1aBpk, (int)&unk_445928, Str, 128664);
     drawImageWithPosition2((int)graphicsGeneral.facexxBpk, 64, 64, (int)((char *)screenBuffer + 82613));
-    v72 = v240;
-    v73 = 27 * v240;
-    itoa(dword_460888[v73], Str, 10);
+    v72 = raceIdParticipants[0];
+	v73 = raceIdParticipants[0];
+    itoa(drivers[v73].rank, Str, 10);
     v74 = (char *)&v246 + 3;
     do
       v75 = (v74++)[1];
@@ -36390,10 +36419,12 @@ LABEL_112:
   v101 = 0;
   if (participants > 0 )
   {
-    v102 = (int)dword_4A7A60;
+	  int iRacePArticipant = 0;
+    //v102 = raceParticipant[iRacePArticipant];
+	//v102 = (int)dword_4A7A60;
     while ( 1 )
     {
-		v103 = *(&v240 + v101);
+		v103 = raceIdParticipants[v101];
 		//esto no se usa puede que este copiando le nombre!
       /*v103 = *(&v240 	  + v101);
       v104 = &byte_460840[108 * v103];
@@ -36404,69 +36435,71 @@ LABEL_112:
         ++v104;
       }
       while ( v105 );*/
-      strupr((char *)v102);
-      v106 = *(&v240 + v101);
-      *(_DWORD *)(v102 + 16) = drivers[v106].damage;
-      *(_DWORD *)(v102 + 20) = drivers[v106].engine;
-      *(_DWORD *)(v102 + 24) = drivers[v106].tire;
-      v107 = drivers[v106].carType;
-      *(_DWORD *)(v102 + 28) = drivers[v106].armour;
+	  strcpy(raceParticipant[iRacePArticipant].name, drivers[v103].name);
+      //strupr((char *)v102);
+      v106 = raceIdParticipants[v101];
+	  raceParticipant[iRacePArticipant].damage = drivers[v106].damage;
+	  raceParticipant[iRacePArticipant].engine = drivers[v106].engine;
+	  raceParticipant[iRacePArticipant].tire = drivers[v106].tire;
+      
+	  raceParticipant[iRacePArticipant].armour = drivers[v106].armour;
       v96 = driverId;
       v108 = v106 == driverId;
-      *(_DWORD *)(v102 + 48) = v107;
+	  raceParticipant[iRacePArticipant].carType = drivers[v106].carType;
       if ( v108 )
-        *(_DWORD *)(v102 + 68) = 3;
+		  raceParticipant[iRacePArticipant].difficulty = 3;
       else
-        *(_DWORD *)(v102 + 68) = configuration.difficulty;
-      v109 = *(&v240 + v101);
-      *(_DWORD *)(v102 + 44) = useWeapons;
-      *(_DWORD *)(v102 + 32) = drivers[v109].rocket;
-      v110 = drivers[v109].mines;
-      *(_DWORD *)(v102 + 36) = drivers[v109].spikes;
-      *(_DWORD *)(v102 + 40) = v110;
+		  raceParticipant[iRacePArticipant].difficulty = configuration.difficulty;
+      v109 = raceIdParticipants[v101];
+	  raceParticipant[iRacePArticipant].useWeapons = useWeapons;
+	  raceParticipant[iRacePArticipant].rocket = drivers[v109].rocket;
+      
+	  raceParticipant[iRacePArticipant].spikes = drivers[v109].spikes;
+	  raceParticipant[iRacePArticipant].mines = drivers[v109].mines;
 	  //asigna aleatoriamente a los contrincantes los mines rocket y spikes
-      if ( v109 != v96 && !isMultiplayerGame )
+      if ( v109 != driverId && !isMultiplayerGame )
       {
-        *(_DWORD *)(v102 + 40) = 0;
-        *(_DWORD *)(v102 + 36) = 0;
-        *(_DWORD *)(v102 + 32) = 0; //rocket
+		  raceParticipant[iRacePArticipant].mines = 0;
+		  raceParticipant[iRacePArticipant].spikes = 0;
+		  raceParticipant[iRacePArticipant].rocket = 0; //rocket
         if ( !(rand() % 5) && useWeapons )
-          *(_DWORD *)(v102 + 32) = 1;
+			raceParticipant[iRacePArticipant].rocket = 1;
         if ( !(rand() % 5) && useWeapons )
-          *(_DWORD *)(v102 + 36) = 1;//spikes
+			raceParticipant[iRacePArticipant].spikes = 1;//spikes
         v111 = rand();
         v96 = driverId;
         if ( !(v111 % 5) && useWeapons )
-          *(_DWORD *)(v102 + 40) = 8;//mines
+			raceParticipant[iRacePArticipant].mines = 8;//mines
       }
       v112 = graphicsGeneral.carcolPal;
 	  //aqui se asigna el color rgb
-      if ( v103 == v96 || isMultiplayerGame )
+      if ( v103 == driverId || isMultiplayerGame )
       {
-        v116 = (char *)graphicsGeneral.copperPal + 2 * drivers[*(&v240 + v101)].colour + drivers[ *(&v240 + v101)].colour;
-        *(_DWORD *)(v102 + 52) = (unsigned __int8)*v116;
-        *(_DWORD *)(v102 + 56) = (unsigned __int8)v116[1];
-        *(_DWORD *)(v102 + 60) = (unsigned __int8)v116[2];
+        v116 = (char *)graphicsGeneral.copperPal + 2 * drivers[raceIdParticipants[v101]].colour + drivers[raceIdParticipants[v101]].colour;
+		raceParticipant[iRacePArticipant].r = (unsigned __int8)*v116;
+		raceParticipant[iRacePArticipant].g = (unsigned __int8)v116[1];
+		raceParticipant[iRacePArticipant].b = (unsigned __int8)v116[2];
         if ( !isMultiplayerGame || v101 <= dword_456758 - 1 )
           goto LABEL_157;
-        *(_DWORD *)(v102 + 52) = *((byte *)v112 + 30);
-        *(_DWORD *)(v102 + 56) = *((byte *)v112 + 31);
+		raceParticipant[iRacePArticipant].r = *((byte *)v112 + 30);
+		raceParticipant[iRacePArticipant].g = *((byte *)v112 + 31);
         v115 = *((byte *)v112 + 32);
       }
       else
       {
-        v113 = drivers[*(&v240 + v101)].colour;
+        v113 = drivers[raceIdParticipants[v101]].colour;
         v114 = (char *)graphicsGeneral.carcolPal + 2 * v113 + v113;
-        *(_DWORD *)(v102 + 52) = (unsigned __int8)*v114;
-        *(_DWORD *)(v102 + 56) = (unsigned __int8)v114[1];
+		raceParticipant[iRacePArticipant].r = (unsigned __int8)*v114;
+		raceParticipant[iRacePArticipant].g = (unsigned __int8)v114[1];
         v115 = (unsigned __int8)v114[2];
       }
-      *(_DWORD *)(v102 + 60) = v115;
+	  raceParticipant[iRacePArticipant].b = v115;
 LABEL_157:
 	  numberOfParticipants = participants;
       ++v101;
-      v102 += 84;
-      if ( v101 >= participants)
+      //v102 += 84;
+	  iRacePArticipant++;
+      if (iRacePArticipant >= participants)
         goto LABEL_160;
     }
   }
@@ -36474,15 +36507,16 @@ LABEL_157:
 LABEL_160:
   if ( isMultiplayerGame && numberOfParticipants < 4 )//claramente setea los colores de los participantes
   {
-    v117 = (signed int)&dword_4A7A98[21 * numberOfParticipants];
+	 int iRacePArticipant = 0;
+
     do
     {
-      *(_DWORD *)(v117 - 4) = *((byte *)v112 + 30);
-      *(_DWORD *)v117 = *((byte *)v112 + 31);
-      *(_DWORD *)(v117 + 4) = *((byte *)v112 + 32);
-      v117 += 84;
+		raceParticipant[iRacePArticipant].r=  *((byte *)v112 + 30);
+		raceParticipant[iRacePArticipant].g = *((byte *)v112 + 31);
+		raceParticipant[iRacePArticipant].b = *((byte *)v112 + 32);
+		iRacePArticipant++;
     }
-    while ( v117 < (signed int)&unk_4A7BE8 );
+    while (iRacePArticipant < participants);
   }
   maxPoints = 0;
   v119 = 0;
@@ -36490,7 +36524,6 @@ LABEL_160:
   if (numberOfParticipants > 0 )
   {
 	  int driverIndex = 0;
-    
     do
     {
       if (drivers[driverIndex].points > maxPoints && v119 != v96 )
@@ -36504,22 +36537,24 @@ LABEL_160:
   userPoints = drivers[v121].points;
   if (userPoints > maxPoints && !isMultiplayerGame )
   {
-    *(_DWORD *)dword_4A7A60 = 1163281473; ///adversary
+    
+	  strcpy(raceParticipant[0].name, "Adversary");
+	  /**(_DWORD *)dword_4A7A60 = 1163281473; ///adversary
     dword_4A7A64 = 1380012882;
-    word_4A7A68 = 89;
-    dword_4A7AA4 = configuration.difficulty;
-    dword_4A7A70[0] = 0;
-    dword_4A7A80 = 0;
-    dword_4A7A90 = 6;
-    dword_4A7A84 = 1;
-    dword_4A7A8C = useWeapons;
-    dword_4A7A88 = useWeapons != 0 ? 8 : 0;
-    dword_4A7B3C = *((byte *)v112 + 30);
-    dword_4A7B40 = *((byte *)v112 + 31);
-    dword_4A7B44 = *((byte *)v112 + 32);
-    dword_4A7B90 = *((byte *)v112 + 30);
-    dword_4A7B94 = *((byte *)v112 + 31);
-    dword_4A7B98 = *((byte *)v112 + 32);
+    word_4A7A68 = 89;*/
+	  raceParticipant[0].difficulty = configuration.difficulty;
+	  raceParticipant[0].damage = 0;
+	  raceParticipant[0].rocket = 0;
+	  raceParticipant[0].carType = 6;
+	  raceParticipant[0].spikes = 1;
+	  raceParticipant[0].useWeapons = useWeapons;
+	  raceParticipant[0].mines = useWeapons != 0 ? 8 : 0;
+	  raceParticipant[2].r = *((byte *)v112 + 30);
+	raceParticipant[2].g = *((byte *)v112 + 31);
+	raceParticipant[2].b = *((byte *)v112 + 32);
+	raceParticipant[3].r = *((byte *)v112 + 30);
+	raceParticipant[3].g = *((byte *)v112 + 31);
+	raceParticipant[3].b = *((byte *)v112 + 32);
   }
   v123 = 24 * ((unsigned __int8)circuitsToSelect_46126C[selectedRace_462CE8] + 18 * drivers[v121].carType);
   dword_50A160 = *(int *)((char *)&dword_45F04C + v123);
@@ -36641,8 +36676,8 @@ LABEL_534:
     v131 += 540;
   }
   while ( v130 - 2 < 20 );
-  v132 = dword_460884[27 * driverId];
-  v245 = 108 * driverId;
+  v132 = drivers[driverId].points;
+  v245 =  driverId;
   if ( v132 <= v129 || isMultiplayerGame )
   {
     v133 = 0;
@@ -36674,44 +36709,45 @@ LABEL_534:
       if ( killOneQuest_456BB8 > 0 )
       {
 		  //cambiar a racePositions[0][0];
-        if ( LOBYTE(dword_45EB50[selectedRace_462CE8]) == dword_456BBC )
+        if ( LOBYTE(dword_45EB50[selectedRace_462CE8]) == killQuestDriverId_456BBC )
           v133 = 0;
-        if ( BYTE1(dword_45EB50[selectedRace_462CE8]) == dword_456BBC )
+        if ( BYTE1(dword_45EB50[selectedRace_462CE8]) == killQuestDriverId_456BBC )
           v133 = 1;
-        if ( BYTE2(dword_45EB50[selectedRace_462CE8]) == dword_456BBC )
+        if ( BYTE2(dword_45EB50[selectedRace_462CE8]) == killQuestDriverId_456BBC )
           v133 = 2;
-        if ( BYTE3(dword_45EB50[selectedRace_462CE8]) == dword_456BBC )
+        if ( BYTE3(dword_45EB50[selectedRace_462CE8]) == killQuestDriverId_456BBC )
           v133 = 3;
-        if ( dword_4A7A70[21 * v133] != 100 )
+        if ( raceParticipant[v133].damage != 100 )
           killOneQuest_456BB8 = -killOneQuest_456BB8;
       }
     }
   }
-  if ( *(int *)((char *)dword_460874 + v245) != -1 )
-    ++*(int *)((char *)dword_460878 + v245);
+  if ( drivers[driverId].loanType != -1 )
+    ++drivers[driverId].loanRaces;
   dword_464F44 = 0;
   //pone a 0 las cosas del underground
-  v136 = (signed int)dword_4608A0;
-  do
-  {
-    *(_DWORD *)(v136 - 4) = 0;
-    *(_DWORD *)v136 = 0;
-    *(_DWORD *)(v136 + 4) = 0;
-    *(_DWORD *)(v136 + 8) = 0;
-    v136 += 108;
-  }
-  while ( v136 < (signed int)&unk_461110 );
+
+  int iDriver = 0;
+  do {
+	  drivers[iDriver].mines = 0;
+	  drivers[iDriver].spikes = 0;
+	  drivers[iDriver].rocket = 0;
+	  drivers[iDriver].sabotage = 0;
+
+	  iDriver++;
+  } while (iDriver < 20);
+
   reInitUnderGroundMarketStock();
-  v137 = v242;
-  v138 = 27 * v241;
-  dword_460894[27 * v240] = 0;
-  v139 = 27 * v243;
-  dword_460894[v138] = 0;
-  dword_460894[27 * v137] = 0;
+  v137 = raceIdParticipants[2];
+  v138 = raceIdParticipants[1];
+  drivers[raceIdParticipants[0]].lastRaceIncome = 0;
+  v139 = raceIdParticipants[3];
+  drivers[raceIdParticipants[1]].lastRaceIncome = 0;
+  drivers[raceIdParticipants[2]].lastRaceIncome = 0;
   v140 = 0;
-  dword_460894[v139] = 0;
-  dword_456BE0 = 0;
-  dword_456BDC = 0;
+  drivers[raceIdParticipants[3]].lastRaceIncome = 0;
+  userLastRaceIncomeNoPrice_456BE0 = 0;
+  userLasRacePriceIncome_456BDC = 0;
   v246 = 0;
   v141 = 2;
   v142 = (int)dword_4608F0; //bucle puntos de polotos
@@ -36814,7 +36850,7 @@ LABEL_534:
         v162 += 150;
       }
       while ( v162 < (signed int)&blacktx1Bpk );
-      if ( dword_4A7AA4 == -1 )
+      if (raceParticipant[0].difficulty == -1 )
       {
         memcpy(&dword_462C4E, "-- Multiplayer connection lost!", 0x20u);
       }
@@ -36961,8 +36997,8 @@ LABEL_534:
     v199 = 0;
     LOBYTE(dword_462C4E) = 0;
     HIBYTE(word_461ED4) = 0;
-    dword_456BE0 = 0;
-    dword_456BDC = 0;
+    userLastRaceIncomeNoPrice_456BE0 = 0;
+    userLasRacePriceIncome_456BDC = 0;
     if ( dword_456758 > 0 )
     {
       v200 = (double)dword_4456E8;
@@ -36972,17 +37008,18 @@ LABEL_534:
       {
         v202 = v244 * *(_DWORD *)(v201 - 52);
         v108 = v199 == dword_45FC20;
-        dword_460894[27 * *(&v240 + v199)] = v202;
+        drivers[raceIdParticipants[v199]].lastRaceIncome = v202;
         if ( v108 )
-          dword_456BE0 = v202;
+          userLastRaceIncomeNoPrice_456BE0 = v202;
         v203 = *(_DWORD *)v201;
-        if ( *(_DWORD *)v201 == 1 )
+		//es multiplayer no me interesa
+        /*if ( *(_DWORD *)v201 == 1 )
         {
           v204 = &dword_460894[27 * *(&v240 + v199)];
           v108 = v199 == dword_45FC20;
           *v204 += (unsigned __int64)(0.3 * v200);
           if ( v108 )
-            dword_456BDC = (unsigned __int64)(0.3 * v200);
+            userLasRacePriceIncome_456BDC = (unsigned __int64)(0.3 * v200);
           dword_460884[27 * *(&v240 + v199)] += 6;
         }
         if ( v203 == 2 )
@@ -36991,7 +37028,7 @@ LABEL_534:
           v108 = v199 == dword_45FC20;
           *v205 += (unsigned __int64)(0.25 * v200);
           if ( v108 )
-            dword_456BDC = (unsigned __int64)(0.25 * v200);
+            userLasRacePriceIncome_456BDC = (unsigned __int64)(0.25 * v200);
           dword_460884[27 * *(&v240 + v199)] += 4;
         }
         if ( v203 == 3 )
@@ -37000,7 +37037,7 @@ LABEL_534:
           v108 = v199 == dword_45FC20;
           *v206 += (unsigned __int64)(0.2 * v200);
           if ( v108 )
-            dword_456BDC = (unsigned __int64)(0.2 * v200);
+            userLasRacePriceIncome_456BDC = (unsigned __int64)(0.2 * v200);
           dword_460884[27 * *(&v240 + v199)] += 2;
         }
         if ( v203 == 4 )
@@ -37009,13 +37046,13 @@ LABEL_534:
           v108 = v199 == dword_45FC20;
           *v207 += (unsigned __int64)(0.15 * v200);
           if ( v108 )
-            dword_456BDC = (unsigned __int64)(0.15 * v200);
-        }
-        v208 = 27 * *(&v240 + v199);
-        dword_460870[v208] += dword_460894[v208];
-        dword_460898[v208] += dword_460894[v208];
+            userLasRacePriceIncome_456BDC = (unsigned __int64)(0.15 * v200);
+        }*/
+        v208 = raceIdParticipants[v199];
+        drivers[v208].money += drivers[v208].lastRaceIncome;
+        drivers[v208].totalIncome += drivers[v208].lastRaceIncome;
         if ( v203 == 1 )
-          ++dword_46088C[27 * *(&v240 + v199)];
+          ++drivers[raceIdParticipants[v199]].racesWon;
         ++v199;
         v201 += 84;
       }
@@ -37024,195 +37061,196 @@ LABEL_534:
   }
   else
   {//calculo del dinero ganado en la carrera
+	  //140 son los puntos del que mas lleva
     if ( *(int *)((char *)dword_460884 + v245) <= v140 && !lapped_456BC0 )
     {
       v143 = selectedRace_462CE8;
       v144 = 0;
-      v145 = (signed int)&dword_4A7A6C;
+      v145 = (signed int)&dword_4A7A6C;//posicion en carrera
       do
       {
         if ( dword_456B50 != 4 && !v143 )
         {
           v146 = 50 * *(_DWORD *)v145;
-          dword_460894[27 * *(&v240 + v144)] = v146;
+		  drivers[raceIdParticipants[v144]].lastRaceIncome = v146;
           if ( v144 == v126 )
-            dword_456BE0 = v146;
+            userLastRaceIncomeNoPrice_456BE0 = v146;
         }
         v147 = *(int *)((char *)dword_460888 + v245);
         if ( v147 > 0 && v147 < 6 && dword_456B50 != 4 )
         {
-          if ( v143 == 1 )
+          if ( v143 == RACE_EASY)
           {
-            dword_460894[27 * *(&v240 + v144)] = 260 * *(_DWORD *)v145;
+			  drivers[raceIdParticipants[v144]].lastRaceIncome = 260 * *(_DWORD *)v145;
 LABEL_304:
             if ( v144 == v126 )
-              dword_456BE0 = 260 * *(_DWORD *)v145;
+              userLastRaceIncomeNoPrice_456BE0 = 260 * *(_DWORD *)v145;
             goto LABEL_309;
           }
-          if ( v143 == 2 )
+          if ( v143 == RACE_MEDIUM)
           {
-            dword_460894[27 * *(&v240 + v144)] = 500 * *(_DWORD *)v145;
+			  drivers[raceIdParticipants[v144]].lastRaceIncome = 500 * *(_DWORD *)v145;
           }
           else
           {
-            if ( v143 == 1 )
+            if ( v143 == RACE_EASY)
               goto LABEL_304;
-            if ( v143 != 2 )
+            if ( v143 != RACE_MEDIUM )
               goto LABEL_309;
           }
           if ( v144 == v126 )
-            dword_456BE0 = 500 * *(_DWORD *)v145;
+            userLastRaceIncomeNoPrice_456BE0 = 500 * *(_DWORD *)v145;
         }
 LABEL_309:
         v148 = *(int *)((char *)dword_460888 + v245);
         if ( v148 <= 5 || v148 >= 11 || dword_456B50 == 4 )
           goto LABEL_322;
-        if ( v143 == 1 )
+        if ( v143 == RACE_MEDIUM)
         {
-          dword_460894[27 * *(&v240 + v144)] = 200 * *(_DWORD *)v145;
+			drivers[raceIdParticipants[v144]].lastRaceIncome = 200 * *(_DWORD *)v145;
 LABEL_317:
           if ( v144 == v126 )
-            dword_456BE0 = 200 * *(_DWORD *)v145;
+            userLastRaceIncomeNoPrice_456BE0 = 200 * *(_DWORD *)v145;
           goto LABEL_322;
         }
-        if ( v143 == 2 )
+        if ( v143 == RACE_HARD)
         {
-          dword_460894[27 * *(&v240 + v144)] = 300 * *(_DWORD *)v145;
+			drivers[raceIdParticipants[v144]].lastRaceIncome = 300 * *(_DWORD *)v145;
         }
         else
         {
-          if ( v143 == 1 )
+          if ( v143 == RACE_MEDIUM)
             goto LABEL_317;
-          if ( v143 != 2 )
+          if ( v143 != RACE_HARD)
             goto LABEL_322;
         }
         if ( v144 == v126 )
-          dword_456BE0 = 300 * *(_DWORD *)v145;
+          userLastRaceIncomeNoPrice_456BE0 = 300 * *(_DWORD *)v145;
 LABEL_322:
         v149 = *(int *)((char *)dword_460888 + v245);
         if ( v149 <= 10 || v149 >= 16 || dword_456B50 == 4 )
           goto LABEL_335;
-        if ( v143 == 1 )
+        if ( v143 == RACE_MEDIUM )
         {
-          dword_460894[27 * *(&v240 + v144)] = 120 * *(_DWORD *)v145;
+			drivers[raceIdParticipants[v144]].lastRaceIncome = 120 * *(_DWORD *)v145;
 LABEL_330:
           if ( v144 == v126 )
-            dword_456BE0 = 120 * *(_DWORD *)v145;
+            userLastRaceIncomeNoPrice_456BE0 = 120 * *(_DWORD *)v145;
           goto LABEL_335;
         }
-        if ( v143 == 2 )
+        if ( v143 == RACE_HARD)
         {
-          dword_460894[27 * *(&v240 + v144)] = 150 * *(_DWORD *)v145;
+			drivers[raceIdParticipants[v144]].lastRaceIncome = 150 * *(_DWORD *)v145;
         }
         else
         {
-          if ( v143 == 1 )
+          if ( v143 == RACE_MEDIUM )
             goto LABEL_330;
-          if ( v143 != 2 )
+          if ( v143 != RACE_HARD )
             goto LABEL_335;
         }
         if ( v144 == v126 )
-          dword_456BE0 = 150 * *(_DWORD *)v145;
+          userLastRaceIncomeNoPrice_456BE0 = 150 * *(_DWORD *)v145;
 LABEL_335:
         v150 = *(int *)((char *)dword_460888 + v245);
         if ( v150 > 15 && v150 < 21 && dword_456B50 != 4 )
         {
-          if ( v143 == 1 )
+          if ( v143 == RACE_MEDIUM )
           {
-            dword_460894[27 * *(&v240 + v144)] = 60 * *(_DWORD *)v145;
+			  drivers[raceIdParticipants[v144]].lastRaceIncome = 60 * *(_DWORD *)v145;
 LABEL_343:
             if ( v144 == v126 )
-              dword_456BE0 = 60 * *(_DWORD *)v145;
+              userLastRaceIncomeNoPrice_456BE0 = 60 * *(_DWORD *)v145;
             goto LABEL_348;
           }
-          if ( v143 == 2 )
+          if ( v143 == RACE_HARD )
           {
-            dword_460894[27 * *(&v240 + v144)] = 80 * *(_DWORD *)v145;
+			  drivers[raceIdParticipants[v144]].lastRaceIncome = 80 * *(_DWORD *)v145;
 LABEL_346:
             if ( v144 == v126 )
-              dword_456BE0 = 80 * *(_DWORD *)v145;
+              userLastRaceIncomeNoPrice_456BE0 = 80 * *(_DWORD *)v145;
             goto LABEL_348;
           }
-          if ( v143 == 1 )
+          if ( v143 == RACE_MEDIUM )
             goto LABEL_343;
-          if ( v143 == 2 )
+          if ( v143 == RACE_HARD )
             goto LABEL_346;
         }
 LABEL_348:
         if ( v143 )
         {
-          if ( v143 == 1 )
+          if ( v143 == RACE_MEDIUM)
           {
             v152 = *(_DWORD *)(v145 + 52);
-            if ( v152 == 1 && *(_DWORD *)(v145 + 4) != 100 )
+            if ( v152 == RACE_POSITION_1 && *(_DWORD *)(v145 + 4) != 100 )
             {
-              dword_460894[27 * *(&v240 + v144)] += 3000;
+              drivers[raceIdParticipants[v144]].lastRaceIncome += 3000;
               if ( v144 == v126 )
-                dword_456BDC = 3000;
+                userLasRacePriceIncome_456BDC = 3000;
             }
-            if ( v152 == 2 && *(_DWORD *)(v145 + 4) != 100 )
+            if ( v152 == RACE_POSITION_2 && *(_DWORD *)(v145 + 4) != 100 )
             {
-              dword_460894[27 * *(&v240 + v144)] += 1500;
+				drivers[raceIdParticipants[v144]].lastRaceIncome += 1500;
               if ( v144 == v126 )
-                dword_456BDC = 1500;
+                userLasRacePriceIncome_456BDC = 1500;
             }
-            if ( v152 == 3 && *(_DWORD *)(v145 + 4) != 100 )
+            if ( v152 == RACE_POSITION_3 && *(_DWORD *)(v145 + 4) != 100 )
             {
-              dword_460894[27 * *(&v240 + v144)] += 375;
+				drivers[raceIdParticipants[v144]].lastRaceIncome += 375;
               if ( v144 == v126 )
-                dword_456BDC = 375;
+                userLasRacePriceIncome_456BDC = 375;
             }
           }
-          else if ( v143 == 2 )
+          else if ( v143 == RACE_HARD )
           {
             v151 = *(_DWORD *)(v145 + 52);
-            if ( v151 == 1 && *(_DWORD *)(v145 + 4) != 100 )
+            if ( v151 == RACE_POSITION_1 && *(_DWORD *)(v145 + 4) != 100 )
             {
-              dword_460894[27 * *(&v240 + v144)] += 12000;
+				drivers[raceIdParticipants[v144]].lastRaceIncome += 12000;
               if ( v144 == v126 )
-                dword_456BDC = 12000;
+                userLasRacePriceIncome_456BDC = 12000;
             }
-            if ( v151 == 2 && *(_DWORD *)(v145 + 4) != 100 )
+            if ( v151 == RACE_POSITION_2 && *(_DWORD *)(v145 + 4) != 100 )
             {
-              dword_460894[27 * *(&v240 + v144)] += 6000;
+				drivers[raceIdParticipants[v144]].lastRaceIncome += 6000;
               if ( v144 == v126 )
-                dword_456BDC = 6000;
+                userLasRacePriceIncome_456BDC = 6000;
             }
-            if ( v151 == 3 && *(_DWORD *)(v145 + 4) != 100 )
+            if ( v151 == RACE_POSITION_3 && *(_DWORD *)(v145 + 4) != 100 )
             {
-              dword_460894[27 * *(&v240 + v144)] += 1500;
+				drivers[raceIdParticipants[v144]].lastRaceIncome += 1500;
               if ( v144 == v126 )
-                dword_456BDC = 1500;
+                userLasRacePriceIncome_456BDC = 1500;
             }
           }
         }
         else
-        {
+        {//RACE_EASY
           v153 = *(_DWORD *)(v145 + 52);
-          if ( v153 == 1 && *(_DWORD *)(v145 + 4) != 100 )
+          if ( v153 == RACE_POSITION_1 && *(_DWORD *)(v145 + 4) != 100 )
           {
-            dword_460894[27 * *(&v240 + v144)] += 750;
+			  drivers[raceIdParticipants[v144]].lastRaceIncome += 750;
             if ( v144 == v126 )
-              dword_456BDC = 750;
+              userLasRacePriceIncome_456BDC = 750;
           }
-          if ( v153 == 2 && *(_DWORD *)(v145 + 4) != 100 )
+          if ( v153 == RACE_POSITION_2 && *(_DWORD *)(v145 + 4) != 100 )
           {
-            dword_460894[27 * *(&v240 + v144)] += 375;
+			  drivers[raceIdParticipants[v144]].lastRaceIncome += 375;
             if ( v144 == v126 )
-              dword_456BDC = 375;
+              userLasRacePriceIncome_456BDC = 375;
           }
-          if ( v153 == 3 && *(_DWORD *)(v145 + 4) != 100 )
+          if ( v153 == RACE_POSITION_3 && *(_DWORD *)(v145 + 4) != 100 )
           {
-            dword_460894[27 * *(&v240 + v144)] += 187;
+			  drivers[raceIdParticipants[v144]].lastRaceIncome += 187;
             if ( v144 == v126 )
-              dword_456BDC = 187;
+              userLasRacePriceIncome_456BDC = 187;
           }
         }
-        v154 = 27 * *(&v240 + v144);
-        dword_460870[v154] += dword_460894[v154];
-        dword_460898[v154] += dword_460894[v154];
+        v154 = raceIdParticipants[v144];
+        drivers[v154].money += drivers[v154].lastRaceIncome;
+        drivers[v154].totalIncome += drivers[v154].lastRaceIncome;
         if ( *(_DWORD *)(v145 + 52) == 1 )
-          ++dword_46088C[27 * *(&v240 + v144)];
+          ++drivers[raceIdParticipants[v144]].racesWon;
         v145 += 84;
         ++v144;
       }
@@ -37220,30 +37258,13 @@ LABEL_348:
     }
     if ( *(int *)((char *)dword_460884 + v245) > v140 )
     {
-      v155 = 27 * *(&v240 + dword_45FC20);
-      dword_456BE0 = 400 * *(int *)((char *)&dword_4A7A6C + v244);
-      dword_460894[v155] = dword_456BE0;
+      v155 = raceIdParticipants[dword_45FC20];
+      userLastRaceIncomeNoPrice_456BE0 = 400 * *(int *)((char *)&dword_4A7A6C + v244);
+      drivers[v155].lastRaceIncome = userLastRaceIncomeNoPrice_456BE0;
     }
   }
-  v209 = 0;
-  v210 = 2;
-  v211 = (int)dword_4608F0; //bucle de puntos de pilotos
-  do
-  {
-    if ( *(_DWORD *)(v211 - 108) > v209 && v210 - 2 != driverId )
-      v209 = *(_DWORD *)(v211 - 108);
-    if ( *(_DWORD *)v211 > v209 && v210 - 1 != driverId )
-      v209 = *(_DWORD *)v211;
-    if ( *(_DWORD *)(v211 + 108) > v209 && v210 != driverId )
-      v209 = *(_DWORD *)(v211 + 108);
-    if ( *(_DWORD *)(v211 + 216) > v209 && v210 + 1 != driverId )
-      v209 = *(_DWORD *)(v211 + 216);
-    if ( *(_DWORD *)(v211 + 324) > v209 && v210 + 2 != driverId )
-      v209 = *(_DWORD *)(v211 + 324);
-    v210 += 5;
-    v211 += 540;
-  }
-  while ( v210 - 2 < 20 );
+  v209 = getMaxDriverPoints(driverId);
+  
   v212 = isMultiplayerGame;
   if ( isMultiplayerGame || (v213 = v245, *(int *)((char *)dword_460884 + v245) <= v209) )
   {
@@ -37253,12 +37274,12 @@ LABEL_348:
       v215 = dword_4A7A70;
       do
       {
-        v216 = 27 * *(&v240 + v214);
-        ++dword_460890[v216];
+        v216 = raceIdParticipants[ v214];
+        ++drivers[v216].totalRaces;
         v217 = *v215;
         ++v214;
         v215 += 21;
-        dword_46084C[v216] = v217;
+        drivers[v216].racesWon = v217;
       }
       while ( v214 < participants);
     }
@@ -37280,7 +37301,7 @@ LABEL_477:
   maxDriverPoints = getMaxDriverPoints(driverId);
   if ( drivers[driverId].points <= maxDriverPoints || dword_456BD8 != 1 || isMultiplayerGame )
   {
-    v222 = dword_46086C[27 * driverId];
+    v222 = drivers[driverId].colour;
     v223 = (char *)graphicsGeneral.copperPal + 2 * v222;
     v224 = (unsigned __int8)v223[v222 + 2];
     v225 = (int)&v223[v222];
@@ -37843,8 +37864,8 @@ int  adversaryPreviewScreen(const char **a1)
   {
     selectedRace_462CE8 = 3;
     dword_45FC20 = 1;
-    dword_456BE0 = 0;
-    dword_456BDC = 0;
+    userLastRaceIncomeNoPrice_456BE0 = 0;
+    userLasRacePriceIncome_456BDC = 0;
     previewRaceScreen(2);
     result = dword_456BD8;
     if ( dword_456BD8 == 1 )
