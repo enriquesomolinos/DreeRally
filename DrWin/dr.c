@@ -49,7 +49,7 @@ int textureTemp[0xFFFFFu]; // weak
 int screenSurface; // weak
 
 
-int palette[256]; // weak
+int palette[256]; // weak //dword_45E600
 //SDL_Surface * screenSurface; // weak
 
 int dword_45F054; // idb
@@ -1475,7 +1475,7 @@ int dword_456B74 = 0; // weak
 int dword_456B78 = 0; // weak
 int showMediumWarningRace = 0; // weak
 int showHardWarningRace = 0; // weak
-int dword_456B84 = 0; // weak
+int undergroundPricesSet_456B84 = 0; // weak
 
 //circuito seleccionado de los tres
 int selectedRaceId = 0; // weak
@@ -1493,7 +1493,7 @@ int drugQuest_456BB4 = 0; // weak
 int killOneQuest_456BB8 = 0; // weak
 int killQuestDriverId_456BBC = 0; // weak
 int lapped_456BC0 = 0; // weak
-int dword_456BC4 = 0; // weak
+int useHasMorePoints_456BC4 = 0; // weak
 int dword_456BC8 = 0; // idb
 int dword_456BCC = 0; // weak
 int dword_456BD0 = 0; // weak
@@ -1501,9 +1501,9 @@ int dword_456BD4 = 0; // weak
 int dword_456BD8 = 0; // weak
 int userLasRacePriceIncome_456BDC = 0; // weak
 int userLastRaceIncomeNoPrice_456BE0 = 0; // weak
-int dword_456BE4 = 0; // weak
-int dword_456BE8 = 0; // weak
-int screenPtr = 0; // weak
+int multiplayerWaitCounter2_456BE4 = 0; // weak
+int multiplayerWaitCounter_456BE8 = 0; // weak
+int screenPtr = 0; // weak dword_456BF0
 int dword_456BF4 = 0; // weak
 int dword_456BF8 = 0; // weak
 int dword_456BFC = 0; // weak
@@ -1664,7 +1664,7 @@ int racePositions[3][4];//para cada carrera 4 participantes ordenados por posici
 int dword_45EB50[256]; // weak
 int dword_45EB54; // weak
 int dword_45EB58; // weak
-void *dword_45EB5C; // idb
+void *tsahpeBpk_45EB5C; // idb
 
 
 byte animPalette[768];
@@ -1740,7 +1740,7 @@ void *bases42Bpk; // idb
 int dword_45F028; // weak
 void *statbas7Bpk; // idb
 int armourAnimFrameDirection_45F034; // weak
-void *screenBuffer; // idb
+void *screenBuffer; // idb //dword_45F038
 
 
 int dword_45F04C; // idb
@@ -2448,7 +2448,7 @@ void *spons1bBpk; // idb
 
 int menuOptionSelected_463DF0; // weak
 void *choo2Bpk; // idb
-char byte_463DF8; // weak
+char showEndAnim_463DF8; // weak
 char byte_463E00[256]; // weak
 int dword_463E08; // weak
 _UNKNOWN unk_463E20; // weak
@@ -2468,13 +2468,13 @@ int dword_464F68; // weak
 int dword_464F6C; // weak
 float flt_464F70; // weak
 void *pedestrBpk; // idb
-void *dword_464F78; // idb
+void *rast1Bpk_464F78; // idb
 _UNKNOWN unk_464F80; // weak
 _UNKNOWN unk_4669C0; // weak
 _UNKNOWN unk_466F00; // weak
 int dword_467000; // weak
 int dword_467020[256]; // weak
-_UNKNOWN unk_46E560; // weak
+_UNKNOWN bugnum6Bpk_46E560; // weak
 _UNKNOWN unk_46E880; // weak
 int dword_46E8D0[256]; // weak
 int dword_46E8D4; // weak
@@ -2531,7 +2531,7 @@ int dword_481C04[256]; // weak
 _UNKNOWN unk_481C08; // weak
 _UNKNOWN unk_481C0C; // weak
 int dword_481E00; // weak
-void *dword_481E04; // idb
+void *sidebom1Bpk_481E04; // idb
 int dword_481E08; // weak
 int dword_481E0C; // weak
 void *smokeBpk; // idb
@@ -3248,7 +3248,7 @@ int dword_4A8D2C; // weak
 int dword_4A8D40[256]; // weak
 _UNKNOWN unk_4A8DD0; // weak
 int dword_4A9140; // weak
-_UNKNOWN unk_4A9160; // weak
+_UNKNOWN smalfo4aBpk_4A9160; // weak
 float flt_4A9A60[256]; // weak
 int dword_4A9B8C; // weak
 int dword_4A9B90; // weak
@@ -3290,7 +3290,7 @@ _UNKNOWN unk_4AA400; // weak
 int dword_4AA500; // weak
 int dword_4AA504; // weak
 int dword_4AA508; // weak
-void *dword_4AA50C; // idb
+void *goalnum2Bpk_4AA50C; // idb
 int dword_4AA520[256]; // weak
 void *dword_4AA920; // idb
 int dword_4AA924; // weak
@@ -3371,7 +3371,7 @@ int dword_503510; // weak
 int dword_503514; // weak
 int dword_503518; // weak
 int dword_50351C; // weak
-_UNKNOWN unk_503520; // weak
+_UNKNOWN ownnum1Bpk_503520; // weak
 int dword_508D20; // weak
 int dword_508D24; // weak
 int dword_508D44[256]; // weak
@@ -3396,8 +3396,8 @@ int dword_50A198[256]; // weak
 int dword_50A19C[256]; // weak
 _UNKNOWN unk_50A1A8; // weak
 int dword_50B2B0; // weak
-_UNKNOWN unk_50B2C0; // weak
-_UNKNOWN unk_50E440; // weak
+_UNKNOWN othnum1Bpk_50B2C0; // weak
+_UNKNOWN posnum2Bpk_50E440; // weak
 int dword_50E540; // weak
 int dword_50E560[256]; // weak
 _UNKNOWN unk_50E6F0; // weak
@@ -3409,7 +3409,7 @@ void *flame5Bpk; // idb
 void *flame6Bpk; // idb
 int dword_50E718; // weak
 int dword_50E71C; // weak
-char byte_50E720[256]; // weak
+char smallbarBpk_50E720[256]; // weak
 char byte_50E721[256]; // weak
 int dword_50EF20; // weak
 _UNKNOWN unk_50EF44; // weak
@@ -16318,7 +16318,7 @@ int  sub_413C90(int a1)
     v4 = 16;
     do
     {
-      v5 = byte_50E720[v1];
+      v5 = smallbarBpk_50E720[v1];
       if ( v5 )
       {
         a1 = dword_464F14;
@@ -16373,7 +16373,7 @@ int  sub_413C90(int a1)
       v18 = 6752;
       do
       {
-        sub_43B240((int)dword_481E04, 8, 6, v18 + dword_464F14);
+        sub_43B240((int)sidebom1Bpk_481E04, 8, 6, v18 + dword_464F14);
         ++v17;
         v18 += 8;
       }
@@ -16382,21 +16382,21 @@ int  sub_413C90(int a1)
   }
   else if ( dword_4A9EB0 <= 0 )
   {
-    sub_402590((int)&unk_4A9160, 6, 6, dword_481E0C / 70 / 60, 16, 8315, -6, 0);
-    sub_402590((int)&unk_4A9160, 6, 6, dword_481E0C / 70 % 60, 16, 8329, 6, 0);
-    sub_402590((int)&unk_4A9160, 6, 6, (unsigned __int64)((double)(dword_481E0C % 70) * 1.42), 16, 8343, 6, 0);
+    sub_402590((int)&smalfo4aBpk_4A9160, 6, 6, dword_481E0C / 70 / 60, 16, 8315, -6, 0);
+    sub_402590((int)&smalfo4aBpk_4A9160, 6, 6, dword_481E0C / 70 % 60, 16, 8329, 6, 0);
+    sub_402590((int)&smalfo4aBpk_4A9160, 6, 6, (unsigned __int64)((double)(dword_481E0C % 70) * 1.42), 16, 8343, 6, 0);
   }
   else
   {
-    sub_402590((int)&unk_4A9160, 6, 6, dword_503224 / 70 / 60, 16, 8315, -6, 0);
-    sub_402590((int)&unk_4A9160, 6, 6, dword_503224 / 70 % 60, 16, 8329, 6, 0);
-    sub_402590((int)&unk_4A9160, 6, 6, (unsigned __int64)((double)(dword_503224 % 70) * 1.42), 16, 8343, 6, 0);
+    sub_402590((int)&smalfo4aBpk_4A9160, 6, 6, dword_503224 / 70 / 60, 16, 8315, -6, 0);
+    sub_402590((int)&smalfo4aBpk_4A9160, 6, 6, dword_503224 / 70 % 60, 16, 8329, 6, 0);
+    sub_402590((int)&smalfo4aBpk_4A9160, 6, 6, (unsigned __int64)((double)(dword_503224 % 70) * 1.42), 16, 8343, 6, 0);
     dword_4A9EB0 -= dword_4A9EA4;
     if ( dword_4A9EB0 < 0 )
       dword_4A9EB0 = 0;
   }
   v19 = 100.0 - ceil((double)dword_4A6898[37 * dword_4A9EA8] * 0.0009765625);
-  v20 = sub_402590((int)&unk_46E560, 8, 10, (unsigned __int64)v19, 0, 11408, -8, -16);
+  v20 = sub_402590((int)&bugnum6Bpk_46E560, 8, 10, (unsigned __int64)v19, 0, 11408, -8, -16);
   sub_43B240((int)&unk_46E880, 8, 10, v20 + dword_464F14);
   v21 = dword_4A9EA8;
   if ( dword_4A6898[37 * dword_4A9EA8] < 20480 )
@@ -16572,7 +16572,7 @@ int sub_414220()
     {
       if ( dword_4A7E0C[216 * dword_508D44[v5]] )
       {
-        sub_43B240((int)dword_4AA50C, 22, 28, v6 + dword_464F14 + dword_456AA0 + 39972);
+        sub_43B240((int)goalnum2Bpk_4AA50C, 22, 28, v6 + dword_464F14 + dword_456AA0 + 39972);
         v4 = dword_508D24;
       }
       ++v5;
@@ -16598,7 +16598,7 @@ int sub_414220()
     }
     while ( v8 < 96 );
   }
-  sub_43B240((int)((char *)&unk_46E560 + 80 * numberOfLaps), 8, 10, dword_464F14 + dword_456AA0 + 46133);
+  sub_43B240((int)((char *)&bugnum6Bpk_46E560 + 80 * numberOfLaps), 8, 10, dword_464F14 + dword_456AA0 + 46133);
   v11 = 1;
   v12 = 1;
   if ( dword_508D24 > 1 )
@@ -16606,14 +16606,14 @@ int sub_414220()
     v13 = 0x4000;
     do
     {
-      sub_43B240((int)((char *)&unk_46E560 + 80 * numberOfLaps), 8, 10, v13 + dword_464F14 + dword_456AA0 + 46138);
+      sub_43B240((int)((char *)&bugnum6Bpk_46E560 + 80 * numberOfLaps), 8, 10, v13 + dword_464F14 + dword_456AA0 + 46138);
       ++v12;
       v13 += 0x4000;
     }
     while ( v12 < dword_508D24 );
   }
   sub_43B240(
-    (int)((char *)&unk_46E560 + 80 * (unsigned __int8)byte_4A7E08[864 * dword_508D44[0]]),
+    (int)((char *)&bugnum6Bpk_46E560 + 80 * (unsigned __int8)byte_4A7E08[864 * dword_508D44[0]]),
     8,
     10,
     dword_464F14 + dword_456AA0 + 46114);
@@ -16625,7 +16625,7 @@ int sub_414220()
     do
     {
       sub_43B240(
-        (int)((char *)&unk_46E560 + 80 * (unsigned __int8)byte_4A7E08[864 * dword_508D44[v15]]),
+        (int)((char *)&bugnum6Bpk_46E560 + 80 * (unsigned __int8)byte_4A7E08[864 * dword_508D44[v15]]),
         8,
         10,
         v16 + dword_464F14 + dword_456AA0 + 46116);
@@ -16757,7 +16757,7 @@ int sub_414220()
   }
   while ( v27 < 4 );
   sub_43B160(
-    (int)((char *)&unk_503520 + 1024 * ((dword_4A8A90[0] + 0x8000) >> 16)),
+    (int)((char *)&ownnum1Bpk_503520 + 1024 * ((dword_4A8A90[0] + 0x8000) >> 16)),
     32,
     32,
     dword_464F14 + dword_456AA0 + 36928);
@@ -16768,7 +16768,7 @@ int sub_414220()
     do
     {
       sub_43B160(
-        (int)((char *)&unk_50B2C0 + 576 * ((dword_4A8A90[v44++] + 0x8000) >> 16)),
+        (int)((char *)&othnum1Bpk_50B2C0 + 576 * ((dword_4A8A90[v44++] + 0x8000) >> 16)),
         24,
         24,
         v45 + dword_464F14 + dword_456AA0 + 41032);
@@ -16817,7 +16817,7 @@ int sub_414220()
       v56 = 21024;
       do
       {
-        sub_43B240((int)dword_481E04, 8, 6, dword_456AA0 + v56 + dword_464F14);
+        sub_43B240((int)sidebom1Bpk_481E04, 8, 6, dword_456AA0 + v56 + dword_464F14);
         ++v55;
         v56 += 8;
       }
@@ -16827,10 +16827,10 @@ int sub_414220()
   else if ( dword_4A9EB0 <= 0 )
   {
     v57 = (signed int)(dword_481E0C / 70 + ((unsigned int)(-2004318071 * (dword_481E0C / 70)) >> 32)) >> 5;
-    sub_402590((int)&unk_4A9160, 6, 6, v57 + ((unsigned int)v57 >> 31), 16, dword_456AA0 + 22587, -6, 0);
-    sub_402590((int)&unk_4A9160, 6, 6, dword_481E0C / 70 % 60, 16, dword_456AA0 + 22601, 6, 0);
+    sub_402590((int)&smalfo4aBpk_4A9160, 6, 6, v57 + ((unsigned int)v57 >> 31), 16, dword_456AA0 + 22587, -6, 0);
+    sub_402590((int)&smalfo4aBpk_4A9160, 6, 6, dword_481E0C / 70 % 60, 16, dword_456AA0 + 22601, 6, 0);
     sub_402590(
-      (int)&unk_4A9160,
+      (int)&smalfo4aBpk_4A9160,
       6,
       6,
       (unsigned __int64)((double)(dword_481E0C % 70) * 1.42),
@@ -16841,10 +16841,10 @@ int sub_414220()
   }
   else
   {
-    sub_402590((int)&unk_4A9160, 6, 6, dword_503224 / 70 / 60, 16, dword_456AA0 + 22587, -6, 0);
-    sub_402590((int)&unk_4A9160, 6, 6, dword_503224 / 70 % 60, 16, dword_456AA0 + 22601, 6, 0);
+    sub_402590((int)&smalfo4aBpk_4A9160, 6, 6, dword_503224 / 70 / 60, 16, dword_456AA0 + 22587, -6, 0);
+    sub_402590((int)&smalfo4aBpk_4A9160, 6, 6, dword_503224 / 70 % 60, 16, dword_456AA0 + 22601, 6, 0);
     sub_402590(
-      (int)&unk_4A9160,
+      (int)&smalfo4aBpk_4A9160,
       6,
       6,
       (unsigned __int64)((double)(dword_503224 % 70) * 1.42),
@@ -16861,7 +16861,7 @@ int sub_414220()
     LOBYTE(v58) = 0;
   sub_43B3A0(dword_464F14 + (unsigned __int8)v58 + dword_456AA0 + 17444, 58 - (unsigned __int8)v58, 7, v1);
   v59 = (unsigned __int64)(100.0 - ceil((double)dword_4A6898[37 * dword_4A9EA8] * 0.0009765625));
-  v60 = sub_402590((int)&unk_46E560, 8, 10, v59, 0, dword_456AA0 + 36398, -8, -16);
+  v60 = sub_402590((int)&bugnum6Bpk_46E560, 8, 10, v59, 0, dword_456AA0 + 36398, -8, -16);
   sub_43B240((int)&unk_46E880, 8, 10, v60 + dword_464F14);
   v61 = dword_4A9EA8;
   if ( dword_4A6898[37 * dword_4A9EA8] < 20480 )
@@ -16903,7 +16903,7 @@ int sub_414220()
     do
     {
       if ( dword_4A6898[37 * dword_508D44[v64]] <= 0 )
-        sub_43B240((int)dword_464F78, 64, 32, v65 + dword_464F14 + dword_456AA0 + 36896);
+        sub_43B240((int)rast1Bpk_464F78, 64, 32, v65 + dword_464F14 + dword_456AA0 + 36896);
       result = dword_508D24;
       ++v64;
       v65 += 0x4000;
@@ -17004,7 +17004,7 @@ void sub_4151C0()
   do
     v8 = (v7++)[1];
   while ( v8 );
-  *(_DWORD *)v7 = 1095778862;
+  *(_DWORD *)v7 = 1095778862;//bpa
   v7[4] = 0;
   sub_402CF0();
   sub_402EE0();
@@ -17038,25 +17038,25 @@ void sub_4151C0()
     ++v3;
   decryptTexture((int)textureTemp, (int)&unk_4AD340, 8704 * v3 + 6656, 2048);
   extractFromBpa("IBFILES.BPA", textureTemp, "RASTI1.BPK");
-  copyImageToBuffer((int)textureTemp, (int)dword_464F78);
+  copyImageToBuffer((int)textureTemp, (int)rast1Bpk_464F78);
   switch ( dword_4A6880[37 * dword_4A9EA8] )
   {
-    case 0:
+    case VAGABOND:
       extractFromBpa("IBFILES.BPA", textureTemp, "DAM-KUP.BPK");
       break;
-    case 1:
+    case DERVISH:
       extractFromBpa("IBFILES.BPA", textureTemp, "DAM-PIC.BPK");
       break;
-    case 2:
+    case SENTINEL:
       extractFromBpa("IBFILES.BPA", textureTemp,"DAM-SED.BPK");
       break;
-    case 3:
+    case SHRIEKER:
       extractFromBpa("IBFILES.BPA", textureTemp, "DAM-CAM.BPK");
       break;
-    case 4:
+    case WRAITH:
       extractFromBpa("IBFILES.BPA", textureTemp, "DAM-POR.BPK");
       break;
-    case 5:
+    case DELIVERATOR:
       extractFromBpa("IBFILES.BPA", textureTemp, "DAM-LOT.BPK");
       break;
     default:
@@ -17064,24 +17064,24 @@ void sub_4151C0()
   }
   decryptTexture((int)textureTemp, (int)&unk_464F80, 8064 * dword_4A9EA8, 8064);
   extractFromBpa("IBFILES.BPA", textureTemp,"BIGNUM6.BPK");
-  copyImageToBuffer((int)textureTemp, (int)&unk_46E560);
+  copyImageToBuffer((int)textureTemp, (int)&bugnum6Bpk_46E560);
   extractFromBpa("IBFILES.BPA", textureTemp, "SMALFO4A.BPK");
-  copyImageToBuffer((int)textureTemp, (int)&unk_4A9160);
+  copyImageToBuffer((int)textureTemp, (int)&smalfo4aBpk_4A9160);
   extractFromBpa("IBFILES.BPA", textureTemp,"POSNUM2.BPK");
-  copyImageToBuffer((int)textureTemp, (int)&unk_50E440);
+  copyImageToBuffer((int)textureTemp, (int)&posnum2Bpk_50E440);
   extractFromBpa("IBFILES.BPA", textureTemp, "OWN-NUM1.BPK");
-  copyImageToBuffer((int)textureTemp, (int)&unk_503520);
+  copyImageToBuffer((int)textureTemp, (int)&ownnum1Bpk_503520);
   extractFromBpa("IBFILES.BPA", textureTemp, "OTH-NUM1.BPK");
-  copyImageToBuffer((int)textureTemp, (int)&unk_50B2C0);
+  copyImageToBuffer((int)textureTemp, (int)&othnum1Bpk_50B2C0);
   extractFromBpa("IBFILES.BPA", textureTemp, "GOALNUM2.BPK");
-  copyImageToBuffer((int)textureTemp, (int)dword_4AA50C);
+  copyImageToBuffer((int)textureTemp, (int)goalnum2Bpk_4AA50C);
   extractFromBpa("IBFILES.BPA", textureTemp, "SIDEBOM1.BPK");
-  copyImageToBuffer((int)textureTemp, (int)dword_481E04);
+  copyImageToBuffer((int)textureTemp, (int)sidebom1Bpk_481E04);
   extractFromBpa("IBFILES.BPA", textureTemp, "SMALLBAR.BPK");
   v4 = dword_4A9EA8;
   if ( !dword_4A68AC[37 * dword_4A9EA8] )
     v4 = dword_4A9EA8 + 4;
-  decryptTexture((int)textureTemp, (int)byte_50E720, v4 << 11, 2048);
+  decryptTexture((int)textureTemp, (int)smallbarBpk_50E720, v4 << 11, 2048);
 }
 
 
@@ -18327,13 +18327,13 @@ LABEL_460:
   free((void *)(dword_464F14 - 512));
   free(dword_5034FC);
   free(genflaBpk);
-  free(dword_481E04);
+  free(sidebom1Bpk_481E04);
   free(genlamBpk);
   free(damslidBpk);
   free(genmesBpk);
   free(dword_479690);
-  free(dword_464F78);
-  free(dword_4AA50C);
+  free(rast1Bpk_464F78);
+  free(goalnum2Bpk_4AA50C);
   free(flame1Bpk);
   free(flame2Bpk);
   free(flame3Bpk);
@@ -19327,7 +19327,7 @@ int __cdecl sub_418B00(float a1, float a2, float a3)
 
 void freeMemoryGraphics() 
 {
-	//TODO peta a veces por eso lo quito free(dword_45EB5C); //es una textura pero vete a saber
+	//TODO peta a veces por eso lo quito free(tsahpeBpk_45EB5C); //es una textura pero vete a saber
 	free(screenBuffer);
 }
 
@@ -24348,7 +24348,7 @@ signed int autoLoadSave()
       return v0;
     v0 = 2;
     dword_464F44 = 0;
-    dword_456BC4 = 0;
+    useHasMorePoints_456BC4 = 0;
     //allocateMemory(0x883u);
     Str = v10;
     memset(v10, 0, 0x880u);
@@ -27154,24 +27154,24 @@ int sub_4260D0()
 {
   int result; // eax@1
 
-  result = dword_456BE4++ + 1;
-  if ( dword_456BE4 == 30 )
+  result = multiplayerWaitCounter2_456BE4++ + 1;
+  if ( multiplayerWaitCounter2_456BE4 == 30 )
   {
     sub_426080();
     drawTextWithFont((int)graphicsGeneral.fsma3bBpk, (int)&byte_4458B0, "Press any key to continue...", 289646);
     result = drawKeyCursor(289634, (char *)screenBuffer + 289634, 0x10Eu, 16);
   }
-  if ( dword_456BE4 == 60 )
+  if ( multiplayerWaitCounter2_456BE4 == 60 )
   {
     sub_426080();
     drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&byte_4458B0, "Press any key to continue...", 289646);
     result = drawKeyCursor(289634, (char *)screenBuffer + 289634, 0x10Eu, 16);
-    dword_456BE4 = 0;
+    multiplayerWaitCounter2_456BE4 = 0;
   }
   return result;
 }
 // 4458B0: using guessed type char byte_4458B0;
-// 456BE4: using guessed type int dword_456BE4;
+// 456BE4: using guessed type int multiplayerWaitCounter2_456BE4;
 
 //----- (00426180) --------------------------------------------------------
 signed int sub_426180()
@@ -27185,7 +27185,7 @@ signed int sub_426180()
   result = 0;
   do
   {
-    v2 = (char *)dword_45EB5C + result;
+    v2 = (char *)tsahpeBpk_45EB5C + result;
     v3 = (char *)screenBuffer + v0 + 64264;
     result += 360;
     v0 += 640;
@@ -27200,24 +27200,24 @@ int sub_4261D0()
 {
   int result; // eax@1
 
-  result = dword_456BE8++ + 1;
-  if ( dword_456BE8 == 15 )
+  result = multiplayerWaitCounter_456BE8++ + 1;
+  if ( multiplayerWaitCounter_456BE8 == 15 )
   {
     sub_426180();
     drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&byte_4458B0, "waiting for other players...", 66238);
     result = drawKeyCursor(64264, (char *)screenBuffer + 64264, 0x168u, 20);
   }
-  if ( dword_456BE8 == 30 )
+  if ( multiplayerWaitCounter_456BE8 == 30 )
   {
     sub_426180();
     drawTextWithFont((int)graphicsGeneral.fsma3bBpk, (int)&byte_4458B0, "waiting for other players...", 66238);
     result = drawKeyCursor(64264, (char *)screenBuffer + 64264, 0x168u, 20);
-    dword_456BE8 = 0;
+    multiplayerWaitCounter_456BE8 = 0;
   }
   return result;
 }
 // 4458B0: using guessed type char byte_4458B0;
-// 456BE8: using guessed type int dword_456BE8;
+// 456BE8: using guessed type int multiplayerWaitCounter_456BE8;
 
 //----- (00426280) --------------------------------------------------------
 int sub_426280()
@@ -27359,8 +27359,9 @@ int transitionToCurrentImage()///esto huele a que esta pintando la pantalla con 
   int v4; // ST08_4@3
   int v5; // eax@3
   int result; // eax@3
-
+    
   v0 =0;
+  v0 = 6553600;
   do
   {
     wait();
@@ -27373,6 +27374,7 @@ int transitionToCurrentImage()///esto huele a que esta pintando la pantalla con 
       v4 = (convertColorToPaletteColor(palette1[v2 + 1], v0) + 0x8000) >> 16;
       v5 = convertColorToPaletteColor(palette1[v2], v0);
       result = setPaletteAndGetValue(v1, (v5 + 0x8000) >> 16, v4, v3);
+	 
       v2 += 3;
 	  //v2 += 12;
       ++v1;
@@ -28986,7 +28988,7 @@ int reloadContinueAnimation()
   drawImageWithPosition2((int)bases45Bpk, 96, 96, (int)((char *)screenBuffer + 162352));
   createPopup(144, 114, 384, 119, 1);
   v0 = setUndergroundMarketPrices();
-  dword_456B84 = v0;
+  undergroundPricesSet_456B84 = v0;
   if ( useWeapons && v0 )
   {
     writeTextInScreen(aContinue, 79530);
@@ -29010,7 +29012,7 @@ int reloadContinueAnimation()
 }
 // 4456E4: using guessed type int useWeapons;
 // 4462A8: using guessed type int continueAnimFramesSize_4611D0[];
-// 456B84: using guessed type int dword_456B84;
+// 456B84: using guessed type int undergroundPricesSet_456B84;
 // 4611D0: using guessed type int continueAnimCurrentFrame_4611D0;
 
 //----- (00429100) --------------------------------------------------------
@@ -30743,7 +30745,7 @@ int __cdecl main(int argc, const char **argv, const char **envp)
   char Filename; // [sp+10h] [bp-64h]@21
 
   v3 = 0;
-  byte_463DF8 = 0;
+  showEndAnim_463DF8 = 0;
   dword_456730 = 0;
   if ( argc == 2 )
   {
@@ -30929,9 +30931,9 @@ int __cdecl main(int argc, const char **argv, const char **envp)
 	  maxDriverPoints = getMaxDriverPoints(driverId);
 
     v63 = drivers[ driverId].points;
-    if ( v63 > maxDriverPoints && !dword_456BC4 )
-      byte_463DF8 = 1;
-    dword_456BC4 = v63 > maxDriverPoints;
+    if ( v63 > maxDriverPoints && !useHasMorePoints_456BC4 )
+      showEndAnim_463DF8 = 1;
+    useHasMorePoints_456BC4 = v63 > maxDriverPoints;
     sub_426080();
     drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&byte_4458B0, "Please wait while loading...", 289646);
     refreshAllScreen();
@@ -30950,7 +30952,7 @@ LABEL_74:
     sub_4260D0();
   }
   while ( !eventDetected() );
-  if ( useWeapons && !dword_456B74 && dword_456B84 )
+  if ( useWeapons && !dword_456B74 && undergroundPricesSet_456B84 )
   {
 LABEL_15:
     sub_4224E0();
@@ -30958,7 +30960,7 @@ LABEL_15:
     do
     {
       wait();
-      if ( byte_463DF8 == 1 )
+      if ( showEndAnim_463DF8 == 1 )
       {
         v27 = 0;
         v28 = 0;
@@ -30978,7 +30980,7 @@ LABEL_15:
       v26 -= 0x20000;
     }
     while ( v26 >= 0 );
-    if ( byte_463DF8 == 1 )
+    if ( showEndAnim_463DF8 == 1 )
     {
       stopSong();
       stopAndOpenMusic();
@@ -30999,7 +31001,7 @@ LABEL_15:
       do
         v36 = (v35++)[1];
       while ( v36 );
-      *(_DWORD *)v35 = 1633971813;
+      *(_DWORD *)v35 = 1633971813; //endanim
       *((_DWORD *)v35 + 1) = 774924654;
       *((_DWORD *)v35 + 2) = 6709608;
       v37 = fopen(&Filename, "rb");
@@ -31021,7 +31023,7 @@ LABEL_15:
       nullsub_1();
       musicPlayMusic();
       nullsub_1();
-      byte_463DF8 = 0;
+      showEndAnim_463DF8 = 0;
       nullsub_1();
       setWindowCaption2();
       sub_4224E0();
@@ -31061,7 +31063,7 @@ LABEL_15:
     v65 = 0;
     v66 = 0;
 	//v66 = (signed int)dword_45FC44;
-    if ( byte_463DF8 == 1 )
+    if ( showEndAnim_463DF8 == 1 )
     {
       do
       {
@@ -31125,7 +31127,7 @@ LABEL_15:
     v64 -= 0x20000;
   }
   while ( v64 >= 0 );
-  if ( byte_463DF8 == 1 )
+  if ( showEndAnim_463DF8 == 1 )
   {
     stopSong();
     stopAndOpenMusic();
@@ -31168,7 +31170,7 @@ LABEL_15:
     nullsub_1();
     musicPlayMusic();
     nullsub_1();
-    byte_463DF8 = 0;
+    showEndAnim_463DF8 = 0;
     nullsub_1();
     setWindowCaption2();
     sub_4224E0();
@@ -33641,7 +33643,7 @@ signed int loadGame()
   dword_456B78 = 0;
   dword_456B74 = 0;
   dword_464F44 = 0;
-  dword_456BC4 = 0;
+  useHasMorePoints_456BC4 = 0;
   //allocateMemory(0x883u);
   Str = v9;
   memset(v9, 0, 0x880u);
@@ -35986,8 +35988,8 @@ void __cdecl previewRaceScreen(signed int participants)
     *(_DWORD *)v16 = 1802527278; //.bpk
     v16[4] = 0;
     extractFromBpa("MENU.BPA", textureTemp, (int)Str);
-    copyImageToBuffer((int)textureTemp, (int)dword_45EB5C);
-    drawImageWithPosition((int)dword_45EB5C, 360, 274, (int)((char *)screenBuffer + 64264));
+    copyImageToBuffer((int)textureTemp, (int)tsahpeBpk_45EB5C);
+    drawImageWithPosition((int)tsahpeBpk_45EB5C, 360, 274, (int)((char *)screenBuffer + 64264));
     v18 = byte_45FC10[dword_456BCC];
     v19 = (unsigned __int8)byte_45FC10[dword_456BCC];
     v20 = &v251 + v19;
@@ -36029,8 +36031,8 @@ void __cdecl previewRaceScreen(signed int participants)
 		  strcat(Str, ".bpk");
 		  extractFromBpa("MENU.BPA", textureTemp, Str);
         //extractFromBpa("MENU.BPA", textureTemp, (int)Str);
-        copyImageToBuffer((int)textureTemp, (int)dword_45EB5C);
-        drawImageWithPosition((int)dword_45EB5C, 360, 274, (int)((char *)screenBuffer + 64264));
+        copyImageToBuffer((int)textureTemp, (int)tsahpeBpk_45EB5C);
+        drawImageWithPosition((int)tsahpeBpk_45EB5C, 360, 274, (int)((char *)screenBuffer + 64264));
         v29 = &v251 + (unsigned __int8)circuitsToSelect_46126C[0];
         v30 = (char *)&dword_45EA50[-(unsigned __int8)circuitsToSelect_46126C[0]] - (char *)&v251;
         do
@@ -36065,8 +36067,8 @@ void __cdecl previewRaceScreen(signed int participants)
 		strcpy(Str, v24);
 		strcat(Str, ".bpk");
 		extractFromBpa("MENU.BPA", textureTemp, Str);
-        copyImageToBuffer((int)textureTemp, (int)dword_45EB5C);
-        drawImageWithPosition((int)dword_45EB5C, 360, 274, (int)((char *)screenBuffer + 64264));
+        copyImageToBuffer((int)textureTemp, (int)tsahpeBpk_45EB5C);
+        drawImageWithPosition((int)tsahpeBpk_45EB5C, 360, 274, (int)((char *)screenBuffer + 64264));
         v37 = &v251 + (unsigned __int8)circuitsToSelect_46126C[1];
 		//v37 = &v251 + (unsigned __int8)byte_46126D;
         v38 = (char *)&dword_45EA50[-(unsigned __int8)circuitsToSelect_46126C[1]] - (char *)&v251;
@@ -36102,8 +36104,8 @@ void __cdecl previewRaceScreen(signed int participants)
         *(_DWORD *)v43 = 1802527278; //.bpk
         v43[4] = 0;*/
         extractFromBpa("MENU.BPA", textureTemp, (int)Str);
-        copyImageToBuffer((int)textureTemp, (int)dword_45EB5C);
-        drawImageWithPosition((int)dword_45EB5C, 360, 274, (int)((char *)screenBuffer + 64264));
+        copyImageToBuffer((int)textureTemp, (int)tsahpeBpk_45EB5C);
+        drawImageWithPosition((int)tsahpeBpk_45EB5C, 360, 274, (int)((char *)screenBuffer + 64264));
         v45 = &v251 + (unsigned __int8)circuitsToSelect_46126C[2];
         v46 = (char *)&dword_45EA50[-(unsigned __int8)circuitsToSelect_46126C[2]] - (char *)&v251;
 		//v45 = &v251 + (unsigned __int8)byte_46126E;
@@ -36123,8 +36125,8 @@ void __cdecl previewRaceScreen(signed int participants)
         v249 = 1263551022;
         LOBYTE(v250) = 0;*/
         extractFromBpa("MENU.BPA", textureTemp, "TSHAPE19.BPK");
-        copyImageToBuffer((int)textureTemp, (int)dword_45EB5C);
-        drawImageWithPosition((int)dword_45EB5C, 360, 274, (int)((char *)screenBuffer + 64264));
+        copyImageToBuffer((int)textureTemp, (int)tsahpeBpk_45EB5C);
+        drawImageWithPosition((int)tsahpeBpk_45EB5C, 360, 274, (int)((char *)screenBuffer + 64264));
         dword_45EA50[0] = 3166804;
         numberOfLaps = 9;
         dword_4A7AA8 = 0;
@@ -37447,8 +37449,8 @@ int __cdecl licenseScreen(int useWeapons_mal)
   char v61[12]; // [sp+3Ch] [bp-Ch]@16
   char* DstBuf; // [sp+30h] [bp-18h]@9
   DstBuf = malloc(0x1000);
-  extractFromBpa("MENU.BPA", dword_45EB5C, (int)"licence3.bpk");
-  copyImageToBuffer((int)dword_45EB5C, (int)textureTemp);
+  extractFromBpa("MENU.BPA", tsahpeBpk_45EB5C, (int)"licence3.bpk");
+  copyImageToBuffer((int)tsahpeBpk_45EB5C, (int)textureTemp);
   carAnimCurrentFrame_45FBA0 = 0;
   v57 = 1;
   //dword_46086C[27 * driverId] = 0;
@@ -37902,7 +37904,7 @@ LABEL_11:
   v11 = 65500;
   do
   {
-    if ( useWeapons && dword_456B84 )
+    if ( useWeapons && undergroundPricesSet_456B84 )
       setMusicVolume(v11);
     wait();
 	v12 = 0;
@@ -37922,7 +37924,7 @@ LABEL_11:
     v6 = 0;
   }
   while ( v11 >= 0 );
-  if ( useWeapons && dword_456B84 )
+  if ( useWeapons && undergroundPricesSet_456B84 )
   {
     musicSetOrder(dword_462D7C);
     dword_456B60 = 1;
@@ -38145,7 +38147,7 @@ void selectRaceScreen()
             v8 = 65500;
             do
             {
-              if ( useWeapons && dword_456B84 )
+              if ( useWeapons && undergroundPricesSet_456B84 )
                 setMusicVolume(v8);
               wait();
               v9 = 0;
@@ -38165,7 +38167,7 @@ void selectRaceScreen()
               v7 -= 0x20000;
             }
             while ( v8 >= 0 );
-            if ( useWeapons && dword_456B84 )
+            if ( useWeapons && undergroundPricesSet_456B84 )
             {
               musicSetOrder(dword_462D7C);
               dword_456B60 = 1;
@@ -39673,7 +39675,7 @@ LABEL_154:
         {
           selectedRace_462CE8 = 0;
           v91 = setUndergroundMarketPrices();
-          dword_456B84 = v91;
+          undergroundPricesSet_456B84 = v91;
           if (useWeapons && v91 )
           {
             enterBlackMarketScreen();
@@ -39689,7 +39691,7 @@ LABEL_154:
         else
         {
           v92 = setUndergroundMarketPrices();
-          dword_456B84 = v92;
+          undergroundPricesSet_456B84 = v92;
           if (useWeapons && v92 )
           {
             enterBlackMarketScreen();
@@ -40693,7 +40695,7 @@ LABEL_10:
 }
 
 void inicializeGraphicVars() {
-	dword_45EB5C = malloc(0x18150u);
+	tsahpeBpk_45EB5C = malloc(0x18150u);
 }
 
 //----- (0043A020) --------------------------------------------------------
@@ -40781,7 +40783,7 @@ int mainMenu()
   ++configuration.timesPlayed;
   saveConfiguration();
   printf("\nLoading music & effects, please wait..\n");
-  checkAndOpenAnimation();
+ // checkAndOpenAnimation();
   
   loadMusic(1, "MEN-MUS.CMF", 2,"MEN-SAM.CMF");
   musicSetMasterVolume(configuration.masterVolume);
@@ -40834,7 +40836,7 @@ int mainMenu()
   //puesto por mi
   screenBuffer = v1;
   dword_461250 = v1;  
-  //apogeeScreen();
+  apogeeScreen();
   //showStartScreen();
 
   inicializeGraphicVars();

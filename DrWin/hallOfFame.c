@@ -11,7 +11,7 @@ CircuitRecords* getDefaulRecords() {
 	int i = 0;
 	while (i < 18 * 6) {
 		strcpy(circuitRecords[i].name, "REMEDY");
-		strcpy(circuitRecords[i].min, "REMEDY");
+		circuitRecords[i].min=0;
 		i++;
 	}
 	

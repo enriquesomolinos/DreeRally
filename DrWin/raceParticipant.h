@@ -109,3 +109,9 @@ int dword_4A7B98; // weak
 int dword_4A7B9C; // weak
 
 */
+
+/*dword_4A6880  estreuctura de 37 *4 bytes  para cada tipo de coche 6 en total
+dword_4A6880 -> carType
+
+
+*/
