@@ -46,11 +46,11 @@ Driver drivers[20];
 RaceParticipant raceParticipant[4];
 
 int textureTemp[0xFFFFFu]; // weak
-int screenSurface; // weak
+//int screenSurface; // weak
 
 
 int palette[256]; // weak //dword_45E600
-//SDL_Surface * screenSurface; // weak
+SDL_Surface * screenSurface; // weak
 
 int dword_45F054; // idb
 int dword_45F050; // idb
@@ -18500,6 +18500,9 @@ void *__cdecl getMusicStream(char* musicName)
   {
     do
     {
+		if (filePos ==69) {
+			int z = 0;
+		}
 		v6 = (byte)fileContent[filePos];
 		char a1 = v6;
 		int a2 = filePos % 7;
@@ -27361,7 +27364,6 @@ int transitionToCurrentImage()///esto huele a que esta pintando la pantalla con 
   int result; // eax@3
     
   v0 =0;
-  v0 = 6553600;
   do
   {
     wait();
@@ -41971,8 +41973,8 @@ int __cdecl sub_43B580(int a1)
   float v23; // ST1C_4@19
   float v24; // ST20_4@20
   float v25; // ST1C_4@20
-  //SDL_Surface * screenSurfaceTemp; // edx@22
-  int screenSurfaceTemp; // edx@22
+  SDL_Surface * screenSurfaceTemp; // edx@22
+  //int screenSurfaceTemp; // edx@22
   
   unsigned int v27; // ecx@22
   int v28; // ebp@24
@@ -42159,8 +42161,8 @@ LABEL_20:
     goto LABEL_49;
   }
   screenSurfaceTemp = screenSurface;
-  //v27 = screenSurface->pitch >> 2;
-  v27 = (unsigned int)*(_WORD *)(screenSurface + 16) >> 2;
+  v27 = screenSurface->pitch >> 2;
+  //v27 = (unsigned int)*(_WORD *)(screenSurface + 16) >> 2;
 
   if ( dword_456C14 == 19 )
   {
@@ -42169,9 +42171,10 @@ LABEL_20:
       v28 = 160 * v27;
       v29 = 200;
       do
-      {		  
-		  v30 = v28 + *(_DWORD *)(screenSurfaceTemp + 20);
-		 // v30 = v28 +  screenSurfaceTemp->pixels;
+      {
+		  
+		  //v30 = v28 + *(_DWORD *)(screenSurfaceTemp + 20);
+		  v30 = (unsigned char*)screenSurfaceTemp->pixels + v28;
         v31 = 64;
         do
         {
@@ -42230,7 +42233,7 @@ LABEL_20:
       v60 = 200;
       while ( 1 )
       {
-        v41 = v40 + *(_DWORD *)(screenSurfaceTemp + 20);
+        v41 = v40 + (unsigned char*)screenSurfaceTemp->pixels;
         v42 = 64;
         do
         {
@@ -42259,7 +42262,7 @@ LABEL_20:
       v61 = 200;
       do
       {
-        v48 = v47 + *(_DWORD *)(screenSurface + 20);
+        v48 = v47 + (unsigned char*)screenSurface->pixels;
         v49 = 319;
         do
         {
@@ -42278,7 +42281,7 @@ LABEL_20:
       v62 = 200;
       do
       {
-        v53 = v52 + *(_DWORD *)(screenSurface + 20);
+        v53 = v52 + (unsigned char*)screenSurface->pixels;
         v54 = 213;
         do
         {
@@ -42299,30 +42302,35 @@ LABEL_20:
   else
   {
     v55 = 0;
-    if ( *(_DWORD *)(screenSurface + 12) > 0 )
+    if (screenSurface->w> 0 )
     {
-      v56 = *(_DWORD *)(screenSurface + 8); //heihgt
+      v56 = screenSurface->h; //heihgt
       v57 = 0;
-      v63 = 4 * v27;
+
+	  v63 = 4 * v27;
+	  //v2 = screenPtr;
       do
       {
-        v58 = v57 + *(_DWORD *)(screenSurfaceTemp + 20);
+        v58 = v57 + (unsigned char*)screenSurfaceTemp->pixels;
         for ( i = 0; i < v56; ++i )
         {
+			//*(_DWORD *)v58 = &screenSurfaceTemp->format->palette->colors[*(byte *)v2];
           *(_DWORD *)v58 = palette[*(byte *)v2];
+		  
+		  
 		  screenSurfaceTemp = screenSurface;
-          v56 = *(_DWORD *)(screenSurface + 8);
+          v56 = screenSurface->w;
           v58 += 4;
           ++v2;
         }
         ++v55;
         v57 += v63;
       }
-      while ( v55 < *(_DWORD *)(screenSurfaceTemp + 12) );
+      while ( v55 < screenSurfaceTemp->h );
     }
   }
   //void SDL_UpdateRect(SDL_Surface *screen, Sint32 x, Sint32 y, Sint32 w, Sint32 h);
-  SDL_UpdateRect(screenSurfaceTemp, 0, 0, *(_DWORD *)(screenSurfaceTemp + 8), *(_DWORD *)(screenSurfaceTemp + 12));
+  SDL_UpdateRect(screenSurfaceTemp, 0, 0, screenSurfaceTemp->w, screenSurfaceTemp->h);
 LABEL_49:
   if ( !mainArgs.configNoSound )
     FSOUND_Update();
@@ -42397,11 +42405,11 @@ int __cdecl setWindowCaption3(int a1)
       {
         v2 = screenSurface;
         v3 = 0;
-        if ( *(_DWORD *)(screenSurface + 12) > 0 )
+        if ( screenSurface->h > 0 )
         {
-          v4 = *(_DWORD *)(screenSurface + 8);
+          v4 = screenSurface->w;
           v5 = 0;
-          v6 = 4 * ((unsigned int)*(_WORD *)(screenSurface + 16) >> 2);
+          v6 = 4 * (screenSurface->pitch >> 2);
           do
           {
             v7 = v5 + *(_DWORD *)(v2 + 20);
@@ -42409,7 +42417,7 @@ int __cdecl setWindowCaption3(int a1)
             {
               *(_DWORD *)v7 = 0;
               v2 = screenSurface;
-              v4 = *(_DWORD *)(screenSurface + 8);
+              v4 = screenSurface->w;
               v7 += 4;
             }
             ++v3;
@@ -42438,12 +42446,7 @@ int __cdecl setWindowCaption3(int a1)
   }
   return result;
 }
-// 43F828: using guessed type int __cdecl SDL_WM_SetCaption(_DWORD, _DWORD);
-// 456A24: using guessed type int configGL;
-// 456BF0: using guessed type int screenPtr;
-// 456BF4: using guessed type int dword_456BF4;
-// 456C14: using guessed type int dword_456C14;
-// 45E0AC: using guessed type int screenSurface;
+
 
 //----- (0043BE60) --------------------------------------------------------
 int setWindowCaption2()
@@ -42638,12 +42641,28 @@ int __cdecl setPaletteValue(int pos, int r, int g, int b)
   if ( mainArgs.configGL )
   {
     result = 4 * (r | ((g | (b << 8)) << 8));
-    palette[pos] = result;
+	/*SDL_Color color;
+	color.r = r;
+	color.g = g;
+	color.b = b;
+	
+	SDL_SetColors(screenSurface, &color, pos, 1);
+	SDL_Palette *sdl_palette = screenSurface->format->palette;*/
+    
+	 palette[pos] = result;
   }
   else
   {
     result = pos;
     palette[pos] = 4 * (b | ((g | (r << 8)) << 8)); //esta variable contiene paletas
+	/*SDL_Color color;
+	color.r = r;
+	color.g = g;
+	color.b = b;
+	
+	SDL_SetColors(screenSurface, &color, pos, 1);
+	SDL_Palette *sdl_palette = screenSurface->format->palette;*/
+	
   }
   return result;
 }
@@ -42662,6 +42681,13 @@ int __cdecl setPaletteAndGetValue(unsigned __int8 pos, unsigned __int8 r, char g
     HIBYTE(v4) = b;
     LOBYTE(v4) = g;
     result = 4 * (r | (v4 << 8));
+	/*SDL_Color color;
+	color.r = r;
+	color.g = g;
+	color.b = b;
+	
+	SDL_SetColors(screenSurface, &color, pos, 1);
+	SDL_Palette *sdl_palette = screenSurface->format->palette;*/
     palette[pos] = result;
   }
   else
@@ -42669,7 +42695,15 @@ int __cdecl setPaletteAndGetValue(unsigned __int8 pos, unsigned __int8 r, char g
     HIBYTE(v6) = r;
     LOBYTE(v6) = g;
     result = 4 * (b | (v6 << 8));
-    palette[pos] = result;
+	/*SDL_Color color;
+	color.r = r;
+	color.g = g;
+	color.b = b;
+   
+	SDL_SetColors(screenSurface, &color, pos, 1);
+	SDL_Palette *sdl_palette = screenSurface->format->palette;*/
+	palette[pos] = result;
+	
   }
   return result;
 }

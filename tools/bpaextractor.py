@@ -5,7 +5,7 @@ import struct
 from collections import OrderedDict
 
 
-FILE_NAME = "TR9.BPA"  #change name to extract other file
+FILE_NAME = "MUSICS.BPA"  #change name to extract other file
 FILE_NAME_SIZE = 13
 FILE_SIZE = 4
 
@@ -49,12 +49,17 @@ try:
     fat = getFAT(f,num_files)
 
     offset = INITIAL_OFFSET
+    
     os.mkdir(FILE_NAME + "_dir" , 0755)
+	
     for name,size in fat.items():
-        f.seek(offset)
-        file_data = f.read(size)
-        fDest = open(FILE_NAME + "_dir/" +name, "w+")
-        fDest.write(file_data)
+               
+        fDest = open(FILE_NAME + "_dir/" +name, "wb")        
+        for index in range(size):
+            f.seek(index+offset)
+            file_data = f.read(1)
+            fDest.seek(index)
+            fDest.write(file_data)
         fDest.close()
         print(name)
         offset =offset + size
