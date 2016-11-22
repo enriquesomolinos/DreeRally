@@ -50,7 +50,8 @@ int textureTemp[0xFFFFFu]; // weak
 
 
 int palette[256]; // weak //dword_45E600
-SDL_Surface * screenSurface; // weak
+SDL_Surface * screenSurface; 
+// weak
 
 int dword_45F054; // idb
 int dword_45F050; // idb
