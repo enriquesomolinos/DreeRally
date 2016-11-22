@@ -6,7 +6,7 @@ typedef struct Graphics4 {
 	void *escboxBpk;
 	void *signlineBpk;
 	void *prep4Bpk;
-	void *dword_45EB5C;
+	void *tsahpeBpk_45EB5C;
 	void *prepw1Bpk;
 } Graphics4;
 

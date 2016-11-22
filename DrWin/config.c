@@ -28,7 +28,7 @@ int checkArgs(char * args)
 	if (strstr(args, "-nosound"))
 		mainArgs.configNoSound = 1;
 	if (strstr(args, "-gl"))
-		mainArgs.configGL = 0;
+		mainArgs.configGL = 1;
 	if (strstr(args, "-smooth"))
 		mainArgs.configSmooth = 0;
 	result = strstr(args, "-window");

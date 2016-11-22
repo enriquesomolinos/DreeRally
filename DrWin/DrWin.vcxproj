@@ -161,6 +161,7 @@
     <ClInclude Include="hallOfFame.h" />
     <ClInclude Include="menus.h" />
     <ClInclude Include="popup.h" />
+    <ClInclude Include="raceParticipant.h" />
     <ClInclude Include="savegame.h" />
     <ClInclude Include="util.h" />
     <ClInclude Include="variables.h" />
@@ -176,6 +177,7 @@
     <ClCompile Include="hallOfFame.c" />
     <ClCompile Include="menus.c" />
     <ClCompile Include="popup.c" />
+    <ClCompile Include="raceParticipant.c" />
     <ClCompile Include="savegame.c" />
     <ClCompile Include="util.c" />
   </ItemGroup>
