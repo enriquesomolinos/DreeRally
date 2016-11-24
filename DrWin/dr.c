@@ -367,7 +367,7 @@ int __cdecl sub_43B160(int a1, int a2, int a3, int a4);
 int __cdecl sub_43B1A0(int a1, int a2, int a3, int a4);
 int __cdecl sub_43B1F0(int a1, int a2, int a3, int a4);
 int __cdecl sub_43B240(int a1, int a2, int a3, int a4);
-int __cdecl sub_43B290(int a1, signed int a2);
+int __cdecl colorToPaletteEntry(int a1, signed int a2);
  int __cdecl convertColorToPaletteColor(int a1, int a2);
 int sub_43B2D0();
 int sub_43B2E0();
@@ -6049,13 +6049,13 @@ int sub_4049F0()
   do
   {
     setPaletteAndGetValue(v0, 0, 0, 0);
-    v3 = sub_43B290(*(byte *)(v2 - 1) << 16, 4128768);
+    v3 = colorToPaletteEntry(*(byte *)(v2 - 1) << 16, 4128768);
     v4 = *(byte *)v2 << 16;
     *((_DWORD *)v1 - 1) = v3;
-    v5 = sub_43B290(v4, 4128768);
+    v5 = colorToPaletteEntry(v4, 4128768);
     v6 = *(byte *)(v2 + 1) << 16;
     *(_DWORD *)v1 = v5;
-    result = sub_43B290(v6, 4128768);
+    result = colorToPaletteEntry(v6, 4128768);
     *((_DWORD *)v1 + 1) = result;
     v2 += 3;
     ++v0;
@@ -6081,13 +6081,13 @@ int sub_404A60()
   v1 = (signed int)&unk_4B4021;
   do
   {
-    v2 = sub_43B290(*(byte *)(v1 - 1) << 16, 4128768);
+    v2 = colorToPaletteEntry(*(byte *)(v1 - 1) << 16, 4128768);
     v3 = *(byte *)v1 << 16;
     *((_DWORD *)v0 - 1) = v2;
-    v4 = sub_43B290(v3, 4128768);
+    v4 = colorToPaletteEntry(v3, 4128768);
     v5 = *(byte *)(v1 + 1) << 16;
     *(_DWORD *)v0 = v4;
-    result = sub_43B290(v5, 4128768);
+    result = colorToPaletteEntry(v5, 4128768);
     *((_DWORD *)v0 + 1) = result;
     v1 += 3;
     v0 = (char *)v0 + 12;
@@ -7294,8 +7294,8 @@ char sub_406100()
           v6 = dword_464F18 + 64;
           *(_DWORD *)(v0 - 32) = v4;
           *(_DWORD *)(v0 - 28) = 12845056;
-          *(_DWORD *)(v0 - 24) = sub_43B290(v5, (signed int)&unk_460000);
-          *(_DWORD *)(v0 - 20) = sub_43B290((v6 << 16) - *(_DWORD *)(v0 - 28), (signed int)&unk_460000);
+          *(_DWORD *)(v0 - 24) = colorToPaletteEntry(v5, (signed int)&unk_460000);
+          *(_DWORD *)(v0 - 20) = colorToPaletteEntry((v6 << 16) - *(_DWORD *)(v0 - 28), (signed int)&unk_460000);
           dword_481E08 += 4;
           v7 = dword_464F18 + 4;
           v8 = dword_464F18 == 72;
@@ -16441,7 +16441,7 @@ int  sub_414110(int a1)
   dword_4A9EA4 = dword_503500 - dword_4A7CFC;
   v1 = (dword_503500 - dword_4A7CFC) << 16;
   dword_4A7CFC = dword_503500;
-  dword_4AA500 = sub_43B290(v1, 0x20000);
+  dword_4AA500 = colorToPaletteEntry(v1, 0x20000);
   if ( dword_481E14 > 190 && !dword_4A7E0C[216 * dword_4A9EA8] )
   {
     dword_50A164 += dword_4A9EA4;
@@ -16539,7 +16539,7 @@ int sub_414220()
   dword_4A9EA4 = dword_503500 - dword_4A7CFC;
   v0 = (dword_503500 - dword_4A7CFC) << 16;
   dword_4A7CFC = dword_503500;
-  dword_4AA500 = sub_43B290(v0, 0x20000);
+  dword_4AA500 = colorToPaletteEntry(v0, 0x20000);
   v1 = 0;
   if ( dword_481E14 > 190 && !dword_4A7E0C[216 * dword_4A9EA8] )
   {
@@ -19282,17 +19282,17 @@ int __cdecl sub_418B00(float a1, float a2, float a3)
   {
     v8 = (double)v16;
     v5 = (a1 - v18) * 0.0625;
-    //*((_DWORD *)v4 - 1) = sub_43B290((unsigned int)(unsigned __int64)(v8 * v5 + v18) << 16, 6553600);
+    //*((_DWORD *)v4 - 1) = colorToPaletteEntry((unsigned int)(unsigned __int64)(v8 * v5 + v18) << 16, 6553600);
     v6 = (a2 - v19) * 0.0625;
-    //*(_DWORD *)v4 = sub_43B290((unsigned int)(unsigned __int64)(v8 * v6 + v19) << 16, 6553600);
+    //*(_DWORD *)v4 = colorToPaletteEntry((unsigned int)(unsigned __int64)(v8 * v6 + v19) << 16, 6553600);
     v7 = (a3 - v20) * 0.0625;
-    ///*((_DWORD *)v4 + 1) = sub_43B290((unsigned int)(unsigned __int64)(v8 * v7 + v20) << 16, 6553600);
+    ///*((_DWORD *)v4 + 1) = colorToPaletteEntry((unsigned int)(unsigned __int64)(v8 * v7 + v20) << 16, 6553600);
     //v4 = (char *)v4 + 12;*/
 	index = index + 3;
 
-	palette1[index] = sub_43B290((unsigned int)(unsigned __int64)(v8 * v5 + v18) << 16, 6553600);
- 	palette1[index +1] = sub_43B290((unsigned int)(unsigned __int64)(v8 * v6 + v19) << 16, 6553600);
-	palette1[index +2] = sub_43B290((unsigned int)(unsigned __int64)(v8 * v7 + v20) << 16, 6553600);
+	palette1[index] = colorToPaletteEntry((unsigned int)(unsigned __int64)(v8 * v5 + v18) << 16, 6553600);
+ 	palette1[index +1] = colorToPaletteEntry((unsigned int)(unsigned __int64)(v8 * v6 + v19) << 16, 6553600);
+	palette1[index +2] = colorToPaletteEntry((unsigned int)(unsigned __int64)(v8 * v7 + v20) << 16, 6553600);
 	
     ++v3;
     v16 = v3;
@@ -19306,17 +19306,17 @@ int __cdecl sub_418B00(float a1, float a2, float a3)
   {
     v14 = (double)v17;
     v11 = (63.0 - a1) * 0.0625;
-    //*((_DWORD *)v10 - 1) = sub_43B290((unsigned int)(unsigned __int64)(v14 * v11 + a1) << 16, 6553600);
+    //*((_DWORD *)v10 - 1) = colorToPaletteEntry((unsigned int)(unsigned __int64)(v14 * v11 + a1) << 16, 6553600);
     v12 = (63.0 - a2) * 0.0625;
-    //*(_DWORD *)v10 = sub_43B290((unsigned int)(unsigned __int64)(v14 * v12 + a2) << 16, 6553600);
+    //*(_DWORD *)v10 = colorToPaletteEntry((unsigned int)(unsigned __int64)(v14 * v12 + a2) << 16, 6553600);
     v13 = (63.0 - a3) * 0.0625;
-   // result = sub_43B290((unsigned int)(unsigned __int64)(v14 * v13 + a3) << 16, 6553600);
+   // result = colorToPaletteEntry((unsigned int)(unsigned __int64)(v14 * v13 + a3) << 16, 6553600);
     //*((_DWORD *)v10 + 1) = result;
     v10 = (char *)v10 + 12;
 
-	palette1[index] = sub_43B290((unsigned int)(unsigned __int64)(v14 * v11 + a1) << 16, 6553600);
-	palette1[index + 1] = sub_43B290((unsigned int)(unsigned __int64)(v14 * v12 + a2) << 16, 6553600);
-	palette1[index + 2] = sub_43B290((unsigned int)(unsigned __int64)(v14 * v13 + a3) << 16, 6553600);
+	palette1[index] = colorToPaletteEntry((unsigned int)(unsigned __int64)(v14 * v11 + a1) << 16, 6553600);
+	palette1[index + 1] = colorToPaletteEntry((unsigned int)(unsigned __int64)(v14 * v12 + a2) << 16, 6553600);
+	palette1[index + 2] = colorToPaletteEntry((unsigned int)(unsigned __int64)(v14 * v13 + a3) << 16, 6553600);
 	result = palette1[index + 2];
 	index = index + 3;
     ++v9;
@@ -19453,14 +19453,14 @@ int __cdecl loadPaletteMenu()
     v2 = (unsigned __int8)v0[2];
     v3 = (unsigned __int8)v0[0] << 16;
     v4 = (unsigned __int8)v0[1] << 16;
-    palette1[v1] = sub_43B290((unsigned __int8)*(v0) << 16, 6553600);
+    palette1[v1] = colorToPaletteEntry((unsigned __int8)*(v0) << 16, 6553600);
 
     v2 <<= 16;
-	palette1[v1+1] = sub_43B290(v4, 6553600);
-	palette1[v1+2] = sub_43B290(v2, 6553600);
-    palette2[v1] = sub_43B290(v3, 6553600);
-	palette2[v1+1] = sub_43B290(v4, 6553600);
-    result = sub_43B290(v2, 6553600);
+	palette1[v1+1] = colorToPaletteEntry(v4, 6553600);
+	palette1[v1+2] = colorToPaletteEntry(v2, 6553600);
+    palette2[v1] = colorToPaletteEntry(v3, 6553600);
+	palette2[v1+1] = colorToPaletteEntry(v4, 6553600);
+    result = colorToPaletteEntry(v2, 6553600);
 	palette2[v1+2] = result;
     v1 += 3;
     v6 += 3;
@@ -22540,9 +22540,9 @@ int __cdecl sub_41ED20(float a1, float a2, float a3)
   v9 = (unsigned __int64)(v7 * v6 + a3 * 0.1666666666666667);
   if ( v9 > 63 )
   v9 = 63;
-  palette1[v4] = sub_43B290(v12 << 16, 6553600);
-  palette1[v4+1] = sub_43B290(v8 << 16, 6553600);
-  result = sub_43B290(v9 << 16, 6553600);
+  palette1[v4] = colorToPaletteEntry(v12 << 16, 6553600);
+  palette1[v4+1] = colorToPaletteEntry(v8 << 16, 6553600);
+  result = colorToPaletteEntry(v9 << 16, 6553600);
   palette1[v4+2] = result;
   v4 += 3;
   ++v11;
@@ -22564,9 +22564,9 @@ int __cdecl sub_41ED20(float a1, float a2, float a3)
     v9 = (unsigned __int64)(v7 * v6 + a3 * 0.1666666666666667);
     if ( v9 > 63 )
       v9 = 63;
-    *(_DWORD *)(v4 - 4) = sub_43B290(v12 << 16, 6553600);
-    *(_DWORD *)v4 = sub_43B290(v8 << 16, 6553600);
-    result = sub_43B290(v9 << 16, 6553600);
+    *(_DWORD *)(v4 - 4) = colorToPaletteEntry(v12 << 16, 6553600);
+    *(_DWORD *)v4 = colorToPaletteEntry(v8 << 16, 6553600);
+    result = colorToPaletteEntry(v9 << 16, 6553600);
     *(_DWORD *)(v4 + 4) = result;
     v4 += 12;
     ++v11;
@@ -24459,21 +24459,21 @@ int sub_4224E0()
     do
     {
       v15 = (double)v29;
-      v16 = sub_43B290(
+      v16 = colorToPaletteEntry(
               (unsigned int)(unsigned __int64)((double)*((byte *)graphicsGeneral.bgcopPal + 2 * dword_456754 + dword_456754)
                                              * 0.015625
                                              * v15) << 16,
               6553600);
       v17 = graphicsGeneral.bgcopPal;
       palette1[index] = v16;
-      v18 = sub_43B290(
+      v18 = colorToPaletteEntry(
               (unsigned int)(unsigned __int64)((double)*((byte *)v17 + 2 * dword_456754 + dword_456754 + 1)
                                              * 0.015625
                                              * v15) << 16,
               6553600);
       v19 = graphicsGeneral.bgcopPal;
 	  palette1[index+1] = v18;
-	  palette1[index+2] = sub_43B290(
+	  palette1[index+2] = colorToPaletteEntry(
                                (unsigned int)(unsigned __int64)((double)*((byte *)v19
                                                                         + 2 * dword_456754
                                                                         + dword_456754
@@ -24484,21 +24484,21 @@ int sub_4224E0()
       v14 += 12;
 	  index = index + 3;
 	 /* v15 = (double)v29;
-	  v16 = sub_43B290(
+	  v16 = colorToPaletteEntry(
 		  (unsigned int)(unsigned __int64)((double)*((byte *)graphicsGeneral.bgcopPal + 2 * dword_456754 + dword_456754)
 			  * 0.015625
 			  * v15) << 16,
 		  6553600);
 	  v17 = graphicsGeneral.bgcopPal;
 	  *(_DWORD *)(v14 - 4) = v16;
-	  v18 = sub_43B290(
+	  v18 = colorToPaletteEntry(
 		  (unsigned int)(unsigned __int64)((double)*((byte *)v17 + 2 * dword_456754 + dword_456754 + 1)
 			  * 0.015625
 			  * v15) << 16,
 		  6553600);
 	  v19 = graphicsGeneral.bgcopPal;
 	  *(_DWORD *)v14 = v18;
-	  *(_DWORD *)(v14 + 4) = sub_43B290(
+	  *(_DWORD *)(v14 + 4) = colorToPaletteEntry(
 		  (unsigned int)(unsigned __int64)((double)*((byte *)v19
 			  + 2 * dword_456754
 			  + dword_456754
@@ -24519,19 +24519,19 @@ int sub_4224E0()
   {
     v21 = convertColorToPaletteColor(palette2[palette2Index], dword_45EAA4 << 16);
 	//v21 = convertColorToPaletteColor(dword_461360[v20], dword_45EAA4 << 16);
-    v22 = sub_43B290((v21 + 0x8000) >> 16 << 16, 6553600);
+    v22 = colorToPaletteEntry((v21 + 0x8000) >> 16 << 16, 6553600);
     v23 = palette2[palette2Index +1];
 	//v23 = dword_461364[v20];
 //    dword_45FD00[v20] = v22;
 	palette1[palette1Index + 16] = v22;
     v24 = convertColorToPaletteColor(v23, dword_45EAA4 << 16);
-    v25 = sub_43B290((v24 + 0x8000) >> 16 << 16, 6553600);
+    v25 = colorToPaletteEntry((v24 + 0x8000) >> 16 << 16, 6553600);
     v26 = dword_45EAA4 << 16;
 	palette1[palette1Index +16] = v25;
     ///dword_45FD04[v20] = v25;
     v27 = convertColorToPaletteColor(palette2[palette2Index +2], v26);
 	//v27 = convertColorToPaletteColor(dword_461368[v20], v26);
-    result = sub_43B290((v27 + 0x8000) >> 16 << 16, 6553600);
+    result = colorToPaletteEntry((v27 + 0x8000) >> 16 << 16, 6553600);
 	palette1[palette1Index +16] = result;
 	
     //dword_45FD08[v20] = result;
@@ -25675,11 +25675,11 @@ int __cdecl sub_424240(int a1, float a2, float a3, float a4)
   {
     v9 = (double)v17;
     v6 = (a2 - v19) * 0.125;
-    palette1[v5] = sub_43B290((unsigned int)(unsigned __int64)(v9 * v6 + v19) << 16, 6553600);
+    palette1[v5] = colorToPaletteEntry((unsigned int)(unsigned __int64)(v9 * v6 + v19) << 16, 6553600);
     v7 = (a3 - v20) * 0.125;
-	palette1[v5+1] = sub_43B290((unsigned int)(unsigned __int64)(v9 * v7 + v20) << 16, 6553600);
+	palette1[v5+1] = colorToPaletteEntry((unsigned int)(unsigned __int64)(v9 * v7 + v20) << 16, 6553600);
     v8 = (a4 - v21) * 0.125;
-	palette1[v5+2] = sub_43B290((unsigned int)(unsigned __int64)(v9 * v8 + v21) << 16, 6553600);
+	palette1[v5+2] = colorToPaletteEntry((unsigned int)(unsigned __int64)(v9 * v8 + v21) << 16, 6553600);
     v5 += 3;
     ++v4;
     v17 = v4;
@@ -25690,11 +25690,11 @@ int __cdecl sub_424240(int a1, float a2, float a3, float a4)
   {
 	  v9 = (double)v17;
 	  v6 = (a2 - v19) * 0.125;
-	  *(_DWORD *)(v5 - 4) = sub_43B290((unsigned int)(unsigned __int64)(v9 * v6 + v19) << 16, 6553600);
+	  *(_DWORD *)(v5 - 4) = colorToPaletteEntry((unsigned int)(unsigned __int64)(v9 * v6 + v19) << 16, 6553600);
 	  v7 = (a3 - v20) * 0.125;
-	  *(_DWORD *)v5 = sub_43B290((unsigned int)(unsigned __int64)(v9 * v7 + v20) << 16, 6553600);
+	  *(_DWORD *)v5 = colorToPaletteEntry((unsigned int)(unsigned __int64)(v9 * v7 + v20) << 16, 6553600);
 	  v8 = (a4 - v21) * 0.125;
-	  *(_DWORD *)(v5 + 4) = sub_43B290((unsigned int)(unsigned __int64)(v9 * v8 + v21) << 16, 6553600);
+	  *(_DWORD *)(v5 + 4) = colorToPaletteEntry((unsigned int)(unsigned __int64)(v9 * v8 + v21) << 16, 6553600);
 	  v5 += 12;
 	  ++v4;
 	  v17 = v4;
@@ -25707,11 +25707,11 @@ int __cdecl sub_424240(int a1, float a2, float a3, float a4)
   {
     v15 = (double)v18;
     v12 = (63.0 - a2) * 0.125;
-   palette1[v11] = sub_43B290((unsigned int)(unsigned __int64)(v15 * v12 + a2) << 16, 6553600);
+   palette1[v11] = colorToPaletteEntry((unsigned int)(unsigned __int64)(v15 * v12 + a2) << 16, 6553600);
     v13 = (63.0 - a3) * 0.125;
-	palette1[v11+1] = sub_43B290((unsigned int)(unsigned __int64)(v15 * v13 + a3) << 16, 6553600);
+	palette1[v11+1] = colorToPaletteEntry((unsigned int)(unsigned __int64)(v15 * v13 + a3) << 16, 6553600);
     v14 = (63.0 - a4) * 0.125;
-    result = sub_43B290((unsigned int)(unsigned __int64)(v15 * v14 + a4) << 16, 6553600);
+    result = colorToPaletteEntry((unsigned int)(unsigned __int64)(v15 * v14 + a4) << 16, 6553600);
 	palette1[v11+2] = result;
     v11 += 3;
     ++v10;
@@ -25722,11 +25722,11 @@ int __cdecl sub_424240(int a1, float a2, float a3, float a4)
   {
     v15 = (double)v18;
     v12 = (63.0 - a2) * 0.125;
-    *(_DWORD *)(v11 - 4) = sub_43B290((unsigned int)(unsigned __int64)(v15 * v12 + a2) << 16, 6553600);
+    *(_DWORD *)(v11 - 4) = colorToPaletteEntry((unsigned int)(unsigned __int64)(v15 * v12 + a2) << 16, 6553600);
     v13 = (63.0 - a3) * 0.125;
-    *(_DWORD *)v11 = sub_43B290((unsigned int)(unsigned __int64)(v15 * v13 + a3) << 16, 6553600);
+    *(_DWORD *)v11 = colorToPaletteEntry((unsigned int)(unsigned __int64)(v15 * v13 + a3) << 16, 6553600);
     v14 = (63.0 - a4) * 0.125;
-    result = sub_43B290((unsigned int)(unsigned __int64)(v15 * v14 + a4) << 16, 6553600);
+    result = colorToPaletteEntry((unsigned int)(unsigned __int64)(v15 * v14 + a4) << 16, 6553600);
     *(_DWORD *)(v11 + 4) = result;
     v11 += 12;
     ++v10;
@@ -27337,9 +27337,9 @@ int __cdecl openPalFromBpa(char * filename)
   do
   {
 	  
-    palette1[v1] = sub_43B290((unsigned __int8)*(&v2[0]) << 16, 6553600);
-	palette1[v1 + 1] = sub_43B290((unsigned __int8)*&v2[1] << 16, 6553600);
-    result = sub_43B290((unsigned __int8)*&v2[2] << 16, 6553600);
+    palette1[v1] = colorToPaletteEntry((unsigned __int8)*(&v2[0]) << 16, 6553600);
+	palette1[v1 + 1] = colorToPaletteEntry((unsigned __int8)*&v2[1] << 16, 6553600);
+    result = colorToPaletteEntry((unsigned __int8)*&v2[2] << 16, 6553600);
 	palette1[v1+2] = result;
 	
     v1 += 3;
@@ -27439,6 +27439,29 @@ int apogeeScreen()
   signed int v5; // esi@6
   signed int v6; // esi@8
 
+
+
+  v0 = 0;
+  do
+	  setPaletteAndGetValue(v0++, 0, 0, 0);
+  while (v0 < 256);
+  openPalFromBpa("menu.pal");
+ 
+  extractFromBpa("MENU.BPA", textureTemp, "face01.bpk");
+  graphicsGeneral.face01Bpk = malloc(0x1000u);
+  copyImageToBuffer((int)textureTemp, graphicsGeneral.face01Bpk);//cuidado que es  un array referenciado a este!!!!!!!!
+  drawImageWithPosition2(graphicsGeneral.face01Bpk, 64, 64, screenBuffer);
+  //copyImageToBuffer(textureTemp, screenBuffer);
+  refreshAllScreen();
+  transitionToCurrentImage();
+  v1 = 0;
+  do
+  {
+	  wait();
+	  ++v1;
+  }
+  //espera de tres segundos
+  while (!eventDetected() && v1 < 1180);
   v0 = 0;
   do
     setPaletteAndGetValue(v0++, 0, 0, 0);
@@ -27486,13 +27509,13 @@ int apogeeScreen()
   //v5 = (signed int)dword_45FC44;
   do
   {
-   palette1[v5] = sub_43B290(
+   palette1[v5] = colorToPaletteEntry(
                             (unsigned __int8)(*(byte *)(*(_DWORD *)(**(_DWORD **)(image + 4) + 4) + v4) & 0xFC) << 14,
                             6553600);
-   palette1[v5+1] = sub_43B290(
+   palette1[v5+1] = colorToPaletteEntry(
                       (unsigned __int8)(*(byte *)(*(_DWORD *)(**(_DWORD **)(image + 4) + 4) + v4 + 1) & 0xFC) << 14,
                       6553600);
-   palette1[v5+2] = sub_43B290(
+   palette1[v5+2] = colorToPaletteEntry(
                             (unsigned __int8)(*(byte *)(*(_DWORD *)(**(_DWORD **)(image + 4) + 4) + v4 + 2) & 0xFC) << 14,
                             6553600);
     v5 += 3;
@@ -27628,13 +27651,13 @@ int showEndScreen()
   //v3 = (signed int)dword_45FC44;
   do
   {
-    palette1[v3] = sub_43B290(
+    palette1[v3] = colorToPaletteEntry(
                             (unsigned __int8)(*(byte *)(*(_DWORD *)(**(_DWORD **)(v1 + 4) + 4) + v2) & 0xFC) << 14,
                             6553600);
-	palette1[v3+1] = sub_43B290(
+	palette1[v3+1] = colorToPaletteEntry(
                       (unsigned __int8)(*(byte *)(*(_DWORD *)(**(_DWORD **)(v1 + 4) + 4) + v2 + 1) & 0xFC) << 14,
                       6553600);
-	palette1[v3+2] = sub_43B290(
+	palette1[v3+2] = colorToPaletteEntry(
                             (unsigned __int8)(*(byte *)(*(_DWORD *)(**(_DWORD **)(v1 + 4) + 4) + v2 + 2) & 0xFC) << 14,
                             6553600);
     v3 += 3;
@@ -41735,7 +41758,7 @@ int __cdecl sub_43B240(int a1, int a2, int a3, int a4)
 }
 
 //----- (0043B290) --------------------------------------------------------
-int __cdecl sub_43B290(int a1, signed int a2)
+int __cdecl colorToPaletteEntry(int a1, signed int a2)
 {
   signed __int64 v2; // rax@2
 
@@ -42315,8 +42338,13 @@ LABEL_20:
         for ( i = 0; i < v56; ++i )
         {
 			//*(_DWORD *)v58 = &screenSurfaceTemp->format->palette->colors[*(byte *)v2];
+			
           *(_DWORD *)v58 = palette[*(byte *)v2];
-		  
+
+		  if (*(byte *)v2 < 7) {
+			  *(_DWORD *)v58 = 0;
+		  }
+		  SDL_Color* color = (SDL_Color *)&palette[*(byte *)v2];
 		  
 		  screenSurfaceTemp = screenSurface;
           v56 = screenSurface->w;
@@ -42655,6 +42683,7 @@ int __cdecl setPaletteValue(int pos, int r, int g, int b)
   {
     result = pos;
     palette[pos] = 4 * (b | ((g | (r << 8)) << 8)); //esta variable contiene paletas
+	SDL_Color* color = (SDL_Color *)&palette[pos];
 	/*SDL_Color color;
 	color.r = r;
 	color.g = g;
@@ -42689,12 +42718,13 @@ int __cdecl setPaletteAndGetValue(unsigned __int8 pos, unsigned __int8 r, char g
 	SDL_SetColors(screenSurface, &color, pos, 1);
 	SDL_Palette *sdl_palette = screenSurface->format->palette;*/
     palette[pos] = result;
+
   }
   else
   {
     HIBYTE(v6) = r;
     LOBYTE(v6) = g;
-    result = 4 * (b | (v6 << 8));
+    result = 4 *  (b | (v6 << 8));
 	/*SDL_Color color;
 	color.r = r;
 	color.g = g;
@@ -42703,6 +42733,10 @@ int __cdecl setPaletteAndGetValue(unsigned __int8 pos, unsigned __int8 r, char g
 	SDL_SetColors(screenSurface, &color, pos, 1);
 	SDL_Palette *sdl_palette = screenSurface->format->palette;*/
 	palette[pos] = result;
+	if (pos == 0) {
+		int z = 0;
+	}
+	SDL_Color* color = (SDL_Color *)&palette[pos];
 	
   }
   return result;

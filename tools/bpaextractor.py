@@ -5,7 +5,7 @@ import struct
 from collections import OrderedDict
 
 
-FILE_NAME = "MUSICS.BPA"  #change name to extract other file
+FILE_NAME = "MENU.BPA"  #change name to extract other file
 FILE_NAME_SIZE = 13
 FILE_SIZE = 4
 
