@@ -44,6 +44,7 @@ Car cars[6];
 char driverNames[20][20];
 Driver drivers[20];
 RaceParticipant raceParticipant[4];
+RaceParticipant2 raceParticipant2[4];
 
 int textureTemp[0xFFFFFu]; // weak
 //int screenSurface; // weak
@@ -66,7 +67,7 @@ int dword_461F2C[256]; // weak
 void __cdecl allocateMemory(size_t Size);
 void __cdecl free(void *Memory);
 int sub_401060();
-int sub_402240();
+int updateRacePositions();
 int sub_4022A0();
 unsigned int sub_402490();
 unsigned int __cdecl sub_402510(int a1, const char *a2);
@@ -74,13 +75,13 @@ int __cdecl sub_402590(int a1, int a2, int a3, signed int a4, int a5, int a6, in
 
 //void __cdecl __noreturn errorExitScreen(int a1);
 int __cdecl extractFromBpa(char *Filename, void *, int); // idb
-signed int sub_402CF0();
-void sub_402EE0();
-int sub_403050();
-void sub_403190();
-int sub_4032F0();
-int sub_403410();
-void sub_4034F0();
+signed int loadCircuitPalette();
+void loadCircuitImages1();
+int loadCarsImages();
+void loadCircuitSceImages();
+int loadCircuitTabFiles();
+int loadCircuitDatFiles();
+void loadCircuitShadows();
 void loadEngineGraphics();
 void loadEngineGraphics2();
 void sub_403960();
@@ -91,17 +92,17 @@ int sub_403D50();
 int sub_403E30();
 int noMemExitScreen();
 char *sub_404730();
-int sub_404920();
-int sub_4049F0();
-int sub_404A60();
-int sub_404AD0();
-int sub_404BA0();
+int drawToBlackScreen();
+int setCircuitPalette_4B4020();
+int setCircuitPaletteBis_4B4020();
+int setCircuitPaletteBisBis_4B4020();
+int setCircuitPaletteBis4_4B4020();
 int sub_404C30();
 int sub_405430();
 int sub_4055A0();
 char sub_406100();
 int sub_406330();
-unsigned int __cdecl sub_406410(int a1, int a2, const char *a3);
+unsigned int __cdecl drawTextInRaceScreen(int a1, int a2, const char *a3);
 signed int __cdecl sub_4064A0(int a1);
 signed int __cdecl sub_4069D0(char a1);
 void __cdecl sub_406BE0(char a1);
@@ -112,8 +113,8 @@ void __noreturn exitCtrlAltDel();
 int sub_4092B0();
 int sub_409460();
 int sub_409A90();
-signed int sub_409BF0();
-unsigned __int64 __cdecl sub_409E50(int a1, float a2, float a3, float a4);
+signed int loadCircuitInfFile();
+unsigned __int64 __cdecl setCircuitPaletteValues(int a1, float a2, float a3, float a4);
 int *sub_409F90();
 int sub_40A360();
 int sub_40A880();
@@ -152,7 +153,7 @@ void sub_4138A0();
 // int __usercall sub_414110@<eax>(int a1@<ebx>);
 int sub_414220();
 int sub_414FC0();
-void sub_4151C0();
+void loadRaceImages();
 int sub_415280();
 int sub_4156B0();
 void __cdecl startRace(int a1, int a2);
@@ -365,7 +366,7 @@ void __cdecl copyBuffer2Screen(void *a1, const void *a2, int a3);
 int __cdecl sub_43B0F0(int a1, signed int a2, int a3);
 int __cdecl sub_43B160(int a1, int a2, int a3, int a4);
 int __cdecl sub_43B1A0(int a1, int a2, int a3, int a4);
-int __cdecl sub_43B1F0(int a1, int a2, int a3, int a4);
+int __cdecl drawCharInRaceScreen(int a1, int a2, int a3, int a4);
 int __cdecl sub_43B240(int a1, int a2, int a3, int a4);
 int __cdecl colorToPaletteEntry(int a1, signed int a2);
  int __cdecl convertColorToPaletteColor(int a1, int a2);
@@ -379,14 +380,14 @@ int __cdecl sub_43B580(int a1);
 int __cdecl setWindowCaption3(int a1);
 int setWindowCaption2();
 int setWindowCaption();
-int sub_43BEE0();
+int setRaceWindowCaption();
  int  sub_43BEF0(int a1, void *a2, unsigned int a3, int a4, char a5);
 int __cdecl drawImageWithPosition2(int a1, int a2, int a3, int a4);
 int __cdecl drawImageWithPosition(int a1, int a2, int a3, int a4);
 int __cdecl sub_43BFE0(int a1, int a2);
 int __cdecl setPaletteValue(int a1, int a2, int a3, int a4);
 int __cdecl setPaletteAndGetValue(unsigned __int8 a1, unsigned __int8 a2, char a3, unsigned __int8 a4);
-int __cdecl sub_43C0F0(int a1);
+int __cdecl regenerateRacePalette(int a1);
 int __cdecl sub_43C160(int a1);
 int __cdecl sub_43C1B0(unsigned __int8 a1, int a2, signed int a3);
 int sub_43C1F0();
@@ -474,14 +475,14 @@ _UNKNOWN loc_43414A; // weak
   FILE iob[1024];
   const unsigned __int16 pctype[256];
   int _mb_cur_max;
-int dword_441250 = 1162564932; // weak
+char dukeNukemName[12] = "DUKE NUKEM"; // weak //DUKE
 _UNKNOWN unk_4429C0; // weak
-byte byte_4429E0[28] =
+byte byte_4429E0[28] = //drop mines
 {
   68,  114,  111,  112,  32,  77,  105,  110,  101,  32,  32,  32,  32,  250,  250,  250,
   250,  250,  250,  250,  250,  250,  250,  250,  0,  0,  0,  0
 }; // idb
-_WORD word_4429FC[14] =
+_WORD word_4429FC[14] = //Ma..
 {
   24909,  26723,  28265,  8293,  30023,  8302,  64032,  64250,  64250,  64250,  64250,  64250,  250,  0
 }; // idb
@@ -517,7 +518,13 @@ int dword_445028 = 1; // weak
 int dword_44502C = 1; // weak
 int dword_445030 = 1; // weak
 int dword_445034 = 163840; // weak
-char aKupla[6] = "KUPLA"; // weak
+
+/***contiene los nomrbe de los coches para los ficheros bpk*/
+
+char* carName[6];
+//char aKupla[6] = "KUPLA"; // weak
+
+
 int dword_44509C = 1063675494; // weak
 int dword_4450A0 = 1065353216; // weak
 _UNKNOWN unk_4450A8; // weak
@@ -649,7 +656,7 @@ int repairAnimFrameSize_446308[] =    {0x5b3,0x5bb,0x5aa,0x5ad,0x598,0x597,0x5a9
 char aStartRacing[13] = "Start Racing"; // weak
 
 char aStartANewGam_0[17] = "Start A New Game"; // weak
-int dword_4466EC = 1953066569; // weak
+int dword_4466EC = 1953066569; // weak//Init
 int dword_4466F0 = 1768710505; // weak
 int dword_4466F4 = 1092642170; // weak
 int dword_4466F8 = 2003127840; // weak
@@ -1397,7 +1404,7 @@ char byte_45673E[] = { '\x05' }; // weak
 char byte_45673F = '\x03'; // weak
 char byte_456741[] = { '\x02' }; // weak
 int dword_456754 = 511; // weak
-int dword_456758 = 2; // idb
+int raceDrivers_456758 = 2; // idb
 int dword_456780 = 4294967295; // weak
 int dword_456784 = 4294967295; // weak
 int dword_456788 = 4294967295; // weak
@@ -1425,7 +1432,7 @@ char aOutOfMemoryAbo[25] = "Out of memory - aborting"; // weak
 CHAR LibFileName[] = "DDRAW.DLL"; // idb
 int dword_456AA0 = 0; // weak
 int dword_456AA4 = 0; // weak
-int dword_456AA8 = 0; // weak
+int isCircuitReversed_456AA8 = 0; // weak
 int dword_456AAC = 0; // weak
 int dword_456AB0 = 0; // weak
 int dword_456AB4 = 0; // weak
@@ -1452,7 +1459,7 @@ char byte_456B01 = '\0'; // weak
 int dword_456B04 = 0; // weak
 int dword_456B08 = 0; // weak
 int dword_456B0C = 0; // weak
-int dword_456B10 = 0; // weak
+int isDemo_456B10 = 0; // weak
 int dword_456B1C = 0; // weak
 int dword_456B28 = 0; // weak
 int dword_456B2C = 0; // weak
@@ -1462,7 +1469,7 @@ int dword_456B38 = 0; // weak
 int dword_456B3C = 0; // weak
 int dword_456B40 = 0; // weak
 int dword_456B44 = 0; // weak
-int dword_456B50 = 0; // weak
+int userRacePosition_456B50 = 0; // weak
 int dword_456B54 = 0; // weak
 int dword_456B58 = 0; // weak
 int gameStarted_456B5C = 0; // weak
@@ -1471,8 +1478,8 @@ int dword_456B64 = 0; // weak
 int dword_456B68 = 0; // weak
 int dword_456B6C = 0; // weak
 int dword_456B70 = 0; // weak
-int dword_456B74 = 0; // weak
-int dword_456B78 = 0; // weak
+int showWelcomePopup_456B74 = 0; // weak
+int showUndergroundPopup_456B78 = 0; // weak
 int showMediumWarningRace = 0; // weak
 int showHardWarningRace = 0; // weak
 int undergroundPricesSet_456B84 = 0; // weak
@@ -1640,7 +1647,7 @@ int dword_45EA38; // weak
 int dword_45EA3C; // weak
 int dword_45EA40; // weak
 int dword_45EA44; // weak
-int dword_45EA50[256]; // weak
+char raceFilePrefix_45EA50[4]; // weak
 void *slidcop2Bpk; // idb
 int dword_45EA64; // weak
 
@@ -1799,7 +1806,9 @@ char byte_45FC11; // weak
 char byte_45FC12; // weak
 char byte_45FC13; // weak
 int dword_45FC1C; // weak
-int dword_45FC20; // weak
+
+//si es cero es que en el listado sales primero en la carrera y asi.Contra adversary eres el 1 porque adversary es el 0 siempre
+int userRaceOrder_45FC20; // weak
 
 int dword_45FC28; // weak
 void *linlin1Bpk; // idb
@@ -2453,15 +2462,17 @@ char byte_463E00[256]; // weak
 int dword_463E08; // weak
 _UNKNOWN unk_463E20; // weak
 int dword_463E2D; // weak
-int dword_464F10; // weak
+int trxSCE3Bpk_464F10; // weak
 int dword_464F14; // weak
 int dword_464F18; // weak
 int dword_464F1C; // weak
 int dword_464F20; // weak
 int dword_464F30[256]; // weak
 int dword_464F40; // weak
-int dword_464F44; // weak
-char byte_464F50; // idb
+int firstRacePlayed_464F44; // weak
+char circuitSelectedTR_464F50[4]; // idb
+//char byte_464F50
+
 int dword_464F60; // weak
 int dword_464F64; // weak
 int dword_464F68; // weak
@@ -2469,35 +2480,35 @@ int dword_464F6C; // weak
 float flt_464F70; // weak
 void *pedestrBpk; // idb
 void *rast1Bpk_464F78; // idb
-_UNKNOWN unk_464F80; // weak
+char damageBpk_464F80[8064]; // weak
 _UNKNOWN unk_4669C0; // weak
-_UNKNOWN unk_466F00; // weak
+int trxVARJOTab_466F00[257]; // weak
 int dword_467000; // weak
 int dword_467020[256]; // weak
-_UNKNOWN bugnum6Bpk_46E560; // weak
+char bugnum6Bpk_46E560[433]; // weak
 _UNKNOWN unk_46E880; // weak
 int dword_46E8D0[256]; // weak
 int dword_46E8D4; // weak
 int dword_46E8D8; // weak
 int dword_46E8DC; // weak
-int dword_46E8E0[256]; // weak
+int trxSHA8Bpk_46E8E0[1024]; // weak
 void *mines1aBpk; // idb
 int dword_46ECE4; // weak
 int dword_46ECE8; // weak
 _UNKNOWN unk_46ED00; // weak
-int dword_46EE00[256]; // weak
+int trxOHIDat_46EE00[256]; // weak
 int dword_46F200; // weak
 void *dword_46F204; // idb
 int dword_46F208; // weak
 int dword_46F21C[256]; // weak
 int dword_46F220[256]; // weak
-_UNKNOWN unk_478E60; // weak
+int trxSHA5Bpk_478E60[1024]; // weak
 void *rocket1Bpk; // idb
 void *rocket2Bpk; // idb
 int dword_479268; // weak
 void *dword_47926C; // idb
 int dword_479270; // weak
-int dword_479280[256]; // weak
+int trxSHA3Bpk_479280[4096]; // weak
 void *genlamBpk; // idb
 int dword_479684; // weak
 void *genmesBpk; // idb
@@ -2508,11 +2519,11 @@ _UNKNOWN unk_479AA0; // weak
 _UNKNOWN unk_479AA4; // weak
 _UNKNOWN unk_479AAC; // weak
 _UNKNOWN unk_479AB8; // weak
-int dword_479D20; // weak
+int trxSCE1Bpk_479D20; // weak
 _UNKNOWN unk_479D24; // weak
 _UNKNOWN unk_479D2C; // weak
 _UNKNOWN unk_479D38; // weak
-char byte_479D40[256]; // weak
+char trxBLOTab_479D40[257]; // weak
 _UNKNOWN unk_479E40; // weak
 _UNKNOWN unk_479EE0; // weak
 _UNKNOWN unk_479EE8; // weak
@@ -2581,6 +2592,8 @@ void *dword_4A6854; // idb
 int dword_4A6858; // weak
 int dword_4A685C; // weak
 void *genflaBpk; // idb
+
+//esto es raceparticipant2 en cuanto este sobra!
 int dword_4A6880[256]; // weak
 int dword_4A6884[256]; // weak
 int dword_4A6888; // weak
@@ -2599,8 +2612,12 @@ int dword_4A68B8; // weak
 int dword_4A68BC; // weak
 int dword_4A68C0; // weak
 char byte_4A68C4[256]; // weak
-int dword_4A68D0[256]; // weak
-_UNKNOWN unk_4A68D4; // weak
+
+
+
+
+//int dword_4A68D0[256]; // weak raceparticipant2[].currentRacePosition
+//_UNKNOWN racePosition; // weak
 int dword_4A68D8[256]; // weak
 int dword_4A68DC[256]; // weak
 int dword_4A68E0[256]; // weak
@@ -3043,7 +3060,7 @@ int dword_4A7785; // weak
 __int16 word_4A7789; // weak
 int dword_4A7A20; // weak
 int dword_4A7A24; // weak
-void *dword_4A7A28; // idb
+void *trxSCE5Bpk_4A7A28; // idb
 void *splat3Bpk; // idb
 void *splat4Bpk; // idb
 int dword_4A7A38; // weak
@@ -3060,7 +3077,7 @@ int dword_4A7A64; // weak
 __int16 word_4A7A68; // weak
 int dword_4A7A6C; // weak
 int dword_4A7A70[256]; // weak
-_UNKNOWN unk_4A7A74; // weak
+//_UNKNOWN unk_4A7A74; // weak
 int dword_4A7A80; // weak
 int dword_4A7A84; // weak
 int dword_4A7A88; // weak
@@ -3071,8 +3088,8 @@ int dword_4A7A98[256]; // weak
 int dword_4A7A9C; // weak
 int dword_4A7AA0[256]; // weak
 int dword_4A7AA4; // weak
-int dword_4A7AA8; // weak
-int dword_4A7AAC; // weak
+//int isCircuitReversed_4A7AA8; // weak
+//int dword_4A7AAC; // weak
 int Val; // idb  //parece que es dword_4A7AB0
 char byte_4A7AB4[256]; // weak
 int dword_4A7AC4; // weak
@@ -3080,7 +3097,7 @@ int dword_4A7AC8; // weak
 int dword_4A7AE8; // weak
 int dword_4A7AEC; // weak
 int dword_4A7AF0; // weak
-int dword_4A7AF4; // weak
+//int dword_4A7AF4; // weak
 int dword_4A7AF8; // weak
 char byte_4A7B08[256]; // weak
 int dword_4A7B3C; // weak
@@ -3245,19 +3262,23 @@ int dword_4A8AA4; // weak
 float flt_4A8AC0[256]; // weak
 float flt_4A8C00[256]; // weak
 int dword_4A8D2C; // weak
-int dword_4A8D40[256]; // weak
+int trxSHA7Bpk_4A8D40[1024]; // weak
 _UNKNOWN unk_4A8DD0; // weak
 int dword_4A9140; // weak
-_UNKNOWN smalfo4aBpk_4A9160; // weak
+char smalfo4aBpk_4A9160[924]; // weak
 float flt_4A9A60[256]; // weak
 int dword_4A9B8C; // weak
 int dword_4A9B90; // weak
-char byte_4A9BA0[256]; // weak
+
+byte circuitPalette_4A9BA0[768];
+/*char byte_4A9BA0[256]; // weak //paleta del cicuito!
 char byte_4A9BA1[256]; // weak
-char byte_4A9BA2[256]; // weak
+char byte_4A9BA2[256]; // weak*/
+
+
 int dword_4A9EA0; // weak
 int dword_4A9EA4; // weak
-int dword_4A9EA8; // weak
+int userRaceOrder_4A9EA8; // weak
 int dword_4A9EAC; // weak
 int dword_4A9EB0; // weak
 void *Memory; // idb
@@ -3277,8 +3298,8 @@ char byte_4A9ECB; // weak
 char byte_4A9ECC; // weak
 char byte_4A9ECD; // weak
 char byte_4A9ECE; // weak
-_UNKNOWN unk_4A9EE0; // weak
-int dword_4A9FE0[256]; // weak
+int trxLITTab_4A9EE0[257]; // weak
+int trxSHA4Bpk_4A9FE0[1024]; // weak
 int dword_4AA3E0; // weak
 int dword_4AA3E4; // weak
 void *shotsBpk; // idb
@@ -3291,15 +3312,15 @@ int dword_4AA500; // weak
 int dword_4AA504; // weak
 int dword_4AA508; // weak
 void *goalnum2Bpk_4AA50C; // idb
-int dword_4AA520[256]; // weak
-void *dword_4AA920; // idb
+int trxSHA6Bpk_4AA520[1024]; // weak
+void *trxLR1Bpk_4AA920; // idb
 int dword_4AA924; // weak
 int dword_4AA928; // weak
 int dword_4AA92C; // weak
-_UNKNOWN unk_4AA940; // weak
-_UNKNOWN unk_4AC340; // weak
-_UNKNOWN unk_4ACB40; // weak
-_UNKNOWN unk_4AD340; // weak
+int boards1BPK_4AA940[6656]; // weak
+int boards2BPK_4AC340[2048]; // weak
+int boards3BPK_4ACB40[2048]; // weak
+int boards4BPK_4AD340[2048]; // weak
 _UNKNOWN unk_4ADB40; // weak
 int dword_4B3140; // weak
 int dword_4B3144; // weak
@@ -3307,9 +3328,17 @@ int dword_4B3160[256]; // weak
 _UNKNOWN unk_4B3404; // weak
 void *burn1aBpk; // idb
 void *obstacleBpk; // idb
+
+/*paleta de circutiro que no se cual es*/
+byte circuitPalette_4B4020[768]; // weak
+
+/*paleta de circuito 2
 _UNKNOWN unk_4B4020; // weak
 _UNKNOWN unk_4B4021; // weak
-int dword_4B4320[256]; // weak
+*/
+
+//int trxSCE2Bpk_4B4320[78808]; // weak
+int trxSCE2Bpk_4B4320[7880800]; // weak
 int dword_4B4324[256]; // weak
 _WORD dword_4B4328[150]; // idb
 int dword_4B4454[256]; // weak
@@ -3328,10 +3357,10 @@ int dword_4B4F68[256]; // weak
 int dword_4B4F6C[256]; // weak
 int dword_501260; // weak
 int dword_501264; // weak
-float flt_501280[256]; // weak
+float trxDRVDat_501280[2048]; // weak
 _UNKNOWN unk_501680; // weak
-int dword_501A80; // weak
-char byte_501AA0[256]; // weak
+int trxSHA2Bpk_501A80; // weak
+char trxSKITab_501AA0[257]; // weak
 int dword_501BA0[256]; // weak
 int dword_501BA4[256]; // weak
 int dword_501BA8[256]; // weak
@@ -3357,23 +3386,23 @@ _UNKNOWN unk_503238; // weak
 _UNKNOWN unk_50323C; // weak
 int dword_503240[256]; // weak
 void *blowiBpk; // idb
-void *dword_5034D0; // idb
-char byte_5034E0[256]; // weak
+void *trxVaiBpk_5034D0; // idb
+//char trxINFBin_5034E0[256]; // weak
 int dword_5034F0; // weak
 int dword_5034F4; // weak
 void *dword_5034F8; // idb
-void *dword_5034FC; // idb
+void *participantCarBpk_5034FC; // idb
 int dword_503500; // weak
 int dword_503504; // weak
 int dword_503508; // weak
 int dword_50350C; // weak
 int dword_503510; // weak
 int dword_503514; // weak
-int dword_503518; // weak
+int currentDriverSelectedIndex_503518; // weak
 int dword_50351C; // weak
-_UNKNOWN ownnum1Bpk_503520; // weak
+char ownnum1Bpk_503520[5148]; // weak
 int dword_508D20; // weak
-int dword_508D24; // weak
+int numberOfParticipants_508D24; // weak
 int dword_508D44[256]; // weak
 int dword_508D48; // weak
 int dword_508D4C; // weak
@@ -3385,9 +3414,9 @@ _UNKNOWN unk_509E61; // weak
 int dword_50A160; // weak
 int dword_50A164; // weak
 void *damslidBpk; // idb
-void *dword_50A16C; // idb
+void *trxImaBpk_50A16C; // idb
 int dword_50A170; // weak
-int dword_50A180[256]; // weak
+int trxSCE4Bpk_50A180[78808]; // weak
 int dword_50A184[256]; // weak
 int dword_50A18C[256]; // weak
 int dword_50A190[256]; // weak
@@ -3396,8 +3425,8 @@ int dword_50A198[256]; // weak
 int dword_50A19C[256]; // weak
 _UNKNOWN unk_50A1A8; // weak
 int dword_50B2B0; // weak
-_UNKNOWN othnum1Bpk_50B2C0; // weak
-_UNKNOWN posnum2Bpk_50E440; // weak
+char othnum1Bpk_50B2C0[3380]; // weak
+char posnum2Bpk_50E440[169]; // weak
 int dword_50E540; // weak
 int dword_50E560[256]; // weak
 _UNKNOWN unk_50E6F0; // weak
@@ -3407,13 +3436,17 @@ void *flame3Bpk; // idb
 void *flame4Bpk; // idb
 void *flame5Bpk; // idb
 void *flame6Bpk; // idb
-int dword_50E718; // weak
+int trxSHA1Bpk_50E718; // weak
 int dword_50E71C; // weak
-char smallbarBpk_50E720[256]; // weak
+char smallbarBpk_50E720[2048]; // weak
 char byte_50E721[256]; // weak
 int dword_50EF20; // weak
-_UNKNOWN unk_50EF44; // weak
-int dword_50FB44; // weak
+
+
+//esto es otra paleta de circuito
+int circuitPalette_50EF40[768]; // weak
+/*_UNKNOWN unk_50EF44; // weak
+int dword_50FB44; // weak*/
 
 
 void __cdecl nullsub_1() {
@@ -3428,27 +3461,13 @@ int sub_43C8F0()
 {
   return sub_43C850();
 }
-void __cdecl allocateMemoryPtr(void ** v1,size_t Size)
-{
-	*v1 = malloc(sizeof(Size));
-	if (!*v1)
-	{
-		freeMusic();
-		setWindowCaption();
-		printf("DEATH RALLY Error: Cannot allocate memory!\n");
-		printf("Please consult DRHELP.EXE for more information on how to resolve this problem.\n");
-		if (isMultiplayerGame)
-			nullsub_1();
-		exit(112);
-	}
-}
+
 //----- (00401000) --------------------------------------------------------
 void __cdecl allocateMemory(size_t Size)
 {
   int v1=1; // eax@1
 
-//TODO correct this
- // operator delete(Size);
+  v1 = malloc(Size);
   if ( !v1 )
   {
     freeMusic();
@@ -3486,15 +3505,8 @@ int sub_401060()
   double v17; // st7@36
   int v18; // ecx@36
   int v19; // ecx@36
-  int v20; // eax@39
-  char v21; // cl@40
-  int v22; // eax@41
-  char v23; // cl@42
-  int v24; // eax@43
-  char v25; // cl@44
   int result; // eax@45
-  char v27; // cl@46
-  int v28; // [sp+Ch] [bp-4F0h]@1
+  int indexRaceParticipantt; // [sp+Ch] [bp-4F0h]@1
   int v29; // [sp+14h] [bp-4E8h]@1
   int v30; // [sp+18h] [bp-4E4h]@1
   int v31; // [sp+1Ch] [bp-4E0h]@1
@@ -3810,6 +3822,7 @@ int sub_401060()
   int v341; // [sp+4F4h] [bp-8h]@1
   int v342; // [sp+4F8h] [bp-4h]@1
 
+  //todo esto son posiciones de memoria :S
   v103 = 1076048691;
   v104 = 1076258406;
   v105 = 1065353216;
@@ -4119,7 +4132,7 @@ int sub_401060()
   v53 = 380;
   v54 = 440;
   v29 = 1090833613;
-  dword_456AA8 = dword_4A7AA8;
+  isCircuitReversed_456AA8 = raceParticipant[0].isCircuitReversed_4A7AA8;
   v30 = 1092301619;
   v31 = 1091567616;
   v32 = 1093140480;
@@ -4132,10 +4145,114 @@ int sub_401060()
   dword_4A6AF0 = 1061997773;
   dword_4A6AF4 = 1064514355;
   dword_4A6AF8 = 1064514355;
-  v28 = 0;
-  if ( dword_508D24 > 0 )
+  indexRaceParticipantt = 0;
+  if ( numberOfParticipants_508D24 > 0 )
   {
-    v0 = (int)dword_4A689C;
+    v0 = (int)dword_4A689C; //28 de offset sobre la estructura
+   
+    do
+    {
+
+      v5 = 3 * raceParticipant[indexRaceParticipantt].difficulty;
+	  raceParticipant2[indexRaceParticipantt].carType = raceParticipant[indexRaceParticipantt].carType;
+      
+      v6 = raceParticipant[indexRaceParticipantt].carType + 2 * v5;
+      
+      v8 = *((float *)&v103 + 5 * v6 + raceParticipant[indexRaceParticipantt].engine);
+      
+	  raceParticipant2[indexRaceParticipantt].unk_4A6884 = v8;
+      v10 = 5 * v6 + raceParticipant[indexRaceParticipantt].tire;
+	  raceParticipant2[indexRaceParticipantt].unk_4A6888 = v8;
+	  
+      v11 = *((float *)&v79 + v6);
+      v12 = *(&v55 + v6);
+	  raceParticipant2[indexRaceParticipantt].unk_4A688C = *(&v223 + v10);
+      v13 = v12 + *(&v35 + 5 * raceParticipant[indexRaceParticipantt].difficulty + raceParticipant[indexRaceParticipantt].armour);
+      v14 = indexRaceParticipantt == userRaceOrder_4A9EA8;
+	  raceParticipant2[indexRaceParticipantt].unk_4A689C = v13;
+	  raceParticipant2[indexRaceParticipantt].unk_4A6894 = 3.75 / (v11 - (double)raceParticipant[indexRaceParticipantt].engine * 0.05);
+      if ( v14 )
+		  raceParticipant2[indexRaceParticipantt].unk_4A689C = v13 + 100;
+      if ( !memcmp(raceParticipant[indexRaceParticipantt].name, &dukeNukemName, 0xBu) )
+		  raceParticipant2[indexRaceParticipantt].unk_4A689C = (unsigned __int64)((double)*(signed int *)raceParticipant2[indexRaceParticipantt].unk_4A689C  * 2.2);
+      if (raceParticipant2[indexRaceParticipantt].unk_4A689C  > 900 )
+		  raceParticipant2[indexRaceParticipantt].unk_4A689C = 900;
+      
+      
+	  raceParticipant2[indexRaceParticipantt].unk_4A6890 = *(&v29 + raceParticipant[indexRaceParticipantt].carType);
+	  raceParticipant2[indexRaceParticipantt].unk_4A6898 = (100 - raceParticipant[indexRaceParticipantt].damage) << 10;
+	  raceParticipant2[indexRaceParticipantt].rocket = raceParticipant[indexRaceParticipantt].rocket;
+	  raceParticipant2[indexRaceParticipantt].spikes = raceParticipant[indexRaceParticipantt].spikes;
+	  raceParticipant2[indexRaceParticipantt].mines = raceParticipant[indexRaceParticipantt].mines;
+	  raceParticipant2[indexRaceParticipantt].useWeapons = raceParticipant[indexRaceParticipantt].useWeapons;
+	  raceParticipant2[indexRaceParticipantt].unk_4A68B0 = 102400;
+	  raceParticipant2[indexRaceParticipantt].unk_4A68B4 = 102400;
+	  raceParticipant2[indexRaceParticipantt].currentRacePosition = 0;//     *(_DWORD *)(v0 + 52) = 0;
+	  raceParticipant2[indexRaceParticipantt].unk_4A68D8 = 0; //*(_DWORD *)(v0 + 60) = 0;
+	  raceParticipant2[indexRaceParticipantt].unk_4A68E0 = 0; //+68
+      if ( !raceParticipant[indexRaceParticipantt].carType)//huele a coches
+      {
+		raceParticipant2[indexRaceParticipantt].unk_4A68DC = 1;// *(_DWORD *)(v0 + 64) = 1;
+		raceParticipant2[indexRaceParticipantt].unk_4A68E4 = 22;
+		raceParticipant2[indexRaceParticipantt].unk_4A68F4 = 8;
+		raceParticipant2[indexRaceParticipantt].unk_4A6904 = 0; //huele a cartype pero ya esta asi que no se
+      }
+      if (raceParticipant[indexRaceParticipantt].carType == 1 )
+      {
+		raceParticipant2[indexRaceParticipantt].unk_4A68DC = 1;
+		raceParticipant2[indexRaceParticipantt].unk_4A68E4 = -18; //+72
+		raceParticipant2[indexRaceParticipantt].unk_4A68F4 = 17; //+88
+		raceParticipant2[indexRaceParticipantt].unk_4A6904 = 1;
+      }
+      if (raceParticipant[indexRaceParticipantt].carType == 2 )
+      {
+		 raceParticipant2[indexRaceParticipantt].unk_4A68DC = 1;
+		 raceParticipant2[indexRaceParticipantt].unk_4A68E4 = -40;
+		 raceParticipant2[indexRaceParticipantt].unk_4A68F4 = 7;
+		 raceParticipant2[indexRaceParticipantt].unk_4A6904 = 2;
+      }
+      if (raceParticipant[indexRaceParticipantt].carType == 3 )
+      {
+		  raceParticipant2[indexRaceParticipantt].unk_4A68DC = 2;
+		  raceParticipant2[indexRaceParticipantt].unk_4A68E4 = 16;
+		  raceParticipant2[indexRaceParticipantt].unk_4A68F4 = 20;
+		  
+		raceParticipant2[indexRaceParticipantt].unk_4A6904 = 3; //104
+		raceParticipant2[indexRaceParticipantt].unk_4A68E8 = -17;
+		raceParticipant2[indexRaceParticipantt].unk_4A68F8 = 20; //92
+		
+		raceParticipant2[indexRaceParticipantt].unk_4A6908 = 3;
+      }
+      if (raceParticipant[indexRaceParticipantt].carType == 4 )
+      {
+		  raceParticipant2[indexRaceParticipantt].unk_4A68DC = 2;
+		  raceParticipant2[indexRaceParticipantt].unk_4A68E4 = 16;
+		  raceParticipant2[indexRaceParticipantt].unk_4A68F4 = 19;
+		  raceParticipant2[indexRaceParticipantt].unk_4A6904 = 4;
+		raceParticipant2[indexRaceParticipantt].unk_4A68E8 = -17; //76
+		raceParticipant2[indexRaceParticipantt].unk_4A68F8 = 19;
+		raceParticipant2[indexRaceParticipantt].unk_4A6908 = 4;
+      }
+      if (raceParticipant[indexRaceParticipantt].carType == 5 )
+      {
+		  raceParticipant2[indexRaceParticipantt].unk_4A68DC = 2;
+		  raceParticipant2[indexRaceParticipantt].unk_4A68E4 = 16;
+		  raceParticipant2[indexRaceParticipantt].unk_4A68F4 = 20;
+		  raceParticipant2[indexRaceParticipantt].unk_4A6904 = 5;
+		raceParticipant2[indexRaceParticipantt].unk_4A68E8 = -17;
+		raceParticipant2[indexRaceParticipantt].unk_4A68F8 = 20;
+		raceParticipant2[indexRaceParticipantt].unk_4A6908 = 5;
+      }
+      
+      v0 += 148;
+      ++indexRaceParticipantt;
+    }
+    while (indexRaceParticipantt < numberOfParticipants_508D24 );
+  }
+  /*
+  if ( numberOfParticipants_508D24 > 0 )
+  {
+    v0 = (int)dword_4A689C; //28 de offset sobre la estructura
     v1 = &dword_4A7AA4; //raceParticipant[0].difficulty
     do
     {
@@ -4155,12 +4272,12 @@ int sub_401060()
       v12 = *(&v55 + v6);
       *(_DWORD *)(v0 - 16) = *(&v223 + v10);
       v13 = v12 + *(&v35 + 5 * v2 + *(v1 - 10));
-      v14 = v28 == dword_4A9EA8;
+      v14 = indexRaceParticipantt == userRaceOrder_4A9EA8;
       *(_DWORD *)v0 = v13;
       *(float *)(v0 - 8) = 3.75 / (v11 - (double)v7 * 0.05);
       if ( v14 )
         *(_DWORD *)v0 = v13 + 100;
-      if ( !memcmp(v1 - 17, &dword_441250, 0xBu) )
+      if ( !memcmp(v1 - 17, &dukeNukemName, 0xBu) )
         *(_DWORD *)v0 = (unsigned __int64)((double)*(signed int *)v0 * 2.2);
       if ( *(_DWORD *)v0 > 900 )
         *(_DWORD *)v0 = 900;
@@ -4177,7 +4294,7 @@ int sub_401060()
       *(_DWORD *)(v0 + 52) = 0;
       *(_DWORD *)(v0 + 60) = 0;
       *(_DWORD *)(v0 + 68) = 0;
-      if ( !v15 )
+      if ( !v15 )//huele a coches
       {
         *(_DWORD *)(v0 + 64) = 1;
         *(_DWORD *)(v0 + 72) = 22;
@@ -4230,23 +4347,26 @@ int sub_401060()
       }
       v1 += 21;
       v0 += 148;
-      ++v28;
+      ++indexRaceParticipantt;
     }
-    while ( v28 < dword_508D24 );
-  }
-  if ( dword_4A6880[0] == 6 && !isMultiplayerGame )
+    while (indexRaceParticipantt < numberOfParticipants_508D24 );
+  }*/
+  //si es adversary
+  if ( raceParticipant2[0].carType == 6 && !isMultiplayerGame )
   {
-    if ( dword_4A68AC[37 * dword_4A9EA8] )
+    if (raceParticipant2[userRaceOrder_4A9EA8].useWeapons )
+		//if (dword_4A68AC[37 * userRaceOrder_4A9EA8])
     {
+		
       if ( raceParticipant[0].difficulty )
       {
         if (raceParticipant[0].difficulty == 1 )
         {
-          dword_4A6884[0] = 1083388723;
+			raceParticipant2[0].unk_4A6884 = 1083388723;
         }
         else if (raceParticipant[0].difficulty == 2 )
         {
-          dword_4A6884[0] = 1083598438;
+			raceParticipant2[0].unk_4A6884 = 1083598438;
         }
         goto LABEL_36;
       }
@@ -4256,93 +4376,72 @@ int sub_401060()
     {
       if (raceParticipant[0].difficulty == 1 )
       {
-        dword_4A6884[0] = 1082969293;
+		  raceParticipant2[0].unk_4A6884 = 1082969293;
       }
       else if (raceParticipant[0].difficulty == 2 )
       {
 LABEL_35:
-        dword_4A6884[0] = 1083179008;
+		  raceParticipant2[0].unk_4A6884 = 1083179008;
         goto LABEL_36;
       }
     }
     else
     {
-      dword_4A6884[0] = 1082759578;
+		raceParticipant2[0].unk_4A6884 = 1082759578;
     }
 LABEL_36:
-    dword_4A6888 = dword_4A6884[0];
-    v17 = *((float *)&v80 + 6 * dword_4A7AF8);
-    v18 = *(&v39 + 5 * dword_4A7AF8);
-    dword_4A6898[0] = (100 - dword_4A7A70[0]) << 10;
-    v19 = *(&v60 + 6 * dword_4A7AF8) + v18;
-    dword_4A688C[0] = 0;
-    dword_4A689C[0] = v19;
-    flt_4A6894[0] = 3.75 / (v17 - (double)dword_4A7AC8 * 0.05);
+	raceParticipant2[0].unk_4A6888 = raceParticipant2[0].unk_4A6884;
+    
+    v17 = *((float *)&v80 + 6 * raceParticipant[1].difficulty);
+    v18 = *(&v39 + 5 * raceParticipant[1].difficulty);
+	raceParticipant2[0].unk_4A6898 = (100 - raceParticipant[0].damage) << 10;
+    v19 = *(&v60 + 6 * raceParticipant[1].difficulty) + v18;
+	raceParticipant2[0].unk_4A688C = 0;
+	raceParticipant2[0].unk_4A689C = v19;
+	raceParticipant2[0].unk_4A6894 = 3.75 / (v17 - (double)raceParticipant[1].engine * 0.05);
     if ( v19 > 900 )
-      dword_4A689C[0] = 900;
-    dword_4A68A0[0] = dword_4A7A80;
-    dword_4A68A4[0] = dword_4A7A84;
-    dword_4A68A8[0] = dword_4A7A88;
-    dword_4A68AC[0] = dword_4A7A8C;
-    dword_4A68B0[0] = 102400;
-    dword_4A68B4[0] = 102400;
-    dword_4A6890[0] = 1093140480;
-    dword_4A68D0[0] = 0;
-    dword_4A68DC[0] = 2;
-    dword_4A68E4[0] = 30;
-    dword_4A68F4[0] = 19;
-    dword_4A6904[0] = 4;
-    dword_4A68E8 = -30;
-    dword_4A68F8 = 19;
-    dword_4A6908 = 4;
+		raceParticipant2[0].unk_4A689C = 900;
+	raceParticipant2[0].rocket = raceParticipant[0].rocket;
+	raceParticipant2[0].spikes = raceParticipant[0].spikes;
+	raceParticipant2[0].mines = raceParticipant[0].mines;
+	raceParticipant2[0].useWeapons = raceParticipant[0].useWeapons;
+    raceParticipant2[0].unk_4A68B0 = 102400;
+	raceParticipant2[0].unk_4A68B4 = 102400;
+	raceParticipant2[0].unk_4A6890 = 1093140480;
+	raceParticipant2[0].currentRacePosition = 0;
+	raceParticipant2[0].unk_4A68DC = 2;
+	raceParticipant2[0].unk_4A68E4 = 30;
+	raceParticipant2[0].unk_4A68F4 = 19;
+	raceParticipant2[0].unk_4A6904 = 4;
+	raceParticipant2[0].unk_4A68E8 = -30;
+	raceParticipant2[0].unk_4A68F8 = 19;
+	raceParticipant2[0].unk_4A6908 = 4;
   }
   //esta copiando los colores de los 4 participantes
-  dword_4A68B8 = dword_4A7A94;
-  dword_4A68BC = dword_4A7A98[0];
-  dword_4A68C0 = dword_4A7A9C;
-  dword_4A694C = dword_4A7AE8;
-  dword_4A6950 = dword_4A7AEC;
-  dword_4A6954 = dword_4A7AF0;
-  dword_4A69E0 = dword_4A7B3C;
-  dword_4A69E4 = dword_4A7B40;
-  dword_4A69E8 = dword_4A7B44;
-  dword_4A6A74 = dword_4A7B90;
-  dword_4A6A78 = dword_4A7B94;
-  dword_4A6A7C = dword_4A7B98;
-  v20 = 0;
-  do
-  {
-    
-	v21 = dword_4A7A60[v20];
-    byte_4A68C4[v20++] = v21;
-  }
-  while ( v21 );
-  v22 = 0;
-  do
-  {
-    v23 = byte_4A7AB4[v22];
-    byte_4A6958[v22++] = v23;
-  }
-  while ( v23 );
-  v24 = 0;
-  do
-  {
-    v25 = byte_4A7B08[v24];
-    byte_4A69EC[v24++] = v25;
-  }
-  while ( v25 );
+  raceParticipant2[0].r = raceParticipant[0].r;
+  raceParticipant2[0].g = raceParticipant[0].g;
+  raceParticipant2[0].b = raceParticipant[0].b;
+  raceParticipant2[1].r = raceParticipant[1].r;
+  raceParticipant2[1].g = raceParticipant[1].g;
+  raceParticipant2[1].b = raceParticipant[1].b;
+  raceParticipant2[2].r = raceParticipant[2].r;
+  raceParticipant2[2].g = raceParticipant[2].g;
+  raceParticipant2[2].b = raceParticipant[2].b;
+  raceParticipant2[3].r = raceParticipant[3].r;
+  raceParticipant2[3].g = raceParticipant[3].g;
+  raceParticipant2[3].b = raceParticipant[3].b;
+  
+  //copiamos los nombres!
+  strcpy(raceParticipant2[0].name, raceParticipant[0].name);
+  strcpy(raceParticipant2[1].name, raceParticipant[1].name);
+  strcpy(raceParticipant2[2].name, raceParticipant[2].name);
+  strcpy(raceParticipant2[3].name, raceParticipant[3].name);
   result = 0;
-  do
-  {
-    v27 = byte_4A7B5C[result];
-    byte_4A6A80[result++] = v27;
-  }
-  while ( v27 );
   return result;
 }
 
 //----- (00402240) --------------------------------------------------------
-int sub_402240()
+int updateRacePositions()
 {
   int v0; // edi@1
   signed int v1; // esi@1
@@ -4350,23 +4449,25 @@ int sub_402240()
   int v3; // ecx@2
   int result; // eax@2
 
-  v0 = (int)dword_4A7AA0;
-  v1 = (signed int)&unk_4A68D4;
+  int indexRaceParticipant =0 ;
+  //v0 = (int)dword_4A7AA0;
+  //v1 = (signed int)&racePosition;
   do
   {
-    v2 = (unsigned __int64)(100.0 - ceil((double)*(signed int *)(v1 - 60) * 0.0009765625));
-    v3 = *(_DWORD *)(v1 - 4);
-    *(_DWORD *)(v0 - 48) = v2;
-    result = *(_DWORD *)v1;
-    *(_DWORD *)v0 = *(_DWORD *)v1;
-    *(_DWORD *)(v0 - 52) = v3;
-    v1 += 148;
-    v0 += 84;
+    v2 = (unsigned __int64)(100.0 - ceil((double)raceParticipant2[indexRaceParticipant].unk_4A6898 * 0.0009765625));
+	v3 = raceParticipant2[indexRaceParticipant].currentRacePosition;
+	raceParticipant[indexRaceParticipant].damage = v2;
+    result = raceParticipant2[indexRaceParticipant].racePosition;
+    raceParticipant[indexRaceParticipant].racePosition= raceParticipant2[indexRaceParticipant].racePosition;
+	raceParticipant[indexRaceParticipant].currentRacePosition = v3;
+    //v1 += 148;
+   // v0 += 84;
+	indexRaceParticipant++;
   }
-  while ( v1 < (signed int)&unk_4A6B24 );
+  while (indexRaceParticipant < 4 );
+  //while (v1 < (signed int)&unk_4A6B24);
   return result;
 }
-// 4A7AA0: using guessed type int dword_4A7AA0[];
 
 //----- (004022A0) --------------------------------------------------------
 int sub_4022A0()
@@ -4418,21 +4519,21 @@ int sub_4022A0()
   }
   while ( v1 );
   v8 = 0;
-  dword_508D44[0] = dword_4A9EA8;
-  if ( !dword_4A9EA8 )
+  dword_508D44[0] = userRaceOrder_4A9EA8;
+  if ( !userRaceOrder_4A9EA8 )
     v8 = 1;
   v9 = v8;
   v10 = v8 + 1;
   dword_508D48 = v9;
-  if ( v10 == dword_4A9EA8 )
+  if ( v10 == userRaceOrder_4A9EA8 )
     ++v10;
   v11 = v10;
   v12 = v10 + 1;
   dword_508D4C = v11;
-  if ( v12 == dword_4A9EA8 )
+  if ( v12 == userRaceOrder_4A9EA8 )
     ++v12;
   dword_508D50 = v12;
-  v13 = (unsigned __int8)byte_4A7E09[864 * dword_4A9EA8];
+  v13 = (unsigned __int8)byte_4A7E09[864 * userRaceOrder_4A9EA8];
   v14 = (unsigned __int8)byte_4A7E09[864 * v9];
   v15 = (unsigned __int8)byte_4A7E09[864 * v12];
   dword_46E8D8 = (unsigned __int8)byte_4A7E09[864 * v11];
@@ -4477,11 +4578,6 @@ unsigned int sub_402490()
     dword_481BE0 = 0;
   return result;
 }
-// 464F14: using guessed type int dword_464F14;
-// 481BE0: using guessed type int dword_481BE0;
-// 4A9EA4: using guessed type int dword_4A9EA4;
-// 4AA500: using guessed type int dword_4AA500;
-// 4B3140: using guessed type int dword_4B3140;
 
 //----- (00402510) --------------------------------------------------------
 unsigned int __cdecl sub_402510(int a1, const char *a2)
@@ -4731,7 +4827,7 @@ LABEL_11:
 // 4027B0: using guessed type char Str[16];
 
 //----- (00402CF0) --------------------------------------------------------
-signed int sub_402CF0()
+signed int loadCircuitPalette()
 {
   int v0; // eax@1
   char v1; // cl@2
@@ -4756,14 +4852,14 @@ signed int sub_402CF0()
   char v20; // cl@19
   char v21; // [sp-1h] [bp-311h]@3
   char Filename[16]; // [sp+0h] [bp-310h]@2
-  char DstBuf; // [sp+10h] [bp-300h]@5
+  char DstBuf[768]; // [sp+10h] [bp-300h]@5
   char v24; // [sp+11h] [bp-2FFh]@6
   char v25[766]; // [sp+12h] [bp-2FEh]@6
 
-  v0 = 0;
+  /*v0 = 0;
   do
   {
-    v1 = *((byte *)dword_45EA50 + v0);//poner aqui racePositions[][]	
+    v1 = *((byte *)raceFilePrefix_45EA50 + v0);
     Filename[v0++] = v1;
   }
   while ( v1 );
@@ -4771,16 +4867,22 @@ signed int sub_402CF0()
   do
     v3 = (v2++)[1];
   while ( v3 );
-  *(_DWORD *)v2 = 1095584045;
-  *((_DWORD *)v2 + 1) = 1263551022;
-  v4 = dword_50A16C;
-  v2[8] = 0;
-  extractFromBpa(&byte_464F50, v4, (int)Filename);
-  decryptTexture((int)dword_50A16C, (int)&DstBuf, 10, 768);
+  *(_DWORD *)v2 = 1095584045;//-ima
+  *((_DWORD *)v2 + 1) = 1263551022; //.bpk
+  v2[8] = 0;*/
+
+  v4 = trxImaBpk_50A16C;
+  
+  strcpy(Filename, raceFilePrefix_45EA50);
+  strcat(Filename, "-IMA.BPK");
+  extractFromBpa(circuitSelectedTR_464F50, v4, (int)Filename);
+  decryptTexture((int)trxImaBpk_50A16C, circuitPalette_4A9BA0, 10, 768);
   v5 = 0;
   dword_481BE8 = 256;
-  do
+  /*do
   {
+	
+
     v6 = *(&v24 + v5);
     byte_4A9BA0[v5] = *(&DstBuf + v5);
     v7 = v25[v5];
@@ -4788,15 +4890,16 @@ signed int sub_402CF0()
     byte_4A9BA2[v5] = v7;
     v5 += 3;
   }
-  while ( v5 < 768 );
-  decryptTexture((int)dword_50A16C, (int)dword_5034F8, 778, dword_464F40 * dword_4A7CF8);
-  result = dword_456AA8;
-  if ( dword_456AA8 )
+  while ( v5 < 768 );*/
+
+  decryptTexture((int)trxImaBpk_50A16C, (int)dword_5034F8, 778, dword_464F40 * dword_4A7CF8); //esto tiene que se 768 porque es una paleta pero se saca del inf.bin!
+  result = isCircuitReversed_456AA8;
+  if ( isCircuitReversed_456AA8 )
   {
-    v9 = 0;
+   /* v9 = 0;
     do
     {
-      v10 = *((byte *)dword_45EA50 + v9);
+      v10 = *((byte *)raceFilePrefix_45EA50 + v9);
       Filename[v9++] = v10;
     }
     while ( v10 );
@@ -4804,14 +4907,18 @@ signed int sub_402CF0()
     do
       v12 = (v11++)[1];
     while ( v12 );
-    *(_DWORD *)v11 = 1229735469;
+    *(_DWORD *)v11 = 1229735469; //FLIP.pal
     *((_DWORD *)v11 + 1) = 1095773776;
     *((_WORD *)v11 + 4) = 76;
-    extractFromBpa(&byte_464F50, &DstBuf, (int)Filename);
-    v13 = 0;
+	*/
+	strcpy(Filename, raceFilePrefix_45EA50);
+	strcat(Filename, "-FLIP.PAL");
+    extractFromBpa(circuitSelectedTR_464F50, circuitPalette_4A9BA0, (int)Filename);
+   /*/aqui se mira un fichero qu eno existe para cargar la paleta!*/
+	/* v13 = 0;
     do
     {
-      v14 = *((byte *)dword_45EA50 + v13);
+      v14 = *((byte *)raceFilePrefix_45EA50 + v13);
       Filename[v13++] = v14;
     }
     while ( v14 );
@@ -4819,9 +4926,11 @@ signed int sub_402CF0()
     do
       v16 = (v15++)[1];
     while ( v16 );
-    *(_DWORD *)v15 = 1229735469;
+    *(_DWORD *)v15 = 1229735469; //FLIP-SCX
     *((_DWORD *)v15 + 1) = 1129524816;
-    *((_WORD *)v15 + 4) = 88;
+    *((_WORD *)v15 + 4) = 88;*/
+	/*strcpy(Filename, raceFilePrefix_45EA50);
+	strcat(Filename, "-FLIP-SCX"); ///esto esta mal fijo porque no existe
     v17 = fopen(Filename, "rb");
     v18 = v17;
     if ( v17 )
@@ -4841,20 +4950,14 @@ signed int sub_402CF0()
       byte_4A9BA2[result] = v20;
       result += 3;
     }
-    while ( result < 768 );
+    while ( result < 768 );*/
   }
   return result;
 }
-// 456AA8: using guessed type int dword_456AA8;
-// 45EA50: using guessed type int dword_45EA50[];
-// 464F40: using guessed type int dword_464F40;
-// 481BE8: using guessed type int dword_481BE8;
-// 4A7CF8: using guessed type int dword_4A7CF8;
-// 402CF0: using guessed type char Filename[16];
-// 402CF0: using guessed type char var_2FE[766];
+
 
 //----- (00402EE0) --------------------------------------------------------
-void sub_402EE0()
+void loadCircuitImages1()
 {
   int v0; // eax@1
   char v1; // cl@2
@@ -4871,10 +4974,10 @@ void sub_402EE0()
   char v12; // [sp-1h] [bp-11h]@3
   byte v13[16]; // [sp+0h] [bp-10h]@2
 
-  v0 = 0;
+ /* v0 = 0;
   do
   {
-    v1 = *((byte *)dword_45EA50 + v0);
+    v1 = *((byte *)raceFilePrefix_45EA50 + v0);
     v13[v0++] = v1;
   }
   while ( v1 );
@@ -4882,15 +4985,19 @@ void sub_402EE0()
   do
     v3 = (v2++)[1];
   while ( v3 );
-  *(_DWORD *)v2 = 1396788525;
-  *((_DWORD *)v2 + 1) = 1263551022;
-  v2[8] = 0;
-  extractFromBpa(&byte_464F50, textureTemp, (int)v13);
-  decryptTexture((int)textureTemp, (int)dword_50A16C, 778, dword_464F40 * dword_4A7CF8);
-  v4 = 0;
+  *(_DWORD *)v2 = 1396788525; //-mas
+  *((_DWORD *)v2 + 1) = 1263551022; //.bpk
+  v2[8] = 0;*/
+
+  strcpy(v13, raceFilePrefix_45EA50);
+  strcat(v13, "-MAS.BPK");
+
+  extractFromBpa(circuitSelectedTR_464F50, textureTemp, (int)v13);
+  decryptTexture((int)textureTemp, (int)trxImaBpk_50A16C, 778, dword_464F40 * dword_4A7CF8);
+ /* v4 = 0;
   do
   {
-    v5 = *((byte *)dword_45EA50 + v4);
+    v5 = *((byte *)raceFilePrefix_45EA50 + v4);
     v13[v4++] = v5;
   }
   while ( v5 );
@@ -4900,13 +5007,15 @@ void sub_402EE0()
   while ( v7 );
   *(_DWORD *)v6 = 1229018669;
   *((_DWORD *)v6 + 1) = 1263551022;
-  v6[8] = 0;
-  extractFromBpa(&byte_464F50, textureTemp, (int)v13);
-  decryptTexture((int)textureTemp, (int)dword_5034D0, 778, dword_4A6858 * dword_503508);
-  v8 = 0;
+  v6[8] = 0;*/
+  strcpy(v13, raceFilePrefix_45EA50);
+  strcat(v13, "-VAI.BPK");
+  extractFromBpa(circuitSelectedTR_464F50, textureTemp, (int)v13);
+  decryptTexture((int)textureTemp, (int)trxVaiBpk_5034D0, 778, dword_4A6858 * dword_503508);
+ /* v8 = 0;
   do
   {
-    v9 = *((byte *)dword_45EA50 + v8);
+    v9 = *((byte *)raceFilePrefix_45EA50 + v8);
     v13[v8++] = v9;
   }
   while ( v9 );
@@ -4917,120 +5026,121 @@ void sub_402EE0()
   *(_DWORD *)v10 = 827477037;
   *((_DWORD *)v10 + 1) = 1263551022;
   v10[8] = 0;
-  extractFromBpa(&byte_464F50, textureTemp, (int)v13);
-  decryptTexture((int)textureTemp, (int)dword_4AA920, 778, dword_4A9B90 * dword_467000);
+  */
+  strcpy(v13, raceFilePrefix_45EA50);
+  strcat(v13, "-LR1.BPK");
+  extractFromBpa(circuitSelectedTR_464F50, textureTemp, (int)v13);
+  decryptTexture((int)textureTemp, (int)trxLR1Bpk_4AA920, 778, dword_4A9B90 * dword_467000);
 }
 
 
 //----- (00403050) --------------------------------------------------------
-int sub_403050()
+int loadCarsImages()
 {
   int result; // eax@1
-  int v1; // ebx@1
+  
   int v2; // ebp@2
   signed int v3; // esi@3
   char *v4; // eax@3
-  char *v5; // edx@3
-  char v6; // cl@4
-  char *v7; // edi@7
-  char v8; // al@8
-  char *v9; // edi@10
-  char v10; // al@11
   int v11; // ecx@13
+  char filename[14];
+  int indexRaceParticipant = 0;
   void *v12; // esi@14
   unsigned __int8 v13; // al@15
-  int *v14; // [sp+4h] [bp-18h]@2
-  signed int *v15; // [sp+8h] [bp-14h]@2
+  
+  
   int v16; // [sp+Ch] [bp-10h]@3
-
-  result = dword_508D24;
-  v1 = 0;
-  if ( dword_508D24 > 0 )
+  
+  result = numberOfParticipants_508D24;
+  
+  if ( numberOfParticipants_508D24 > 0 )
   {
     v2 = 0;
-    v15 = dword_4A6880;
-    v14 = &dword_4A7A84;
+    
+    
     do
     {
-      v3 = *v15;
-      v4 = &aKupla[14 * *v15];
-      v5 = (char *)((char *)&v16 - v4);
+      v3 = raceParticipant2[indexRaceParticipant].carType;
+	  v4 = carName[raceParticipant2[indexRaceParticipant].carType];
+	  //v4 = &aKupla[14 * *v15];
+     /* v5 = (char *)((char *)&v16 - v4);
       do
       {
         v6 = *v4;
         v4[(_DWORD)v5] = *v4;
         ++v4;
       }
-      while ( v6 );
-      if ( *v14 != 1 || v3 >= 6 )
+      while ( v6 );*/
+
+	  //si no tiene spikes kupla , con spikes es kupla-s
+      if (raceParticipant2[indexRaceParticipant].spikes != 1 || v3 >= 6 )
       {
-        v9 = (char *)&v15 + 3;
+		  strcpy(filename,carName[raceParticipant2[indexRaceParticipant].carType]);
+		  strcat(filename, ".BPK");
+		/*  v9 = raceParticipant2[indexRaceParticipant].unk_4A688C;
         do
           v10 = (v9++)[1];
         while ( v10 );
-        *(_DWORD *)v9 = 1263551022;
-        v9[4] = 0;
+        *(_DWORD *)v9 = 1263551022;//bpk
+        v9[4] = 0;*/
       }
       else
       {
-        v7 = (char *)&v15 + 3;
+		  strcpy(filename, carName[raceParticipant2[indexRaceParticipant].carType]);
+		  strcat(filename, "-S.BPK");
+        /*v7 = (char *)&v15 + 3;
         do
           v8 = (v7++)[1];
         while ( v8 );
-        *(_DWORD *)v7 = 1110332205;
-        *((_WORD *)v7 + 2) = 19280;
-        v7[6] = 0;
+        *(_DWORD *)v7 = 1110332205;//-s.b
+        *((_WORD *)v7 + 2) = 19280; //pk
+        v7[6] = 0;*/
       }
-      extractFromBpa("ENGINE.BPA", textureTemp, (int)&v16);
-      copyImageToBuffer((int)textureTemp, (int)((char *)dword_5034FC + v2));
+      extractFromBpa("ENGINE.BPA", textureTemp, filename);
+      copyImageToBuffer((int)textureTemp, (int)((char *)participantCarBpk_5034FC + v2));
       v11 = v2;
       if ( __OFSUB__(v2, v2 + 153600) ^ 1 )
       {
-        v12 = dword_5034FC;
+        v12 = participantCarBpk_5034FC;
         do
         {
           v13 = *((byte *)v12 + v11);
           if ( v13 >= 0xFu && v13 <= 0x18u )
           {
-            *((byte *)v12 + v11) += 10 * v1;
-            v12 = dword_5034FC;
+            *((byte *)v12 + v11) += 10 * indexRaceParticipant;
+            v12 = participantCarBpk_5034FC;
           }
           ++v11;
         }
         while ( v11 < v2 + 153600 );
       }
-      result = dword_508D24;
-      ++v1;
+      result = numberOfParticipants_508D24;
+      ++indexRaceParticipant;
       v2 += 153600;
-      v14 += 21;
-      v15 += 37;
+      
     }
-    while ( v1 < dword_508D24 );
+    while (indexRaceParticipant < numberOfParticipants_508D24 );
   }
   return result;
 }
-// 481E20: using guessed type int textureTemp[];
-// 4A6880: using guessed type int dword_4A6880[];
-// 4A7A84: using guessed type int dword_4A7A84;
-// 508D24: using guessed type int dword_508D24;
+
 
 //----- (00403190) --------------------------------------------------------
-void sub_403190()
+void loadCircuitSceImages()
 {
   int v0; // eax@1
   char v1; // cl@2
   char *v2; // edi@3
   char v3; // al@4
   int v4; // eax@5
-  signed int v5; // [sp-4h] [bp-14h]@8
-  signed int v6; // [sp-4h] [bp-14h]@9
+  
   int v7; // [sp-4h] [bp-14h]@10
   byte v8[16]; // [sp+0h] [bp-10h]@2
 
-  v0 = 0;
+ /* v0 = 0;
   do
   {
-    v1 = *((byte *)dword_45EA50 + v0);
+    v1 = *((byte *)raceFilePrefix_45EA50 + v0);
     v8[v0++] = v1;
   }
   while ( v1 );
@@ -5040,22 +5150,25 @@ void sub_403190()
   while ( v3 );
   *(_DWORD *)v2 = 1162040109;
   *((_DWORD *)v2 + 1) = 1263551022;
-  v2[8] = 0;
-  extractFromBpa(&byte_464F50, textureTemp, (int)v8);
-  decryptTexture((int)textureTemp, (int)&dword_479D20, 0, 1);
-  decryptTexture((int)textureTemp, (int)dword_4B4320, 1, 3152 * dword_479D20 + 1);
-  decryptTexture((int)textureTemp, (int)&dword_464F10, 3152 * dword_479D20 + 1, 1);
-  v4 = dword_464F10;
-  if ( 44 * dword_464F10 )
+  v2[8] = 0;*/
+  strcpy(v8, raceFilePrefix_45EA50);
+  strcat(v8, "-SCE.BPK");
+  extractFromBpa(circuitSelectedTR_464F50, textureTemp, (int)v8);
+  decryptTexture((int)textureTemp, (int)&trxSCE1Bpk_479D20, 0, 1);
+  decryptTexture((int)textureTemp, (int)trxSCE2Bpk_4B4320, 1, 3152 * trxSCE1Bpk_479D20 + 1);
+  decryptTexture((int)textureTemp, (int)&trxSCE3Bpk_464F10, 3152 * trxSCE1Bpk_479D20 + 1, 1);
+  v4 = trxSCE3Bpk_464F10;
+  if ( 44 * trxSCE3Bpk_464F10 )
   {
-    decryptTexture((int)textureTemp, (int)dword_50A180, 3152 * dword_479D20 + 2, 44 * dword_464F10);
-    v4 = dword_464F10;
+    decryptTexture((int)textureTemp, (int)trxSCE4Bpk_50A180, 3152 * trxSCE1Bpk_479D20 + 2, 44 * trxSCE3Bpk_464F10);
+    v4 = trxSCE3Bpk_464F10;
   }
-  switch ( BYTE2(dword_45EA50[0]) )
+  switch ( raceFilePrefix_45EA50[2] )
+	  //switch (BYTE2(raceFilePrefix_45EA50[0]))
   {
     case 0x31u:
     case 0x32u:
-      v5 = 390000;
+		v7 = 390000;
       goto LABEL_10;
     case 0x30u:
     case 0x33u:
@@ -5065,23 +5178,18 @@ void sub_403190()
     case 0x37u:
     case 0x38u:
     case 0x39u:
-      v6 = 300000;
+		v7 = 300000;
 LABEL_10:
-      decryptTexture((int)textureTemp, (int)dword_4A7A28, 3152 * dword_479D20 + 44 * v4 + 2, v7);
+      decryptTexture((int)textureTemp, (int)trxSCE5Bpk_4A7A28, 3152 * trxSCE1Bpk_479D20 + 44 * v4 + 2, v7);
       break;
     default:
       return;
   }
 }
-// 45EA50: using guessed type int dword_45EA50[];
-// 464F10: using guessed type int dword_464F10;
-// 479D20: using guessed type int dword_479D20;
-// 481E20: using guessed type int textureTemp[];
-// 4B4320: using guessed type int dword_4B4320[];
-// 50A180: using guessed type int dword_50A180[];
+
 
 //----- (004032F0) --------------------------------------------------------
-int sub_4032F0()
+int loadCircuitTabFiles()
 {
   int v0; // eax@1
   char v1; // cl@2
@@ -5098,10 +5206,10 @@ int sub_4032F0()
   char v13; // [sp-1h] [bp-11h]@3
   byte v14[16]; // [sp+0h] [bp-10h]@2
 
-  v0 = 0;
+ /* v0 = 0;
   do
   {
-    v1 = *((byte *)dword_45EA50 + v0);
+    v1 = *((byte *)raceFilePrefix_45EA50 + v0);
     v14[v0++] = v1;
   }
   while ( v1 );
@@ -5111,12 +5219,15 @@ int sub_4032F0()
   while ( v3 );
   *(_DWORD *)v2 = 1229673261;
   *((_DWORD *)v2 + 1) = 1111577646;
-  v2[8] = 0;
-  extractFromBpa(&byte_464F50, byte_501AA0, (int)v14);
-  v4 = 0;
+  v2[8] = 0;*/
+
+  strcpy(v14, raceFilePrefix_45EA50);
+  strcat(v14, "-SKI.TAB");
+  extractFromBpa(circuitSelectedTR_464F50, trxSKITab_501AA0, (int)v14);
+ /* v4 = 0;
   do
   {
-    v5 = *((byte *)dword_45EA50 + v4);
+    v5 = *((byte *)raceFilePrefix_45EA50 + v4);
     v14[v4++] = v5;
   }
   while ( v5 );
@@ -5126,12 +5237,14 @@ int sub_4032F0()
   while ( v7 );
   *(_DWORD *)v6 = 1330397741;
   *((_DWORD *)v6 + 1) = 1111577646;
-  v6[8] = 0;
-  extractFromBpa(&byte_464F50, byte_479D40, (int)v14);
-  v8 = 0;
+  v6[8] = 0;*/
+  strcpy(v14, raceFilePrefix_45EA50);
+  strcat(v14, "-BLO.TAB");
+  extractFromBpa(circuitSelectedTR_464F50, trxBLOTab_479D40, (int)v14);
+ /* v8 = 0;
   do
   {
-    v9 = *((byte *)dword_45EA50 + v8);
+    v9 = *((byte *)raceFilePrefix_45EA50 + v8);
     v14[v8++] = v9;
   }
   while ( v9 );
@@ -5141,14 +5254,16 @@ int sub_4032F0()
   while ( v11 );
   *(_DWORD *)v10 = 1414089773;
   *((_DWORD *)v10 + 1) = 1111577646;
-  v10[8] = 0;
-  extractFromBpa(&byte_464F50, &unk_4A9EE0, (int)v14);
-  return extractFromBpa("ENGINE.BPA", &unk_466F00, (int)"VARJO.TAB");
+  v10[8] = 0;*/
+  strcpy(v14, raceFilePrefix_45EA50);
+  strcat(v14, "-LIT.TAB");
+  extractFromBpa(circuitSelectedTR_464F50, &trxLITTab_4A9EE0, (int)v14);
+  return extractFromBpa("ENGINE.BPA", &trxVARJOTab_466F00, (int)"VARJO.TAB");
 }
-// 45EA50: using guessed type int dword_45EA50[];
+
 
 //----- (00403410) --------------------------------------------------------
-int sub_403410()
+int loadCircuitDatFiles()
 {
   int v0; // eax@1
   char v1; // cl@2
@@ -5161,10 +5276,10 @@ int sub_403410()
   char v9; // [sp-1h] [bp-11h]@3
   byte v10[16]; // [sp+0h] [bp-10h]@2
 
-  v0 = 0;
+  /*v0 = 0;
   do
   {
-    v1 = *((byte *)dword_45EA50 + v0);
+    v1 = *((byte *)raceFilePrefix_45EA50 + v0);
     v10[v0++] = v1;
   }
   while ( v1 );
@@ -5174,14 +5289,16 @@ int sub_403410()
   while ( v3 );
   *(_DWORD *)v2 = 1448231981;
   *((_DWORD *)v2 + 1) = 1413563438;
-  v2[8] = 0;
-  extractFromBpa(&byte_464F50, flt_501280, (int)v10);
+  v2[8] = 0;*/
+  strcpy(v10, raceFilePrefix_45EA50);
+  strcat(v10, "-DRV.DAT");
+  extractFromBpa(circuitSelectedTR_464F50, trxDRVDat_501280, (int)v10);
   memcpy(flt_4796A0, &unk_501680, 0x400u);
   dword_481BE8 = 256;
-  v4 = 0;
+  /*v4 = 0;
   do
   {
-    v5 = *((byte *)dword_45EA50 + v4);
+    v5 = *((byte *)raceFilePrefix_45EA50 + v4);
     v10[v4++] = v5;
   }
   while ( v5 );
@@ -5191,13 +5308,15 @@ int sub_403410()
   while ( v7 );
   *(_DWORD *)v6 = 1229475629;
   *((_DWORD *)v6 + 1) = 1413563438;
-  v6[8] = 0;
-  return extractFromBpa(&byte_464F50, dword_46EE00, (int)v10);
+  v6[8] = 0;*/
+  strcpy(v10, raceFilePrefix_45EA50);
+  strcat(v10, "-OHI.DAT");
+  return extractFromBpa(circuitSelectedTR_464F50, trxOHIDat_46EE00, (int)v10);
 }
 
 
 //----- (004034F0) --------------------------------------------------------
-void sub_4034F0()
+void loadCircuitShadows()
 {
   int v0; // eax@1
   char v1; // cl@2
@@ -5206,10 +5325,10 @@ void sub_4034F0()
   char v4; // [sp-1h] [bp-11h]@3
   byte v5[16]; // [sp+0h] [bp-10h]@2
 
-  v0 = 0;
+ /* v0 = 0;
   do
   {
-    v1 = *((byte *)dword_45EA50 + v0);
+    v1 = *((byte *)raceFilePrefix_45EA50 + v0);
     v5[v0++] = v1;
   }
   while ( v1 );
@@ -5219,20 +5338,19 @@ void sub_4034F0()
   while ( v3 );
   *(_DWORD *)v2 = 1095258925;
   *((_DWORD *)v2 + 1) = 1263551022;
-  v2[8] = 0;
-  extractFromBpa(&byte_464F50, textureTemp, (int)v5);
-  decryptTexture((int)textureTemp, (int)&dword_50E718, 0, 4);
-  decryptTexture((int)textureTemp, (int)&dword_501A80, 4, 4);
-  decryptTexture((int)textureTemp, (int)dword_479280, 8, 4 * dword_50E718);
-  decryptTexture((int)textureTemp, (int)dword_4A9FE0, 4 * dword_50E718 + 8, 4 * dword_50E718);
-  decryptTexture((int)textureTemp, (int)&unk_478E60, 8 * dword_50E718 + 8, 4 * dword_50E718);
-  decryptTexture((int)textureTemp, (int)dword_4AA520, 12 * dword_50E718 + 8, 4 * dword_501A80);
-  decryptTexture(
-    (int)textureTemp,
-    (int)dword_4A8D40,
-    4 * (dword_50E718 + dword_501A80 + 2 * dword_50E718) + 8,
-    4 * dword_501A80);
-  decryptTexture((int)textureTemp, (int)dword_46E8E0, 12 * dword_50E718 + 8 * dword_501A80 + 8, 4 * dword_501A80);
+  v2[8] = 0;*/
+  strcpy(v5, raceFilePrefix_45EA50);
+  strcat(v5, "-SHA.BPK");
+
+  extractFromBpa(circuitSelectedTR_464F50, textureTemp, (int)v5);
+  decryptTexture((int)textureTemp, (int)&trxSHA1Bpk_50E718, 0, 4);
+  decryptTexture((int)textureTemp, (int)&trxSHA2Bpk_501A80, 4, 4);
+  decryptTexture((int)textureTemp, (int)trxSHA3Bpk_479280, 8, 4 * trxSHA1Bpk_50E718);
+  decryptTexture((int)textureTemp, (int)trxSHA4Bpk_4A9FE0, 4 * trxSHA1Bpk_50E718 + 8, 4 * trxSHA1Bpk_50E718);
+  decryptTexture((int)textureTemp, (int)trxSHA5Bpk_478E60, 8 * trxSHA1Bpk_50E718 + 8, 4 * trxSHA1Bpk_50E718);
+  decryptTexture((int)textureTemp, (int)trxSHA6Bpk_4AA520, 12 * trxSHA1Bpk_50E718 + 8, 4 * trxSHA2Bpk_501A80);
+  decryptTexture((int)textureTemp, (int)trxSHA7Bpk_4A8D40, 4 * (trxSHA1Bpk_50E718 + trxSHA2Bpk_501A80 + 2 * trxSHA1Bpk_50E718) + 8, 4 * trxSHA2Bpk_501A80);
+  decryptTexture((int)textureTemp, (int)trxSHA8Bpk_46E8E0, 12 * trxSHA1Bpk_50E718 + 8 * trxSHA2Bpk_501A80 + 8, 4 * trxSHA2Bpk_501A80);
 }
 
 
@@ -5257,7 +5375,7 @@ void loadEngineGraphics()
   copyImageToBuffer((int)textureTemp, (int)flame6Bpk);
   extractFromBpa("ENGINE.BPA", textureTemp,"SHOTS.BPK");
   copyImageToBuffer((int)textureTemp, (int)shotsBpk);
-  if ( dword_456AA8 )
+  if ( isCircuitReversed_456AA8 )
     extractFromBpa("ENGINE.BPA", textureTemp,"OBST_REV.BPK");
   else
     extractFromBpa("ENGINE.BPA", textureTemp, "OBSTACLE.BPK");
@@ -5414,8 +5532,8 @@ int sub_403BB0()
     if ( byte_4A6832 == -1 )
     {
       v1 = (unsigned __int8)byte_4A6827;
-      v2 = dword_503518;
-      result = 864 * dword_503518;
+      v2 = currentDriverSelectedIndex_503518;
+      result = 864 * currentDriverSelectedIndex_503518;
       byte_4A7E08[result] = (unsigned __int8)byte_4A6827 >> 4;
       v3 = (unsigned __int8)byte_4A6823;
       *(int *)((char *)dword_4A7E0C + result) = (v1 >> 3) & 1;
@@ -5423,7 +5541,7 @@ int sub_403BB0()
       dword_4A6898[v4] = 16 * ((unsigned __int8)byte_4A6822 + (v3 << 8));
       dword_4A68B4[v4] = (unsigned __int8)byte_4A6824 << 10;
       dword_4A68B0[v4] = (unsigned __int8)byte_4A6825 << 10;
-      dword_4A68D0[v4] = (unsigned __int8)byte_4A6826;
+	  raceParticipant2[v2].currentRacePosition = (unsigned __int8)byte_4A6826;
       v5 = (unsigned __int8)byte_4A6829;
       *(int *)((char *)dword_4A7D00 + result) = (unsigned __int8)byte_4A6828;
       v6 = (double)v5;
@@ -5522,11 +5640,11 @@ int sub_403E30()
   int v30; // ecx@66
   int result; // eax@78
 
-  v0 = dword_508D24;
+  v0 = numberOfParticipants_508D24;
   v1 = 0;
   dword_50E540 = 0;
-  dword_503518 = 0;
-  if ( dword_508D24 > 0 )
+  currentDriverSelectedIndex_503518 = 0;
+  if ( numberOfParticipants_508D24 > 0 )
   {
     v2 = dword_45E0A8;
     do
@@ -5538,7 +5656,7 @@ int sub_403E30()
         v3 = 0;
         dword_46F208 = 0;
       }
-      if ( v1 != dword_4A9EA8 )
+      if ( v1 != userRaceOrder_4A9EA8 )
       {
         v4 = &dword_4A7D20[864 * v1];
         *(_DWORD *)v4 = 0;
@@ -5581,8 +5699,8 @@ int sub_403E30()
           }
           else
           {
-            v6 = dword_503518;
-            dword_464F30[dword_503518] = dword_503500;
+            v6 = currentDriverSelectedIndex_503518;
+            dword_464F30[currentDriverSelectedIndex_503518] = dword_503500;
             v7 = dword_45DC30[v3];
             if ( *(byte *)((*(_WORD *)(v7 + 2) & 0xFFF) + v7 + 4) <= 0x7Fu )
             {
@@ -5781,9 +5899,9 @@ LABEL_75:
               goto LABEL_76;
           }
           v29 = dword_456AF0;
-          v30 = dword_503518;
+          v30 = currentDriverSelectedIndex_503518;
           if ( *(byte *)((*(_WORD *)(v19 + 2) & 0xFFF) + v19 + 4) & 0x10 )
-            *(_DWORD *)&dword_4A7D20[4 * (dword_456AF0 + 216 * dword_503518)] |= 0x10u;
+            *(_DWORD *)&dword_4A7D20[4 * (dword_456AF0 + 216 * currentDriverSelectedIndex_503518)] |= 0x10u;
           if ( *(byte *)((*(_WORD *)(dword_45DC30[v3] + 2) & 0xFFF) + dword_45DC30[v3] + 4) & 0x20 )
             *(_DWORD *)&dword_4A7D20[4 * (v29 + 216 * v30)] |= 0x20u;
           if ( *(byte *)((*(_WORD *)(dword_45DC30[v3] + 2) & 0xFFF) + dword_45DC30[v3] + 4) & 0x40 )
@@ -5795,17 +5913,17 @@ LABEL_75:
 LABEL_76:
         sub_403BB0();
         *(_WORD *)(dword_45DC30[v3] + 2) = *(_WORD *)dword_45DC30[v3];
-        v0 = dword_508D24;
+        v0 = numberOfParticipants_508D24;
         v2 = dword_45E0A8;
       }
-      v1 = dword_503518++ + 1;
+      v1 = currentDriverSelectedIndex_503518++ + 1;
     }
-    while ( dword_503518 < v0 );
+    while ( currentDriverSelectedIndex_503518 < v0 );
   }
   result = 0;
-  for ( dword_503518 = 0; result < v0; dword_503518 = result )
+  for ( currentDriverSelectedIndex_503518 = 0; result < v0; currentDriverSelectedIndex_503518 = result )
   {
-    if ( result != dword_4A9EA8 && dword_464F30[result] + 700 < dword_503500 )
+    if ( result != userRaceOrder_4A9EA8 && dword_464F30[result] + 700 < dword_503500 )
       dword_4A6B04 = 1;
     ++result;
   }
@@ -5825,31 +5943,11 @@ int noMemExitScreen()
   signed int v6; // [sp+0h] [bp-4h]@9
   signed int v7; // [sp+0h] [bp-4h]@11
 
-	//TODO correct
-  //operator delete(0x3844u);
-  if ( !v0 )
-  {
-    freeMusic();
-    setWindowCaption();
-    printf("DEATH RALLY Error: Cannot allocate memory!\n");
-    printf("Please consult DRHELP.EXE for more information on how to resolve this problem.\n");
-    if ( isMultiplayerGame )
-      nullsub_1();
-    exit(112);
-  }
+	
+  v0 = malloc(0x3844u);
   dword_4A6854 = v0;
-  	//TODO correct
-  //operator delete(0x3844u);
-  if ( !v1 )
-  {
-    freeMusic();
-    setWindowCaption();
-    printf("DEATH RALLY Error: Cannot allocate memory!\n");
-    printf("Please consult DRHELP.EXE for more information on how to resolve this problem.\n");
-    if ( isMultiplayerGame )
-      nullsub_1();
-    exit(112);
-  }
+ 
+  v1 = malloc(0x3844u);
   v2 = 0;
   dword_46F204 = v1;
   v6 = 0;
@@ -5996,7 +6094,7 @@ char *sub_404730()
 // 464F14: using guessed type int dword_464F14;
 
 //----- (00404920) --------------------------------------------------------
-int sub_404920()
+int drawToBlackScreen()
 {
   unsigned __int8 v0; // di@2
   signed int v1; // esi@2
@@ -6004,24 +6102,25 @@ int sub_404920()
   signed int v3; // [sp+8h] [bp-18h]@1
   double v4; // [sp+18h] [bp-8h]@2
 
-  sub_43C0F0((int)&unk_4B4020);
+  regenerateRacePalette(circuitPalette_4B4020);
   v3 = 40;
   do
   {
     v0 = 0;
-    v1 = (signed int)&unk_4B4021;
+	v1 = 0;
+    //v1 = (signed int)&unk_4B4021;
     v4 = (double)v3;
     do
     {
       setPaletteAndGetValue(
         v0,
-        (unsigned __int64)((double)*(byte *)(v1 - 1) * (v4 * 0.025)),
-        (unsigned __int64)((double)*(byte *)v1 * (v4 * 0.025)),
-        (unsigned __int64)((double)*(byte *)(v1 + 1) * (v4 * 0.025)));
+        (unsigned __int64)((double)circuitPalette_4B4020[v1] * (v4 * 0.025)),
+        (unsigned __int64)((double)circuitPalette_4B4020[v1+1] * (v4 * 0.025)),
+        (unsigned __int64)((double)circuitPalette_4B4020[v1+2]* (v4 * 0.025)));
       v1 += 3;
       ++v0;
-    }
-    while ( v1 < (signed int)((char *)dword_4B4320 + 1) );
+	} while (v1 < maxPaletteEntries + 1 );
+	//while (v1 < (signed int)((char *)trxSCE2Bpk_4B4320 + 1));
     wait();
     setMusicVolume((unsigned __int64)(v4 * 1638.4));
     result = v3-- - 1;
@@ -6029,13 +6128,13 @@ int sub_404920()
   while ( v3 >= 0 );
   return result;
 }
-// 4B4320: using guessed type int dword_4B4320[];
+// 4B4320: using guessed type int trxSCE2Bpk_4B4320[];
 
 //----- (004049F0) --------------------------------------------------------
-int sub_4049F0()
+int setCircuitPalette_4B4020()
 {
   unsigned __int8 v0; // bl@1
-  _UNKNOWN *v1; // edi@1
+  //_UNKNOWN *v1; // edi@1
   signed int v2; // esi@1
   int v3; // eax@2
   int v4; // ST08_4@2
@@ -6044,32 +6143,34 @@ int sub_4049F0()
   int result; // eax@2
 
   v0 = 0;
-  v1 = &unk_50EF44;
-  v2 = (signed int)&unk_4B4021;
+  //v1 = &unk_50EF44;
+  //v2 = (signed int)&unk_4B4021;
+  v2 = 0;
   do
   {
     setPaletteAndGetValue(v0, 0, 0, 0);
-    v3 = colorToPaletteEntry(*(byte *)(v2 - 1) << 16, 4128768);
-    v4 = *(byte *)v2 << 16;
-    *((_DWORD *)v1 - 1) = v3;
+    v3 = colorToPaletteEntry(circuitPalette_4B4020[v2] << 16, 4128768);
+    v4 = circuitPalette_4B4020[v2+1] << 16;
+	circuitPalette_50EF40[v2] = v3;
     v5 = colorToPaletteEntry(v4, 4128768);
-    v6 = *(byte *)(v2 + 1) << 16;
-    *(_DWORD *)v1 = v5;
+    v6 = circuitPalette_4B4020[v2+2] << 16;
+	circuitPalette_50EF40[v2+1] = v5;
     result = colorToPaletteEntry(v6, 4128768);
-    *((_DWORD *)v1 + 1) = result;
+	circuitPalette_50EF40[v2+2] = result;
     v2 += 3;
     ++v0;
-    v1 = (char *)v1 + 12;
+   // v1 = (char *)v1 + 12;
   }
-  while ( v2 < (signed int)((char *)dword_4B4320 + 1) );
+  while (v2 < maxPaletteEntries + 1);
+  //while ( v2 < (signed int)((char *)trxSCE2Bpk_4B4320 + 1) );
   return result;
 }
-// 4B4320: using guessed type int dword_4B4320[];
+
 
 //----- (00404A60) --------------------------------------------------------
-int sub_404A60()
+int setCircuitPaletteBis_4B4020()
 {
-  _UNKNOWN *v0; // edi@1
+  //_UNKNOWN *v0; // edi@1
   signed int v1; // esi@1
   int v2; // eax@2
   int v3; // ST08_4@2
@@ -6077,31 +6178,33 @@ int sub_404A60()
   int v5; // ST00_4@2
   int result; // eax@2
 
-  v0 = &unk_50EF44;
-  v1 = (signed int)&unk_4B4021;
+  //v0 = &unk_50EF44;
+ //v1 = (signed int)&unk_4B4021;
+  v1 = 0;
   do
   {
-    v2 = colorToPaletteEntry(*(byte *)(v1 - 1) << 16, 4128768);
-    v3 = *(byte *)v1 << 16;
-    *((_DWORD *)v0 - 1) = v2;
+    v2 = colorToPaletteEntry(circuitPalette_4B4020[v1] << 16, 4128768);
+    v3 = circuitPalette_4B4020[v1+1] << 16;
+	circuitPalette_50EF40[v1] = v2;
     v4 = colorToPaletteEntry(v3, 4128768);
-    v5 = *(byte *)(v1 + 1) << 16;
-    *(_DWORD *)v0 = v4;
+    v5 = circuitPalette_4B4020[v1+2] << 16;
+	circuitPalette_50EF40[v1+1] = v4;
     result = colorToPaletteEntry(v5, 4128768);
-    *((_DWORD *)v0 + 1) = result;
+	circuitPalette_50EF40 [v1+2]= result;
     v1 += 3;
-    v0 = (char *)v0 + 12;
+   // v0 = (char *)v0 + 12;
   }
-  while ( v1 < (signed int)((char *)dword_4B4320 + 1) );
+  while (v1 < maxPaletteEntries + 1);
+  //while ( v1 < (signed int)((char *)trxSCE2Bpk_4B4320 + 1) );
   return result;
 }
-// 4B4320: using guessed type int dword_4B4320[];
+// 4B4320: using guessed type int trxSCE2Bpk_4B4320[];
 
 //----- (00404AD0) --------------------------------------------------------
-int sub_404AD0()
+int setCircuitPaletteBisBis_4B4020()
 {
   int v0; // eax@1
-  _UNKNOWN *v1; // ebp@1
+  int v1; // ebp@1
   signed int v2; // ebx@1
   int v3; // esi@3
   int v4; // edi@3
@@ -6111,19 +6214,23 @@ int sub_404AD0()
 
   v0 = dword_456AF8++ + 1;
   v7 = 0;
-  v1 = &unk_4B4021;
-  v2 = (signed int)&unk_50EF44;
+  //v1 = &unk_4B4021;
+  v1 = 0;
+  //v2 = (signed int)&unk_50EF44;
   while ( 1 )
   {
-    v3 = ((*((byte *)v1 - 1) << 16) - convertColorToPaletteColor(*(_DWORD *)(v2 - 4), v0 << 16) + 0x8000) >> 16;
-    v4 = ((*(byte *)v1 << 16) - convertColorToPaletteColor(*(_DWORD *)v2, dword_456AF8 << 16) + 0x8000) >> 16;
-    v5 = convertColorToPaletteColor(*(_DWORD *)(v2 + 4), dword_456AF8 << 16);
-    result = setPaletteAndGetValue(v7, v3, v4, ((*((byte *)v1 + 1) << 16) - v5 + 0x8000) >> 16);
+    v3 = ((circuitPalette_4B4020[v1] << 16) - convertColorToPaletteColor(circuitPalette_50EF40[v1], v0 << 16) + 0x8000) >> 16;
+    v4 =((circuitPalette_4B4020[v1+1] << 16) - convertColorToPaletteColor(circuitPalette_50EF40[v1+1], dword_456AF8 << 16) + 0x8000) >> 16;
+    v5 = convertColorToPaletteColor(circuitPalette_50EF40[v1+2], dword_456AF8 << 16);
+    result = setPaletteAndGetValue(v7, v3, v4, ((circuitPalette_4B4020[v1+2] << 16) - v5 + 0x8000) >> 16);
     v2 += 12;
-    v1 = (char *)v1 + 3;
+    //v1 = (char *)v1 + 3;
+	v1 += 3;
     ++v7;
-    if ( v2 >= (signed int)&dword_50FB44 )
-      break;
+	if (v1 > 768)
+		break;
+    //if ( v2 >= (signed int)&dword_50FB44 )
+      //break;
     v0 = dword_456AF8;
   }
   return result;
@@ -6132,7 +6239,7 @@ int sub_404AD0()
 // 50FB44: using guessed type int dword_50FB44;
 
 //----- (00404BA0) --------------------------------------------------------
-int sub_404BA0()
+int setCircuitPaletteBis4_4B4020()
 {
   int v0; // eax@1
   unsigned __int8 v1; // bp@1
@@ -6148,14 +6255,16 @@ int sub_404BA0()
   //v2 = (signed int)&unk_50EF44;
   while ( 1 )
   {
-    v3 = (convertColorToPaletteColor(*(_DWORD *)(v2 - 4), v0 << 16) + 0x8000) >> 16;
-    v4 = (convertColorToPaletteColor(*(_DWORD *)v2, dword_456AF8 << 16) + 0x8000) >> 16;
-    v5 = convertColorToPaletteColor(*(_DWORD *)(v2 + 4), dword_456AF8 << 16);
+    v3 = (convertColorToPaletteColor(circuitPalette_50EF40[v2], v0 << 16) + 0x8000) >> 16;
+    v4 = (convertColorToPaletteColor(circuitPalette_50EF40[v2+1], dword_456AF8 << 16) + 0x8000) >> 16;
+    v5 = convertColorToPaletteColor(circuitPalette_50EF40[v2+2], dword_456AF8 << 16);
     result = setPaletteAndGetValue(v1, v3, v4, (v5 + 0x8000) >> 16);
-    v2 += 12;
+    v2 += 3;
     ++v1;
-    if ( v2 >= (signed int)&dword_50FB44 )
-      break;
+	if (v2 > 768)
+		break;
+    //if ( v2 >= (signed int)&dword_50FB44 )
+      //break;
     v0 = dword_456AF8;
   }
   return result;
@@ -6233,10 +6342,10 @@ int sub_404C30()
   double v64; // [sp+28h] [bp-8h]@34
   double v65; // [sp+28h] [bp-8h]@47
 
-  memcpy(&unk_509E60, byte_4A9BA0, 0x300u);
+  memcpy(&unk_509E60, circuitPalette_4A9BA0, 0x300u);
   v0 = 0;
-  v1 = 10 * dword_4A9EA8;
-  v61 = 10 * dword_4A9EA8;
+  v1 = 10 * userRaceOrder_4A9EA8;
+  v61 = 10 * userRaceOrder_4A9EA8;
   do
   {
     v2 = 0;
@@ -6410,7 +6519,7 @@ int sub_404C30()
       if ( v37 > 63 )
         LOBYTE(v37) = 63;
       v38 = v55;
-      if ( v55 >= 10 * dword_4A9EA8 + 15 && v55 <= 10 * dword_4A9EA8 + 24 )
+      if ( v55 >= 10 * userRaceOrder_4A9EA8 + 15 && v55 <= 10 * userRaceOrder_4A9EA8 + 24 )
       {
         setPaletteAndGetValue(v55, v35, v36, v37);
         v38 = v55;
@@ -6445,7 +6554,7 @@ int sub_404C30()
         LOBYTE(v45) = 63;
       if ( v46 > 63 )
         LOBYTE(v46) = 63;
-      if ( v56 >= 10 * dword_4A9EA8 + 15 && v56 <= 10 * dword_4A9EA8 + 24 )
+      if ( v56 >= 10 * userRaceOrder_4A9EA8 + 15 && v56 <= 10 * userRaceOrder_4A9EA8 + 24 )
         setPaletteAndGetValue(v56, v44, v45, v46);
       v43 += 3;
       ++v56;
@@ -6467,7 +6576,7 @@ int sub_404C30()
   v63 = 256;
   do
   {
-    v48 = dword_4A9EA8;
+    v48 = userRaceOrder_4A9EA8;
     v49 = 0;
     v57 = 0;
     v50 = (signed int)&unk_509E61;
@@ -6484,7 +6593,7 @@ int sub_404C30()
           (unsigned __int16)(v60 * v51 + v53 * v63 + 128) >> 8,
           SBYTE5(v53),
           (unsigned __int16)(v60 * *(byte *)(v50 + 1) + v53 * v63 + 128) >> 8);
-        v48 = dword_4A9EA8;
+        v48 = userRaceOrder_4A9EA8;
         v49 = v57;
       }
       ++v49;
@@ -6507,25 +6616,7 @@ int sub_404C30()
   dword_4A7CFC = dword_4A8D2C;
   return result;
 }
-// 44509C: using guessed type int dword_44509C;
-// 4450A0: using guessed type int dword_4450A0;
-// 456AF8: using guessed type int dword_456AF8;
-// 456BF0: using guessed type int screenPtr;
-// 464F14: using guessed type int dword_464F14;
-// 464F20: using guessed type int dword_464F20;
-// 481E00: using guessed type int dword_481E00;
-// 481E20: using guessed type int textureTemp[];
-// 4A7A24: using guessed type int dword_4A7A24;
-// 4A7CD0: using guessed type int dword_4A7CD0;
-// 4A7CFC: using guessed type int dword_4A7CFC;
-// 4A8D2C: using guessed type int dword_4A8D2C;
-// 4A9EA8: using guessed type int dword_4A9EA8;
-// 4A9EAC: using guessed type int dword_4A9EAC;
-// 503500: using guessed type int dword_503500;
-// 503510: using guessed type int dword_503510;
-// 503514: using guessed type int dword_503514;
-// 50A160: using guessed type int dword_50A160;
-// 50A170: using guessed type int dword_50A170;
+
 
 //----- (00405430) --------------------------------------------------------
 int sub_405430()
@@ -6585,16 +6676,7 @@ int sub_405430()
   while ( v9 ^ v10 );
   return result;
 }
-// 4450A0: using guessed type int dword_4450A0;
-// 456BF0: using guessed type int screenPtr;
-// 464F14: using guessed type int dword_464F14;
-// 464F20: using guessed type int dword_464F20;
-// 481BE8: using guessed type int dword_481BE8;
-// 481E00: using guessed type int dword_481E00;
-// 4A7A24: using guessed type int dword_4A7A24;
-// 4A7CD0: using guessed type int dword_4A7CD0;
-// 503514: using guessed type int dword_503514;
-// 50A170: using guessed type int dword_50A170;
+
 
 //----- (004055A0) --------------------------------------------------------
 int sub_4055A0()
@@ -6792,7 +6874,8 @@ int sub_4055A0()
   int v190; // [sp+38h] [bp-8h]@39
 
   v0 = &unk_4B3404;
-  v1 = (signed int)byte_4A9BA1;
+  v1 = &circuitPalette_4A9BA0[1];
+  //v1 = (signed int)byte_4A9BA1;
   if ( dword_456AA0 == 64 )
   {
     do
@@ -7235,25 +7318,6 @@ int sub_4055A0()
   dword_4A7CFC = dword_4A8D2C;
   return result;
 }
-// 44509C: using guessed type int dword_44509C;
-// 4450A0: using guessed type int dword_4450A0;
-// 456AA0: using guessed type int dword_456AA0;
-// 456BF0: using guessed type int screenPtr;
-// 464F14: using guessed type int dword_464F14;
-// 464F20: using guessed type int dword_464F20;
-// 481E00: using guessed type int dword_481E00;
-// 481E20: using guessed type int textureTemp[];
-// 4A7A24: using guessed type int dword_4A7A24;
-// 4A7CD0: using guessed type int dword_4A7CD0;
-// 4A7CFC: using guessed type int dword_4A7CFC;
-// 4A8D2C: using guessed type int dword_4A8D2C;
-// 4A9EA0: using guessed type int dword_4A9EA0;
-// 4A9EAC: using guessed type int dword_4A9EAC;
-// 4AA504: using guessed type int dword_4AA504;
-// 503500: using guessed type int dword_503500;
-// 503510: using guessed type int dword_503510;
-// 503514: using guessed type int dword_503514;
-// 50A170: using guessed type int dword_50A170;
 
 //----- (00406100) --------------------------------------------------------
 char sub_406100()
@@ -7358,14 +7422,7 @@ LABEL_14:
   while ( v0 < 4725737 );
   return result;
 }
-// 456AA0: using guessed type int dword_456AA0;
-// 464F18: using guessed type int dword_464F18;
-// 479268: using guessed type int dword_479268;
-// 479270: using guessed type int dword_479270;
-// 481E08: using guessed type int dword_481E08;
-// 503220: using guessed type int dword_503220;
-// 5034F0: using guessed type int dword_5034F0;
-// 50E560: using guessed type int dword_50E560[];
+
 
 //----- (00406330) --------------------------------------------------------
 int sub_406330()
@@ -7434,22 +7491,23 @@ int sub_406330()
 // 5034F0: using guessed type int dword_5034F0;
 
 //----- (00406410) --------------------------------------------------------
-unsigned int __cdecl sub_406410(int a1, int a2, const char *a3)
+unsigned int __cdecl drawTextInRaceScreen(int a1, int a2, const char *text)
 {
   unsigned int v3; // esi@1
   unsigned int result; // eax@1
   int v5; // edi@2
 
   v3 = 0;
-  result = strlen(a3);
+  result = strlen(text);
   if ( result )
   {
     v5 = 6 * (272 * a2 + a1 + 205);
     do
     {
-      sub_43B1F0(36 * (a3[v3++] - 32) + 4886880, 6, 6, (int)((char *)dword_479690 + v5));
+      drawCharInRaceScreen(36 * (text[v3] - 32) + 4886880, 6, 6, (int)((char *)dword_479690 + v5));
+	  v3++;
       v5 += 6;
-      result = strlen(a3);
+      result = strlen(text);
     }
     while ( v3 < result );
   }
@@ -7488,8 +7546,8 @@ signed int __cdecl sub_4064A0(int a1)
   dword_464F18 = 0;
   dword_479268 = 0;
   dword_481E08 = 0;
-  	//TODO correct
-  //operator delete(0xFA00u);
+  
+  v1 = malloc(0xFA00u);
   if ( !v1 )
   {
     freeMusic();
@@ -7501,8 +7559,8 @@ signed int __cdecl sub_4064A0(int a1)
     exit(112);
   }
   Memory = v1;
-  	//TODO correct
-  //operator delete(0xFA00u);
+
+  v2 = malloc(0xFA00u);
   if ( !v2 )
   {
     freeMusic();
@@ -7673,7 +7731,7 @@ signed int __cdecl sub_4069D0(char a1)
   {
     nullsub_1();
     v1 = 0;
-    if ( dword_508D24 > 0 )
+    if ( numberOfParticipants_508D24 > 0 )
     {
       while ( 2 )
       {
@@ -7722,7 +7780,7 @@ signed int __cdecl sub_4069D0(char a1)
         }
         while ( v6 ^ v7 );
         ++v1;
-        if ( v1 < dword_508D24 )
+        if ( v1 < numberOfParticipants_508D24 )
           continue;
         break;
       }
@@ -7732,7 +7790,7 @@ signed int __cdecl sub_4069D0(char a1)
 }
 // 45DC30: using guessed type int dword_45DC30[];
 // 45EA04: using guessed type int isMultiplayerGame;
-// 508D24: using guessed type int dword_508D24;
+// 508D24: using guessed type int numberOfParticipants_508D24;
 
 //----- (00406BE0) --------------------------------------------------------
 void __cdecl sub_406BE0(char a1)
@@ -7789,8 +7847,8 @@ int __cdecl sub_406D30(int a1)
   dword_464F18 = 0;
   dword_479268 = 0;
   dword_481E08 = 0;
-  	//TODO correct
-  //operator delete(0xFA00u);
+
+  v1=malloc(0xFA00u);
   if ( !v1 )
   {
     freeMusic();
@@ -7803,7 +7861,7 @@ int __cdecl sub_406D30(int a1)
   }
   Memory = v1;
   	//TODO correct
-  //operator delete(0xFA00u);
+  v2 = malloc(0xFA00u);
   if ( !v2 )
   {
     freeMusic();
@@ -8187,9 +8245,9 @@ int sub_407330()
   *((_DWORD *)v8 + 1) = 1414873646;
   *((_DWORD *)v8 + 2) = 542003028;
   *((_WORD *)v8 + 6) = 52;
-  dword_4A6B2F = 774778414;
-  dword_4A6B33 = 774778414;
-  dword_4A6B37 = 1397042734;
+  dword_4A6B2F = 774778414;//....
+  dword_4A6B33 = 774778414;//....
+  dword_4A6B37 = 1397042734;//..ESC
   word_4A6B3B = 67;
   dword_4A6B3E = 774778414;
   dword_4A6B42 = 774778414;
@@ -8592,20 +8650,20 @@ int sub_407330()
   dword_4A7781 = 774778414;
   dword_4A7785 = 1162096174;
   memcpy(&unk_491820, (const void *)screenPtr, 0xFA00u);
-  memcpy(&unk_4B4020, byte_4A9BA0, 0x300u);
+  memcpy(&circuitPalette_4B4020, loadCircuitPalette, 0x300u);
   dword_456AF8 = 0;
-  sub_404A60();
+  setCircuitPaletteBis_4B4020();
   v9 = 63;
   do
   {
     wait();
-    sub_404AD0();
+    setCircuitPaletteBisBis_4B4020();
     --v9;
   }
   while ( v9 );
   extractFromBpa("ENGINE.BPA", textureTemp, (int)"KEYCOM3.BPK");
   copyImageToBuffer((int)textureTemp, screenPtr);
-  extractFromBpa("ENGINE.BPA", &unk_4B4020, (int)"KEYCOM3.PAL");
+  extractFromBpa("ENGINE.BPA", &circuitPalette_4B4020, (int)"KEYCOM3.PAL");
   sub_4072C0(screenPtr + 2620, "     GLOBAL KEY-DEFINITIONS");
   sub_4072C0(screenPtr + 6460, "   TAB.............STATUS BAR");
   sub_4072C0(screenPtr + 8380, "   F1.............INFO SCREEN");
@@ -8924,12 +8982,12 @@ int sub_407330()
   memcpy((char *)v98 + 4 * (v96 >> 2), &v97[4 * (v96 >> 2)], v96 & 3);
   sub_4072C0(v100, (const char *)&v116);
   dword_456AF8 = 0;
-  sub_404A60();
+  setCircuitPaletteBis_4B4020();
   v101 = 63;
   do
   {
     wait();
-    sub_404BA0();
+    setCircuitPaletteBis4_4B4020();
     --v101;
   }
   while ( v101 );
@@ -8953,25 +9011,25 @@ int sub_407330()
   }
   while ( !v102 );
   dword_456AF8 = 0;
-  sub_404A60();
+  setCircuitPaletteBis_4B4020();
   v106 = 63;
   do
   {
     wait();
-    sub_404AD0();
+    setCircuitPaletteBisBis_4B4020();
     --v106;
   }
   while ( v106 );
   extractFromBpa("ENGINE.BPA", textureTemp, (int)"INFO2.BPK");
   copyImageToBuffer((int)textureTemp, screenPtr);
-  extractFromBpa("ENGINE.BPA", &unk_4B4020, (int)"INFO2.PAL");
+  extractFromBpa("ENGINE.BPA", &circuitPalette_4B4020, (int)"INFO2.PAL");
   dword_456AF8 = 0;
-  sub_404A60();
+  setCircuitPaletteBis_4B4020();
   v107 = 63;
   do
   {
     wait();
-    sub_404BA0();
+    setCircuitPaletteBis4_4B4020();
     --v107;
   }
   while ( v107 );
@@ -8995,24 +9053,24 @@ int sub_407330()
   }
   while ( !v108 );
   dword_456AF8 = 0;
-  sub_404A60();
+  setCircuitPaletteBis_4B4020();
   v112 = 63;
   do
   {
     wait();
-    sub_404AD0();
+    setCircuitPaletteBisBis_4B4020();
     --v112;
   }
   while ( v112 );
   memcpy((void *)screenPtr, &unk_491820, 0xFA00u);
-  memcpy(&unk_4B4020, byte_4A9BA0, 0x300u);
+  memcpy(&circuitPalette_4B4020, circuitPalette_4A9BA0, 0x300u);
   dword_456AF8 = 0;
-  sub_404A60();
+  setCircuitPaletteBis_4B4020();
   v113 = 63;
   do
   {
     wait();
-    sub_404BA0();
+    setCircuitPaletteBis4_4B4020();
     --v113;
   }
   while ( v113 );
@@ -9056,16 +9114,16 @@ int sub_4092B0()
   char DstBuf; // [sp+Ch] [bp-318h]@2
   char v13; // [sp+Dh] [bp-317h]@3
   char v14; // [sp+Eh] [bp-316h]@3
-  int Val; // [sp+10h] [bp-314h]@1
+  int Val2; // [sp+10h] [bp-314h]@1
   char Filename[4]; // [sp+14h] [bp-310h]@4
   __int16 v17; // [sp+18h] [bp-30Ch]@4
   char v18; // [sp+1Ah] [bp-30Ah]@4
   char Str; // [sp+24h] [bp-300h]@13
 
-  Val = 0;
+  Val2 = 0;
   do
   {
-    itoa(Val, &DstBuf, 10);
+    itoa(Val2, &DstBuf, 10);
     if ( strlen(&DstBuf) != 2 )
     {
       v13 = DstBuf;
@@ -9076,12 +9134,12 @@ int sub_4092B0()
     v18 = 0;
     v17 = 17225;
     v0 = strlen(&DstBuf) + 1;
-    v1 = (char *)&Val + 3;
+    v1 = (char *)&Val2 + 3;
     do
       v2 = (v1++)[1];
     while ( v2 );
     memcpy(v1, &DstBuf, v0);
-    v3 = (char *)&Val + 3;
+    v3 = (char *)&Val2 + 3;
     do
       v4 = (v3++)[1];
     while ( v4 );
@@ -9096,8 +9154,8 @@ int sub_4092B0()
     fclose(v6);
     if ( v7 < 1 )
       break;
-    v9 = __OFSUB__(Val + 1, 100);
-    v8 = Val++ - 99 < 0;
+    v9 = __OFSUB__(Val2 + 1, 100);
+    v8 = Val2++ - 99 < 0;
   }
   while ( v8 ^ v9 );
   File = fopen(Filename, "wb");
@@ -9292,7 +9350,7 @@ int sub_409460()
       v4 = rand;
     }
   }
-  if ( dword_4A7AAC == 1 )
+  if ( raceParticipant[0].drugPicked == 1 )
   {
     result = isMultiplayerGame;
     if ( !isMultiplayerGame )
@@ -9403,20 +9461,11 @@ int sub_409460()
         }
         while ( v35 < 16 );
       }
-      dword_4A7AAC = 0;
+	  raceParticipant[0].drugPicked = 0;
     }
   }
   return result;
 }
-// 456AC4: using guessed type int dword_456AC4;
-// 45EA04: using guessed type int isMultiplayerGame;
-// 464F40: using guessed type int dword_464F40;
-// 4A7AAC: using guessed type int dword_4A7AAC;
-// 501BA0: using guessed type int dword_501BA0[];
-// 501BA4: using guessed type int dword_501BA4[];
-// 501BA8: using guessed type int dword_501BA8[];
-// 501BAC: using guessed type int dword_501BAC[];
-// 501BB0: using guessed type int dword_501BB0[];
 
 //----- (00409A90) --------------------------------------------------------
 int sub_409A90()
@@ -9428,7 +9477,7 @@ int sub_409A90()
 
   result = 0;
   dword_464F68 = 0;
-  v1 = flt_4A6894[37 * dword_4A9EA8];
+  v1 = flt_4A6894[37 * userRaceOrder_4A9EA8];
   dword_445010 = 256;
   dword_445014 = 128;
   dword_445018 = 200;
@@ -9465,20 +9514,30 @@ int sub_409A90()
   dword_479684 = 0;
   dword_4A7CEC = -1;
   dword_481BE8 = 4;
+
+
   dword_456AE8 = 0;
+
   dword_456AB0 = 0;
   dword_456AB4 = 0;
   dword_456AB8 = 0;
-  dword_456AAC = 0;
-  dword_456AA4 = 0;
-  dword_4AA508 = 0;
+  
   dword_456AC8 = 0;
   dword_456ACC = 0;
+
   dword_456AD4 = 0;
   dword_456ADC = 0;
+
   dword_456AE0 = 0;
   dword_456AE4 = 0;
+
+
+  dword_456AAC = 0;
+  dword_456AA4 = 0;
+ 
   dword_456AD8 = 0;
+
+  dword_4AA508 = 0;
   dword_445034 = 163840;
   dword_464F6C = 0;
   dword_481E14 = 0;
@@ -9492,7 +9551,7 @@ int sub_409A90()
 
 
 //----- (00409BF0) --------------------------------------------------------
-signed int sub_409BF0()
+signed int loadCircuitInfFile()
 {
   int v0; // eax@1
   char v1; // cl@2
@@ -9515,41 +9574,71 @@ signed int sub_409BF0()
   int v18; // edx@14
   int v19; // edx@14
   signed int result; // eax@15
-
-  v0 = 0;
+  char  trxInfName[16];
+  int dstBuffer[128];
+  /*v0 = 0;
   do
   {
-    v1 = *((byte *)dword_45EA50 + v0);
-    *(&byte_464F50 + v0++) = v1;
+    v1 = *((byte *)raceFilePrefix_45EA50 + v0);
+    *(&circuitSelectedTR_464F50 + v0++) = v1;
   }
   while ( v1 );
-  v2 = &byte_464F50 - 1;
+  v2 = &circuitSelectedTR_464F50 - 1;
   do
     v3 = (v2++)[1];
   while ( v3 );
   *(_DWORD *)v2 = 1095778862;//.bpa
   v2[4] = 0;
-  v4 = 0;
+  */
+  strcpy(circuitSelectedTR_464F50, raceFilePrefix_45EA50);
+  strcat(circuitSelectedTR_464F50, ".BPA");
+  /*v4 = 0;
   do
   {
-    v5 = *((byte *)dword_45EA50 + v4);
-    byte_5034E0[v4++] = v5;
+    v5 = *((byte *)raceFilePrefix_45EA50 + v4);
+    trxINFBin_5034E0[v4++] = v5;
   }
   while ( v5 );
-  v6 = &byte_5034E0[-1];
+  v6 = &trxINFBin_5034E0[-1];
   do
     v7 = (v6++)[1];
   while ( v7 );
   *(_DWORD *)v6 = 1179535661;//-inf.bin
   *((_DWORD *)v6 + 1) = 1313423918; //bin
-  v6[8] = 0;
-  extractFromBpa(&byte_464F50, textureTemp, (int)byte_5034E0);
-  v8 = textureTemp[0];
-  v9 = dword_481E24[0];
+  v6[8] = 0;*/
+  strcpy(trxInfName, raceFilePrefix_45EA50);
+  strcat(trxInfName, "-INF.BIN");
+  extractFromBpa(circuitSelectedTR_464F50, dstBuffer, (int)trxInfName);
+  //textureTemp es dword_481E20
+  v8 = dstBuffer[0];
+  v9 = dstBuffer[1];
+  dword_4A685C = dstBuffer[2];
+  *(float *)dword_4A7DB4 = (double)dstBuffer[3];
+  //esto es de la paelta con esto se calculan los colores!
+  dword_464F40 = dstBuffer[0];
+  *(float *)dword_4A7DB8 = (double)dstBuffer[4];
+  //esto es de la paelta
+  dword_4A7CF8 = dstBuffer[1];
+  dword_4A7D0C[0] = (unsigned __int64)(double)dstBuffer[5];
+  flt_4A8114 = (double)dstBuffer[6];
+  flt_4A8118 = (double)dstBuffer[7];
+  dword_4A806C = (unsigned __int64)(double)dstBuffer[8];
+  flt_4A8474 = (double)dstBuffer[9];
+  flt_4A8478 = (double)dstBuffer[10];
+  dword_4A83CC = (unsigned __int64)(double)dstBuffer[11];
+  
+  flt_4A87D4 = (double)dstBuffer[12];
+  flt_4A87D8 = (double)dstBuffer[13];
+  dword_4A872C = (unsigned __int64)(double)dstBuffer[14];
+
+
+  /* v9 = dword_481E24[0];
   dword_4A685C = dword_481E28;
   *(float *)dword_4A7DB4 = (double)dword_481E2C;
+  //esto es de la paelta con esto se calculan los colores!
   dword_464F40 = textureTemp[0];
   *(float *)dword_4A7DB8 = (double)dword_481E30;
+  //esto es de la paelta
   dword_4A7CF8 = dword_481E24[0];
   dword_4A7D0C[0] = (unsigned __int64)(double)dword_481E34;
   flt_4A8114 = (double)dword_481E38;
@@ -9561,18 +9650,20 @@ signed int sub_409BF0()
   v10 = 15;
   flt_4A87D4 = (double)dword_481E50;
   flt_4A87D8 = (double)dword_481E54;
-  dword_4A872C = (unsigned __int64)(double)dword_481E58;
-  v11 = (signed int)dword_501BA4;
+  dword_4A872C = (unsigned __int64)(double)dword_481E58;*/
+
+  v10 = 15;
+  v11 = (signed int)dword_501BA4; //esto da 17 vueltas
   do
   {
     v12 = dword_481E24[v10];
-    *(_DWORD *)(v11 - 4) = textureTemp[v10];
+    *(_DWORD *)(v11 - 4) = dstBuffer[v10];
     *(_DWORD *)v11 = v12;
     v11 += 288;
     v10 += 2;
   }
   while ( v11 < (signed int)&unk_502DA4 );
-  v13 = (signed int)&unk_479AAC;
+  v13 = (signed int)&unk_479AAC; //20 vueltas
   do
   {
     *(_DWORD *)(v13 + 16) = 0;
@@ -9582,8 +9673,8 @@ signed int sub_409BF0()
     v13 += 32;
   }
   while ( v13 < (signed int)&unk_479D2C );
-  v14 = (int)&textureTemp[v10];
-  v15 = (signed int)&unk_479AA4;
+  v14 = (int)&dstBuffer[v10];
+  v15 = (signed int)&unk_479AA4; //20 vueltas
   do
   {
     v16 = *(_DWORD *)v14;
@@ -9610,7 +9701,7 @@ signed int sub_409BF0()
 
 
 //----- (00409E50) --------------------------------------------------------
-unsigned __int64 __cdecl sub_409E50(int a1, float a2, float a3, float a4)
+unsigned __int64 __cdecl setCircuitPaletteValues(int position, float a2, float a3, float a4)
 {
   signed int v4; // edi@1
   char *v5; // esi@1
@@ -9625,32 +9716,34 @@ unsigned __int64 __cdecl sub_409E50(int a1, float a2, float a3, float a4)
   signed int v14; // [sp+0h] [bp-Ch]@3
 
   v4 = 0;
-  v5 = &byte_4A9BA1[3 * a1];
+  int paletteIndex = 3 * position;
+  //v5 = circuitPalette_4A9BA0[3 * position];
   v13 = 0;
   v6 = a4 * 0.1;
   do
   {
     v8 = (double)v13;
-    *(v5 - 1) = (unsigned __int64)(v8 * ((a2 - a2 * 0.1) * 0.2) + a2 * 0.1);
-    *v5 = (unsigned __int64)(v8 * ((a3 - a3 * 0.1) * 0.2) + a3 * 0.1);
+	circuitPalette_4A9BA0[paletteIndex] = (unsigned __int64)(v8 * ((a2 - a2 * 0.1) * 0.2) + a2 * 0.1);
+	circuitPalette_4A9BA0[paletteIndex+1] = (unsigned __int64)(v8 * ((a3 - a3 * 0.1) * 0.2) + a3 * 0.1);
     v7 = (a4 - v6) * 0.2;
-    v5[1] = (unsigned __int64)(v8 * v7 + v6);
-    v5 += 3;
+	circuitPalette_4A9BA0[paletteIndex+2] = (unsigned __int64)(v8 * v7 + v6);
+	paletteIndex += 3;
     ++v4;
     v13 = v4;
   }
   while ( v4 < 5 );
   v9 = 0;
   v14 = 0;
-  v10 = &byte_4A9BA1[3 * (a1 + 5)];
+  //v10 = circuitPalette_4A9BA0[3 * (position + 5)];
+  paletteIndex = 3 * (position + 5);
   do
   {
     v11 = (double)v14;
-    *(v10 - 1) = (unsigned __int64)(v11 * ((63.0 - a2) * 0.2) + a2);
-    *v10 = (unsigned __int64)(v11 * ((63.0 - a3) * 0.2) + a3);
+	circuitPalette_4A9BA0[paletteIndex] = (unsigned __int64)(v11 * ((63.0 - a2) * 0.2) + a2);
+	circuitPalette_4A9BA0[paletteIndex+1] = (unsigned __int64)(v11 * ((63.0 - a3) * 0.2) + a3);
     result = (unsigned __int64)(v11 * ((63.0 - a4) * 0.2) + a4);
-    v10[1] = result;
-    v10 += 3;
+	circuitPalette_4A9BA0[paletteIndex+2] = result;
+	paletteIndex += 3;
     ++v9;
     v14 = v9;
   }
@@ -9694,61 +9787,63 @@ int *sub_409F90()
   byte_4A7E08[0] = 1;
   byte_4A7E09[0] = 1;
   dword_4A804C[0] = 0;
-  if ( dword_4A6880[0] != 6 )
+  if ( raceParticipant2[0].carType != 6 )
   {
-    v1 = (double)dword_4A68C0;
-    v2 = (double)dword_4A68BC;
-    v3 = (double)dword_4A68B8;
-    sub_409E50(15, v3, v2, v1);
+    v1 = (double)raceParticipant2[0].b;
+    v2 = (double)raceParticipant2[0].g;
+    v3 = (double)raceParticipant2[0].r;
+    setCircuitPaletteValues(15, v3, v2, v1);
   }
   v4 = (double)dword_4A806C * 3.75;
   flt_4A810C = v4;
   flt_4A81B8 = v4;
-  v5 = (double)dword_4A6954;
+  v5 = (double)raceParticipant2[1].b;
   dword_4A8070 = 1600 * (dword_4A806C + 96);
   dword_4A81B0 = LODWORD(flt_4A8114);
-  v6 = (double)dword_4A6950;
+  v6 = (double)raceParticipant2[1].g;
   dword_4A81B4 = LODWORD(flt_4A8118);
   byte_4A8168 = 1;
   byte_4A8169 = 2;
   dword_4A83AC = 0;
-  v7 = (double)dword_4A694C;
-  sub_409E50(25, v7, v6, v5);
+  v7 = (double)raceParticipant2[1].r;
+  setCircuitPaletteValues(25, v7, v6, v5);
   v8 = (double)dword_4A83CC * 3.75;
   flt_4A846C = v8;
   flt_4A8518 = v8;
-  v9 = (double)dword_4A69E8;
+  v9 = (double)raceParticipant2[2].b;
   dword_4A83D0 = 1600 * (dword_4A83CC + 192);
   dword_4A8510 = LODWORD(flt_4A8474);
-  v10 = (double)dword_4A69E4;
+  v10 = (double)raceParticipant[2].g;
   dword_4A8514 = LODWORD(flt_4A8478);
   byte_4A84C8 = 1;
   byte_4A84C9 = 3;
   dword_4A870C = 0;
-  v11 = (double)dword_4A69E0;
-  sub_409E50(35, v11, v10, v9);
+  v11 = (double)raceParticipant2[2].r;
+  setCircuitPaletteValues(35, v11, v10, v9);
   v12 = (double)dword_4A872C * 3.75;
   flt_4A87CC = v12;
   flt_4A8878 = v12;
-  v13 = (double)dword_4A6A7C;
+  v13 = (double)raceParticipant2[3].b;
   byte_4A8828 = 1;
-  v14 = (double)dword_4A6A78;
+  v14 = (double)raceParticipant2[3].g;
   dword_4A8730 = 1600 * (dword_4A872C + 288);
   dword_4A8870 = LODWORD(flt_4A87D4);
   dword_4A8874 = LODWORD(flt_4A87D8);
   byte_4A8829 = 4;
-  v15 = (double)dword_4A6A74;
+  v15 = (double)raceParticipant2[3].r;
   dword_4A8A6C = 0;
-  sub_409E50(45, v15, v14, v13);
+  setCircuitPaletteValues(45, v15, v14, v13);
   dword_481BE8 = 15;
   v16 = (int)flt_4A6894;
   result = dword_4A7EA0;
-  v18 = (signed int)&unk_4A7A74;
-  dword_503518 = 4;
+  //v18 = (signed int)&unk_4A7A74;
+  int indexRaceParticipant = 0;
+  currentDriverSelectedIndex_503518 = 4;
   do
   {
     *(result - 1) = 0;
-    *result = 5000 * (*(_DWORD *)v18 + 3);
+	*result = 5000 * raceParticipant[indexRaceParticipant].rocket;
+	//*result = 5000 * (*(_DWORD *)v18 + 3);
     *(result - 62) = *(_DWORD *)v16;
     *(result - 104) = 0;
     *(result - 60) = 0;
@@ -9851,11 +9946,13 @@ int *sub_409F90()
     result[109] = 0;
     result[110] = 0;
     result[111] = 0;
-    v18 += 84;
+   // v18 += 84;
+	indexRaceParticipant++;
     v16 += 148;
     result += 216;
   }
-  while ( v18 < (signed int)&unk_4A7BC4 );
+  while (indexRaceParticipant < 4 );
+  //while (v18 < (signed int)&unk_4A7BC4);
   return result;
 }
 
@@ -9918,18 +10015,18 @@ int sub_40A360()
   int v53; // [sp+3Ch] [bp-1Ch]@2
   double v54; // [sp+50h] [bp-8h]@25
 
-  result = dword_479D20;
+  result = trxSCE1Bpk_479D20;
   v1 = 0;
   dword_4AA928 = 0;
-  if ( dword_479D20 > 0 )
+  if ( trxSCE1Bpk_479D20 > 0 )
   {
-    v2 = (int)dword_4B4320;
+    v2 = (int)trxSCE2Bpk_4B4320;
     v49 = 0;
     v44 = dword_467020;
-    v43 = (int)dword_4B4320;
+    v43 = (int)trxSCE2Bpk_4B4320;
     v50 = (int)dword_4B484C;
-    v53 = dword_479D20;
-    dword_4AA928 = dword_479D20;
+    v53 = trxSCE1Bpk_479D20;
+    dword_4AA928 = trxSCE1Bpk_479D20;
     while ( 1 )
     {
       if ( *(_DWORD *)v2 > 0 )
@@ -10091,12 +10188,12 @@ int sub_40A880()
   int *v15; // [sp+10h] [bp-8h]@8
   int v16; // [sp+14h] [bp-4h]@9
 
-  v0 = dword_479D20;
-  if ( dword_479D20 > 0 )
+  v0 = trxSCE1Bpk_479D20;
+  if ( trxSCE1Bpk_479D20 > 0 )
   {
     v1 = dword_46F220;
     v2 = dword_4B4324;
-    v3 = dword_479D20;
+    v3 = trxSCE1Bpk_479D20;
     do
     {
       v4 = *v2;
@@ -10113,13 +10210,13 @@ int sub_40A880()
       --v3;
     }
     while ( v3 );
-    v0 = dword_479D20;
+    v0 = trxSCE1Bpk_479D20;
   }
   result = 0;
   dword_4AA928 = 0;
   if ( v0 > 0 )
   {
-    v8 = dword_464F10;
+    v8 = trxSCE3Bpk_464F10;
     v9 = 0;
     v15 = dword_4B4324;
     do
@@ -10159,7 +10256,7 @@ int sub_40A880()
           ++v11;
         }
         while ( v11 < v10 );
-        v0 = dword_479D20;
+        v0 = trxSCE1Bpk_479D20;
         dword_481BE8 = v11;
       }
       ++result;
@@ -10277,9 +10374,9 @@ int sub_40A9A0()
   {
     do
     {
-      v7 = *((byte *)dword_50A16C + v6);
-      *((byte *)dword_50A16C + v6) = *((char *)dword_50A16C + v5 - v6 - 1);
-      *((char *)dword_50A16C + dword_464F40 * dword_4A7CF8 - v6 - 1) = v7;
+      v7 = *((byte *)trxImaBpk_50A16C + v6);
+      *((byte *)trxImaBpk_50A16C + v6) = *((char *)trxImaBpk_50A16C + v5 - v6 - 1);
+      *((char *)trxImaBpk_50A16C + dword_464F40 * dword_4A7CF8 - v6 - 1) = v7;
       v5 = dword_464F40 * dword_4A7CF8;
       ++v6;
     }
@@ -10288,17 +10385,17 @@ int sub_40A9A0()
   v8 = dword_4A6858 * dword_503508;
   for ( j = 0; j < dword_4A6858 * dword_503508 / 2; ++j )
   {
-    v10 = *((byte *)dword_5034D0 + j);
-    *((byte *)dword_5034D0 + j) = *((char *)dword_5034D0 + v8 - j - 1);
-    *((char *)dword_5034D0 + dword_4A6858 * dword_503508 - j - 1) = v10;
+    v10 = *((byte *)trxVaiBpk_5034D0 + j);
+    *((byte *)trxVaiBpk_5034D0 + j) = *((char *)trxVaiBpk_5034D0 + v8 - j - 1);
+    *((char *)trxVaiBpk_5034D0 + dword_4A6858 * dword_503508 - j - 1) = v10;
     v8 = dword_4A6858 * dword_503508;
   }
   v11 = dword_4A9B90 * dword_467000;
   for ( k = 0; k < dword_4A9B90 * dword_467000 / 2; ++k )
   {
-    v13 = *((byte *)dword_4AA920 + k);
-    *((byte *)dword_4AA920 + k) = *((char *)dword_4AA920 + v11 - k - 1);
-    *((char *)dword_4AA920 + dword_4A9B90 * dword_467000 - k - 1) = v13;
+    v13 = *((byte *)trxLR1Bpk_4AA920 + k);
+    *((byte *)trxLR1Bpk_4AA920 + k) = *((char *)trxLR1Bpk_4AA920 + v11 - k - 1);
+    *((char *)trxLR1Bpk_4AA920 + dword_4A9B90 * dword_467000 - k - 1) = v13;
     v11 = dword_4A9B90 * dword_467000;
   }
   v78 = 0;
@@ -10309,11 +10406,11 @@ int sub_40A9A0()
     v15 = 0;
     do
     {
-      v16 = (char *)dword_5034FC + v78 + v15;
+      v16 = (char *)participantCarBpk_5034FC + v78 + v15;
       v17 = *v16;
-      *v16 = *((byte *)dword_5034FC + v14 + 153599);
+      *v16 = *((byte *)participantCarBpk_5034FC + v14 + 153599);
       ++v15;
-      *((byte *)dword_5034FC + v14-- + 153599) = v17;
+      *((byte *)participantCarBpk_5034FC + v14-- + 153599) = v17;
     }
     while ( v15 < 76800 );
     v18 = v79;
@@ -10324,9 +10421,9 @@ int sub_40A9A0()
       v20 = 0;
       do
       {
-        v21 = *((byte *)dword_5034FC + v18 + v20);
-        *((byte *)dword_5034FC + v18 + v20) = *((byte *)dword_5034FC + v19 + v20);
-        *((byte *)dword_5034FC + v19 + v20++) = v21;
+        v21 = *((byte *)participantCarBpk_5034FC + v18 + v20);
+        *((byte *)participantCarBpk_5034FC + v18 + v20) = *((byte *)participantCarBpk_5034FC + v19 + v20);
+        *((byte *)participantCarBpk_5034FC + v19 + v20++) = v21;
       }
       while ( v20 < 1600 );
       v18 += 1600;
@@ -10342,10 +10439,10 @@ int sub_40A9A0()
       v24 = 0;
       do
       {
-        v25 = (char *)dword_5034FC + v22 + v24;
+        v25 = (char *)participantCarBpk_5034FC + v22 + v24;
         v26 = *v25;
-        *v25 = *((byte *)dword_5034FC + v23 + v24);
-        *((byte *)dword_5034FC + v23 + v24++) = v26;
+        *v25 = *((byte *)participantCarBpk_5034FC + v23 + v24);
+        *((byte *)participantCarBpk_5034FC + v23 + v24++) = v26;
       }
       while ( v24 < 1600 );
       v22 += 1600;
@@ -10422,18 +10519,18 @@ int sub_40A9A0()
     v45 += 32;
   }
   while ( v45 < (signed int)&unk_479D24 );
-  v47 = dword_50E718;
+  v47 = trxSHA1Bpk_50E718;
   for ( l = 0; l < v47; ++l )
   {
-    v49 = dword_4A9FE0[l];
-    dword_479280[l] = v34 - dword_479280[l] - 1;
-    dword_4A9FE0[l] = v38 - v49 - 1;
+    v49 = trxSHA4Bpk_4A9FE0[l];
+    trxSHA3Bpk_479280[l] = v34 - trxSHA3Bpk_479280[l] - 1;
+    trxSHA4Bpk_4A9FE0[l] = v38 - v49 - 1;
   }
-  LODWORD(v50) = dword_479D20;
-  if ( dword_479D20 > 0 )
+  LODWORD(v50) = trxSCE1Bpk_479D20;
+  if ( trxSCE1Bpk_479D20 > 0 )
   {
-    v51 = (int)dword_4B4320;
-    v52 = dword_479D20;
+    v51 = (int)trxSCE2Bpk_4B4320;
+    v52 = trxSCE1Bpk_479D20;
     do
     {
       v53 = 0;
@@ -10479,13 +10576,13 @@ int sub_40A9A0()
     while ( v52 );
     v38 = dword_4A7CF8;
   }
-  v62 = dword_464F10;
-  if ( dword_464F10 > 0 )
+  v62 = trxSCE3Bpk_464F10;
+  if ( trxSCE3Bpk_464F10 > 0 )
   {
     v63 = (double)((v34 << 8) - 256);
     v64 = (double)((v38 << 8) - 256);
     v65 = (int)dword_50A18C;
-    v66 = dword_464F10;
+    v66 = trxSCE3Bpk_464F10;
     do
     {
       v67 = *(_DWORD *)(v65 + 8);
@@ -10512,15 +10609,15 @@ int sub_40A9A0()
         do
         {
           v73 = *(_DWORD *)(v70 + 4);
-          v74 = (char *)dword_4A7A28 + v73 + v72;
+          v74 = (char *)trxSCE5Bpk_4A7A28 + v73 + v72;
           v75 = *v74;
-          *v74 = *((char *)dword_4A7A28 + v73 + *(_DWORD *)v70 * *(_DWORD *)(v70 - 4) - v72 - 1);
-          *((char *)dword_4A7A28 + *(_DWORD *)(v70 + 4) + *(_DWORD *)v70 * *(_DWORD *)(v70 - 4) - v72 - 1) = v75;
+          *v74 = *((char *)trxSCE5Bpk_4A7A28 + v73 + *(_DWORD *)v70 * *(_DWORD *)(v70 - 4) - v72 - 1);
+          *((char *)trxSCE5Bpk_4A7A28 + *(_DWORD *)(v70 + 4) + *(_DWORD *)v70 * *(_DWORD *)(v70 - 4) - v72 - 1) = v75;
           v76 = *(_DWORD *)v70 * *(_DWORD *)(v70 - 4);
           ++v72;
         }
         while ( v72 < ((signed int)v76 - HIDWORD(v76)) >> 1 );
-        v62 = dword_464F10;
+        v62 = trxSCE3Bpk_464F10;
       }
       LODWORD(v50) = v82 + 1;
       v70 += 44;
@@ -10614,18 +10711,18 @@ int sub_40AFC0()
   int v76; // [sp+18h] [bp-10h]@141
   int v77; // [sp+20h] [bp-8h]@141
 
-  v0 = 216 * dword_503518;
+  v0 = 216 * currentDriverSelectedIndex_503518;
   dword_50E71C = 0;
-  v1 = (flt_4A7DAC[216 * dword_503518] + 180.0) * 0.01745329251994444;
-  v67 = (unsigned __int64)(sin(v1) * 35.0 + *(float *)&dword_4A7DB4[216 * dword_503518]);
-  v72 = (unsigned __int64)(cos(v1) * 35.0 + *(float *)&dword_4A7DB8[216 * dword_503518]);
+  v1 = (flt_4A7DAC[216 * currentDriverSelectedIndex_503518] + 180.0) * 0.01745329251994444;
+  v67 = (unsigned __int64)(sin(v1) * 35.0 + *(float *)&dword_4A7DB4[216 * currentDriverSelectedIndex_503518]);
+  v72 = (unsigned __int64)(cos(v1) * 35.0 + *(float *)&dword_4A7DB8[216 * currentDriverSelectedIndex_503518]);
   v2 = 0;
-  if ( dword_508D24 > 0 )
+  if ( numberOfParticipants_508D24 > 0 )
   {
     v3 = (int)dword_4A7DB8;
     do
     {
-      if ( v2 != dword_503518 )
+      if ( v2 != currentDriverSelectedIndex_503518 )
       {
         v4 = v67 - (unsigned __int64)*(float *)(v3 - 4);
         v5 = v72 - (unsigned __int64)*(float *)v3;
@@ -10638,7 +10735,7 @@ int sub_40AFC0()
           if ( v5 < 0 )
             v7 = -v5;
           if ( v7 < 20
-            && *((byte *)dword_5034FC + 40 * v5 + *(_DWORD *)(v3 - 168) + v4 + 820) > 3u
+            && *((byte *)participantCarBpk_5034FC + 40 * v5 + *(_DWORD *)(v3 - 168) + v4 + 820) > 3u
             && !dword_4A7E88[v0]
             && !dword_4A7E0C[v0] )
             dword_4A7E88[v0] = 100;
@@ -10647,7 +10744,7 @@ int sub_40AFC0()
       ++v2;
       v3 += 864;
     }
-    while ( v2 < dword_508D24 );
+    while ( v2 < numberOfParticipants_508D24 );
   }
   v8 = (*(float *)(v0 * 4 + 4881836) + 180.0) * 0.01745329251994444;
   v9 = (unsigned __int64)(sin(v8) * 25.0 + *(float *)(v0 * 4 + 4881844));
@@ -10702,11 +10799,11 @@ int sub_40AFC0()
     LODWORD(v22) = dword_4A7CF8 - 1;
   if ( (v22 & 0x80000000) != 0 )
     LODWORD(v22) = 0;
-  BYTE4(v22) = *((byte *)dword_4AA920 + dword_4A9B90 * (v19 >> 2) + (v18 >> 2));
-  v23 = *((byte *)dword_4AA920 + dword_4A9B90 * ((signed int)v22 >> 2) + (v21 >> 2));
-  v24 = 4 * (dword_4A7A20 + 216 * dword_503518) + 4881696;
+  BYTE4(v22) = *((byte *)trxLR1Bpk_4AA920 + dword_4A9B90 * (v19 >> 2) + (v18 >> 2));
+  v23 = *((byte *)trxLR1Bpk_4AA920 + dword_4A9B90 * ((signed int)v22 >> 2) + (v21 >> 2));
+  v24 = 4 * (dword_4A7A20 + 216 * currentDriverSelectedIndex_503518) + 4881696;
   v66 = BYTE4(v22);
-  *(_DWORD *)&dword_4A7D20[4 * (dword_4A7A20 + 216 * dword_503518)] = 0;
+  *(_DWORD *)&dword_4A7D20[4 * (dword_4A7A20 + 216 * currentDriverSelectedIndex_503518)] = 0;
   v25 = dword_4A8050[v0];
   v26 = 0;
   v27 = 560;
@@ -10717,7 +10814,7 @@ int sub_40AFC0()
     v27 -= 60;
   }
   while ( v27 >= 60 );
-  if ( v26 && !dword_4A7E0C[v0] && dword_4A6898[37 * dword_503518] > 0 )
+  if ( v26 && !dword_4A7E0C[v0] && dword_4A6898[37 * currentDriverSelectedIndex_503518] > 0 )
     *(_DWORD *)v24 |= 4u;
   v28 = dword_4A8050[v0];
   v29 = 0;
@@ -10729,21 +10826,21 @@ int sub_40AFC0()
     v30 -= 60;
   }
   while ( v30 >= 30 );
-  if ( v29 && !dword_4A7E0C[v0] && dword_4A6898[37 * dword_503518] > 0 )
+  if ( v29 && !dword_4A7E0C[v0] && dword_4A6898[37 * currentDriverSelectedIndex_503518] > 0 )
     *(_DWORD *)v24 |= 8u;
   v31 = dword_4A7E80[v0];
   if ( v31 < 100 )
   {
-    v32 = *((byte *)dword_5034D0
+    v32 = *((byte *)trxVaiBpk_5034D0
           + dword_4A6858 * ((signed int)(unsigned __int64)*(float *)(v0 * 4 + 4881848) >> 2)
           + ((signed int)(unsigned __int64)*(float *)(v0 * 4 + 4881844) >> 2));
     v33 = 16 - v66;
     v34 = 16 - v23;
-    if ( *(float *)&dword_4A6884[37 * dword_503518] > 0.0 || *(float *)(v0 * 4 + 4881840) > 0.5 )
+    if ( *(float *)&dword_4A6884[37 * currentDriverSelectedIndex_503518] > 0.0 || *(float *)(v0 * 4 + 4881840) > 0.5 )
     {
       if ( dword_4A7E88[v0] )
       {
-        v35 = dword_46EE00[v32];
+        v35 = trxOHIDat_46EE00[v32];
         if ( v33 > v35 + 1 )
           *(_DWORD *)v24 |= 8u;
         if ( v34 >= v35 - 1 )
@@ -10763,14 +10860,14 @@ LABEL_79:
     v36 = v37 == 0;
     if ( (v37 & 0x80000000) != 0 )
       v36 = (((byte)v37 - 1) | 0xFFFFFFFE) == -1;
-    v38 = dword_503518;
+    v38 = currentDriverSelectedIndex_503518;
     if ( v36
-      && dword_4A7E98[216 * dword_503518] > 3
-      && !dword_4A7E0C[216 * dword_503518]
-      && dword_4A6898[37 * dword_503518] > 0 )
-      *(_DWORD *)&dword_4A7D20[4 * (dword_4A7A20 + 216 * dword_503518)] |= 8u;
+      && dword_4A7E98[216 * currentDriverSelectedIndex_503518] > 3
+      && !dword_4A7E0C[216 * currentDriverSelectedIndex_503518]
+      && dword_4A6898[37 * currentDriverSelectedIndex_503518] > 0 )
+      *(_DWORD *)&dword_4A7D20[4 * (dword_4A7A20 + 216 * currentDriverSelectedIndex_503518)] |= 8u;
     v0 = 216 * v38;
-    if ( flt_501280[v32] * *(float *)&dword_4A6884[37 * v38] > *(float *)&dword_4A7DB0[216 * v38] && !dword_4A7E84[v0] )
+    if ( trxDRVDat_501280[v32] * *(float *)&dword_4A6884[37 * v38] > *(float *)&dword_4A7DB0[216 * v38] && !dword_4A7E84[v0] )
       *(_DWORD *)&dword_4A7D20[4 * (dword_4A7A20 + 216 * v38)] |= 1u;
     *((float *)&unk_4A7DA8 + 216 * v38) = flt_4796A0[v32] * flt_4A6894[37 * v38];
     goto LABEL_97;
@@ -10783,7 +10880,7 @@ LABEL_79:
     *(_DWORD *)v24 = 2;
 LABEL_97:
   if ( dword_4A7E88[v0] > 0 )
-    *(_DWORD *)&dword_4A7D20[4 * (dword_4A7A20 + 216 * dword_503518)] |= 0x10u;
+    *(_DWORD *)&dword_4A7D20[4 * (dword_4A7A20 + 216 * currentDriverSelectedIndex_503518)] |= 0x10u;
   v39 = dword_4A7E80[v0];
   if ( v39 > 0 )
     dword_4A7E80[v0] = v39 - 1;
@@ -10797,12 +10894,12 @@ LABEL_97:
   v68 = (unsigned __int64)(sin(v42) * 55.0 + *(float *)(v0 * 4 + 4881844));
   v73 = (unsigned __int64)(cos(v42) * 55.0 + *(float *)(v0 * 4 + 4881848));
   v43 = 0;
-  if ( dword_508D24 > 0 )
+  if ( numberOfParticipants_508D24 > 0 )
   {
     v44 = (int)dword_4A7DB8;
     do
     {
-      if ( v43 != dword_503518 )
+      if ( v43 != currentDriverSelectedIndex_503518 )
       {
         v45 = v68 - (unsigned __int64)*(float *)(v44 - 4);
         v46 = v73 - (unsigned __int64)*(float *)v44;
@@ -10814,7 +10911,7 @@ LABEL_97:
             v46 = -v46;
           if ( v46 < 20 && !dword_4A7EA4[v0] )
           {
-            *(_DWORD *)&dword_4A7D20[4 * (dword_4A7A20 + 216 * dword_503518)] |= 0x40u;
+            *(_DWORD *)&dword_4A7D20[4 * (dword_4A7A20 + 216 * currentDriverSelectedIndex_503518)] |= 0x40u;
             dword_4A7EA4[v0] = 350;
           }
         }
@@ -10822,7 +10919,7 @@ LABEL_97:
       ++v43;
       v44 += 864;
     }
-    while ( v43 < dword_508D24 );
+    while ( v43 < numberOfParticipants_508D24 );
   }
   v47 = dword_4A7EA4[v0];
   if ( v47 > 0 )
@@ -10831,12 +10928,12 @@ LABEL_97:
   v69 = (unsigned __int64)(sin(v48) * 20.0 + *(float *)(v0 * 4 + 4881844));
   v74 = (unsigned __int64)(cos(v48) * 20.0 + *(float *)(v0 * 4 + 4881848));
   v49 = 0;
-  if ( dword_508D24 > 0 )
+  if ( numberOfParticipants_508D24 > 0 )
   {
     v50 = (int)dword_4A7DB8;
     do
     {
-      if ( v49 != dword_503518 )
+      if ( v49 != currentDriverSelectedIndex_503518 )
       {
         v51 = v69 - (unsigned __int64)*(float *)(v50 - 4);
         v52 = v74 - (unsigned __int64)*(float *)v50;
@@ -10847,24 +10944,24 @@ LABEL_97:
           if ( v52 < 0 )
             v52 = -v52;
           if ( v52 < 20 )
-            *(_DWORD *)&dword_4A7D20[4 * (dword_4A7A20 + 216 * dword_503518)] |= 0x20u;
+            *(_DWORD *)&dword_4A7D20[4 * (dword_4A7A20 + 216 * currentDriverSelectedIndex_503518)] |= 0x20u;
         }
       }
       ++v49;
       v50 += 864;
     }
-    while ( v49 < dword_508D24 );
+    while ( v49 < numberOfParticipants_508D24 );
   }
   v53 = (*(float *)(v0 * 4 + 4881836) + 180.0) * 0.01745329251994444;
   v70 = (unsigned __int64)(sin(v53) * 50.0 + *(float *)(v0 * 4 + 4881844));
   v75 = (unsigned __int64)(cos(v53) * 50.0 + *(float *)(v0 * 4 + 4881848));
   v54 = 0;
-  if ( dword_508D24 > 0 )
+  if ( numberOfParticipants_508D24 > 0 )
   {
     v55 = (int)dword_4A7DB8;
     do
     {
-      if ( v54 != dword_503518 )
+      if ( v54 != currentDriverSelectedIndex_503518 )
       {
         v56 = v70 - (unsigned __int64)*(float *)(v55 - 4);
         v57 = v75 - (unsigned __int64)*(float *)v55;
@@ -10875,20 +10972,20 @@ LABEL_97:
           if ( v57 < 0 )
             v57 = -v57;
           if ( v57 < 20 )
-            *(_DWORD *)&dword_4A7D20[4 * (dword_4A7A20 + 216 * dword_503518)] |= 0x20u;
+            *(_DWORD *)&dword_4A7D20[4 * (dword_4A7A20 + 216 * currentDriverSelectedIndex_503518)] |= 0x20u;
         }
       }
       ++v54;
       v55 += 864;
     }
-    while ( v54 < dword_508D24 );
+    while ( v54 < numberOfParticipants_508D24 );
   }
   v58 = (*(float *)(v0 * 4 + 4881836) + 180.0) * 0.01745329251994444;
   v71 = (unsigned __int64)(sin(v58) * 80.0 + *(float *)(v0 * 4 + 4881844));
-  v59 = dword_503518;
+  v59 = currentDriverSelectedIndex_503518;
   v76 = (unsigned __int64)(cos(v58) * 80.0 + *(float *)(v0 * 4 + 4881848));
   v77 = 0;
-  if ( dword_508D24 > 0 )
+  if ( numberOfParticipants_508D24 > 0 )
   {
     v60 = (int)dword_4A7DB8;
     do
@@ -10910,14 +11007,14 @@ LABEL_97:
       v60 += 864;
       ++v77;
     }
-    while ( v77 < dword_508D24 );
+    while ( v77 < numberOfParticipants_508D24 );
   }
   if ( dword_4A7E88[v0] == 70 )
   {
     v63 = rand() % 5;
-    v59 = dword_503518;
+    v59 = currentDriverSelectedIndex_503518;
     if ( !v63 )
-      dword_4A805C[216 * dword_503518] = 1;
+      dword_4A805C[216 * currentDriverSelectedIndex_503518] = 1;
   }
   result = 864 * v59;
   if ( !dword_4A7E88[216 * v59] )
@@ -10957,7 +11054,7 @@ int sub_40B920()
   int v19; // [sp+2Ch] [bp-8h]@1
   int v20; // [sp+30h] [bp-4h]@1
 
-  result = dword_4A9EA8;
+  result = userRaceOrder_4A9EA8;
   v9 = 1032805417;
   v10 = 1039516303;
   v11 = 1038174126;
@@ -10970,13 +11067,13 @@ int sub_40B920()
   v18 = 1039516303;
   v19 = 1022739087;
   v20 = 1031127695;
-  if ( dword_4A9EA8 )
+  if ( userRaceOrder_4A9EA8 )
     v8 = raceParticipant[0].difficulty;
   else
-    v8 = dword_4A7AF8;
+    v8 = raceParticipant[1].difficulty;
   v1 = 0;
-  dword_503518 = 0;
-  if ( dword_508D24 > 0 )
+  currentDriverSelectedIndex_503518 = 0;
+  if ( numberOfParticipants_508D24 > 0 )
   {
     v2 = dword_4A685C;
     v3 = &dword_4A6888;
@@ -11000,16 +11097,16 @@ int sub_40B920()
             v5 = 1.0 - *((float *)&v16 + 2 * v8);
         }
       }
-      result = dword_508D24;
+      result = numberOfParticipants_508D24;
       ++v1;
       v4 += 864;
       *((float *)v3 - 1) = v5 * *(float *)v3;
       v3 += 37;
       if ( v1 >= result )
         break;
-      result = dword_4A9EA8;
+      result = userRaceOrder_4A9EA8;
     }
-    dword_503518 = v1;
+    currentDriverSelectedIndex_503518 = v1;
   }
   return result;
 }
@@ -11107,8 +11204,8 @@ void sub_40BAB0()
   float v88; // [sp+30h] [bp-10h]@64
   int v89; // [sp+30h] [bp-10h]@71
 
-  v0 = dword_503518;
-  v1 = 864 * dword_503518;
+  v0 = currentDriverSelectedIndex_503518;
+  v1 = 864 * currentDriverSelectedIndex_503518;
   dword_4A7E60[v1 / 4] = 0;
   v2 = 37 * v0;
   v3 = dword_4A6898[37 * v0] == 0;
@@ -11153,7 +11250,7 @@ LABEL_13:
     v10 = *(float *)(v1 + 4881840) - *(float *)(v1 + 4881840) * 0.033333335;
     *(float *)(v1 + 4881840) = 0.02 * v10 + v10;
   }
-  if ( v0 == dword_4A9EA8 )
+  if ( v0 == userRaceOrder_4A9EA8 )
   {
     v11 = dword_4A68D8[v2];
     if ( v11 == 1 )
@@ -11311,61 +11408,61 @@ LABEL_64:
   v39 = (unsigned __int64)(*(float *)(v1 + 4881908) + *(float *)(v1 + 4881844));
   v4 = (signed int)v39 + v38 < 0;
   v40 = v39 + v38;
-  v41 = dword_50A16C;
+  v41 = trxImaBpk_50A16C;
   if ( v4 || v40 >= dword_464F40 * dword_4A7CF8 )
     v89 = 15;
   else
-    v89 = *((byte *)dword_50A16C + v40) & 0xF;
+    v89 = *((byte *)trxImaBpk_50A16C + v40) & 0xF;
   v42 = (unsigned __int64)(*(float *)(v1 + 4881860) + *(float *)(v1 + 4881844))
       + dword_464F40 * (unsigned __int64)(*(float *)(v1 + 4881848) + *(float *)(v1 + 4881864));
   if ( v42 < 0 || v42 >= dword_464F40 * dword_4A7CF8 )
     v87 = 15;
   else
-    v87 = *((byte *)dword_50A16C + v42) & 0xF;
+    v87 = *((byte *)trxImaBpk_50A16C + v42) & 0xF;
   v43 = (unsigned __int64)(*(float *)(v1 + 4881868) + *(float *)(v1 + 4881844))
       + dword_464F40 * (unsigned __int64)(*(float *)(v1 + 4881848) + *(float *)(v1 + 4881872));
   if ( v43 < 0 || v43 >= dword_464F40 * dword_4A7CF8 )
     v83 = 15;
   else
-    v83 = *((byte *)dword_50A16C + v43) & 0xF;
+    v83 = *((byte *)trxImaBpk_50A16C + v43) & 0xF;
   v44 = (unsigned __int64)(*(float *)(v1 + 4881876) + *(float *)(v1 + 4881844))
       + dword_464F40 * (unsigned __int64)(*(float *)(v1 + 4881848) + *(float *)(v1 + 4881880));
   if ( v44 < 0 || v44 >= dword_464F40 * dword_4A7CF8 )
     v84 = 15;
   else
-    v84 = *((byte *)dword_50A16C + v44) & 0xF;
+    v84 = *((byte *)trxImaBpk_50A16C + v44) & 0xF;
   v45 = (unsigned __int64)(*(float *)(v1 + 4881884) + *(float *)(v1 + 4881844))
       + dword_464F40 * (unsigned __int64)(*(float *)(v1 + 4881848) + *(float *)(v1 + 4881888));
   if ( v45 < 0 || v45 >= dword_464F40 * dword_4A7CF8 )
     v85 = 15;
   else
-    v85 = *((byte *)dword_50A16C + v45) & 0xF;
+    v85 = *((byte *)trxImaBpk_50A16C + v45) & 0xF;
   v46 = (unsigned __int64)(*(float *)(v1 + 4881844) + *(float *)(v1 + 4881892))
       + dword_464F40 * (unsigned __int64)(*(float *)(v1 + 4881848) + *(float *)(v1 + 4881896));
   if ( v46 < 0 || v46 >= dword_464F40 * dword_4A7CF8 )
     v81 = 15;
   else
-    v81 = *((byte *)dword_50A16C + v46) & 0xF;
+    v81 = *((byte *)trxImaBpk_50A16C + v46) & 0xF;
   v47 = (unsigned __int64)(*(float *)(v1 + 4881844) + *(float *)(v1 + 4881900))
       + dword_464F40 * (unsigned __int64)(*(float *)(v1 + 4881848) + *(float *)(v1 + 4881904));
   if ( v47 < 0 || v47 >= dword_464F40 * dword_4A7CF8 )
     v82 = 15;
   else
-    v82 = *((byte *)dword_50A16C + v47) & 0xF;
+    v82 = *((byte *)trxImaBpk_50A16C + v47) & 0xF;
   v48 = (unsigned __int64)(*(float *)(v1 + 4881836) * 0.2666666666666667);
-  v49 = 1600 * (v48 + 96 * dword_503518);
+  v49 = 1600 * (v48 + 96 * currentDriverSelectedIndex_503518);
   dword_4A7D0C[v1 / 4] = v48;
   dword_4A7D10[v1 / 4] = v49;
   v50 = sub_43BFE0(
-          (int)((char *)dword_5034FC + v49),
+          (int)((char *)participantCarBpk_5034FC + v49),
           (int)((char *)v41
               + (unsigned __int64)*(float *)(v1 + 4882012)
               + v37 * (unsigned __int64)(*(float *)(v1 + 4881848) - 20.0 + *(float *)(v1 + 4882016))
               + (unsigned __int64)*(float *)(v1 + 4881844)
               - 20));
-  v51 = dword_503518;
-  v52 = 864 * dword_503518;
-  dword_4A7D14[216 * dword_503518] = v50;
+  v51 = currentDriverSelectedIndex_503518;
+  v52 = 864 * currentDriverSelectedIndex_503518;
+  dword_4A7D14[216 * currentDriverSelectedIndex_503518] = v50;
   if ( v50 >= 4 )
   {
     dword_4A7D14[v52 / 4] = 0;
@@ -11395,8 +11492,8 @@ LABEL_134:
         v57 = dword_4A7E6C[216 * v51];
         ++v56;
         *((float *)&unk_4A7E64 + 216 * v51) = (double)(rand() % (2 * v57 + 1) - v57);
-        v58 = 864 * dword_503518;
-        v59 = dword_4A7E6C[216 * dword_503518];
+        v58 = 864 * currentDriverSelectedIndex_503518;
+        v59 = dword_4A7E6C[216 * currentDriverSelectedIndex_503518];
         *(float *)(v58 + 4882024) = (double)(rand() % (2 * v59 + 1) - v59);
         v60 = dword_4A7E70[v58 / 4] + 1;
         dword_4A7E70[v58 / 4] = v60;
@@ -11420,14 +11517,14 @@ LABEL_134:
         if ( *(float *)(v58 + 4881848) < 20.0 )
           dword_4A7DB8[v58 / 4] = 1101004800;
         v65 = dword_464F40 * (unsigned __int64)floor(*(float *)(v58 + 4881848) - 20.0 + *(float *)(v58 + 4882016));
-        v66 = (unsigned __int64)floor(*(float *)&dword_4A7DB4[216 * dword_503518]);
-        v67 = (unsigned __int64)floor(*(float *)&dword_4A7E5C[216 * dword_503518]);
+        v66 = (unsigned __int64)floor(*(float *)&dword_4A7DB4[216 * currentDriverSelectedIndex_503518]);
+        v67 = (unsigned __int64)floor(*(float *)&dword_4A7E5C[216 * currentDriverSelectedIndex_503518]);
         v68 = sub_43BFE0(
-                (int)((char *)dword_5034FC + dword_4A7D10[216 * dword_503518]),
-                (int)((char *)dword_50A16C + v65 + v66 + v67 - 20));
-        v51 = dword_503518;
-        v69 = 864 * dword_503518;
-        dword_4A7D14[216 * dword_503518] = v68;
+                (int)((char *)participantCarBpk_5034FC + dword_4A7D10[216 * currentDriverSelectedIndex_503518]),
+                (int)((char *)trxImaBpk_50A16C + v65 + v66 + v67 - 20));
+        v51 = currentDriverSelectedIndex_503518;
+        v69 = 864 * currentDriverSelectedIndex_503518;
+        dword_4A7D14[216 * currentDriverSelectedIndex_503518] = v68;
         if ( v68 < 4 )
         {
           *(float *)(v69 + 4881844) = *(float *)(v69 + 4881844) - *(float *)(v69 + 4882020);
@@ -11495,7 +11592,7 @@ LABEL_135:
     v75 = 864 * v51;
     v76 = (double)rand() * (*(float *)&dword_4A7DB0[216 * v51] * 7.0) * 0.0000152587890625 + flt_4A7DAC[216 * v51];
     *(float *)(v75 + 4881836) = v76;
-    v52 = 864 * dword_503518;
+    v52 = 864 * currentDriverSelectedIndex_503518;
     v77 = v76 - (double)rand() * (*(float *)(v52 + 4881840) * 7.0) * 0.0000152587890625;
     *(float *)(v52 + 4881836) = v77;
     if ( v77 < 0.0 )
@@ -11613,11 +11710,11 @@ int sub_40CD10()
   int v89; // [sp+30h] [bp-Ch]@0
   int v90; // [sp+38h] [bp-4h]@7
 
-  v0 = dword_508D24;
-  if ( dword_508D24 > 0 )
+  v0 = numberOfParticipants_508D24;
+  if ( numberOfParticipants_508D24 > 0 )
   {
     v1 = &unk_4A7E00;
-    v2 = dword_508D24;
+    v2 = numberOfParticipants_508D24;
     do
     {
       v3 = *((float *)v1 - 1);
@@ -11630,23 +11727,23 @@ int sub_40CD10()
     while ( v2 );
   }
   result = v0 - 1;
-  dword_503518 = 0;
+  currentDriverSelectedIndex_503518 = 0;
   if ( v0 - 1 > 0 )
   {
     while ( 1 )
     {
-      v90 = dword_503518 + 1;
-      v75 = dword_503518 + 1;
-      if ( dword_503518 + 1 < v0 )
+      v90 = currentDriverSelectedIndex_503518 + 1;
+      v75 = currentDriverSelectedIndex_503518 + 1;
+      if ( currentDriverSelectedIndex_503518 + 1 < v0 )
         break;
 LABEL_115:
-      result = dword_508D24 - 1;
-      dword_503518 = v90;
-      if ( v90 >= dword_508D24 - 1 )
+      result = numberOfParticipants_508D24 - 1;
+      currentDriverSelectedIndex_503518 = v90;
+      if ( v90 >= numberOfParticipants_508D24 - 1 )
         return result;
-      v0 = dword_508D24;
+      v0 = numberOfParticipants_508D24;
     }
-    v5 = 864 * dword_503518;
+    v5 = 864 * currentDriverSelectedIndex_503518;
     while ( 1 )
     {
       v6 = 216 * v75;
@@ -11697,8 +11794,8 @@ LABEL_115:
           v17 = v83 - v76;
           do
           {
-            if ( *((byte *)dword_5034FC + v15 + dword_4A7D10[v5 / 4] + v16) > 3u
-              && *((byte *)dword_5034FC + v17 + v78 + dword_4A7D10[v6] + v16) > 3u )
+            if ( *((byte *)participantCarBpk_5034FC + v15 + dword_4A7D10[v5 / 4] + v16) > 3u
+              && *((byte *)participantCarBpk_5034FC + v17 + v78 + dword_4A7D10[v6] + v16) > 3u )
             {
               v89 = v16 - 20;
               v81 = v17 + v16 - 20;
@@ -11889,7 +11986,7 @@ LABEL_119:
         }
       }
       v74 = 0;
-      if ( dword_4A68A4[37 * dword_503518] && !dword_4A7E0C[v6] )
+      if ( dword_4A68A4[37 * currentDriverSelectedIndex_503518] && !dword_4A7E0C[v6] )
       {
         v61 = (unsigned __int64)*(float *)&dword_4A7DB4[216 * v75];
         v62 = v61 - (unsigned __int64)(*(float *)(v5 + 4881868) + *(float *)(v5 + 4881844));
@@ -11903,7 +12000,7 @@ LABEL_119:
           v65 = v88 - (unsigned __int64)(*(float *)(v5 + 4881872) + *(float *)(v5 + 4881848));
           if ( v63 < 0 )
             v65 = -v63;
-          if ( v65 < 20 && *((byte *)dword_5034FC + 40 * v63 + dword_4A7D10[v6] + v62 + 820) > 3u )
+          if ( v65 < 20 && *((byte *)participantCarBpk_5034FC + 40 * v63 + dword_4A7D10[v6] + v62 + 820) > 3u )
             v74 = 1;
         }
         v66 = v61 - (unsigned __int64)(*(float *)(v5 + 4881860) + *(float *)(v5 + 4881844));
@@ -11916,7 +12013,7 @@ LABEL_119:
           v69 = v88 - (unsigned __int64)(*(float *)(v5 + 4881864) + *(float *)(v5 + 4881848));
           if ( v67 < 0 )
             v69 = -v67;
-          if ( v69 < 20 && *((byte *)dword_5034FC + 40 * v67 + dword_4A7D10[v6] + v66 + 820) > 3u )
+          if ( v69 < 20 && *((byte *)participantCarBpk_5034FC + 40 * v67 + dword_4A7D10[v6] + v66 + 820) > 3u )
             goto LABEL_120;
         }
         if ( v74 == 1 )
@@ -11940,7 +12037,7 @@ LABEL_120:
       }
 LABEL_114:
       ++v75;
-      if ( v75 >= dword_508D24 )
+      if ( v75 >= numberOfParticipants_508D24 )
         goto LABEL_115;
     }
   }
@@ -11964,14 +12061,14 @@ int sub_40D560()
   int result; // eax@6
 
   v0 = dword_4A7A3C;
-  v1 = flt_4A7DAC[216 * dword_4A9EA8] + 180.0;
+  v1 = flt_4A7DAC[216 * userRaceOrder_4A9EA8] + 180.0;
   dword_4A6B00 = dword_4A7A3C;
   dword_501264 = dword_464F1C;
   v2 = v1 * 0.01745329251994444;
-  v3 = (unsigned __int64)(sin(v2) * *(float *)&dword_4A7DB0[216 * dword_4A9EA8] * 16.0);
+  v3 = (unsigned __int64)(sin(v2) * *(float *)&dword_4A7DB0[216 * userRaceOrder_4A9EA8] * 16.0);
   v4 = v3;
   dword_4A7A3C = v3;
-  v5 = (unsigned __int64)(cos(v2) * *(float *)&dword_4A7DB0[216 * dword_4A9EA8] * 10.66666666666667);
+  v5 = (unsigned __int64)(cos(v2) * *(float *)&dword_4A7DB0[216 * userRaceOrder_4A9EA8] * 10.66666666666667);
   dword_464F1C = v5;
   if ( v0 == v4 && dword_501264 == (_DWORD)v5 )
   {
@@ -11987,8 +12084,8 @@ int sub_40D560()
   dword_503504 += ((signed int)v5 - dword_503504) / v6;
   dword_4A8AA4 = v6 - 1;
 LABEL_6:
-  v7 = (unsigned __int64)*(float *)&dword_4A7DB4[216 * dword_4A9EA8];
-  v8 = *(float *)&dword_4A7DB8[216 * dword_4A9EA8];
+  v7 = (unsigned __int64)*(float *)&dword_4A7DB4[216 * userRaceOrder_4A9EA8];
+  v8 = *(float *)&dword_4A7DB8[216 * userRaceOrder_4A9EA8];
   v9 = dword_46ECE8 + v7 - dword_445014;
   dword_456ABC = dword_46ECE8 + v7 - dword_445014;
   result = dword_503504 + (unsigned __int64)v8 - dword_44501C;
@@ -12023,20 +12120,21 @@ void sub_40D6B0()
   int v6; // [sp+0h] [bp-4h]@2
 
   dword_4AA928 = 0;
-  if ( dword_479D20 > 0 )
+  if ( trxSCE1Bpk_479D20 > 0 )
   {
     v0 = dword_445014;
     v1 = dword_44501C;
     v2 = dword_456ABC;
     v3 = &unk_4B4D00;
-    v6 = dword_479D20;
-    dword_4AA928 = dword_479D20;
+    v6 = trxSCE1Bpk_479D20;
+    dword_4AA928 = trxSCE1Bpk_479D20;
     do
     {
       v4 = dword_456AC0;
       *((_DWORD *)v3 + 1) = *((_DWORD *)v3 - 1) - v0 - v2;
       *((_DWORD *)v3 + 2) = *(_DWORD *)v3 - v1 - v4;
-      v5 = BYTE2(dword_45EA50[0]) == 48;
+	  v5 = strcmp(raceFilePrefix_45EA50, "TR0");
+	  strcpy(raceFilePrefix_45EA50, "TR0");
       *((_DWORD *)v3 + 153) = 0;
       if ( !v5 )
       {
@@ -12070,23 +12168,23 @@ int sub_40D7B0()
   int v8; // ebp@4
   int v9; // ecx@4
 
-  result = dword_501A80;
+  result = trxSHA2Bpk_501A80;
   v1 = 0;
   dword_481BE8 = 0;
-  if ( dword_501A80 > 0 )
+  if ( trxSHA2Bpk_501A80 > 0 )
   {
     while ( 1 )
     {
-      v2 = dword_4A8D40[v1];
-      v3 = dword_4AA520[v1];
-      v4 = dword_46E8E0[v1];
+      v2 = trxSHA7Bpk_4A8D40[v1];
+      v3 = trxSHA6Bpk_4AA520[v1];
+      v4 = trxSHA8Bpk_46E8E0[v1];
       v2 *= 4;
-      v5 = dword_479280[v3] - dword_456ABC;
-      v6 = *(int *)((char *)dword_479280 + v2) - dword_456ABC;
-      v7 = dword_479280[v4] - dword_456ABC;
-      v8 = dword_4A9FE0[v3] - dword_456AC0;
-      v9 = *(int *)((char *)dword_4A9FE0 + v2) - dword_456AC0;
-      dword_46ECE4 = dword_4A9FE0[v4] - dword_456AC0;
+      v5 = trxSHA3Bpk_479280[v3] - dword_456ABC;
+      v6 = *(int *)((char *)trxSHA3Bpk_479280 + v2) - dword_456ABC;
+      v7 = trxSHA3Bpk_479280[v4] - dword_456ABC;
+      v8 = trxSHA4Bpk_4A9FE0[v3] - dword_456AC0;
+      v9 = *(int *)((char *)trxSHA4Bpk_4A9FE0 + v2) - dword_456AC0;
+      dword_46ECE4 = trxSHA4Bpk_4A9FE0[v4] - dword_456AC0;
       dword_50EF20 = v5;
       dword_50351C = v6;
       dword_4A8A80 = v7;
@@ -12098,9 +12196,9 @@ int sub_40D7B0()
         && (abs(v8 - dword_44501C) < dword_44501C
          || abs(v9 - dword_44501C) < dword_44501C
          || abs(dword_46ECE4 - dword_44501C) < dword_44501C) )
-        sub_43D530(v5 + dword_456AA0, v8, dword_456AA0 + v6, v9, dword_456AA0 + v7, dword_46ECE4, (int)&unk_466F00);
+        sub_43D530(v5 + dword_456AA0, v8, dword_456AA0 + v6, v9, dword_456AA0 + v7, dword_46ECE4, (int)&trxVARJOTab_466F00);
       result = dword_481BE8++ + 1;
-      if ( dword_481BE8 >= dword_501A80 )
+      if ( dword_481BE8 >= trxSHA2Bpk_501A80 )
         break;
       v1 = dword_481BE8;
     }
@@ -12162,12 +12260,12 @@ int sub_40D920()
   float v47; // [sp+10h] [bp-Ch]@8
 
   v0 = (double)dword_46ECE8;
-  v1 = dword_4A9EA8;
+  v1 = userRaceOrder_4A9EA8;
   v44 = (double)dword_445014;
-  v2 = 216 * dword_4A9EA8;
-  dword_503518 = dword_4A9EA8;
-  if ( v0 + *(float *)&dword_4A7DB4[216 * dword_4A9EA8] < v44 )
-    dword_4A7D04[v2] = (unsigned __int64)*(float *)&dword_4A7DB4[216 * dword_4A9EA8];
+  v2 = 216 * userRaceOrder_4A9EA8;
+  currentDriverSelectedIndex_503518 = userRaceOrder_4A9EA8;
+  if ( v0 + *(float *)&dword_4A7DB4[216 * userRaceOrder_4A9EA8] < v44 )
+    dword_4A7D04[v2] = (unsigned __int64)*(float *)&dword_4A7DB4[216 * userRaceOrder_4A9EA8];
   v3 = dword_445014;
   v46 = (double)(dword_464F40 - dword_445014);
   if ( v0 + *(float *)(v2 * 4 + 4881844) > v46 )
@@ -12199,31 +12297,31 @@ int sub_40D920()
       dword_4A7D08[v2] - (unsigned __int64)(cos(v10) * -33.33332),
       dword_4A7D04[v2] - (unsigned __int64)(sin(v9) * -40.0),
       dword_4A7D08[v2] - (unsigned __int64)(cos(v9) * -33.33332),
-      (int)&unk_4A9EE0);
-    v11 = (flt_4A7DAC[216 * dword_503518] + 190.0) * 0.01745329251994444;
-    v12 = (flt_4A7DAC[216 * dword_503518] + 198.0) * 0.01745329251994444;
+      (int)&trxLITTab_4A9EE0);
+    v11 = (flt_4A7DAC[216 * currentDriverSelectedIndex_503518] + 190.0) * 0.01745329251994444;
+    v12 = (flt_4A7DAC[216 * currentDriverSelectedIndex_503518] + 198.0) * 0.01745329251994444;
     sub_43D530(
-      dword_4A7D04[216 * dword_503518],
-      dword_4A7D08[216 * dword_503518],
-      dword_4A7D04[216 * dword_503518] - (unsigned __int64)(sin(v12) * -36.0),
-      dword_4A7D08[216 * dword_503518] - (unsigned __int64)(cos(v12) * -29.999988),
-      dword_4A7D04[216 * dword_503518] - (unsigned __int64)(sin(v11) * -40.0),
-      dword_4A7D08[216 * dword_503518] - (unsigned __int64)(cos(v11) * -33.33332),
-      (int)&unk_4A9EE0);
-    v13 = (flt_4A7DAC[216 * dword_503518] - 18.0 + 180.0) * 0.01745329251994444;
-    v14 = (flt_4A7DAC[216 * dword_503518] - 10.0 + 180.0) * 0.01745329251994444;
+      dword_4A7D04[216 * currentDriverSelectedIndex_503518],
+      dword_4A7D08[216 * currentDriverSelectedIndex_503518],
+      dword_4A7D04[216 * currentDriverSelectedIndex_503518] - (unsigned __int64)(sin(v12) * -36.0),
+      dword_4A7D08[216 * currentDriverSelectedIndex_503518] - (unsigned __int64)(cos(v12) * -29.999988),
+      dword_4A7D04[216 * currentDriverSelectedIndex_503518] - (unsigned __int64)(sin(v11) * -40.0),
+      dword_4A7D08[216 * currentDriverSelectedIndex_503518] - (unsigned __int64)(cos(v11) * -33.33332),
+      (int)&trxLITTab_4A9EE0);
+    v13 = (flt_4A7DAC[216 * currentDriverSelectedIndex_503518] - 18.0 + 180.0) * 0.01745329251994444;
+    v14 = (flt_4A7DAC[216 * currentDriverSelectedIndex_503518] - 10.0 + 180.0) * 0.01745329251994444;
     sub_43D530(
-      dword_4A7D04[216 * dword_503518],
-      dword_4A7D08[216 * dword_503518],
-      dword_4A7D04[216 * dword_503518] - (unsigned __int64)(sin(v14) * -40.0),
-      dword_4A7D08[216 * dword_503518] - (unsigned __int64)(cos(v14) * -33.33332),
-      dword_4A7D04[216 * dword_503518] - (unsigned __int64)(sin(v13) * -36.0),
-      dword_4A7D08[216 * dword_503518] - (unsigned __int64)(cos(v13) * -29.999988),
-      (int)&unk_4A9EE0);
-    v1 = dword_4A9EA8;
+      dword_4A7D04[216 * currentDriverSelectedIndex_503518],
+      dword_4A7D08[216 * currentDriverSelectedIndex_503518],
+      dword_4A7D04[216 * currentDriverSelectedIndex_503518] - (unsigned __int64)(sin(v14) * -40.0),
+      dword_4A7D08[216 * currentDriverSelectedIndex_503518] - (unsigned __int64)(cos(v14) * -33.33332),
+      dword_4A7D04[216 * currentDriverSelectedIndex_503518] - (unsigned __int64)(sin(v13) * -36.0),
+      dword_4A7D08[216 * currentDriverSelectedIndex_503518] - (unsigned __int64)(cos(v13) * -29.999988),
+      (int)&trxLITTab_4A9EE0);
+    v1 = userRaceOrder_4A9EA8;
   }
   v15 = 0;
-  for ( dword_503518 = 0; v15 < dword_508D24; dword_503518 = v15 )
+  for ( currentDriverSelectedIndex_503518 = 0; v15 < numberOfParticipants_508D24; currentDriverSelectedIndex_503518 = v15 )
   {
     if ( v15 != v1 )
     {
@@ -12249,30 +12347,30 @@ int sub_40D920()
             v18 - (unsigned __int64)(cos(v22) * -33.33332),
             dword_4A7D04[v16] - (unsigned __int64)(sin(v21) * -40.0),
             v18 - (unsigned __int64)(cos(v21) * -33.33332),
-            (int)&unk_4A9EE0);
-          v23 = (flt_4A7DAC[216 * dword_503518] + 190.0) * 0.01745329251994444;
-          v24 = (flt_4A7DAC[216 * dword_503518] + 198.0) * 0.01745329251994444;
+            (int)&trxLITTab_4A9EE0);
+          v23 = (flt_4A7DAC[216 * currentDriverSelectedIndex_503518] + 190.0) * 0.01745329251994444;
+          v24 = (flt_4A7DAC[216 * currentDriverSelectedIndex_503518] + 198.0) * 0.01745329251994444;
           sub_43D530(
-            dword_4A7D04[216 * dword_503518],
-            dword_4A7D08[216 * dword_503518],
-            dword_4A7D04[216 * dword_503518] - (unsigned __int64)(sin(v24) * -36.0),
-            dword_4A7D08[216 * dword_503518] - (unsigned __int64)(cos(v24) * -29.999988),
-            dword_4A7D04[216 * dword_503518] - (unsigned __int64)(sin(v23) * -40.0),
-            dword_4A7D08[216 * dword_503518] - (unsigned __int64)(cos(v23) * -33.33332),
-            (int)&unk_4A9EE0);
-          v25 = (flt_4A7DAC[216 * dword_503518] - 18.0 + 180.0) * 0.01745329251994444;
-          v26 = (flt_4A7DAC[216 * dword_503518] - 10.0 + 180.0) * 0.01745329251994444;
+            dword_4A7D04[216 * currentDriverSelectedIndex_503518],
+            dword_4A7D08[216 * currentDriverSelectedIndex_503518],
+            dword_4A7D04[216 * currentDriverSelectedIndex_503518] - (unsigned __int64)(sin(v24) * -36.0),
+            dword_4A7D08[216 * currentDriverSelectedIndex_503518] - (unsigned __int64)(cos(v24) * -29.999988),
+            dword_4A7D04[216 * currentDriverSelectedIndex_503518] - (unsigned __int64)(sin(v23) * -40.0),
+            dword_4A7D08[216 * currentDriverSelectedIndex_503518] - (unsigned __int64)(cos(v23) * -33.33332),
+            (int)&trxLITTab_4A9EE0);
+          v25 = (flt_4A7DAC[216 * currentDriverSelectedIndex_503518] - 18.0 + 180.0) * 0.01745329251994444;
+          v26 = (flt_4A7DAC[216 * currentDriverSelectedIndex_503518] - 10.0 + 180.0) * 0.01745329251994444;
           sub_43D530(
-            dword_4A7D04[216 * dword_503518],
-            dword_4A7D08[216 * dword_503518],
-            dword_4A7D04[216 * dword_503518] - (unsigned __int64)(sin(v26) * -40.0),
-            dword_4A7D08[216 * dword_503518] - (unsigned __int64)(cos(v26) * -33.33332),
-            dword_4A7D04[216 * dword_503518] - (unsigned __int64)(sin(v25) * -36.0),
-            dword_4A7D08[216 * dword_503518] - (unsigned __int64)(cos(v25) * -29.999988),
-            (int)&unk_4A9EE0);
-          v15 = dword_503518;
+            dword_4A7D04[216 * currentDriverSelectedIndex_503518],
+            dword_4A7D08[216 * currentDriverSelectedIndex_503518],
+            dword_4A7D04[216 * currentDriverSelectedIndex_503518] - (unsigned __int64)(sin(v26) * -40.0),
+            dword_4A7D08[216 * currentDriverSelectedIndex_503518] - (unsigned __int64)(cos(v26) * -33.33332),
+            dword_4A7D04[216 * currentDriverSelectedIndex_503518] - (unsigned __int64)(sin(v25) * -36.0),
+            dword_4A7D08[216 * currentDriverSelectedIndex_503518] - (unsigned __int64)(cos(v25) * -29.999988),
+            (int)&trxLITTab_4A9EE0);
+          v15 = currentDriverSelectedIndex_503518;
         }
-        v1 = dword_4A9EA8;
+        v1 = userRaceOrder_4A9EA8;
       }
     }
     ++v15;
@@ -12280,15 +12378,15 @@ int sub_40D920()
   v27 = dword_4A7D10[216 * v1];
   v28 = dword_4A7D08[216 * v1];
   v29 = dword_4A7D04[216 * v1];
-  dword_503518 = v1;
+  currentDriverSelectedIndex_503518 = v1;
   sub_43AEC0(v29, v28, v27);
-  if ( dword_4A6898[37 * dword_503518] <= 0 )
+  if ( dword_4A6898[37 * currentDriverSelectedIndex_503518] <= 0 )
   {
     sub_43AFC0(
-      dword_4A7D04[216 * dword_503518],
-      dword_4A7D08[216 * dword_503518],
-      dword_4A7EDC[216 * dword_503518] << 8);
-    v30 = 216 * dword_503518;
+      dword_4A7D04[216 * currentDriverSelectedIndex_503518],
+      dword_4A7D08[216 * currentDriverSelectedIndex_503518],
+      dword_4A7EDC[216 * currentDriverSelectedIndex_503518] << 8);
+    v30 = 216 * currentDriverSelectedIndex_503518;
     if ( waitWithDelay() >= (unsigned int)(dword_4A7EE0[v30] + 3) )
     {
       v31 = dword_4A7EDC[v30] + 1;
@@ -12296,14 +12394,14 @@ int sub_40D920()
       dword_4A7EDC[v30] = v31;
       if ( !((unsigned __int8)(v32 ^ __OFSUB__(v31, 7)) | (v31 == 7)) )
         dword_4A7EDC[v30] = 0;
-      dword_4A7EE0[216 * dword_503518] = waitWithDelay();
+      dword_4A7EE0[216 * currentDriverSelectedIndex_503518] = waitWithDelay();
     }
   }
-  result = dword_508D24;
+  result = numberOfParticipants_508D24;
   v34 = 0;
-  for ( dword_503518 = 0; v34 < dword_508D24; dword_503518 = v34 )
+  for ( currentDriverSelectedIndex_503518 = 0; v34 < numberOfParticipants_508D24; currentDriverSelectedIndex_503518 = v34 )
   {
-    if ( v34 != dword_4A9EA8 )
+    if ( v34 != userRaceOrder_4A9EA8 )
     {
       v35 = 216 * v34;
       v36 = dword_4A7D04[216 * v34];
@@ -12313,7 +12411,7 @@ int sub_40D920()
         if ( v37 > -20 && v37 < dword_445018 + 20 )
         {
           sub_43AEC0(v36, v37, dword_4A7D10[v35]);
-          v34 = dword_503518;
+          v34 = currentDriverSelectedIndex_503518;
         }
       }
       v38 = 216 * v34;
@@ -12324,10 +12422,10 @@ int sub_40D920()
         if ( v40 > -8 && v40 < dword_445018 + 8 && dword_4A6898[37 * v34] <= 0 )
         {
           sub_43AFC0(v39, v40, dword_4A7EDC[v38] << 8);
-          v41 = 216 * dword_503518;
+          v41 = 216 * currentDriverSelectedIndex_503518;
           if ( waitWithDelay() < (unsigned int)(dword_4A7EE0[v41] + 3) )
           {
-            v34 = dword_503518;
+            v34 = currentDriverSelectedIndex_503518;
           }
           else
           {
@@ -12337,13 +12435,13 @@ int sub_40D920()
             if ( !((unsigned __int8)(v32 ^ __OFSUB__(v42, 7)) | (v42 == 7)) )
               dword_4A7EDC[v41] = 0;
             v43 = waitWithDelay();
-            v34 = dword_503518;
-            dword_4A7EE0[216 * dword_503518] = v43;
+            v34 = currentDriverSelectedIndex_503518;
+            dword_4A7EE0[216 * currentDriverSelectedIndex_503518] = v43;
           }
         }
       }
     }
-    result = dword_508D24;
+    result = numberOfParticipants_508D24;
     ++v34;
   }
   return result;
@@ -12434,18 +12532,18 @@ int sub_40E180()
   int v79; // [sp+2Ch] [bp-10h]@20
   int v80; // [sp+34h] [bp-8h]@41
 
-  v0 = dword_503518;
-  v1 = 37 * dword_503518;
-  result = dword_4A6898[37 * dword_503518];
+  v0 = currentDriverSelectedIndex_503518;
+  v1 = 37 * currentDriverSelectedIndex_503518;
+  result = dword_4A6898[37 * currentDriverSelectedIndex_503518];
   if ( result <= 0 )
     return result;
-  v3 = 216 * dword_503518;
-  result = dword_4A7E0C[216 * dword_503518];
+  v3 = 216 * currentDriverSelectedIndex_503518;
+  result = dword_4A7E0C[216 * currentDriverSelectedIndex_503518];
   if ( result )
     return result;
   if ( dword_481E14 <= 430 )
     return result;
-  result = dword_4A7A20 + 216 * dword_503518;
+  result = dword_4A7A20 + 216 * currentDriverSelectedIndex_503518;
   if ( !(dword_4A7D20[4 * result] & 0x20) )
     return result;
   result = dword_4A68AC[v1];
@@ -12454,7 +12552,7 @@ int sub_40E180()
   result = dword_4A68B0[v1];
   if ( result <= 0 )
     return result;
-  v4 = 37 * dword_503518 + dword_4A68E0[v1];
+  v4 = 37 * currentDriverSelectedIndex_503518 + dword_4A68E0[v1];
   dword_4A7EB8[v3] = 1;
   v5 = 37 * v0 + dword_4A68E0[v1];
   v6 = ((double)dword_4A68E4[v4] + flt_4A7DAC[216 * v0] + 180.0) * 0.01745329251994444;
@@ -12486,18 +12584,18 @@ int sub_40E180()
   v22 = *(float *)&dword_4A7DB8[216 * v0] - 4.0;
   dword_50350C = v21;
   dword_4A6AD8 = (unsigned __int64)(v22 + (double)v70);
-  if ( v0 == dword_4A9EA8 )
+  if ( v0 == userRaceOrder_4A9EA8 )
   {
     v66 = 36864;
     v65 = rand() % 2 + 19;
     v64 = 9;
 LABEL_15:
     loadMenuSoundEffect(v64, v65, 0, v66, 135168);
-    v0 = dword_503518;
+    v0 = currentDriverSelectedIndex_503518;
     goto LABEL_16;
   }
-  v23 = (unsigned __int64)(*(float *)&dword_4A7DB4[216 * v0] - *(float *)&dword_4A7DB4[216 * dword_4A9EA8]);
-  v24 = (unsigned __int64)(*(float *)&dword_4A7DB8[216 * v0] - *(float *)&dword_4A7DB8[216 * dword_4A9EA8]);
+  v23 = (unsigned __int64)(*(float *)&dword_4A7DB4[216 * v0] - *(float *)&dword_4A7DB4[216 * userRaceOrder_4A9EA8]);
+  v24 = (unsigned __int64)(*(float *)&dword_4A7DB8[216 * v0] - *(float *)&dword_4A7DB8[216 * userRaceOrder_4A9EA8]);
   v25 = 36864 - 75 * (unsigned __int64)sqrt((double)(v23 * v23 + (signed int)v24 * (signed int)v24));
   if ( v25 > 4096 )
   {
@@ -12518,7 +12616,7 @@ LABEL_16:
     v30 = (unsigned __int64)(v29 + 1.0);
   v77 = v28 + rand() % 6 - 3;
   v31 = rand();
-  v32 = dword_503518;
+  v32 = currentDriverSelectedIndex_503518;
   v33 = 0;
   v74 = 0;
   v79 = v30 + v31 % 6 - 3;
@@ -12530,7 +12628,7 @@ LABEL_16:
     v75 = v34;
     v69 = v35;
     v76 = 0;
-    if ( dword_508D24 > 0 )
+    if ( numberOfParticipants_508D24 > 0 )
     {
       v37 = (int)dword_4A6898;
       v72 = (int)dword_4A6898;
@@ -12541,8 +12639,8 @@ LABEL_40:
         v36 = v76 + 1;
         v71 += 864;
         v37 += 148;
-        v46 = __OFSUB__(v76 + 1, dword_508D24);
-        v45 = v76++ + 1 - dword_508D24 < 0;
+        v46 = __OFSUB__(v76 + 1, numberOfParticipants_508D24);
+        v45 = v76++ + 1 - numberOfParticipants_508D24 < 0;
         v72 = v37;
         if ( !(v45 ^ v46) )
           goto LABEL_41;
@@ -12564,7 +12662,7 @@ LABEL_69:
       }
       else
       {
-        v42 = (char *)dword_5034FC + 40 * v39 + *(_DWORD *)(v71 - 168);
+        v42 = (char *)participantCarBpk_5034FC + 40 * v39 + *(_DWORD *)(v71 - 168);
         v43 = (unsigned __int8)v42[v38 + 820] < 3u;
         v44 = v42[v38 + 820] == 3;
         v37 = v72;
@@ -12574,7 +12672,7 @@ LABEL_69:
           if ( !*(_DWORD *)(v71 + 84) )
             *(_DWORD *)v72 = (unsigned __int64)((double)*(signed int *)v72
                                               - (double)(1024 - *(_DWORD *)(v72 + 4))
-                                              * *(float *)&dword_4A6AE0[dword_4A6880[37 * v32]]);
+                                              * *(float *)&dword_4A6AE0[raceParticipant2[v32].carType]);
           if ( *(_DWORD *)v72 < 0 )
             *(_DWORD *)v72 = 0;
           v34 = v75;
@@ -12596,7 +12694,7 @@ LABEL_41:
       && v47 < dword_4A7CF8
       && v80 >= 0
       && v80 < dword_464F40
-      && (*((byte *)dword_50A16C + v47 * dword_464F40 + v80) & 0xFu) < 4 )
+      && (*((byte *)trxImaBpk_50A16C + v47 * dword_464F40 + v80) & 0xFu) < 4 )
     {
       dword_4A7CF0 = v34 + dword_50350C;
       dword_4AA3E4 = v35 + dword_4A6AD8;
@@ -12606,7 +12704,7 @@ LABEL_41:
     if ( !isMultiplayerGame )
     {
       v48 = rand() % 5;
-      v32 = dword_503518;
+      v32 = currentDriverSelectedIndex_503518;
       if ( v48 < 20 )
       {
         v49 = 32 * v48;
@@ -12626,8 +12724,8 @@ LABEL_41:
             v52 = -v52;
           if ( v52 >= 3 )
             goto LABEL_62;
-          v53 = dword_4A9EA8;
-          v44 = v32 == dword_4A9EA8;
+          v53 = userRaceOrder_4A9EA8;
+          v44 = v32 == userRaceOrder_4A9EA8;
           *(_DWORD *)v73 = 1;
           *((_DWORD *)v73 - 1) = 0;
           if ( v44 )
@@ -12651,7 +12749,7 @@ LABEL_62:
 LABEL_61:
         v58 = rand();
         loadMenuSoundEffect(3u, v58 % 3 + 7, 0, v67, 327680);
-        v32 = dword_503518;
+        v32 = currentDriverSelectedIndex_503518;
         goto LABEL_62;
       }
     }
@@ -12699,9 +12797,9 @@ int sub_40E960()
   int result; // eax@19
   int v14; // [sp+0h] [bp-4h]@6
 
-  v0 = dword_503518;
-  v1 = 216 * dword_503518;
-  if ( dword_4A7EB8[216 * dword_503518] )
+  v0 = currentDriverSelectedIndex_503518;
+  v1 = 216 * currentDriverSelectedIndex_503518;
+  if ( dword_4A7EB8[216 * currentDriverSelectedIndex_503518] )
   {
     v2 = dword_456AA0 + dword_4A7ED4[v1] - dword_456ABC;
     v3 = dword_4A7ED8[v1] - dword_456AC0;
@@ -12711,6 +12809,7 @@ int sub_40E960()
       v4 = v3 << 9;
       do
       {
+		  //esto son las llamas! que son 8 imagenes
         v5 = 0;
         do
         {
@@ -12720,7 +12819,7 @@ int sub_40E960()
           if ( v6 )
           {
             *(byte *)(v5 + dword_464F14 + v4 + v2 + 96) = v6;
-            v0 = dword_503518;
+            v0 = currentDriverSelectedIndex_503518;
           }
           v7 = *((byte *)*(&flame1Bpk + dword_4A6904[dword_4A68E0[37 * v0] + 37 * v0])
                + 8 * (v14 + 8 * (dword_4A7D0C[216 * v0] / 2))
@@ -12729,7 +12828,7 @@ int sub_40E960()
           if ( v7 )
           {
             *(byte *)(v5 + dword_464F14 + v4 + v2 + 97) = v7;
-            v0 = dword_503518;
+            v0 = currentDriverSelectedIndex_503518;
           }
           v8 = *((byte *)*(&flame1Bpk + dword_4A6904[dword_4A68E0[37 * v0] + 37 * v0])
                + 8 * (v14 + 8 * (dword_4A7D0C[216 * v0] / 2))
@@ -12738,7 +12837,7 @@ int sub_40E960()
           if ( v8 )
           {
             *(byte *)(v5 + dword_464F14 + v4 + v2 + 98) = v8;
-            v0 = dword_503518;
+            v0 = currentDriverSelectedIndex_503518;
           }
           v9 = v14;
           v10 = *((byte *)*(&flame1Bpk + dword_4A6904[dword_4A68E0[37 * v0] + 37 * v0])
@@ -12748,7 +12847,7 @@ int sub_40E960()
           if ( v10 )
           {
             *(byte *)(v5 + v4 + dword_464F14 + v2 + 99) = v10;
-            v0 = dword_503518;
+            v0 = currentDriverSelectedIndex_503518;
           }
           v5 += 4;
         }
@@ -12823,8 +12922,8 @@ int sub_40EBC0()
   char v47; // al@67
   char v48; // al@69
 
-  result = 216 * dword_503518;
-  v1 = dword_4A7EB4[216 * dword_503518];
+  result = 216 * currentDriverSelectedIndex_503518;
+  v1 = dword_4A7EB4[216 * currentDriverSelectedIndex_503518];
   if ( v1 > 0 )
   {
     v2 = dword_456AA0 + dword_4A7ECC[result] - dword_456ABC;
@@ -12865,8 +12964,8 @@ int sub_40EBC0()
       }
       while ( v4 < 64 );
     }
-    result = 216 * dword_503518;
-    dword_4A7EB4[216 * dword_503518] = 0;
+    result = 216 * currentDriverSelectedIndex_503518;
+    dword_4A7EB4[216 * currentDriverSelectedIndex_503518] = 0;
   }
   if ( dword_4A7EB0[result] > 0 )
   {
@@ -12914,8 +13013,8 @@ int sub_40EBC0()
       }
       while ( v22 < 64 );
     }
-    result = 216 * dword_503518;
-    dword_4A7EB4[result] = dword_4A7EB0[216 * dword_503518] + 1;
+    result = 216 * currentDriverSelectedIndex_503518;
+    dword_4A7EB4[result] = dword_4A7EB0[216 * currentDriverSelectedIndex_503518] + 1;
     dword_4A7EB0[result] = 0;
   }
   if ( dword_4A7EAC[result] > 0 )
@@ -12964,8 +13063,8 @@ int sub_40EBC0()
       }
       while ( v39 < 64 );
     }
-    result = 216 * dword_503518;
-    dword_4A7EB0[result] = dword_4A7EAC[216 * dword_503518] + 1;
+    result = 216 * currentDriverSelectedIndex_503518;
+    dword_4A7EB0[result] = dword_4A7EAC[216 * currentDriverSelectedIndex_503518] + 1;
     dword_4A7EAC[result] = 0;
   }
   return result * 4;
@@ -13014,7 +13113,7 @@ int  sub_40F070(int result)
   v2 = 0;
   do
   {
-    v3 = v1 + 216 * dword_503518;
+    v3 = v1 + 216 * currentDriverSelectedIndex_503518;
     v4 = dword_4A7EE4[v3];
     if ( v4 <= 0 )
       goto LABEL_35;
@@ -13072,7 +13171,7 @@ LABEL_12:
       goto LABEL_14;
     }
 LABEL_33:
-    v3 = v1 + 216 * dword_503518;
+    v3 = v1 + 216 * currentDriverSelectedIndex_503518;
     result = dword_4A9EA4 + dword_4A7EE4[v3];
     dword_4A7EE4[v3] = result;
     if ( result >= 13 )
@@ -13136,7 +13235,7 @@ LABEL_45:
       while ( v20 < 64 );
       v1 = v33;
     }
-    v30 = v1 + 216 * dword_503518;
+    v30 = v1 + 216 * currentDriverSelectedIndex_503518;
     v31 = dword_4A7F20[v30];
     result = 4 * v30 + 4882208;
     v32 = dword_4A9EA4 + v31;
@@ -13179,15 +13278,15 @@ int sub_40F450()
   unsigned __int8 v21; // of@26
   signed int v23; // [sp+0h] [bp-4h]@13
 
-  v0 = dword_503518;
-  LODWORD(v1) = 148 * dword_503518;
-  if ( dword_4A68D8[37 * dword_503518] == 1
+  v0 = currentDriverSelectedIndex_503518;
+  LODWORD(v1) = 148 * currentDriverSelectedIndex_503518;
+  if ( dword_4A68D8[37 * currentDriverSelectedIndex_503518] == 1
     && *(int *)((char *)dword_4A68B4 + v1) > 0
     && *(int *)((char *)dword_4A68A0 + v1) )
   {
-    v2 = 216 * dword_503518;
-    v3 = (flt_4A7DAC[216 * dword_503518] + 180.0) * 0.01745329251994444;
-    v4 = *(float *)&dword_4A6890[37 * dword_503518] * -2.3;
+    v2 = 216 * currentDriverSelectedIndex_503518;
+    v3 = (flt_4A7DAC[216 * currentDriverSelectedIndex_503518] + 180.0) * 0.01745329251994444;
+    v4 = *(float *)&dword_4A6890[37 * currentDriverSelectedIndex_503518] * -2.3;
     v5 = sin(v3) * v4;
     v6 = (unsigned __int64)v5;
     if ( v5 - (double)v6 >= 0.5 )
@@ -13235,8 +13334,8 @@ int sub_40F450()
         }
         while ( v23 );
         LODWORD(v1) = waitWithDelay();
-        v0 = dword_503518;
-        if ( (unsigned int)v1 >= dword_4A7EE0[216 * dword_503518] + 4 )
+        v0 = currentDriverSelectedIndex_503518;
+        if ( (unsigned int)v1 >= dword_4A7EE0[216 * currentDriverSelectedIndex_503518] + 4 )
         {
           v21 = __OFSUB__(dword_456AFC + 1, 1);
           v19 = dword_456AFC == 0;
@@ -13244,8 +13343,8 @@ int sub_40F450()
           if ( !((unsigned __int8)(v20 ^ v21) | v19) )
             dword_456AFC = 0;
           LODWORD(v1) = waitWithDelay();
-          v0 = dword_503518;
-          dword_4A7EE0[216 * dword_503518] = v1;
+          v0 = currentDriverSelectedIndex_503518;
+          dword_4A7EE0[216 * currentDriverSelectedIndex_503518] = v1;
         }
       }
     }
@@ -13321,9 +13420,9 @@ int sub_40F6A0()
   int v60; // [sp+14h] [bp-4h]@16
   int v61; // [sp+14h] [bp-4h]@51
 
-  v0 = dword_503518;
-  v1 = 864 * dword_503518;
-  v2 = dword_4A7EA8[216 * dword_503518];
+  v0 = currentDriverSelectedIndex_503518;
+  v1 = 864 * currentDriverSelectedIndex_503518;
+  v2 = dword_4A7EA8[216 * currentDriverSelectedIndex_503518];
   if ( v2 > 0 )
     dword_4A7EA8[v1 / 4] = v2 - 1;
   v3 = 37 * v0;
@@ -13369,14 +13468,14 @@ int sub_40F6A0()
         if ( !v11 )
         {
 LABEL_85:
-          if ( dword_503518 == dword_4A9EA8 )
+          if ( currentDriverSelectedIndex_503518 == userRaceOrder_4A9EA8 )
           {
             loadMenuSoundEffect(4u, 18, 0, 36864, 135168);
           }
           else
           {
-            v15 = (unsigned __int64)(*(float *)(v1 + 4881844) - *(float *)&dword_4A7DB4[216 * dword_4A9EA8]);
-            v16 = (unsigned __int64)(*(float *)(v1 + 4881848) - *(float *)&dword_4A7DB8[216 * dword_4A9EA8]);
+            v15 = (unsigned __int64)(*(float *)(v1 + 4881844) - *(float *)&dword_4A7DB4[216 * userRaceOrder_4A9EA8]);
+            v16 = (unsigned __int64)(*(float *)(v1 + 4881848) - *(float *)&dword_4A7DB8[216 * userRaceOrder_4A9EA8]);
             v17 = 0x10000 - 75 * (unsigned __int64)sqrt((double)(v15 * v15 + (signed int)v16 * (signed int)v16));
             if ( v17 > 4096 )
               loadMenuSoundEffect(4u, 18, 0, v17, 135168);
@@ -13419,7 +13518,7 @@ LABEL_85:
             ++v20;
           }
           while ( v21 < 64 );
-          --dword_4A68A8[37 * dword_503518];
+          --dword_4A68A8[37 * currentDriverSelectedIndex_503518];
         }
       }
     }
@@ -13431,18 +13530,18 @@ LABEL_85:
     v31 = (int)dword_481C00;
     while ( 1 )
     {
-      v32 = (unsigned __int64)*(float *)&dword_4A7DB4[216 * dword_503518] - *(_DWORD *)v31;
-      v33 = (unsigned __int64)*(float *)&dword_4A7DB8[216 * dword_503518] - *(_DWORD *)(v31 + 4);
+      v32 = (unsigned __int64)*(float *)&dword_4A7DB4[216 * currentDriverSelectedIndex_503518] - *(_DWORD *)v31;
+      v33 = (unsigned __int64)*(float *)&dword_4A7DB8[216 * currentDriverSelectedIndex_503518] - *(_DWORD *)(v31 + 4);
       v34 = v32;
       if ( v32 < 0 )
         v34 = -v32;
       if ( v34 >= 20 )
         goto LABEL_82;
-      v35 = (unsigned __int64)*(float *)&dword_4A7DB8[216 * dword_503518] - *(_DWORD *)(v31 + 4);
+      v35 = (unsigned __int64)*(float *)&dword_4A7DB8[216 * currentDriverSelectedIndex_503518] - *(_DWORD *)(v31 + 4);
       if ( v33 < 0 )
         v35 = -v33;
       if ( v35 >= 20
-        || *((byte *)dword_5034FC + 40 * v33 + dword_4A7D10[216 * dword_503518] + v32 + 820) <= 3u
+        || *((byte *)participantCarBpk_5034FC + 40 * v33 + dword_4A7D10[216 * currentDriverSelectedIndex_503518] + v32 + 820) <= 3u
         || *(_DWORD *)(v31 + 8) != -1 )
         goto LABEL_82;
       v36 = 0;
@@ -13471,24 +13570,24 @@ LABEL_85:
         ++v36;
       }
       while ( v37 < 256 );
-      v43 = dword_503518;
-      v44 = dword_4A7E0C[216 * dword_503518];
+      v43 = currentDriverSelectedIndex_503518;
+      v44 = dword_4A7E0C[216 * currentDriverSelectedIndex_503518];
       *(_DWORD *)(v31 + 8) = 0;
       if ( !v44 )
         dword_4A6898[37 * v43] += 20 * (dword_4A689C[37 * v43] - 1024);
       if ( dword_4A6898[37 * v43] < 0 )
         dword_4A6898[37 * v43] = 0;
       *((float *)&unk_4A7DFC + 216 * v43) = (double)(rand() % 3 - 1) * 0.5 + *((float *)&unk_4A7DFC + 216 * v43);
-      v45 = (char *)&unk_4A7E00 + 864 * dword_503518;
+      v45 = (char *)&unk_4A7E00 + 864 * currentDriverSelectedIndex_503518;
       *(float *)v45 = (double)(rand() % 3 - 1) * 0.5 + *(float *)v45;
-      v46 = &dword_4A7DB4[216 * dword_503518];
+      v46 = &dword_4A7DB4[216 * currentDriverSelectedIndex_503518];
       *(float *)v46 = (double)(rand() % 11 - 5) + *(float *)v46;
-      v47 = &dword_4A7DB8[216 * dword_503518];
+      v47 = &dword_4A7DB8[216 * currentDriverSelectedIndex_503518];
       *(float *)v47 = (double)(rand() % 11 - 5) + *(float *)v47;
-      v48 = 864 * dword_503518;
+      v48 = 864 * currentDriverSelectedIndex_503518;
       v49 = rand();
-      v50 = dword_4A9EA8;
-      v51 = dword_503518 == dword_4A9EA8;
+      v50 = userRaceOrder_4A9EA8;
+      v51 = currentDriverSelectedIndex_503518 == userRaceOrder_4A9EA8;
       *(float *)(v48 + 4881924) = (double)(v49 % 22 - 10);
       *(float *)(v48 + 4881840) = *(float *)(v48 + 4881840) - 1.7 * *(float *)(v48 + 4881840);
       if ( v51 )
@@ -13871,7 +13970,7 @@ LABEL_92:
         goto LABEL_95;
     }
     v14 = v8() % 100;
-    if ( dword_4A68AC[37 * dword_4A9EA8] )
+    if ( dword_4A68AC[37 * userRaceOrder_4A9EA8] )
     {
       if ( v14 >= 0 )
       {
@@ -14212,7 +14311,7 @@ char sub_410B90()
   char v31; // [sp-14h] [bp-28h]@14
   int v32; // [sp-Ch] [bp-20h]@14
 
-  v0 = dword_503518;
+  v0 = currentDriverSelectedIndex_503518;
   v1 = (signed int)dword_501BA0;
   do
   {
@@ -14228,7 +14327,7 @@ char sub_410B90()
         v5 = -v3;
       if ( v5 < 17 )
       {
-        v6 = (char *)dword_5034FC + 40 * v3 + dword_4A7D10[216 * v0];
+        v6 = (char *)participantCarBpk_5034FC + 40 * v3 + dword_4A7D10[216 * v0];
         LOBYTE(v3) = v6[v2 + 738];
         v7 = (int)&v6[v2];
         if ( (unsigned __int8)v3 > 3u
@@ -14239,7 +14338,7 @@ char sub_410B90()
           v3 = *(_DWORD *)(v1 + 8);
           if ( v3 > 0 )
           {
-            if ( v0 == dword_4A9EA8 )
+            if ( v0 == userRaceOrder_4A9EA8 )
             {
               v32 = 36864;
               v31 = 18;
@@ -14247,8 +14346,8 @@ char sub_410B90()
             }
             else
             {
-              v8 = *(float *)&dword_4A7DB8[216 * v0] - *(float *)&dword_4A7DB8[216 * dword_4A9EA8];
-              v9 = (unsigned __int64)(*(float *)&dword_4A7DB4[216 * v0] - *(float *)&dword_4A7DB4[216 * dword_4A9EA8]);
+              v8 = *(float *)&dword_4A7DB8[216 * v0] - *(float *)&dword_4A7DB8[216 * userRaceOrder_4A9EA8];
+              v9 = (unsigned __int64)(*(float *)&dword_4A7DB4[216 * v0] - *(float *)&dword_4A7DB4[216 * userRaceOrder_4A9EA8]);
               v10 = 36864
                   - 75
                   * (unsigned __int64)sqrt((double)(signed int)(v9 * v9 + (unsigned __int64)v8 * (unsigned __int64)v8));
@@ -14287,43 +14386,43 @@ LABEL_18:
                 switch ( *(_DWORD *)(v1 + 8) )
                 {
                   case 1:
-                    v18 = &dword_4A68B0[37 * dword_503518];
-                    v19 = dword_4A68B0[37 * dword_503518] + 30720;
+                    v18 = &dword_4A68B0[37 * currentDriverSelectedIndex_503518];
+                    v19 = dword_4A68B0[37 * currentDriverSelectedIndex_503518] + 30720;
                     goto LABEL_32;
                   case 2:
-                    v18 = &dword_4A68B4[37 * dword_503518];
-                    v19 = dword_4A68B4[37 * dword_503518] + 15360;
+                    v18 = &dword_4A68B4[37 * currentDriverSelectedIndex_503518];
+                    v19 = dword_4A68B4[37 * currentDriverSelectedIndex_503518] + 15360;
                     goto LABEL_32;
-                  case 3:
-                    ++dword_4A68D0[37 * dword_503518];
+                  case 3: //adelantado
+                    ++raceParticipant2[currentDriverSelectedIndex_503518].currentRacePosition;
                     break;
                   case 4:
-                    v20 = dword_503518;
-                    dword_4A8050[216 * dword_503518] = 560;
-                    if ( v20 == dword_4A9EA8 )
+                    v20 = currentDriverSelectedIndex_503518;
+                    dword_4A8050[216 * currentDriverSelectedIndex_503518] = 560;
+                    if ( v20 == userRaceOrder_4A9EA8 )
                       loadMenuSoundEffect(2u, 6, 0, 0x10000, 327680);
                     break;
                   case 5:
                     v21 = rand() % 4;
-                    v22 = dword_4A6898[37 * dword_503518];
+                    v22 = dword_4A6898[37 * currentDriverSelectedIndex_503518];
                     v21 += 2;
-                    v23 = &dword_4A6898[37 * dword_503518];
+                    v23 = &dword_4A6898[37 * currentDriverSelectedIndex_503518];
                     *(_DWORD *)(v1 + 28) = v21;
                     v24 = (v21 << 10) + v22;
                     *v23 = v24;
                     if ( v24 > 102400 )
                       *v23 = 102400;
                     break;
-                  case 6:
-                    if ( dword_503518 == dword_4A9EA8 )
-                      dword_4A7AAC = 1;
+                  case 6: //drogas pilladas
+                    if ( currentDriverSelectedIndex_503518 == userRaceOrder_4A9EA8 )
+						raceParticipant[0].drugPicked = 1;
                     break;
-                  case 7:
-                    dword_4A68D0[37 * dword_503518] += 10;
+                  case 7: //parece como cuando explota el coche
+					  raceParticipant2[currentDriverSelectedIndex_503518].currentRacePosition += 10;
                     break;
                   case 8:
-                    v25 = dword_4A6898[37 * dword_503518];
-                    v18 = &dword_4A6898[37 * dword_503518];
+                    v25 = dword_4A6898[37 * currentDriverSelectedIndex_503518];
+                    v18 = &dword_4A6898[37 * currentDriverSelectedIndex_503518];
                     *(_DWORD *)(v1 + 28) = 20;
                     v19 = v25 + 20480;
 LABEL_32:
@@ -14342,7 +14441,7 @@ LABEL_32:
                 v27 = rand();
                 v28 = v27;
                 v3 = v27 / 150;
-                v0 = dword_503518;
+                v0 = currentDriverSelectedIndex_503518;
                 *(_DWORD *)(v1 + 16) = 0;
                 *(_DWORD *)(v1 + 12) = (unsigned __int64)(v28 % 150) + 200;
                 goto LABEL_35;
@@ -14394,19 +14493,19 @@ int sub_410FA0()
   {
     if ( !*(_DWORD *)result )
     {
-      v1 = dword_503518;
-      v2 = 216 * dword_503518;
-      v3 = (unsigned __int64)*(float *)&dword_4A7DB4[216 * dword_503518] - *(_DWORD *)(v18 - 24) - 8;
-      v4 = (unsigned __int64)*(float *)&dword_4A7DB8[216 * dword_503518] - *(_DWORD *)(v18 - 20) - 8;
+      v1 = currentDriverSelectedIndex_503518;
+      v2 = 216 * currentDriverSelectedIndex_503518;
+      v3 = (unsigned __int64)*(float *)&dword_4A7DB4[216 * currentDriverSelectedIndex_503518] - *(_DWORD *)(v18 - 24) - 8;
+      v4 = (unsigned __int64)*(float *)&dword_4A7DB8[216 * currentDriverSelectedIndex_503518] - *(_DWORD *)(v18 - 20) - 8;
       v5 = v3;
       if ( v3 < 0 )
         v5 = -v3;
       if ( v5 < 20 )
       {
-        v6 = (unsigned __int64)*(float *)&dword_4A7DB8[216 * dword_503518] - *(_DWORD *)(v18 - 20) - 8;
+        v6 = (unsigned __int64)*(float *)&dword_4A7DB8[216 * currentDriverSelectedIndex_503518] - *(_DWORD *)(v18 - 20) - 8;
         if ( v4 < 0 )
           v6 = -v4;
-        if ( v6 < 20 && *((byte *)dword_5034FC + 40 * v4 + dword_4A7D10[v2] + v3 + 820) > 3u )
+        if ( v6 < 20 && *((byte *)participantCarBpk_5034FC + 40 * v4 + dword_4A7D10[v2] + v3 + 820) > 3u )
         {
           *(_DWORD *)v18 = 1;
           *(_DWORD *)(v18 - 4) = 0;
@@ -14415,12 +14514,12 @@ int sub_410FA0()
           if ( dword_4A6898[37 * v1] < 0 )
             dword_4A6898[37 * v1] = 0;
           *(float *)&dword_4A7DB4[216 * v1] = (double)(rand() % 7 - 3) + *(float *)&dword_4A7DB4[216 * v1];
-          v7 = &dword_4A7DB8[216 * dword_503518];
+          v7 = &dword_4A7DB8[216 * currentDriverSelectedIndex_503518];
           *(float *)v7 = (double)(rand() % 7 - 3) + *(float *)v7;
-          v8 = 864 * dword_503518;
+          v8 = 864 * currentDriverSelectedIndex_503518;
           v9 = rand();
-          v10 = dword_4A9EA8;
-          v11 = dword_503518 == dword_4A9EA8;
+          v10 = userRaceOrder_4A9EA8;
+          v11 = currentDriverSelectedIndex_503518 == userRaceOrder_4A9EA8;
           *(float *)(v8 + 4881924) = (double)(v9 % 10 - 5);
           *(float *)(v8 + 4881840) = *(float *)(v8 + 4881840) - *(float *)(v8 + 4881840) * 1.1;
           dword_4A8054[v8 / 4] = 45;
@@ -14529,9 +14628,9 @@ char sub_4111F0()
         }
         *(_DWORD *)(v0 + 28) = waitWithDelay();
       }
-      v4 = 864 * dword_4A9EA8;
-      v5 = *(float *)&dword_4A7DB4[216 * dword_4A9EA8];
-      if ( dword_456AA8 )
+      v4 = 864 * userRaceOrder_4A9EA8;
+      v5 = *(float *)&dword_4A7DB4[216 * userRaceOrder_4A9EA8];
+      if ( isCircuitReversed_456AA8 )
       {
         v14 = *(_DWORD *)v0;
         v15 = (unsigned __int64)v5;
@@ -14540,7 +14639,7 @@ char sub_4111F0()
         v17 = v15 - *(_DWORD *)v0 < 0;
         if ( v15 < *(_DWORD *)v0 )
         {
-          if ( (signed int)(unsigned __int64)*(float *)&dword_4A7DB8[216 * dword_4A9EA8] < *(_DWORD *)(v0 + 4) )
+          if ( (signed int)(unsigned __int64)*(float *)&dword_4A7DB8[216 * userRaceOrder_4A9EA8] < *(_DWORD *)(v0 + 4) )
             *(_DWORD *)(v0 + 16) = 0;
           v18 = __OFSUB__(v15, v14);
           v16 = v15 == v14;
@@ -14573,7 +14672,7 @@ char sub_4111F0()
         v9 = v7 - *(_DWORD *)v0 < 0;
         if ( v7 < *(_DWORD *)v0 )
         {
-          if ( (signed int)(unsigned __int64)*(float *)&dword_4A7DB8[216 * dword_4A9EA8] < *(_DWORD *)(v0 + 4) )
+          if ( (signed int)(unsigned __int64)*(float *)&dword_4A7DB8[216 * userRaceOrder_4A9EA8] < *(_DWORD *)(v0 + 4) )
             *(_DWORD *)(v0 + 16) = 2;
           v10 = __OFSUB__(v7, v6);
           v8 = v7 == v6;
@@ -14600,7 +14699,7 @@ char sub_4111F0()
     }
     v0 += 32;
   }
-  while ( v0 < (signed int)&dword_479D20 );
+  while ( v0 < (signed int)&trxSCE1Bpk_479D20 );
   v23 = (signed int)&unk_479AA4;
   do
   {
@@ -14677,7 +14776,7 @@ int sub_411530()
   int v6; // eax@3
 
   v0 = 788 * dword_4AA928;
-  result = dword_4B4320[788 * dword_4AA928];
+  result = trxSCE2Bpk_4B4320[788 * dword_4AA928];
   v2 = 0;
   dword_481BE8 = 0;
   if ( result > 0 )
@@ -14691,7 +14790,7 @@ int sub_411530()
       ++v5;
       v5[482] = v3 + ((v6 + 128) >> 8);
       v5[557] = v4 + (((v5[557] << 8) / *(v5 - 1) + 128) >> 8);
-      result = dword_4B4320[v0];
+      result = trxSCE2Bpk_4B4320[v0];
       ++v2;
     }
     while ( v2 < result );
@@ -14829,9 +14928,9 @@ void sub_4116D0()
   int v46; // edx@43
   int v47; // [sp+0h] [bp-4h]@23
 
-  v0 = dword_479D20 - 1;
-  dword_4A7A38 = dword_479D20 - 1;
-  if ( dword_479D20 - 1 >= 0 )
+  v0 = trxSCE1Bpk_479D20 - 1;
+  dword_4A7A38 = trxSCE1Bpk_479D20 - 1;
+  if ( trxSCE1Bpk_479D20 - 1 >= 0 )
   {
     while ( 1 )
     {
@@ -14841,7 +14940,7 @@ void sub_4116D0()
       dword_4AA928 = dword_4B4F6C[788 * v0];
       if ( !v3 )
       {
-        v4 = dword_4B4320[v2];
+        v4 = trxSCE2Bpk_4B4320[v2];
         v5 = 0;
         dword_481BE8 = 0;
         if ( v4 > 0 )
@@ -14854,7 +14953,7 @@ void sub_4116D0()
             ++v5;
             ++v6;
           }
-          while ( v5 < dword_4B4320[v2] );
+          while ( v5 < trxSCE2Bpk_4B4320[v2] );
           dword_481BE8 = v5;
         }
         sub_411530();
@@ -15021,8 +15120,8 @@ LABEL_36:
           dword_50A19C[v40] = dword_50A190[v40] - (dword_456AC0 << 8) - (v42 << 8);
           dword_50A198[v40] = v41 + (((dword_50A198[v40] << 8) / dword_50A194[v40] + 128) >> 8);
           dword_50A19C[v40] = v42 + (((dword_50A19C[v40] << 8) / dword_50A194[v40] + 128) >> 8);
-          v43 = (int)&dword_50A180[v40];
-          if ( dword_50A198[v40] > -dword_50A180[v40] )
+          v43 = (int)&trxSCE4Bpk_50A180[v40];
+          if ( dword_50A198[v40] > -trxSCE4Bpk_50A180[v40] )
           {
             v44 = dword_50A19C[v40];
             if ( v44 > -dword_50A184[v40] )
@@ -15205,15 +15304,16 @@ int sub_411D10()
   float v175; // [sp+30h] [bp-10h]@63
   int v176; // [sp+34h] [bp-Ch]@64
 
-  result = dword_508D24;
+  result = numberOfParticipants_508D24;
   v1 = 0;
-  dword_503518 = 0;
-  if ( dword_508D24 > 0 )
+  currentDriverSelectedIndex_503518 = 0;
+  if ( numberOfParticipants_508D24 > 0 )
   {
     while ( 1 )
     {
       v2 = 864 * v1;
       v3 = dword_4A6898[37 * v1];
+	  //4881940 es 4A7E10
       *(float *)(v2 + 4881936) = sin((flt_4A7DAC[216 * v1] + 180.0 - 22.0) * 0.01745329251994444) * 12.0
                                + *(float *)&dword_4A7DB4[216 * v1];
       *(float *)(v2 + 4881940) = cos((flt_4A7DAC[216 * v1] + 180.0 - 22.0) * 0.01745329251994444) * 9.999995999999999
@@ -15238,12 +15338,12 @@ int sub_411D10()
         v4 = (char *)&unk_4A7E04 + 864 * v1;
         v5 = (double)rand() * 0.0000152587890625 + *(float *)v4;
         *(float *)v4 = v5;
-        v2 = 864 * dword_503518;
+        v2 = 864 * currentDriverSelectedIndex_503518;
         v6 = rand();
-        v1 = dword_503518;
+        v1 = currentDriverSelectedIndex_503518;
         *(float *)(v2 + 4881924) = v5 - (double)v6 * 0.0000152587890625;
       }
-      if ( dword_4A8054[v2 / 4] > 0 && dword_4A68AC[37 * dword_4A9EA8] )
+      if ( dword_4A8054[v2 / 4] > 0 && dword_4A68AC[37 * userRaceOrder_4A9EA8] )
       {
         --dword_4A8054[v2 / 4];
         v7 = (unsigned __int64)*(float *)(v2 + 4881840);
@@ -15273,84 +15373,84 @@ int sub_411D10()
           if ( !v22 )
             v21 = v21 + 1.0;
           v23 = v17 + dword_464F40 * (unsigned __int64)v21;
-          if ( (*((byte *)dword_50A16C + v23) & 0xF) == 15 )
+          if ( (*((byte *)trxImaBpk_50A16C + v23) & 0xF) == 15 )
           {
-            *((byte *)dword_5034F8 + v23) = byte_479D40[*((byte *)dword_5034F8 + v23)];
-            *((byte *)dword_5034F8 + v23 + 1) = byte_479D40[*((byte *)dword_5034F8 + v23 + 1)];
-            *((byte *)dword_5034F8 + dword_464F40 + v23) = byte_479D40[*((byte *)dword_5034F8 + dword_464F40 + v23)];
-            *((byte *)dword_5034F8 + dword_464F40 + v23 + 1) = byte_479D40[*((byte *)dword_5034F8
+            *((byte *)dword_5034F8 + v23) = trxBLOTab_479D40[*((byte *)dword_5034F8 + v23)];
+            *((byte *)dword_5034F8 + v23 + 1) = trxBLOTab_479D40[*((byte *)dword_5034F8 + v23 + 1)];
+            *((byte *)dword_5034F8 + dword_464F40 + v23) = trxBLOTab_479D40[*((byte *)dword_5034F8 + dword_464F40 + v23)];
+            *((byte *)dword_5034F8 + dword_464F40 + v23 + 1) = trxBLOTab_479D40[*((byte *)dword_5034F8
                                                                             + dword_464F40
                                                                             + v23
                                                                             + 1)];
           }
-          v24 = (unsigned __int64)*(float *)&dword_4A7E28[216 * dword_503518];
-          v25 = dword_4A7E28[216 * dword_503518];
-          v27 = *(float *)&dword_4A7E28[216 * dword_503518];
+          v24 = (unsigned __int64)*(float *)&dword_4A7E28[216 * currentDriverSelectedIndex_503518];
+          v25 = dword_4A7E28[216 * currentDriverSelectedIndex_503518];
+          v27 = *(float *)&dword_4A7E28[216 * currentDriverSelectedIndex_503518];
           if ( !v28 )
             v27 = v27 + 1.0;
           v29 = (unsigned __int64)v27;
-          v30 = (unsigned __int64)*(float *)&dword_4A7E2C[216 * dword_503518];
-          v31 = dword_4A7E2C[216 * dword_503518];
-          v33 = *(float *)&dword_4A7E2C[216 * dword_503518];
+          v30 = (unsigned __int64)*(float *)&dword_4A7E2C[216 * currentDriverSelectedIndex_503518];
+          v31 = dword_4A7E2C[216 * currentDriverSelectedIndex_503518];
+          v33 = *(float *)&dword_4A7E2C[216 * currentDriverSelectedIndex_503518];
           if ( !v34 )
             v33 = v33 + 1.0;
           v35 = v29 + dword_464F40 * (unsigned __int64)v33;
-          if ( (*((byte *)dword_50A16C + v35) & 0xF) == 15 )
+          if ( (*((byte *)trxImaBpk_50A16C + v35) & 0xF) == 15 )
           {
-            *((byte *)dword_5034F8 + v35) = byte_479D40[*((byte *)dword_5034F8 + v35)];
-            *((byte *)dword_5034F8 + v35 + 1) = byte_479D40[*((byte *)dword_5034F8 + v35 + 1)];
-            *((byte *)dword_5034F8 + dword_464F40 + v35) = byte_479D40[*((byte *)dword_5034F8 + dword_464F40 + v35)];
-            *((byte *)dword_5034F8 + dword_464F40 + v35 + 1) = byte_479D40[*((byte *)dword_5034F8
+            *((byte *)dword_5034F8 + v35) = trxBLOTab_479D40[*((byte *)dword_5034F8 + v35)];
+            *((byte *)dword_5034F8 + v35 + 1) = trxBLOTab_479D40[*((byte *)dword_5034F8 + v35 + 1)];
+            *((byte *)dword_5034F8 + dword_464F40 + v35) = trxBLOTab_479D40[*((byte *)dword_5034F8 + dword_464F40 + v35)];
+            *((byte *)dword_5034F8 + dword_464F40 + v35 + 1) = trxBLOTab_479D40[*((byte *)dword_5034F8
                                                                             + dword_464F40
                                                                             + v35
                                                                             + 1)];
           }
-          v36 = (unsigned __int64)*(float *)&dword_4A7E38[216 * dword_503518];
-          v37 = dword_4A7E38[216 * dword_503518];
-          v39 = *(float *)&dword_4A7E38[216 * dword_503518];
+          v36 = (unsigned __int64)*(float *)&dword_4A7E38[216 * currentDriverSelectedIndex_503518];
+          v37 = dword_4A7E38[216 * currentDriverSelectedIndex_503518];
+          v39 = *(float *)&dword_4A7E38[216 * currentDriverSelectedIndex_503518];
           if ( !v40 )
             v39 = v39 + 1.0;
           v41 = (unsigned __int64)v39;
-          v42 = (unsigned __int64)*(float *)&dword_4A7E3C[216 * dword_503518];
-          v43 = dword_4A7E3C[216 * dword_503518];
-          v45 = *(float *)&dword_4A7E3C[216 * dword_503518];
+          v42 = (unsigned __int64)*(float *)&dword_4A7E3C[216 * currentDriverSelectedIndex_503518];
+          v43 = dword_4A7E3C[216 * currentDriverSelectedIndex_503518];
+          v45 = *(float *)&dword_4A7E3C[216 * currentDriverSelectedIndex_503518];
           if ( !v46 )
             v45 = v45 + 1.0;
           v47 = v41 + dword_464F40 * (unsigned __int64)v45;
-          if ( (*((byte *)dword_50A16C + v47) & 0xF) == 15 )
+          if ( (*((byte *)trxImaBpk_50A16C + v47) & 0xF) == 15 )
           {
-            *((byte *)dword_5034F8 + v47) = byte_479D40[*((byte *)dword_5034F8 + v47)];
-            *((byte *)dword_5034F8 + v47 + 1) = byte_479D40[*((byte *)dword_5034F8 + v47 + 1)];
-            *((byte *)dword_5034F8 + dword_464F40 + v47) = byte_479D40[*((byte *)dword_5034F8 + dword_464F40 + v47)];
-            *((byte *)dword_5034F8 + dword_464F40 + v47 + 1) = byte_479D40[*((byte *)dword_5034F8
+            *((byte *)dword_5034F8 + v47) = trxBLOTab_479D40[*((byte *)dword_5034F8 + v47)];
+            *((byte *)dword_5034F8 + v47 + 1) = trxBLOTab_479D40[*((byte *)dword_5034F8 + v47 + 1)];
+            *((byte *)dword_5034F8 + dword_464F40 + v47) = trxBLOTab_479D40[*((byte *)dword_5034F8 + dword_464F40 + v47)];
+            *((byte *)dword_5034F8 + dword_464F40 + v47 + 1) = trxBLOTab_479D40[*((byte *)dword_5034F8
                                                                             + dword_464F40
                                                                             + v47
                                                                             + 1)];
           }
-          v48 = (unsigned __int64)*(float *)&dword_4A7E48[216 * dword_503518];
-          v49 = dword_4A7E48[216 * dword_503518];
-          v51 = *(float *)&dword_4A7E48[216 * dword_503518];
+          v48 = (unsigned __int64)*(float *)&dword_4A7E48[216 * currentDriverSelectedIndex_503518];
+          v49 = dword_4A7E48[216 * currentDriverSelectedIndex_503518];
+          v51 = *(float *)&dword_4A7E48[216 * currentDriverSelectedIndex_503518];
           if ( !v52 )
             v51 = v51 + 1.0;
           v53 = (unsigned __int64)v51;
-          v54 = (unsigned __int64)*(float *)&dword_4A7E4C[216 * dword_503518];
-          v55 = dword_4A7E4C[216 * dword_503518];
-          v57 = *(float *)&dword_4A7E4C[216 * dword_503518];
+          v54 = (unsigned __int64)*(float *)&dword_4A7E4C[216 * currentDriverSelectedIndex_503518];
+          v55 = dword_4A7E4C[216 * currentDriverSelectedIndex_503518];
+          v57 = *(float *)&dword_4A7E4C[216 * currentDriverSelectedIndex_503518];
           if ( !v58 )
             v57 = v57 + 1.0;
           v59 = v53 + dword_464F40 * (unsigned __int64)v57;
-          if ( (*((byte *)dword_50A16C + v59) & 0xF) == 15 )
+          if ( (*((byte *)trxImaBpk_50A16C + v59) & 0xF) == 15 )
           {
-            *((byte *)dword_5034F8 + v59) = byte_479D40[*((byte *)dword_5034F8 + v59)];
-            *((byte *)dword_5034F8 + v59 + 1) = byte_479D40[*((byte *)dword_5034F8 + v59 + 1)];
-            *((byte *)dword_5034F8 + dword_464F40 + v59) = byte_479D40[*((byte *)dword_5034F8 + dword_464F40 + v59)];
-            *((byte *)dword_5034F8 + dword_464F40 + v59 + 1) = byte_479D40[*((byte *)dword_5034F8
+            *((byte *)dword_5034F8 + v59) = trxBLOTab_479D40[*((byte *)dword_5034F8 + v59)];
+            *((byte *)dword_5034F8 + v59 + 1) = trxBLOTab_479D40[*((byte *)dword_5034F8 + v59 + 1)];
+            *((byte *)dword_5034F8 + dword_464F40 + v59) = trxBLOTab_479D40[*((byte *)dword_5034F8 + dword_464F40 + v59)];
+            *((byte *)dword_5034F8 + dword_464F40 + v59 + 1) = trxBLOTab_479D40[*((byte *)dword_5034F8
                                                                             + dword_464F40
                                                                             + v59
                                                                             + 1)];
           }
-          v60 = 864 * dword_503518;
-          *(float *)(v60 + 4881944) = v159 + *(float *)&dword_4A7E18[216 * dword_503518];
+          v60 = 864 * currentDriverSelectedIndex_503518;
+          *(float *)(v60 + 4881944) = v159 + *(float *)&dword_4A7E18[216 * currentDriverSelectedIndex_503518];
           v9 = &dword_4A7E18[v60 / 4];
           *(float *)(v60 + 4881948) = v161 + *(float *)(v60 + 4881948);
           v10 = &dword_4A7E1C[v60 / 4];
@@ -15366,19 +15466,18 @@ int sub_411D10()
       {
         v61 = *(_DWORD *)(v2 + 4881852);
         v63 = *(float *)(v2 + 4881852);
-        if ( v64 | v65 )
-          v63 = -v63;
+       //TODO FIX esto esta sin inicializar if ( v64 | v65 )      v63 = -v63;
         v174 = (double)(dword_4A6880[37 * v1] + 13);
         if ( v63 > v174
           || *(float *)(v2 + 4881840) > 0.0 && dword_4A7D20[4 * (dword_4A7A20 + 216 * v1)] & 2
           || *(float *)(v2 + 4881840) > 0.0
           && *(float *)&dword_4A6884[37 * v1] * 0.55 > *(float *)(v2 + 4881840)
-          && dword_4A7D20[4 * (dword_4A7A20 + 216 * dword_503518)] & 1 )
+          && dword_4A7D20[4 * (dword_4A7A20 + 216 * currentDriverSelectedIndex_503518)] & 1 )
         {
-          v66 = *(_DWORD *)&dword_4A7D20[4 * (dword_4A7A20 + 216 * dword_503518)];
+          v66 = *(_DWORD *)&dword_4A7D20[4 * (dword_4A7A20 + 216 * currentDriverSelectedIndex_503518)];
           if ( !(v66 & 2) || !(v66 & 0x40) )
           {
-            if ( dword_503518 == dword_4A9EA8 )
+            if ( currentDriverSelectedIndex_503518 == userRaceOrder_4A9EA8 )
             {
               v67 = *(_DWORD *)(v2 + 4881852);
               v69 = *(float *)(v2 + 4881852);
@@ -15469,7 +15568,7 @@ int sub_411D10()
             dword_481BE8 = 0;
             if ( v77 > 0 )
             {
-              v106 = dword_503518;
+              v106 = currentDriverSelectedIndex_503518;
               do
               {
                 if ( *(float *)(v2 + 4881840) < 0.0
@@ -15488,18 +15587,18 @@ int sub_411D10()
                   if ( !v117 )
                     v116 = v116 + 1.0;
                   v118 = v112 + dword_464F40 * (unsigned __int64)v116;
-                  if ( (*((byte *)dword_50A16C + v118) & 0xF) == 15 )
+                  if ( (*((byte *)trxImaBpk_50A16C + v118) & 0xF) == 15 )
                   {
-                    *((byte *)dword_5034F8 + v118) = byte_501AA0[*((byte *)dword_5034F8 + v118)];
-                    *((byte *)dword_5034F8 + v118 + 1) = byte_501AA0[*((byte *)dword_5034F8 + v118 + 1)];
-                    *((byte *)dword_5034F8 + dword_464F40 + v118) = byte_501AA0[*((byte *)dword_5034F8
+                    *((byte *)dword_5034F8 + v118) = trxSKITab_501AA0[*((byte *)dword_5034F8 + v118)];
+                    *((byte *)dword_5034F8 + v118 + 1) = trxSKITab_501AA0[*((byte *)dword_5034F8 + v118 + 1)];
+                    *((byte *)dword_5034F8 + dword_464F40 + v118) = trxSKITab_501AA0[*((byte *)dword_5034F8
                                                                                  + dword_464F40
                                                                                  + v118)];
-                    *((byte *)dword_5034F8 + dword_464F40 + v118 + 1) = byte_501AA0[*((byte *)dword_5034F8
+                    *((byte *)dword_5034F8 + dword_464F40 + v118 + 1) = trxSKITab_501AA0[*((byte *)dword_5034F8
                                                                                      + dword_464F40
                                                                                      + v118
                                                                                      + 1)];
-                    v106 = dword_503518;
+                    v106 = currentDriverSelectedIndex_503518;
                   }
                   v119 = (unsigned __int64)*(float *)&dword_4A7E28[216 * v106];
                   v120 = dword_4A7E28[216 * v106];
@@ -15513,18 +15612,18 @@ int sub_411D10()
                   if ( !v129 )
                     v128 = v128 + 1.0;
                   v130 = v124 + dword_464F40 * (unsigned __int64)v128;
-                  if ( (*((byte *)dword_50A16C + v130) & 0xF) == 15 )
+                  if ( (*((byte *)trxImaBpk_50A16C + v130) & 0xF) == 15 )
                   {
-                    *((byte *)dword_5034F8 + v130) = byte_501AA0[*((byte *)dword_5034F8 + v130)];
-                    *((byte *)dword_5034F8 + v130 + 1) = byte_501AA0[*((byte *)dword_5034F8 + v130 + 1)];
-                    *((byte *)dword_5034F8 + dword_464F40 + v130) = byte_501AA0[*((byte *)dword_5034F8
+                    *((byte *)dword_5034F8 + v130) = trxSKITab_501AA0[*((byte *)dword_5034F8 + v130)];
+                    *((byte *)dword_5034F8 + v130 + 1) = trxSKITab_501AA0[*((byte *)dword_5034F8 + v130 + 1)];
+                    *((byte *)dword_5034F8 + dword_464F40 + v130) = trxSKITab_501AA0[*((byte *)dword_5034F8
                                                                                  + dword_464F40
                                                                                  + v130)];
-                    *((byte *)dword_5034F8 + dword_464F40 + v130 + 1) = byte_501AA0[*((byte *)dword_5034F8
+                    *((byte *)dword_5034F8 + dword_464F40 + v130 + 1) = trxSKITab_501AA0[*((byte *)dword_5034F8
                                                                                      + dword_464F40
                                                                                      + v130
                                                                                      + 1)];
-                    v106 = dword_503518;
+                    v106 = currentDriverSelectedIndex_503518;
                   }
                 }
                 v131 = (unsigned __int64)*(float *)&dword_4A7E38[216 * v106];
@@ -15539,18 +15638,18 @@ int sub_411D10()
                 if ( !v141 )
                   v140 = v140 + 1.0;
                 v142 = v136 + dword_464F40 * (unsigned __int64)v140;
-                if ( (*((byte *)dword_50A16C + v142) & 0xF) == 15 )
+                if ( (*((byte *)trxImaBpk_50A16C + v142) & 0xF) == 15 )
                 {
-                  *((byte *)dword_5034F8 + v142) = byte_501AA0[*((byte *)dword_5034F8 + v142)];
-                  *((byte *)dword_5034F8 + v142 + 1) = byte_501AA0[*((byte *)dword_5034F8 + v142 + 1)];
-                  *((byte *)dword_5034F8 + dword_464F40 + v142) = byte_501AA0[*((byte *)dword_5034F8
+                  *((byte *)dword_5034F8 + v142) = trxSKITab_501AA0[*((byte *)dword_5034F8 + v142)];
+                  *((byte *)dword_5034F8 + v142 + 1) = trxSKITab_501AA0[*((byte *)dword_5034F8 + v142 + 1)];
+                  *((byte *)dword_5034F8 + dword_464F40 + v142) = trxSKITab_501AA0[*((byte *)dword_5034F8
                                                                                + dword_464F40
                                                                                + v142)];
-                  *((byte *)dword_5034F8 + dword_464F40 + v142 + 1) = byte_501AA0[*((byte *)dword_5034F8
+                  *((byte *)dword_5034F8 + dword_464F40 + v142 + 1) = trxSKITab_501AA0[*((byte *)dword_5034F8
                                                                                    + dword_464F40
                                                                                    + v142
                                                                                    + 1)];
-                  v106 = dword_503518;
+                  v106 = currentDriverSelectedIndex_503518;
                 }
                 v143 = (unsigned __int64)*(float *)&dword_4A7E48[216 * v106];
                 v144 = dword_4A7E48[216 * v106];
@@ -15564,18 +15663,18 @@ int sub_411D10()
                 if ( !v153 )
                   v152 = v152 + 1.0;
                 v154 = v148 + dword_464F40 * (unsigned __int64)v152;
-                if ( (*((byte *)dword_50A16C + v154) & 0xF) == 15 )
+                if ( (*((byte *)trxImaBpk_50A16C + v154) & 0xF) == 15 )
                 {
-                  *((byte *)dword_5034F8 + v154) = byte_501AA0[*((byte *)dword_5034F8 + v154)];
-                  *((byte *)dword_5034F8 + v154 + 1) = byte_501AA0[*((byte *)dword_5034F8 + v154 + 1)];
-                  *((byte *)dword_5034F8 + dword_464F40 + v154) = byte_501AA0[*((byte *)dword_5034F8
+                  *((byte *)dword_5034F8 + v154) = trxSKITab_501AA0[*((byte *)dword_5034F8 + v154)];
+                  *((byte *)dword_5034F8 + v154 + 1) = trxSKITab_501AA0[*((byte *)dword_5034F8 + v154 + 1)];
+                  *((byte *)dword_5034F8 + dword_464F40 + v154) = trxSKITab_501AA0[*((byte *)dword_5034F8
                                                                                + dword_464F40
                                                                                + v154)];
-                  *((byte *)dword_5034F8 + dword_464F40 + v154 + 1) = byte_501AA0[*((byte *)dword_5034F8
+                  *((byte *)dword_5034F8 + dword_464F40 + v154 + 1) = trxSKITab_501AA0[*((byte *)dword_5034F8
                                                                                    + dword_464F40
                                                                                    + v154
                                                                                    + 1)];
-                  v106 = dword_503518;
+                  v106 = currentDriverSelectedIndex_503518;
                 }
                 v2 = 864 * v106;
                 v105 = __OFSUB__(dword_481BE8 + 1, v77);
@@ -15596,9 +15695,9 @@ int sub_411D10()
           }
         }
       }
-      v156 = dword_503518;
-      v157 = 216 * dword_503518;
-      dword_4A7E18[v157] = dword_4A7E10[216 * dword_503518];
+      v156 = currentDriverSelectedIndex_503518;
+      v157 = 216 * currentDriverSelectedIndex_503518;
+      dword_4A7E18[v157] = dword_4A7E10[216 * currentDriverSelectedIndex_503518];
       dword_4A7E1C[v157] = dword_4A7E14[v157];
       dword_4A7E28[v157] = dword_4A7E20[v157];
       dword_4A7E2C[v157] = dword_4A7E24[v157];
@@ -15606,11 +15705,11 @@ int sub_411D10()
       dword_4A7E3C[v157] = dword_4A7E34[v157];
       dword_4A7E48[v157] = dword_4A7E40[v157];
       dword_4A7E4C[v157] = dword_4A7E44[v157];
-      result = dword_508D24;
-      dword_503518 = v156 + 1;
-      if ( v156 + 1 >= dword_508D24 )
+      result = numberOfParticipants_508D24;
+      currentDriverSelectedIndex_503518 = v156 + 1;
+      if ( v156 + 1 >= numberOfParticipants_508D24 )
         break;
-      v1 = dword_503518;
+      v1 = currentDriverSelectedIndex_503518;
     }
   }
   return result;
@@ -15641,12 +15740,12 @@ int sub_412DF0()
   int v18; // eax@52
   int result; // eax@63
 
-  v0 = dword_508D24;
+  v0 = numberOfParticipants_508D24;
   v1 = 0;
-  dword_503518 = 0;
-  if ( dword_508D24 > 0 )
+  currentDriverSelectedIndex_503518 = 0;
+  if ( numberOfParticipants_508D24 > 0 )
   {
-    v2 = dword_5034D0;
+    v2 = trxVaiBpk_5034D0;
     v3 = dword_4A6858;
     do
     {
@@ -15665,10 +15764,10 @@ int sub_412DF0()
            + ((signed int)(unsigned __int64)*(float *)(v4 + 4881844) >> 2)) == dword_4A685C
         && dword_4A7D00[v4 / 4] < dword_4A685C )
         dword_4A7D00[v4 / 4] = 0;
-      v1 = dword_503518++ + 1;
+      v1 = currentDriverSelectedIndex_503518++ + 1;
     }
-    while ( dword_503518 < dword_508D24 );
-    v0 = dword_508D24;
+    while ( currentDriverSelectedIndex_503518 < numberOfParticipants_508D24 );
+    v0 = numberOfParticipants_508D24;
   }
   v6 = 0;
   if ( v0 > 0 )
@@ -15700,7 +15799,7 @@ int sub_412DF0()
     while ( v6 < v0 );
   }
   v11 = 0;
-  for ( dword_503518 = 0; v11 < v0; dword_503518 = v11 )
+  for ( currentDriverSelectedIndex_503518 = 0; v11 < v0; currentDriverSelectedIndex_503518 = v11 )
   {
     v12 = 864 * v11;
     if ( dword_4A7D00[216 * v11] == dword_4A685C )
@@ -15713,13 +15812,13 @@ int sub_412DF0()
       else
       {
         ++byte_4A7E08[v12];
-        if ( v11 == dword_4A9EA8 )
+        if ( v11 == userRaceOrder_4A9EA8 )
         {
           if ( (unsigned __int8)byte_4A7E08[v12] == numberOfLaps )
           {
             loadMenuSoundEffect(2u, 2, 0, 0x10000, 327680);
-            v11 = dword_503518;
-            v0 = dword_508D24;
+            v11 = currentDriverSelectedIndex_503518;
+            v0 = numberOfParticipants_508D24;
             dword_456AE4 = 210;
           }
           v13 = dword_45FC1C + 100 * (dword_463CD4 + 60 * dword_45EA64);
@@ -15737,11 +15836,13 @@ int sub_412DF0()
           }
           else
           {
-            if ( BYTE2(dword_45EA50[0]) != 48 && !dword_456AE4 )
+            if ( strcmp(raceFilePrefix_45EA50,'TR0')==0 && !dword_456AE4 )
+			//if (BYTE2(raceFilePrefix_45EA50[0]) != 48 && !dword_456AE4)
+				
             {
               loadMenuSoundEffect(2u, 4, 0, 0x10000, 327680);
-              v11 = dword_503518;
-              v0 = dword_508D24;
+              v11 = currentDriverSelectedIndex_503518;
+              v0 = numberOfParticipants_508D24;
             }
             dword_50A160 = dword_45EA64;
             dword_501260 = dword_463CD4;
@@ -15760,7 +15861,7 @@ int sub_412DF0()
       if ( (unsigned __int8)byte_4A7E08[864 * v11] > numberOfLaps )
       {
         byte_4A7E08[v14 * 4] = numberOfLaps;
-        v15 = v11 == dword_4A9EA8;
+        v15 = v11 == userRaceOrder_4A9EA8;
         dword_4A7E0C[v14] = 1;
         if ( v15 )
         {
@@ -15769,11 +15870,11 @@ int sub_412DF0()
         }
         dword_4A6884[37 * v11] = 0;
         dword_456AC8 = 1;
-        if ( !memcmp(&dword_4A7A60[84 * v11], &dword_441250, 0xBu) && byte_4A7E09[v14 * 4] == 1 )
+        if ( !memcmp(raceParticipant[v11].name, &dukeNukemName, 0xBu) && byte_4A7E09[v14 * 4] == 1 )
         {
           loadMenuSoundEffect(2u, 31, 0, 0x10000, 327680);
-          v11 = dword_503518;
-          v0 = dword_508D24;
+          v11 = currentDriverSelectedIndex_503518;
+          v0 = numberOfParticipants_508D24;
         }
       }
     }
@@ -15781,32 +15882,32 @@ int sub_412DF0()
   }
   v16 = 0;
   v17 = 0;
-  dword_503518 = 0;
+  currentDriverSelectedIndex_503518 = 0;
   if ( v0 > 0 )
   {
     v18 = (int)dword_4A7D00;
     do
     {
-      if ( *(_DWORD *)v18 + dword_4A685C * *(byte *)(v18 + 264) > v17 && v16 != dword_4A9EA8 )
+      if ( *(_DWORD *)v18 + dword_4A685C * *(byte *)(v18 + 264) > v17 && v16 != userRaceOrder_4A9EA8 )
         v17 = *(_DWORD *)v18 + dword_4A685C * *(byte *)(v18 + 264);
       ++v16;
       v18 += 864;
     }
     while ( v16 < v0 );
-    dword_503518 = v16;
+    currentDriverSelectedIndex_503518 = v16;
   }
-  if ( v17 > dword_4A7D00[216 * dword_4A9EA8] + dword_4A685C * ((unsigned __int8)byte_4A7E08[864 * dword_4A9EA8] + 1)
+  if ( v17 > dword_4A7D00[216 * userRaceOrder_4A9EA8] + dword_4A685C * ((unsigned __int8)byte_4A7E08[864 * userRaceOrder_4A9EA8] + 1)
     && !lapped_456BC0
-    && dword_4A6880[0] != 6
+    && raceParticipant2[0].carType != 6
     && !isMultiplayerGame )
   {
     lapped_456BC0 = 1;
     loadMenuSoundEffect(2u, 22, 0, 0x10000, 327680);
   }
-  result = 864 * dword_4A9EA8;
-  if ( v17 < dword_4A7D00[216 * dword_4A9EA8] + dword_4A685C * ((unsigned __int8)byte_4A7E08[864 * dword_4A9EA8] + 1)
+  result = 864 * userRaceOrder_4A9EA8;
+  if ( v17 < dword_4A7D00[216 * userRaceOrder_4A9EA8] + dword_4A685C * ((unsigned __int8)byte_4A7E08[864 * userRaceOrder_4A9EA8] + 1)
     && lapped_456BC0 == 1
-    && dword_4A6880[0] != 6 )
+    && raceParticipant2[0].carType != 6 )
   {
     result = isMultiplayerGame;
     if ( !isMultiplayerGame )
@@ -15826,12 +15927,12 @@ void sub_413300()
   int v4; // eax@5
   char v5; // dl@7
 
-  v0 = dword_508D24;
+  v0 = numberOfParticipants_508D24;
   v1 = 0;
-  dword_503518 = 0;
-  if ( dword_508D24 > 0 )
+  currentDriverSelectedIndex_503518 = 0;
+  if ( numberOfParticipants_508D24 > 0 )
   {
-    v2 = dword_4A9EA8;
+    v2 = userRaceOrder_4A9EA8;
     v3 = (int)byte_4A7E09;
     do
     {
@@ -15849,13 +15950,10 @@ void sub_413300()
       v3 += 864;
     }
     while ( v1 < v0 );
-    dword_503518 = v1;
+    currentDriverSelectedIndex_503518 = v1;
   }
 }
-// 4A7E0C: using guessed type int dword_4A7E0C[];
-// 4A9EA8: using guessed type int dword_4A9EA8;
-// 503518: using guessed type int dword_503518;
-// 508D24: using guessed type int dword_508D24;
+
 
 //----- (00413380) --------------------------------------------------------
 int sub_413380()
@@ -15882,9 +15980,9 @@ int sub_413380()
   int v19; // [sp+14h] [bp-4h]@2
   int v20; // [sp+14h] [bp-4h]@13
 
-  v0 = dword_508D24;
+  v0 = numberOfParticipants_508D24;
   v1 = 0;
-  if ( dword_508D24 > 0 )
+  if ( numberOfParticipants_508D24 > 0 )
   {
     v2 = (int)byte_4A7E09;
     v19 = (int)byte_4A7E09;
@@ -15905,7 +16003,7 @@ int sub_413380()
             *(byte *)v19 = *(byte *)v4;
             *(byte *)v4 = v6;
           }
-          v0 = dword_508D24;
+          v0 = numberOfParticipants_508D24;
         }
         ++v3;
         v5 += 148;
@@ -15921,7 +16019,7 @@ int sub_413380()
   }
   result = dword_479684;
   v8 = 0;
-  dword_503518 = 0;
+  currentDriverSelectedIndex_503518 = 0;
   if ( v0 > 0 )
   {
     v20 = (int)dword_4A6898;
@@ -15974,7 +16072,7 @@ LABEL_37:
       v20 += 148;
     }
     while ( v8 < v0 );
-    dword_503518 = v8;
+    currentDriverSelectedIndex_503518 = v8;
     dword_479684 = result;
   }
   for ( i = 0; i < result; byte_4A7E09[v16] = v17 )
@@ -16005,9 +16103,9 @@ int sub_413500()
   result = dword_481E14;
   if ( dword_481E14 > 190 )
   {
-    result = dword_508D24;
+    result = numberOfParticipants_508D24;
     v1 = 0;
-    for ( dword_503518 = 0; v1 < dword_508D24; dword_503518 = v1 )
+    for ( currentDriverSelectedIndex_503518 = 0; v1 < numberOfParticipants_508D24; currentDriverSelectedIndex_503518 = v1 )
     {
       v2 = 0;
       v3 = 0;
@@ -16027,7 +16125,7 @@ int sub_413500()
         }
         while ( v3 < dword_503510 );
       }
-      v6 = dword_4A6880[37 * v1];
+      v6 = raceParticipant2[v1].carType;
       v12 = (v6 > 1) + 33;
       if ( v2 != 1 || (v7 = 216 * v1, dword_4A7E0C[216 * v1]) )
       {
@@ -16042,15 +16140,15 @@ int sub_413500()
       else if ( !dword_4A8058[v7] )
       {
         dword_4A8058[v7] = 1;
-        if ( v1 == dword_4A9EA8 )
+        if ( v1 == userRaceOrder_4A9EA8 )
         {
           loadMenuSoundEffect(v1 + 11, (v6 > 1) + 33, 0, 0x10000, (v1 + 33) << 12);
 LABEL_18:
-          v1 = dword_503518;
+          v1 = currentDriverSelectedIndex_503518;
           goto LABEL_19;
         }
-        v8 = (unsigned __int64)(*(float *)&dword_4A7DB4[216 * v1] - *(float *)&dword_4A7DB4[216 * dword_4A9EA8]);
-        v9 = (unsigned __int64)(*(float *)&dword_4A7DB8[216 * v1] - *(float *)&dword_4A7DB8[216 * dword_4A9EA8]);
+        v8 = (unsigned __int64)(*(float *)&dword_4A7DB4[216 * v1] - *(float *)&dword_4A7DB4[216 * userRaceOrder_4A9EA8]);
+        v9 = (unsigned __int64)(*(float *)&dword_4A7DB8[216 * v1] - *(float *)&dword_4A7DB8[216 * userRaceOrder_4A9EA8]);
         v10 = 38144 - 88 * (unsigned __int64)sqrt((double)(v8 * v8 + (signed int)v9 * (signed int)v9));
         if ( v10 > 0 )
         {
@@ -16059,7 +16157,7 @@ LABEL_18:
         }
       }
 LABEL_19:
-      result = dword_508D24;
+      result = numberOfParticipants_508D24;
       ++v1;
     }
   }
@@ -16084,7 +16182,7 @@ signed int sub_4136C0()
   signed int result; // eax@30
 
   v0 = eventDetected();
-  v1 = dword_4A9EA8;
+  v1 = userRaceOrder_4A9EA8;
   if ( !v0 )
     goto LABEL_30;
   v2 = byte_4A9EC2;
@@ -16112,7 +16210,7 @@ signed int sub_4136C0()
   byte_4A9ECD = byte_4A9ECE;
   byte_4A9ECE = v0;
   if ( v9 && v10 == 19 && v7 == 22 && v0 == 34 )
-    dword_4A8050[216 * dword_4A9EA8] = 999999;
+    dword_4A8050[216 * userRaceOrder_4A9EA8] = 999999;
   if ( byte_4A9ECA != 32 || v8 != 19 )
   {
     if ( v8 == 32 && v10 == 19 && byte_4A9ECD == 22 && v0 == 48 )
@@ -16122,7 +16220,7 @@ signed int sub_4136C0()
   {
     dword_4A68A0[37 * v1] = 1;
   }
-  if ( dword_456B10 )
+  if ( isDemo_456B10 )
 LABEL_18:
     dword_456AB0 = 1;
   if ( byte_4A9ECA != 32 || v8 != 19 )
@@ -16261,8 +16359,8 @@ void sub_4138A0()
     }
     if ( v0 & 0x10 )
       v0 |= 1u;
-    v12 = &dword_4A7DA0[216 * dword_4A9EA8];
-    dword_4A7D60[*v12 + 216 * dword_4A9EA8] = (unsigned __int8)v0;
+    v12 = &dword_4A7DA0[216 * userRaceOrder_4A9EA8];
+    dword_4A7D60[*v12 + 216 * userRaceOrder_4A9EA8] = (unsigned __int8)v0;
     v13 = *v12 + 1;
     v14 = *v12 - 14 < 0;
     *v12 = v13;
@@ -16357,18 +16455,18 @@ int  sub_413C90(int a1)
     --v3;
   }
   while ( v3 );
-  v15 = (unsigned __int64)((double)dword_4A68B4[37 * dword_4A9EA8] * 0.000556640625);
+  v15 = (unsigned __int64)((double)dword_4A68B4[37 * userRaceOrder_4A9EA8] * 0.000556640625);
   if ( (v15 & 0x80000000) != 0 )
     LOBYTE(v15) = 0;
   sub_43B3A0((unsigned __int8)v15 + dword_464F14 + 3684, 58 - (unsigned __int8)v15, 7, 0);
-  if ( dword_4A68AC[37 * dword_4A9EA8] )
+  if ( dword_4A68AC[37 * userRaceOrder_4A9EA8] )
   {
-    v16 = (unsigned __int64)((double)dword_4A68B0[37 * dword_4A9EA8] * 0.000537109375);
+    v16 = (unsigned __int64)((double)dword_4A68B0[37 * userRaceOrder_4A9EA8] * 0.000537109375);
     if ( (v16 & 0x80000000) != 0 )
       LOBYTE(v16) = 0;
     sub_43BEF0(a1, (void *)((unsigned __int8)v16 + dword_464F14 + 9828), 55 - (unsigned __int8)v16, 3, 0);
     v17 = 0;
-    if ( dword_4A68A8[37 * dword_4A9EA8] > 0 )
+    if ( dword_4A68A8[37 * userRaceOrder_4A9EA8] > 0 )
     {
       v18 = 6752;
       do
@@ -16377,7 +16475,7 @@ int  sub_413C90(int a1)
         ++v17;
         v18 += 8;
       }
-      while ( v17 < dword_4A68A8[37 * dword_4A9EA8] );
+      while ( v17 < dword_4A68A8[37 * userRaceOrder_4A9EA8] );
     }
   }
   else if ( dword_4A9EB0 <= 0 )
@@ -16395,16 +16493,16 @@ int  sub_413C90(int a1)
     if ( dword_4A9EB0 < 0 )
       dword_4A9EB0 = 0;
   }
-  v19 = 100.0 - ceil((double)dword_4A6898[37 * dword_4A9EA8] * 0.0009765625);
+  v19 = 100.0 - ceil((double)dword_4A6898[37 * userRaceOrder_4A9EA8] * 0.0009765625);
   v20 = sub_402590((int)&bugnum6Bpk_46E560, 8, 10, (unsigned __int64)v19, 0, 11408, -8, -16);
   sub_43B240((int)&unk_46E880, 8, 10, v20 + dword_464F14);
-  v21 = dword_4A9EA8;
-  if ( dword_4A6898[37 * dword_4A9EA8] < 20480 )
+  v21 = userRaceOrder_4A9EA8;
+  if ( dword_4A6898[37 * userRaceOrder_4A9EA8] < 20480 )
   {
     if ( !dword_456ADC )
     {
       loadMenuSoundEffect(2u, 1, 0, 0x10000, 327680);
-      v21 = dword_4A9EA8;
+      v21 = userRaceOrder_4A9EA8;
     }
     dword_456ADC = 1;
   }
@@ -16413,7 +16511,7 @@ int  sub_413C90(int a1)
     if ( !dword_456AE0 )
     {
       loadMenuSoundEffect(2u, 1, 0, 0x10000, 327680);
-      v21 = dword_4A9EA8;
+      v21 = userRaceOrder_4A9EA8;
     }
     dword_456AE0 = 1;
   }
@@ -16421,7 +16519,8 @@ int  sub_413C90(int a1)
   if ( !result )
   {
     result = 0;
-    if ( !memcmp(&dword_4A7A60[84 * v21], &dword_441250, 0xBu) )
+	//si es duke nukem
+    if ( !memcmp(raceParticipant[v21].name, &dukeNukemName, 0xBu) )
     {
       result = dword_456AE8;
       if ( !dword_456AE8 )
@@ -16442,7 +16541,7 @@ int  sub_414110(int a1)
   v1 = (dword_503500 - dword_4A7CFC) << 16;
   dword_4A7CFC = dword_503500;
   dword_4AA500 = colorToPaletteEntry(v1, 0x20000);
-  if ( dword_481E14 > 190 && !dword_4A7E0C[216 * dword_4A9EA8] )
+  if ( dword_481E14 > 190 && !dword_4A7E0C[216 * userRaceOrder_4A9EA8] )
   {
     dword_50A164 += dword_4A9EA4;
     dword_481E0C += dword_4A9EA4;
@@ -16541,7 +16640,7 @@ int sub_414220()
   dword_4A7CFC = dword_503500;
   dword_4AA500 = colorToPaletteEntry(v0, 0x20000);
   v1 = 0;
-  if ( dword_481E14 > 190 && !dword_4A7E0C[216 * dword_4A9EA8] )
+  if ( dword_481E14 > 190 && !dword_4A7E0C[216 * userRaceOrder_4A9EA8] )
   {
     dword_50A164 += dword_4A9EA4;
     dword_481E0C += dword_4A9EA4;
@@ -16555,7 +16654,7 @@ int sub_414220()
   if ( dword_456AA0 < 64 )
     sub_413C90(0);
   v2 = 0;
-  v3 = &unk_4AA940;
+  v3 = &boards1BPK_4AA940;
   do
   {
     copyBuffer2Screen((void *)(v2 + dword_464F14 + dword_456AA0 + 32), v3, 16);
@@ -16563,9 +16662,9 @@ int sub_414220()
     v2 += 512;
   }
   while ( (signed int)v3 < (signed int)&unk_4ADB40 );
-  v4 = dword_508D24;
+  v4 = numberOfParticipants_508D24;
   v5 = 0;
-  if ( dword_508D24 > 0 )
+  if ( numberOfParticipants_508D24 > 0 )
   {
     v6 = 0;
     do
@@ -16573,7 +16672,7 @@ int sub_414220()
       if ( dword_4A7E0C[216 * dword_508D44[v5]] )
       {
         sub_43B240((int)goalnum2Bpk_4AA50C, 22, 28, v6 + dword_464F14 + dword_456AA0 + 39972);
-        v4 = dword_508D24;
+        v4 = numberOfParticipants_508D24;
       }
       ++v5;
       v6 += 0x4000;
@@ -16601,7 +16700,7 @@ int sub_414220()
   sub_43B240((int)((char *)&bugnum6Bpk_46E560 + 80 * numberOfLaps), 8, 10, dword_464F14 + dword_456AA0 + 46133);
   v11 = 1;
   v12 = 1;
-  if ( dword_508D24 > 1 )
+  if ( numberOfParticipants_508D24 > 1 )
   {
     v13 = 0x4000;
     do
@@ -16610,16 +16709,16 @@ int sub_414220()
       ++v12;
       v13 += 0x4000;
     }
-    while ( v12 < dword_508D24 );
+    while ( v12 < numberOfParticipants_508D24 );
   }
   sub_43B240(
     (int)((char *)&bugnum6Bpk_46E560 + 80 * (unsigned __int8)byte_4A7E08[864 * dword_508D44[0]]),
     8,
     10,
     dword_464F14 + dword_456AA0 + 46114);
-  v14 = dword_508D24;
+  v14 = numberOfParticipants_508D24;
   v15 = 1;
-  if ( dword_508D24 > 1 )
+  if ( numberOfParticipants_508D24 > 1 )
   {
     v16 = 0x4000;
     do
@@ -16629,12 +16728,12 @@ int sub_414220()
         8,
         10,
         v16 + dword_464F14 + dword_456AA0 + 46116);
-      v14 = dword_508D24;
+      v14 = numberOfParticipants_508D24;
       ++v15;
       v16 += 0x4000;
     }
-    while ( v15 < dword_508D24 );
-    if ( dword_508D24 > 1 )
+    while ( v15 < numberOfParticipants_508D24 );
+    if ( numberOfParticipants_508D24 > 1 )
     {
       v17 = (unsigned __int64)(64.0 - ceil((double)dword_4A6898[37 * dword_508D48] * 0.0009765625) * 0.6369426751592356);
       HIDWORD(v17) = -(signed int)v17;
@@ -16648,7 +16747,7 @@ int sub_414220()
         --v66;
       }
       while ( v66 );
-      v14 = dword_508D24;
+      v14 = numberOfParticipants_508D24;
       v11 = 1;
       v1 = 0;
     }
@@ -16667,7 +16766,7 @@ int sub_414220()
       --v67;
     }
     while ( v67 );
-    v14 = dword_508D24;
+    v14 = numberOfParticipants_508D24;
     v1 = 0;
     v11 = 1;
   }
@@ -16690,7 +16789,7 @@ int sub_414220()
   }
   sub_402510(dword_456AA0 + 1059, &byte_4A68C4[148 * dword_508D44[0]]);
   v23 = 1;
-  if ( dword_508D24 > 1 )
+  if ( numberOfParticipants_508D24 > 1 )
   {
     v24 = 0x4000;
     do
@@ -16698,7 +16797,7 @@ int sub_414220()
       sub_402510(v24 + dword_456AA0 + 37923, &byte_4A68C4[148 * dword_508D44[v23++]]);
       v24 += 0x4000;
     }
-    while ( v23 < dword_508D24 );
+    while ( v23 < numberOfParticipants_508D24 );
   }
   v25 = (unsigned __int8)byte_4A7E09[864 * dword_508D48];
   dword_481BD0[0] = (unsigned __int8)byte_4A7E09[864 * dword_508D44[0]];
@@ -16762,7 +16861,7 @@ int sub_414220()
     32,
     dword_464F14 + dword_456AA0 + 36928);
   v44 = 1;
-  if ( dword_508D24 > 1 )
+  if ( numberOfParticipants_508D24 > 1 )
   {
     v45 = 0x4000;
     do
@@ -16774,18 +16873,18 @@ int sub_414220()
         v45 + dword_464F14 + dword_456AA0 + 41032);
       v45 += 0x4000;
     }
-    while ( v44 < dword_508D24 );
+    while ( v44 < numberOfParticipants_508D24 );
   }
   v46 = (unsigned __int8)byte_4A7E09[864 * dword_508D48];
-  v47 = dword_4A9EA8;
+  v47 = userRaceOrder_4A9EA8;
   dword_46E8D0[0] = (unsigned __int8)byte_4A7E09[864 * dword_508D44[0]];
   v48 = (unsigned __int8)byte_4A7E09[864 * dword_508D4C];
   dword_46E8D4 = v46;
   v49 = (unsigned __int8)byte_4A7E09[864 * dword_508D50];
   dword_46E8D8 = v48;
-  v50 = *(float *)&dword_4A7DB0[216 * dword_4A9EA8];
+  v50 = *(float *)&dword_4A7DB0[216 * userRaceOrder_4A9EA8];
   dword_46E8DC = v49;
-  v51 = (unsigned __int64)(v50 / *(float *)&dword_4A6884[37 * dword_4A9EA8] * -162.0);
+  v51 = (unsigned __int64)(v50 / *(float *)&dword_4A6884[37 * userRaceOrder_4A9EA8] * -162.0);
   v52 = 1 - v51;
   if ( v11 - (signed int)v51 < v11 )
     v52 = 1;
@@ -16803,7 +16902,7 @@ int sub_414220()
       ++v53;
     }
     while ( v53 < 162 );
-    v47 = dword_4A9EA8;
+    v47 = userRaceOrder_4A9EA8;
   }
   if ( dword_4A68AC[37 * v47] )
   {
@@ -16812,7 +16911,7 @@ int sub_414220()
       LOBYTE(v54) = 0;
     sub_43BEF0(0, (void *)(dword_464F14 + (unsigned __int8)v54 + dword_456AA0 + 24100), 55 - (unsigned __int8)v54, 3, 0);
     v55 = 0;
-    if ( dword_4A68A8[37 * dword_4A9EA8] > 0 )
+    if ( dword_4A68A8[37 * userRaceOrder_4A9EA8] > 0 )
     {
       v56 = 21024;
       do
@@ -16821,7 +16920,7 @@ int sub_414220()
         ++v55;
         v56 += 8;
       }
-      while ( v55 < dword_4A68A8[37 * dword_4A9EA8] );
+      while ( v55 < dword_4A68A8[37 * userRaceOrder_4A9EA8] );
     }
   }
   else if ( dword_4A9EB0 <= 0 )
@@ -16856,20 +16955,20 @@ int sub_414220()
     if ( dword_4A9EB0 < 0 )
       dword_4A9EB0 = 0;
   }
-  v58 = (unsigned __int64)((double)dword_4A68B4[37 * dword_4A9EA8] * 0.000556640625);
+  v58 = (unsigned __int64)((double)dword_4A68B4[37 * userRaceOrder_4A9EA8] * 0.000556640625);
   if ( (v58 & 0x80000000) != 0 )
     LOBYTE(v58) = 0;
   sub_43B3A0(dword_464F14 + (unsigned __int8)v58 + dword_456AA0 + 17444, 58 - (unsigned __int8)v58, 7, v1);
-  v59 = (unsigned __int64)(100.0 - ceil((double)dword_4A6898[37 * dword_4A9EA8] * 0.0009765625));
+  v59 = (unsigned __int64)(100.0 - ceil((double)dword_4A6898[37 * userRaceOrder_4A9EA8] * 0.0009765625));
   v60 = sub_402590((int)&bugnum6Bpk_46E560, 8, 10, v59, 0, dword_456AA0 + 36398, -8, -16);
   sub_43B240((int)&unk_46E880, 8, 10, v60 + dword_464F14);
-  v61 = dword_4A9EA8;
-  if ( dword_4A6898[37 * dword_4A9EA8] < 20480 )
+  v61 = userRaceOrder_4A9EA8;
+  if ( dword_4A6898[37 * userRaceOrder_4A9EA8] < 20480 )
   {
     if ( !dword_456ADC )
     {
       loadMenuSoundEffect(2u, v11, 0, 0x10000, 327680);
-      v61 = dword_4A9EA8;
+      v61 = userRaceOrder_4A9EA8;
     }
     dword_456ADC = 1;
   }
@@ -16878,16 +16977,16 @@ int sub_414220()
     if ( !dword_456AE0 )
     {
       loadMenuSoundEffect(2u, v11, 0, 0x10000, 327680);
-      v61 = dword_4A9EA8;
+      v61 = userRaceOrder_4A9EA8;
     }
     dword_456AE0 = 1;
   }
-  if ( !dword_4A6898[37 * v61] && !memcmp(&dword_4A7A60[84 * v61], &dword_441250, 0xBu) )
+  if ( !dword_4A6898[37 * v61] && !memcmp(raceParticipant[v61].name, &dukeNukemName, 0xBu) )
   {
     if ( !dword_456AE8 )
     {
       loadMenuSoundEffect(2u, 32, 0, 0x10000, 327680);
-      v61 = dword_4A9EA8;
+      v61 = userRaceOrder_4A9EA8;
     }
     dword_456AE8 = 1;
   }
@@ -16895,20 +16994,20 @@ int sub_414220()
   if ( (v62 & 0x80000000) != 0 )
     LODWORD(v62) = 0;
   sub_43B160((int)((char *)&unk_4669C0 - 1344 * v62), 64, 21, dword_464F14 + dword_456AA0 + 25632);
-  result = dword_508D24;
+  result = numberOfParticipants_508D24;
   v64 = 0;
-  if ( dword_508D24 > 0 )
+  if ( numberOfParticipants_508D24 > 0 )
   {
     v65 = 0;
     do
     {
       if ( dword_4A6898[37 * dword_508D44[v64]] <= 0 )
         sub_43B240((int)rast1Bpk_464F78, 64, 32, v65 + dword_464F14 + dword_456AA0 + 36896);
-      result = dword_508D24;
+      result = numberOfParticipants_508D24;
       ++v64;
       v65 += 0x4000;
     }
-    while ( v64 < dword_508D24 );
+    while ( v64 < numberOfParticipants_508D24 );
   }
   return result;
 }
@@ -16947,7 +17046,7 @@ int sub_414FC0()
       dword_4A7CFC = 0;
       dword_503510 = 0;
       dword_4A9EAC = 0;
-      v1 = 216 * dword_4A9EA8;
+      v1 = 216 * userRaceOrder_4A9EA8;
       dword_4A7DA4[v1] = 0;
       dword_4A7DA0[v1] = 0;
       loadMenuSoundEffect(5u, 44, 0, 0x10000, 163840);
@@ -16981,7 +17080,7 @@ int sub_414FC0()
 
 
 //----- (004151C0) --------------------------------------------------------
-void sub_4151C0()
+void loadRaceImages()
 {
   int v0; // eax@6
   signed int v1; // esi@8
@@ -16993,53 +17092,55 @@ void sub_4151C0()
   char *v7; // edi@3
   char v8; // al@4
 
-  v5 = 0;
+ /* v5 = 0;
   do
   {
-    v6 = *((byte *)dword_45EA50 + v5);
-    *(&byte_464F50 + v5++) = v6;
+    v6 = *((byte *)raceFilePrefix_45EA50 + v5);
+    *(&circuitSelectedTR_464F50 + v5++) = v6;
   }
   while ( v6 );
-  v7 = &byte_464F50 - 1;
+  v7 = &circuitSelectedTR_464F50 - 1;
   do
     v8 = (v7++)[1];
   while ( v8 );
   *(_DWORD *)v7 = 1095778862;//bpa
-  v7[4] = 0;
-  sub_402CF0();
-  sub_402EE0();
-  sub_403050();
+  v7[4] = 0;*/
+  strcpy(circuitSelectedTR_464F50, raceFilePrefix_45EA50);
+  strcat(circuitSelectedTR_464F50, ".BPA");
+  loadCircuitPalette();
+  loadCircuitImages1();
+  loadCarsImages();
   loadEngineGraphics();
-  sub_4034F0();
-  sub_403190();
-  sub_4032F0();
-  sub_403410();
+  loadCircuitShadows();
+  loadCircuitSceImages();
+  loadCircuitTabFiles();
+  loadCircuitDatFiles();
   extractFromBpa("ENGINE.BPA", textureTemp, "GEN-FLA.BPK");
   copyImageToBuffer((int)textureTemp, (int)genflaBpk);
   extractFromBpa("ENGINE.BPA", textureTemp, "GEN-LAM.BPK");
   copyImageToBuffer((int)textureTemp, (int)genlamBpk);
   loadEngineGraphics2();
   extractFromBpa("IBFILES.BPA", textureTemp, "BOARDS.BPK");
-  if ( dword_4A68AC[37 * dword_4A9EA8] )
-    v0 = 8704 * dword_4A9EA8;
+  if ( raceParticipant2[userRaceOrder_4A9EA8].useWeapons )
+    v0 = 8704 * userRaceOrder_4A9EA8;
   else
-    v0 = 6656 * dword_4A9EA8 + 34816;
-  decryptTexture((int)textureTemp, (int)&unk_4AA940, v0, 6656);
+    v0 = 6656 * userRaceOrder_4A9EA8 + 34816;
+  decryptTexture((int)textureTemp, (int)&boards1BPK_4AA940, v0, 6656);
   v1 = 0;
-  if ( !dword_4A9EA8 )
+  if ( !userRaceOrder_4A9EA8 )
     v1 = 1;
-  decryptTexture((int)textureTemp, (int)&unk_4AC340, 8704 * v1 + 6656, 2048);
+  decryptTexture((int)textureTemp, (int)&boards2BPK_4AC340, 8704 * v1 + 6656, 2048);
   v2 = v1 + 1;
-  if ( v2 == dword_4A9EA8 )
+  if ( v2 == userRaceOrder_4A9EA8 )
     ++v2;
-  decryptTexture((int)textureTemp, (int)&unk_4ACB40, 8704 * v2 + 6656, 2048);
+  decryptTexture((int)textureTemp, (int)&boards3BPK_4ACB40, 8704 * v2 + 6656, 2048);
   v3 = v2 + 1;
-  if ( v3 == dword_4A9EA8 )
+  if ( v3 == userRaceOrder_4A9EA8 )
     ++v3;
-  decryptTexture((int)textureTemp, (int)&unk_4AD340, 8704 * v3 + 6656, 2048);
+  decryptTexture((int)textureTemp, (int)&boards4BPK_4AD340, 8704 * v3 + 6656, 2048);
   extractFromBpa("IBFILES.BPA", textureTemp, "RASTI1.BPK");
   copyImageToBuffer((int)textureTemp, (int)rast1Bpk_464F78);
-  switch ( dword_4A6880[37 * dword_4A9EA8] )
+  switch ( raceParticipant2[userRaceOrder_4A9EA8].carType )
   {
     case VAGABOND:
       extractFromBpa("IBFILES.BPA", textureTemp, "DAM-KUP.BPK");
@@ -17062,7 +17163,7 @@ void sub_4151C0()
     default:
       break;
   }
-  decryptTexture((int)textureTemp, (int)&unk_464F80, 8064 * dword_4A9EA8, 8064);
+  decryptTexture((int)textureTemp, (int)&damageBpk_464F80, 8064 * userRaceOrder_4A9EA8, 8064);
   extractFromBpa("IBFILES.BPA", textureTemp,"BIGNUM6.BPK");
   copyImageToBuffer((int)textureTemp, (int)&bugnum6Bpk_46E560);
   extractFromBpa("IBFILES.BPA", textureTemp, "SMALFO4A.BPK");
@@ -17078,9 +17179,9 @@ void sub_4151C0()
   extractFromBpa("IBFILES.BPA", textureTemp, "SIDEBOM1.BPK");
   copyImageToBuffer((int)textureTemp, (int)sidebom1Bpk_481E04);
   extractFromBpa("IBFILES.BPA", textureTemp, "SMALLBAR.BPK");
-  v4 = dword_4A9EA8;
-  if ( !dword_4A68AC[37 * dword_4A9EA8] )
-    v4 = dword_4A9EA8 + 4;
+  v4 = userRaceOrder_4A9EA8;
+  if ( !raceParticipant2[userRaceOrder_4A9EA8].useWeapons )
+    v4 = userRaceOrder_4A9EA8 + 4;
   decryptTexture((int)textureTemp, (int)smallbarBpk_50E720, v4 << 11, 2048);
 }
 
@@ -17098,29 +17199,29 @@ int sub_415280()
   result = dword_4A8D2C;
   if ( dword_503500 >= dword_4A8D2C )
   {
-    v1 = 8 * (LOBYTE(dword_4A7E0C[216 * dword_4A9EA8]) + 2 * byte_4A7E08[864 * dword_4A9EA8]);
+    v1 = 8 * (LOBYTE(dword_4A7E0C[216 * userRaceOrder_4A9EA8]) + 2 * byte_4A7E08[864 * userRaceOrder_4A9EA8]);
     *(byte *)(((*(_WORD *)dword_45E064)++ & 0xFFF) + dword_45E064 + 4) = -2;
-    *(byte *)(((*(_WORD *)dword_45E064)++ & 0xFFF) + dword_45E064 + 4) = dword_4A9EA8;
-    *(byte *)(((*(_WORD *)dword_45E064)++ & 0xFFF) + dword_45E064 + 4) = dword_4A6898[37 * dword_4A9EA8] >> 4;
-    *(byte *)(((*(_WORD *)dword_45E064)++ & 0xFFF) + dword_45E064 + 4) = dword_4A6898[37 * dword_4A9EA8] >> 12;
-    *(byte *)(((*(_WORD *)dword_45E064)++ & 0xFFF) + dword_45E064 + 4) = dword_4A68B4[37 * dword_4A9EA8] >> 10;
-    *(byte *)(((*(_WORD *)dword_45E064)++ & 0xFFF) + dword_45E064 + 4) = dword_4A68B0[37 * dword_4A9EA8] >> 10;
-    *(byte *)(((*(_WORD *)dword_45E064)++ & 0xFFF) + dword_45E064 + 4) = LOBYTE(dword_4A68D0[37 * dword_4A9EA8]);
+    *(byte *)(((*(_WORD *)dword_45E064)++ & 0xFFF) + dword_45E064 + 4) = userRaceOrder_4A9EA8;
+    *(byte *)(((*(_WORD *)dword_45E064)++ & 0xFFF) + dword_45E064 + 4) = dword_4A6898[37 * userRaceOrder_4A9EA8] >> 4;
+    *(byte *)(((*(_WORD *)dword_45E064)++ & 0xFFF) + dword_45E064 + 4) = dword_4A6898[37 * userRaceOrder_4A9EA8] >> 12;
+    *(byte *)(((*(_WORD *)dword_45E064)++ & 0xFFF) + dword_45E064 + 4) = dword_4A68B4[37 * userRaceOrder_4A9EA8] >> 10;
+    *(byte *)(((*(_WORD *)dword_45E064)++ & 0xFFF) + dword_45E064 + 4) = dword_4A68B0[37 * userRaceOrder_4A9EA8] >> 10;
+    *(byte *)(((*(_WORD *)dword_45E064)++ & 0xFFF) + dword_45E064 + 4) = LOBYTE(raceParticipant2[userRaceOrder_4A9EA8].currentRacePosition);
     *(byte *)(((*(_WORD *)dword_45E064)++ & 0xFFF) + dword_45E064 + 4) = v1;
-    *(byte *)(((*(_WORD *)dword_45E064)++ & 0xFFF) + dword_45E064 + 4) = LOBYTE(dword_4A7D00[216 * dword_4A9EA8]);
-    v2 = (unsigned __int64)*(float *)&dword_4A7DB4[216 * dword_4A9EA8];
+    *(byte *)(((*(_WORD *)dword_45E064)++ & 0xFFF) + dword_45E064 + 4) = LOBYTE(dword_4A7D00[216 * userRaceOrder_4A9EA8]);
+    v2 = (unsigned __int64)*(float *)&dword_4A7DB4[216 * userRaceOrder_4A9EA8];
     *(byte *)(((*(_WORD *)dword_45E064)++ & 0xFFF) + dword_45E064 + 4) = BYTE1(v2);
-    *(byte *)(((*(_WORD *)dword_45E064)++ & 0xFFF) + dword_45E064 + 4) = (unsigned __int64)*(float *)&dword_4A7DB4[216 * dword_4A9EA8];
-    v3 = (unsigned __int64)*(float *)&dword_4A7DB8[216 * dword_4A9EA8];
+    *(byte *)(((*(_WORD *)dword_45E064)++ & 0xFFF) + dword_45E064 + 4) = (unsigned __int64)*(float *)&dword_4A7DB4[216 * userRaceOrder_4A9EA8];
+    v3 = (unsigned __int64)*(float *)&dword_4A7DB8[216 * userRaceOrder_4A9EA8];
     *(byte *)(((*(_WORD *)dword_45E064)++ & 0xFFF) + dword_45E064 + 4) = BYTE1(v3);
-    *(byte *)(((*(_WORD *)dword_45E064)++ & 0xFFF) + dword_45E064 + 4) = (unsigned __int64)*(float *)&dword_4A7DB8[216 * dword_4A9EA8];
-    v4 = (unsigned __int64)*(float *)&dword_4A7E50[216 * dword_4A9EA8];
+    *(byte *)(((*(_WORD *)dword_45E064)++ & 0xFFF) + dword_45E064 + 4) = (unsigned __int64)*(float *)&dword_4A7DB8[216 * userRaceOrder_4A9EA8];
+    v4 = (unsigned __int64)*(float *)&dword_4A7E50[216 * userRaceOrder_4A9EA8];
     *(byte *)(((*(_WORD *)dword_45E064)++ & 0xFFF) + dword_45E064 + 4) = BYTE1(v4);
-    *(byte *)(((*(_WORD *)dword_45E064)++ & 0xFFF) + dword_45E064 + 4) = (unsigned __int64)*(float *)&dword_4A7E50[216 * dword_4A9EA8];
-    v5 = (unsigned __int64)*(float *)&dword_4A7E54[216 * dword_4A9EA8];
+    *(byte *)(((*(_WORD *)dword_45E064)++ & 0xFFF) + dword_45E064 + 4) = (unsigned __int64)*(float *)&dword_4A7E50[216 * userRaceOrder_4A9EA8];
+    v5 = (unsigned __int64)*(float *)&dword_4A7E54[216 * userRaceOrder_4A9EA8];
     *(byte *)(((*(_WORD *)dword_45E064)++ & 0xFFF) + dword_45E064 + 4) = BYTE1(v5);
-    *(byte *)(((*(_WORD *)dword_45E064)++ & 0xFFF) + dword_45E064 + 4) = (unsigned __int64)*(float *)&dword_4A7E54[216 * dword_4A9EA8];
-    *(byte *)(((*(_WORD *)dword_45E064)++ & 0xFFF) + dword_45E064 + 4) = LOBYTE(dword_4A7D0C[216 * dword_4A9EA8]);
+    *(byte *)(((*(_WORD *)dword_45E064)++ & 0xFFF) + dword_45E064 + 4) = (unsigned __int64)*(float *)&dword_4A7E54[216 * userRaceOrder_4A9EA8];
+    *(byte *)(((*(_WORD *)dword_45E064)++ & 0xFFF) + dword_45E064 + 4) = LOBYTE(dword_4A7D0C[216 * userRaceOrder_4A9EA8]);
     *(byte *)(((*(_WORD *)dword_45E064)++ & 0xFFF) + dword_45E064 + 4) = -1;
     dword_4A6AD4 = 1;
     nullsub_1();
@@ -17157,10 +17258,10 @@ int sub_4156B0()
   int v1; // ecx@1
   int v2; // eax@2
 
-  v0 = dword_479D20;
+  v0 = trxSCE1Bpk_479D20;
   v1 = 0;
   dword_4AA928 = 0;
-  if ( dword_479D20 > 0 )
+  if ( trxSCE1Bpk_479D20 > 0 )
   {
     v2 = (int)dword_4B4D04;
     do
@@ -17290,19 +17391,19 @@ void __cdecl startRace(int a1, int numberOfParticipants)
   char v110; // [sp+Fh] [bp-11h]@144
   char v111[16]; // [sp+10h] [bp-10h]@143
 
-  dword_4A9EA8 = a1;
-  dword_508D24 = numberOfParticipants;
+  userRaceOrder_4A9EA8 = a1;
+  numberOfParticipants_508D24 = numberOfParticipants;
   sub_401060(); ///esto es muy muy abstracto hay que hacer las estrcuturas primero porque sino nada. initRaceValues
   sub_409A90();//mas init values
-  if ( isMultiplayerGame )
+ /* if ( isMultiplayerGame )
   {
-    v2 = dword_508D24;
+    v2 = numberOfParticipants_508D24;
     v3 = 0;
     dword_4A7A38 = 0;
-    if ( dword_508D24 > 0 )
+    if ( numberOfParticipants_508D24 > 0 )
     {
       v4 = &dword_4A68B8;
-      v5 = dword_508D24;
+      v5 = numberOfParticipants_508D24;
       do
       {
         v3 += *v4;
@@ -17311,10 +17412,10 @@ void __cdecl startRace(int a1, int numberOfParticipants)
       }
       while ( v5 );
       dword_4A7A38 = v3;
-      if ( dword_508D24 > 0 )
+      if ( numberOfParticipants_508D24 > 0 )
       {
         v6 = &dword_4A68BC;
-        v7 = dword_508D24;
+        v7 = numberOfParticipants_508D24;
         do
         {
           v3 += *v6;
@@ -17326,10 +17427,10 @@ void __cdecl startRace(int a1, int numberOfParticipants)
       }
     }
     dword_481BE8 = 0;
-    if ( dword_508D24 > 0 )
+    if ( numberOfParticipants_508D24 > 0 )
     {
       v8 = &dword_4A68C0;
-      dword_481BE8 = dword_508D24;
+      dword_481BE8 = numberOfParticipants_508D24;
       do
       {
         v3 += *v8;
@@ -17345,32 +17446,126 @@ void __cdecl startRace(int a1, int numberOfParticipants)
     dword_4A6B04 = 0;
     dword_47968C = 0;
     dword_4A8D2C = 0;
-  }
+  }*/
   sub_43C7B0((int (*)(void))sub_4138A0);
-  sub_409BF0();
+  loadCircuitInfFile();
+  v9=malloc(dword_464F40 * dword_4A7CF8);
  
+  dword_5034F8 = v9;
+  v10 = malloc(dword_464F40 * dword_4A7CF8);
+ 
+  trxImaBpk_50A16C = v10;
+  v11 = malloc(dword_4A6858 * dword_503508);
+  
+  trxVaiBpk_5034D0 = v11;
+  v12 =malloc(dword_4A9B90 * dword_467000);
+  
+  trxLR1Bpk_4AA920 = v12;
+ 
+  v13 = malloc(0x5F370u);
+  trxSCE5Bpk_4A7A28 = v13;
+  
+  v14 = malloc(0x19400u);
+  dword_464F14 = v14 + 512;
+  
+  v15 = malloc(0x96000u);
+  participantCarBpk_5034FC = v15;
+  
+  v16 = malloc(0x4B000u);
+  genflaBpk = v16;
+  
+  v17 = malloc(0x3840u);
+  genlamBpk = v17;
+  
+  v18 = malloc(0x30u);
+  sidebom1Bpk_481E04 = v18;
+  
+  v19 = malloc(0x240u);
+  damslidBpk = v19;
+  
+  v20 = malloc(0x3C90u);
+  genmesBpk = v20;
+  
+  v21 = malloc(0x3C90u);
+  dword_479690 = v21;
+
+  v22 = malloc(0x800u);
+  rast1Bpk_464F78 = v22;
+  
+  v23 = malloc(0x268u);
+  goalnum2Bpk_4AA50C = v23;
+  
+  v24 = malloc(0xC00u);
+  flame1Bpk = v24;
+
+  v25 = malloc(0xC00u);
+  flame2Bpk = v25;
+  
+  v26 = malloc(0xC00u);
+  flame3Bpk = v26;
+ 
+  v27 = malloc(0xC00u);
+  flame4Bpk = v27;
+  
+  v28 = malloc(0xC00u);
+  flame5Bpk = v28;
+  
+  v29 = malloc(0xC00u);
+  flame6Bpk = v29;
+  
+  v30 = malloc(0x140u);
+  mines1aBpk = v30;
+
+  v31 = malloc(0x600u);
+  blowiBpk = v31;
+  
+  v32 = malloc(0x480u);
+  shotsBpk = v32;
+
+  v33 = malloc(0x800u);
+  obstacleBpk = v33;
+  
+  v34 = malloc(0x2400u);
+  pedestrBpk = v34;
+ 
+  v35 = malloc(0x800u);
+  splat3Bpk = v35;
+ 
+  v36 = malloc(0x800u);
+  splat4Bpk = v36;
+ 
+  v37 = malloc(0x1800u);
+  rocket1Bpk = v37;
+ 
+  v38 = malloc(0x1800u);
+  rocket2Bpk = v38;
+ 
+  v39 = malloc(0x800u);
+  burn1aBpk = v39;
+  
+  v40 = malloc(0xC0u);
   smokeBpk = v40;
-  noMemExitScreen();
+  noMemExitScreen(); //esto no sale del juego
   dword_4A9140 = (int)exitCtrlAltDel;
-  sub_4151C0();
+  loadRaceImages();
   sub_409F90();
   sub_4022A0();
-  sub_40A360();
+  //TODO FIX sub_40A360(); esto hace cosas muy chungas!
   dword_481BE0 = 0;
   dword_4B3140 = 80;
   dword_464F64 = 80;
-  sub_40A880();
+  //TODO FIX sub_40A880();esto hace cosas muy chungas!
   sub_43CBB0();
-  sub_404920();
+  drawToBlackScreen();//esto pone la pantalla en negro hace el degradado
   stopSong();
   stopAndOpenMusic();
   nullsub_1();
-  sub_43BEE0();//cambiar el caption
+  setRaceWindowCaption();//cambiar el caption
   sub_43C740();//evento de teclado
-  v41 = 0;
+  /*v41 = 0;
   do
   {
-    v42 = *((byte *)dword_45EA50 + v41);
+    v42 = *((byte *)raceFilePrefix_45EA50 + v41);
     v111[v41++] = v42;
   }
   while ( v42 );
@@ -17380,7 +17575,10 @@ void __cdecl startRace(int a1, int numberOfParticipants)
   while ( v44 );
   *(_DWORD *)v43 = 1398099245; //-mus.cmf
   *((_DWORD *)v43 + 1) = 1179468590;
-  v43[8] = 0;
+  v43[8] = 0;*/
+
+  strcpy(v111, raceFilePrefix_45EA50);
+  strcat(v111, "-MUS_CMF");
   loadMusic(1, (int)v111, 2, (int)"GEN-EFE.CMF");
   setMusicVolume(0);
   musicSetMasterVolume(configuration.masterVolume);
@@ -17393,13 +17591,13 @@ void __cdecl startRace(int a1, int numberOfParticipants)
     musicSetMasterVolume(0);
   if ( !dword_445024 )
     musicSetVolume(0);
-  sub_4049F0();//seteo de colores
-  if ( dword_456AA8 )
-    sub_40A9A0();
-  sub_409460();
-  sub_4022A0();
-  sub_409A90();
-  loadMenuSoundEffect(1u, LOBYTE(dword_4A6880[37 * dword_4A9EA8]) + 25, 0, 0x10000, 163840);
+  setCircuitPalette_4B4020();//seteo de colores
+//TODO FIX if ( isCircuitReversed_456AA8 )
+//TODO FIX     sub_40A9A0();
+  //TODO FIX sub_409460(); esto es muy raro!
+  //TODO FIX sub_4022A0(); esto es muy raro!
+  //TODO FIX sub_409A90(); esto es muy raro!
+  loadMenuSoundEffect(1u, LOBYTE(raceParticipant2[userRaceOrder_4A9EA8].carType) + 25, 0, 0x10000, 163840);
   dword_503510 = 0;
   dword_4A9EAC = 0;
   dword_481E14 = 0;
@@ -17408,12 +17606,12 @@ void __cdecl startRace(int a1, int numberOfParticipants)
   dword_503224 = 0;
   dword_50A164 = 0;
   dword_4A6AD4 = 0;
-  if ( dword_456B10 )
+  if ( isDemo_456B10 )
     dword_464F6C = 1;
   do
   {
     v45 = dword_4A9EAC;
-    dword_4A7DA4[216 * dword_4A9EA8] = dword_4A7DA0[216 * dword_4A9EA8];
+    dword_4A7DA4[216 * userRaceOrder_4A9EA8] = dword_4A7DA0[216 * userRaceOrder_4A9EA8];
     dword_503510 = v45;
     dword_4A7A20 = 0;
     dword_4A9EAC = 0;
@@ -17432,8 +17630,8 @@ void __cdecl startRace(int a1, int numberOfParticipants)
     dword_481BE8 = 0;
     if ( dword_503510 > 0 )
     {
-      v47 = 216 * dword_4A9EA8;
-      v48 = &dword_4A7DA4[216 * dword_4A9EA8];
+      v47 = 216 * userRaceOrder_4A9EA8;
+      v48 = &dword_4A7DA4[216 * userRaceOrder_4A9EA8];
       do
       {
         v93 = (*v48)-- - 1 < 0;
@@ -17446,11 +17644,11 @@ void __cdecl startRace(int a1, int numberOfParticipants)
     }
     sub_413500();
     v49 = malloc(0xAu);
-    free(v49);
-    sub_410220();
+    //free(v49);
+    //TODO FIX sub_410220(); esto es muy chungo
     if ( dword_503510 > 0 )
     {
-      v50 = dword_508D24;
+      v50 = numberOfParticipants_508D24;
       while ( 1 )
       {
         v94 = __OFSUB__(dword_481E14 + 1, 190);
@@ -17459,19 +17657,19 @@ void __cdecl startRace(int a1, int numberOfParticipants)
         if ( (unsigned __int8)(v93 ^ v94) | v72 )
           goto LABEL_195;
         v51 = 0;
-        dword_503518 = 0;
+        currentDriverSelectedIndex_503518 = 0;
         if ( v50 > 0 )
         {
           do
           {
-            if ( dword_464F6C || v51 != dword_4A9EA8 && !isMultiplayerGame )
+            if ( dword_464F6C || v51 != userRaceOrder_4A9EA8 && !isMultiplayerGame )
             {
               sub_40AFC0();
-              v50 = dword_508D24;
+              v50 = numberOfParticipants_508D24;
             }
-            v51 = dword_503518++ + 1;
+            v51 = currentDriverSelectedIndex_503518++ + 1;
           }
-          while ( dword_503518 < v50 );
+          while ( currentDriverSelectedIndex_503518 < v50 );
           if ( v50 > 0 )
           {
             v52 = (int)dword_4A7D14;
@@ -17485,20 +17683,20 @@ void __cdecl startRace(int a1, int numberOfParticipants)
             while ( v53 );
           }
         }
-        dword_503518 = 0;
+        currentDriverSelectedIndex_503518 = 0;
         if ( v50 > 0 )
         {
           do
           {
             sub_40BAB0();
-            v50 = dword_508D24;
-            ++dword_503518;
+            v50 = numberOfParticipants_508D24;
+            ++currentDriverSelectedIndex_503518;
           }
-          while ( dword_503518 < dword_508D24 );
-          if ( dword_508D24 > 0 )
+          while ( currentDriverSelectedIndex_503518 < numberOfParticipants_508D24 );
+          if ( numberOfParticipants_508D24 > 0 )
           {
             v54 = (int)dword_4A7D18;
-            v55 = dword_508D24;
+            v55 = numberOfParticipants_508D24;
             do
             {
               *(_DWORD *)v54 = 0;
@@ -17508,12 +17706,12 @@ void __cdecl startRace(int a1, int numberOfParticipants)
             while ( v55 );
           }
         }
-        dword_503518 = 0;
+        currentDriverSelectedIndex_503518 = 0;
         if ( v50 > 0 )
         {
           v56 = v50;
           v57 = (int)dword_4A7D1C;
-          dword_503518 = v50;
+          currentDriverSelectedIndex_503518 = v50;
           do
           {
             *(_DWORD *)v57 = 0;
@@ -17523,52 +17721,52 @@ void __cdecl startRace(int a1, int numberOfParticipants)
           while ( v56 );
         }
         sub_40CD10();
-        dword_503518 = 0;
+        currentDriverSelectedIndex_503518 = 0;
         if ( v50 > 0 )
         {
           do
           {
             sub_40F6A0();
-            v50 = dword_508D24;
-            ++dword_503518;
+            v50 = numberOfParticipants_508D24;
+            ++currentDriverSelectedIndex_503518;
           }
-          while ( dword_503518 < dword_508D24 );
+          while ( currentDriverSelectedIndex_503518 < numberOfParticipants_508D24 );
         }
         if ( !isMultiplayerGame )
         {
-          dword_503518 = 0;
+          currentDriverSelectedIndex_503518 = 0;
           if ( v50 > 0 )
           {
             do
             {
               sub_410FA0();
-              v50 = dword_508D24;
-              ++dword_503518;
+              v50 = numberOfParticipants_508D24;
+              ++currentDriverSelectedIndex_503518;
             }
-            while ( dword_503518 < dword_508D24 );
+            while ( currentDriverSelectedIndex_503518 < numberOfParticipants_508D24 );
           }
         }
-        dword_503518 = 0;
+        currentDriverSelectedIndex_503518 = 0;
         if ( v50 > 0 )
         {
           do
           {
             sub_410B90();
-            v50 = dword_508D24;
-            ++dword_503518;
+            v50 = numberOfParticipants_508D24;
+            ++currentDriverSelectedIndex_503518;
           }
-          while ( dword_503518 < dword_508D24 );
+          while ( currentDriverSelectedIndex_503518 < numberOfParticipants_508D24 );
         }
-        dword_503518 = 0;
+        currentDriverSelectedIndex_503518 = 0;
         if ( v50 > 0 )
           break;
 LABEL_213:
-        dword_503518 = 0;
+        currentDriverSelectedIndex_503518 = 0;
         if ( v50 > 0 )
         {
           v64 = (int)dword_4A6898;
           v65 = (int)dword_4A7E98;
-          dword_503518 = v50;
+          currentDriverSelectedIndex_503518 = v50;
           do
           {
             if ( (*(_DWORD *)(v65 - 4) == 2 || *(_DWORD *)v65 == 2) && !*(_DWORD *)(v65 - 140) )
@@ -17593,14 +17791,14 @@ LABEL_213:
           }
           while ( v50 );
         }
-        v67 = 216 * dword_4A9EA8;
-        if ( !dword_4A7D14[216 * dword_4A9EA8] && !dword_4A7D18[v67] && !dword_4A7D1C[v67] )
+        v67 = 216 * userRaceOrder_4A9EA8;
+        if ( !dword_4A7D14[216 * userRaceOrder_4A9EA8] && !dword_4A7D18[v67] && !dword_4A7D1C[v67] )
           goto LABEL_248;
-        v68 = (unsigned __int64)(sqrt(*((float *)&unk_4A7DFC + 216 * dword_4A9EA8)
-                                    * *((float *)&unk_4A7DFC + 216 * dword_4A9EA8) + *((float *)&unk_4A7E00
-                                                                                     + 216 * dword_4A9EA8)
+        v68 = (unsigned __int64)(sqrt(*((float *)&unk_4A7DFC + 216 * userRaceOrder_4A9EA8)
+                                    * *((float *)&unk_4A7DFC + 216 * userRaceOrder_4A9EA8) + *((float *)&unk_4A7E00
+                                                                                     + 216 * userRaceOrder_4A9EA8)
                                                                                    * *((float *)&unk_4A7E00
-                                                                                     + 216 * dword_4A9EA8))
+                                                                                     + 216 * userRaceOrder_4A9EA8))
                                * 25000.0);
         dword_50B2B0 = v68;
         if ( v68 > 0x10000 )
@@ -17637,7 +17835,7 @@ LABEL_213:
         }
 LABEL_237:
         v69 = rand() % 24576;
-        v70 = dword_4A7E90[216 * dword_4A9EA8];
+        v70 = dword_4A7E90[216 * userRaceOrder_4A9EA8];
         dword_481BE8 = v69;
         switch ( v70 )
         {
@@ -17686,8 +17884,8 @@ LABEL_248:
         if ( dword_4AA92C > 0 )
         {
           if ( !dword_456AD0
-            && dword_4A6898[37 * dword_4A9EA8] > 0
-            && !dword_4A7E0C[216 * dword_4A9EA8]
+            && dword_4A6898[37 * userRaceOrder_4A9EA8] > 0
+            && !dword_4A7E0C[216 * userRaceOrder_4A9EA8]
             && dword_456AD4 == 2 )
           {
             loadMenuSoundEffect(6u, 37, 0, dword_4AA92C, 163840);
@@ -17701,37 +17899,37 @@ LABEL_248:
           sub_43C3E0(6u);
           dword_456AD0 = 0;
         }
-        v72 = dword_4A6898[37 * dword_4A9EA8] == 0;
-        v93 = dword_4A6898[37 * dword_4A9EA8] < 0;
+        v72 = dword_4A6898[37 * userRaceOrder_4A9EA8] == 0;
+        v93 = dword_4A6898[37 * userRaceOrder_4A9EA8] < 0;
         dword_4AA92C = 0;
-        if ( v93 || v72 || dword_4A7E0C[216 * dword_4A9EA8] )
+        if ( v93 || v72 || dword_4A7E0C[216 * userRaceOrder_4A9EA8] )
         {
           sub_43C3E0(1u);
           sub_43C3E0(6u);
         }
-        v73 = *(float *)&dword_4A7DB0[216 * dword_4A9EA8] / *(float *)&dword_4A6884[37 * dword_4A9EA8];
+        v73 = *(float *)&dword_4A7DB0[216 * userRaceOrder_4A9EA8] / *(float *)&dword_4A6884[37 * userRaceOrder_4A9EA8];
         if ( v73 < 0.0 )
           v73 = -v73;
-        dword_445034 = (unsigned __int64)((double)(5 * dword_4A7EA0[216 * dword_4A9EA8]) * v73
-                                        + (double)(dword_4A7E9C[216 * dword_4A9EA8] + 163840));
+        dword_445034 = (unsigned __int64)((double)(5 * dword_4A7EA0[216 * userRaceOrder_4A9EA8]) * v73
+                                        + (double)(dword_4A7E9C[216 * userRaceOrder_4A9EA8] + 163840));
         sub_43C1B0(1u, 0x10000, dword_445034);
-        sub_411D10();
-        sub_412DF0();
+        //TODO fix sub_411D10(); esto peta creo que calcula posiciones con velocidad y tal.
+        //TODO FIX sub_412DF0(); esto peta
         v74 = isMultiplayerGame;
         if ( !isMultiplayerGame || !dword_4A6B04 )
           sub_413380();
-        if ( !v74 && (dword_4A7E0C[216 * dword_4A9EA8] || dword_4A6898[37 * dword_4A9EA8] <= 0) )
+        if ( !v74 && (dword_4A7E0C[216 * userRaceOrder_4A9EA8] || dword_4A6898[37 * userRaceOrder_4A9EA8] <= 0) )
           ++dword_4AA508;
-        v50 = dword_508D24;
+        v50 = numberOfParticipants_508D24;
         v75 = 0;
         dword_4A7A38 = 0;
-        dword_503518 = 0;
-        if ( dword_508D24 > 0 )
+        currentDriverSelectedIndex_503518 = 0;
+        if ( numberOfParticipants_508D24 > 0 )
         {
-          v76 = dword_508D24;
+          v76 = numberOfParticipants_508D24;
           v77 = (int)dword_4A6898;
           v78 = (int)dword_4A7E0C;
-          dword_503518 = dword_508D24;
+          currentDriverSelectedIndex_503518 = numberOfParticipants_508D24;
           do
           {
             if ( *(float *)(v78 - 92) <= 0.5 && (*(_DWORD *)v78 || *(_DWORD *)v77 <= 0) )
@@ -17743,7 +17941,7 @@ LABEL_248:
           while ( v76 );
           dword_4A7A38 = v75;
         }
-        if ( v75 >= dword_508D24 - 1 )
+        if ( v75 >= numberOfParticipants_508D24 - 1 )
           ++dword_4AA508;
         --dword_503510;
         ++dword_4A7A20;
@@ -17753,10 +17951,10 @@ LABEL_248:
       do
       {
         sub_40E180();
-        v50 = dword_508D24;
-        ++dword_503518;
+        v50 = numberOfParticipants_508D24;
+        ++currentDriverSelectedIndex_503518;
       }
-      while ( dword_503518 < dword_508D24 );
+      while ( currentDriverSelectedIndex_503518 < numberOfParticipants_508D24 );
 LABEL_195:
       if ( v50 > 0 )
       {
@@ -17811,7 +18009,7 @@ LABEL_281:
       if ( dword_4A7CF4 )
         sub_415280();
     }
-    else if ( dword_4A6880[0] != 6 )
+    else if ( raceParticipant2[0].carType != 6 )
     {
       sub_40B920();
     }
@@ -17831,31 +18029,31 @@ LABEL_281:
       }
       while ( v93 ^ v94 );
       v80 = sub_43C1F0() & 0xFF00;
-      if ( !memcmp(dword_45EA50, "TR0", 4u) )
+      if ( !memcmp(raceFilePrefix_45EA50, "TR0", 4u) )
         musicSetOrder(7680);
-      if ( !memcmp(dword_45EA50, "TR1", 4u) )
+      if ( !memcmp(raceFilePrefix_45EA50, "TR1", 4u) )
         musicSetOrder(14080);
-      if ( !memcmp(dword_45EA50, "TR2", 4u) )
+      if ( !memcmp(raceFilePrefix_45EA50, "TR2", 4u) )
         musicSetOrder(11520);
-      if ( !memcmp(dword_45EA50, "TR3", 4u) )
+      if ( !memcmp(raceFilePrefix_45EA50, "TR3", 4u) )
         musicSetOrder(12800);
-      if ( !memcmp(dword_45EA50, "TR4", 4u) )
+      if ( !memcmp(raceFilePrefix_45EA50, "TR4", 4u) )
         musicSetOrder(11520);
-      if ( !memcmp(dword_45EA50, "TR5", 4u) )
+      if ( !memcmp(raceFilePrefix_45EA50, "TR5", 4u) )
         musicSetOrder(14080);
-      if ( !memcmp(dword_45EA50, "TR6", 4u) )
+      if ( !memcmp(raceFilePrefix_45EA50, "TR6", 4u) )
         musicSetOrder(12800);
-      if ( !memcmp(dword_45EA50, "TR7", 4u) )
+      if ( !memcmp(raceFilePrefix_45EA50, "TR7", 4u) )
         musicSetOrder(12800);
-      if ( !memcmp(dword_45EA50, "TR8", 4u) )
+      if ( !memcmp(raceFilePrefix_45EA50, "TR8", 4u) )
         musicSetOrder(12800);
-      if ( !memcmp(dword_45EA50, "TR9", 4u) )
+      if ( !memcmp(raceFilePrefix_45EA50, "TR9", 4u) )
         musicSetOrder(12800);
       setMusicVolume(0x8000);
       sub_407330();
       musicSetOrder(v80);
       setMusicVolume(0x10000);
-      loadMenuSoundEffect(1u, LOBYTE(dword_4A6880[37 * dword_4A9EA8]) + 25, 0, 0x10000, 163840);
+      loadMenuSoundEffect(1u, LOBYTE(raceParticipant2[userRaceOrder_4A9EA8].carType) + 25, 0, 0x10000, 163840);
     }
     if ( dword_46F200 )
       goto LABEL_316;
@@ -17869,7 +18067,7 @@ LABEL_316:
     }
     dword_46F200 = 0;
 LABEL_318:
-    if ( dword_4A6898[37 * dword_4A9EA8] <= 0 )
+    if ( dword_4A6898[37 * userRaceOrder_4A9EA8] <= 0 )
       dword_445028 = 1;
     if ( byte_45E0FC )
     {
@@ -17923,46 +18121,46 @@ LABEL_318:
       }
       while ( v93 ^ v94 );
       v82 = sub_43C1F0() & 0xFF00;
-      if ( !memcmp(dword_45EA50, "TR0", 4u) )
+      if ( !memcmp(raceFilePrefix_45EA50, "TR0", 4u) )
         musicSetOrder(7680);
-      if ( !memcmp(dword_45EA50, "TR1", 4u) )
+      if ( !memcmp(raceFilePrefix_45EA50, "TR1", 4u) )
         musicSetOrder(14080);
-      if ( !memcmp(dword_45EA50, "TR2", 4u) )
+      if ( !memcmp(raceFilePrefix_45EA50, "TR2", 4u) )
         musicSetOrder(11520);
-      if ( !memcmp(dword_45EA50, "TR3", 4u) )
+      if ( !memcmp(raceFilePrefix_45EA50, "TR3", 4u) )
         musicSetOrder(12800);
-      if ( !memcmp(dword_45EA50, "TR4", 4u) )
+      if ( !memcmp(raceFilePrefix_45EA50, "TR4", 4u) )
         musicSetOrder(11520);
-      if ( !memcmp(dword_45EA50, "TR5", 4u) )
+      if ( !memcmp(raceFilePrefix_45EA50, "TR5", 4u) )
         musicSetOrder(14080);
-      if ( !memcmp(dword_45EA50, "TR6", 4u) )
+      if ( !memcmp(raceFilePrefix_45EA50, "TR6", 4u) )
         musicSetOrder(12800);
-      if ( !memcmp(dword_45EA50, "TR7", 4u) )
+      if ( !memcmp(raceFilePrefix_45EA50, "TR7", 4u) )
         musicSetOrder(12800);
-      if ( !memcmp(dword_45EA50, "TR8", 4u) )
+      if ( !memcmp(raceFilePrefix_45EA50, "TR8", 4u) )
         musicSetOrder(12800);
-      if ( !memcmp(dword_45EA50, "TR9", 4u) )
+      if ( !memcmp(raceFilePrefix_45EA50, "TR9", 4u) )
         musicSetOrder(12800);
       setMusicVolume(0x8000);
       memcpy(dword_479690, genmesBpk, 0x3C90u);
-      sub_406410(0, 0, "                                ");
-      sub_406410(0, 1, "                                ");
-      sub_406410(0, 2, "                                ");
-      sub_406410(0, 3, "     G A M E   P A U S E D !    ");
-      sub_406410(0, 4, "                                ");
-      sub_406410(0, 5, "                                ");
-      sub_406410(0, 6, "                                ");
-      sub_406410(0, 7, "                                ");
-      sub_406410(0, 8, "    PRESS ENTER TO CONTINUE     ");
+      drawTextInRaceScreen(0, 0, "                                ");
+      drawTextInRaceScreen(0, 1, "                                ");
+      drawTextInRaceScreen(0, 2, "                                ");
+      drawTextInRaceScreen(0, 3, "     G A M E   P A U S E D !    ");
+      drawTextInRaceScreen(0, 4, "                                ");
+      drawTextInRaceScreen(0, 5, "                                ");
+      drawTextInRaceScreen(0, 6, "                                ");
+      drawTextInRaceScreen(0, 7, "                                ");
+      drawTextInRaceScreen(0, 8, "    PRESS ENTER TO CONTINUE     ");
       sub_4064A0(0);
       if ( dword_456AA4 == 1 )
         memset((void *)screenPtr, 0, 0xFA00u);
       musicSetOrder(v82);
       setMusicVolume(0x10000);
-      loadMenuSoundEffect(1u, LOBYTE(dword_4A6880[37 * dword_4A9EA8]) + 25, 0, 0x10000, 163840);
+      loadMenuSoundEffect(1u, LOBYTE(raceParticipant2[userRaceOrder_4A9EA8].carType) + 25, 0, 0x10000, 163840);
     }
     sub_40D560();
-    sub_40D6B0();
+    //TODO FIX sub_40D6B0(); es necesario corregit sto porque peta
     v83 = dword_464F40;
     v84 = 0;
     dword_4A7A38 = 0;
@@ -17981,37 +18179,40 @@ LABEL_318:
       dword_4A7A38 += dword_464F40;
     }
     while ( v93 ^ v94 );
-    if ( !isMultiplayerGame )
-      LOBYTE(v84) = sub_4111F0();
-    for ( dword_503518 = 0; dword_503518 < dword_508D24; ++dword_503518 )
+    /* TODO FIX if ( !isMultiplayerGame ) explota aqui
+      LOBYTE(v84) = sub_4111F0();*/
+    for ( currentDriverSelectedIndex_503518 = 0; currentDriverSelectedIndex_503518 < numberOfParticipants_508D24; ++currentDriverSelectedIndex_503518 )
     {
+		//draw smoke
       sub_40F070(v84);
-      v84 = dword_503518 + 1;
+      v84 = currentDriverSelectedIndex_503518 + 1;
     }
-    sub_40D920();
+	/* TODO FIX sub_40D920(); esto falla*/
     sub_40FE20();
-    if ( dword_445030 )
-      sub_40D7B0();
-    v85 = dword_508D24;
-    for ( dword_503518 = 0; dword_503518 < dword_508D24; ++dword_503518 )
+   /* TODO FIX if ( dword_445030 )
+      sub_40D7B0();*/
+    v85 = numberOfParticipants_508D24;
+    for ( currentDriverSelectedIndex_503518 = 0; currentDriverSelectedIndex_503518 < numberOfParticipants_508D24; ++currentDriverSelectedIndex_503518 )
     {
+		//pinta llamas
       sub_40E960();
-      v85 = dword_508D24;
+      v85 = numberOfParticipants_508D24;
     }
-    dword_503518 = 0;
+    currentDriverSelectedIndex_503518 = 0;
     if ( v85 > 0 )
     {
       do
       {
+		  //pinta turbo
         sub_40F450();
-        ++dword_503518;
+        ++currentDriverSelectedIndex_503518;
       }
-      while ( dword_503518 < dword_508D24 );
+      while ( currentDriverSelectedIndex_503518 < numberOfParticipants_508D24 );
     }
-    sub_4156B0();
-    sub_4116D0();
-    for ( dword_503518 = 0; dword_503518 < dword_508D24; ++dword_503518 )
-      sub_40EBC0();
+	//TODO FIXsub_4156B0();esto falla
+    //TODO FIX sub_4116D0(); esto falla
+    for ( currentDriverSelectedIndex_503518 = 0; currentDriverSelectedIndex_503518 < numberOfParticipants_508D24; ++currentDriverSelectedIndex_503518 )
+      	sub_40EBC0(); //pinta disparos
     sub_410050();
     if ( !isMultiplayerGame )
       sub_4136C0();
@@ -18022,12 +18223,12 @@ LABEL_318:
     else
       sub_414220();
     v86 = 0;
-    for ( dword_503518 = 0; v86 < dword_508D24; dword_503518 = v86 )
+    for ( currentDriverSelectedIndex_503518 = 0; v86 < numberOfParticipants_508D24; currentDriverSelectedIndex_503518 = v86 )
     {
       if ( byte_4A7E09[864 * v86] == 1 && dword_456AC8 )
       {
         sub_402490();
-        v86 = dword_503518;
+        v86 = currentDriverSelectedIndex_503518;
       }
       ++v86;
     }
@@ -18048,16 +18249,16 @@ LABEL_318:
       while ( v93 ^ v94 );
       loadMenuSoundEffect(2u, 5, 0, 0x10000, 327680);
       memcpy(dword_479690, genmesBpk, 0x3C90u);
-      sub_406410(0, 0, "                                ");
-      sub_406410(0, 1, "                                ");
-      sub_406410(0, 2, "                                ");
-      sub_406410(0, 3, "      R A C E    O V E R !      ");
-      sub_406410(0, 4, "                                ");
-      sub_406410(0, 5, "                                ");
-      sub_406410(0, 6, "                                ");
-      sub_406410(0, 7, "                                ");
-      sub_406410(0, 8, "    PRESS ENTER TO CONTINUE     ");
-      if ( dword_456B10 )
+      drawTextInRaceScreen(0, 0, "                                ");
+      drawTextInRaceScreen(0, 1, "                                ");
+      drawTextInRaceScreen(0, 2, "                                ");
+      drawTextInRaceScreen(0, 3, "      R A C E    O V E R !      ");
+      drawTextInRaceScreen(0, 4, "                                ");
+      drawTextInRaceScreen(0, 5, "                                ");
+      drawTextInRaceScreen(0, 6, "                                ");
+      drawTextInRaceScreen(0, 7, "                                ");
+      drawTextInRaceScreen(0, 8, "    PRESS ENTER TO CONTINUE     ");
+      if ( isDemo_456B10 )
         sub_4064A0(1);
       else
         sub_4064A0(0);
@@ -18066,8 +18267,8 @@ LABEL_318:
     dword_481BE8 = waitWithDelay();
     while ( dword_481BE8 == waitWithDelay() )
       ;
-    v88 = dword_4A9EA8;
-    if ( dword_4A8050[216 * dword_4A9EA8] > 0 )
+    v88 = userRaceOrder_4A9EA8;
+    if ( dword_4A8050[216 * userRaceOrder_4A9EA8] > 0 )
     {
       if ( !dword_456AA4 || (sub_405430(), !dword_456AA4) )
         sub_404730();
@@ -18089,18 +18290,18 @@ LABEL_318:
           dword_4A7A38 += 512;
         }
         while ( v93 ^ v94 );
-        v88 = dword_4A9EA8;
+        v88 = userRaceOrder_4A9EA8;
       }
       if ( dword_456AA4 == 1 )
       {
         sub_405430();
-        v88 = dword_4A9EA8;
+        v88 = userRaceOrder_4A9EA8;
       }
       dword_4A8050[216 * v88] = 0;
     }
     v90 = dword_4A9EA4;
     v91 = (signed int)dword_4A8050;
-    dword_503518 = 4;
+    currentDriverSelectedIndex_503518 = 4;
     do
     {
       if ( *(_DWORD *)v91 > 0 )
@@ -18187,31 +18388,31 @@ LABEL_427:
     while ( v93 ^ v94 );
     if ( isMultiplayerGame && dword_47968C )
     {
-      sub_406410(0, 0, "                                ");
-      sub_406410(0, 1, "                                ");
-      sub_406410(0, 2, " S O M E O N E   I S   A B O U T");
-      sub_406410(0, 3, "   T O   A B O R T   R A C E !  ");
-      sub_406410(0, 4, "                                ");
-      sub_406410(0, 5, "                                ");
-      sub_406410(0, 6, "                                ");
-      sub_406410(0, 7, "  WAITING FOR SIGNAL FROM HOST  ");
-      sub_406410(0, 8, "                                ");
+      drawTextInRaceScreen(0, 0, "                                ");
+      drawTextInRaceScreen(0, 1, "                                ");
+      drawTextInRaceScreen(0, 2, " S O M E O N E   I S   A B O U T");
+      drawTextInRaceScreen(0, 3, "   T O   A B O R T   R A C E !  ");
+      drawTextInRaceScreen(0, 4, "                                ");
+      drawTextInRaceScreen(0, 5, "                                ");
+      drawTextInRaceScreen(0, 6, "                                ");
+      drawTextInRaceScreen(0, 7, "  WAITING FOR SIGNAL FROM HOST  ");
+      drawTextInRaceScreen(0, 8, "                                ");
       sub_406D30(1);
     }
     else
     {
-      sub_406410(0, 0, "                                ");
-      sub_406410(0, 1, "                                ");
-      sub_406410(0, 2, "                                ");
-      if ( dword_456B10 )
-        sub_406410(0, 3, "      A B O R T   D E M O !     ");
+      drawTextInRaceScreen(0, 0, "                                ");
+      drawTextInRaceScreen(0, 1, "                                ");
+      drawTextInRaceScreen(0, 2, "                                ");
+      if ( isDemo_456B10 )
+        drawTextInRaceScreen(0, 3, "      A B O R T   D E M O !     ");
       else
-        sub_406410(0, 3, "      A B O R T   R A C E !     ");
-      sub_406410(0, 4, "                                ");
-      sub_406410(0, 5, "             Y / N              ");
-      sub_406410(0, 6, "                                ");
-      sub_406410(0, 7, "                                ");
-      sub_406410(0, 8, "                                ");
+        drawTextInRaceScreen(0, 3, "      A B O R T   R A C E !     ");
+      drawTextInRaceScreen(0, 4, "                                ");
+      drawTextInRaceScreen(0, 5, "             Y / N              ");
+      drawTextInRaceScreen(0, 6, "                                ");
+      drawTextInRaceScreen(0, 7, "                                ");
+      drawTextInRaceScreen(0, 8, "                                ");
     }
     if ( !isMultiplayerGame )
       goto LABEL_473;
@@ -18225,12 +18426,12 @@ LABEL_473:
       if ( !isMultiplayerGame )
       {
         sub_413300();
-        dword_456B10 = 0;
+        isDemo_456B10 = 0;
         goto LABEL_460;
       }
       goto LABEL_458;
     }
-    v100 = LOBYTE(dword_4A6880[37 * dword_4A9EA8]) + 25;
+    v100 = LOBYTE(raceParticipant2[userRaceOrder_4A9EA8].carType) + 25;
     dword_464F68 = 0;
     loadMenuSoundEffect(1u, v100, 0, 0x10000, 163840);
     if ( dword_456AA4 == 1 )
@@ -18250,15 +18451,15 @@ LABEL_458:
         nullsub_1();
         dword_464F68 = -1;
         memcpy(dword_479690, genmesBpk, 0x3C90u);
-        sub_406410(0, 0, "                                ");
-        sub_406410(0, 1, "                                ");
-        sub_406410(0, 2, "     M U L T I P L A Y E R      ");
-        sub_406410(0, 3, "      C O N N E C T I O N       ");
-        sub_406410(0, 4, "           L O S T !            ");
-        sub_406410(0, 5, "                                ");
-        sub_406410(0, 6, "                                ");
-        sub_406410(0, 7, "                                ");
-        sub_406410(0, 8, "      PRESS ENTER TO ABORT      ");
+        drawTextInRaceScreen(0, 0, "                                ");
+        drawTextInRaceScreen(0, 1, "                                ");
+        drawTextInRaceScreen(0, 2, "     M U L T I P L A Y E R      ");
+        drawTextInRaceScreen(0, 3, "      C O N N E C T I O N       ");
+        drawTextInRaceScreen(0, 4, "           L O S T !            ");
+        drawTextInRaceScreen(0, 5, "                                ");
+        drawTextInRaceScreen(0, 6, "                                ");
+        drawTextInRaceScreen(0, 7, "                                ");
+        drawTextInRaceScreen(0, 8, "      PRESS ENTER TO ABORT      ");
         sub_406D30(0);
         dword_464F68 = 1;
 		raceParticipant[0].difficulty = -1;
@@ -18269,25 +18470,27 @@ LABEL_460:
     if ( dword_456ACC == 1 )
     {
       dword_456C28 = 0;
-      sub_404C30();
+      //TODO FIX sub_404C30(); falla
+	  //TODO fix 
+	  //firstRacePlayed_464F44=0;
       if ( !isMultiplayerGame )
       {
-        if ( dword_464F44 )
+        if ( firstRacePlayed_464F44 )
         {
           memcpy(dword_479690, genmesBpk, 0x3C90u);
-          sub_406410(0, 0, "     WELCOME TO DEATH RALLY!    ");
-          sub_406410(0, 1, "                                ");
-          sub_406410(0, 2, " PRESS                          ");
-          sub_406410(0, 3, "    F1-INFO SCREEN              ");
-          sub_406410(0, 4, "     P-PAUSE                    ");
-          sub_406410(0, 5, "   TAB-TOGGLE STATUS BAR        ");
-          sub_406410(0, 6, "   ESC-ABORT RACE               ");
-          sub_406410(0, 7, "                                ");
-          sub_406410(0, 8, "    PRESS ENTER TO CONTINUE     ");
-          if ( dword_456B10 )
+          drawTextInRaceScreen(0, 0, "     WELCOME TO DEATH RALLY!    ");
+          drawTextInRaceScreen(0, 1, "                                ");
+          drawTextInRaceScreen(0, 2, " PRESS                          ");
+          drawTextInRaceScreen(0, 3, "    F1-INFO SCREEN              ");
+          drawTextInRaceScreen(0, 4, "     P-PAUSE                    ");
+          drawTextInRaceScreen(0, 5, "   TAB-TOGGLE STATUS BAR        ");
+          drawTextInRaceScreen(0, 6, "   ESC-ABORT RACE               ");
+          drawTextInRaceScreen(0, 7, "                                ");
+          drawTextInRaceScreen(0, 8, "    PRESS ENTER TO CONTINUE     ");
+         /* TOD FIX esto peta! if ( isDemo_456B10 )
             sub_4064A0(1);
           else
-            sub_4064A0(0);
+            sub_4064A0(0);*/
         }
       }
     }
@@ -18299,33 +18502,36 @@ LABEL_460:
   dword_456C28 = 0;
   sub_4055A0();
   memset((void *)screenPtr, 0, 0xFA00u);
-  v101 = dword_508D24;
-  dword_503518 = 0;
-  if ( dword_508D24 > 0 )
+  v101 = numberOfParticipants_508D24;
+  currentDriverSelectedIndex_503518 = 0;
+  if ( numberOfParticipants_508D24 > 0 )
   {
-    v102 = &unk_4A68D4;
+   // v102 = &racePosition;
     v103 = (int)byte_4A7E09;
-    dword_503518 = dword_508D24;
+    currentDriverSelectedIndex_503518 = numberOfParticipants_508D24;
+	int indexRaceParticipant = 0;
+	
     do
     {
-      *(_DWORD *)v102 = *(byte *)v103;
+		raceParticipant2[indexRaceParticipant].racePosition = *(byte *)v103;
       v103 += 864;
-      v102 = (char *)v102 + 148;
+	  raceParticipant2[indexRaceParticipant].racePosition = (char *)raceParticipant2[indexRaceParticipant].racePosition + 148;
       --v101;
+	  indexRaceParticipant++;
     }
     while ( v101 );
   }
   sub_43C730();
   stopSong();
   stopAndOpenMusic();
-  sub_402240();
+  updateRacePositions();
   free(dword_5034F8);
-  free(dword_50A16C);
-  free(dword_5034D0);
-  free(dword_4AA920);
-  free(dword_4A7A28);
+  free(trxImaBpk_50A16C);
+  free(trxVaiBpk_5034D0);
+  free(trxLR1Bpk_4AA920);
+  free(trxSCE5Bpk_4A7A28);
   free((void *)(dword_464F14 - 512));
-  free(dword_5034FC);
+  free(participantCarBpk_5034FC);
   free(genflaBpk);
   free(sidebom1Bpk_481E04);
   free(genlamBpk);
@@ -18566,7 +18772,7 @@ char eventDetected()
     v0 = *(byte *)(v1 + dword_463E08);
     dword_456B04 = v1 + 1;
   }
-  if ( dword_456B10 )
+  if ( isDemo_456B10 )
     v0 = 28;
   if ( configuration.useJoystick <= 0 )
     return v0;
@@ -18654,7 +18860,7 @@ char sub_418090()
     v0 = *(byte *)(v1 + dword_463E08);
     dword_456B04 = v1 + 1;
   }
-  if ( dword_456B10 )
+  if ( isDemo_456B10 )
     v0 = 13;
   if ( configuration.useJoystick > 0 )
   {
@@ -20523,9 +20729,7 @@ unsigned int noPaintJobPopUp()
   writeTextInScreen(&aShare350_GoKno[v2], 179361);
   return drawTextWithFont((int)graphicsGeneral.fbig3aBpk, (int)&unk_445848, "CONTINUE", 202432);
 }
-// 46085C: using guessed type int dword_46085C[];
-// 460870: using guessed type int dword_460870[];
-// 463CE8: using guessed type int driverId;
+
 
 //----- (0041B850) --------------------------------------------------------
 unsigned int allCarsCrashPopUp()
@@ -20583,9 +20787,7 @@ unsigned int allCarsCrashPopUp()
   writeTextInScreen(&aPoweredSerialA[v2], 179361);
   return drawTextWithFont((int)graphicsGeneral.fbig3aBpk, (int)&unk_445848, "CONTINUE", 202432);
 }
-// 46085C: using guessed type int dword_46085C[];
-// 460870: using guessed type int dword_460870[];
-// 463CE8: using guessed type int driverId;
+
 
 //----- (0041BA00) --------------------------------------------------------
 int steriodsNotFoundPopup()
@@ -21013,7 +21215,7 @@ unsigned int endGamePopup()
     writeTextInScreen((const char *)&unk_454F08, 182460);
   }
   result = drawTextWithFont((int)graphicsGeneral.fbig3aBpk, (int)&unk_445848, "CONTINUE", 202432);
-  dword_456B10 = 0;
+  isDemo_456B10 = 0;
   byte_45E0DC = 0;
   return result;
 }
@@ -23673,8 +23875,7 @@ int loadAcceptedText()
   writeTextInScreen(&byte_4525C8[v1], 120490);
   return writeTextInScreen(&aPressEscToGoBa[v1], 130730);
 }
-// 46085C: using guessed type int dword_46085C[];
-// 463CE8: using guessed type int driverId;
+
 
 //----- (004210C0) --------------------------------------------------------
 int showCarBought()
@@ -24350,7 +24551,7 @@ signed int autoLoadSave()
     if ( !byte_45E0FD )
       return v0;
     v0 = 2;
-    dword_464F44 = 0;
+    firstRacePlayed_464F44 = 0;
     useHasMorePoints_456BC4 = 0;
     //allocateMemory(0x883u);
     Str = v10;
@@ -25381,9 +25582,9 @@ int __cdecl sub_423C90(int a1, int a2)
           ++v12;
         }
         while ( v12 < 4 );
-        memcpy(&unk_4611E0, &dword_4A7A60[84 * v5], 0x54u);
-        v14 = &dword_4A7A60[84 * v17];
-        memcpy(&dword_4A7A60[84 * v5], v14, 0x54u);
+        memcpy(&unk_4611E0, raceParticipant[v5].name, 0x54u);
+        v14 = raceParticipant[v17].name;
+        memcpy(raceParticipant[v5].name, v14, 0x54u);
         memcpy(v14, &unk_4611E0, 0x54u);
       }
       v2 = a1;
@@ -25754,8 +25955,8 @@ int sub_424420()
   v8 = 4;
   if ( isMultiplayerGame )
   {
-    v8 = dword_456758;
-    v0 = dword_456758;
+    v8 = raceDrivers_456758;
+    v0 = raceDrivers_456758;
   }
   v1 = (350 - 79 * v0) / (v0 + 1);
   v2 = 0;
@@ -26220,79 +26421,80 @@ unsigned int drawStadistics()
       ++v37;
     }
     while ( v39 );
-    if ( isMultiplayerGame )
-    {
-      v40 = (unsigned __int8)byte_45FC0F[dword_456BCC];
-      v41 = &aSuburbia[15 * v40];
-      v42 = (char *)&v173 - 15 * v40 - aSuburbia;
-      do
-      {
-        v43 = *v41;
-        v41[v42] = *v41;
-        ++v41;
-      }
-      while ( v43 );
-      itoa(dword_456758, DstBuf, 10);
-      v44 = &DstBuf[19];
-      do
-        v45 = (v44++)[1];
-      while ( v45 );
-      *(_WORD *)v44 = 32;
-      v46 = strlen(DstBuf) + 1;
-      v47 = &DstBuf[19];
-      do
-        v48 = (v47++)[1];
-      while ( v48 );
-      memcpy(v47, DstBuf, v46);
-      v49 = &DstBuf[19];
-      do
-        v50 = (v49++)[1];
-      while ( v50 );
-      *(_DWORD *)v49 = 1634496557;//easy race
-      *((_DWORD *)v49 + 1) = 544367993;
-      *((_DWORD *)v49 + 2) = 1701011826;
-      *((_WORD *)v49 + 6) = 58;
-    }
-    else if ( v35 )
-    {
-      switch ( v35 )
-      {
-        case 1:
-          v111 = &DstBuf[19];
-          do
-            v112 = (v111++)[1];
-          while ( v112 );
-          *(_DWORD *)v111 = 1684368672;//race medium
-          *((_DWORD *)v111 + 1) = 544044393;
-          *((_DWORD *)v111 + 2) = 1701011826;
-          *((_WORD *)v111 + 6) = 58;
-          break;
-        case 2:
-          v113 = &DstBuf[19];
-          do
-            v114 = (v113++)[1];
-          while ( v114 );
-          *(_DWORD *)v113 = 1918986272;//race hard
-          *((_DWORD *)v113 + 1) = 1634869348;
-          *((_DWORD *)v113 + 2) = 3827043;
-          break;
-        case 3:
-          v173 = 543516756;//the arena
-          v174 = 1852142145;
-          LOWORD(v175) = 14945;
-          BYTE2(v175) = 0;
-          break;
-      }
-    }
-    else
-    {
-      v109 = &DstBuf[19];
+	if (isMultiplayerGame)
+	{
+		v40 = (unsigned __int8)byte_45FC0F[dword_456BCC];
+		v41 = &aSuburbia[15 * v40];
+		v42 = (char *)&v173 - 15 * v40 - aSuburbia;
+		do
+		{
+			v43 = *v41;
+			v41[v42] = *v41;
+			++v41;
+		} while (v43);
+		itoa(raceDrivers_456758, DstBuf, 10);
+		v44 = &DstBuf[19];
+		do
+			v45 = (v44++)[1];
+		while (v45);
+		*(_WORD *)v44 = 32;
+		v46 = strlen(DstBuf) + 1;
+		v47 = &DstBuf[19];
+		do
+			v48 = (v47++)[1];
+		while (v48);
+		memcpy(v47, DstBuf, v46);
+		v49 = &DstBuf[19];
+		do
+			v50 = (v49++)[1];
+		while (v50);
+		*(_DWORD *)v49 = 1634496557;//easy race
+		*((_DWORD *)v49 + 1) = 544367993;
+		*((_DWORD *)v49 + 2) = 1701011826;
+		*((_WORD *)v49 + 6) = 58;
+	}
+	else if (v35)
+	{
+		switch (v35)
+		{
+		case 1:
+			v111 = &DstBuf[19];
+			do
+				v112 = (v111++)[1];
+			while (v112);
+			*(_DWORD *)v111 = 1684368672;//race medium
+			*((_DWORD *)v111 + 1) = 544044393;
+			*((_DWORD *)v111 + 2) = 1701011826;
+			*((_WORD *)v111 + 6) = 58;
+			break;
+		case 2:
+			v113 = &DstBuf[19];
+			do
+				v114 = (v113++)[1];
+			while (v114);
+			*(_DWORD *)v113 = 1918986272;//race hard
+			*((_DWORD *)v113 + 1) = 1634869348;
+			*((_DWORD *)v113 + 2) = 3827043;
+			break;
+		case 3:
+			v173 = 543516756;//the arena
+			v174 = 1852142145;
+			LOWORD(v175) = 14945;
+			BYTE2(v175) = 0;
+			break;
+		}
+	}
+	else
+	{
+		v109 = malloc(20);
+		strcpy(v109, "easy race:");
+     /* v109 = &DstBuf[19];
       do
         v110 = (v109++)[1];
       while ( v110 );
-      *(_DWORD *)v109 = 1935762720;
+      *(_DWORD *)v109 = 1935762720; //easy race:
       *((_DWORD *)v109 + 1) = 1634869369;
-      *((_DWORD *)v109 + 2) = 3827043;
+      *((_DWORD *)v109 + 2) = 3827043;*/
     }
     drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&byte_4458B0, (const char *)&v173, 158440);
     itoa(dword_456BD8, DstBuf, 10);
@@ -26473,6 +26675,8 @@ unsigned int drawStadistics()
       v97 = dword_461FEC;
       v88 = &circuitsToSelect_46126C[selectedRace_462CE8];
       v91 = dword_463CAC;
+
+	  //esto es de circuit record
       v98 = 24 * ((unsigned __int8)circuitsToSelect_46126C[selectedRace_462CE8] + 18 * drivers[driverId].carType);
       *(int *)((char *)&dword_45F04C + v98) = dword_463CAC;
       *(int *)((char *)&dword_45F050 + v98) = v90;
@@ -26884,7 +27088,7 @@ int __cdecl writeDriverList(int a1)
 // 425980: using guessed type char DstBuf[20];
 
 //----- (00425BD0) --------------------------------------------------------
-int __cdecl drawRightPositions(int a1, int a2)
+int __cdecl drawRightPositions(int numDrivers, int a2)
 {
   int v2; // ebx@1
   int v3; // eax@1
@@ -26958,12 +27162,12 @@ int __cdecl drawRightPositions(int a1, int a2)
   char DstBuf[20]; // [sp+24h] [bp-14h]@3
 
   v2 = *(_DWORD *)a2;
-  v3 = (350 - 79 * a1) / (a1 + 1);
+  v3 = (350 - 79 * numDrivers) / (numDrivers + 1);
   a2 = *(_DWORD *)a2;
   v68 = 0;
   v4 = v3 + 108;
   v5 = v3 + 79;
-  if ( a1 > 0 )
+  if (numDrivers > 0 )
   {
     v69 = 640 * v5;
     v6 = 640 * v4;
@@ -27026,7 +27230,7 @@ int __cdecl drawRightPositions(int a1, int a2)
       v6 += v69;
       ++v68;
     }
-    while ( v68 < a1 );
+    while ( v68 < numDrivers);
     LOWORD(v2) = a2;
   }
   sub_4224E0();
@@ -27078,7 +27282,7 @@ int __cdecl drawRightPositions(int a1, int a2)
   }
   v35 = v30;
   sub_424240(80, v35, v63, v65);
-  if ( BYTE2(a2) == driverId || isMultiplayerGame && dword_456758 > 2 )
+  if ( BYTE2(a2) == driverId || isMultiplayerGame && raceDrivers_456758 > 2 )
   {
     v41 = drivers[BYTE2(v2)].colour;
 	//v41 = dword_46086C[27 * BYTE2(a2)];
@@ -27102,7 +27306,7 @@ int __cdecl drawRightPositions(int a1, int a2)
   }
   v45 = v40;
   sub_424240(224, v45, v64, v66);
-  if ( BYTE3(a2) == driverId || isMultiplayerGame && dword_456758 > 3 )
+  if ( BYTE3(a2) == driverId || isMultiplayerGame && raceDrivers_456758 > 3 )
   {
     v54 = drivers[BYTE3(v2)].colour;
 	//v54 = dword_46086C[27 * BYTE3(a2)];
@@ -27240,23 +27444,23 @@ int sub_426280()
   int v12; // [sp+Ch] [bp-18h]@2
   char DstBuf[20]; // [sp+10h] [bp-14h]@3
 
-  v0 = (350 - (dword_456758 << 6)) / (dword_456758 + 1);
+  v0 = (350 - (raceDrivers_456758 << 6)) / (raceDrivers_456758 + 1);
   v1 = 0;
   v2 = v0 + 108;
   result = v0 + 64;
-  if ( dword_456758 > 0 )
+  if ( raceDrivers_456758 > 0 )
   {
     v12 = 640 * result;
     v4 = 640 * v2 + 10306;
     do
     {
       drawImageWithPosition2((int)graphicsGeneral.mulsbg2Bpk, 184, 64, (int)((char *)screenBuffer + v4 - 10252));
-      itoa(dword_460888[27 * (dword_456758 - v1 - 1)], DstBuf, 10);
-      if ( dword_460888[27 * (dword_456758 - v1 - 1)] == 1 )
+      itoa(dword_460888[27 * (raceDrivers_456758 - v1 - 1)], DstBuf, 10);
+      if ( dword_460888[27 * (raceDrivers_456758 - v1 - 1)] == 1 )
         drawTextWithFont((int)graphicsGeneral.fbig3aBpk, (int)&unk_445848, DstBuf, v4 + 4);
       else
         drawTextWithFont((int)graphicsGeneral.fbig3aBpk, (int)&unk_445848, DstBuf, v4);
-      v5 = &byte_460840[108 * (dword_456758 - v1 - 1)];
+      v5 = &byte_460840[108 * (raceDrivers_456758 - v1 - 1)];
       v6 = (char *)(DstBuf - v5);
       do
       {
@@ -27267,7 +27471,7 @@ int sub_426280()
       while ( v7 );
       strupr(DstBuf);
       drawTextWithFont((int)graphicsGeneral.fmed1aBpk, (int)&unk_445928, DstBuf, v4 + 5790);
-      itoa(dword_460884[27 * (dword_456758 - v1 - 1)], DstBuf, 10);
+      itoa(dword_460884[27 * (raceDrivers_456758 - v1 - 1)], DstBuf, 10);
       v8 = DstBuf;
       v9 = 0;
       v10 = 0;
@@ -27281,11 +27485,11 @@ int sub_426280()
         while ( v10 < strlen(DstBuf) );
       }
       drawTextWithFont((int)graphicsGeneral.fmed1aBpk, (int)&unk_445928, DstBuf, v4 - 10306 - v9 + 16226);
-      result = dword_456758;
+      result = raceDrivers_456758;
       ++v1;
       v4 += v12;
     }
-    while ( v1 < dword_456758 );
+    while ( v1 < raceDrivers_456758 );
   }
   return result;
 }
@@ -27442,27 +27646,7 @@ int apogeeScreen()
 
 
   v0 = 0;
-  do
-	  setPaletteAndGetValue(v0++, 0, 0, 0);
-  while (v0 < 256);
-  openPalFromBpa("menu.pal");
  
-  extractFromBpa("MENU.BPA", textureTemp, "face01.bpk");
-  graphicsGeneral.face01Bpk = malloc(0x1000u);
-  copyImageToBuffer((int)textureTemp, graphicsGeneral.face01Bpk);//cuidado que es  un array referenciado a este!!!!!!!!
-  drawImageWithPosition2(graphicsGeneral.face01Bpk, 64, 64, screenBuffer);
-  //copyImageToBuffer(textureTemp, screenBuffer);
-  refreshAllScreen();
-  transitionToCurrentImage();
-  v1 = 0;
-  do
-  {
-	  wait();
-	  ++v1;
-  }
-  //espera de tres segundos
-  while (!eventDetected() && v1 < 1180);
-  v0 = 0;
   do
     setPaletteAndGetValue(v0++, 0, 0, 0);
   while ( v0 < 256 );
@@ -28767,7 +28951,7 @@ int initDrivers()
   allCarsCrash_456BB0 = 0;
   selectedRaceId = 0;
   reInitUnderGroundMarketStock(); //esto calcula la posicion con los putnos pero no se usa :S
-  dword_456B10 = 0;
+  isDemo_456B10 = 0;
   dword_456B68 = 0;
 
   //108 es el tamñao de cada estructura de piloto esta seteando a cero cosas
@@ -29058,7 +29242,7 @@ int drawShopAnimationAndRightSide()
   }
   drawImageWithPosition((int)v1, 640, 16, v2);
   drawCarRightSide();
-  if ( !dword_456B74
+  if ( !showWelcomePopup_456B74
     && consecutiveWins_456BA8 != 3
     && noPaintJob_456BAC != 1
     && allCarsCrash_456BB0 != 1
@@ -29093,11 +29277,11 @@ int sub_4291D0()
   menuActive_4457F0[13] = 0;
   showHardWarningRace = 0;
   showMediumWarningRace = 0;
-  dword_456B78 = 0;
-  dword_456B74 = 0;
+  showUndergroundPopup_456B78 = 0;
+  showWelcomePopup_456B74 = 0;
   result = initDrivers();
   dword_445724 = 0;
-  dword_464F44 = 1;
+  firstRacePlayed_464F44 = 1;
   return result;
 }
 
@@ -29135,7 +29319,7 @@ void __fastcall easyRaceResults(int ecx0, int a2, int a1)
   }
   else
   {
-    switch ( dword_4A7AA0[0] )
+    switch ( raceParticipant[0].racePosition )
     {
       case 1:
         LOBYTE(v12) = racePositions[0][0];
@@ -29150,7 +29334,7 @@ void __fastcall easyRaceResults(int ecx0, int a2, int a1)
         BYTE3(v12) = racePositions[0][0];
         break;
     }
-    switch ( dword_4A7AF4 )
+    switch (raceParticipant[1].racePosition)
     {
       case 1:
         LOBYTE(v12) = racePositions[0][1];
@@ -29165,7 +29349,7 @@ void __fastcall easyRaceResults(int ecx0, int a2, int a1)
         BYTE3(v12) = racePositions[0][1];
         break;
     }
-    switch ( dword_4A7B48 )
+    switch (raceParticipant[2].racePosition)
     {
       case 1:
         LOBYTE(v12) = racePositions[0][2];
@@ -29180,7 +29364,7 @@ void __fastcall easyRaceResults(int ecx0, int a2, int a1)
         BYTE3(v12) = racePositions[0][2];
         break;
     }
-    switch ( dword_4A7B9C )
+    switch (raceParticipant[3].racePosition)
     {
       case 1:
         LOBYTE(v12) = racePositions[0][3];
@@ -29195,66 +29379,7 @@ void __fastcall easyRaceResults(int ecx0, int a2, int a1)
         BYTE3(v12) = racePositions[0][3];
         break;
     }
-	/* switch ( dword_4A7AA0[0] )
-    {
-      case 1:
-        LOBYTE(v12) = LOBYTE(dword_45EB50[0]);
-        break;
-      case 2:
-        BYTE1(v12) = LOBYTE(dword_45EB50[0]);
-        break;
-      case 3:
-        BYTE2(v12) = LOBYTE(dword_45EB50[0]);
-        break;
-      case 4:
-        BYTE3(v12) = LOBYTE(dword_45EB50[0]);
-        break;
-    }
-    switch ( dword_4A7AF4 )
-    {
-      case 1:
-        LOBYTE(v12) = BYTE1(dword_45EB50[0]);
-        break;
-      case 2:
-        BYTE1(v12) = BYTE1(dword_45EB50[0]);
-        break;
-      case 3:
-        BYTE2(v12) = BYTE1(dword_45EB50[0]);
-        break;
-      case 4:
-        BYTE3(v12) = BYTE1(dword_45EB50[0]);
-        break;
-    }
-    switch ( dword_4A7B48 )
-    {
-      case 1:
-        LOBYTE(v12) = BYTE2(dword_45EB50[0]);
-        break;
-      case 2:
-        BYTE1(v12) = BYTE2(dword_45EB50[0]);
-        break;
-      case 3:
-        BYTE2(v12) = BYTE2(dword_45EB50[0]);
-        break;
-      case 4:
-        BYTE3(v12) = BYTE2(dword_45EB50[0]);
-        break;
-    }
-    switch ( dword_4A7B9C )
-    {
-      case 1:
-        LOBYTE(v12) = BYTE3(dword_45EB50[0]);
-        break;
-      case 2:
-        BYTE1(v12) = BYTE3(dword_45EB50[0]);
-        break;
-      case 3:
-        BYTE2(v12) = BYTE3(dword_45EB50[0]);
-        break;
-      case 4:
-        BYTE3(v12) = BYTE3(dword_45EB50[0]);
-        break;
-    }*/
+	
   }
   if ( !a1 )
   {
@@ -29352,7 +29477,7 @@ void __fastcall mediumRaceResults(int ecx0, int a2, int a1)
   v17 = ecx0;
   if ( selectedRace_462CE8 == 1 )
   {
-    switch ( dword_4A7AA0[0] )
+    switch ( raceParticipant[0].racePosition )
     {
       case 1:
         LOBYTE(v17) = racePositions[1][0];
@@ -29367,7 +29492,7 @@ void __fastcall mediumRaceResults(int ecx0, int a2, int a1)
         BYTE3(v17) = racePositions[1][0];
         break;
     }
-    switch ( dword_4A7AF4 )
+    switch (raceParticipant[1].racePosition)
     {
       case 1:
         LOBYTE(v17) = racePositions[1][1];
@@ -29382,7 +29507,7 @@ void __fastcall mediumRaceResults(int ecx0, int a2, int a1)
         BYTE3(v17) = racePositions[1][1];
         break;
     }
-    switch ( dword_4A7B48 )
+    switch (raceParticipant[2].racePosition)
     {
       case 1:
         LOBYTE(v17) = racePositions[1][2];
@@ -29397,7 +29522,7 @@ void __fastcall mediumRaceResults(int ecx0, int a2, int a1)
         BYTE3(v17) = racePositions[1][2];
         break;
     }
-    switch ( dword_4A7B9C )
+    switch (raceParticipant[3].racePosition)
     {
       case 1:
         LOBYTE(v17) = racePositions[1][3];
@@ -29412,66 +29537,7 @@ void __fastcall mediumRaceResults(int ecx0, int a2, int a1)
         BYTE3(v17) = racePositions[1][3];
         break;
     }
-	/*switch ( dword_4A7AA0[0] )
-    {
-      case 1:
-        LOBYTE(v17) = dword_45EB54;
-        break;
-      case 2:
-        BYTE1(v17) = dword_45EB54;
-        break;
-      case 3:
-        BYTE2(v17) = dword_45EB54;
-        break;
-      case 4:
-        BYTE3(v17) = dword_45EB54;
-        break;
-    }
-    switch ( dword_4A7AF4 )
-    {
-      case 1:
-        LOBYTE(v17) = BYTE1(dword_45EB54);
-        break;
-      case 2:
-        BYTE1(v17) = BYTE1(dword_45EB54);
-        break;
-      case 3:
-        BYTE2(v17) = BYTE1(dword_45EB54);
-        break;
-      case 4:
-        BYTE3(v17) = BYTE1(dword_45EB54);
-        break;
-    }
-    switch ( dword_4A7B48 )
-    {
-      case 1:
-        LOBYTE(v17) = BYTE2(dword_45EB54);
-        break;
-      case 2:
-        BYTE1(v17) = BYTE2(dword_45EB54);
-        break;
-      case 3:
-        BYTE2(v17) = BYTE2(dword_45EB54);
-        break;
-      case 4:
-        BYTE3(v17) = BYTE2(dword_45EB54);
-        break;
-    }
-    switch ( dword_4A7B9C )
-    {
-      case 1:
-        LOBYTE(v17) = BYTE3(dword_45EB54);
-        break;
-      case 2:
-        BYTE1(v17) = BYTE3(dword_45EB54);
-        break;
-      case 3:
-        BYTE2(v17) = BYTE3(dword_45EB54);
-        break;
-      case 4:
-        BYTE3(v17) = BYTE3(dword_45EB54);
-        break;
-    }*/
+	
   }
   else
   {
@@ -29585,7 +29651,7 @@ void __fastcall hardRaceResults(int ecx0, int a2, int a1)
   v17 = ecx0;
   if ( selectedRace_462CE8 == 2 )
   {
-    switch ( dword_4A7AA0[0] )
+    switch (raceParticipant[0].racePosition)
     {
       case 1:
         LOBYTE(v17) = racePositions[2][0];
@@ -29600,7 +29666,7 @@ void __fastcall hardRaceResults(int ecx0, int a2, int a1)
         BYTE3(v17) = racePositions[2][0];
         break;
     }
-    switch ( dword_4A7AF4 )
+    switch (raceParticipant[1].racePosition)
     {
       case 1:
         LOBYTE(v17) = racePositions[2][1];
@@ -29615,7 +29681,7 @@ void __fastcall hardRaceResults(int ecx0, int a2, int a1)
         BYTE3(v17) = racePositions[2][1];
         break;
     }
-    switch ( dword_4A7B48 )
+    switch (raceParticipant[2].racePosition)
     {
       case 1:
         LOBYTE(v17) = racePositions[2][2];
@@ -29630,7 +29696,7 @@ void __fastcall hardRaceResults(int ecx0, int a2, int a1)
         BYTE3(v17) = racePositions[2][2];
         break;
     }
-    switch ( dword_4A7B9C )
+    switch (raceParticipant[3].racePosition)
     {
       case 1:
         LOBYTE(v17) = racePositions[2][3];
@@ -29645,66 +29711,7 @@ void __fastcall hardRaceResults(int ecx0, int a2, int a1)
         BYTE3(v17) = racePositions[2][3];
         break;
     }
-	/* switch ( dword_4A7AA0[0] )
-    {
-      case 1:
-        LOBYTE(v17) = dword_45EB58;
-        break;
-      case 2:
-        BYTE1(v17) = dword_45EB58;
-        break;
-      case 3:
-        BYTE2(v17) = dword_45EB58;
-        break;
-      case 4:
-        BYTE3(v17) = dword_45EB58;
-        break;
-    }
-    switch ( dword_4A7AF4 )
-    {
-      case 1:
-        LOBYTE(v17) = BYTE1(dword_45EB58);
-        break;
-      case 2:
-        BYTE1(v17) = BYTE1(dword_45EB58);
-        break;
-      case 3:
-        BYTE2(v17) = BYTE1(dword_45EB58);
-        break;
-      case 4:
-        BYTE3(v17) = BYTE1(dword_45EB58);
-        break;
-    }
-    switch ( dword_4A7B48 )
-    {
-      case 1:
-        LOBYTE(v17) = BYTE2(dword_45EB58);
-        break;
-      case 2:
-        BYTE1(v17) = BYTE2(dword_45EB58);
-        break;
-      case 3:
-        BYTE2(v17) = BYTE2(dword_45EB58);
-        break;
-      case 4:
-        BYTE3(v17) = BYTE2(dword_45EB58);
-        break;
-    }
-    switch ( dword_4A7B9C )
-    {
-      case 1:
-        LOBYTE(v17) = BYTE3(dword_45EB58);
-        break;
-      case 2:
-        BYTE1(v17) = BYTE3(dword_45EB58);
-        break;
-      case 3:
-        BYTE2(v17) = BYTE3(dword_45EB58);
-        break;
-      case 4:
-        BYTE3(v17) = BYTE3(dword_45EB58);
-        break;
-    }*/
+	
   }
   else
   {
@@ -30593,23 +30600,7 @@ void sub_42A570()
     }
   }
 }
-// 456730: using guessed type int dword_456730;
-// 456754: using guessed type int dword_456754;
-// 456B54: using guessed type int dword_456B54;
-// 456BA0: using guessed type int dword_456BA0;
-// 456BF0: using guessed type int screenPtr;
-// 45E0A8: using guessed type int dword_45E0A8;
-// 45E118: using guessed type char byte_45E118;
-// 45E5E0: using guessed type int dword_45E5E0;
-// 45EA04: using guessed type int isMultiplayerGame;
-// 461EC4: using guessed type __int16;
-// 461EC8: using guessed type __int16;
-// 461ECC: using guessed type __int16;
-// 461ED0: using guessed type __int16;
-// 461ED4: using guessed type __int16;
-// 462C4E: using guessed type int dword_462C4E;
-// 463CE8: using guessed type int driverId;
-// 42A570: using guessed type char var_400[1024];
+
 
 //----- (0042B1B0) --------------------------------------------------------
 void __cdecl selectRaceWarningPopup(int a1)
@@ -30977,7 +30968,7 @@ LABEL_74:
     sub_4260D0();
   }
   while ( !eventDetected() );
-  if ( useWeapons && !dword_456B74 && undergroundPricesSet_456B84 )
+  if ( useWeapons && !showWelcomePopup_456B74 && undergroundPricesSet_456B84 )
   {
 LABEL_15:
     sub_4224E0();
@@ -31301,7 +31292,7 @@ char sub_42BD10()
   __int16 v67; // [sp+24h] [bp-44h]@1
   char DstBuf; // [sp+40h] [bp-28h]@1
 
-  v0 = dword_456758;
+  v0 = raceDrivers_456758;
   memcpy(screenBuffer, graphicsGeneral.menubg5Bpk, 0x4B000u);
   v63 = v0;
   drawImageWithPosition((int)graphicsGeneral.rank1cBpk, 54, 386, (int)((char *)screenBuffer + 54060));
@@ -31330,7 +31321,7 @@ char sub_42BD10()
   drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&byte_4458B0, "Multiplayer Ranking", 55096);
   sub_424420();
   v7 = 0;
-  for ( i = dword_456758 - 1; v7 < dword_456758 - 1; i = dword_456758 - 1 )
+  for ( i = raceDrivers_456758 - 1; v7 < raceDrivers_456758 - 1; i = raceDrivers_456758 - 1 )
   {
     v9 = 108 * v7;
     if (drivers[v7].totalIncome <= drivers[v7+1].totalIncome)
@@ -31366,9 +31357,9 @@ char sub_42BD10()
         ++v11;
       }
       while ( v11 < 4 );
-      v13 = &dword_4A7A60[84 * v7];
+      v13 = raceParticipant[v7].name;
       memcpy(&unk_4611E0, v13, 0x54u);
-      v14 = &dword_4A7A60[84 * v10];
+      v14 = raceParticipant[v10].name;
       memcpy(v13, v14, 0x54u);
       memcpy(v14, &unk_4611E0, 0x54u);
       v7 = 0;
@@ -31413,21 +31404,21 @@ char sub_42BD10()
           ++v18;
         }
         while ( v18 < 4 );
-        v20 = &dword_4A7A60[84 * v15];
+        v20 = raceParticipant[v15].name;
         memcpy(&unk_4611E0, v20, 0x54u);
-        v21 = &dword_4A7A60[84 * v16];
+        v21 = raceParticipant[v16].name;
         memcpy(v20, v21, 0x54u);
         memcpy(v21, &unk_4611E0, 0x54u);
         v15 = 0;
       }
     }
-    while ( v15 < dword_456758 - 1 );
+    while ( v15 < raceDrivers_456758 - 1 );
   }
-  v22 = dword_456758;
-  if ( dword_456758 > 0 )
+  v22 = raceDrivers_456758;
+  if ( raceDrivers_456758 > 0 )
   {
     v23 = (int)drivers[0].rank;
-    v24 = dword_456758;
+    v24 = raceDrivers_456758;
     do
     {
       *(_DWORD *)v23 = v22--;
@@ -31447,7 +31438,7 @@ char sub_42BD10()
     ++v26;
   }
   while ( v28 );
-  itoa(dword_456758, &DstBuf, 10);
+  itoa(raceDrivers_456758, &DstBuf, 10);
   v29 = (char *)&v63 + 3;
   do
     v30 = (v29++)[1];
@@ -31484,28 +31475,31 @@ char sub_42BD10()
     while ( v38 < strlen((const char *)&v64) );
   }
   drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&byte_4458B0, (const char *)&v64, 55530 - v37 / 2);
-  v40 = 0;
+  
   v62 = 50462976;
   if ( v63 > 0 )
   {
-    v41 = (int)dword_4A7AA0;
+	int indexRaceParticipant = 0;
+	  
+    
     do
     {
-      v42 = *(_DWORD *)v41;
-      if ( *(_DWORD *)v41 == 1 )
-        LOBYTE(v62) = v40;
+      v42 = raceParticipant[indexRaceParticipant].racePosition;
+      if (v42 == 1 )
+        LOBYTE(v62) = indexRaceParticipant;
       if ( v42 == 2 )
-        BYTE1(v62) = v40;
+        BYTE1(v62) = indexRaceParticipant;
       if ( v42 == 3 )
-        BYTE2(v62) = v40;
+        BYTE2(v62) = indexRaceParticipant;
       if ( v42 == 4 )
-        BYTE3(v62) = v40;
-      ++v40;
-      v41 += 84;
+        BYTE3(v62) = indexRaceParticipant;
+      
+      
+	  indexRaceParticipant++;
     }
-    while ( v40 < v63 );
+    while (indexRaceParticipant < v63 );
   }
-  drawRightPositions(dword_456758, (int)&v62);
+  drawRightPositions(raceDrivers_456758, (int)&v62);
   sub_426080();
   drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&byte_4458B0, "Press any key to continue...", 289646);
   refreshAllScreen();
@@ -31553,11 +31547,14 @@ char sub_42BD10()
     sub_4260D0();
   }
   while ( !eventDetected() );
-  v49 = (signed int)&dword_4A7AA4; ///raceParticipant[0].difficulty
-  while ( *(_DWORD *)v49 != -1 || dword_456B9C )
+  int indexRaceParticipant = 0;
+  //v49 = (signed int)&dword_4A7AA4; ///raceParticipant[0].difficulty
+  while (raceParticipant[indexRaceParticipant].difficulty != -1 || dword_456B9C )
+	  //while (*(_DWORD *)v49 != -1 || dword_456B9C)
   {
-    v49 += 84;
-    if ( v49 >= (signed int)&unk_4A7BF4 )
+    //v49 += 84;
+	  indexRaceParticipant++;
+    if (raceParticipant[indexRaceParticipant].difficulty >= (signed int)&unk_4A7BF4 )
       goto LABEL_76;
   }
   sub_42A300();
@@ -32829,7 +32826,7 @@ int sabotageScreen()
     ++v5;
   }
   while ( v6 < (signed int)&unk_4610BC );
-  if ( dword_456B10 )
+  if ( isDemo_456B10 )
   {
     result = 0;
   }
@@ -33665,9 +33662,9 @@ signed int loadGame()
   *(_DWORD *)&aStartRacing[12] = 6778473;
   showHardWarningRace = 0;
   showMediumWarningRace = 0;
-  dword_456B78 = 0;
-  dword_456B74 = 0;
-  dword_464F44 = 0;
+  showUndergroundPopup_456B78 = 0;
+  showWelcomePopup_456B74 = 0;
+  firstRacePlayed_464F44 = 0;
   useHasMorePoints_456BC4 = 0;
   //allocateMemory(0x883u);
   Str = v9;
@@ -35335,7 +35332,7 @@ int showHitmanScreen()
   char v43; // [sp+13h] [bp-35h]@21
   char v44[52]; // [sp+14h] [bp-34h]@20
 
-  if ( dword_456B10 )
+  if ( isDemo_456B10 )
     return 0;
   v40 = 1;
   if ( rand() % 100 < dword_45678C && useWeapons )
@@ -35752,7 +35749,7 @@ void __cdecl previewRaceScreen(signed int participants)
   int v142; // eax@267
   int v143; // ebx@291
   int v144; // eax@291
-  signed int v145; // esi@291
+ // signed int v145; // esi@291
   int v146; // ecx@294
   signed int v147; // ecx@296
   signed int v148; // ecx@309
@@ -35897,29 +35894,29 @@ void __cdecl previewRaceScreen(signed int participants)
   int v285; // [sp+DCh] [bp-18h]@1
   char DstBuf; // [sp+E0h] [bp-14h]@47
 
-  v258 = 3691092;
-  v267 = 3691092;
-  v255 = 3494484;
-  v256 = 3560020;
-  v264 = 3494484;
-  v265 = 3560020;
+  v258 = 3691092;//TR8
+  v267 = 3691092;//TR8
+  v255 = 3494484;//TR5
+  v256 = 3560020;//TR6
+  v264 = 3494484;//TR5
+  v265 = 3560020;//TR6
   dword_456730 = 0;
   memcpy((void *)dword_45FC00, screenBuffer, 0x4B000u);
   screenBuffer = (void *)dword_45FC00;
-  v259 = 3756628;
-  v268 = 3756628;
+  v259 = 3756628;//TR9
+  v268 = 3756628;//TR9
   memcpy((void *)dword_45FC00, graphicsGeneral.menubg5Bpk, 0x4B000u);
-  v253 = 3363412;
-  v262 = 3363412;
-  v251 = 3232340;
-  v252 = 3297876;
-  v254 = 3428948;
-  v257 = 3625556;
-  v260 = 3232340;
-  v261 = 3297876;
-  v263 = 3428948;
-  v266 = 3625556;
-  v269 = 3166804;
+  v253 = 3363412;//TR3
+  v262 = 3363412;//TR3
+  v251 = 3232340; //TR1
+  v252 = 3297876; //TR2
+  v254 = 3428948; //TR4
+  v257 = 3625556; //TR7
+  v260 = 3232340; //TR1
+  v261 = 3297876;//TR2
+  v263 = 3428948;//TR4
+  v266 = 3625556;//TR7
+  v269 = 3166804;//TR0
   v282 = 113331;
   v283 = 138403;
   v284 = 175411;
@@ -35990,7 +35987,7 @@ void __cdecl previewRaceScreen(signed int participants)
 	raceIdParticipants[3] = 3;
     //allocateMemoryPtr((void*)&v11,4u);
     //TODO fix
-   // Str = v11;
+	//Str = v11;
     *(byte *)v11 = driverId;
     sub_41EA70((int)Str, 1, 19);
     free(Str);
@@ -36018,7 +36015,8 @@ void __cdecl previewRaceScreen(signed int participants)
     v18 = byte_45FC10[dword_456BCC];
     v19 = (unsigned __int8)byte_45FC10[dword_456BCC];
     v20 = &v251 + v19;
-    v21 = (char *)&dword_45EA50[-v19] - (char *)&v251;
+	//ni idea de que es esto pero es multiplayer
+    v21 = (char *)&raceFilePrefix_45EA50[-v19] - (char *)&v251;
     do
     {
       v22 = *(byte *)v20;
@@ -36027,12 +36025,12 @@ void __cdecl previewRaceScreen(signed int participants)
     }
     while ( v22 );
     numberOfLaps = 5;
-    dword_4A7AA8 = (unsigned __int8)v18 > 8u;
+	raceParticipant[0].isCircuitReversed_4A7AA8 = (unsigned __int8)v18 > 8u;
   }
   else
   {
     v23 = selectedRace_462CE8;
-    dword_4A7AA8 = (unsigned __int8)circuitsToSelect_46126C[selectedRace_462CE8] > 8u;
+	raceParticipant[0].isCircuitReversed_4A7AA8 = (unsigned __int8)circuitsToSelect_46126C[selectedRace_462CE8] > 8u;
     switch ( selectedRace_462CE8 )
     {
       case 0:
@@ -36058,8 +36056,14 @@ void __cdecl previewRaceScreen(signed int participants)
         //extractFromBpa("MENU.BPA", textureTemp, (int)Str);
         copyImageToBuffer((int)textureTemp, (int)tsahpeBpk_45EB5C);
         drawImageWithPosition((int)tsahpeBpk_45EB5C, 360, 274, (int)((char *)screenBuffer + 64264));
-        v29 = &v251 + (unsigned __int8)circuitsToSelect_46126C[0];
-        v30 = (char *)&dword_45EA50[-(unsigned __int8)circuitsToSelect_46126C[0]] - (char *)&v251;
+        
+
+		//en funcion del circuito seleccionado saca el TRx
+		v29 = &v251 + (unsigned __int8)circuitsToSelect_46126C[0];
+		strcpy(raceFilePrefix_45EA50, "TR");
+		itoa((circuitsToSelect_46126C[0]%9)+1, &DstBuf, 10);
+		strcat(raceFilePrefix_45EA50, &DstBuf);
+        v30 = (char *)&raceFilePrefix_45EA50[-(unsigned __int8)circuitsToSelect_46126C[0]] - (char *)&v251;
         do
         {
           v31 = *(byte *)v29;
@@ -36096,8 +36100,11 @@ void __cdecl previewRaceScreen(signed int participants)
         drawImageWithPosition((int)tsahpeBpk_45EB5C, 360, 274, (int)((char *)screenBuffer + 64264));
         v37 = &v251 + (unsigned __int8)circuitsToSelect_46126C[1];
 		//v37 = &v251 + (unsigned __int8)byte_46126D;
-        v38 = (char *)&dword_45EA50[-(unsigned __int8)circuitsToSelect_46126C[1]] - (char *)&v251;
-		//v38 = (char *)&dword_45EA50[-(unsigned __int8)byte_46126D] - (char *)&v251;
+		strcpy(raceFilePrefix_45EA50, "TR");
+		itoa((circuitsToSelect_46126C[1] % 9) + 1, &DstBuf, 10);
+		strcat(raceFilePrefix_45EA50, &DstBuf);
+        v38 = (char *)&raceFilePrefix_45EA50[-(unsigned __int8)circuitsToSelect_46126C[1]] - (char *)&v251;
+		//v38 = (char *)&raceFilePrefix_45EA50[-(unsigned __int8)byte_46126D] - (char *)&v251;
         do
         {
           v39 = *(byte *)v37;
@@ -36132,9 +36139,12 @@ void __cdecl previewRaceScreen(signed int participants)
         copyImageToBuffer((int)textureTemp, (int)tsahpeBpk_45EB5C);
         drawImageWithPosition((int)tsahpeBpk_45EB5C, 360, 274, (int)((char *)screenBuffer + 64264));
         v45 = &v251 + (unsigned __int8)circuitsToSelect_46126C[2];
-        v46 = (char *)&dword_45EA50[-(unsigned __int8)circuitsToSelect_46126C[2]] - (char *)&v251;
+		strcpy(raceFilePrefix_45EA50, "TR");
+		itoa((circuitsToSelect_46126C[2] % 9) + 1, &DstBuf, 10);
+		strcat(raceFilePrefix_45EA50, &DstBuf);
+        v46 = (char *)&raceFilePrefix_45EA50[-(unsigned __int8)circuitsToSelect_46126C[2]] - (char *)&v251;
 		//v45 = &v251 + (unsigned __int8)byte_46126E;
-		//v46 = (char *)&dword_45EA50[-(unsigned __int8)byte_46126E] - (char *)&v251;
+		//v46 = (char *)&raceFilePrefix_45EA50[-(unsigned __int8)byte_46126E] - (char *)&v251;
         do
         {
           v47 = *(byte *)v45;
@@ -36152,9 +36162,10 @@ void __cdecl previewRaceScreen(signed int participants)
         extractFromBpa("MENU.BPA", textureTemp, "TSHAPE19.BPK");
         copyImageToBuffer((int)textureTemp, (int)tsahpeBpk_45EB5C);
         drawImageWithPosition((int)tsahpeBpk_45EB5C, 360, 274, (int)((char *)screenBuffer + 64264));
-        dword_45EA50[0] = 3166804;
+        //raceFilePrefix_45EA50[0] = 3166804; //TR0
+		strcat(raceFilePrefix_45EA50, "TR0");
         numberOfLaps = 9;
-        dword_4A7AA8 = 0;
+		raceParticipant[0].isCircuitReversed_4A7AA8 = 0;
 LABEL_44:
         v23 = selectedRace_462CE8;
         break;
@@ -36440,8 +36451,8 @@ LABEL_112:
   lapped_456BC0 = 0;
  
   int maxDriverPoints = getMaxDriverPoints(driverId);
-  if ( isMultiplayerGame || (dword_4A7AAC = 1, drugQuest_456BB4 <= 0) )//dword_4A7AAC offset de 76 en la estructura de participante
-    dword_4A7AAC = 0;
+  if ( isMultiplayerGame || (raceParticipant[0].drugPicked = 1, drugQuest_456BB4 <= 0) )//dword_4A7AAC offset de 76 en la estructura de participante
+	  raceParticipant[0].drugPicked = 0;
   numberOfParticipants = participants;
   v101 = 0;
   if (participants > 0 )
@@ -36506,7 +36517,7 @@ LABEL_112:
 		raceParticipant[iRacePArticipant].r = (unsigned __int8)*v116;
 		raceParticipant[iRacePArticipant].g = (unsigned __int8)v116[1];
 		raceParticipant[iRacePArticipant].b = (unsigned __int8)v116[2];
-        if ( !isMultiplayerGame || v101 <= dword_456758 - 1 )
+        if ( !isMultiplayerGame || v101 <= raceDrivers_456758 - 1 )
           goto LABEL_157;
 		raceParticipant[iRacePArticipant].r = *((byte *)v112 + 30);
 		raceParticipant[iRacePArticipant].g = *((byte *)v112 + 31);
@@ -36655,18 +36666,20 @@ LABEL_534:
   freeMemoryGraphics4();
   if ( isMultiplayerGame )
   {
-    dword_45FC20 = driverId;
+    userRaceOrder_45FC20 = driverId;
     if ( dword_45E0A8 == 2 )
       sub_43C730();
   }
-//TODO esto inicia la carrera  startRace(dword_45FC20, numberOfParticipants);
+
+
+  startRace(userRaceOrder_45FC20, numberOfParticipants);
   if ( isMultiplayerGame && dword_45E0A8 == 2 )
     sub_43C7B0((int (*)(void))sub_4181B0);
-  v126 = dword_45FC20;
+  v126 = userRaceOrder_45FC20;
   v127 = driverId;
-  v244 = 84 * dword_45FC20;
-  v128 = dword_4A7AA0[21 * dword_45FC20];
-  dword_456B50 = v128;
+  v244 = 84 * userRaceOrder_45FC20;
+  v128 = raceParticipant[userRaceOrder_45FC20].racePosition;
+  userRacePosition_456B50 = v128;
   dword_456BD8 = v128;
   v129 = 0;
   v130 = 2;
@@ -36675,13 +36688,13 @@ LABEL_534:
   {
     if ( *(_DWORD *)(v131 - 108) > v129 )
     {
-      v126 = dword_45FC20;
+      v126 = userRaceOrder_45FC20;
       if ( v130 - 2 != driverId )
         v129 = *(_DWORD *)(v131 - 108);
     }
     if ( *(_DWORD *)v131 > v129 )
     {
-      v126 = dword_45FC20;
+      v126 = userRaceOrder_45FC20;
       if ( v130 - 1 != driverId )
         v129 = *(_DWORD *)v131;
     }
@@ -36689,13 +36702,13 @@ LABEL_534:
       v129 = *(_DWORD *)(v131 + 108);
     if ( *(_DWORD *)(v131 + 216) > v129 )
     {
-      v126 = dword_45FC20;
+      v126 = userRaceOrder_45FC20;
       if ( v130 + 1 != driverId )
         v129 = *(_DWORD *)(v131 + 216);
     }
     if ( *(_DWORD *)(v131 + 324) > v129 )
     {
-      v126 = dword_45FC20;
+      v126 = userRaceOrder_45FC20;
       if ( v130 + 2 != driverId )
         v129 = *(_DWORD *)(v131 + 324);
     }
@@ -36711,27 +36724,27 @@ LABEL_534:
     v134 = 0;
     if (numberOfParticipants > 0 )
     {
-      v135 = (int)dword_4A7A70;
+     // v135 = (int)dword_4A7A70;
       do
       {
-        if ( v134 != v126 && *(_DWORD *)v135 == 100 )
+        if ( v134 != v126 && raceParticipant[v134].damage == 100 )
           ++v133;
         ++v134;
-        v135 += 84;
+       // v135 += 84;
       }
       while ( v134 < numberOfParticipants);
     }
-    if ( v133 == numberOfParticipants - 1 && *(int *)((char *)dword_4A7A70 + v244) < 100 )
+    if ( v133 == numberOfParticipants - 1 && raceParticipant[userRaceOrder_45FC20].damage < 100 )
       allCarsCrash_456BB0 = 1;
-    if ( (isMultiplayerGame || dword_456B50 != 4) && *(int *)((char *)dword_4A7A70 + v244) < 3 && useWeapons == 1 )
+    if ( (isMultiplayerGame || userRacePosition_456B50 != 4) && raceParticipant[userRaceOrder_45FC20].damage < 3 && useWeapons == 1 )
       noPaintJob_456BAC = 1;
-    if ( dword_456B50 == 1 )
+    if ( userRacePosition_456B50 == 1 )
       ++consecutiveWins_456BA8;
     else
       consecutiveWins_456BA8 = 0;
     if ( !isMultiplayerGame )
     {
-      if ( drugQuest_456BB4 > 0 && (dword_4A7AAC != 1 || dword_456B50 != 1 || *(int *)((char *)dword_4A7A70 + v244) >= 100) )
+      if ( drugQuest_456BB4 > 0 && (raceParticipant[0].drugPicked != 1 || userRacePosition_456B50 != 1 || raceParticipant[userRaceOrder_45FC20].damage >= 100) )
         drugQuest_456BB4 = -drugQuest_456BB4;
       if ( killOneQuest_456BB8 > 0 )
       {
@@ -36751,7 +36764,7 @@ LABEL_534:
   }
   if ( drivers[driverId].loanType != -1 )
     ++drivers[driverId].loanRaces;
-  dword_464F44 = 0;
+  firstRacePlayed_464F44 = 0;
   //pone a 0 las cosas del underground
 
   int iDriver = 0;
@@ -36839,7 +36852,7 @@ LABEL_534:
   while ( v141 - 2 < 20 );
   if ( isMultiplayerGame )
   {
-    v156 = unk_461EC2;
+   /* v156 = unk_461EC2;
     unk_461EC2 = unk_461EC3;
     v157 = dword_456BCC + 1;
     v159 = __OFSUB__(dword_456BCC + 1, dword_456BC8);
@@ -37026,7 +37039,7 @@ LABEL_534:
     HIBYTE(word_461ED4) = 0;
     userLastRaceIncomeNoPrice_456BE0 = 0;
     userLasRacePriceIncome_456BDC = 0;
-    if ( dword_456758 > 0 )
+    if ( raceDrivers_456758 > 0 )
     {
       v200 = (double)dword_4456E8;
       v244 = (unsigned __int64)(0.02 * v200);
@@ -37034,7 +37047,7 @@ LABEL_534:
       do
       {
         v202 = v244 * *(_DWORD *)(v201 - 52);
-        v108 = v199 == dword_45FC20;
+        v108 = v199 == userRaceOrder_45FC20;
         drivers[raceIdParticipants[v199]].lastRaceIncome = v202;
         if ( v108 )
           userLastRaceIncomeNoPrice_456BE0 = v202;
@@ -37043,7 +37056,7 @@ LABEL_534:
         /*if ( *(_DWORD *)v201 == 1 )
         {
           v204 = &dword_460894[27 * *(&v240 + v199)];
-          v108 = v199 == dword_45FC20;
+          v108 = v199 == userRaceOrder_45FC20;
           *v204 += (unsigned __int64)(0.3 * v200);
           if ( v108 )
             userLasRacePriceIncome_456BDC = (unsigned __int64)(0.3 * v200);
@@ -37052,7 +37065,7 @@ LABEL_534:
         if ( v203 == 2 )
         {
           v205 = &dword_460894[27 * *(&v240 + v199)];
-          v108 = v199 == dword_45FC20;
+          v108 = v199 == userRaceOrder_45FC20;
           *v205 += (unsigned __int64)(0.25 * v200);
           if ( v108 )
             userLasRacePriceIncome_456BDC = (unsigned __int64)(0.25 * v200);
@@ -37061,7 +37074,7 @@ LABEL_534:
         if ( v203 == 3 )
         {
           v206 = &dword_460894[27 * *(&v240 + v199)];
-          v108 = v199 == dword_45FC20;
+          v108 = v199 == userRaceOrder_45FC20;
           *v206 += (unsigned __int64)(0.2 * v200);
           if ( v108 )
             userLasRacePriceIncome_456BDC = (unsigned __int64)(0.2 * v200);
@@ -37070,12 +37083,12 @@ LABEL_534:
         if ( v203 == 4 )
         {
           v207 = &dword_460894[27 * *(&v240 + v199)];
-          v108 = v199 == dword_45FC20;
+          v108 = v199 == userRaceOrder_45FC20;
           *v207 += (unsigned __int64)(0.15 * v200);
           if ( v108 )
             userLasRacePriceIncome_456BDC = (unsigned __int64)(0.15 * v200);
         }*/
-        v208 = raceIdParticipants[v199];
+        /*v208 = raceIdParticipants[v199];
         drivers[v208].money += drivers[v208].lastRaceIncome;
         drivers[v208].totalIncome += drivers[v208].lastRaceIncome;
         if ( v203 == 1 )
@@ -37083,8 +37096,8 @@ LABEL_534:
         ++v199;
         v201 += 84;
       }
-      while ( v199 < dword_456758 );
-    }
+      while ( v199 < raceDrivers_456758 );
+    }*/
   }
   else
   {//calculo del dinero ganado en la carrera
@@ -37093,30 +37106,31 @@ LABEL_534:
     {
       v143 = selectedRace_462CE8;
       v144 = 0;
-      v145 = (signed int)&dword_4A7A6C;//posicion en carrera
+	  int indexRaceParticipant = 0;
+     // v145 = (signed int)&dword_4A7A6C;//posicion en carrera raceParticipant[].racePosition
       do
       {
-        if ( dword_456B50 != 4 && !v143 )
+        if ( userRacePosition_456B50 != 4 && !v143 )
         {
-          v146 = 50 * *(_DWORD *)v145;
+          v146 = 50 * raceParticipant[indexRaceParticipant].currentRacePosition;
 		  drivers[raceIdParticipants[v144]].lastRaceIncome = v146;
           if ( v144 == v126 )
             userLastRaceIncomeNoPrice_456BE0 = v146;
         }
         v147 = *(int *)((char *)dword_460888 + v245);
-        if ( v147 > 0 && v147 < 6 && dword_456B50 != 4 )
+        if ( v147 > 0 && v147 < 6 && userRacePosition_456B50 != 4 )
         {
           if ( v143 == RACE_EASY)
           {
-			  drivers[raceIdParticipants[v144]].lastRaceIncome = 260 * *(_DWORD *)v145;
+			  drivers[raceIdParticipants[v144]].lastRaceIncome = 260 * raceParticipant[indexRaceParticipant].currentRacePosition;
 LABEL_304:
             if ( v144 == v126 )
-              userLastRaceIncomeNoPrice_456BE0 = 260 * *(_DWORD *)v145;
+              userLastRaceIncomeNoPrice_456BE0 = 260 * raceParticipant[indexRaceParticipant].currentRacePosition;
             goto LABEL_309;
           }
           if ( v143 == RACE_MEDIUM)
           {
-			  drivers[raceIdParticipants[v144]].lastRaceIncome = 500 * *(_DWORD *)v145;
+			  drivers[raceIdParticipants[v144]].lastRaceIncome = 500 * raceParticipant[indexRaceParticipant].currentRacePosition;
           }
           else
           {
@@ -37126,23 +37140,23 @@ LABEL_304:
               goto LABEL_309;
           }
           if ( v144 == v126 )
-            userLastRaceIncomeNoPrice_456BE0 = 500 * *(_DWORD *)v145;
+            userLastRaceIncomeNoPrice_456BE0 = 500 * raceParticipant[indexRaceParticipant].currentRacePosition;
         }
 LABEL_309:
         v148 = *(int *)((char *)dword_460888 + v245);
-        if ( v148 <= 5 || v148 >= 11 || dword_456B50 == 4 )
+        if ( v148 <= 5 || v148 >= 11 || userRacePosition_456B50 == 4 )
           goto LABEL_322;
         if ( v143 == RACE_MEDIUM)
         {
-			drivers[raceIdParticipants[v144]].lastRaceIncome = 200 * *(_DWORD *)v145;
+			drivers[raceIdParticipants[v144]].lastRaceIncome = 200 * raceParticipant[indexRaceParticipant].currentRacePosition;
 LABEL_317:
           if ( v144 == v126 )
-            userLastRaceIncomeNoPrice_456BE0 = 200 * *(_DWORD *)v145;
+            userLastRaceIncomeNoPrice_456BE0 = 200 * raceParticipant[indexRaceParticipant].currentRacePosition;
           goto LABEL_322;
         }
         if ( v143 == RACE_HARD)
         {
-			drivers[raceIdParticipants[v144]].lastRaceIncome = 300 * *(_DWORD *)v145;
+			drivers[raceIdParticipants[v144]].lastRaceIncome = 300 * raceParticipant[indexRaceParticipant].currentRacePosition;
         }
         else
         {
@@ -37152,22 +37166,22 @@ LABEL_317:
             goto LABEL_322;
         }
         if ( v144 == v126 )
-          userLastRaceIncomeNoPrice_456BE0 = 300 * *(_DWORD *)v145;
+          userLastRaceIncomeNoPrice_456BE0 = 300 * raceParticipant[indexRaceParticipant].currentRacePosition;
 LABEL_322:
         v149 = *(int *)((char *)dword_460888 + v245);
-        if ( v149 <= 10 || v149 >= 16 || dword_456B50 == 4 )
+        if ( v149 <= 10 || v149 >= 16 || userRacePosition_456B50 == 4 )
           goto LABEL_335;
         if ( v143 == RACE_MEDIUM )
         {
-			drivers[raceIdParticipants[v144]].lastRaceIncome = 120 * *(_DWORD *)v145;
+			drivers[raceIdParticipants[v144]].lastRaceIncome = 120 * raceParticipant[indexRaceParticipant].currentRacePosition;
 LABEL_330:
           if ( v144 == v126 )
-            userLastRaceIncomeNoPrice_456BE0 = 120 * *(_DWORD *)v145;
+            userLastRaceIncomeNoPrice_456BE0 = 120 * raceParticipant[indexRaceParticipant].currentRacePosition;
           goto LABEL_335;
         }
         if ( v143 == RACE_HARD)
         {
-			drivers[raceIdParticipants[v144]].lastRaceIncome = 150 * *(_DWORD *)v145;
+			drivers[raceIdParticipants[v144]].lastRaceIncome = 150 * raceParticipant[indexRaceParticipant].currentRacePosition;
         }
         else
         {
@@ -37177,25 +37191,25 @@ LABEL_330:
             goto LABEL_335;
         }
         if ( v144 == v126 )
-          userLastRaceIncomeNoPrice_456BE0 = 150 * *(_DWORD *)v145;
+          userLastRaceIncomeNoPrice_456BE0 = 150 * raceParticipant[indexRaceParticipant].currentRacePosition;
 LABEL_335:
         v150 = *(int *)((char *)dword_460888 + v245);
-        if ( v150 > 15 && v150 < 21 && dword_456B50 != 4 )
+        if ( v150 > 15 && v150 < 21 && userRacePosition_456B50 != 4 )
         {
           if ( v143 == RACE_MEDIUM )
           {
-			  drivers[raceIdParticipants[v144]].lastRaceIncome = 60 * *(_DWORD *)v145;
+			  drivers[raceIdParticipants[v144]].lastRaceIncome = 60 * raceParticipant[indexRaceParticipant].currentRacePosition;
 LABEL_343:
             if ( v144 == v126 )
-              userLastRaceIncomeNoPrice_456BE0 = 60 * *(_DWORD *)v145;
+              userLastRaceIncomeNoPrice_456BE0 = 60 * raceParticipant[indexRaceParticipant].currentRacePosition;
             goto LABEL_348;
           }
           if ( v143 == RACE_HARD )
           {
-			  drivers[raceIdParticipants[v144]].lastRaceIncome = 80 * *(_DWORD *)v145;
+			  drivers[raceIdParticipants[v144]].lastRaceIncome = 80 * raceParticipant[indexRaceParticipant].currentRacePosition;
 LABEL_346:
             if ( v144 == v126 )
-              userLastRaceIncomeNoPrice_456BE0 = 80 * *(_DWORD *)v145;
+              userLastRaceIncomeNoPrice_456BE0 = 80 * raceParticipant[indexRaceParticipant].currentRacePosition;
             goto LABEL_348;
           }
           if ( v143 == RACE_MEDIUM )
@@ -37208,20 +37222,20 @@ LABEL_348:
         {
           if ( v143 == RACE_MEDIUM)
           {
-            v152 = *(_DWORD *)(v145 + 52);
-            if ( v152 == RACE_POSITION_1 && *(_DWORD *)(v145 + 4) != 100 )
+            v152 = raceParticipant[indexRaceParticipant].racePosition;
+            if ( v152 == RACE_POSITION_1 && raceParticipant[indexRaceParticipant].damage != 100 )
             {
               drivers[raceIdParticipants[v144]].lastRaceIncome += 3000;
               if ( v144 == v126 )
                 userLasRacePriceIncome_456BDC = 3000;
             }
-            if ( v152 == RACE_POSITION_2 && *(_DWORD *)(v145 + 4) != 100 )
+            if ( v152 == RACE_POSITION_2 && raceParticipant[indexRaceParticipant].damage != 100 )
             {
 				drivers[raceIdParticipants[v144]].lastRaceIncome += 1500;
               if ( v144 == v126 )
                 userLasRacePriceIncome_456BDC = 1500;
             }
-            if ( v152 == RACE_POSITION_3 && *(_DWORD *)(v145 + 4) != 100 )
+            if ( v152 == RACE_POSITION_3 && raceParticipant[indexRaceParticipant].damage != 100 )
             {
 				drivers[raceIdParticipants[v144]].lastRaceIncome += 375;
               if ( v144 == v126 )
@@ -37230,20 +37244,20 @@ LABEL_348:
           }
           else if ( v143 == RACE_HARD )
           {
-            v151 = *(_DWORD *)(v145 + 52);
-            if ( v151 == RACE_POSITION_1 && *(_DWORD *)(v145 + 4) != 100 )
+            v151 = raceParticipant[indexRaceParticipant].racePosition;
+            if ( v151 == RACE_POSITION_1 && raceParticipant[indexRaceParticipant].damage != 100 )
             {
 				drivers[raceIdParticipants[v144]].lastRaceIncome += 12000;
               if ( v144 == v126 )
                 userLasRacePriceIncome_456BDC = 12000;
             }
-            if ( v151 == RACE_POSITION_2 && *(_DWORD *)(v145 + 4) != 100 )
+            if ( v151 == RACE_POSITION_2 && raceParticipant[indexRaceParticipant].damage != 100 )
             {
 				drivers[raceIdParticipants[v144]].lastRaceIncome += 6000;
               if ( v144 == v126 )
                 userLasRacePriceIncome_456BDC = 6000;
             }
-            if ( v151 == RACE_POSITION_3 && *(_DWORD *)(v145 + 4) != 100 )
+            if ( v151 == RACE_POSITION_3 && raceParticipant[indexRaceParticipant].damage != 100 )
             {
 				drivers[raceIdParticipants[v144]].lastRaceIncome += 1500;
               if ( v144 == v126 )
@@ -37253,20 +37267,20 @@ LABEL_348:
         }
         else
         {//RACE_EASY
-          v153 = *(_DWORD *)(v145 + 52);
-          if ( v153 == RACE_POSITION_1 && *(_DWORD *)(v145 + 4) != 100 )
+          v153 = raceParticipant[indexRaceParticipant].racePosition;
+          if ( v153 == RACE_POSITION_1 && raceParticipant[indexRaceParticipant].damage != 100 )
           {
 			  drivers[raceIdParticipants[v144]].lastRaceIncome += 750;
             if ( v144 == v126 )
               userLasRacePriceIncome_456BDC = 750;
           }
-          if ( v153 == RACE_POSITION_2 && *(_DWORD *)(v145 + 4) != 100 )
+          if ( v153 == RACE_POSITION_2 && raceParticipant[indexRaceParticipant].damage != 100 )
           {
 			  drivers[raceIdParticipants[v144]].lastRaceIncome += 375;
             if ( v144 == v126 )
               userLasRacePriceIncome_456BDC = 375;
           }
-          if ( v153 == RACE_POSITION_3 && *(_DWORD *)(v145 + 4) != 100 )
+          if ( v153 == RACE_POSITION_3 && raceParticipant[indexRaceParticipant].damage != 100 )
           {
 			  drivers[raceIdParticipants[v144]].lastRaceIncome += 187;
             if ( v144 == v126 )
@@ -37276,16 +37290,17 @@ LABEL_348:
         v154 = raceIdParticipants[v144];
         drivers[v154].money += drivers[v154].lastRaceIncome;
         drivers[v154].totalIncome += drivers[v154].lastRaceIncome;
-        if ( *(_DWORD *)(v145 + 52) == 1 )
+        if ( raceParticipant[indexRaceParticipant].racePosition == 1 )
           ++drivers[raceIdParticipants[v144]].racesWon;
-        v145 += 84;
+       
         ++v144;
+		indexRaceParticipant++;
       }
-      while ( v145 < (signed int)&unk_4A7BBC );
+      while (indexRaceParticipant < 4 );
     }
     if ( *(int *)((char *)dword_460884 + v245) > v140 )
     {
-      v155 = raceIdParticipants[dword_45FC20];
+      v155 = raceIdParticipants[userRaceOrder_45FC20];
       userLastRaceIncomeNoPrice_456BE0 = 400 * *(int *)((char *)&dword_4A7A6C + v244);
       drivers[v155].lastRaceIncome = userLastRaceIncomeNoPrice_456BE0;
     }
@@ -37298,14 +37313,14 @@ LABEL_348:
     v214 = 0;
     if (participants > 0 )
     {
-      v215 = dword_4A7A70;
+      //v215 = dword_4A7A70;
       do
       {
         v216 = raceIdParticipants[ v214];
         ++drivers[v216].totalRaces;
-        v217 = *v215;
+        v217 = raceParticipant[v214].damage;
         ++v214;
-        v215 += 21;
+       // v215 += 21;
         drivers[v216].racesWon = v217;
       }
       while ( v214 < participants);
@@ -37379,7 +37394,8 @@ LABEL_477:
       //while ( HIBYTE(word_461EB4) < 4u || (unsigned __int8)byte_461EB6 < 4u );
 	  while (participantsRace[0] < 4u || participantsRace[2] < 4u);
       *(_DWORD *)Str = 0;
-      v234 = (signed int)dword_4A7AA0;
+	  int indexRaceParticipant = 0;
+      //v234 = (signed int)dword_4A7AA0;
       do
       {
         do
@@ -37387,13 +37403,15 @@ LABEL_477:
           v235 = rand() % 4;
           v236 = *((byte *)&v246 + v235 + 4);
           v237 = v235 + 1;
-          *(_DWORD *)v234 = v237;
+          raceParticipant[indexRaceParticipant].racePosition = v237;
         }
         while ( v236 );
-        v234 += 84;
+        //v234 += 84;
         *((byte *)&v246 + v237 + 3) = 1;
+		indexRaceParticipant++;
       }
-      while ( v234 < (signed int)&unk_4A7BF0 );
+      while (indexRaceParticipant < 4 );
+	  //while (v234 < (signed int)&unk_4A7BF0);
       if ( dword_456BD8 == 1 )
       {
         sub_4312D0();
@@ -37890,7 +37908,7 @@ int  adversaryPreviewScreen(const char **a1)
   if ( v8 != 1 )
   {
     selectedRace_462CE8 = 3;
-    dword_45FC20 = 1;
+    userRaceOrder_45FC20 = 1;
     userLastRaceIncomeNoPrice_456BE0 = 0;
     userLasRacePriceIncome_456BDC = 0;
     previewRaceScreen(2);
@@ -37911,10 +37929,10 @@ int  adversaryPreviewScreen(const char **a1)
 	  menuActive_4457F0[13] = 0;
       showHardWarningRace = 0;
       showMediumWarningRace = 0;
-      dword_456B78 = 0;
-      dword_456B74 = 0;
+      showUndergroundPopup_456B78 = 0;
+      showWelcomePopup_456B74 = 0;
       result = initDrivers();
-      dword_464F44 = 1;
+      firstRacePlayed_464F44 = 1;
       dword_456B64 = 1;
       dword_445724 = 0;
       dword_456BD8 = 0;
@@ -37971,7 +37989,8 @@ LABEL_11:
   while (participantsRace[0] < 4u || participantsRace[2] < 4u );
   //while (HIBYTE(word_461EB4) < 4u || (unsigned __int8)byte_461EB6 < 4u);
   v29 = 0;
-  v17 = (signed int)dword_4A7AA0;
+  int indexRaceParticipant = 0;
+ // v17 = (signed int)dword_4A7AA0;
   do
   {
     do
@@ -37979,13 +37998,16 @@ LABEL_11:
       v18 = rand() % 4;
       v19 = *(&v28 + v18 + 1);
       v20 = v18 + 1;
-      *(_DWORD *)v17 = v20;
+      raceParticipant[indexRaceParticipant].racePosition = v20;
     }
     while ( v19 );
-    v17 += 84;
+    //v17 += 84;
     *(&v28 + v20) = 1;
+
+	indexRaceParticipant++;
   }
-  while ( v17 < (signed int)&unk_4A7BF0 );
+  while (indexRaceParticipant < 4 );
+  //while (v17 < (signed int)&unk_4A7BF0);
   main(1, v26, v27);
   result = 0;
   result = getMaxDriverPoints(driverId);
@@ -38089,12 +38111,12 @@ void selectRaceScreen()
   screenBuffer = (void *)dword_45FC00;
   memcpy((void *)(dword_45FC00 + 65920), (char *)graphicsGeneral.menubg5Bpk + 65920, 0x28A00u);
   drawSelectRaceScreen();
-  if ( dword_456B74 || (drawBorder(160 * selectedRaceId + 22, 118, 148, 132), dword_456B74) )
+  if ( showWelcomePopup_456B74 || (drawBorder(160 * selectedRaceId + 22, 118, 148, 132), showWelcomePopup_456B74) )
     welcomePopup();
   screenBuffer = (void *)dword_461250;
   sub_42C4A0();
   refreshAllScreen();
-  if ( dword_456B74 )
+  if ( showWelcomePopup_456B74 )
   {
     sub_42C780();
     memcpy((char *)screenBuffer + 65920, (char *)graphicsGeneral.menubg5Bpk + 65920, 0x28A00u);
@@ -38277,7 +38299,7 @@ void selectRaceScreen()
         selectedRace_462CE8 = selectedRaceId;
 		racePositions[selectedRaceId][v30] = driverId;
         //*((byte *)&dword_45EB50[selectedRaceId] + v30) = driverId;
-        dword_45FC20 = v30;
+        userRaceOrder_45FC20 = v30;
         participantsRace[v29] = v30 + 1;
 		//*((byte *)&word_461EB4 + v29) = v30 + 1;
         refreshAllScreen();
@@ -38330,7 +38352,7 @@ void selectRaceScreen()
             DstBuf[v40] = 1;
            //>TODO FIX LO HE QUITADO PORQU PETA *(byte *)(v31 + v36 - 2) = v40;
             if ( v41 )
-              dword_45FC20 = v36;
+              userRaceOrder_45FC20 = v36;
             ++v36;
           }
           while ( v36 < 4 );
@@ -38372,7 +38394,7 @@ void selectRaceScreen()
             DstBuf[v40] = 1;
             *(byte *)(v31 + v36 - 2) = v40;
             if ( v41 )
-              dword_45FC20 = v36;
+              userRaceOrder_45FC20 = v36;
             ++v36;
           }
           while ( v36 < 4 );
@@ -38594,7 +38616,7 @@ LABEL_48:
         loadMenuSoundEffect(1u, 24, 0, configuration.musicVolume, dword_445190);
         if ( isMultiplayerGame )
         {
-          previewRaceScreen(dword_456758);
+          previewRaceScreen(raceDrivers_456758);
         }
         else
         {
@@ -38759,7 +38781,7 @@ void enterBlackMarketScreen()
   undergroundOptionSelected_dword_461278 = 5;
   drawBlackMarketScreen();
   v20 = 0;
-  if ( dword_456B78 || (drawBorder(426, 243, 108, 114), dword_456B78) )
+  if ( showUndergroundPopup_456B78 || (drawBorder(426, 243, 108, 114), showUndergroundPopup_456B78) )
     undergroundMarketPopup();
   refreshAllScreen();
   sub_4224E0();
@@ -38769,7 +38791,7 @@ void enterBlackMarketScreen()
   {
     wait();
     setMusicVolume(v20);
-    if ( v60 % 2 && !dword_456B78 )
+    if ( v60 % 2 && !showUndergroundPopup_456B78 )
     {
       v22 = 0;
       for ( j = 0; j < continueAnimCurrentFrame_4611D0; ++j )
@@ -38779,7 +38801,7 @@ void enterBlackMarketScreen()
       drawKeyCursor(172592, (char *)screenBuffer + 172592, 0x60u, 64);
 	  continueAnimCurrentFrame_4611D0 = continueAnimCurrentFrame_4611D0 % 24;
     }
-    if ( v60 % 2 && dword_456B78 )
+    if ( v60 % 2 && showUndergroundPopup_456B78 )
       drawCursor(164, 321);
     v24 = 0;
     //v25 = (signed int)dword_45FC44;
@@ -38819,10 +38841,10 @@ void enterBlackMarketScreen()
     ++v60;
   }
   while ( v20 < 65500 );
-  if ( dword_456B78 )
+  if ( showUndergroundPopup_456B78 )
   {
     sub_42C780();
-    dword_456B78 = 0;
+    showUndergroundPopup_456B78 = 0;
     drawBlackMarketScreen();
     drawBorder(426, 243, 108, 114);
     refreshAllScreen();
@@ -39709,7 +39731,7 @@ LABEL_154:
           else
           {
             loadMenuSoundEffect(1u, 24, 0, configuration.musicVolume, dword_445190);
-            previewRaceScreen(dword_456758);
+            previewRaceScreen(raceDrivers_456758);
             dword_456B58 = 1;
           }
         }
@@ -39873,7 +39895,7 @@ char postLoadedOrLicense()
   if ( v0 - v3 < 0 )
     v58 = 0;
 
-  if ( !dword_456B64 && (!dword_456B74 || isMultiplayerGame) )
+  if ( !dword_456B64 && (!showWelcomePopup_456B74 || isMultiplayerGame) )
   {
     memcpy((void *)dword_45FC00, screenBuffer, 0x4B000u);
     screenBuffer = (void *)dword_45FC00;
@@ -39901,7 +39923,7 @@ char postLoadedOrLicense()
     if ( dword_456B64 || v57 )
       break;
     v12 = 0;
-    if ( dword_456B74 && !v11 )
+    if ( showWelcomePopup_456B74 && !v11 )
     {
       sub_4224E0();	  
       selectRaceScreen();
@@ -39913,7 +39935,7 @@ char postLoadedOrLicense()
     memcpy(screenBuffer, graphicsGeneral.menubg5Bpk, 0x4B000u);
     drawShopAnimationAndRightSide();
     v56 = 0;
-    if ( dword_456B74 )
+    if ( showWelcomePopup_456B74 )
     {
       welcomeShopPopup();
       v56 = 1;
@@ -40001,7 +40023,7 @@ LABEL_44:
         setMusicVolume(v61);
       if ( v60 % 2 )
       {
-        if ( !dword_456B74
+        if ( !showWelcomePopup_456B74
           && consecutiveWins_456BA8 != 3
           && noPaintJob_456BAC != 1
           && allCarsCrash_456BB0 != 1
@@ -40026,7 +40048,7 @@ LABEL_44:
       }
       if ( v60 % 2 )
       {
-        if ( dword_456B74
+        if ( showWelcomePopup_456B74
           || consecutiveWins_456BA8 == 3
           || noPaintJob_456BAC == 1
           || allCarsCrash_456BB0 == 1
@@ -40071,7 +40093,7 @@ LABEL_44:
       v61 += 1310;
     }
     while ( v18 ^ v19 );
-    if ( !dword_456B74
+    if ( !showWelcomePopup_456B74
       && consecutiveWins_456BA8 != 3
       && noPaintJob_456BAC != 1
       && allCarsCrash_456BB0 != 1
@@ -40079,7 +40101,7 @@ LABEL_44:
       && !killOneQuest_456BB8
       && lapped_456BC0 != 1
       && (isMultiplayerGame || drivers[driverId].rank > 7)
-      && dword_456B50 != 4 )
+      && userRacePosition_456B50 != 4 )
     {
       v32 =driverId;
       if ( drivers[driverId].loanRaces != 4 )
@@ -40119,7 +40141,7 @@ LABEL_44:
     switch ( v56 )
     {
       case 1:
-        dword_456B74 = 0;
+        showWelcomePopup_456B74 = 0;
         break;
       case 2:
         consecutiveWins_456BA8 = 0;
@@ -40282,11 +40304,11 @@ LABEL_149:
       }
     }
 LABEL_157:
-    if ( dword_456B50 == 4 )
+    if ( userRacePosition_456B50 == 4 )
     {
       if ( !isMultiplayerGame && !v35 )
         sub_42E6F0();
-      dword_456B50 = 0;
+      userRacePosition_456B50 = 0;
     }
     memcpy((char *)screenBuffer + 61440, (char *)graphicsGeneral.menubg5Bpk + 61440, 0x29B80u);
     drawShopAnimationAndRightSide();
@@ -40484,7 +40506,7 @@ LABEL_220:
       default:
         break;
     }
-    if ( dword_456B10 )
+    if ( isDemo_456B10 )
       byte_45E0FC = 1;
     v49 = autoLoadSave();
     if ( v49 > 0 )
@@ -40626,8 +40648,8 @@ LABEL_2:
 		  menuActive_4457F0[13] = 1;
           showHardWarningRace = 1;
           showMediumWarningRace = 1;
-          dword_456B78 = 1;
-          dword_456B74 = 1;
+          showUndergroundPopup_456B78 = 1;
+          showWelcomePopup_456B74 = 1;
 		  
 		  isMultiplayerGame = 0; ///puesto por mi!
 		 initDrivers();
@@ -40639,7 +40661,7 @@ LABEL_2:
           *(_WORD *)&aStartANewGam_0[12] = 28783;
           aStartANewGam_0[14] = 0;
           *(_DWORD *)aStartRacing = 1953394499;
-          dword_464F44 = 1;
+          firstRacePlayed_464F44 = 1;
 		  menuActive_4457F0[10] = 1;
           *(_DWORD *)&aStartRacing[4] = 1702194793;
           *(_DWORD *)&aStartRacing[8] = 1667322400;
@@ -40673,11 +40695,11 @@ LABEL_10:
 			menuActive_4457F0[13] = 0;
             showHardWarningRace = 0;
             showMediumWarningRace = 0;
-            dword_456B78 = 0;
-            dword_456B74 = 0;
+            showUndergroundPopup_456B78 = 0;
+            showWelcomePopup_456B74 = 0;
             initDrivers();
             copyPalette1toPalette();
-            dword_464F44 = 1;
+            firstRacePlayed_464F44 = 1;
             dword_445724 = 0;
           }
         }
@@ -40837,10 +40859,10 @@ int mainMenu()
   }
   if ( !configuration.dword_456734 )
   {
-    dword_4470E2 = 1936487760;
-    dword_4470E6 = 1766072421;
-    dword_4470EA = 1852402785;
-    word_4470EE = 103;
+    dword_4470E2 = 1936487760; //Puls
+    dword_4470E6 = 1766072421; //e Di
+    dword_4470EA = 1852402785;//alin
+    word_4470EE = 103;//g
   }
   v0 = SDL_GetTicks();
   srand(v0);
@@ -40861,7 +40883,7 @@ int mainMenu()
   //puesto por mi
   screenBuffer = v1;
   dword_461250 = v1;  
-  apogeeScreen();
+  //apogeeScreen();
   //showStartScreen();
 
   inicializeGraphicVars();
@@ -41389,7 +41411,7 @@ char __cdecl sub_43AEC0(int a1, int a2, int a3)
       v7 = 40;
       do
       {
-        result = *((byte *)dword_5034FC + v3++);
+        result = *((byte *)participantCarBpk_5034FC + v3++);
         if ( result )
           *(byte *)(dword_464F14 + v5) = result;
         ++v5;
@@ -41678,7 +41700,7 @@ int __cdecl sub_43B1A0(int a1, int a2, int a3, int a4)
 }
 
 //----- (0043B1F0) --------------------------------------------------------
-int __cdecl sub_43B1F0(int a1, int a2, int a3, int a4)
+int __cdecl drawCharInRaceScreen(int a1, int a2, int a3, int a4)
 {
   int result; // eax@1
   int v5; // ecx@2
@@ -41805,7 +41827,7 @@ int __cdecl sub_43B2F0(int a1, int a2, int a3)
   v3 = *(_DWORD *)(a3 + 4);
   v4 = dword_464F14;
   result = dword_464F14 + (a2 << 9) + a1 + 96;
-  v6 = (char *)dword_4A7A28 + *(_DWORD *)(a3 + 8);
+  v6 = (char *)trxSCE5Bpk_4A7A28 + *(_DWORD *)(a3 + 8);
   v7 = *(_DWORD *)a3;
   for ( i = 0; i < v3; ++i )
   {
@@ -42511,7 +42533,7 @@ int setWindowCaption()
 
 
 //----- (0043BEE0) --------------------------------------------------------
-int sub_43BEE0()
+int setRaceWindowCaption()
 {
   return setWindowCaption3(19);
 }
@@ -42745,7 +42767,7 @@ int __cdecl setPaletteAndGetValue(unsigned __int8 pos, unsigned __int8 r, char g
 // 45E600: using guessed type int palette[];
 
 //----- (0043C0F0) --------------------------------------------------------
-int __cdecl sub_43C0F0(int a1)
+int __cdecl regenerateRacePalette(int a1)
 {
   int result; // eax@1
   signed int v2; // ecx@1
@@ -42753,6 +42775,7 @@ int __cdecl sub_43C0F0(int a1)
   int v4; // eax@4
 
   result = a1;
+  int index = 0;
   v2 = (signed int)palette;
   if ( mainArgs.configGL )
   {
@@ -42764,11 +42787,14 @@ int __cdecl sub_43C0F0(int a1)
       *(byte *)v3 = (*(_DWORD *)v2 >> 18) & 0x3F;
       v2 += 4;
       result = v3 + 1;
+	  index += 3;
     }
-    while ( v2 < (signed int)&configuration.useJoystick );
+    while ( index<768 );
+	//while (v2 < (signed int)&configuration.useJoystick);
   }
   else
   {
+	  index = 0;
     do
     {
       *(byte *)result = (*(_DWORD *)v2 >> 18) & 0x3F;
@@ -42777,8 +42803,10 @@ int __cdecl sub_43C0F0(int a1)
       *(byte *)v4 = (*(_DWORD *)v2 >> 2) & 0x3F;
       v2 += 4;
       result = v4 + 1;
+	  index += 3;
     }
-    while ( v2 < (signed int)&configuration.useJoystick );
+	while (index<768);
+    //while ( v2 < (signed int)&configuration.useJoystick );
   }
   return result;
 }

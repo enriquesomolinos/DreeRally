@@ -153,6 +153,7 @@
     <ClInclude Include="anim.h" />
     <ClInclude Include="bpaUtil.h" />
     <ClInclude Include="cars.h" />
+    <ClInclude Include="circuit.h" />
     <ClInclude Include="config.h" />
     <ClInclude Include="defs.h" />
     <ClInclude Include="doc.h" />

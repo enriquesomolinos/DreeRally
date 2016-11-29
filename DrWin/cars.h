@@ -11,6 +11,9 @@ typedef enum  {
 
 }CarType;
 
+
+
+
 typedef struct Car {
 	char* name;
 	int cost;

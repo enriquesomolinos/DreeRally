@@ -77,3 +77,19 @@ int dword_45FD08[256]; // weak*/
 unk_4600C4 es tamaño de paleta 768
 unk_460244
 unk_45FDC4
+
+
+
+sub_402CF0  esto tiene la carga de los datos de los circuitos mucha info y facil!    OKI
+sub_402EE0
+sub_403190
+sub_4032F0 -> load tab files
+sub_403410 -> load dat files
+sub_4034F0 ->bpk
+sub_409BF0     byte_5034E0 -> inf.bin
+loadRaceImages -> terminar de descifrar todo
+
+
+
+
+loadCircuitInfFile  destripar bien las estructuras

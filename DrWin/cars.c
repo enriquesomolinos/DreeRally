@@ -3,7 +3,24 @@
 
 extern Car cars[6];
 
+extern char* carName[6];
+
 void initCars() {
+	carName[0] = malloc(14);
+	carName[1] = malloc(14);
+	carName[2] = malloc(14);
+	carName[3] = malloc(14);
+	carName[4] = malloc(14);
+	carName[5] = malloc(14);
+	carName[6] = malloc(14);
+	strcpy(carName[0],"KUPLA");
+	strcpy(carName[1], "PICKUP");
+	strcpy(carName[2], "SEDAN");
+	strcpy(carName[3], "CAMARO");
+	strcpy(carName[4], "PORCHE");
+	strcpy(carName[5], "LOTUS");
+
+	
 	initCar0();
 	initCar1();
 	initCar2();

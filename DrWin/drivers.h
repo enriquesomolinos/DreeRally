@@ -60,6 +60,9 @@ int getMaxDriverPoints(int userDriverId);
 460854 -> nivel de ruedas 0-3
 460858 -> nivel de armadura 0-3
 46085c -> tipo de coche 0-5
+460860
+460864
+460868
 46086c parece que es el color
 460870 dinero que tiene
 460874 es el tipo de credito
