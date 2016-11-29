@@ -61,7 +61,7 @@ char loadConfig()
 	v1 = v0;
 	if (v0 && (fseek(v0, 0, 2), v2 = ftell(v1), fclose(v1), v2 > 7))
 	{
-		allocateMemoryPtr((void *)&v3, 0x1388u);
+		v3 =malloc(0x1388u);
 		v4 = v3;
 		v5 = fopen("dr.cfg", "rb");
 		
@@ -159,7 +159,7 @@ int saveConfiguration()
 
 	v0 = rand();
 	//allocateMemory(0x1388u);
-	allocateMemoryPtr((void *)&v1, 0x1388u);
+	v1=malloc( 0x1388u);
 	v2 = (const void *)v1;
 	*(_DWORD *)v1 = configuration.masterVolume;
 	*(_DWORD *)(v1 + 4) = configuration.musicVolume;
@@ -519,9 +519,9 @@ int defaultConfig()
 	configuration.defaultTurboGamepad = '\x06'; // weak
 	configuration.defaultGunGamepad = '\a'; // weak
 	configuration.defaultMineGamepad = '\b'; // weak
-	signed int v0; // esi@1
-	signed int v1; // edi@2
-	int v2; // eax@3
+//	signed int v0; // esi@1
+//	signed int v1; // edi@2
+//	int v2; // eax@3
 
 	configuration.masterVolume = 0x8000;
 	configuration.musicVolume = 49152;

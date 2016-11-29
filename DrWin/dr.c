@@ -2002,8 +2002,8 @@ void *porscheBpk; // idb
 void *lotusBpk; // idb
 int minesCost_462D40; // idb
 int spikesCost_dword_462D44; // idb
-int rocket_462D48; // idb
-int sabotage_462D4C; // idb
+int rocketCost_462D48; // idb
+int sabotageCost_462D4C; // idb
 char byte_462D50=2; // weak
 
 void *shoptxt2Bpk; // idb
@@ -3486,22 +3486,22 @@ int sub_401060()
 {
 
   int v0; // ebp@2
-  int *v1; // ebx@2
-  int v2; // eax@3
-  int v3; // ecx@3
-  signed int v4; // edi@3
+///  int *v1; // ebx@2
+//  int v2; // eax@3
+//  int v3; // ecx@3
+//  signed int v4; // edi@3
   int v5; // esi@3
   int v6; // ecx@3
-  signed int v7; // ST14_4@3
+//  signed int v7; // ST14_4@3
   double v8; // st7@3
-  int v9; // edi@3
+//  int v9; // edi@3
   int v10; // edi@3
   double v11; // st7@3
   int v12; // ecx@3
   int v13; // eax@3
   bool v14; // zf@3
-  int v15; // eax@9
-  int v16; // edi@9
+//  int v15; // eax@9
+//  int v16; // edi@9
   double v17; // st7@36
   int v18; // ecx@36
   int v19; // ecx@36
@@ -4443,8 +4443,8 @@ LABEL_36:
 //----- (00402240) --------------------------------------------------------
 int updateRacePositions()
 {
-  int v0; // edi@1
-  signed int v1; // esi@1
+//  int v0; // edi@1
+//  signed int v1; // esi@1
   unsigned __int64 v2; // rax@2
   int v3; // ecx@2
   int result; // eax@2
@@ -4707,7 +4707,7 @@ int __cdecl extractFromBpa(char *bpaFilename, void *dest, char * filename)
   char v19; // al@18
   FILE *v20; // esi@20
   __int32 v21; // eax@20
-  int *v22; // ecx@21
+//  int *v22; // ecx@21
   int v23; // edx@21
   char buffer[4]; // [sp+10h] [bp-68h]@1
   int v26; // [sp+14h] [bp-64h]@3
@@ -4829,32 +4829,32 @@ LABEL_11:
 //----- (00402CF0) --------------------------------------------------------
 signed int loadCircuitPalette()
 {
-  int v0; // eax@1
-  char v1; // cl@2
-  char *v2; // edi@3
-  char v3; // al@4
+//  int v0; // eax@1
+//  char v1; // cl@2
+//  char *v2; // edi@3
+//  char v3; // al@4
   void *v4; // ST1C_4@5
   signed int v5; // eax@5
-  char v6; // dl@6
-  char v7; // cl@6
+//  char v6; // dl@6
+//  char v7; // cl@6
   signed int result; // eax@7
-  int v9; // eax@8
-  char v10; // cl@9
-  char *v11; // edi@10
-  char v12; // al@11
-  int v13; // eax@12
-  char v14; // cl@13
-  char *v15; // edi@14
-  char v16; // al@15
-  FILE *v17; // eax@16
-  FILE *v18; // esi@16
-  char v19; // dl@19
-  char v20; // cl@19
-  char v21; // [sp-1h] [bp-311h]@3
+//  int v9; // eax@8
+//  char v10; // cl@9
+//  char *v11; // edi@10
+//  char v12; // al@11
+//  int v13; // eax@12
+//  char v14; // cl@13
+//  char *v15; // edi@14
+////  char v16; // al@15
+//  FILE *v17; // eax@16
+//  FILE *v18; // esi@16
+//  char v19; // dl@19
+//  char v20; // cl@19
+//  char v21; // [sp-1h] [bp-311h]@3
   char Filename[16]; // [sp+0h] [bp-310h]@2
-  char DstBuf[768]; // [sp+10h] [bp-300h]@5
-  char v24; // [sp+11h] [bp-2FFh]@6
-  char v25[766]; // [sp+12h] [bp-2FEh]@6
+//  char DstBuf[768]; // [sp+10h] [bp-300h]@5
+//  char v24; // [sp+11h] [bp-2FFh]@6
+//  char v25[766]; // [sp+12h] [bp-2FEh]@6
 
   /*v0 = 0;
   do
@@ -4959,19 +4959,19 @@ signed int loadCircuitPalette()
 //----- (00402EE0) --------------------------------------------------------
 void loadCircuitImages1()
 {
-  int v0; // eax@1
-  char v1; // cl@2
-  char *v2; // edi@3
-  char v3; // al@4
-  int v4; // eax@5
-  char v5; // cl@6
-  char *v6; // edi@7
-  char v7; // al@8
-  int v8; // eax@9
-  char v9; // cl@10
-  char *v10; // edi@11
-  char v11; // al@12
-  char v12; // [sp-1h] [bp-11h]@3
+//  int v0; // eax@1
+//  char v1; // cl@2
+//  char *v2; // edi@3
+//  char v3; // al@4
+//  int v4; // eax@5
+//  char v5; // cl@6
+//  char *v6; // edi@7
+//  char v7; // al@8
+//  int v8; // eax@9
+//  char v9; // cl@10
+//  char *v10; // edi@11
+//  char v11; // al@12
+//  char v12; // [sp-1h] [bp-11h]@3
   byte v13[16]; // [sp+0h] [bp-10h]@2
 
  /* v0 = 0;
@@ -5049,7 +5049,7 @@ int loadCarsImages()
   unsigned __int8 v13; // al@15
   
   
-  int v16; // [sp+Ch] [bp-10h]@3
+//  int v16; // [sp+Ch] [bp-10h]@3
   
   result = numberOfParticipants_508D24;
   
@@ -5128,10 +5128,10 @@ int loadCarsImages()
 //----- (00403190) --------------------------------------------------------
 void loadCircuitSceImages()
 {
-  int v0; // eax@1
-  char v1; // cl@2
-  char *v2; // edi@3
-  char v3; // al@4
+//  int v0; // eax@1
+//  char v1; // cl@2
+//  char *v2; // edi@3
+//  char v3; // al@4
   int v4; // eax@5
   
   int v7; // [sp-4h] [bp-14h]@10
@@ -5191,19 +5191,19 @@ LABEL_10:
 //----- (004032F0) --------------------------------------------------------
 int loadCircuitTabFiles()
 {
-  int v0; // eax@1
-  char v1; // cl@2
-  char *v2; // edi@3
-  char v3; // al@4
-  int v4; // eax@5
-  char v5; // cl@6
-  char *v6; // edi@7
-  char v7; // al@8
-  int v8; // eax@9
-  char v9; // cl@10
-  char *v10; // edi@11
+//  int v0; // eax@1
+//  char v1; // cl@2
+//  char *v2; // edi@3
+//  char v3; // al@4
+//  int v4; // eax@5
+//  char v5; // cl@6
+//  char *v6; // edi@7
+//  char v7; // al@8
+//  int v8; // eax@9
+///  char v9; // cl@10
+//  char *v10; // edi@11
   char v11; // al@12
-  char v13; // [sp-1h] [bp-11h]@3
+//  char v13; // [sp-1h] [bp-11h]@3
   byte v14[16]; // [sp+0h] [bp-10h]@2
 
  /* v0 = 0;
@@ -5265,15 +5265,15 @@ int loadCircuitTabFiles()
 //----- (00403410) --------------------------------------------------------
 int loadCircuitDatFiles()
 {
-  int v0; // eax@1
-  char v1; // cl@2
-  char *v2; // edi@3
-  char v3; // al@4
-  int v4; // eax@5
-  char v5; // cl@6
-  char *v6; // edi@7
-  char v7; // al@8
-  char v9; // [sp-1h] [bp-11h]@3
+//  int v0; // eax@1
+//  char v1; // cl@2
+//  char *v2; // edi@3
+//  char v3; // al@4
+//  int v4; // eax@5
+//  char v5; // cl@6
+//  char *v6; // edi@7
+//  char v7; // al@8
+//  char v9; // [sp-1h] [bp-11h]@3
   byte v10[16]; // [sp+0h] [bp-10h]@2
 
   /*v0 = 0;
@@ -5318,11 +5318,11 @@ int loadCircuitDatFiles()
 //----- (004034F0) --------------------------------------------------------
 void loadCircuitShadows()
 {
-  int v0; // eax@1
-  char v1; // cl@2
-  char *v2; // edi@3
-  char v3; // al@4
-  char v4; // [sp-1h] [bp-11h]@3
+//  int v0; // eax@1
+//  char v1; // cl@2
+//  char *v2; // edi@3
+//  char v3; // al@4
+//  char v4; // [sp-1h] [bp-11h]@3
   byte v5[16]; // [sp+0h] [bp-10h]@2
 
  /* v0 = 0;
@@ -5374,35 +5374,35 @@ void loadEngineGraphics()
   extractFromBpa("ENGINE.BPA", textureTemp, "FLAME6.BPK");
   copyImageToBuffer((int)textureTemp, (int)flame6Bpk);
   extractFromBpa("ENGINE.BPA", textureTemp,"SHOTS.BPK");
-  copyImageToBuffer((int)textureTemp, (int)shotsBpk);
+  copyImageToBuffer((int)textureTemp, shotsBpk);
   if ( isCircuitReversed_456AA8 )
     extractFromBpa("ENGINE.BPA", textureTemp,"OBST_REV.BPK");
   else
     extractFromBpa("ENGINE.BPA", textureTemp, "OBSTACLE.BPK");
-  copyImageToBuffer((int)textureTemp, (int)obstacleBpk);
+  copyImageToBuffer((int)textureTemp, obstacleBpk);
   extractFromBpa("ENGINE.BPA", textureTemp, "PEDESTR.BPK");
-  copyImageToBuffer((int)textureTemp, (int)pedestrBpk);
+  copyImageToBuffer((int)textureTemp, pedestrBpk);
   extractFromBpa("ENGINE.BPA", textureTemp, "SPLAT3.BPK");
-  copyImageToBuffer((int)textureTemp, (int)splat3Bpk);
+  copyImageToBuffer((int)textureTemp, splat3Bpk);
   extractFromBpa("ENGINE.BPA", textureTemp, "SPLAT4.BPK");
-  copyImageToBuffer((int)textureTemp, (int)splat4Bpk);
+  copyImageToBuffer((int)textureTemp, splat4Bpk);
   extractFromBpa("ENGINE.BPA", textureTemp, "ROCKET1.BPK");
-  copyImageToBuffer((int)textureTemp, (int)rocket1Bpk);
+  copyImageToBuffer((int)textureTemp, rocket1Bpk);
   extractFromBpa("ENGINE.BPA", textureTemp, "ROCKET2.BPK");
-  copyImageToBuffer((int)textureTemp, (int)rocket2Bpk);
+  copyImageToBuffer((int)textureTemp, rocket2Bpk);
   extractFromBpa("ENGINE.BPA", textureTemp, "BURN1A.BPK");
-  copyImageToBuffer((int)textureTemp, (int)burn1aBpk);
+  copyImageToBuffer((int)textureTemp, burn1aBpk);
   extractFromBpa("ENGINE.BPA", textureTemp, "SMOKE.BPK");
-  copyImageToBuffer((int)textureTemp, (int)smokeBpk);
+  copyImageToBuffer((int)textureTemp, smokeBpk);
 }
 
 
 //----- (00403910) --------------------------------------------------------
 void loadEngineGraphics2()
 {
-  extractFromBpa("ENGINE.BPA", textureTemp, (int)"GEN-MES.BPK");
+  extractFromBpa("ENGINE.BPA", textureTemp, "GEN-MES.BPK");
   copyImageToBuffer((int)textureTemp, (int)genmesBpk);
-  extractFromBpa("IBFILES.BPA", textureTemp, (int)"DAMSLID.BPK");
+  extractFromBpa("IBFILES.BPA", textureTemp, "DAMSLID.BPK");
   copyImageToBuffer((int)textureTemp, (int)damslidBpk);
 }
 // 481E20: using guessed type int textureTemp[];
@@ -23351,7 +23351,7 @@ int drawCarRightSide()
     memset(&v21[4 * ((unsigned int)v20 >> 2)], 63, v20 & 3);
   }
   while ( v19 < 3200 );
-  itoa(dword_46084C[27 * driverId], DstBuf, 10);
+  itoa(drivers[driverId].damage, DstBuf, 10);
   v22 = 0;
   do
   {
@@ -24363,36 +24363,36 @@ signed int setUndergroundMarketPrices()
   {
     minesCost_462D40 = 2525;
     spikesCost_dword_462D44 = 2750;
-    rocket_462D48 = 3275;
-    sabotage_462D4C = 2625;
+    rocketCost_462D48 = 3275;
+    sabotageCost_462D4C = 2625;
   }
   if ( v0 == WRAITH )
   {
     minesCost_462D40 = 1250;
     spikesCost_dword_462D44 = 1750;
-    rocket_462D48 = 2250;
-    sabotage_462D4C = 2125;
+    rocketCost_462D48 = 2250;
+    sabotageCost_462D4C = 2125;
   }
   if ( v0 == SHRIEKER )
   {
     minesCost_462D40 = 500;
     spikesCost_dword_462D44 = 550;
-    rocket_462D48 = 625;
-    sabotage_462D4C = 570;
+    rocketCost_462D48 = 625;
+    sabotageCost_462D4C = 570;
   }
   if ( v0 == SENTINEL )
   {
     minesCost_462D40 = 450;
     spikesCost_dword_462D44 = 500;
-    rocket_462D48 = 675;
-    sabotage_462D4C = 550;
+    rocketCost_462D48 = 675;
+    sabotageCost_462D4C = 550;
   }
   if ( v0 == DERVISH )
   {
     minesCost_462D40 = 200;
     spikesCost_dword_462D44 = 225;
-    rocket_462D48 = 350;
-    sabotage_462D4C = 325;
+    rocketCost_462D48 = 350;
+    sabotageCost_462D4C = 325;
   }
   v1 = v0 == 0;
   result = 1;
@@ -24400,8 +24400,8 @@ signed int setUndergroundMarketPrices()
   {
     minesCost_462D40 = 150;
     spikesCost_dword_462D44 = 200;
-    rocket_462D48 = 275;
-    sabotage_462D4C = 250;
+    rocketCost_462D48 = 275;
+    sabotageCost_462D4C = 250;
   }
   return result;
 }
@@ -25059,7 +25059,7 @@ int drawBlackMarketElement2()
 	{
 		drawImageWithPosition2((int)((char *)maret1eBpk + 18432), 96, 96, (int)((char *)screenBuffer + 162144));
 		getBlackMarketElementText(2);
-		itoa(rocket_462D48, DstBuf, 10);
+		itoa(rocketCost_462D48, DstBuf, 10);
 		v6 = 36;
 		v0 = strlen(DstBuf) + 1;
 		v1 = &v5;
@@ -25108,7 +25108,7 @@ int drawBlackMarketElement3()
   {
     drawImageWithPosition2((int)((char *)maret1eBpk + 27648), 96, 96, (int)((char *)screenBuffer + 162248));
     getBlackMarketElementText(3);
-    itoa(sabotage_462D4C, DstBuf, 10);
+    itoa(sabotageCost_462D4C, DstBuf, 10);
     v9 = 36;
     v3 = strlen(DstBuf) + 1;
     v4 = &v8;
@@ -32817,15 +32817,15 @@ int sabotageScreen()
   v43 = v2;
   v40 = v1;
   v5 = 0;
-  v6 = (signed int)dword_46084C;
+ // v6 = (signed int)dword_46084C;
   do
   {
     if ( v5 != v4 && !v3 )
-      *(_DWORD *)v6 = 0;
-    v6 += 108;
+      drivers[v5].damage = 0;
+    //v6 += 108;
     ++v5;
   }
-  while ( v6 < (signed int)&unk_4610BC );
+  while ( v5 < 20 );
   if ( isDemo_456B10 )
   {
     result = 0;
@@ -32871,7 +32871,7 @@ int sabotageScreen()
       srand(v20);
       v21 = rand();
       v22 = 108 * (unsigned __int8)*(&v40 + v18);
-      v23 = v21 % 25 + 25;
+      v23 = v21 % 25 + 25;//calculo del sabotage aleatorio
       dword_46084C[v22 / 4] = v23;
       itoa(v23, &DstBuf, 10);
       v24 = &byte_460840[v22];
@@ -33947,12 +33947,12 @@ signed int redefineControls()
         while (configuration.accelerateKey == 170 );
         sub_418090();
         eventDetected();
-        dword_446DF8 = 1634887020;
+        dword_446DF8 = 1634887020;//lera
         byte_446E02 = 0;
-        dword_446DF4 = 1701012289;
+        dword_446DF4 = 1701012289;//Acce
         v3 = (char *)&unk_462DA0 + 15 * configuration.accelerateKey;
         word_446E00 = 8224;
-        dword_446DFC = 538994036;
+        dword_446DFC = 538994036;//te  
         v4 = (char *)&unk_462DA0 + 15 * configuration.accelerateKey;
         do
           v5 = *v3++;
@@ -34587,7 +34587,7 @@ int showAdjustOptions()
   int v17; // eax@62
   int v18; // [sp+10h] [bp-14h]@1
   int v19; // [sp+14h] [bp-10h]@1
-  char DstBuf; // [sp+18h] [bp-Ch]@25
+  char* DstBuf=malloc(200); // [sp+18h] [bp-Ch]@25
 
   v18 = configuration.masterVolume / 512;
   v0 = configuration.musicVolume / 512;
@@ -34621,7 +34621,7 @@ LABEL_2:
               if ( v18 > 0 )
                 v18 -= 2;
               break;
-            case 75:
+            case KEY_LEFT:
               if ( v18 > 0 )
                 v18 -= 2;
               break;
@@ -34629,7 +34629,7 @@ LABEL_2:
               if ( v18 < 128 )
                 v18 += 2;
               break;
-            case 77:
+            case KEY_RIGHT:
               if ( v18 < 128 )
                 v18 += 2;
               break;
@@ -34652,14 +34652,14 @@ LABEL_2:
           drawImageWithPosition((int)slidmus2Bpk, 172, 24, (int)((char *)screenBuffer + 160314));
           drawImageWithPosition((int)volcur2Bpk, 10, 24, (int)((char *)screenBuffer + v18 + 160329));
           drawKeyCursor(v18 + 160327, (char *)screenBuffer + v18 + 160327, 0xEu, 24);
-          itoa((unsigned __int64)((double)v18 * 0.78125), &DstBuf, 10);
+          itoa((unsigned __int64)((double)v18 * 0.78125), DstBuf, 10);
           v6 = (char *)&v19 + 3;
           do
             v7 = (v6++)[1];
           while ( v7 );
-          *(_WORD *)v6 = 37;
-          v8 = sub_41C9F0(&DstBuf);
-          drawTextWithFont((int)graphicsGeneral.fbig3aBpk, (int)&unk_445848, &DstBuf, 157109 - v8);
+         //TODO FIX quitado porque peta *(_WORD *)v6 = 37;
+          v8 = sub_41C9F0(DstBuf);
+          drawTextWithFont((int)graphicsGeneral.fbig3aBpk, (int)&unk_445848, DstBuf, 157109 - v8);
           drawKeyCursor(157024, (char *)screenBuffer + 157024, 0x78u, 32);
           musicSetMasterVolume(v18 << 9);
           sub_42A570();
@@ -34689,7 +34689,7 @@ LABEL_2:
               v19 = v0;
             }
           }
-          else if ( v10 == 75 )
+          else if ( v10 == KEY_LEFT)
           {
             if ( v0 > 0 )
             {
@@ -34697,7 +34697,7 @@ LABEL_2:
               v19 = v0;
             }
           }
-          else if ( v10 != -51 && v10 != 77 )
+          else if ( v10 != -51 && v10 != KEY_RIGHT)
           {
             if ( v10 == 59 && isMultiplayerGame )
               sub_42CCF0();
@@ -34721,21 +34721,21 @@ LABEL_2:
           drawImageWithPosition((int)slidmus2Bpk, 172, 24, (int)((char *)screenBuffer + 160314));
           drawImageWithPosition((int)volcur2Bpk, 10, 24, (int)((char *)screenBuffer + v0 + 160329));
           drawKeyCursor(v0 + 160327, (char *)screenBuffer + v0 + 160327, 0xEu, 24);
-          itoa((unsigned __int64)((double)v19 * 0.78125), &DstBuf, 10);
+          itoa((unsigned __int64)((double)v19 * 0.78125),DstBuf, 10);
           v13 = (char *)&v19 + 3;
           do
             v14 = (v13++)[1];
           while ( v14 );
           *(_WORD *)v13 = 37;
-          v15 = sub_41C9F0(&DstBuf);
-          drawTextWithFont((int)graphicsGeneral.fbig3aBpk, (int)&unk_445848, &DstBuf, 157109 - v15);
+          v15 = sub_41C9F0(DstBuf);
+          drawTextWithFont((int)graphicsGeneral.fbig3aBpk, (int)&unk_445848, DstBuf, 157109 - v15);
           drawKeyCursor(157024, (char *)screenBuffer + 157024, 0x78u, 32);
           musicSetVolume(v0 << 9);
           sub_42A570();
         }
         while ( v9 != 28 );
         configuration.musicVolume = v0 << 9;
-        loadMenuSoundEffect(1u, 22, 0, v0 << 9, dword_4451A0);
+        loadMenuSoundEffect(1u, 22, 0, configuration.musicVolume, dword_4451A0);
         goto LABEL_2;
       case 2:
         redefineControls();
@@ -34760,7 +34760,7 @@ LABEL_58:
         if ( !configuration.useJoystick )
           goto LABEL_58;
         break;
-      case 5:
+      case PREVIOUS_MENU:
         v17 = 0;
         dword_44575C = 0;
         if ( !menuActive_4457F0[27] )
@@ -34784,19 +34784,7 @@ LABEL_58:
   }
   return saveConfiguration();
 }
-// 417E80: using guessed type int configJoystick(void);
-// 4264E0: using guessed type int saveConfiguration(void);
-// 42CCF0: using guessed type int sub_42CCF0(void);
-// 4309A0: using guessed type int showAdjustOptions(void);
-// 4451A0: using guessed type int dword_4451A0;
-// 445744: using guessed type int dword_445744;
-// 44575C: using guessed type int dword_44575C;
-// 4458B0: using guessed type char byte_4458B0;
-// 456B9C: using guessed type int dword_456B9C;
-// 45DC14: using guessed type int configuration.masterVolume;
-// 45DC18: using guessed type int configuration.musicVolume;
-// 45EA00: using guessed type int configuration.useJoystick;
-// 45EA04: using guessed type int isMultiplayerGame;
+
 
 //----- (00430FA0) --------------------------------------------------------
 char sub_430FA0()
@@ -35631,15 +35619,15 @@ void __cdecl previewRaceScreen(signed int participants)
   char *v24; // eax@22
   signed int v25; // edx@22
   char v26; // cl@23
-  char *v27; // edi@24
+//  char *v27; // edi@24
   char v28; // al@25
   int *v29; // ecx@26
   signed int v30; // eax@26
   char v31; // dl@27
-  char *v32; // eax@29
+//  char *v32; // eax@29
   signed int v33; // edx@29
   char v34; // cl@30
-  char *v35; // edi@31
+//  char *v35; // edi@31
   char v36; // al@32
   int *v37; // ecx@33
   signed int v38; // eax@33
@@ -35665,11 +35653,11 @@ void __cdecl previewRaceScreen(signed int participants)
   char *v58; // edi@52
   char v59; // cl@53
   char *v60=malloc(10); // edi@56
-  char v61; // al@57
+//  char v61; // al@57
   char *v62 = malloc(10); // edi@60
-  char v63; // al@61
+//  char v63; // al@61
   char *v64 = malloc(10); // edi@64
-  char v65; // al@65
+//  char v65; // al@65
   char *v66 = malloc(10); // edi@68
   char v67; // al@69
   char *v68; // eax@71
@@ -35692,26 +35680,26 @@ void __cdecl previewRaceScreen(signed int participants)
   char *v85; // edi@86
   char v86; // al@87
   unsigned int v87; // edx@88
-  char *v88; // eax@88
+//  char *v88; // eax@88
   char v89; // cl@89
   char *v90; // ecx@92
-  char v91; // dl@93
+//  char v91; // dl@93
   int v92; // eax@99
   void *v93 = malloc(4u); // eax@100
   int v94; // edi@100
   signed int v95; // esi@100
   int v96; // edx@112
 
-  signed int v98; // esi@112
+//  signed int v98; // esi@112
   int v99; // ecx@112
   int numberOfParticipants; // ebp@132
   signed int v101; // ebx@132
-  int v102; // esi@133
+//  int v102; // esi@133
   int v103; // edi@134
   char *v104; // eax@134
   char v105; // dl@135
   int v106; // ecx@136
-  int v107; // eax@136
+//  int v107; // eax@136
   bool v108; // zf@136
   int v109; // ecx@139
   int v110; // eax@139
@@ -35740,7 +35728,7 @@ void __cdecl previewRaceScreen(signed int participants)
   signed int v133; // edx@226
   int v134; // eax@226
   int v135; // ecx@227
-  signed int v136; // eax@265
+//  signed int v136; // eax@265
   int v137; // eax@267
   int v138; // edx@267
   int v139; // ecx@267
@@ -35765,30 +35753,30 @@ void __cdecl previewRaceScreen(signed int participants)
   bool v158; // sf@392
   unsigned __int8 v159; // of@392
   char v160; // al@392
-  char v161; // al@392
+//  char v161; // al@392
   signed int v162; // edx@392
   signed int v163; // eax@394
   char v164; // cl@395
   char *v165; // eax@397
   char *v166; // edx@397
-  char v167; // cl@398
+//  char v167; // cl@398
   unsigned int v168; // eax@399
   char *v169; // edi@399
-  char v170; // cl@400
-  char *v171; // edi@401
+//  char v170; // cl@400
+//  char *v171; // edi@401
   char v172; // al@402
   signed int v173; // edx@403
   signed int v174; // eax@404
-  char v175; // cl@405
-  signed int v176; // eax@408
+//  char v175; // cl@405
+//  signed int v176; // eax@408
   char v177; // cl@409
   char *v178; // eax@413
   char *v179; // ecx@413
-  char v180; // dl@414
+//  char v180; // dl@414
   unsigned int v181; // eax@415
   const void *v182; // esi@415
-  char *v183; // edi@415
-  char v184; // cl@416
+//  char *v183; // edi@415
+//  char v184; // cl@416
   char *v185; // edi@417
   char v186; // al@418
   char *v187; // eax@419
@@ -35799,22 +35787,22 @@ void __cdecl previewRaceScreen(signed int participants)
   char *v192; // edi@421
   char v193; // cl@422
   char *v194; // edi@423
-  char v195; // al@424
+//  char v195; // al@424
   signed int v196; // edx@426
   signed int v197; // eax@427
   char v198; // cl@428
   int v199; // esi@430
-  double v200; // st7@431
+//  double v200; // st7@431
   int v201; // ebp@431
   int v202; // eax@432
-  int v203; // ebx@434
+//  int v203; // ebx@434
   int *v204; // edi@435
-  int *v205; // edi@439
+//  int *v205; // edi@439
   int *v206; // edi@443
-  int *v207; // edi@447
-  int v208; // eax@449
+//  int *v207; // edi@447
+//  int v208; // eax@449
   int v209; // eax@452
-  signed int v210; // edx@452
+//  signed int v210; // edx@452
   int v211; // ecx@452
   int v212; // edi@469
   int v213; // ecx@470
@@ -35824,7 +35812,7 @@ void __cdecl previewRaceScreen(signed int participants)
   int v217; // ebx@474
   void *v218 = malloc(0x4B000u); // eax@477
   
-  signed int v220; // edx@477
+//  signed int v220; // edx@477
   int v221; // ecx@477
   int v222; // eax@497
   char *v223; // edx@497
@@ -35836,7 +35824,7 @@ void __cdecl previewRaceScreen(signed int participants)
   float v229; // ST28_4@497
   signed int v230; // esi@498
   
-  signed int v232; // edx@503
+////  signed int v232; // edx@503
   int v233; // ecx@503
   signed int v234; // esi@525
   int v235; // eax@526
@@ -37442,9 +37430,9 @@ int __cdecl licenseScreen(int useWeapons_mal)
   int v11; // eax@11
   int v12; // eax@11
   int j; // ecx@11
-  bool v14; // zf@13
-  bool v15; // sf@13
-  unsigned __int8 v16; // of@13
+//  bool v14; // zf@13
+//  bool v15; // sf@13
+//  unsigned __int8 v16; // of@13
   char *v17; // ecx@15
   char *v18; // eax@15
   char v19; // dl@16
@@ -37483,8 +37471,8 @@ int __cdecl licenseScreen(int useWeapons_mal)
   void *v52; // [sp-4h] [bp-4Ch]@54
   int v53; // [sp+0h] [bp-48h]@34
   int v54; // [sp+0h] [bp-48h]@54
-  float v55; // [sp+4h] [bp-44h]@34
-  float v56; // [sp+4h] [bp-44h]@54
+//  float v55; // [sp+4h] [bp-44h]@34
+//  float v56; // [sp+4h] [bp-44h]@54
   char v57; // [sp+1Fh] [bp-29h]@1
   int v58; // [sp+20h] [bp-28h]@1
   __int16 v59; // [sp+24h] [bp-24h]@9
@@ -37836,12 +37824,12 @@ int  adversaryPreviewScreen(const char **a1)
   int v14; // ST34_4@16
   int v15; // eax@16
   signed int v16; // esi@21
-  signed int v17; // esi@26
+//  signed int v17; // esi@26
   int v18; // eax@27
   char v19; // cl@27
   int v20; // eax@27
-  signed int v21; // edx@29
-  int v22; // ecx@29
+//  signed int v21; // edx@29
+//  int v22; // ecx@29
   bool v23; // zf@47
   bool v24; // sf@47
   unsigned __int8 v25; // of@47
@@ -38026,7 +38014,7 @@ LABEL_11:
 void selectRaceScreen()
 {
   unsigned __int8 v0; // di@1
-  signed int v1; // esi@1
+//  signed int v1; // esi@1
   int v2; // ST48_4@2
   int v3; // ST44_4@2
   int v4; // eax@2
@@ -38040,20 +38028,20 @@ void selectRaceScreen()
   int v12; // ST44_4@36
   int v13; // eax@36
   signed int v14; // esi@41
-  char *v15; // edi@46
-  char v16; // al@47
-  unsigned int v17; // eax@49
-  char *v18; // edi@49
-  char v19; // cl@50
-  char *v20; // edi@51
-  char v21; // al@52
-  int v22; // eax@53
-  char *v23; // eax@53
-  char *v24; // edx@53
-  char v25; // cl@54
-  unsigned int v26; // eax@55
-  char *v27; // edi@55
-  char v28; // cl@56
+//  char *v15; // edi@46
+//  char v16; // al@47
+//  unsigned int v17; // eax@49
+//  char *v18; // edi@49
+//  char v19; // cl@50
+//  char *v20; // edi@51
+//  char v21; // al@52
+//  int v22; // eax@53
+//  char *v23; // eax@53
+//  char *v24; // edx@53
+//  char v25; // cl@54
+//  unsigned int v26; // eax@55
+//  char *v27; // edi@55
+//  char v28; // cl@56
   int v29; // ecx@57
   unsigned __int8 v30; // al@57
   signed int v31; // edx@61
@@ -38068,8 +38056,8 @@ void selectRaceScreen()
   signed int v40; // eax@64
   bool v41; // zf@74
   signed int v42; // esi@78
-  const char **v43; // [sp+0h] [bp-6Ch]@0
-  const char **v44; // [sp+4h] [bp-68h]@0
+//  const char **v43; // [sp+0h] [bp-6Ch]@0
+//  const char **v44; // [sp+4h] [bp-68h]@0
   char Str; // [sp+10h] [bp-5Ch]@53
   char v46; // [sp+11h] [bp-5Bh]@62
   char v47; // [sp+12h] [bp-5Ah]@62
@@ -38440,7 +38428,7 @@ void __thiscall underGroundMenuEnter(void *this)
   int v1; // eax@1
   int v2; // esi@1
   char v3; // bl@1
-  int v4; // eax@6
+//  int v4; // eax@6
   int v5; // ebx@19
   int v6; // edi@19
   int v7; // ebp@20
@@ -38448,9 +38436,9 @@ void __thiscall underGroundMenuEnter(void *this)
   int v9; // eax@32
   int v10; // edx@36
   int v11; // edx@44
-  int v12; // edx@53
-  int *v13; // eax@53
-  signed int v14; // edi@53
+//  int v12; // edx@53
+//  int *v13; // eax@53
+//  signed int v14; // edi@53
   void *v15; // [sp+0h] [bp-4h]@1
 
   v15 = this;
@@ -38565,14 +38553,14 @@ void __thiscall underGroundMenuEnter(void *this)
       getBlackMarketElementPurchasedText(1);
       goto LABEL_48;
     case ROCKET:
-      if ( rocketAvailable_45EFF8 != 1 || hasInsuficientMoneyToBuy(rocket_462D48) )
+      if ( rocketAvailable_45EFF8 != 1 || hasInsuficientMoneyToBuy(rocketCost_462D48) )
       {
 LABEL_37:
         loadMenuSoundEffect(2u, 23, 0, configuration.musicVolume, dword_44518C);
         return;
       }
       loadMenuSoundEffect(1u, 28, 0, configuration.musicVolume, dword_4451A0);
-      v11 = drivers[driverId].money - rocket_462D48;
+      v11 = drivers[driverId].money - rocketCost_462D48;
       rocketAvailable_45EFF8 = 0;
 	  drivers[driverId].money = v11;
       drawBlackMarketElement2();
@@ -38580,7 +38568,7 @@ LABEL_37:
       getBlackMarketElementPurchasedText(2);
       goto LABEL_48;
     case SABOTAGE:
-      if ( sabotageAvailable_45EFFC != 1 || hasInsuficientMoneyToBuy(sabotage_462D4C) )
+      if ( sabotageAvailable_45EFFC != 1 || hasInsuficientMoneyToBuy(sabotageCost_462D4C) )
       {
 LABEL_41:
         loadMenuSoundEffect(2u, 23, 0, configuration.musicVolume, dword_44518C);
@@ -38589,7 +38577,7 @@ LABEL_41:
       {
         loadMenuSoundEffect(1u, 28, 0, configuration.musicVolume, dword_4451A0);
         sabotageAvailable_45EFFC = 0;
-		drivers[driverId].money -= sabotage_462D4C;
+		drivers[driverId].money -= sabotageCost_462D4C;
         drawBlackMarketElement3();
         drivers[driverId].sabotage = 1;
         getBlackMarketElementPurchasedText(3);
@@ -38651,16 +38639,16 @@ LABEL_48:
 //----- (00436700) --------------------------------------------------------
 void enterBlackMarketScreen()
 {
-  int v0; // eax@1
-  signed int v1; // edx@1
+//  int v0; // eax@1
+//  signed int v1; // edx@1
   int v2; // ecx@1
   int v3; // edi@21
   signed int v4; // ebp@21
   int v5; // eax@23
   int i; // ecx@23
-  bool v7; // zf@25
-  bool v8; // sf@25
-  unsigned __int8 v9; // of@25
+//  bool v7; // zf@25
+//  bool v8; // sf@25
+///  unsigned __int8 v9; // of@25
   unsigned __int8 v10; // bl@27
   signed int v11; // esi@27
   int v12; // ST3C_4@28
@@ -39162,9 +39150,9 @@ void enterShop()
   int v44; // ST44_4@37
   signed int v45; // ebp@38
   int v46; // esi@39
-  bool v47; // zf@39
-  bool v48; // sf@39
-  unsigned __int8 v49; // of@39
+//  bool v47; // zf@39
+//  bool v48; // sf@39
+//  unsigned __int8 v49; // of@39
   signed int v50; // eax@41
   char *v51; // ecx@42
   char v52; // al@45
@@ -39205,7 +39193,7 @@ void enterShop()
   __int64 v87; // rax@105
   __int64 v88; // rax@108
   int v89; // eax@117
-  int v90; // esi@121
+//  int v90; // esi@121
   signed int v91; // eax@125
   signed int v92; // eax@129
   int v93; // eax@132
@@ -39826,7 +39814,7 @@ char postLoadedOrLicense()
   int v14; // edi@39
   int v15; // esi@59
   int v16; // edi@60
-  bool v17; // zf@63
+//  bool v17; // zf@63
   bool v18; // sf@63
   unsigned __int8 v19; // of@63
   int v20; // esi@73
@@ -39850,7 +39838,7 @@ char postLoadedOrLicense()
   int v38; // esi@150
   int v39; // edi@150
   int v40; // edx@178
-  double v41; // ST38_8@179
+//  double v41; // ST38_8@179
   char v42; // bl@195
   char v43; // dl@196
   char v44; // cl@196
@@ -40757,58 +40745,58 @@ int mainMenu()
   float v6; // ST38_4@10
   float v7; // ST34_4@10
   float v8; // ST30_4@10
-  int v9; // eax@10
-  signed int v10; // eax@10
-  char v11; // bl@12
-  char v12; // dl@12
-  char v13; // cl@12
-  char v14; // dl@12
-  signed int v15; // esi@12
-  signed int v16; // eax@13
-  char v17; // cl@14
-  char v18; // dl@16
-  char v19; // bl@16
-  char v20; // cl@16
-  signed int v21; // esi@16
-  char v22; // cl@18
-  char v23; // dl@20
-  signed int v24; // esi@20
-  signed int v25; // edx@21
-  char v26; // cl@22
-  char v27; // dl@24
-  signed int v28; // esi@24
-  signed int v29; // eax@25
-  char v30; // cl@26
+//  int v9; // eax@10
+//  signed int v10; // eax@10
+//  char v11; // bl@12
+//  char v12; // dl@12
+//  char v13; // cl@12
+//  char v14; // dl@12
+//  signed int v15; // esi@12
+//  signed int v16; // eax@13
+//  char v17; // cl@14
+//  char v18; // dl@16
+//  char v19; // bl@16
+//  char v20; // cl@16
+//  signed int v21; // esi@16
+//  char v22; // cl@18
+//  char v23; // dl@20
+///  signed int v24; // esi@20
+//  signed int v25; // edx@21
+//  char v26; // cl@22
+//  char v27; // dl@24
+//  signed int v28; // esi@24
+//  signed int v29; // eax@25
+//  char v30; // cl@26
   signed int v31; // ebx@32
   unsigned __int8 v32; // bp@35
   signed int v33; // esi@35
   int v34; // ST38_4@36
   int v35; // ST34_4@36
   int v36; // eax@36
-  char *v37; // eax@54
-  char v38; // dl@55
-  unsigned int v39; // eax@56
-  char *v40; // edi@56
-  char v41; // cl@57
-  char *v42; // edi@58
-  char v43; // al@59
-  char *v44; // eax@60
-  char v45; // dl@61
-  unsigned int v46; // eax@62
-  char *v47; // edi@62
-  char v48; // cl@63
-  char *v49; // edi@64
-  char v50; // al@65
-  bool v51; // zf@66
-  char *v52; // eax@68
-  char *v53; // edx@68
-  char v54; // cl@69
-  unsigned int v55; // eax@70
-  char *v56; // edi@70
-  char v57; // cl@71
-  char *v58; // edi@72
-  char v59; // al@73
-  signed int v61; // [sp+1Ch] [bp-Ch]@17
+//  char *v37; // eax@54
+//  char v38; // dl@55
+//  unsigned int v39; // eax@56
+//  char *v40; // edi@56
+//  char v41; // cl@57
+//  char *v42; // edi@58
+//  char v43; // al@59
+//  char *v44; // eax@60
+//  char v45; // dl@61
+//  unsigned int v46; // eax@62
+//  char *v47; // edi@62
+//  char v48; // cl@63
+//  char *v49; // edi@64
+//  char v50; // al@65
+//  bool v51; // zf@66
+//  char *v52; // eax@68
+//  char *v53; // edx@68
+//  char v54; // cl@69
+//  unsigned int v55; // eax@70
+//  char *v56; // edi@70
+//  char v57; // cl@71
+//  char *v58; // edi@72
+//  char v59; // al@73
+//  signed int v61; // [sp+1Ch] [bp-Ch]@17
   signed int v62; // [sp+20h] [bp-8h]@1
   int v63; // [sp+24h] [bp-4h]@1
 
@@ -40883,9 +40871,9 @@ int mainMenu()
   //puesto por mi
   screenBuffer = v1;
   dword_461250 = v1;  
-  //apogeeScreen();
-  //showStartScreen();
-
+  apogeeScreen();
+  showStartScreen();
+ 
   inicializeGraphicVars();
   loadGraphics1();
   loadGraphics2();
@@ -41154,7 +41142,7 @@ int mainMenu()
 
   }
   while ( !v63 );
-  if ( isMultiplayerGame )
+  /*if ( isMultiplayerGame )
   {
     if ( !memcmp(&dword_44671E, "Abort Current Game", 0x13u) )
     {
@@ -41228,7 +41216,7 @@ LABEL_76:
     nullsub_1();
     isMultiplayerGame = 0;
     dword_45E0A8 = 0;
-  }
+  }*/
   showEndScreen();
   saveConfiguration();
   freeMemoryGraphics();
@@ -42363,9 +42351,7 @@ LABEL_20:
 			
           *(_DWORD *)v58 = palette[*(byte *)v2];
 
-		  if (*(byte *)v2 < 7) {
-			  *(_DWORD *)v58 = 0;
-		  }
+		 
 		  SDL_Color* color = (SDL_Color *)&palette[*(byte *)v2];
 		  
 		  screenSurfaceTemp = screenSurface;
@@ -42379,7 +42365,7 @@ LABEL_20:
       while ( v55 < screenSurfaceTemp->h );
     }
   }
-  //void SDL_UpdateRect(SDL_Surface *screen, Sint32 x, Sint32 y, Sint32 w, Sint32 h);
+  
   SDL_UpdateRect(screenSurfaceTemp, 0, 0, screenSurfaceTemp->w, screenSurfaceTemp->h);
 LABEL_49:
   if ( !mainArgs.configNoSound )
@@ -46114,8 +46100,8 @@ int  initSystem(double fmodMinVersion, int a1, const char **a2, const char *args
   char *v5; // eax@4
   int v6; // eax@5
   int v7; // edi@7
-  int v8; // eax@7
-  void *v9; // esp@7
+//  int v8; // eax@7
+//  void *v9; // esp@7
   int result; // eax@8
   char* sdlError; // eax@10
   HMODULE v12; // eax@11
@@ -46191,8 +46177,8 @@ int __stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdL
   int result; // eax@4
   int v11; // eax@5
   int v12; // ebx@5
-  int v13; // eax@5
-  void *v14; // esp@5
+//  int v13; // eax@5
+//  void *v14; // esp@5
   int v15; // [sp+0h] [bp-Ch]@3
 
   ddrawModule = LoadLibraryA(LibFileName);

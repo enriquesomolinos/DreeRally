@@ -114,11 +114,11 @@ dword_4A7A60  tamaño 84*4 hasta 4a7bb0
 dword_4A6884
 dword_4A6888
 dword_4A688C
-5 dword_4A688C
+5 dword_4A688C - parece que el tire efectivo
 dword_4A6890
-flt_4A6894
+flt_4A6894 ->parece que es engine efectivo
 dword_4A6898
-dword_4A689C
+dword_4A689C -> parece que armour efectivo
 10dword_4A68A0 ->rocket
 dword_4A68A4 ->spikes
 dword_4A68A8 -> mines
