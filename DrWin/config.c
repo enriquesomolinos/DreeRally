@@ -17,7 +17,7 @@
 
 
 
-extern MainArgs mainArgs = { 0,1,0,1 };
+extern MainArgs mainArgs = { 0,1,0,1,0 };
 
 extern Configuration configuration;
 
@@ -25,8 +25,11 @@ extern Configuration configuration;
 int checkArgs(char * args)
 {
 	int result = 0;
+	
 	if (strstr(args, "-nosound"))
 		mainArgs.configNoSound = 1;
+	if (strstr(args, "-noeffect"))
+		mainArgs.configNoSoundEffect = 1;
 	if (strstr(args, "-gl"))
 		mainArgs.configGL = 1;
 	if (strstr(args, "-smooth"))
@@ -34,6 +37,7 @@ int checkArgs(char * args)
 	result = strstr(args, "-window");
 	if (result)
 		mainArgs.configWindow = 1;
+	
 	return result;
 
 }

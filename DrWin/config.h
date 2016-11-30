@@ -5,6 +5,7 @@ typedef struct MainArgs {
 	int configSmooth;
 	int configGL;
 	int configWindow;
+	int configNoSoundEffect;
 } MainArgs;
 
 typedef struct Configuration {
