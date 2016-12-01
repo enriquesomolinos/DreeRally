@@ -19,7 +19,7 @@
 
 extern MainArgs mainArgs = { 0,1,0,1,0 };
 
-extern Configuration configuration;
+Configuration configuration;
 
 
 int checkArgs(char * args)

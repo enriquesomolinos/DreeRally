@@ -37,7 +37,7 @@
 
 const INITIAL_MONEY=10000; ///cambiar a 495
 MainArgs mainArgs;
-Configuration configuration;
+extern Configuration configuration;
 GraphicsGeneral graphicsGeneral;
 Graphics4 graphics4;
 Car cars[6];
@@ -363,7 +363,7 @@ int __cdecl sub_43B030(int a1, int a2);
 int __cdecl sub_43B050(int a1, signed int a2);
 int __cdecl sub_43B080(int a1, int a2, int a3, int a4, int a5);
 void __cdecl copyBuffer2Screen(void *a1, const void *a2, int a3);
-int __cdecl sub_43B0F0(int a1, signed int a2, int a3);
+int __cdecl extractBits(int a1, signed int a2, int a3);
 int __cdecl sub_43B160(int a1, int a2, int a3, int a4);
 int __cdecl sub_43B1A0(int a1, int a2, int a3, int a4);
 int __cdecl drawCharInRaceScreen(int a1, int a2, int a3, int a4);
@@ -1573,13 +1573,15 @@ int (__cdecl *dword_456CA0)(_DWORD) = NULL; // weak
 int (__cdecl *dword_456CA4)(_DWORD, _DWORD, _DWORD) = NULL; // weak
 int (__cdecl *dword_456CA8)(_DWORD) = NULL; // weak
 int (__cdecl *dword_456CAC)(_DWORD) = NULL; // weak
-_UNKNOWN unk_456CC0; // weak
+
+int unk_456CC0[0x5800]; // weak
+//_UNKNOWN unk_456CC0; // wea
 _UNKNOWN unk_456CF4; // weak
 _UNKNOWN unk_4582C0; // weak
 int dword_45C4C0; // weak
 int dword_45C4C4; // weak
 _UNKNOWN unk_45C4E0; // weak
-int dword_45C4E4[256]; // weak
+int dword_45C4E4[256]; // weak   //esto tiene la direccion de memoria 456CC0
 _UNKNOWN unk_45C4F4; // weak
 _UNKNOWN unk_45C546; // weak
 int dword_45DA60; // weak
@@ -19827,6 +19829,10 @@ unsigned int __cdecl drawTextWithFont(int font, int a2, const char *text, int sc
       }
       else
       {
+		  //TODO fix controlamos que no sea negativo que la lia!
+		  if (v9 < 32) {
+			  v9 = 32;
+		  }
         drawImageWithPosition(font + width * height * ((unsigned __int8)v9 - 32), width, height, (int)((char *)screenBuffer + screenPositionOffset));
 		height = v10;
 		screenPositionOffset += *(byte *)(text[v6] + a2 - 30);
@@ -22341,14 +22347,14 @@ int __cdecl drawRecordByCircuit(int a1)
   int v37; // [sp+10h] [bp-5Ch]@11
   signed int v38; // [sp+14h] [bp-58h]@11
   int v39; // [sp+18h] [bp-54h]@11
-  char Str[20]; // [sp+1Ch] [bp-50h]@5
-  char *DstBuf = malloc(20); // [sp+30h] [bp-3Ch]@17
+  char Str[60]; // [sp+1Ch] [bp-50h]@5
+  char *DstBuf = malloc(60); // [sp+30h] [bp-3Ch]@17
 //  char v42; // [sp+31h] [bp-3Bh]@18
 //  char v43; // [sp+32h] [bp-3Ah]@18
-  char v44; // [sp+44h] [bp-28h]@17
+  char* v44=malloc(2); // [sp+44h] [bp-28h]@17
 //  char v45; // [sp+45h] [bp-27h]@20
 //  char v46; // [sp+46h] [bp-26h]@20
-  char v47; // [sp+58h] [bp-14h]@17
+  char* v47 = malloc(2); // [sp+58h] [bp-14h]@17
 //  char v48; // [sp+59h] [bp-13h]@22
 //  char v49; // [sp+5Ah] [bp-12h]@22
   signed int v50; // [sp+70h] [bp+4h]@11
@@ -22434,8 +22440,8 @@ int __cdecl drawRecordByCircuit(int a1)
 	strcpy(name, configuration.circuitRecords[a1  + index*18].name);
     drawTextWithFont((int)graphicsGeneral.fmed1aBpk, (int)&unk_445928, name, v16);
     itoa(configuration.circuitRecords[a1  + index*18].min, DstBuf, 10);
-    itoa(configuration.circuitRecords[a1  + index*18].sec, &v44, 10);
-    itoa(configuration.circuitRecords[a1  + index*18].cen, &v47, 10);
+    itoa(configuration.circuitRecords[a1  + index*18].sec, v44, 10);
+    itoa(configuration.circuitRecords[a1  + index*18].cen, v47, 10);
     /*if ( strlen(DstBuf) == 1 )
     {
       v42 = DstBuf;
@@ -22489,9 +22495,9 @@ int __cdecl drawRecordByCircuit(int a1)
 	memset(Str, "\0" ,strlen(Str));
 	strcpy(Str, DstBuf);
 	strcat(Str, ":");
-	strcat(Str, &v44);
+	strcat(Str, v44);
 	strcat(Str, ".");
-	strcat(Str, &v47);
+	strcat(Str, v47);
     drawTextWithFont(v34, (int)&unk_445928, Str, v16 + 154);
     v17 -= 432;
     v16 += 14080;
@@ -23200,7 +23206,11 @@ int __cdecl getNamePositionRight(const char *a1)
   if ( v1 != a1 + 1 )
   {
     do
-      v2 += (unsigned __int8)byte_44590A[a1[v3++]];
+      v2 += (unsigned __int8)byte_4458B0[90+a1[v3++]];
+	//v2 += (unsigned __int8)byte_44590A[a1[v3++]];
+
+
+	
     while ( v3 < strlen(a1) );
   }
   return (96 - v2) / 2;
@@ -23301,7 +23311,7 @@ int drawCarRightSide()
   /*esto creo que no es necesario*/
   //name = getNamePositionRight(Str);
   memcpy(Str, drivers[driverId].name, strlen(drivers[driverId].name));
-  memset(&Str[strlen(drivers[driverId].name) + 1], '\0', 1);
+  memset(&Str[strlen(drivers[driverId].name)], '\0', 1);
   strupr(Str);
   namePosition = getNamePositionRight(Str);
   
@@ -27558,6 +27568,7 @@ int __cdecl openPalFromBpa(char * filename)
  // v2 = &v7;
   do
   {
+	 
 	  
     palette1[v1] = colorToPaletteEntry(v2[0] << 16, 6553600);
 	palette1[v1 + 1] = colorToPaletteEntry(v2[1] << 16, 6553600);
@@ -27610,6 +27621,41 @@ int transitionToCurrentImage()///esto huele a que esta pintando la pantalla con 
   }
   while ( v0 < 6553600 );
   return result;
+}
+//----- (00427280) --------------------------------------------------------
+int metodofalse()///esto huele a que esta pintando la pantalla con la paleta
+{
+	int v0; // edi@1
+	unsigned __int8 v1; // bl@2
+	signed int v2; // esi@2
+	int v3; // ST0C_4@3
+	int v4; // ST08_4@3
+	int v5; // eax@3
+	int result; // eax@3
+
+	v0 = 0x640000;
+
+	do
+	{
+		waitWithRefresh();
+		v1 = 0;
+		v2 = 0;
+
+		//v2 = (signed int)dword_45FC44;
+		do
+		{
+			v3 = (convertColorToPaletteColor(palette1[v2 + 2], v0) + 0x8000) >> 16;
+			v4 = (convertColorToPaletteColor(palette1[v2 + 1], v0) + 0x8000) >> 16;
+			v5 = (convertColorToPaletteColor(palette1[v2], v0) + 0x8000) >> 16;
+			result = setPaletteAndGetValue(v1, v5, v4, v3);
+
+			v2 += 3;
+			//v2 += 12;
+			++v1;
+		} while (v2 < maxPaletteEntries);
+		v0 += 0x40000;
+	} while (v0 < 6553600);
+	return result;
 }
 
 
@@ -27667,9 +27713,7 @@ int apogeeScreen()
 
   v0 = 0;
  
-  /*do
-    setPaletteAndGetValue(v0++, 0, 0, 0);
-  while ( v0 < 256 );*/
+
   openPalFromBpa("apogee.pal");
  
   extractFromBpa("MENU.BPA", textureTemp, "apogee.bpk");
@@ -27685,6 +27729,22 @@ int apogeeScreen()
   }
   //espera de tres segundos
   while ( !eventDetected() && v1 < 180 );
+  transitionToBlack();
+  openPalFromBpa("remedy.pal");
+
+  extractFromBpa("MENU.BPA", textureTemp, "remedy.bpk");
+  copyImageToBuffer(textureTemp, screenBuffer);
+  refreshAllScreen();
+  transitionToCurrentImage();
+
+  v1 = 0;
+  do
+  {
+	  waitWithRefresh();
+	  ++v1;
+  }
+  //espera de tres segundos
+  while (!eventDetected() && v1 < 180);
   transitionToBlack();
   do
 	  setPaletteAndGetValue(v0++, 0, 0, 0);
@@ -32683,10 +32743,7 @@ void sub_42D8C0()
       return;
   }
 }
-// 445198: using guessed type int dword_445198;
-// 45DC18: using guessed type int configuration.musicVolume;
-// 45FC30: using guessed type int actualCarSelected;
-// 463DF0: using guessed type int menuOptionSelected_463DF0;
+
 
 //----- (0042DAB0) --------------------------------------------------------
 void sub_42DAB0()
@@ -40893,7 +40950,7 @@ int mainMenu()
   //puesto por mi
   screenBuffer = v1;
   dword_461250 = v1;  
-  apogeeScreen();  
+  //apogeeScreen();  
   showStartScreen();
  
   inicializeGraphicVars();
@@ -41608,7 +41665,7 @@ void __cdecl copyBuffer2Screen(void *a1, const void *a2, int a3)
 }
 
 //----- (0043B0F0) --------------------------------------------------------
-int __cdecl sub_43B0F0(int a1, signed int a2, int a3)
+int __cdecl extractBits(int src, signed int bitOffset, int bitLenght)
 {
   int v3; // ebp@1
   int v4; // esi@1
@@ -41617,10 +41674,10 @@ int __cdecl sub_43B0F0(int a1, signed int a2, int a3)
 
   v3 = 0;
   v4 = 0;
-  v5 = a2 % 8;
-  if ( a3 > 0 )
+  v5 = bitOffset % 8;
+  if (bitLenght > 0 )
   {
-    v6 = a2 / 8 + a1;
+    v6 = bitOffset / 8 + src;
     do
     {
       v3 |= ((*(byte *)v6 & (unsigned __int8)(1 << v5++)) != 0) << v4++;
@@ -41630,9 +41687,9 @@ int __cdecl sub_43B0F0(int a1, signed int a2, int a3)
         ++v6;
       }
     }
-    while ( v4 < a3 );
+    while ( v4 < bitLenght);
   }
-  return v3 & ((1 << a3) - 1);
+  return v3 & ((1 << bitLenght) - 1);
 }
 
 //----- (0043B160) --------------------------------------------------------
@@ -42372,10 +42429,12 @@ LABEL_20:
         {
 			//*(_DWORD *)v58 = &screenSurfaceTemp->format->palette->colors[*(byte *)v2];
 			
-			
-
+			if (palette[1] != 0) {
+				int a = 0;
+			}
 			*(unsigned int *)v58 = palette[(*(byte *)v2)];
-			
+			//*(unsigned int *)v58 = palette[248];
+			//*(unsigned int *)v58 = SDL_MapRGBA(screenSurface->format,BYTE2(palette[(*(byte *)v2)]),BYTE1(palette[(*(byte *)v2)]) ,BYTE4(palette[(*(byte *)v2)]) ,0);
 
 		 
 		  SDL_Color* color = (SDL_Color *)&palette[*(byte *)v2];
@@ -42716,7 +42775,7 @@ int __cdecl setPaletteValue(int pos, int r, int g, int b)
   else
   {
     result = pos;
-    palette[pos] = 4 * (b | ((g | (r << 8)) << 8)); //esta variable contiene paletas
+    palette[pos] = 4* (b | ((g | (r << 8)) << 8)); //esta variable contiene paletas
 	SDL_Color* color = (SDL_Color *)&palette[pos];
 	/*SDL_Color color;
 	color.r = r;
@@ -42755,9 +42814,9 @@ int __cdecl setPaletteAndGetValue(unsigned __int8 pos, unsigned __int8 r, char g
   }
   else
   {
-    HIBYTE(v6) = r;
-    LOBYTE(v6) = g;
-    result = 4 *  (b | (v6 << 8));
+    
+	result = 4* (r << 16 | g << 8 | b);
+    
 	/*SDL_Color color;
 	color.r = r;
 	color.g = g;
@@ -42765,9 +42824,7 @@ int __cdecl setPaletteAndGetValue(unsigned __int8 pos, unsigned __int8 r, char g
    
 	SDL_SetColors(screenSurface, &color, pos, 1);
 	SDL_Palette *sdl_palette = screenSurface->format->palette;*/
-	if (result != 0) {
-		int bvb = 0;
-	}
+	
 	palette[pos] = result;
 	if (pos == 0) {
 		int z = 0;
@@ -43011,7 +43068,10 @@ int __cdecl sub_43C3E0(unsigned __int8 a1)
   result = mainArgs.configNoSound;
   if ( !mainArgs.configNoSound )
   {
-    result = dword_45C4E4[43 * (a1 - 1)];
+    result = &unk_456CC0[43 * (a1 - 1)];
+	//result = dword_45C4E4[43 * (a1 - 1)]; //cambiado porque tiene la direccion de memoria
+
+	
     *(_DWORD *)(result + 44) = 0;
     *(_DWORD *)(result + 40) = 0;
     *(_DWORD *)(result + 28) = 0;
@@ -43360,7 +43420,7 @@ void __cdecl decryptTexture(int src,  int dest, int startPos, int lenght)
 {
   int v4; // ebx@1
   signed int v5; // ebp@1
-  void *v6 = malloc(0x4004u); // esi@1
+  void *v6 ; // esi@1
   signed int v7; // edi@1
   int v8; // eax@2
   int i; // eax@4
@@ -43369,14 +43429,14 @@ void __cdecl decryptTexture(int src,  int dest, int startPos, int lenght)
   signed int v12; // eax@21
   int v13; // [sp+10h] [bp-1Ch]@1
   signed int v14; // [sp+14h] [bp-18h]@1
-  int v15; // [sp+18h] [bp-14h]@1
+  int imageDestposition; // [sp+18h] [bp-14h]@1
   void *Memory= malloc(0x1001u); // [sp+1Ch] [bp-10h]@1
   char v17; // [sp+20h] [bp-Ch]@1
   void *v18= malloc(0x1001u); // [sp+24h] [bp-8h]@1
   void *v19 = malloc(0x4004u); // [sp+28h] [bp-4h]@1
   
   v4 = 0;
-  v15 = 0;
+  imageDestposition = 0;
   v5 = 0;
  
   v6 = Memory;
@@ -43389,7 +43449,7 @@ void __cdecl decryptTexture(int src,  int dest, int startPos, int lenght)
   {
     while ( 1 )
     {
-      v8 = sub_43B0F0(src, v5, v13);
+      v8 = extractBits(src, v5, v13);
       v5 += v13;
       if ( v8 == 256 )
         goto LABEL_28;
@@ -43398,7 +43458,7 @@ void __cdecl decryptTexture(int src,  int dest, int startPos, int lenght)
       v13 = 9;
       v7 = 258;
       v14 = 512;
-      for ( i = sub_43B0F0(src, v5, 9); i == 257; i = sub_43B0F0(src, v5, 9) )
+      for ( i = extractBits(src, v5, 9); i == 257; i = extractBits(src, v5, 9) )
         v5 += 9;
       v5 += 9;
       if ( i == 256 )
@@ -43414,7 +43474,7 @@ LABEL_26:
         v10 = lenght == 0;
         goto LABEL_27;
       }
-      *(byte *)(v15++ + dest) = 32 * i | (i >> 3);
+	  *(byte *)(imageDestposition++ + dest) = (32* i | (i >> 3)) ;
       v10 = lenght-- == 1;
 LABEL_27:
       if ( v10 )
@@ -43452,7 +43512,7 @@ LABEL_27:
       }
       else
       {
-        *(byte *)(v15++ + dest) = 32 * v12 | (v12 >> 3);
+        *(byte *)(imageDestposition++ + dest) = (32*(byte)v12 | ((byte)v12 >> 3));
         --lenght;
         if ( !lenght)
           goto LABEL_28;
