@@ -620,7 +620,7 @@ _UNKNOWN unk_445848[] ={ '\x20','\x20','\x14','\x9','\x0E','\x14','\x15','\x18',
 						'\x0D','\x0C','\x0D','\x0D','\x0','\x0','\x0','\x0','\x0','\x0','\x0','\x9' }; // weak
 char byte_445892[] = { '\x12','\x8','\x0E','\x13','\x10','\x16','\x12','\x12','\x20','\x12','\x12','\x11','\x10','\x12','\x13','\x1A','\x12','\x13','\x10','\x0B','\x6','\x0B','\x0F','\x14'}; // weak
 //char byte_445892[] = { '\x12','\x8','\x0E','\x13','\x10','\x16','\x12','\x12','\x10','\x12','\x12','\x11','\x10','\x12','\x13','\x1A','\x12','\x13','\x10','\x0B','\x6','\x0B','\x0F','\x14','\x0','\x0','\x0','\x0','\x0','\x0' }; // weak
-char byte_4458B0[] = { '\x10', '\x10', '\x0A', '\x5', '\x8', '\x0B', '\x0B', '\x0D', '\x0B', '\x5',
+char letterSpacing_4458B0[] = { '\x10', '\x10', '\x0A', '\x5', '\x8', '\x0B', '\x0B', '\x0D', '\x0B', '\x5',
 					   '\x6',  '\x6',  '\x9',  '\x0B', '\x5', '\x0B', '\x4', '\x0A', '\x0B', '\x5', 
 						'\x9', '\x0A', '\x0A', '\x0A', '\x0A', '\x0A', '\x0A', '\x0A', '\x4', '\x5',
 						'\x9', '\x0B', '\x8', '\x8', '\x0C', '\x0B', '\x0B', '\x0A', '\x0B', '\x0A', 
@@ -638,14 +638,14 @@ char byte_4458B0[] = { '\x10', '\x10', '\x0A', '\x5', '\x8', '\x0B', '\x0B', '\x
 						'\x9', '\x9', '\x9', '\x9', '\x9', '\x9', '\x9', '\x9', '\x9', '\x9', '\x9', 
 						'\x9', '\x9', '\x9', '\x9', '\x9', '\x9', '\x9', '\x9', '\x9', '\x9', '\x9',
 						'\x9', '\x9', '\x9', '\x9', '\x9', '\x9', '\x9' };
-//char byte_4458B0 = '\x10'; // weak
-char byte_4458B1 = '\x10'; // weak
-char byte_4458E7[] = { '\v' }; // weak
-char byte_44590A[] = { '\n' }; // weak
-char byte_445911 = '\v'; // weak
-char byte_445914 = '\x10'; // weak
-char byte_445915 = '\r'; // weak
-char byte_445916 = '\x0E'; // weak
+//char letterSpacing_4458B0 = '\x10'; // weak
+//char byte_4458B1 = '\x10'; // weak
+//char byte_4458E7[] = { '\v' }; // weak
+//char byte_44590A[] = { '\n' }; // weak
+//char byte_445911 = '\v'; // weak
+//char byte_445914 = '\x10'; // weak
+//char byte_445915 = '\r'; // weak
+//char byte_445916 = '\x0E'; // weak
 
 char  unk_445928[] = {9,0xc,
 					  9,9,9,9,9,9,9,9,9,9, 
@@ -19856,8 +19856,8 @@ unsigned int __cdecl sub_41A370(const char *a1, int a2)
   char v7; // al@3
   int v8; // [sp-8h] [bp-18h]@3
 
-  v2 = (unsigned __int8)byte_445914;
-  v3 = (unsigned __int8)byte_445915;
+  v2 = (unsigned __int8)letterSpacing_4458B0[95];
+  v3 = (unsigned __int8)letterSpacing_4458B0[96];
   v4 = 0;
   result = strlen(a1);
   if ( result )
@@ -19870,12 +19870,12 @@ unsigned int __cdecl sub_41A370(const char *a1, int a2)
       if ( v7 == 36 )
       {
         drawImageWithPosition2((int)fsma3fBpk, v2, v3, v8);
-        v6 += (unsigned __int8)byte_445916;
+        v6 += (unsigned __int8)letterSpacing_4458B0[97];
       }
       else
       {
         drawImageWithPosition2((int)((char *)fsma3fBpk + v2 * v3 * ((unsigned __int8)v7 - 47)), v2, v3, v8);
-        v6 += (unsigned __int8)byte_4458E7[a1[v4]];
+        v6 += (unsigned __int8)letterSpacing_4458B0[55+a1[v4]];
       }
       ++v4;
       result = strlen(a1);
@@ -19905,9 +19905,9 @@ int __cdecl writeTextInScreen(const char *text, int screenOffset)
   signed int v13; // [sp+Ch] [bp-8h]@1
 
   //ancho y alto escribe un 10h
-  v2 = (unsigned __int8)byte_4458B0[0];
+  v2 = (unsigned __int8)letterSpacing_4458B0[0];
   v3 = 0;
-  v4 = (unsigned __int8)byte_4458B0[1];
+  v4 = (unsigned __int8)letterSpacing_4458B0[1];
   //v4 = (unsigned __int8)byte_4458B1;
   v13 = 0;
   result = strlen(text);
@@ -19964,7 +19964,7 @@ LABEL_17:
   }
   return result;
 }
-// 4458B0: using guessed type char byte_4458B0;
+// 4458B0: using guessed type char letterSpacing_4458B0;
 // 4458B1: using guessed type char byte_4458B1;
 
 //----- (0041A530) esto pinta el recuadro parece que es x , offset x , y , offset y --------------------------------------------------------
@@ -22529,10 +22529,10 @@ char drawBottomMenuText()
 ///  char result; // al@4
 
 
-  drawTextWithFont((int)graphicsGeneral.fsma3bBpk, (int)&byte_4458B0, "         Welcome to Death Rally(tm) - Windows Version 1.0", 640 * 395);
-  drawTextWithFont((int)graphicsGeneral.fsma3bBpk, (int)&byte_4458B0, "              Port by ---- - - http://www.dreerally.com", 640 * 410);
-  drawTextWithFont((int)graphicsGeneral.fsma3bBpk, (int)&byte_4458B0, "       (c)Remedy Entertainment - http://www.remedygames.com", 640 * 425);
-  drawTextWithFont((int)graphicsGeneral.fsma3bBpk, (int)&byte_4458B0, "  Use arrow keys to change selection and press enter to confirm.", 640 * 455);
+  drawTextWithFont((int)graphicsGeneral.fsma3bBpk, (int)&letterSpacing_4458B0, "         Welcome to Death Rally(tm) - Windows Version 1.0", 640 * 395);
+  drawTextWithFont((int)graphicsGeneral.fsma3bBpk, (int)&letterSpacing_4458B0, "              Port by ---- - - http://www.dreerally.com", 640 * 410);
+  drawTextWithFont((int)graphicsGeneral.fsma3bBpk, (int)&letterSpacing_4458B0, "       (c)Remedy Entertainment - http://www.remedygames.com", 640 * 425);
+  drawTextWithFont((int)graphicsGeneral.fsma3bBpk, (int)&letterSpacing_4458B0, "  Use arrow keys to change selection and press enter to confirm.", 640 * 455);
 
   /*
 
@@ -22552,11 +22552,11 @@ char drawBottomMenuText()
   {
     result = *((byte *)&word_461ED0 + v3);
     if ( !result )
-      result = drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&byte_4458B0, v4, v5);
+      result = drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&letterSpacing_4458B0, v4, v5);
     if ( *((byte *)&word_461ED0 + v3) == 1 )
-      result = drawTextWithFont((int)graphicsGeneral.fsma3bBpk, (int)&byte_4458B0, v4, v5);
+      result = drawTextWithFont((int)graphicsGeneral.fsma3bBpk, (int)&letterSpacing_4458B0, v4, v5);
     if ( *((byte *)&word_461ED0 + v3) == 2 )
-      result = drawTextWithFont((int)graphicsGeneral.fsma3cBpk, (int)&byte_4458B0, v4, v5);
+      result = drawTextWithFont((int)graphicsGeneral.fsma3cBpk, (int)&letterSpacing_4458B0, v4, v5);
     v5 += 9600;
     ++v3;
     v4 += 150;
@@ -22564,7 +22564,7 @@ char drawBottomMenuText()
   while ( v5 < 299532 );
   return result;*/
 }
-// 4458B0: using guessed type char byte_4458B0;
+// 4458B0: using guessed type char letterSpacing_4458B0;
 // 461ED0: using guessed type __int16 word_461ED0;
 
 //----- (0041E8D0) --------------------------------------------------------
@@ -22595,11 +22595,11 @@ char sub_41E8D0()
   {
     result = unk_461EC0[v3];
     if ( !result )
-      result = drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&byte_4458B0, v4, v5);
+      result = drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&letterSpacing_4458B0, v4, v5);
     if ( unk_461EC0[v3] == 1 )
-      result = drawTextWithFont((int)graphicsGeneral.fsma3bBpk, (int)&byte_4458B0, v4, v5);
+      result = drawTextWithFont((int)graphicsGeneral.fsma3bBpk, (int)&letterSpacing_4458B0, v4, v5);
     if ( unk_461EC0[v3] == 2 )
-      result = drawTextWithFont((int)graphicsGeneral.fsma3cBpk, (int)&byte_4458B0, v4, v5);
+      result = drawTextWithFont((int)graphicsGeneral.fsma3cBpk, (int)&letterSpacing_4458B0, v4, v5);
     v5 += 9600;
     ++v3;
     v4 += 150;
@@ -22607,7 +22607,7 @@ char sub_41E8D0()
   while ( v5 < 287372 );
   return result;
 }
-// 4458B0: using guessed type char byte_4458B0;
+// 4458B0: using guessed type char letterSpacing_4458B0;
 
 //----- (0041E9A0) --------------------------------------------------------
 char sub_41E9A0()
@@ -22637,11 +22637,11 @@ char sub_41E9A0()
   {
     result = unk_461EC0[v3];
     if ( !result )
-      result = drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&byte_4458B0, v4, v5);
+      result = drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&letterSpacing_4458B0, v4, v5);
     if ( unk_461EC0[v3] == 1 )
-      result = drawTextWithFont((int)graphicsGeneral.fsma3bBpk, (int)&byte_4458B0, v4, v5);
+      result = drawTextWithFont((int)graphicsGeneral.fsma3bBpk, (int)&letterSpacing_4458B0, v4, v5);
     if ( unk_461EC0[v3] == 2 )
-      result = drawTextWithFont((int)graphicsGeneral.fsma3cBpk, (int)&byte_4458B0, v4, v5);
+      result = drawTextWithFont((int)graphicsGeneral.fsma3cBpk, (int)&letterSpacing_4458B0, v4, v5);
     v5 += 9600;
     ++v3;
     v4 += 150;
@@ -22649,7 +22649,7 @@ char sub_41E9A0()
   while ( v5 < 287372 );
   return result;
 }
-// 4458B0: using guessed type char byte_4458B0;
+// 4458B0: using guessed type char letterSpacing_4458B0;
 
 //----- (0041EA70) --------------------------------------------------------
 void __cdecl sub_41EA70(int a1, int a2, char a3)
@@ -23153,9 +23153,9 @@ int __cdecl sub_41FAB0(const char *a1)
     {
       v5 = a1[v3];
       if ( v5 == 36 )
-        v6 = (unsigned __int8)byte_445916;
+        v6 = (unsigned __int8)letterSpacing_4458B0[97];
       else
-        v6 = (unsigned __int8)byte_4458E7[(unsigned __int8)v5];
+        v6 = (unsigned __int8)letterSpacing_4458B0[55+(unsigned __int8)v5];
       v2 += v6;
       ++v3;
     }
@@ -23182,7 +23182,8 @@ int __cdecl sub_41FB20(const char *a1)
   if ( v1 != a1 + 1 )
   {
     do
-      result += (unsigned __int8)byte_44590A[a1[v3++]];
+      result += (unsigned __int8)letterSpacing_4458B0[90+a1[v3++]];
+	//result += (unsigned __int8)byte_44590A[a1[v3++]];
     while ( v3 < strlen(a1) );
   }
   return result;
@@ -23206,7 +23207,7 @@ int __cdecl getNamePositionRight(const char *a1)
   if ( v1 != a1 + 1 )
   {
     do
-      v2 += (unsigned __int8)byte_4458B0[90+a1[v3++]];
+      v2 += (unsigned __int8)letterSpacing_4458B0[90+a1[v3++]];
 	//v2 += (unsigned __int8)byte_44590A[a1[v3++]];
 
 
@@ -23333,7 +23334,7 @@ int drawCarRightSide()
   while ( v7 );
   memcpy(v6, DstBuf, v5);
   money = sub_41FA50(moneyCount);
-  drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&byte_4458B0, moneyCount, money + 131744);
+  drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&letterSpacing_4458B0, moneyCount, money + 131744);
   
   ///calculo de la velocidad a partir de la velocidad inicial que es  initialVelocity (55)
   itoa(initialVelocity + drivers[driverId].engine*5 + 5 * drivers[driverId].carType, DstBuf, 10);
@@ -23400,7 +23401,7 @@ int drawCarRightSide()
       v25 += (unsigned __int8)byte_445892[(unsigned __int8)Str[v26++]];
     while ( v26 < strlen(Str) );
   }
-  drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&byte_4458B0, Str, 193903 - v25);
+  drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&letterSpacing_4458B0, Str, 193903 - v25);
   v28 = driverId;
   v29 = 0;
   //dword_44E5F0 contiene los datos del coche dword_44E5F4 dword_44E5F8 engine tire armour muestra los upgrades posibles
@@ -25272,7 +25273,7 @@ void underGroundMenuRight()
       drawBorder(322, 243, 108, 114);
       refreshAllScreen();
       break;
-    case 4:
+    case SABOTAGE:
       undergroundOptionSelected_dword_461278 = SABOTAGE;
       sub_423350();
       drawBorder2(322, 243, 0x6Cu, 114);
@@ -25283,9 +25284,7 @@ void underGroundMenuRight()
       return;
   }
 }
-// 445198: using guessed type int dword_445198;
-// 45DC18: using guessed type int configuration.musicVolume;
-// 461278: using guessed type int undergroundOptionSelected_dword_461278;
+
 
 //----- (004236D0) --------------------------------------------------------
 int reInitUnderGroundMarketStock()
@@ -25731,9 +25730,9 @@ int drawSelectRaceScreen()
   drawImageWithPosition2(trsnap2m1Bpk[circuitsToSelect_46126C[2]], 128, 112, (int)((char *)screenBuffer + 82272));
   /*drawImageWithPosition2((int)*(&trsnap2m1Bpk + (unsigned __int8)byte_46126D), 128, 112, (int)((char *)screenBuffer + 82112));
   drawImageWithPosition2((int)*(&trsnap2m1Bpk + (unsigned __int8)byte_46126E), 128, 112, (int)((char *)screenBuffer + 82272));*/
-  drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&byte_4458B0, "$750", 143433);
-  drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&byte_4458B0, "$3000", 143586);
-  drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&byte_4458B0, "$12000", 143743);
+  drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&letterSpacing_4458B0, "$750", 143433);
+  drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&letterSpacing_4458B0, "$3000", 143586);
+  drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&letterSpacing_4458B0, "$12000", 143743);
   createPopup(22, 256, 148, 105, 1);
   createPopup(182, 256, 148, 105, 1);
   createPopup(342, 256, 148, 105, 1);
@@ -26296,11 +26295,11 @@ unsigned int drawStadistics()
     *((_DWORD *)v3 + 1) = 695412837;
     v5 = (int)graphicsGeneral.fsma3aBpk;
     v3[8] = 0;
-    drawTextWithFont(v5, (int)&byte_4458B0, (const char *)&v173, 289326);
+    drawTextWithFont(v5, (int)&letterSpacing_4458B0, (const char *)&v173, 289326);
     if ( isMultiplayerGame )
-      drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&byte_4458B0, "Multiplayer Ranking", 55096);
+      drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&letterSpacing_4458B0, "Multiplayer Ranking", 55096);
   }
-  drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&byte_4458B0, "Your Statistics:", 55456);
+  drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&letterSpacing_4458B0, "Your Statistics:", 55456);
   
   /*v6 = &v171;
   do
@@ -26311,7 +26310,7 @@ unsigned int drawStadistics()
   v8 = (int)graphicsGeneral.fsma3aBpk;
   /**(_WORD *)v6 = 46;
   LOBYTE(v175) = 0;*/
-  drawTextWithFont(v8, (int)&byte_4458B0, "Position", 73960);
+  drawTextWithFont(v8, (int)&letterSpacing_4458B0, "Position", 73960);
   char *tmp = malloc(15);
   memset(DstBuf, 0, 20);
   memset(tmp, 0, 15);
@@ -26331,7 +26330,7 @@ unsigned int drawStadistics()
   
   memcpy(v10, DstBuf, v9);*/
   v12 = (int)graphicsGeneral.fsma3aBpk;
-  drawTextWithFont(v12, (int)&byte_4458B0, DstBuf, 74126);
+  drawTextWithFont(v12, (int)&letterSpacing_4458B0, DstBuf, 74126);
 
   memset(DstBuf, 0, 20);
   memset(tmp, 0, 15);
@@ -26342,7 +26341,7 @@ unsigned int drawStadistics()
   
   
   //LOWORD(v175) = 110;
-  drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&byte_4458B0, "Races won", 88680);
+  drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&letterSpacing_4458B0, "Races won", 88680);
   /*BYTE2(v173) = 0;
   LOWORD(v173) = 8250;
   v13 = strlen(DstBuf) + 1;
@@ -26353,7 +26352,7 @@ unsigned int drawStadistics()
   
   memcpy(v14, DstBuf, v13);*/
   v16 = (int)graphicsGeneral.fsma3aBpk;
-  drawTextWithFont(v16, (int)&byte_4458B0, DstBuf, 88846);
+  drawTextWithFont(v16, (int)&letterSpacing_4458B0, DstBuf, 88846);
 
   memset(DstBuf, 0, 20);
   memset(tmp, 0, 15);
@@ -26364,7 +26363,7 @@ unsigned int drawStadistics()
 
  
   
-  drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&byte_4458B0, "Total races", 103400);
+  drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&letterSpacing_4458B0, "Total races", 103400);
   /*BYTE2(v173) = 0;
   LOWORD(v173) = 8250;
   v17 = strlen(DstBuf) + 1;
@@ -26391,7 +26390,7 @@ unsigned int drawStadistics()
     while ( v26 );
     memcpy(v25, DstBuf, v24);
   }*/
-  drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&byte_4458B0, DstBuf, 103566);
+  drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&letterSpacing_4458B0, DstBuf, 103566);
   memset(DstBuf, 0, 20);
   memset(tmp, 0, 15);
   strcpy(DstBuf, ":  $");
@@ -26402,7 +26401,7 @@ unsigned int drawStadistics()
   //v175 = 1701670755;
   //v173 = 1635020628;
   //LOBYTE(v176) = 0;
-  drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&byte_4458B0, "Total income", 118120);
+  drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&letterSpacing_4458B0, "Total income", 118120);
  /* v173 = 2367546;
   v27 = strlen(DstBuf) + 1;
   v28 = &DstBuf[19];
@@ -26410,7 +26409,7 @@ unsigned int drawStadistics()
     v29 = (v28++)[1];
   while ( v29 );
   memcpy(v28, DstBuf, v27);*/
-  drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&byte_4458B0, DstBuf, 118286);
+  drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&letterSpacing_4458B0, DstBuf, 118286);
   memset(DstBuf, 0, 20);
   memset(tmp, 0, 15);
   strcpy(DstBuf, ":  $");
@@ -26420,7 +26419,7 @@ unsigned int drawStadistics()
   
   //v174 = 1869422700;
   //v175 = 7955822;
-  drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&byte_4458B0, "Total money", 132840);
+  drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&letterSpacing_4458B0, "Total money", 132840);
 /*  v173 = 2367546;
   v30 = strlen(DstBuf) + 1;
   v31 = &DstBuf[19];
@@ -26429,7 +26428,7 @@ unsigned int drawStadistics()
   while ( v32 );*/
   v33 = (int)graphicsGeneral.fsma3aBpk;
  // memcpy(v31, DstBuf, v30);
-  drawTextWithFont(v33, (int)&byte_4458B0, DstBuf, 133006);
+  drawTextWithFont(v33, (int)&letterSpacing_4458B0, DstBuf, 133006);
   result = dword_456BD8;
   
   if ( dword_456BD8 <= 0 )
@@ -26481,11 +26480,11 @@ unsigned int drawStadistics()
 		*((_DWORD *)v49 + 2) = 1701011826;
 		*((_WORD *)v49 + 6) = 58;
 	}
-	else if (v35)
+	else if (selectedRace_462CE8)
 	{
-		switch (v35)
+		switch (selectedRace_462CE8)
 		{
-		case 1:
+		case RACE_MEDIUM:
 			v111 = &DstBuf[19];
 			do
 				v112 = (v111++)[1];
@@ -26495,7 +26494,7 @@ unsigned int drawStadistics()
 			*((_DWORD *)v111 + 2) = 1701011826;
 			*((_WORD *)v111 + 6) = 58;
 			break;
-		case 2:
+		case RACE_HARD:
 			v113 = &DstBuf[19];
 			do
 				v114 = (v113++)[1];
@@ -26504,7 +26503,7 @@ unsigned int drawStadistics()
 			*((_DWORD *)v113 + 1) = 1634869348;
 			*((_DWORD *)v113 + 2) = 3827043;
 			break;
-		case 3:
+		case RACE_ARENA:
 			v173 = 543516756;//the arena
 			v174 = 1852142145;
 			LOWORD(v175) = 14945;
@@ -26524,17 +26523,17 @@ unsigned int drawStadistics()
       *((_DWORD *)v109 + 1) = 1634869369;
       *((_DWORD *)v109 + 2) = 3827043;*/
     }
-    drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&byte_4458B0, (const char *)&v173, 158440);
+    drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&letterSpacing_4458B0, (const char *)&v173, 158440);
     itoa(dword_456BD8, DstBuf, 10);
     v51 = &v171;
     do
       v52 = (v51++)[1];
     while ( v52 );
     *(_WORD *)v51 = 46;
-    v173 = 1667329104;
-    v174 = 6778473;
-    drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&byte_4458B0, (const char *)&v173, 173160);
-    LOWORD(v173) = 8250;
+    v173 = 1667329104;//Plac
+    v174 = 6778473;//ing
+    drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&letterSpacing_4458B0, (const char *)&v173, 173160);
+    LOWORD(v173) = 8250;//:
     BYTE2(v173) = 0;
     v53 = strlen(DstBuf) + 1;
     v54 = &DstBuf[19];
@@ -26542,27 +26541,27 @@ unsigned int drawStadistics()
       v55 = (v54++)[1];
     while ( v55 );
     memcpy(v54, DstBuf, v53);
-    drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&byte_4458B0, (const char *)&v173, 173326);
+    drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&letterSpacing_4458B0, (const char *)&v173, 173326);
     itoa(userLasRacePriceIncome_456BDC, DstBuf, 10);
-    v173 = 1701011794;
-    v174 = 1668180256;
-    v175 = 6647151;
-    drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&byte_4458B0, (const char *)&v173, 187880);
-    v173 = 2367546;
+    v173 = 1701011794;//Race
+    v174 = 1668180256;//inc
+    v175 = 6647151;//ome
+    drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&letterSpacing_4458B0, (const char *)&v173, 187880);
+    v173 = 2367546;//: 4
     v56 = strlen(DstBuf) + 1;
     v57 = &DstBuf[19];
     do
       v58 = (v57++)[1];
     while ( v58 );
     memcpy(v57, DstBuf, v56);
-    drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&byte_4458B0, (const char *)&v173, 188046);
+    drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&letterSpacing_4458B0, (const char *)&v173, 188046);
     itoa(userLastRaceIncomeNoPrice_456BE0, DstBuf, 10);
-    v174 = 1852383347;
-    v175 = 1701670755;
-    v173 = 1970171714;
+    v174 = 1852383347; //s in
+    v175 = 1701670755;//come
+    v173 = 1970171714;//Bonu
     LOBYTE(v176) = 0;
-    drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&byte_4458B0, (const char *)&v173, 202600);
-    v173 = 2367546;
+    drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&letterSpacing_4458B0, (const char *)&v173, 202600);
+    v173 = 2367546;//: S
     v59 = strlen(DstBuf) + 1;
     v60 = &DstBuf[19];
     do
@@ -26570,15 +26569,15 @@ unsigned int drawStadistics()
     while ( v61 );
     v62 = (int)graphicsGeneral.fsma3aBpk;
     memcpy(v60, DstBuf, v59);
-    drawTextWithFont(v62, (int)&byte_4458B0, (const char *)&v173, 202766);
+    drawTextWithFont(v62, (int)&letterSpacing_4458B0, (const char *)&v173, 202766);
     itoa(userLasRacePriceIncome_456BDC + userLastRaceIncomeNoPrice_456BE0, DstBuf, 10);
-    v173 = 1635020628;
-    v175 = 1763730787;
-    v176 = 1836016494;
-    v174 = 1634869356;
-    v177 = 101;
-    drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&byte_4458B0, (const char *)&v173, 217320);
-    v173 = 2367546;
+    v173 = 1635020628;//Total
+    v175 = 1763730787;//ce i
+    v176 = 1836016494;//ncom
+    v174 = 1634869356;//l ra
+    v177 = 101;///e
+    drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&letterSpacing_4458B0, (const char *)&v173, 217320);
+    v173 = 2367546;//: e
     v63 = strlen(DstBuf) + 1;
     v64 = &DstBuf[19];
     do
@@ -26586,15 +26585,15 @@ unsigned int drawStadistics()
     while ( v65 );
     v66 = (int)graphicsGeneral.fsma3aBpk;
     memcpy(v64, DstBuf, v63);
-    drawTextWithFont(v66, (int)&byte_4458B0, (const char *)&v173, 217486);
+    drawTextWithFont(v66, (int)&letterSpacing_4458B0, (const char *)&v173, 217486);
     itoa(numberOfLaps, DstBuf, 10);
-    v173 = 1651340622;
-    v175 = 1634476134;
-    LOWORD(v176) = 29552;
-    v174 = 1864397413;
+    v173 = 1651340622;//Numb
+    v175 = 1634476134;//f la
+    LOWORD(v176) = 29552;//ps
+    v174 = 1864397413;//er o
     BYTE2(v176) = 0;
-    drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&byte_4458B0, (const char *)&v173, 232040);
-    LOWORD(v173) = 8250;
+    drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&letterSpacing_4458B0, (const char *)&v173, 232040);
+    LOWORD(v173) = 8250;// :
     BYTE2(v173) = 0;
     v67 = strlen(DstBuf) + 1;
     v68 = &DstBuf[19];
@@ -26604,7 +26603,7 @@ unsigned int drawStadistics()
     memcpy(v68, DstBuf, 4 * (v67 >> 2));
     v70 = (int)graphicsGeneral.fsma3aBpk;
     memcpy(&v68[4 * (v67 >> 2)], &DstBuf[4 * (v67 >> 2)], v67 & 3);
-    drawTextWithFont(v70, (int)&byte_4458B0, (const char *)&v173, 232206);
+    drawTextWithFont(v70, (int)&letterSpacing_4458B0, (const char *)&v173, 232206);
     itoa(dword_45EEC0, &v184, 10);
     itoa(dword_45EEBC, &v178, 10);
     itoa(dword_462D74, &v181, 10);
@@ -26661,12 +26660,12 @@ unsigned int drawStadistics()
     }
     while ( v82 );
     memcpy(v81, &v181, v80);
-    v173 = 1701011794;
-    v174 = 1835627552;
-    LOWORD(v175) = 101;
-    drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&byte_4458B0, (const char *)&v173, 246760);
+    v173 = 1701011794;//Race
+    v174 = 1835627552;//tim
+    LOWORD(v175) = 101;//e
+    drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&letterSpacing_4458B0, (const char *)&v173, 246760);
     BYTE2(v173) = 0;
-    LOWORD(v173) = 8250;
+    LOWORD(v173) = 8250;// :
     v83 = strlen(DstBuf) + 1;
     v84 = &DstBuf[19];
     do
@@ -26674,7 +26673,7 @@ unsigned int drawStadistics()
     while ( v85 );
     v86 = (int)graphicsGeneral.fsma3aBpk;
     memcpy(v84, DstBuf, v83);
-    drawTextWithFont(v86, (int)&byte_4458B0, (const char *)&v173, 246926);
+    drawTextWithFont(v86, (int)&letterSpacing_4458B0, (const char *)&v173, 246926);
     v87 = 27 * driverId;
     v88 = &circuitsToSelect_46126C[selectedRace_462CE8];
     v89 = 24 * ((unsigned __int8)circuitsToSelect_46126C[selectedRace_462CE8] + 18 * drivers[driverId].carType);
@@ -26817,11 +26816,11 @@ unsigned int drawStadistics()
     }
     while ( v136 != v104 );
     memcpy(v135, &v181, v134);
-    v173 = 1953719618;
-    v174 = 1885432864;
+    v173 = 1953719618;//Best
+    v174 = 1885432864;//lap
     LOBYTE(v175) = 0;
-    drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&byte_4458B0, (const char *)&v173, 261480);
-    LOWORD(v173) = 8250;
+    drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&letterSpacing_4458B0, (const char *)&v173, 261480);
+    LOWORD(v173) = 8250;// :
     v137 = DstBuf;
     BYTE2(v173) = 0;
     do
@@ -26835,7 +26834,7 @@ unsigned int drawStadistics()
     memcpy(v140, DstBuf, 4 * (v139 >> 2));
     v142 = (int)graphicsGeneral.fsma3aBpk;
     memcpy(&v140[4 * (v139 >> 2)], &DstBuf[4 * (v139 >> 2)], v139 & 3);
-    drawTextWithFont(v142, (int)&byte_4458B0, (const char *)&v173, 261646);
+    drawTextWithFont(v142, (int)&letterSpacing_4458B0, (const char *)&v173, 261646);
     itoa(
       *(&dword_45F04C + 6 * ((unsigned __int8)circuitsToSelect_46126C[selectedRace_462CE8] + 18 * dword_46085C[27 * driverId])),
       &v184,
@@ -26921,12 +26920,12 @@ unsigned int drawStadistics()
     }
     while ( v164 != v104 );
     memcpy(v163, &v181, v162);
-    v174 = 1885432864;
-    v175 = 1702257952;
-    v173 = 1953719618;
-    LOWORD(v176) = 114;
-    drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&byte_4458B0, (const char *)&v173, 276200);
-    LOWORD(v173) = 8250;
+    v174 = 1885432864;//lap
+    v175 = 1702257952;//eve
+    v173 = 1953719618;//Best
+    LOWORD(v176) = 114;//r
+    drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&letterSpacing_4458B0, (const char *)&v173, 276200);
+    LOWORD(v173) = 8250;// :
     v165 = DstBuf;
     BYTE2(v173) = 0;
     do
@@ -26940,7 +26939,7 @@ unsigned int drawStadistics()
     memcpy(v168, DstBuf, 4 * (v167 >> 2));
     v170 = (int)graphicsGeneral.fsma3aBpk;
     memcpy(&v168[4 * (v167 >> 2)], &DstBuf[4 * (v167 >> 2)], v167 & 3);
-    result = drawTextWithFont(v170, (int)&byte_4458B0, (const char *)&v173, 276366);
+    result = drawTextWithFont(v170, (int)&letterSpacing_4458B0, (const char *)&v173, 276366);
     dword_456BD8 = 0;
   }
   return result;
@@ -26999,121 +26998,42 @@ int __cdecl writeDriverList(int a1)
 
 		  memset(DstBuf, "\0", 20);
 		  itoa(drivers[indexDriver].rank, DstBuf, 10);
+		  strcat(DstBuf, ".");
 		  
-		  
+		  int v8 = 0;
+		  int v9 = 0;
+		  do
+			  v8 += (unsigned __int8)letterSpacing_4458B0[90 + (unsigned __int8)DstBuf[v9++]];
+		  while (v9 < strlen(DstBuf));
 
-		  drawTextWithFont((int)graphicsGeneral.fmed1aBpk, (int)&unk_445928, DstBuf, v2  + 57662);
+		  drawTextWithFont((int)graphicsGeneral.fmed1aBpk, (int)&unk_445928, DstBuf, v2 -v8 + 57662);
 		  
 		  memset(DstBuf, "\0", 20);
 		  strcpy(DstBuf, drivers[indexDriver].name);
-		  
+		  strupr(DstBuf);
 		  
 		  drawTextWithFont((int)graphicsGeneral.fmed1aBpk, (int)&unk_445928, DstBuf, v2 + 57026);
-		  /*********byte_44590A es para sacar el tamaño de la letra!/
-		 /* itoa(*(_DWORD *)(v3 + 68), DstBuf, 10);
-		  v13 = DstBuf;
-		  v14 = 0;
-		  v15 = 0;
-		  do
-			  v16 = *v13++;
-		  while (v16);
-		  v22 = v13 - &DstBuf[1];
-		  if (v13 != &DstBuf[1])
-		  {
-			  do
-				  v14 += (unsigned __int8)byte_44590A[(unsigned __int8)DstBuf[v15++]];
-			  while (v15 < strlen(DstBuf));
-		  }*/
+		 
 		  memset(DstBuf, "\0", 20);
 		  
 		  itoa(drivers[indexDriver].points, DstBuf, 10);
-		  drawTextWithFont((int)graphicsGeneral.fmed1aBpk, (int)&unk_445928, DstBuf, v2 - (strlen(DstBuf) - 1) + 57160);
+		  int v14 = 0;
+		  int v15 = 0;
+		  do
+			  v14 += (unsigned __int8)letterSpacing_4458B0[90+(unsigned __int8)DstBuf[v15++]];
+		  while (v15 < strlen(DstBuf));
+		  
+		  drawTextWithFont((int)graphicsGeneral.fmed1aBpk, (int)&unk_445928, DstBuf, v2 - v14 + 57160);
 		  result = v20 + 1;
 		 // v3 += 108;
-		  v2 += 12160;
+		  v2 += 19*640;
 		  
 		  indexDriver++;
 	  } while (indexDriver <20);
   }
-  return result;
-  /*if ( a1 > 0 )
-  {
-    v3 = (int)byte_460840;
-    v21 = DstBuf - byte_460840;
-    do
-    {
-      v19 = (int)((char *)screenBuffer + v2 + 55709);
-      if ( v20 == driverId )
-      {
-        drawImageWithPosition((int)graphicsGeneral.prankBpk, 31, 18, v19);
-        drawImageWithPosition((int)graphicsGeneral.pnameBpk, 101, 18, (int)((char *)screenBuffer + v2 + 55741));
-        v4 = graphicsGeneral.ppistBpk;
-      }
-      else
-      {
-        drawImageWithPosition((int)graphicsGeneral.rankinf1Bpk, 31, 18, v19);
-        drawImageWithPosition((int)graphicsGeneral.rankinf2Bpk, 101, 18, (int)((char *)screenBuffer + v2 + 55741));
-        v4 = graphicsGeneral.rankinf3Bpk;
-      }
-      drawImageWithPosition((int)v4, 53, 18, (int)((char *)screenBuffer + v2 + 55843));
-      itoa(*(_DWORD *)(v3 + 72), DstBuf, 10);
-      v5 = (char *)&v22 + 3;
-      do
-        v6 = (v5++)[1];
-      while ( v6 );
-      *(_WORD *)v5 = 46;
-      v7 = DstBuf;
-      v8 = 0;
-      v9 = 0;
-      do
-        v10 = *v7++;
-      while ( v10 );
-      v22 = v7 - &DstBuf[1];
-      if ( v7 != &DstBuf[1] )
-      {
-        do
-          v8 += (unsigned __int8)byte_44590A[(unsigned __int8)DstBuf[v9++]];
-        while ( v9 < strlen(DstBuf) );
-      }
-      drawTextWithFont((int)graphicsGeneral.fmed1aBpk, (int)&unk_445928, DstBuf, v2 - v8 + 57662);
-      v11 = v3;
-      do
-      {
-        v12 = *(byte *)v11;
-        *(byte *)(v21 + v11) = *(byte *)v11;
-        ++v11;
-      }
-      while ( v12 );
-      strupr(DstBuf);
-      drawTextWithFont((int)graphicsGeneral.fmed1aBpk, (int)&unk_445928, DstBuf, v2 + 57026);
-      itoa(*(_DWORD *)(v3 + 68), DstBuf, 10);
-      v13 = DstBuf;
-      v14 = 0;
-      v15 = 0;
-      do
-        v16 = *v13++;
-      while ( v16 );
-      v22 = v13 - &DstBuf[1];
-      if ( v13 != &DstBuf[1] )
-      {
-        do
-          v14 += (unsigned __int8)byte_44590A[(unsigned __int8)DstBuf[v15++]];
-        while ( v15 < strlen(DstBuf) );
-      }
-      drawTextWithFont((int)graphicsGeneral.fmed1aBpk, (int)&unk_445928, DstBuf, v2 - v14 + 57160);
-      result = v20 + 1;
-      v3 += 108;
-      v2 += 12160;
-     // v18 = __OFSUB__(v20 + 1, a1);
-      v17 = v20++ + 1 - a1 < 0;
-      v21 -= 108;
-    }
-    while ( v17 ^ v18 );
-  }
-  return result;*/
+  return result;  
 }
-// 463CE8: using guessed type int driverId;
-// 425980: using guessed type char DstBuf[20];
+
 
 //----- (00425BD0) --------------------------------------------------------
 int __cdecl drawRightPositions(int numDrivers, int a2)
@@ -27227,7 +27147,7 @@ int __cdecl drawRightPositions(int numDrivers, int a2)
       //if ( v12 != &DstBuf[1] )
       //{
         do
-          v67 += (unsigned __int8)byte_44590A[(unsigned __int8)DstBuf[v11++]];
+          v67 += (unsigned __int8)letterSpacing_4458B0[90+(unsigned __int8)DstBuf[v11++]];
         while ( v11 < strlen(DstBuf) );
       //}
       drawTextWithFont((int)graphicsGeneral.fmed1aBpk, (int)&unk_445928, DstBuf, v6 - v67 + 33700);	  
@@ -27393,19 +27313,19 @@ int sub_4260D0()
   if ( multiplayerWaitCounter2_456BE4 == 30 )
   {
     sub_426080();
-    drawTextWithFont((int)graphicsGeneral.fsma3bBpk, (int)&byte_4458B0, "Press any key to continue...", 289646);
+    drawTextWithFont((int)graphicsGeneral.fsma3bBpk, (int)&letterSpacing_4458B0, "Press any key to continue...", 289646);
     result = drawKeyCursor(289634, (char *)screenBuffer + 289634, 0x10Eu, 16);
   }
   if ( multiplayerWaitCounter2_456BE4 == 60 )
   {
     sub_426080();
-    drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&byte_4458B0, "Press any key to continue...", 289646);
+    drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&letterSpacing_4458B0, "Press any key to continue...", 289646);
     result = drawKeyCursor(289634, (char *)screenBuffer + 289634, 0x10Eu, 16);
     multiplayerWaitCounter2_456BE4 = 0;
   }
   return result;
 }
-// 4458B0: using guessed type char byte_4458B0;
+// 4458B0: using guessed type char letterSpacing_4458B0;
 // 456BE4: using guessed type int multiplayerWaitCounter2_456BE4;
 
 //----- (00426180) --------------------------------------------------------
@@ -27439,19 +27359,19 @@ int sub_4261D0()
   if ( multiplayerWaitCounter_456BE8 == 15 )
   {
     sub_426180();
-    drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&byte_4458B0, "waiting for other players...", 66238);
+    drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&letterSpacing_4458B0, "waiting for other players...", 66238);
     result = drawKeyCursor(64264, (char *)screenBuffer + 64264, 0x168u, 20);
   }
   if ( multiplayerWaitCounter_456BE8 == 30 )
   {
     sub_426180();
-    drawTextWithFont((int)graphicsGeneral.fsma3bBpk, (int)&byte_4458B0, "waiting for other players...", 66238);
+    drawTextWithFont((int)graphicsGeneral.fsma3bBpk, (int)&letterSpacing_4458B0, "waiting for other players...", 66238);
     result = drawKeyCursor(64264, (char *)screenBuffer + 64264, 0x168u, 20);
     multiplayerWaitCounter_456BE8 = 0;
   }
   return result;
 }
-// 4458B0: using guessed type char byte_4458B0;
+// 4458B0: using guessed type char letterSpacing_4458B0;
 // 456BE8: using guessed type int multiplayerWaitCounter_456BE8;
 
 //----- (00426280) --------------------------------------------------------
@@ -27509,7 +27429,7 @@ int sub_426280()
       if ( v8 != &DstBuf[1] )
       {
         do
-          v9 += (unsigned __int8)byte_44590A[(unsigned __int8)DstBuf[v10++]];
+          v9 += (unsigned __int8)letterSpacing_4458B0[90+(unsigned __int8)DstBuf[v10++]];
         while ( v10 < strlen(DstBuf) );
       }
       drawTextWithFont((int)graphicsGeneral.fmed1aBpk, (int)&unk_445928, DstBuf, v4 - 10306 - v9 + 16226);
@@ -29467,7 +29387,7 @@ void __fastcall easyRaceResults(int ecx0, int a2, int a1)
   {
     sub_424420();
     drawImageWithPosition((int)graphicsGeneral.raceeasBpk, 272, 20, (int)((char *)screenBuffer + 54114));
-    drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&byte_4458B0, "Easy Race Results", 55440);
+    drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&letterSpacing_4458B0, "Easy Race Results", 55440);
     drawRightPositions(4, (int)&v12);
   }
   v3 = 0;
@@ -29533,7 +29453,7 @@ void __fastcall easyRaceResults(int ecx0, int a2, int a1)
   if ( a1 )
     return;
 LABEL_60:
-  drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&byte_4458B0, "Press any key to continue...", 289646);
+  drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&letterSpacing_4458B0, "Press any key to continue...", 289646);
   refreshAllScreen();
 }
 
@@ -29638,7 +29558,7 @@ void __fastcall mediumRaceResults(int ecx0, int a2, int a1)
   {
     sub_424420();
     drawImageWithPosition((int)graphicsGeneral.racemedBpk, 272, 20, (int)((char *)screenBuffer + 54114));
-    drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&byte_4458B0, "Medium Race Results", 55440);
+    drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&letterSpacing_4458B0, "Medium Race Results", 55440);
     drawRightPositions(4, (int)&v17);
   }
   v3 = 0;
@@ -29813,7 +29733,7 @@ void __fastcall hardRaceResults(int ecx0, int a2, int a1)
   {
     sub_424420();
     drawImageWithPosition((int)graphicsGeneral.raceharBpk, 272, 20, (int)((char *)screenBuffer + 54114));
-    drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&byte_4458B0, "Hard Race Results", 55440);
+    drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&letterSpacing_4458B0, "Hard Race Results", 55440);
     drawRightPositions(4, (int)&v17);
   }
   v3 = 0;
@@ -30735,7 +30655,7 @@ void __cdecl selectRaceWarningPopup(int a1)
 
   }
   
-  drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&byte_4458B0, "Press any key to continue.", 189008);
+  drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&letterSpacing_4458B0, "Press any key to continue.", 189008);
   refreshAllScreen();
   loadMenuSoundEffect(1u, 23, 0, configuration.musicVolume, dword_44518C - 4096);
   do
@@ -30745,7 +30665,7 @@ void __cdecl selectRaceWarningPopup(int a1)
   refreshAllScreen();
 }
 // 44518C: using guessed type int dword_44518C;
-// 4458B0: using guessed type char byte_4458B0;
+// 4458B0: using guessed type char letterSpacing_4458B0;
 // 45DC18: using guessed type int configuration.musicVolume;
 
 //----- (0042B290) --------------------------------------------------------
@@ -30849,7 +30769,7 @@ int __cdecl main(int argc, const char **argv, const char **envp)
   {
     drawStadistics();
     writeDriverList(20);
-    drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&byte_4458B0, "Press any key to continue...", 289646);
+    drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&letterSpacing_4458B0, "Press any key to continue...", 289646);
     refreshAllScreen();
     sub_4224E0();
     v4 = 0;
@@ -31021,7 +30941,7 @@ int __cdecl main(int argc, const char **argv, const char **envp)
   {
     if ( argc != 1 )
       goto LABEL_74;
-    drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&byte_4458B0, "Press any key to continue...", 289646);
+    drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&letterSpacing_4458B0, "Press any key to continue...", 289646);
   }
   else
   {
@@ -31033,14 +30953,14 @@ int __cdecl main(int argc, const char **argv, const char **envp)
       showEndAnim_463DF8 = 1;
     useHasMorePoints_456BC4 = v63 > maxDriverPoints;
     sub_426080();
-    drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&byte_4458B0, "Please wait while loading...", 289646);
+    drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&letterSpacing_4458B0, "Please wait while loading...", 289646);
     refreshAllScreen();
     loadGraphics2();
     loadGraphics3();
     loadGraphics4();
     sub_426080();
     loadMenuSoundEffect(1u, 28, 0, configuration.musicVolume, dword_4451A0);
-    drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&byte_4458B0, "Press any key to continue...", 289646);
+    drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&letterSpacing_4458B0, "Press any key to continue...", 289646);
   }
   refreshAllScreen();
   do
@@ -31399,8 +31319,8 @@ char sub_42BD10()
   *((_DWORD *)v4 + 1) = 695412837;
   v6 = (int)graphicsGeneral.fsma3aBpk;
   v4[8] = 0;
-  drawTextWithFont(v6, (int)&byte_4458B0, (const char *)&v64, 289326);
-  drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&byte_4458B0, "Multiplayer Ranking", 55096);
+  drawTextWithFont(v6, (int)&letterSpacing_4458B0, (const char *)&v64, 289326);
+  drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&letterSpacing_4458B0, "Multiplayer Ranking", 55096);
   sub_424420();
   v7 = 0;
   for ( i = raceDrivers_456758 - 1; v7 < raceDrivers_456758 - 1; i = raceDrivers_456758 - 1 )
@@ -31556,7 +31476,7 @@ char sub_42BD10()
       v37 += (unsigned __int8)byte_445892[*((byte *)&v64 + v38++)];
     while ( v38 < strlen((const char *)&v64) );
   }
-  drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&byte_4458B0, (const char *)&v64, 55530 - v37 / 2);
+  drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&letterSpacing_4458B0, (const char *)&v64, 55530 - v37 / 2);
   
   v62 = 50462976;
   if ( v63 > 0 )
@@ -31583,7 +31503,7 @@ char sub_42BD10()
   }
   drawRightPositions(raceDrivers_456758, (int)&v62);
   sub_426080();
-  drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&byte_4458B0, "Press any key to continue...", 289646);
+  drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&letterSpacing_4458B0, "Press any key to continue...", 289646);
   refreshAllScreen();
   v43 = 0;
   do
@@ -31614,14 +31534,14 @@ char sub_42BD10()
   drawStadistics();
   sub_426280();
   sub_426080();
-  drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&byte_4458B0, "Please wait while loading...", 289646);
+  drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&letterSpacing_4458B0, "Please wait while loading...", 289646);
   refreshAllScreen();
   loadGraphics2();
   loadGraphics3();
   loadGraphics4();
   sub_426080();
   loadMenuSoundEffect(1u, 28, 0, configuration.musicVolume, dword_4451A0);
-  drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&byte_4458B0, "Press any key to continue...", 289646);
+  drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&letterSpacing_4458B0, "Press any key to continue...", 289646);
   refreshAllScreen();
   do
   {
@@ -32051,8 +31971,8 @@ char sub_42C940()
   drawTransparentBlock(0, 371, 639, 109);
   if ( isMultiplayerGame )
   {
-    drawTextWithFont((int)graphicsGeneral.fsma3bBpk, (int)&byte_4458B0, "press   to enter chat mode", 233635);
-    drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&byte_4458B0, "F1", 233689);
+    drawTextWithFont((int)graphicsGeneral.fsma3bBpk, (int)&letterSpacing_4458B0, "press   to enter chat mode", 233635);
+    drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&letterSpacing_4458B0, "F1", 233689);
   }
   drawBottomMenuText();
   refreshAllScreen();
@@ -32254,18 +32174,18 @@ int sub_42CCF0()
   v77 = v1;
   memcpy((char *)screenBuffer + 53760, (char *)graphicsGeneral.menubg5Bpk + 53760, 0x3C500u);
   drawTransparentBlock(0, 111, 639, 369);
-  drawTextWithFont((int)graphicsGeneral.fsma3bBpk, (int)&byte_4458B0, "press   to minimize chat window", 67875);
-  drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&byte_4458B0, "F1", 67929);
+  drawTextWithFont((int)graphicsGeneral.fsma3bBpk, (int)&letterSpacing_4458B0, "press   to minimize chat window", 67875);
+  drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&letterSpacing_4458B0, "F1", 67929);
   v2 = (const char *)&unk_462000;
   v3 = 76172;
   do
   {
     if ( !unk_461EC0[v0] )
-      drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&byte_4458B0, v2, v3);
+      drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&letterSpacing_4458B0, v2, v3);
     if ( unk_461EC0[v0] == 1 )
-      drawTextWithFont((int)graphicsGeneral.fsma3bBpk, (int)&byte_4458B0, v2, v3);
+      drawTextWithFont((int)graphicsGeneral.fsma3bBpk, (int)&letterSpacing_4458B0, v2, v3);
     if ( unk_461EC0[v0] == 2 )
-      drawTextWithFont((int)graphicsGeneral.fsma3cBpk, (int)&byte_4458B0, v2, v3);
+      drawTextWithFont((int)graphicsGeneral.fsma3cBpk, (int)&letterSpacing_4458B0, v2, v3);
     v3 += 9600;
     ++v0;
     v2 += 150;
@@ -32282,7 +32202,7 @@ int sub_42CCF0()
     v78 = v6;
     if ( v6 <= 10 )
     {
-      drawTextWithFont((int)graphicsGeneral.fsma3cBpk, (int)&byte_4458B0, (const char *)&unk_443C40, v4 + 288012);
+      drawTextWithFont((int)graphicsGeneral.fsma3cBpk, (int)&letterSpacing_4458B0, (const char *)&unk_443C40, v4 + 288012);
     }
     else
     {
@@ -32301,7 +32221,8 @@ int sub_42CCF0()
     }
     if ( v6 > 20 )
       v78 = 0;
-    drawKeyCursor(v4 + 288012, (char *)screenBuffer + v4 + 288012, (unsigned __int8)byte_445911, 15);
+    //drawKeyCursor(v4 + 288012, (char *)screenBuffer + v4 + 288012, (unsigned __int8)byte_445911, 15);
+	drawKeyCursor(v4 + 288012, (char *)screenBuffer + v4 + 288012, (unsigned __int8)letterSpacing_4458B0[92], 15);
     v10 = sub_418090();
     v74 = v10;
     switch ( v10 )
@@ -32543,7 +32464,7 @@ LABEL_34:
           memcpy(v41, &v74, 4 * (v40 >> 2));
           v43 = (int)graphicsGeneral.fsma3cBpk;
           memcpy(&v41[4 * (v40 >> 2)], &v74 + 4 * (v40 >> 2), v40 & 3);
-          drawTextWithFont(v43, (int)&byte_4458B0, v80, 288012);
+          drawTextWithFont(v43, (int)&letterSpacing_4458B0, v80, 288012);
           v44 = v80;
           v4 = 0;
           v45 = 0;
@@ -32579,7 +32500,7 @@ LABEL_34:
             *((_DWORD *)v16 + 3) = *((_DWORD *)v15 + 3);
           }
           while ( v14 < 10240 );
-          drawTextWithFont((int)graphicsGeneral.fsma3cBpk, (int)&byte_4458B0, (const char *)&v74, v4 + 288012);
+          drawTextWithFont((int)graphicsGeneral.fsma3cBpk, (int)&letterSpacing_4458B0, (const char *)&v74, v4 + 288012);
           v17 = v74;
           drawKeyCursor(v4 + 288012, (char *)screenBuffer + v4 + 288012, (unsigned __int8)byte_445892[v74], 15);
           v4 += (unsigned __int8)byte_445892[v17];
@@ -32616,7 +32537,7 @@ LABEL_34:
   return result;
 }
 // 42CCF0: using guessed type int sub_42CCF0(void);
-// 4458B0: using guessed type char byte_4458B0;
+// 4458B0: using guessed type char letterSpacing_4458B0;
 // 445911: using guessed type char byte_445911;
 // 456B54: using guessed type int dword_456B54;
 // 456B90: using guessed type int dword_456B90;
@@ -32815,7 +32736,7 @@ char __cdecl confirmationPopup(const char *a1)
   createPopup(110, 210, 428, 90, 1);
   v1 = sub_41FBD0(a1);
   drawTextWithFont((int)graphicsGeneral.fbig3aBpk, (int)&unk_445848, a1, 147524 - v1);
-  drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&byte_4458B0, "Press any key to continue.", 173648);
+  drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&letterSpacing_4458B0, "Press any key to continue.", 173648);
   refreshAllScreen();
   eventDetected();
   sub_418090();
@@ -32826,7 +32747,7 @@ char __cdecl confirmationPopup(const char *a1)
   eventDetected();
   return sub_418090();
 }
-// 4458B0: using guessed type char byte_4458B0;
+// 4458B0: using guessed type char letterSpacing_4458B0;
 // 45E0FC: using guessed type char byte_45E0FC;
 // 45E0FD: using guessed type char byte_45E0FD;
 
@@ -33861,7 +33782,7 @@ __int16 savegameWithName()
     {
       drawMenu(5, 0);
       createPopup(120, 275, 390, 70, 1);
-      drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&byte_4458B0, "Enter the name of save game?", 180610);
+      drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&letterSpacing_4458B0, "Enter the name of save game?", 180610);
       refreshAllScreen();
       v7 = (char *)&unk_446C32 + 50 * v6;
       if ( !memcmp((char *)&unk_446C32 + 50 * v6, &dword_443D18, 0xBu) )
@@ -34012,7 +33933,7 @@ signed int redefineControls()
         drawMenu(CONFIGURE_MENU, 0);
         drawMenu(DEFINE_KEYBOARD_MENU, 0);
         createPopup(295, 121, 323, 48, 1);
-        drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&byte_4458B0, "Press a key for accelerate...", 86065);
+        drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&letterSpacing_4458B0, "Press a key for accelerate...", 86065);
         refreshAllScreen();
         do
         {
@@ -34047,7 +33968,7 @@ signed int redefineControls()
         drawMenu(CONFIGURE_MENU, 0);
         drawMenu(DEFINE_KEYBOARD_MENU, 0);
         createPopup(295, 149, 323, 48, 1);
-        drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&byte_4458B0, "Press a key for brake...", 103985);
+        drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&letterSpacing_4458B0, "Press a key for brake...", 103985);
         refreshAllScreen();
         do
         {
@@ -34081,7 +34002,7 @@ signed int redefineControls()
         drawMenu(CONFIGURE_MENU, 0);
         drawMenu(DEFINE_KEYBOARD_MENU, 0);
         createPopup(295, 177, 323, 48, 1);
-        drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&byte_4458B0, "Press a key for left steer...", 121905);
+        drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&letterSpacing_4458B0, "Press a key for left steer...", 121905);
         refreshAllScreen();
         do
         {
@@ -34116,7 +34037,7 @@ signed int redefineControls()
         drawMenu(CONFIGURE_MENU, 0);
         drawMenu(DEFINE_KEYBOARD_MENU, 0);
         createPopup(295, 205, 323, 48, 1);
-        drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&byte_4458B0, "Press a key for right steer...", 139825);
+        drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&letterSpacing_4458B0, "Press a key for right steer...", 139825);
         refreshAllScreen();
         do
         {
@@ -34154,7 +34075,7 @@ LABEL_34:
         drawMenu(CONFIGURE_MENU, 0);
         drawMenu(DEFINE_KEYBOARD_MENU, 0);
         createPopup(295, 233, 323, 48, 1);
-        drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&byte_4458B0, "Press a key for turbo boost...", 157745);
+        drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&letterSpacing_4458B0, "Press a key for turbo boost...", 157745);
         refreshAllScreen();
         do
         {
@@ -34188,7 +34109,7 @@ LABEL_34:
         drawMenu(CONFIGURE_MENU, 0);
         drawMenu(DEFINE_KEYBOARD_MENU, 0);
         createPopup(295, 261, 323, 48, 1);
-        drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&byte_4458B0, "Press a key for machine gun...", 175665);
+        drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&letterSpacing_4458B0, "Press a key for machine gun...", 175665);
         refreshAllScreen();
         do
         {
@@ -34222,7 +34143,7 @@ LABEL_34:
         drawMenu(CONFIGURE_MENU, 0);
         drawMenu(DEFINE_KEYBOARD_MENU, 0);
         createPopup(295, 289, 323, 48, 1);
-        drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&byte_4458B0, "Press a key for drop mine...", 193585);
+        drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&letterSpacing_4458B0, "Press a key for drop mine...", 193585);
         refreshAllScreen();
         do
         {
@@ -34259,7 +34180,7 @@ LABEL_34:
         drawMenu(CONFIGURE_MENU, 0);
         drawMenu(DEFINE_KEYBOARD_MENU, 0);
         createPopup(295, 317, 323, 48, 1);
-        drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&byte_4458B0, "Press a key for horn...", 211505);
+        drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&letterSpacing_4458B0, "Press a key for horn...", 211505);
         refreshAllScreen();
         do
         {
@@ -34317,7 +34238,7 @@ LABEL_69:
 }
 // 445798: using guessed type int dword_445798;
 // 4457B0: using guessed type int dword_4457B0;
-// 4458B0: using guessed type char byte_4458B0;
+// 4458B0: using guessed type char letterSpacing_4458B0;
 // 446DF4: using guessed type int dword_446DF4;
 // 446DF8: using guessed type int dword_446DF8;
 // 446DFC: using guessed type int dword_446DFC;
@@ -34406,7 +34327,7 @@ signed int defineGamepadJoystickMenu()
         drawMenu(CONFIGURE_MENU, 0);
         drawMenu(DEFINE_GAMEPAD_MENU, 0);
         createPopup(295, 121, 323, 48, 1);
-        drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&byte_4458B0, "Move gamepad for accelerate...", 86065);
+        drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&letterSpacing_4458B0, "Move gamepad for accelerate...", 86065);
         refreshAllScreen();
 		configuration.accelerateGamepad = (unsigned __int8)sub_42CBF0();
         sub_418090();
@@ -34432,7 +34353,7 @@ signed int defineGamepadJoystickMenu()
         drawMenu(CONFIGURE_MENU, 0);
         drawMenu(DEFINE_GAMEPAD_MENU, 0);
         createPopup(295, 149, 323, 48, 1);
-        drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&byte_4458B0, "Move gamepad for brake...", 103985);
+        drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&letterSpacing_4458B0, "Move gamepad for brake...", 103985);
         refreshAllScreen();
 		configuration.brakeGamepad = (unsigned __int8)sub_42CBF0();
         sub_418090();
@@ -34457,7 +34378,7 @@ signed int defineGamepadJoystickMenu()
         drawMenu(CONFIGURE_MENU, 0);
         drawMenu(DEFINE_GAMEPAD_MENU, 0);
         createPopup(295, 177, 323, 48, 1);
-        drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&byte_4458B0, "Move gamepad for left steer...", 121905);
+        drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&letterSpacing_4458B0, "Move gamepad for left steer...", 121905);
         refreshAllScreen();
 		configuration.leftSteeringGamepad = (unsigned __int8)sub_42CBF0();
         sub_418090();
@@ -34483,7 +34404,7 @@ signed int defineGamepadJoystickMenu()
         drawMenu(CONFIGURE_MENU, 0);
         drawMenu(DEFINE_GAMEPAD_MENU, 0);
         createPopup(295, 205, 323, 48, 1);
-        drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&byte_4458B0, "Move gamepad for right steer...", 139825);
+        drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&letterSpacing_4458B0, "Move gamepad for right steer...", 139825);
         refreshAllScreen();
 		configuration.rightSteeringGamepad = (unsigned __int8)sub_42CBF0();
         sub_418090();
@@ -34510,7 +34431,7 @@ signed int defineGamepadJoystickMenu()
         drawMenu(CONFIGURE_MENU, 0);
         drawMenu(DEFINE_GAMEPAD_MENU, 0);
         createPopup(295, 233, 323, 48, 1);
-        drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&byte_4458B0, "Move gamepad for turbo boost...", 157745);
+        drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&letterSpacing_4458B0, "Move gamepad for turbo boost...", 157745);
         refreshAllScreen();
 		configuration.turboGamepad = (unsigned __int8)sub_42CBF0();
         sub_418090();
@@ -34535,7 +34456,7 @@ signed int defineGamepadJoystickMenu()
         drawMenu(CONFIGURE_MENU, 0);
         drawMenu(DEFINE_GAMEPAD_MENU, 0);
         createPopup(295, 261, 323, 48, 1);
-        drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&byte_4458B0, "Move gamepad  for machine gun...", 175665);
+        drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&letterSpacing_4458B0, "Move gamepad  for machine gun...", 175665);
         refreshAllScreen();
 		configuration.gunGamepad = (unsigned __int8)sub_42CBF0();
         sub_418090();
@@ -34560,7 +34481,7 @@ signed int defineGamepadJoystickMenu()
         drawMenu(CONFIGURE_MENU, 0);
         drawMenu(DEFINE_GAMEPAD_MENU, 0);
         createPopup(295, 289, 323, 48, 1);
-        drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&byte_4458B0, "Move gamepad for drop mine...", 193585);
+        drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&letterSpacing_4458B0, "Move gamepad for drop mine...", 193585);
         refreshAllScreen();
 		configuration.mineGamepad = (unsigned __int8)sub_42CBF0();
         sub_418090();
@@ -34615,7 +34536,7 @@ LABEL_40:
 }
 // 4457D0: using guessed type int dword_4457D0;
 // 4457E8: using guessed type int dword_4457E8;
-// 4458B0: using guessed type char byte_4458B0;
+// 4458B0: using guessed type char letterSpacing_4458B0;
 // 447178: using guessed type int dword_447178;
 // 44717C: using guessed type int dword_44717C;
 // 447180: using guessed type int dword_447180;
@@ -34684,7 +34605,7 @@ LABEL_2:
       case 0:
         drawMenu(CONFIGURE_MENU, 0);
         createPopup(214, 218, 330, 70, 1);
-        drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&byte_4458B0, "Adjust music volume:", 144864);
+        drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&letterSpacing_4458B0, "Adjust music volume:", 144864);
         drawImageWithPosition((int)slidmus2Bpk, 172, 24, (int)((char *)screenBuffer + 160314));
         refreshAllScreen();
         v2 = 0;
@@ -34750,7 +34671,7 @@ LABEL_2:
       case 1:
         drawMenu(CONFIGURE_MENU, 0);
         createPopup(214, 218, 330, 70, 1);
-        drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&byte_4458B0, "Adjust effect volume:", 144864);
+        drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&letterSpacing_4458B0, "Adjust effect volume:", 144864);
         drawImageWithPosition((int)slidmus2Bpk, 172, 24, (int)((char *)screenBuffer + 160314));
         refreshAllScreen();
         v9 = 0;
@@ -36304,7 +36225,7 @@ LABEL_44:
         while ( v63 );
         *(_DWORD *)v62 = *(_DWORD *)"$3000";
         *((_WORD *)v62 + 2) = *(_WORD *)"0";*/
-		strcpy(v62, "$3000");
+		strcpy(v60, "$3000");
         break;
       case 2: //race hard
         /*v64 = (char *)&v246 + 3;
@@ -36314,7 +36235,7 @@ LABEL_44:
         *(_DWORD *)v64 = *(_DWORD *)"$12000";
         *((_WORD *)v64 + 2) = *(_WORD *)"00";
         v64[6] = a12000[6];*/
-		strcpy(v64, "$12000");
+		strcpy(v60, "$12000");
         break;
       case 3:
         /*v66 = (char *)&v246 + 3;
@@ -36323,7 +36244,7 @@ LABEL_44:
         while ( v67 );
         *(_DWORD *)v66 = 1380928583; //GLORY
         *((_WORD *)v66 + 2) = 89;*/
-		strcpy(v66, "GLORY");
+		strcpy(v60, "GLORY");
         break;
     }
   }
@@ -36337,19 +36258,22 @@ LABEL_44:
     v60[4] = a750[4];*/
 	  strcpy(v60, "$750");
   }
-  v68 = Str;
-  v69 = 0;
+  strcpy(Str, "PRIZE:");
+  strcat(Str, v60);
+  /*v69 = 0;
   v70 = 0;
   do
     v71 = *v68++;
   while ( v71 );
-  v244 = v68 - &Str[1];
-  if ( v68 != &Str[1] )
-  {
+  v244 = v68 - &Str[1];*/
+  //if ( v60 != &Str[1] )
+  //{
+  v69 = 0;
+  v70 = 0;
     do
-      v69 += (unsigned __int8)byte_44590A[(unsigned __int8)Str[v70++]];
+      v69 += (unsigned __int8)letterSpacing_4458B0[90+(unsigned __int8)Str[v70++]];
     while ( v70 < strlen(Str) );
-  }
+  //}
   drawTextWithFont((int)graphicsGeneral.fmed1aBpk, (int)&unk_445928, Str, 229739 - v69);
   if ( selectedRace_462CE8 == 3 )
   {
@@ -36375,7 +36299,7 @@ LABEL_44:
     if ( v76 != &Str[1] )
     {
       do
-        v77 += (unsigned __int8)byte_44590A[(unsigned __int8)Str[v78++]];
+        v77 += (unsigned __int8)letterSpacing_4458B0[90+(unsigned __int8)Str[v78++]];
       while ( v78 < strlen(Str) );
     }
     drawTextWithFont((int)graphicsGeneral.fmed1aBpk, (int)&unk_445928, Str, 138403 - v77);
@@ -36422,7 +36346,7 @@ LABEL_44:
 		itoa(drivers[currentDriverId].rank, &DstBuf, 10);
 		strcpy(Str, &DstBuf);
         do
-          v245 += (unsigned __int8)byte_44590A[(unsigned __int8)Str[v87++]];
+          v245 += (unsigned __int8)letterSpacing_4458B0[90+(unsigned __int8)Str[v87++]];
         while ( v87 < strlen(Str) );
       //}
 		drawTextWithFont((int)graphicsGeneral.fmed1aBpk, (int)&unk_445928, Str, v282 + i - v245);
@@ -37871,8 +37795,8 @@ LABEL_74:
 LABEL_86:
   if ( isMultiplayerGame )
   {
-    drawTextWithFont((int)graphicsGeneral.fsma3bBpk, (int)&byte_4458B0, "press   to enter chat mode", 233635);
-    drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&byte_4458B0, "F1", 233689);
+    drawTextWithFont((int)graphicsGeneral.fsma3bBpk, (int)&letterSpacing_4458B0, "press   to enter chat mode", 233635);
+    drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&letterSpacing_4458B0, "F1", 233689);
   }
   drawBottomMenuText();
   refreshAllScreen();
@@ -38250,7 +38174,7 @@ void selectRaceScreen()
           {
             createPopup(33, 200, 580, 112, 1);
             drawTextWithFont((int)graphicsGeneral.fbig3aBpk, (int)&unk_445848, "You did not sign up in any race.", 144048);
-            drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&byte_4458B0, "Press any key to continue.", 167248);
+            drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&letterSpacing_4458B0, "Press any key to continue.", 167248);
             refreshAllScreen();
             loadMenuSoundEffect(1u, 23, 0, configuration.musicVolume, dword_44518C - 4096);
             do
@@ -38350,6 +38274,7 @@ void selectRaceScreen()
         memcpy(v27, &Str, v26);*/
 		strcat(name, " ");
 		strcat(name, drivers[driverId].name);
+		strupr(name);
         drawTextWithFont(
           (int)graphicsGeneral.fmed1aBpk,
           (int)&unk_445928,
@@ -39080,8 +39005,8 @@ void enterBlackMarketScreen()
       drawTransparentBlock(0, 371, 639, 109);
       if ( isMultiplayerGame )
       {
-        drawTextWithFont((int)graphicsGeneral.fsma3bBpk, (int)&byte_4458B0, "press   to enter chat mode", 233635);
-        drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&byte_4458B0, "F1", 233689);
+        drawTextWithFont((int)graphicsGeneral.fsma3bBpk, (int)&letterSpacing_4458B0, "press   to enter chat mode", 233635);
+        drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&letterSpacing_4458B0, "F1", 233689);
       }
       drawBottomMenuText();
       refreshAllScreen();
@@ -39333,9 +39258,9 @@ void enterShop()
         *(_DWORD *)v30 = 1717924384;
         v32 = (int)graphicsGeneral.fsma3cBpk;
         *((_DWORD *)v30 + 1) = 6581877;
-        drawTextWithFont(v32, (int)&byte_4458B0, (const char *)&v99, 79530);
+        drawTextWithFont(v32, (int)&letterSpacing_4458B0, (const char *)&v99, 79530);
         memcpy(&v99, "from your old car and upgrades.", 0x20u);
-        drawTextWithFont((int)graphicsGeneral.fsma3cBpk, (int)&byte_4458B0, (const char *)&v99, 89770);
+        drawTextWithFont((int)graphicsGeneral.fsma3cBpk, (int)&letterSpacing_4458B0, (const char *)&v99, 89770);
         v33 = 1760 * actualCarSelected;
         v34 = &aVagabond[1760 * actualCarSelected];
         v35 = (char *)((char *)&v99 - v34);
@@ -39368,12 +39293,12 @@ void enterShop()
         memcpy(v42, DstBuf, 4 * (v41 >> 2));
         v44 = (int)graphicsGeneral.fsma3cBpk;
         memcpy(&v42[4 * (v41 >> 2)], &DstBuf[4 * (v41 >> 2)], v41 & 3);
-        drawTextWithFont(v44, (int)&byte_4458B0, (const char *)&v99, 100010);
+        drawTextWithFont(v44, (int)&letterSpacing_4458B0, (const char *)&v99, 100010);
         v100 = 1702060392;
         v101 = 544500000;
         v99 = 1668445520;
         LOWORD(v102) = 63;
-        drawTextWithFont((int)graphicsGeneral.fsma3cBpk, (int)&byte_4458B0, (const char *)&v99, 110250);
+        drawTextWithFont((int)graphicsGeneral.fsma3cBpk, (int)&letterSpacing_4458B0, (const char *)&v99, 110250);
       }
       else
       {
@@ -39400,9 +39325,9 @@ void enterShop()
         *(_DWORD *)v9 = 1717924384;
         v11 = (int)graphicsGeneral.fsma3cBpk;
         *((_DWORD *)v9 + 1) = 6581877;
-        drawTextWithFont(v11, (int)&byte_4458B0, (const char *)&v99, 79530);
+        drawTextWithFont(v11, (int)&letterSpacing_4458B0, (const char *)&v99, 79530);
         memcpy(&v99, "from your old car and upgrades.", 0x20u);
-        drawTextWithFont((int)graphicsGeneral.fsma3cBpk, (int)&byte_4458B0, (const char *)&v99, 89770);
+        drawTextWithFont((int)graphicsGeneral.fsma3cBpk, (int)&letterSpacing_4458B0, (const char *)&v99, 89770);
         v99 = 1701736269;
         v102 = 540697701;
         v12 = cars[actualCarSelected].cost;
@@ -39423,7 +39348,7 @@ void enterShop()
         memcpy(v16, DstBuf, 4 * (v15 >> 2));
         v18 = (int)graphicsGeneral.fsma3cBpk;
         memcpy(&v16[4 * (v15 >> 2)], &DstBuf[4 * (v15 >> 2)], v15 & 3);
-        drawTextWithFont(v18, (int)&byte_4458B0, (const char *)&v99, 100010);
+        drawTextWithFont(v18, (int)&letterSpacing_4458B0, (const char *)&v99, 100010);
         BYTE2(v100) = 0;
         v19 = &aVagabond[1760 * actualCarSelected];
         v99 = 544830786; //buy
@@ -39444,7 +39369,7 @@ void enterShop()
         *(_WORD *)v24 = 16160;
         v26 = (int)graphicsGeneral.fsma3cBpk;
         v24[2] = 0;
-        drawTextWithFont(v26, (int)&byte_4458B0, (const char *)&v99, 110250);
+        drawTextWithFont(v26, (int)&letterSpacing_4458B0, (const char *)&v99, 110250);
       }
       drawTextWithFont((int)graphicsGeneral.fbig3aBpk, (int)&unk_445848, "yes", 118640);
       drawTextWithFont((int)fbig3bBpk, (int)&unk_445848, "no", 118810);
@@ -39552,15 +39477,15 @@ void enterShop()
             createPopup(144, 114, 384, 119, 1);
             drawImageWithPosition((int)slidcop2Bpk, 294, 16, (int)((char *)screenBuffer + 124988));
             memcpy(&v99, "Use arrows to change the color", 0x1Fu);
-            drawTextWithFont((int)graphicsGeneral.fsma3cBpk, (int)&byte_4458B0, (const char *)&v99, 79530);
+            drawTextWithFont((int)graphicsGeneral.fsma3cBpk, (int)&letterSpacing_4458B0, (const char *)&v99, 79530);
             memcpy(&v99, "of your car and press Enter", 0x1Cu);
-            drawTextWithFont((int)graphicsGeneral.fsma3cBpk, (int)&byte_4458B0, (const char *)&v99, 89770);
+            drawTextWithFont((int)graphicsGeneral.fsma3cBpk, (int)&letterSpacing_4458B0, (const char *)&v99, 89770);
             v99 = 1852139639;
             v100 = 1852401184;
             v101 = 1701344105;
             LOWORD(v102) = 11876;
             BYTE2(v102) = 0;
-            drawTextWithFont((int)graphicsGeneral.fsma3cBpk, (int)&byte_4458B0, (const char *)&v99, 100010);
+            drawTextWithFont((int)graphicsGeneral.fsma3cBpk, (int)&letterSpacing_4458B0, (const char *)&v99, 100010);
             refreshAllScreen();
             v59 = 0;
             do
@@ -40073,8 +39998,8 @@ LABEL_44:
     drawTransparentBlock(0, 371, 639, 109);
     if ( isMultiplayerGame )
     {
-      drawTextWithFont((int)graphicsGeneral.fsma3bBpk, (int)&byte_4458B0, "press   to enter chat mode", 233635);
-      drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&byte_4458B0, "F1", 233689);
+      drawTextWithFont((int)graphicsGeneral.fsma3bBpk, (int)&letterSpacing_4458B0, "press   to enter chat mode", 233635);
+      drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&letterSpacing_4458B0, "F1", 233689);
     }
     drawBottomMenuText();
     refreshAllScreen();
@@ -40382,8 +40307,8 @@ LABEL_157:
     drawTransparentBlock(0, 371, 639, 109);
     if ( isMultiplayerGame )
     {
-      drawTextWithFont((int)graphicsGeneral.fsma3bBpk, (int)&byte_4458B0, "press   to enter chat mode", 233635);
-      drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&byte_4458B0, "F1", 233689);
+      drawTextWithFont((int)graphicsGeneral.fsma3bBpk, (int)&letterSpacing_4458B0, "press   to enter chat mode", 233635);
+      drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&letterSpacing_4458B0, "F1", 233689);
     }
     drawBottomMenuText();
     drawBorder(426, 243, 108, 114);
@@ -40632,8 +40557,8 @@ LABEL_220:
       drawTransparentBlock(0, 371, 639, 109);
       if ( isMultiplayerGame )
       {
-        drawTextWithFont((int)graphicsGeneral.fsma3bBpk, (int)&byte_4458B0, "press   to enter chat mode", 233635);
-        drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&byte_4458B0, "F1", 233689);
+        drawTextWithFont((int)graphicsGeneral.fsma3bBpk, (int)&letterSpacing_4458B0, "press   to enter chat mode", 233635);
+        drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&letterSpacing_4458B0, "F1", 233689);
       }
       drawBottomMenuText();
       refreshAllScreen();
@@ -40663,8 +40588,8 @@ LABEL_220:
   drawTransparentBlock(0, 371, 639, 109);
   if ( isMultiplayerGame )
   {
-    drawTextWithFont((int)graphicsGeneral.fsma3bBpk, (int)&byte_4458B0, "press   to enter chat mode", 233635);
-    drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&byte_4458B0, "F1", 233689);
+    drawTextWithFont((int)graphicsGeneral.fsma3bBpk, (int)&letterSpacing_4458B0, "press   to enter chat mode", 233635);
+    drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&letterSpacing_4458B0, "F1", 233689);
   }
   return drawBottomMenuText();
 }
@@ -40741,7 +40666,7 @@ LABEL_10:
       case END_CURRENT_GAME:
         drawMenu(START_NEW_GAME_MENU, 0);
         createPopup(170, 220, 300, 80, 1);
-        drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&byte_4458B0, "End current game?", 146152);
+        drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&letterSpacing_4458B0, "End current game?", 146152);
         v4 = 1;
         v2 = drawYesNoMenu(180, 258, 1, &v4);
         if ( v4 )
@@ -41207,7 +41132,7 @@ int mainMenu()
 			//exit to os
 		  drawMenu(INITIAL_MENU, 0);
 		  createPopup(170, 200, 300, 80, 1);
-		  drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&byte_4458B0, "Are you sure?", 133373);
+		  drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&letterSpacing_4458B0, "Are you sure?", 133373);
 		  drawYesNoMenu(180, 238, 1, &v63);
 		  break;
 		default:

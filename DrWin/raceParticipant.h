@@ -3,7 +3,8 @@
 typedef enum {
 	RACE_EASY =0,
 	RACE_MEDIUM=1,
-	RACE_HARD=2
+	RACE_HARD=2,
+	RACE_ARENA = 3
 
 }RaceTypes;
 
