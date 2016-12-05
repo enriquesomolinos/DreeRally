@@ -1,9 +1,15 @@
 # DreeRally
-Death Rally engine reimplementation
+Death Rally engine reimplementation. To run this game you need the original Death Rally files!.
 
 See details and status in www.dreerally.com
 
-At this moment there is only certain tools to decrypt the original files:
+![alt tag](http://www.dreerally.com/wp-content/uploads/2016/12/Captura.jpg)
+![alt tag](http://www.dreerally.com/wp-content/uploads/2016/12/Captura2.jpg)
+![alt tag](http://www.dreerally.com/wp-content/uploads/2016/12/Captura3.jpg)
+![alt tag](http://www.dreerally.com/wp-content/uploads/2016/12/Captura4.jpg)
+
+
+Also there is certain tools to decrypt the original files:
     
 - Bpadecryptor.py: allows to extract the contents of BPA files
 - Music.py: once music.bpk file is extracted, with this script you can decrypt the music files and play with VLC.

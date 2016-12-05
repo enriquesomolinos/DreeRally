@@ -22530,8 +22530,9 @@ char drawBottomMenuText()
 
 
   drawTextWithFont((int)graphicsGeneral.fsma3bBpk, (int)&letterSpacing_4458B0, "         Welcome to Death Rally(tm) - Windows Version 1.0", 640 * 395);
-  drawTextWithFont((int)graphicsGeneral.fsma3bBpk, (int)&letterSpacing_4458B0, "              Port by ---- - - http://www.dreerally.com", 640 * 410);
-  drawTextWithFont((int)graphicsGeneral.fsma3bBpk, (int)&letterSpacing_4458B0, "       (c)Remedy Entertainment - http://www.remedygames.com", 640 * 425);
+  drawTextWithFont((int)graphicsGeneral.fsma3bBpk, (int)&letterSpacing_4458B0, "        Port by enrique somolinos http://www.dreerally.com", 640 * 410);
+  drawTextWithFont((int)graphicsGeneral.fsma3bBpk, (int)&letterSpacing_4458B0, "    See more developments at https://github.com/enriquesomolinos", 640 * 425);
+  //drawTextWithFont((int)graphicsGeneral.fsma3bBpk, (int)&letterSpacing_4458B0, "       (c)Remedy Entertainment - http://www.remedygames.com", 640 * 425);
   drawTextWithFont((int)graphicsGeneral.fsma3bBpk, (int)&letterSpacing_4458B0, "  Use arrow keys to change selection and press enter to confirm.", 640 * 455);
 
   /*
@@ -42553,7 +42554,7 @@ int  sub_43BEF0(int a1, void *a2, unsigned int a3, int a4, char a5)
         BYTE1(a1) = a5;
         v7 = a1 << 16;
         LOWORD(v7) = a1;
-        memset32(v6, v7, a3 >> 2);
+        //TODO FIX esto peta memset32(v6, v7, a3 >> 2);
         memset((char *)v6 + 4 * (a3 >> 2), a5, a3 & 3);
         v6 = (char *)v6 + a3;
       }
@@ -45844,7 +45845,7 @@ LABEL_90:
         while ( v51 < v49 );
         if ( (unsigned int)v29 < 0x10 )
 LABEL_94:
-          memset32((void *)(v20 + 4 * v51 + 4), (int)&dword_45DA80, 16 - v51);
+		//TODO FIX esto peta memset32((void *)(v20 + 4 * v51 + 4), (int)&dword_45DA80, 16 - v51);
         v51 = 0;
         if ( v49 )
         {

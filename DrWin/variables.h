@@ -1,4 +1,4 @@
-void memset32(void *buf, uint32_t n, int32_t c)
+/*void memset32(void *buf, uint32_t n, int32_t c)
 {
   __asm {
   mov ecx, n
@@ -6,7 +6,7 @@ void memset32(void *buf, uint32_t n, int32_t c)
   mov edi, buf
   rep stosd
   }
-}
+}*/
 
 
 typedef enum
