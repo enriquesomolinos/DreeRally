@@ -1,7 +1,7 @@
 # DreeRally
 Death Rally engine reimplementation. To run this game you need the original Death Rally files!.
 
-See details and status in www.dreerally.com
+See details and status in www.dreerally.com and in our wiki https://github.com/enriquesomolinos/DreeRally/wiki
 
 ![alt tag](http://www.dreerally.com/wp-content/uploads/2016/12/Captura.jpg)
 ![alt tag](http://www.dreerally.com/wp-content/uploads/2016/12/Captura2.jpg)
