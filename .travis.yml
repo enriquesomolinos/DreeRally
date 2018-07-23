@@ -1,8 +1,9 @@
 language: c
 
 os:
-  - linux
-  - osx
+  #- linux
+  #- osx
+  - windows
 
 #notifications:
  # email:
