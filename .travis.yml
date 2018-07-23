@@ -1,9 +1,9 @@
 language: c
 solution: DrWin.sln
 os:
-  #- linux
+  - linux
   #- osx
-  - windows
+  #- windows
 
 #notifications:
  # email:
