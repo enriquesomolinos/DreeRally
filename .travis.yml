@@ -9,15 +9,15 @@ os:
  # email:
   #  on_failure: change # default: always
 
-addons:
+#addons:
   # Packages for Linux
-  apt:
-    packages:
-      - mingw-w64
+ # apt:
+  #  packages:
+   #   - mingw-w64
 
 env:
   - MAKE_BUILD=make
-  - MAKE_BUILD=debug
+ # - MAKE_BUILD=debug
 
 before_install:
   # Packages for OSX
