@@ -23,9 +23,6 @@ before_install:
   # Packages for OSX
   - if [ $TRAVIS_OS_NAME = osx ]; then brew install mingw-w64; fi
 
-before_script:
-  - touch storm.dll
-  - touch diabloui.dll
 
 script:
   - if [ $MAKE_BUILD = make ]; then make; fi
