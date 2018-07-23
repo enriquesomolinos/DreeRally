@@ -23,9 +23,9 @@ before_install:
   - sudo apt-get update -qq > /dev/null
   - sudo apt-get install -qq mono-devel mono-gmcs > /dev/null
   #- mozroots --import --sync
-  - mv -f src/.nuget/NuGet.mono.targets src/.nuget/NuGet.targets
-  - chmod +x lib/xunit/xunit.console.clr4.x86.exe
-  - export EnableNuGetPackageRestore=true
+  #- mv -f src/.nuget/NuGet.mono.targets src/.nuget/NuGet.targets
+  #- chmod +x lib/xunit/xunit.console.clr4.x86.exe
+  #- export EnableNuGetPackageRestore=true
 
 
 script:
