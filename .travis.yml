@@ -1,5 +1,5 @@
 language: c
-solution: DRWin.sln
+solution: DrWin.sln
 os:
   #- linux
   #- osx
@@ -29,7 +29,7 @@ before_install:
 
 
 script:
-  - xbuild CI\ DRWin.sln
+  - xbuild CI\ DrWin.sln
   #- if [ $MAKE_BUILD = make ]; then make; fi
   #- if [ $MAKE_BUILD = debug ]; then make debug; fi
 
