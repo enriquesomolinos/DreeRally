@@ -26,8 +26,8 @@ solution: "./DrWin/DrWin.sln"
   #- mv -f src/.nuget/NuGet.mono.targets src/.nuget/NuGet.targets
   #- chmod +x lib/xunit/xunit.console.clr4.x86.exe
   #- export EnableNuGetPackageRestore=true
-install:
-  - travis_retry nuget restore -source "https://www.nuget.org/api/v2" ./DrWin/DrWin.sln
+#install:
+  #- travis_retry nuget restore -source "https://www.nuget.org/api/v2" ./DrWin/DrWin.sln
 
 script:
   - xbuild ./DrWin/DrWin.sln
