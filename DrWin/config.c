@@ -1,7 +1,7 @@
 
 #define _CRT_NONSTDC_NO_WARNINGS
 #define  _CRT_SECURE_NO_WARNINGS
-
+test
 
 #pragma warning(push)
 #pragma warning(disable: warning-code) //4996 for _CRT_SECURE_NO_WARNINGS equivalent
