@@ -18,7 +18,7 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
-  <PropertyGroup Label="Globals">
+  <PropertyGroup>
     <ProjectGuid>{536A73B6-98EF-4DF2-B767-5CB883E18FE5}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>DrWin</RootNamespace>
