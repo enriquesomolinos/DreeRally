@@ -29,7 +29,7 @@ before_install:
 
 
 script:
-  - xbuild DrWin.sln
+  - xbuild ./DrWin/DrWin.sln
   #- if [ $MAKE_BUILD = make ]; then make; fi
   #- if [ $MAKE_BUILD = debug ]; then make debug; fi
 
