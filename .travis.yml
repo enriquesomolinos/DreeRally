@@ -1,7 +1,7 @@
 language: c
-solution: DrWin.sln
-os:
-  - linux
+solution: "./DrWin/DrWin.sln"
+#os:
+  #- linux
   #- osx
   #- windows
 
@@ -15,8 +15,8 @@ os:
   #  packages:
    #   - mingw-w64
 
-env:
-  - MAKE_BUILD=make
+#env:
+ # - MAKE_BUILD=make
  # - MAKE_BUILD=debug
 
 before_install:
