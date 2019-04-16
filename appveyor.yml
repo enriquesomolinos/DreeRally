@@ -2,8 +2,8 @@ version: 1.0.{build}
 pull_requests:
   do_not_increment_build_number: true
 clone_depth: 1
+configuration: Debug
 image: Visual Studio 2017
-configuration: Release
 platform: x86
 build:
   project: Drwin/DrWin.sln
@@ -11,3 +11,8 @@ build:
 artifacts:
   - path: Drwin.exe
     name: Drwin.exe
+environment:
+  global:
+    # WarningLevel of 1 is ONLY SEVERE warnings, nothing else. See
+    # https://stackoverflow.com/questions/1023858/how-to-suppress-specific-msbuild-warning
+    MSBUILD_FLAGS: /maxcpucount /nologo /property:WarningLevel=1
