@@ -6,7 +6,7 @@ image: Visual Studio 2017
 configuration: Release
 platform: x86
 build:
-  project: DrWin.sln
+  project: Drwin/DrWin.sln
   verbosity: minimal
 artifacts:
   - path: Drwin.exe
