@@ -6,7 +6,7 @@ configuration: Debug
 image: Visual Studio 2017
 platform: x86
 build:
-  project: Drwin/DrWin.sln
+  project: DrWin.sln
   verbosity: minimal
 artifacts:
   - path: Drwin.exe
