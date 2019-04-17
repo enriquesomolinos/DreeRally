@@ -27152,7 +27152,7 @@ int __cdecl drawRightPositions(int numDrivers, int a2)
         while ( v11 < strlen(DstBuf) );
       //}
       drawTextWithFont((int)graphicsGeneral.fmed1aBpk, (int)&unk_445928, DstBuf, v6 - v67 + 33700);	  
-	  strcpy(DstBuf,drivers[v8].name,strlen(drivers[v8].name));
+	  strcpy(DstBuf,drivers[v8].name);
 	  //v14 = &byte_460840[v8 * 4];
      /* do
       {
