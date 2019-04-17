@@ -1,4 +1,6 @@
-# DreeRally
+
+
+# DreeRally[![Build status](https://ci.appveyor.com/api/projects/status/u7idbsek3njnh648/branch/master?svg=true)](https://ci.appveyor.com/project/enriquesomolinos/dreerally/branch/master)
 Death Rally engine reimplementation. To run this game you need the original Death Rally files!.
 
 See details and status in www.dreerally.com and in our wiki https://github.com/enriquesomolinos/DreeRally/wiki
