@@ -2,14 +2,14 @@ version: 1.0.{build}
 pull_requests:
   do_not_increment_build_number: true
 clone_depth: 1
-configuration: Debug
+configuration: Release
 image: Visual Studio 2017
 platform: x86
 build:
   project: DrWin.sln
   verbosity: minimal
 artifacts:
-  - path: Debug/Drwin.exe
+  - path: Release/Drwin.exe
     name: Drwin.exe
 environment:
   global:
