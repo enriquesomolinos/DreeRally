@@ -9,7 +9,7 @@ build:
   project: DrWin.sln
   verbosity: minimal
 artifacts:
-  - path: Drwin/Drwin.exe
+  - path: Debug/Drwin.exe
     name: Drwin.exe
 environment:
   global:
