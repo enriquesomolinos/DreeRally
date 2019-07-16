@@ -347,7 +347,7 @@ int8 __CFADD__(int x, int y)
 #define _UNKNOWN char
 
 #ifdef _MSC_VER
-#define snprintf _snprintf
+//#define snprintf _snprintf
 //#define vsnprintf _vsnprintf
 #endif
 
