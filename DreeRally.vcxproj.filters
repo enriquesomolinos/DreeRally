@@ -1,0 +1,225 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Header Files\race">
+      <UniqueIdentifier>{9b2b85cf-d785-4916-89f5-d7f8edb2dc4a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\race">
+      <UniqueIdentifier>{d5dfe669-2afa-49b8-82a0-6ca8266489c4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\minifmod_modified">
+      <UniqueIdentifier>{d3aa23ea-299b-4e18-b1ad-964fa2c51e0f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\minifmod_modified">
+      <UniqueIdentifier>{8e0c7a6a-98f7-401e-87be-50bc25716020}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\multiplayer">
+      <UniqueIdentifier>{3b9f0da2-ecf3-425f-b894-aa91422ea544}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\hof">
+      <UniqueIdentifier>{14ceb84c-c8e8-4b75-a1ae-8a59b86e97fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\blackmarket">
+      <UniqueIdentifier>{001c63dc-a1e8-46dd-a04f-15da029b1671}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\bpa">
+      <UniqueIdentifier>{9856ffd6-1ae0-4b48-b16a-0bef09914d2d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\license">
+      <UniqueIdentifier>{3317a9c3-b775-4445-8851-5e9ea53d818a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\popup">
+      <UniqueIdentifier>{319cf5aa-8220-4981-9e0f-729b94fe3d63}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\bpa">
+      <UniqueIdentifier>{6aeeab3f-2995-4588-af86-1cfa4dd589cd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\blackmarket">
+      <UniqueIdentifier>{a6217c00-7189-4331-a87b-094206db4ae9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\license">
+      <UniqueIdentifier>{fdae3f94-225b-4845-96a9-ab11f441df74}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\hof">
+      <UniqueIdentifier>{06ba32cb-c8ce-42b3-9903-8da4abc75571}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\popup">
+      <UniqueIdentifier>{05c38d85-362d-47aa-b0fc-9f32074b7d2e}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="anim.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cars.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="config.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dr.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="drivers.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="graphics.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="menus.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="raceParticipant.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="savegame.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="util.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="imageUtil.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="circuit.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="raceResults.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="race\powerup.c">
+      <Filter>Source Files\race</Filter>
+    </ClCompile>
+    <ClCompile Include="race\pedestrian.c">
+      <Filter>Source Files\race</Filter>
+    </ClCompile>
+    <ClCompile Include="race\3dSystem.c">
+      <Filter>Source Files\race</Filter>
+    </ClCompile>
+    <ClCompile Include="popup\popup.c">
+      <Filter>Source Files\popup</Filter>
+    </ClCompile>
+    <ClCompile Include="multiplayer\multiplayer.c">
+      <Filter>Source Files\multiplayer</Filter>
+    </ClCompile>
+    <ClCompile Include="minifmod_modified\soundSystem.c">
+      <Filter>Source Files\minifmod_modified</Filter>
+    </ClCompile>
+    <ClCompile Include="license\licenseScreen.c">
+      <Filter>Source Files\license</Filter>
+    </ClCompile>
+    <ClCompile Include="hof\hallOfFame.c">
+      <Filter>Source Files\hof</Filter>
+    </ClCompile>
+    <ClCompile Include="bpa\bpaUtil.c">
+      <Filter>Source Files\bpa</Filter>
+    </ClCompile>
+    <ClCompile Include="blackmarket\blackMarket.c">
+      <Filter>Source Files\blackmarket</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="cars.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="circuit.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="config.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="defs.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="doc.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="drivers.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="graphics.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="menus.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="savegame.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="soundEffects.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="util.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="variables.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="imageUtil.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dr.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="raceParticipant.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="raceResults.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="race\terrain.h">
+      <Filter>Header Files\race</Filter>
+    </ClInclude>
+    <ClInclude Include="race\powerup.h">
+      <Filter>Header Files\race</Filter>
+    </ClInclude>
+    <ClInclude Include="race\pedestrian.h">
+      <Filter>Header Files\race</Filter>
+    </ClInclude>
+    <ClInclude Include="race\anim.h">
+      <Filter>Header Files\race</Filter>
+    </ClInclude>
+    <ClInclude Include="race\3dSystem.h">
+      <Filter>Header Files\race</Filter>
+    </ClInclude>
+    <ClInclude Include="popup\popup.h">
+      <Filter>Header Files\popup</Filter>
+    </ClInclude>
+    <ClInclude Include="minifmod_modified\xmeffects.h">
+      <Filter>Header Files\minifmod_modified</Filter>
+    </ClInclude>
+    <ClInclude Include="minifmod_modified\system_memory.h">
+      <Filter>Header Files\minifmod_modified</Filter>
+    </ClInclude>
+    <ClInclude Include="minifmod_modified\soundSystem.h">
+      <Filter>Header Files\minifmod_modified</Filter>
+    </ClInclude>
+    <ClInclude Include="minifmod_modified\fmod.h">
+      <Filter>Header Files\minifmod_modified</Filter>
+    </ClInclude>
+    <ClInclude Include="license\licenseScreen.h">
+      <Filter>Header Files\license</Filter>
+    </ClInclude>
+    <ClInclude Include="hof\hallOfFame.h">
+      <Filter>Header Files\hof</Filter>
+    </ClInclude>
+    <ClInclude Include="bpa\bpaUtil.h">
+      <Filter>Header Files\bpa</Filter>
+    </ClInclude>
+    <ClInclude Include="blackmarket\blackMarket.h">
+      <Filter>Header Files\blackmarket</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

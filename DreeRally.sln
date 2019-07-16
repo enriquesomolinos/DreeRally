@@ -1,0 +1,28 @@
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DreeRally", "DreeRally.vcxproj", "{DB6EA97D-424D-459C-8B0B-1934C138929F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		MinSizeRel|Win32 = MinSizeRel|Win32
+		Release|Win32 = Release|Win32
+		RelWithDebInfo|Win32 = RelWithDebInfo|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DB6EA97D-424D-459C-8B0B-1934C138929F}.Debug|Win32.ActiveCfg = Debug|Win32
+		{DB6EA97D-424D-459C-8B0B-1934C138929F}.Debug|Win32.Build.0 = Debug|Win32
+		{DB6EA97D-424D-459C-8B0B-1934C138929F}.MinSizeRel|Win32.ActiveCfg = Release|Win32
+		{DB6EA97D-424D-459C-8B0B-1934C138929F}.MinSizeRel|Win32.Build.0 = Release|Win32
+		{DB6EA97D-424D-459C-8B0B-1934C138929F}.Release|Win32.ActiveCfg = Release|Win32
+		{DB6EA97D-424D-459C-8B0B-1934C138929F}.Release|Win32.Build.0 = Release|Win32
+		{DB6EA97D-424D-459C-8B0B-1934C138929F}.RelWithDebInfo|Win32.ActiveCfg = Release|Win32
+		{DB6EA97D-424D-459C-8B0B-1934C138929F}.RelWithDebInfo|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A4E9B168-A99A-38D3-9859-29C698A97850}
+	EndGlobalSection
+EndGlobal
