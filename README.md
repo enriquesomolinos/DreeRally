@@ -1,9 +1,9 @@
-[![Build status](https://img.shields.io/github/downloads/enriquesomolinos/dreerally/total.svg)
-![Dev phase](https://img.shields.io/badge/devphase-sentinel-brightgreen.svg)(https://dreerally.com/development/)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md#pull-requests)
+[![Build status](https://img.shields.io/github/downloads/enriquesomolinos/dreerally/total.svg)](https://github.com/enriquesomolinos/dreerally/releases)
 ![GitHub commit activity](https://img.shields.io/github/commit-activity/m/enriquesomolinos/dreerally.svg)
 ![GitHub contributors](https://img.shields.io/github/contributors/enriquesomolinos/dreerally.svg)
 ![GitHub release](https://img.shields.io/github/release-pre/enriquesomolinos/dreerally.svg)
+![Dev phase](https://img.shields.io/badge/devphase-sentinel-brightgreen.svg)
 
 # Dreerally
 Death Rally engine reimplementation. To run this game you need the original Death Rally files!.
