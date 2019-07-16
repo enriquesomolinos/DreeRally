@@ -1,4 +1,3 @@
-#pragma once
 
 typedef enum {
 	RACE_EASY =0,
@@ -377,7 +376,7 @@ int participantBpkOffser_4A7D10[256]; // weak
 int dword_4A7D14[256]; // weak
 int dword_4A7D18[256]; // weak
 int dword_4A7D1C[256]; // weak
-byte dword_4A7D20[64]; // idb
+BYTE dword_4A7D20[64]; // idb
 int dword_4A7D60[256]; // weak
 int lastKeysReadIndex_4A7DA0[256]; // weak
 int lastKeysReadPreviousIndex_4A7DA4[256]; // weak

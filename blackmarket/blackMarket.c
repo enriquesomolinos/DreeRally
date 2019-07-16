@@ -1,6 +1,6 @@
 
 
-#include <windows.h>
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -197,7 +197,7 @@ int loadAcceptedText()
 }
 
 //----- (00422810) --------------------------------------------------------
-int __cdecl getBlackMarketElementText(int a1)
+int   getBlackMarketElementText(int a1)
 {
   createPopup(144, 114, 384, 119, 1);
   writeTextInScreen(&aMines[240 * a1], 79530);
@@ -209,7 +209,7 @@ int __cdecl getBlackMarketElementText(int a1)
 }
 
 //----- (004228A0) --------------------------------------------------------
-int __cdecl getBlackMarketElementPurchasedText(int a1)
+int   getBlackMarketElementPurchasedText(int a1)
 {
   createPopup(144, 114, 384, 119, 1);
   writeTextInScreen(&a8MinesLoadedIn[240 * a1], 79530);
@@ -313,7 +313,7 @@ int drawLoanShark()
     v8 = &v13;
     do
     {
-      v9 = *((byte *)v8 + 1);
+      v9 = *((BYTE *)v8 + 1);
       v8 = (char *)v8 + 1;
     }
     while ( v9 );
@@ -379,7 +379,7 @@ int drawBlackMarketElement0()
     v1 = &v5;
     do
     {
-      v2 = *((byte *)v1 + 1);
+      v2 = *((BYTE *)v1 + 1);
       v1 = (char *)v1 + 1;
     }
     while ( v2 );
@@ -424,7 +424,7 @@ if (spikesAvailable_45EFF4 == 1)
 	v1 = &v5;
 	do
 	{
-		v2 = *((byte *)v1 + 1);
+		v2 = *((BYTE *)v1 + 1);
 		v1 = (char *)v1 + 1;
 	} while (v2);
 	memcpy(v1, DstBuf, v0);
@@ -473,7 +473,7 @@ int drawBlackMarketElement2()
 		
 		/*do
 		{
-			v2 = *((byte *)v1 + 1);
+			v2 = *((BYTE *)v1 + 1);
 			v1 = (char *)v1 + 1;
 		} while (v2);*/
 		//strcat(v1,DstBuf);
@@ -1196,8 +1196,8 @@ void enterBlackMarketScreen()
     switch ( eventDetected() )
     {
       case KEY_F1:
-        if ( isMultiplayerGame )
-          multiplayer_sub_42CCF0();
+       // if ( isMultiplayerGame )
+         // multiplayer_sub_42CCF0();
         break;
       case KEY_UP:
       case 0xC8:

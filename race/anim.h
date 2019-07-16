@@ -1,6 +1,5 @@
-#pragma once
 
-int __cdecl drawMenuAnimation(int a1, int a2, int a3, int a4, int a5);
+int   drawMenuAnimation(int x, int y, int frame, int animation, int frameSizes[]);
 int reloadContinueAnimation();
 int reloadEngineAnimation();
 int reloadTireAnimation();

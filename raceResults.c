@@ -1,5 +1,5 @@
 
-#include <windows.h>
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -10,8 +10,8 @@
 #include "graphics.h"
 #include "imageUtil.h"
 #include "drivers.h"
-#include "mod\mod.h"
-#include "i18n\i18n.h"
+#include "mod/mod.h"
+#include "i18n/i18n.h"
 
 
 const  int EASY_RACE=0;
@@ -22,7 +22,7 @@ extern const int NUM_RACES = 3;
 int racePositions[3][4];//para cada carrera 4 participantes ordenados por posicion 
 
 //----- (00429280) --------------------------------------------------------
-void __fastcall easyRaceResults(int ecx0, int a2, int a1)
+void   easyRaceResults(int ecx0, int a2, int a1)
 {
   signed int v3; // edi@37
   int v4; // eax@39
@@ -128,7 +128,7 @@ void __fastcall easyRaceResults(int ecx0, int a2, int a1)
   {
     if ( !a1 )
     {
-      v4 = *((byte *)&v12 + v3);
+      v4 = *((BYTE *)&v12 + v3);
       if (drivers[v4].damage != 100 )
 		  //if (dword_46084C[27 * v4] != 100)
       {
@@ -200,7 +200,7 @@ LABEL_60:
 }
 
 //----- (004295E0) --------------------------------------------------------
-void __fastcall mediumRaceResults(int ecx0, int a2, int a1)
+void   mediumRaceResults(int ecx0, int a2, int a1)
 {
   signed int v3; // edi@37
   int v4; // eax@39
@@ -308,7 +308,7 @@ void __fastcall mediumRaceResults(int ecx0, int a2, int a1)
   {
     if ( !a1 )
 	{
-      v4 = *((byte *)&v17 + v3);
+      v4 = *((BYTE *)&v17 + v3);
       if (drivers[v4].damage != 100 )
       {
         if ( v4 == driverId && lapped_456BC0 == 1 )
@@ -383,7 +383,7 @@ LABEL_60:
 
 
 //----- (00429990) --------------------------------------------------------
-void __fastcall hardRaceResults(int ecx0, int a2, int a1)
+void   hardRaceResults(int ecx0, int a2, int a1)
 {
   signed int v3; // edi@37
   int v4; // eax@39
@@ -492,7 +492,7 @@ void __fastcall hardRaceResults(int ecx0, int a2, int a1)
   {
     if ( !a1 )
     {
-      v4 = *((byte *)&v17 + v3);
+      v4 = *((BYTE *)&v17 + v3);
       if (drivers[v4].damage != 100 )
       {
         if ( v4 == driverId && lapped_456BC0 == 1 )

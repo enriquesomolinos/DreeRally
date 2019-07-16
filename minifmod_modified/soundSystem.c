@@ -3,11 +3,11 @@
 #include <math.h>
 
 
-int (__cdecl *FSOUND_File_OpenCallback_456C9C)(_DWORD) = NULL; // weak
-int (__cdecl *FSOUND_File_CloseCallback_456CA0)(_DWORD) = NULL; // weak
-int (__cdecl *FSOUND_File_ReadCallback_456CA4)(_DWORD, _DWORD, _DWORD) = NULL; // weak
-int (__cdecl *FSOUND_File_SeekCallback_456CA8)(_DWORD) = NULL; // weak
-int (__cdecl *FSOUND_File_TellCallback_456CAC)(_DWORD) = NULL; // weak
+int (  *FSOUND_File_OpenCallback_456C9C)(_DWORD) = NULL; // weak
+int (  *FSOUND_File_CloseCallback_456CA0)(_DWORD) = NULL; // weak
+int (  *FSOUND_File_ReadCallback_456CA4)(_DWORD, _DWORD, _DWORD) = NULL; // weak
+int (  *FSOUND_File_SeekCallback_456CA8)(_DWORD) = NULL; // weak
+int (  *FSOUND_File_TellCallback_456CAC)(_DWORD) = NULL; // weak
 
 int debug2=1;
 char streamId_4444F8[] = "Extended Module:"; // weak
@@ -65,14 +65,14 @@ static const float	mix_1over255	= 1.0f / 255.0f;
 static const float	mix_1over256	= 1.0f / 256.0f;
 static const float	mix_1over2gig	= 1.0f / 2147483648.0f;
 
-int __cdecl FMUSIC_UpdateXM_43EF50(FMUSIC_MODULE *mod)
+int   FMUSIC_UpdateXM_43EF50(FMUSIC_MODULE *mod)
 {
   return FMUSIC_UpdateXMEffects_43EDC0(mod);
 }
 
 //----- (0043AD80) --------------------------------------------------------
-void *__cdecl FSOUND_File_OpenCallback_43AD80(int size,char *data)
-//void *__cdecl sub_43AD80(int soundEffectSize)
+void *  FSOUND_File_OpenCallback_43AD80(int size,char *data)
+//void *  sub_43AD80(int soundEffectSize)
 {
   const void *v1; // esi@1
   size_t v2; // edi@1
@@ -105,7 +105,7 @@ void *__cdecl FSOUND_File_OpenCallback_43AD80(int size,char *data)
 }
 
 //----- (0043ADD0) --------------------------------------------------------
-void __cdecl FSOUND_File_CloseCallback_43ADD0(unsigned int handle)
+void   FSOUND_File_CloseCallback_43ADD0(unsigned int handle)
 {
   //free(*((void **)handle + 2));free del handle->data
   free((void *)handle);
@@ -123,7 +123,7 @@ void __cdecl FSOUND_File_CloseCallback_43ADD0(unsigned int handle)
   return dst;
 }
 //----- (0043ADF0) --------------------------------------------------------
-int __cdecl FSOUND_File_ReadCallback_43ADF0(void *buffer, int size, unsigned int handle)
+int   FSOUND_File_ReadCallback_43ADF0(void *buffer, int size, unsigned int handle)
 {
   
  struct_userhandle *handleTemp =(struct_userhandle *)handle;
@@ -146,7 +146,7 @@ int __cdecl FSOUND_File_ReadCallback_43ADF0(void *buffer, int size, unsigned int
 }
 
 //----- (0043AE30) --------------------------------------------------------
-int __cdecl FSOUND_File_SeekCallback_43AE30(unsigned int handle, int pos, signed char mode)
+int   FSOUND_File_SeekCallback_43AE30(unsigned int handle, int pos, signed char mode)
 {
   int result; // eax@1
   int v4; // ecx@2
@@ -187,7 +187,7 @@ LABEL_9:
 }
 
 //----- (0043AE70) --------------------------------------------------------
-int __cdecl FSOUND_File_TellCallback_43AE70(unsigned int handle)
+int   FSOUND_File_TellCallback_43AE70(unsigned int handle)
 {
 //  return *(_DWORD *)(a1 + 4);
 	struct_userhandle *handleTemp = (struct_userhandle *)handle;
@@ -196,7 +196,7 @@ int __cdecl FSOUND_File_TellCallback_43AE70(unsigned int handle)
 }
 
 //----- (0043D8A0) --------------------------------------------------------
-unsigned __int64 __cdecl FMUSIC_SetBPM_43D8A0(FMUSIC_MODULE *mod_456C24, int bpm)
+unsigned __int64   FMUSIC_SetBPM_43D8A0(FMUSIC_MODULE *mod_456C24, int bpm)
 {
   unsigned __int64 result; // rax@1
 
@@ -208,7 +208,7 @@ unsigned __int64 __cdecl FMUSIC_SetBPM_43D8A0(FMUSIC_MODULE *mod_456C24, int bpm
 }
 // 456A40: using guessed type int FSOUND_MixRate_456A40;
 //----- (0043D8E0) --------------------------------------------------------
-char __cdecl FMUSIC_StopSong_43D8E0(FMUSIC_MODULE *mod)
+char   FMUSIC_StopSong_43D8E0(FMUSIC_MODULE *mod)
 {
   char result; // al@2
 
@@ -237,7 +237,7 @@ char __cdecl FMUSIC_StopSong_43D8E0(FMUSIC_MODULE *mod)
   
 }
 //----- (0043D940) --------------------------------------------------------
-char __cdecl FMUSIC_FreeSong_43D940(FMUSIC_MODULE *mod)
+char   FMUSIC_FreeSong_43D940(FMUSIC_MODULE *mod)
 {
   void *v1; // edi@1
   char result; // al@2
@@ -271,7 +271,7 @@ char __cdecl FMUSIC_FreeSong_43D940(FMUSIC_MODULE *mod)
 // 456C35: using guessed type char byte_456C35;
 
 //----- (0043DA40) --------------------------------------------------------
-char __cdecl FMUSIC_PlaySong_43DA40(FMUSIC_MODULE *mod_456C24) //a1
+char   FMUSIC_PlaySong_43DA40(FMUSIC_MODULE *mod_456C24) //a1
 {
   signed int v1; // edi@7
   int v2; // esi@7
@@ -311,7 +311,7 @@ char __cdecl FMUSIC_PlaySong_43DA40(FMUSIC_MODULE *mod_456C24) //a1
     //while ( v4 < (signed int)&unk_45C4F4 );//5800h /88=256
 	 while ( v3 < 256 );//5800h /88=256
    // v5 = *(_WORD *)(mod_456C24 + 38);
-   // v6 = *(byte *)(mod_456C24 + 296);
+   // v6 = *(BYTE *)(mod_456C24 + 296);
    
 	 
 	 
@@ -360,7 +360,7 @@ char __cdecl FMUSIC_PlaySong_43DA40(FMUSIC_MODULE *mod_456C24) //a1
 
 
 //----- (0043DC50) --------------------------------------------------------
-int __cdecl FMUSIC_LoadSong_43DC50(int size,  char *data, SAMPLELOADCALLBACK sampleloadcallback)
+int   FMUSIC_LoadSong_43DC50(int size,  char *data, SAMPLELOADCALLBACK sampleloadcallback)
 {
   FMUSIC_MODULE		*mod;
   signed char			retcode=FALSE;
@@ -402,7 +402,7 @@ int __cdecl FMUSIC_LoadSong_43DC50(int size,  char *data, SAMPLELOADCALLBACK sam
 
 //----- (0043DCB0) --------------------------------------------------------
 
-int __cdecl  FSOUND_Software_Fill_43DCB0(signed int a1, int a2)
+int    FSOUND_Software_Fill_43DCB0(signed int a1, int a2)
 {
 	int mi_FSOUND_BlockSize= a1;
 	void  *	mixbuffer; 
@@ -490,7 +490,7 @@ int __cdecl  FSOUND_Software_Fill_43DCB0(signed int a1, int a2)
 }
 
 //----- (0043DE30) --------------------------------------------------------
-int __cdecl FSOUND_MixerClipCopy_Float32_43DE30(void *dest, void *src, long len)
+int   FSOUND_MixerClipCopy_Float32_43DE30(void *dest, void *src, long len)
 {
 	int count;
 	short *destptr = (short *)dest;
@@ -515,7 +515,7 @@ int __cdecl FSOUND_MixerClipCopy_Float32_43DE30(void *dest, void *src, long len)
 }
 
 //----- (0043DEA0) --------------------------------------------------------
-int __cdecl  FSOUND_Mixer_FPU_Ramp_43DEA0(void *mixptr, int len) 
+int    FSOUND_Mixer_FPU_Ramp_43DEA0(void *mixptr, int len) 
 {
 	static FSOUND_CHANNEL *cptr;
 	static int count;
@@ -1228,7 +1228,7 @@ MixLoopStart16:
 
 
 //----- (0043E550) --------------------------------------------------------
-char __cdecl FMUSIC_XM_InstrumentVibrato_43E550(FMUSIC_CHANNEL *cptr, FMUSIC_INSTRUMENT *iptr)
+char   FMUSIC_XM_InstrumentVibrato_43E550(FMUSIC_CHANNEL *cptr, FMUSIC_INSTRUMENT *iptr)
 {
 
   unsigned __int64 v2; // rax@2//delta
@@ -1288,7 +1288,7 @@ char __cdecl FMUSIC_XM_InstrumentVibrato_43E550(FMUSIC_CHANNEL *cptr, FMUSIC_INS
 
 
 //----- (0043E670) --------------------------------------------------------
-char __cdecl FMUSIC_XM_ProcessEnvelope_43E670(FMUSIC_CHANNEL *cptr, int *pos, int *tick, unsigned char type, int numpoints, unsigned short *points, unsigned char loopend, unsigned char loopstart, unsigned char sustain, int *value, int *valfrac, signed char *envstopped, int *envdelta, unsigned char control)
+char   FMUSIC_XM_ProcessEnvelope_43E670(FMUSIC_CHANNEL *cptr, int *pos, int *tick, unsigned char type, int numpoints, unsigned short *points, unsigned char loopend, unsigned char loopstart, unsigned char sustain, int *value, int *valfrac, signed char *envstopped, int *envdelta, unsigned char control)
 //parece que es FMUSIC_XM_ProcessEnvelope
 //void FMUSIC_XM_ProcessEnvelope_43E670(FMUSIC_CHANNEL *cptr, int *pos, int *tick, unsigned char type, int numpoints, unsigned short *points, unsigned char loopend, unsigned char loopstart, unsigned char sustain, int *value, int *valfrac, signed char *envstopped, int *envdelta, unsigned char control)
 {							
@@ -1353,7 +1353,7 @@ char __cdecl FMUSIC_XM_ProcessEnvelope_43E670(FMUSIC_CHANNEL *cptr, int *pos, in
 }
 
 //----- (0043E7A0) --------------------------------------------------------
-char __cdecl FMUSIC_XM_ProcessVolumeByte_43E7A0(FMUSIC_CHANNEL *cptr, unsigned char volume)
+char   FMUSIC_XM_ProcessVolumeByte_43E7A0(FMUSIC_CHANNEL *cptr, unsigned char volume)
 
 {
   int v2; // eax@3
@@ -1448,7 +1448,7 @@ char __cdecl FMUSIC_XM_ProcessVolumeByte_43E7A0(FMUSIC_CHANNEL *cptr, unsigned c
 }
 
 //----- (0043E8C0) --------------------------------------------------------
-int __cdecl FMUSIC_XM_UpdateFlags_43E8C0(FMUSIC_CHANNEL *cptr, FSOUND_SAMPLE *sptr, FMUSIC_MODULE *mod)
+int   FMUSIC_XM_UpdateFlags_43E8C0(FMUSIC_CHANNEL *cptr, FSOUND_SAMPLE *sptr, FMUSIC_MODULE *mod)
 
 {
  // signed int v3; // ebx@1
@@ -1658,7 +1658,7 @@ double temp;
 // 456A40: using guessed type int FSOUND_MixRate_456A40_456A40;
 
 //----- (0043EB10) --------------------------------------------------------
-int __cdecl FMUSIC_XM_Resetcptr_43EB10(FMUSIC_CHANNEL *cptr, FSOUND_SAMPLE	*sptr)
+int   FMUSIC_XM_Resetcptr_43EB10(FMUSIC_CHANNEL *cptr, FSOUND_SAMPLE	*sptr)
 
 {
   int result; // eax@1
@@ -1666,7 +1666,7 @@ int __cdecl FMUSIC_XM_Resetcptr_43EB10(FMUSIC_CHANNEL *cptr, FSOUND_SAMPLE	*sptr
 
   //result = a1;
   cptr->volume = (int)sptr->defvol;//16 y 16
-  //v3 = *(byte *)(a1 + 162);
+  //v3 = *(BYTE *)(a1 + 162);
   
   cptr->pan			= sptr->defpan;// 20 y 24
   cptr->envvol		= 32;//52
@@ -1692,20 +1692,21 @@ int __cdecl FMUSIC_XM_Resetcptr_43EB10(FMUSIC_CHANNEL *cptr, FSOUND_SAMPLE	*sptr
     cptr->tremolopos=0; //137
   cptr->tremorpos	= 0;	 //146
   cptr->notectrl |= FMUSIC_VOLUME;
-  cptr->notectrl |= FMUSIC_PAN;//*(byte *)(a1 + 2) |= 6u;
+  cptr->notectrl |= FMUSIC_PAN;//*(BYTE *)(a1 + 2) |= 6u;
   //return result;
 
 }
 
+
 //----- (0043EBB0) --------------------------------------------------------
-char __cdecl sub_43EBB0(int channelId, unsigned __int8 volume)
+char   sub_43EBB0(int channelId, unsigned __int8 volume)
 {
 	//el primer parametro que se pasa es FMUSIC_CHANNEL *cptr
   return FMUSIC_XM_ProcessVolumeByte_43E7A0((int)&FMUSIC_Channel[channelId],volume);
 }
 
 //----- (0043EBD0) --------------------------------------------------------
-unsigned __int64 __cdecl sub_43EBD0(int channelId, signed int a2)
+unsigned __int64   sub_43EBD0(int channelId, signed int a2)
 {
   char *v2; // esi@1
   FMUSIC_CHANNEL *cptr; //es v2
@@ -1719,9 +1720,9 @@ unsigned __int64 __cdecl sub_43EBD0(int channelId, signed int a2)
                             - ((double)a2 * 0.000015258789 * 6.0
                              + 52.0
                              - 6.0
-                             + (double)*(byte *)(*((_DWORD *)v2 + 2) + 31))
+                             + (double)*(BYTE *)(*((_DWORD *)v2 + 2) + 31))
                             * 64.0
-                            - (double)(*(byte *)(*((_DWORD *)v2 + 2) + 17) / 2));*/
+                            - (double)(*(BYTE *)(*((_DWORD *)v2 + 2) + 17) / 2));*/
     result = (unsigned __int64)((10*12*16*4)
                             - ((double)(a2 * 0.000015258789 * 6.0)
                              + 52.0
@@ -1744,7 +1745,7 @@ unsigned __int64 __cdecl sub_43EBD0(int channelId, signed int a2)
 }
 
 //----- (0043EC40) --------------------------------------------------------
-int __cdecl FMUSIC_UpdateXMNote_43EC40(FMUSIC_MODULE *mod, int channelId, unsigned __int8 soundId, int a4, char volume)
+int   FMUSIC_UpdateXMNote_43EC40(FMUSIC_MODULE *mod, int channelId, unsigned __int8 soundId, int a4, char volume)
 {
 	//FMUSIC_UpdateXMNote(FMUSIC_MODULE *mod)  esta modificado claro
 	//parece #ifdef FMUSIC_XM_NOTEDELAY_ACTIVE #ifdef FMUSIC_XM_VOLUMEBYTE_ACTIVE
@@ -1768,7 +1769,7 @@ int __cdecl FMUSIC_UpdateXMNote_43EC40(FMUSIC_MODULE *mod, int channelId, unsign
     cprt_inst_v9 = soundId;//v9 = 340 * soundId; 340 es el tamaño de instrumet
     iptr_v6 = &mod->instrument[soundId];//cprt_inst_v9];
 
-    cptr_v10 = iptr_v6->keymap[cptr_v5->note];//*(byte *)(cprt_inst_v9 + current_instruent_v8 + 108);
+    cptr_v10 = iptr_v6->keymap[cptr_v5->note];//*(BYTE *)(cprt_inst_v9 + current_instruent_v8 + 108);
     if ( iptr_v6->keymap[cptr_v5->note] < 0x10u ){
 		sptr_v7 = iptr_v6->sample[iptr_v6->keymap[cptr_v5->note]];
 		cptr_v5->sptr = sptr_v7;
@@ -1817,7 +1818,7 @@ int __cdecl FMUSIC_UpdateXMNote_43EC40(FMUSIC_MODULE *mod, int channelId, unsign
 // 45DA80: using guessed type int dword_45DA80;
 
 //----- (0043EDC0) --------------------------------------------------------
-int __cdecl FMUSIC_UpdateXMEffects_43EDC0(FMUSIC_MODULE *mod)
+int   FMUSIC_UpdateXMEffects_43EDC0(FMUSIC_MODULE *mod)
 {
   int result; // eax@1
   _UNKNOWN *v2; // esi@2
@@ -1918,7 +1919,7 @@ int __cdecl FMUSIC_UpdateXMEffects_43EDC0(FMUSIC_MODULE *mod)
 // 45DA80: using guessed type int dword_45DA80;
 
 //----- (0043EF60) --------------------------------------------------------
-char __cdecl FMUSIC_LoadXM_43EF60(FMUSIC_MODULE *mod, FSOUND_FILE_HANDLE *fp)
+char   FMUSIC_LoadXM_43EF60(FMUSIC_MODULE *mod, FSOUND_FILE_HANDLE *fp)
 {
   signed int v2; // eax@1
   bool v3; // zf@4
@@ -1951,8 +1952,8 @@ char __cdecl FMUSIC_LoadXM_43EF60(FMUSIC_MODULE *mod, FSOUND_FILE_HANDLE *fp)
   int v30; // esi@70
   int v31; // eax@70
   int samplelenbytes_v32; // edi@70
-  byte *buff_v33; // ebx@71
-  void (__cdecl *v34)(_DWORD, _DWORD, _DWORD, _DWORD, _DWORD); // eax@71
+  BYTE *buff_v33; // ebx@71
+  void (  *v34)(_DWORD, _DWORD, _DWORD, _DWORD, _DWORD); // eax@71
   signed short *wptr_v35; // edi@75
   int i; // eax@75
   __int16 v37; // dx@76
@@ -1998,7 +1999,7 @@ char __cdecl FMUSIC_LoadXM_43EF60(FMUSIC_MODULE *mod, FSOUND_FILE_HANDLE *fp)
   }
   while ( v2 < 16 );
   mod->Update			     = &FMUSIC_UpdateXM_43EF50;//  *(_DWORD *)(effectStruct + 344) = sub_43EF50;
-  mod->defaultglobalvolume = 64;//*(byte *)(effectStruct + 296) = 64;
+  mod->defaultglobalvolume = 64;//*(BYTE *)(effectStruct + 296) = 64;
  
  // FSOUND_File_Seek_43F7B0(fp);
 
@@ -2027,7 +2028,7 @@ char __cdecl FMUSIC_LoadXM_43EF60(FMUSIC_MODULE *mod, FSOUND_FILE_HANDLE *fp)
     v5 = 0;// effectStruct + 40; //orderlist
     do
     {
-      //v6 = *(byte *)v5;
+      //v6 = *(BYTE *)v5;
       if ( mod->orderlist[v5] >= mod->numpatterns);//+24
         mod->numpatterns = mod->orderlist[v5] + 1; //+24
       ++v5;
@@ -2283,24 +2284,24 @@ LABEL_94:
           {
            //todofix v30 = *(_DWORD *)v50;
             //v31 = *(_DWORD *)(*(_DWORD *)v50 + 4);
-            samplelenbytes_v32 = sptr_v48->length * sptr_v48->bits / 8;// (unsigned int)*(byte *)(*(_DWORD *)v50 + 28) >> 3;
+            samplelenbytes_v32 = sptr_v48->length * sptr_v48->bits / 8;// (unsigned int)*(BYTE *)(*(_DWORD *)v50 + 28) >> 3;
             if ( sptr_v48->length )
             {
 			 buff_v33 = FSOUND_Memory_Calloc((sptr_v48->length * 2)+16);
               //v33 = calloc(2 * sptr_v48->length + 16, 1u);
-              //v34 = *(void (__cdecl **)(_DWORD, _DWORD, _DWORD, _DWORD, _DWORD))(effectStruct + 348);
+              //v34 = *(void (  **)(_DWORD, _DWORD, _DWORD, _DWORD, _DWORD))(effectStruct + 348);
              ///quitado porque parece que no se usa if ( mod->samplecallback ) //v34 parece que esto nunca pasa
              ///quitado porque parece que no se usa  {
 				  //mod->samplecallback(buff, samplelenbytes, sptr->bits, count, count2);
 						//FSOUND_File_SeekCallback_43AE30(fp, samplelenbytes_v32, SEEK_CUR);
-             ///quitado porque parece que no se usa     mod->samplecallback((int)buff_v33, samplelenbytes_v32, sptr_v48->bits,v52,v51);//*(byte *)(v30 + 28), v52, v51); v34 al principio
+             ///quitado porque parece que no se usa     mod->samplecallback((int)buff_v33, samplelenbytes_v32, sptr_v48->bits,v52,v51);//*(BYTE *)(v30 + 28), v52, v51); v34 al principio
              ///quitado porque parece que no se usa    FSOUND_File_Seek_43F7B0(fp);
              ///quitado porque parece que no se usa  }
               ///quitado porque parece que no se usa else
               ///quitado porque parece que no se usa {
 			  FSOUND_File_Read_43F790(buff_v33, samplelenbytes_v32, fp);
                ///quitado porque parece que no se usa}
-              if (sptr_v48->bits == 8)// *(byte *)(v30 + 28) == 8 )
+              if (sptr_v48->bits == 8)// *(BYTE *)(v30 + 28) == 8 )
               {
                 //v35 = *(void **)v30;
                 wptr_v35 = (signed short *)sptr_v48->buff;
@@ -2308,11 +2309,11 @@ LABEL_94:
                 {
 					*wptr_v35 = (signed short)(buff_v33[i]) << 8;
 					//LOBYTE(*wptr_v35) = 0;
-                  //HIBYTE(*wptr_v35) = *((byte *)&buff_v33+i);
+                  //HIBYTE(*wptr_v35) = *((BYTE *)&buff_v33+i);
 					*wptr_v35 ++;
 
 					//LOBYTE(v37) = 0;
-                  //HIBYTE(v37) = *((byte *)v33 + i);
+                  //HIBYTE(v37) = *((BYTE *)v33 + i);
                   //v35 = (char *)v35 + 2;
        //comentado para uqe funcione  *(_DWORD *)&wptr_v35 + 1 = (signed short)(&buff_v33+i) << 8;
 					//++i;
@@ -2376,7 +2377,7 @@ LABEL_94:
 						{
 							buff[sptr_v48->loopstart+sptr_v48->looplen] = buff[sptr_v48->loopstart];// fix it
 						}
-              //v42 = *(byte *)(v30 + 29);
+              //v42 = *(BYTE *)(v30 + 29);
               /*buff_v43 = *(void **)v30;
 
 
@@ -2442,17 +2443,17 @@ LABEL_94:
 //return mod;
   return result;
 }
-// 43EF50: using guessed type int __cdecl sub_43EF50(int);
+// 43EF50: using guessed type int   sub_43EF50(int);
 // 45DA80: using guessed type int dword_45DA80;
 // 43EF60: using guessed type char var_100[256];
 
 //----- (0043F6B0) --------------------------------------------------------
-int (__cdecl *__cdecl FSOUND_File_SetCallbacks_43F6B0(int (__cdecl *OpenCallback)(_DWORD), int (__cdecl *CloseCallback)(_DWORD), int (__cdecl *ReadCallback)(_DWORD, _DWORD, _DWORD), int (__cdecl *SeekCallback)(_DWORD), int (__cdecl *TellCallback)(_DWORD)))(_DWORD)
+int (  *  FSOUND_File_SetCallbacks_43F6B0(int (  *OpenCallback)(_DWORD), int (  *CloseCallback)(_DWORD), int (  *ReadCallback)(_DWORD, _DWORD, _DWORD), int (  *SeekCallback)(_DWORD), int (  *TellCallback)(_DWORD)))(_DWORD)
 {
 	/*void FSOUND_File_SetCallbacks(unsigned int (*OpenCallback)(char *name), void	(*CloseCallback)(unsigned int handle),	int (*ReadCallback)(void *buffer, int size, unsigned int handle), void (*SeekCallback)(unsigned int handle, int pos, signed char mode), int (*TellCallback)(unsigned int handle))
 {
 	if (!OpenCallback || !CloseCallback || !ReadCallback || !SeekCallback || !TellCallback)*/
-  int (__cdecl *result)(_DWORD); // eax@5
+  int (  *result)(_DWORD); // eax@5
 
   if ( OpenCallback && CloseCallback && ReadCallback && SeekCallback && (result = TellCallback) != 0 )
   {
@@ -2475,7 +2476,7 @@ int (__cdecl *__cdecl FSOUND_File_SetCallbacks_43F6B0(int (__cdecl *OpenCallback
 
 //----- (0043F720) --------------------------------------------------------
 FSOUND_FILE_HANDLE * FSOUND_File_Open_43F720(int size,char *data, signed char type, int length)
-//void *__cdecl sub_43F720(int soundEffectSize, char a2, int a3)
+//void *  sub_43F720(int soundEffectSize, char a2, int a3)
 {
 
 	void *result; // eax@2
@@ -2496,10 +2497,10 @@ FSOUND_FILE_HANDLE * FSOUND_File_Open_43F720(int size,char *data, signed char ty
 	}
   return result;
 }
-// 456C9C: using guessed type int (__cdecl *dword_456C9C)(_DWORD);
+// 456C9C: using guessed type int (  *dword_456C9C)(_DWORD);
 
 //----- (0043F770) --------------------------------------------------------
-void __cdecl FSOUND_File_Close_43F770(FSOUND_FILE_HANDLE *handle)
+void   FSOUND_File_Close_43F770(FSOUND_FILE_HANDLE *handle)
 {
  /* if ( handle )
   {
@@ -2518,10 +2519,10 @@ void __cdecl FSOUND_File_Close_43F770(FSOUND_FILE_HANDLE *handle)
 	free(handle);
   
 }
-// 456CA0: using guessed type int (__cdecl *dword_456CA0)(_DWORD);
+// 456CA0: using guessed type int (  *dword_456CA0)(_DWORD);
 
 //----- (0043F790) --------------------------------------------------------
-int __cdecl FSOUND_File_Read_43F790(void *buffer, int size, FSOUND_FILE_HANDLE *handle)
+int   FSOUND_File_Read_43F790(void *buffer, int size, FSOUND_FILE_HANDLE *handle)
 {
   int result; // eax@1
 
@@ -2534,10 +2535,10 @@ int __cdecl FSOUND_File_Read_43F790(void *buffer, int size, FSOUND_FILE_HANDLE *
   
   return result;
 }
-// 456CA4: using guessed type int (__cdecl *FSOUND_File_ReadCallback_456CA4)(_DWORD, _DWORD, _DWORD);
+// 456CA4: using guessed type int (  *FSOUND_File_ReadCallback_456CA4)(_DWORD, _DWORD, _DWORD);
 
 //----- (0043F7B0) --------------------------------------------------------
-int __cdecl FSOUND_File_Seek_43F7B0(FSOUND_FILE_HANDLE *handle)
+int   FSOUND_File_Seek_43F7B0(FSOUND_FILE_HANDLE *handle)
 {
   int result; // eax@1
 
@@ -2547,10 +2548,10 @@ int __cdecl FSOUND_File_Seek_43F7B0(FSOUND_FILE_HANDLE *handle)
 	//TODO FIX result = dword_456CA8(*(_DWORD *)(a1 + 16));
   return result;
 }
-// 456CA8: using guessed type int (__cdecl *dword_456CA8)(_DWORD);
+// 456CA8: using guessed type int (  *dword_456CA8)(_DWORD);
 
 //----- (0043F7D0) --------------------------------------------------------
-int __cdecl FSOUND_File_Tell_43F7D0(FSOUND_FILE_HANDLE *handle)
+int   FSOUND_File_Tell_43F7D0(FSOUND_FILE_HANDLE *handle)
 {
   int result; // eax@1
 
@@ -2560,4 +2561,4 @@ int __cdecl FSOUND_File_Tell_43F7D0(FSOUND_FILE_HANDLE *handle)
  //   result = dword_456CAC(*(_DWORD *)(a1 + 16));
   return result;
 }
-// 456CAC: using guessed type int (__cdecl *dword_456CAC)(_DWORD);
+// 456CAC: using guessed type int (  *dword_456CAC)(_DWORD);
