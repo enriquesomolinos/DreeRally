@@ -348,7 +348,7 @@ int8 __CFADD__(int x, int y)
 
 #ifdef _MSC_VER
 #define snprintf _snprintf
-#define vsnprintf _vsnprintf
+//#define vsnprintf _vsnprintf
 #endif
 
 #endif // HEXRAYS_DEFS_H
