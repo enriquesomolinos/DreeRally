@@ -4,7 +4,7 @@ pull_requests:
 clone_depth: 1
 configuration: Release
 image: Visual Studio 2017
-platform: x86
+platform: Win32
 build:
   project: DreeRally.sln
   verbosity: minimal
