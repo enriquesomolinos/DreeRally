@@ -1,11 +1,14 @@
 #include "hof/hallOfFame.h"
 
+
+
 typedef struct MainArgs {
 	int configNoSound;
 	int configSmooth;
 	int configGL;
 	int configWindow;
 	int configNoSoundEffect;
+	char * language;
 } MainArgs;
 
 typedef struct Configuration {
