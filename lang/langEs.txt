@@ -1,0 +1,39 @@
+#menus
+Start Racing=Comenzar Carrera
+Multiplayer Race=Multijugador
+Configure=Configuracion
+See hall of fame=Salon de la fama
+Credits=Creditos
+Exit to os=Salir al os
+yes=si
+no=no
+Are you sure?=¿Estas seguro?
+
+Start a new game=Comenzar nuevo juego
+End current Game=Finalizar juego
+See current Stadistics=Ver estadisticas
+Load game=Cargar juego
+save game=Guardar partida
+Previous menu=Volver
+
+Music volume=Volumen de la musica
+Effect volume=Volumen de los efectos
+define Keyboard=Configura teclado
+Define Gamepad/Joystick=Configura gamepad/joystick
+Gamepad/Joystick Disabled=gamepad/joystick Desactivado
+
+Empty slot=Slot vacio
+Quicksave slot=Guardado rapido
+
+Accelerate=Acelerar
+Brake=Frenar
+Steer Left=Giro Izquierda
+Steer right=Giro Derecha
+Turbo boost=Turbo Boost
+Machine Gun=Ametralladora
+Drop Mine=Dejar Mina
+Horn=Claxon
+Select difficulty:=Dificultad:
+speed makes me dizzy=la velocidad me marea
+i live to ride=vivo para conducir
+petrol in my veins=petroleo en mis venas

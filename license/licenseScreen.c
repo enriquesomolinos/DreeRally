@@ -16,7 +16,7 @@
 #include "../imageUtil.h"
 #include "../drivers.h"
 #include "../config.h"
-
+#include "../i18n/i18n.h"
 
 char aSpeedMakesMeDi[21] = "speed makes me dizzy"; // weak
 char aILiveToRide[15] = "i live to ride"; // weak
@@ -95,6 +95,7 @@ int __cdecl licenseScreen(int useWeapons_mal)
   carAnimCurrentFrame_45FBA0 = 0;
   v57 = 1;
   //dword_46086C[27 * driverId] = 0;
+
   drivers[driverId].colour = 0;
   drawTransparentBlock(0, 371, 639, 109);
   drawBottomMenuText();
@@ -112,8 +113,8 @@ int __cdecl licenseScreen(int useWeapons_mal)
   drawImageWithPosition2((int)graphicsGeneral.face01Bpk, 64, 64, (int)((char *)screenBuffer + 122330));
   if (useWeapons_mal)
   {
-    drawTextWithFont((int)fbig3bBpk, (int)&bigLetterSpacing_445848, "yes", 202463);
-    drawTextWithFont((int)fbig3bBpk, (int)&bigLetterSpacing_445848, "no", 202633);
+    drawTextWithFont((int)fbig3bBpk, (int)&bigLetterSpacing_445848, getLanguageEntry("yes"), 202463);
+    drawTextWithFont((int)fbig3bBpk, (int)&bigLetterSpacing_445848, getLanguageEntry("no"), 202633);
     v5 = 0;
     v6 = 186240;
     do
@@ -235,21 +236,21 @@ int __cdecl licenseScreen(int useWeapons_mal)
   memcpy((char *)screenBuffer + 53760, (char *)graphicsGeneral.menubg5Bpk + 53760, 0x2C380u);
   drawMenu(INITIAL_MENU, 0);
   createPopup(93, 142, 440, 186, 1);
-  drawTextWithFont((int)graphicsGeneral.fbig3aBpk, (int)&bigLetterSpacing_445848, "Select difficulty:", 102573);
+  drawTextWithFont((int)graphicsGeneral.fbig3aBpk, (int)&bigLetterSpacing_445848, getLanguageEntry("Select difficulty:"), 102573);
   drawCursor(115, 28 * configuration.difficulty + 221);
   v28 = configuration.difficulty;
   if (configuration.difficulty )
   {
-    drawTextWithFont((int)fbig3bBpk, (int)&bigLetterSpacing_445848, aSpeedMakesMeDi, 138379);
+    drawTextWithFont((int)fbig3bBpk, (int)&bigLetterSpacing_445848, getLanguageEntry(aSpeedMakesMeDi), 138379);
     if ( v28 == 1 )
     {
-      drawTextWithFont((int)graphicsGeneral.fbig3aBpk, (int)&bigLetterSpacing_445848, aILiveToRide, 156299);
+      drawTextWithFont((int)graphicsGeneral.fbig3aBpk, (int)&bigLetterSpacing_445848, getLanguageEntry(aILiveToRide), 156299);
       goto LABEL_37;
     }
   }
   else
   {
-    drawTextWithFont((int)graphicsGeneral.fbig3aBpk, (int)&bigLetterSpacing_445848, aSpeedMakesMeDi, 138379);
+    drawTextWithFont((int)graphicsGeneral.fbig3aBpk, (int)&bigLetterSpacing_445848, getLanguageEntry(aSpeedMakesMeDi), 138379);
   }
   drawTextWithFont((int)fbig3bBpk, (int)&bigLetterSpacing_445848, aILiveToRide, 156299);
   if ( v28 != 2 )
@@ -267,7 +268,7 @@ LABEL_37:
   v53 = (int)&bigLetterSpacing_445848;
   v51 = graphicsGeneral.fbig3aBpk;
 LABEL_38:
-  drawTextWithFont((int)v51, v53, aPetrolInMyVein, 174219);
+  drawTextWithFont((int)v51, v53, getLanguageEntry(aPetrolInMyVein), 174219);
   refreshAllScreen();
   while ( 1 )
   {
@@ -300,18 +301,18 @@ LABEL_49:
             while ( v30 < 144640 );
             if ( v28 )
             {
-              drawTextWithFont((int)fbig3bBpk, (int)&bigLetterSpacing_445848, aSpeedMakesMeDi, 138379);
+              drawTextWithFont((int)fbig3bBpk, (int)&bigLetterSpacing_445848, getLanguageEntry(aSpeedMakesMeDi), 138379);
               if ( v28 == 1 )
               {
-                drawTextWithFont((int)graphicsGeneral.fbig3aBpk, (int)&bigLetterSpacing_445848, aILiveToRide, 156299);
+                drawTextWithFont((int)graphicsGeneral.fbig3aBpk, (int)&bigLetterSpacing_445848, getLanguageEntry(aILiveToRide), 156299);
                 goto LABEL_57;
               }
             }
             else
             {
-              drawTextWithFont((int)graphicsGeneral.fbig3aBpk, (int)&bigLetterSpacing_445848, aSpeedMakesMeDi, 138379);
+              drawTextWithFont((int)graphicsGeneral.fbig3aBpk, (int)&bigLetterSpacing_445848,getLanguageEntry( aSpeedMakesMeDi), 138379);
             }
-            drawTextWithFont((int)fbig3bBpk, (int)&bigLetterSpacing_445848, aILiveToRide, 156299);
+            drawTextWithFont((int)fbig3bBpk, (int)&bigLetterSpacing_445848, getLanguageEntry(aILiveToRide), 156299);
             if ( v28 == 2 )
             {
 				// v56 =  *((float*)aPetrolInMyVein);
@@ -319,7 +320,7 @@ LABEL_49:
               v54 = (int)&bigLetterSpacing_445848;
               v52 = graphicsGeneral.fbig3aBpk;
 LABEL_58:
-              drawTextWithFont((int)v52, v54, aPetrolInMyVein, 174219);
+              drawTextWithFont((int)v52, v54, getLanguageEntry(aPetrolInMyVein), 174219);
               drawKeyCursor(138355, (char *)screenBuffer + 138355, 0x190u, 84);
               loadMenuSoundEffect(1u, 25, 0, configuration.effectsVolume, dword_445194);
               goto LABEL_59;
@@ -406,7 +407,7 @@ LABEL_74:
 LABEL_86:
   if ( isMultiplayerGame )
   {
-    drawTextWithFont((int)graphicsGeneral.fsma3bBpk, (int)&letterSpacing_4458B0, "press   to enter chat mode", 233635);
+    drawTextWithFont((int)graphicsGeneral.fsma3bBpk, (int)&letterSpacing_4458B0, getLanguageEntry("press   to enter chat mode"), 233635);
     drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&letterSpacing_4458B0, "F1", 233689);
   }
   drawBottomMenuText();

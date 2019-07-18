@@ -13,11 +13,12 @@
 #include "defs.h"
 #include <string.h>
 #include "hof/hallOfFame.h"
+#include "i18n/i18n.h"
 
 
 
 
-MainArgs mainArgs = { 0,1,1,1,1 };
+MainArgs mainArgs = { 0,1,1,1,1,NULL };
 
 Configuration configuration;
 
@@ -25,6 +26,8 @@ Configuration configuration;
 int checkArgs(char * args)
 {
 	int result = 0;
+	char delim[] = "=";
+	char *s;
 	
 	if (strstr(args, "-nosound"))
 		mainArgs.configNoSound = 0;
@@ -34,6 +37,12 @@ int checkArgs(char * args)
 		mainArgs.configGL = 0;
 	if (strstr(args, "-smooth"))
 		mainArgs.configSmooth = 0;
+	if (strstr(args, "-lang=")){
+		s = strstr(args, "-lang=");
+		s = strstr(args, "=");
+		mainArgs.language = &s[1];
+
+	}
 	result = strstr(args, "-window");
 	if (result)
 		
