@@ -58,6 +58,21 @@
     <Filter Include="Source Files\popup">
       <UniqueIdentifier>{05c38d85-362d-47aa-b0fc-9f32074b7d2e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\i18n">
+      <UniqueIdentifier>{4f0a99e6-3999-4119-baba-06eba08d0381}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\i18n">
+      <UniqueIdentifier>{c197791c-9c41-43c1-a016-2e5899a8317b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\util">
+      <UniqueIdentifier>{46c7b985-1419-4744-b2e6-9dcd3c08789d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\util">
+      <UniqueIdentifier>{6fe8fa32-7524-4db3-b6db-3284b19f5dce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\lang">
+      <UniqueIdentifier>{de194950-f540-4591-a1a2-4d3cc1d493cd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="anim.c">
@@ -128,6 +143,12 @@
     </ClCompile>
     <ClCompile Include="blackmarket\blackMarket.c">
       <Filter>Source Files\blackmarket</Filter>
+    </ClCompile>
+    <ClCompile Include="i18n\i18n.c">
+      <Filter>Source Files\i18n</Filter>
+    </ClCompile>
+    <ClCompile Include="util\hash.c">
+      <Filter>Source Files\util</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -221,5 +242,16 @@
     <ClInclude Include="blackmarket\blackMarket.h">
       <Filter>Header Files\blackmarket</Filter>
     </ClInclude>
+    <ClInclude Include="i18n\i18n.h">
+      <Filter>Header Files\i18n</Filter>
+    </ClInclude>
+    <ClInclude Include="util\hash.h">
+      <Filter>Header Files\util</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="lang\langEs.txt">
+      <Filter>Resource Files\lang</Filter>
+    </None>
   </ItemGroup>
 </Project>
