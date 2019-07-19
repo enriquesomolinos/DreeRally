@@ -190,7 +190,9 @@
     <ClCompile Include="raceResults.c" />
     <ClCompile Include="savegame.c" />
     <ClCompile Include="minifmod_modified\soundSystem.c" />
+    <ClCompile Include="i18n\i18n.c" />
     <ClCompile Include="util.c" />
+    <ClCompile Include="util\hash.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="race\3dSystem.h" />
@@ -219,7 +221,9 @@
     <ClInclude Include="minifmod_modified\soundSystem.h" />
     <ClInclude Include="minifmod_modified\system_memory.h" />
     <ClInclude Include="race\terrain.h" />
+    <ClInclude Include="i18n\i18n.h" />
     <ClInclude Include="util.h" />
+    <ClInclude Include="util\hash.h" />
     <ClInclude Include="variables.h" />
     <ClInclude Include="raceResults.h" />
     <ClInclude Include="minifmod_modified\xmeffects.h" />
@@ -230,6 +234,9 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="lang\langEs.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

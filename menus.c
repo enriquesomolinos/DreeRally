@@ -1,10 +1,11 @@
 #include "menus.h"
 #include "util.h"
 #include "savegame.h"
+#include "i18n/i18n.h"
 
 #include <stdio.h>
 
-char * menu0[] = { "Start Racing", "Multiplayer Race", "Configure","See hall of fame","Credits","Exit to OS" };
+char * menu0[] = { "Start Racing", "Multiplayer Race", "Configure","See hall of fame","Credits","Exit to os" };
 char * menu1[] = { "Start a new game", "End current Game", "See current Stadistics","Load game","save game","Previous menu" };
 
 
@@ -34,34 +35,34 @@ char* getMenuText(int menu, int position) {
 	default:
 		break;
 	case INITIAL_MENU://menu principal
-		return menu0[position];
+		return getLanguageEntry(menu0[position]);
 		break;
 
 	case START_NEW_GAME_MENU://
-		return menu1[position];
+		return getLanguageEntry(menu1[position]);
 		break;
 	
 	case CONFIGURE_MENU://
-		return menu3[position];
+		return getLanguageEntry(menu3[position]);
 		break;
 	case LOAD_MENU://
 		
 		if (position == 8) {
-			return menu5[position];
+			return getLanguageEntry(menu5[position]);
 		}
 		else {
 			if (getSaveGameName(position) != NULL) {
 				return getSaveGameName(position);
-			}else return menu5[position];
+			}else return getLanguageEntry(menu5[position]);
 
 		}
 		
 		break;
 	case DEFINE_KEYBOARD_MENU://
-		return menu6[position];
+		return getLanguageEntry(menu6[position]);
 		break;
 	case DEFINE_GAMEPAD_MENU://
-		return menu8[position];
+		return getLanguageEntry(menu8[position]);
 		break;
 		
 
