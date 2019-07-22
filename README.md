@@ -36,11 +36,28 @@ Follow us on [Dreerally](http://www.dreerally.com)
 # Installing
 Once compiled, the DreeRally binary will serve as a replacement for `DeathRally.exe`. The following files from the original game need to be present: `ENDANI.haf`, `ENGINE.BPA`, `fmod.dll`, `IBFILES.BPA`,  `MENU.BPA`, `msvcr71.dll`, `MUSICS.BPA`, `SANIM.haf`, `SDL.dll`, and `TRX.BPA`.
 
+In this version you can add a few parameters when you launch dreerally:
+
+- -nosound: run with no music 
+- -noeffect: run with no sound effects 
+- -gl: run with opengl render. 
+- -smooth
+- -lang=lang(locale): run with a specific locale
+- -window: run in window mode
+
 # Multiplayer
 At this moment multiplayer is not implemented.
 
 # Contributing
 [Guidelines](docs/CONTRIBUTING.md)
+
+# Translations
+Here is the way to add a new language:
+
+-Create a new file under lang directory, for example langBr.txt. Please, follow this name lang%locale%.txt
+-Add your entries to this file. You can copy from langEs.txt
+-Launch dreerally.exe with the parameter -lang=langBr to use your translation.
+-If everything goes well, please, do a merge request to the project 
 
 # Modding
 At this moment you can only put your custom files in the root directory of the game. For example if you put MENU.PAL in the root directory, the game will use your custom file and not the original file!.
