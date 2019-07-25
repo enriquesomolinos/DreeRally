@@ -37,3 +37,16 @@ Select difficulty:=Dificultad:
 speed makes me dizzy=la velocidad me marea
 i live to ride=vivo para conducir
 petrol in my veins=petroleo en mis venas
+
+PRIZE: =PREMIO: 
+GLORY=GLORIA
+NUMBER OF LAPS: =NUMERO DE VUELTAS: 
+
+Hard Race Results=Resultados carrera dificil
+Medium Race Results=Resultados carrera media
+Easy Race Results=Resultados carrera facil
+Press any key to continue...=Pulsa una tecla para continuar...
+Press any key to continue.=Pulsa una tecla para continuar.
+Please wait while loading...=Por favor, espera mientras se esta cargando
+You did not sign up in any race.=No te has apuntado a ninguna carrera.
+Easy Race Results=Resultados carrera facil

@@ -5,6 +5,7 @@
 #include <string.h>
 #include "../defs.h"
 #include "../dr.h"
+#include "../config.h"
 
 
 
@@ -49,20 +50,28 @@ int __cdecl extractFromBpa(char *bpaFilename, void *dest, char * filename)
   int debug=1;
   char completeFile[300] = "";//"C:/proyectos/Drwin/Debug/";
   FILE *extractedFile;
- /* if (	extractedFile=fopen(filename, "rb") ) { // file does not exist
+  if(mainArgs.mod){
+	  strcat(completeFile,"mods/");
+	  strcat(completeFile, mainArgs.mod);
+	   strcat(completeFile,"/files/");
+	   strcat(completeFile,strupr(filename));
+	  if (	extractedFile=fopen(completeFile, "rb") ) { // file does not exist
 
-		     fseek(extractedFile, 0L, SEEK_END);
-			  fileSize = ftell(extractedFile);
-			    destStream = malloc(fileSize * sizeof(char));
-			  
+				 fseek(extractedFile, 0L, SEEK_END);
+
+				 fileSize = ftell(extractedFile);
+					destStream = malloc(fileSize * sizeof(char));
+					//extractedFile=fopen(filename, "rb");
+				  fseek(extractedFile, 0, SEEK_SET);
 
 
-			  fread(dest, fileSize, 1u, extractedFile);
-			  dest = destStream;
+				  fread(dest, 1u,fileSize, extractedFile);
+				//  dest = destStream;
 			  
 		 
-			 return fclose(extractedFile);
-   }*/
+				 return fclose(extractedFile);
+	   }
+	}
   v3 = filename;
   strcpy(Str, filename);
   bpafile = fopen(bpaFilename, "rb");
@@ -162,9 +171,6 @@ LABEL_11:
 	  fileDataPointer = 4339;
 	  v21 = 17;
 	  v23 = fileOrder;
-/*-	if(debug && strncmp("TR3-LR1",strupr(filename),7)==0){
-		fileOrder =10;
-		  }*/
 		  fseek(v20, v21, 0);
 		  fread(&fileSize, 4u, 1u, v20);
 		  if (fileOrder > 0) {
@@ -188,10 +194,8 @@ LABEL_12:
   //fcloseall ();
 	return fclose(v20);
 }
-// 508D6D: using guessed type int dword_508D6D;
-// 4027B0: using guessed type char Str[16];
 
-	  //----- (00417B90) --------------------------------------------------------
+ //----- (00417B90) --------------------------------------------------------
 int __cdecl getFileSizeFromBpa(char *bpaFile, char * filename)
 {
   char  v2; // ebp@1

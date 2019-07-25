@@ -3,13 +3,14 @@
 #include <stdlib.h>
 #include <string.h>
 #include "../config.h"
-#include "i18n.h"
+#include "mod.h"
+
 #include "../util/hash.h"
 
 
-hash_t *languageEntries;
+hash_t *modEntries;
 
-char * readline(FILE *fp, char *buffer)
+char * readlineConfig(FILE *fp, char *buffer)
 {
     int ch;
     int i = 0;
@@ -42,20 +43,23 @@ char * readline(FILE *fp, char *buffer)
     }
     return buffer;
 }
-
-int initI18n() {
+int initMod() {
 
 	FILE * fp;
     char *s;
 	char delim[] = "=";
 	char *key ;
 	char *value ;
-    languageEntries = hash_new(150);
-	if(mainArgs.language)
-		fp = fopen(strcat(strcat("lang/",mainArgs.language),".txt"), "r");
-	else
+	char completeFile[300] = "";
+	if(mainArgs.mod){
+	    modEntries = hash_new(150);
+		 strcat(completeFile,"mods/");
+	  strcat(completeFile, mainArgs.mod);
+	   strcat(completeFile,"/config.txt");
+		fp = fopen(completeFile, "r");
+	}else
 		return;
-	while ((s = readline(fp, 0)) != NULL)
+	while ((s = readlineConfig(fp, 0)) != NULL)
 	{
 		
 		key = strtok(s, delim);
@@ -63,17 +67,25 @@ int initI18n() {
 		if(key != NULL)
 		{
 			value = strtok(NULL, delim);
-			hash_insert(languageEntries, (key), value);
+			hash_insert(modEntries, (key), value);
 		}
 		//free(s);		
 	}
 	fclose(fp);
 }
 
-char * getLanguageEntry(char * languageEntry) {
+char * getModCharEntry(char * modEntryKey, char * fallbackValue) {
 	char * result;
-	result = (char *)hash_lookup(languageEntries, (languageEntry));
+	result = (char *)hash_lookup(modEntries, (modEntryKey));
 	if(result == NULL)
-		return languageEntry;
+		return fallbackValue;
 	return result ;	
+}
+
+int getModIntEntry(char * modEntryKey, int fallbackValue) {
+	char * result;
+	result = (char *)hash_lookup(modEntries, (modEntryKey));
+	if(result == NULL)
+		return fallbackValue;
+	return atoi(result) ;	
 }

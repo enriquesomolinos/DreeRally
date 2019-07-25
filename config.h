@@ -9,6 +9,7 @@ typedef struct MainArgs {
 	int configWindow;
 	int configNoSoundEffect;
 	char * language;
+	char * mod;
 } MainArgs;
 
 typedef struct Configuration {

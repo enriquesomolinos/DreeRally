@@ -31,6 +31,7 @@
 #include "race/terrain.h"
 #include "race/3dSystem.h"
 #include "i18n/i18n.h"
+#include "mod/mod.h"
 //#include "fmod.h"
 //#include "system_file.h"
 //#include "Music.h"
@@ -5395,7 +5396,7 @@ char drawRacepopupEffect_406100()
         if ( v3 < 20 )
         {
 			sub_43AE80(racePopupMemory[v0].unk_479EF0, (int)((char *)inRaceMessagePopup_479690 + 204 * dword_464F18 + dword_503220), 4, 204); //puntero pantalla, inicio del puntero de la imagen, algo y ancho //dword_464F18 largo popup 72 para pausa
-		  v4 = racePopupMemory2[dword_479268].dword_50E560 << 16;
+		  v4 = (int)racePopupMemory2[dword_479268].dword_50E560 << 16;
           v5 = (((leftMenuInRaceWidth_456AA0 >> 1) + dword_503220 + 57) << 16) - v4;
           v6 = dword_464F18 + 64;
 		  racePopupMemory[v0].unk_479EE0 = v4;
@@ -15866,7 +15867,7 @@ if ( isCircuitReversed_456AA8 )
           while ( v56 );
         }
        
-		 recalculateRaceCarWithOrientation();
+		// recalculateRaceCarWithOrientation();
         currentDriverSelectedIndex_503518 = 0;
         if ( v50 > 0 )
         {
@@ -16691,10 +16692,12 @@ LABEL_460:
 	
     do
     {
-		raceParticipant2[indexRaceParticipant].racePosition =raceParticipant2[v103].racePosition;
+		--v101;
+		raceParticipant2[v101].racePosition =raceParticipantIngame[v101].racePosition_4A7E09;
+		//raceParticipant2[indexRaceParticipant].racePosition =raceParticipant2[v103].racePosition;
       v103 += 1;
 	  //raceParticipant2[indexRaceParticipant].racePosition = (char *)raceParticipant2[indexRaceParticipant].racePosition + 148;
-      --v101;
+      
 	  indexRaceParticipant++;
     }
     while ( v101 );
@@ -19382,7 +19385,7 @@ char GamepadNotFoundPopup_41E3B0()
   drawMenu(CONFIGURE_MENU, 0);
   createPopup(28, 198, 595, 86, 1);
   drawTextWithFont((int)graphicsGeneral.fbig3aBpk, (int)&bigLetterSpacing_445848, "Gamepad not detected!", 133260);
-  drawTextWithFont((int)graphicsGeneral.fbig3aBpk, (int)&bigLetterSpacing_445848, "Press any key to continue.", 153697);
+  drawTextWithFont((int)graphicsGeneral.fbig3aBpk, (int)&bigLetterSpacing_445848, getLanguageEntry("Press any key to continue."), 153697);
   refreshAllScreen();
   eventDetected();
   sub_418090();
@@ -22875,13 +22878,13 @@ int drawPressAnyKeyToContinue()
   if ( waitCounter2_456BE4 == 30 )
   {
     sub_426080();
-    drawTextWithFont((int)graphicsGeneral.fsma3bBpk, (int)&letterSpacing_4458B0, "Press any key to continue...", 289646);
+    drawTextWithFont((int)graphicsGeneral.fsma3bBpk, (int)&letterSpacing_4458B0, getLanguageEntry("Press any key to continue..."), 289646);
     result = drawKeyCursor(289634, (char *)screenBuffer + 289634, 0x10Eu, 16);
   }
   if ( waitCounter2_456BE4 == 60 )
   {
     sub_426080();
-    drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&letterSpacing_4458B0, "Press any key to continue...", 289646);
+    drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&letterSpacing_4458B0, getLanguageEntry("Press any key to continue..."), 289646);
     result = drawKeyCursor(289634, (char *)screenBuffer + 289634, 0x10Eu, 16);
     waitCounter2_456BE4 = 0;
   }
@@ -24915,7 +24918,7 @@ void __cdecl selectRaceWarningPopup(int a1)
 
   }
   
-  drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&letterSpacing_4458B0, "Press any key to continue.", 189008);
+  drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&letterSpacing_4458B0, getLanguageEntry("Press any key to continue."), 189008);
   refreshAllScreen();
   loadMenuSoundEffect(1u, 23, 0, configuration.effectsVolume, dword_44518C - 4096);
   do
@@ -25029,7 +25032,7 @@ int __cdecl main(int argc, const char **argv, const char **envp)
   {
     drawStadistics();
     writeDriverList(20);
-    drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&letterSpacing_4458B0, "Press any key to continue...", 289646);
+	drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&letterSpacing_4458B0, getLanguageEntry("Press any key to continue..."), 289646);
     refreshAllScreen();
     sub_4224E0();
     v4 = 0;
@@ -25162,7 +25165,7 @@ int __cdecl main(int argc, const char **argv, const char **envp)
     v54 = eventDetected();
     v56 = v54;
   }
-  while ( !v54 );
+  while ( !v54 || v54==28 );
   if ( v54 != 1 )
     v56 = 0;
   mediumRaceResults(v56,0 , 0);
@@ -25201,7 +25204,7 @@ int __cdecl main(int argc, const char **argv, const char **envp)
   {
     if ( argc != 1 )
       goto LABEL_74;
-    drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&letterSpacing_4458B0, "Press any key to continue...", 289646);
+	drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&letterSpacing_4458B0, getLanguageEntry("Press any key to continue..."), 289646);
   }
   else
   {
@@ -25213,14 +25216,14 @@ int __cdecl main(int argc, const char **argv, const char **envp)
       showEndAnim_463DF8 = 1;
     useHasMorePoints_456BC4 = v63 > maxDriverPoints;
     sub_426080();
-    drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&letterSpacing_4458B0, "Please wait while loading...", 289646);
+    drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&letterSpacing_4458B0, getLanguageEntry("Please wait while loading..."), 289646);
     refreshAllScreen();
     loadGraphics2();
     loadGraphics3();
     loadGraphics4();
     sub_426080();
     loadMenuSoundEffect(1u, 28, 0, configuration.effectsVolume, dword_4451A0);
-    drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&letterSpacing_4458B0, "Press any key to continue...", 289646);
+    drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&letterSpacing_4458B0, getLanguageEntry("Press any key to continue..."), 289646);
   }
   refreshAllScreen();
   do
@@ -28775,9 +28778,9 @@ void __cdecl previewRaceScreen(signed int participants)
           v29 = (int *)((char *)v29 + 1);
         }
         while ( v31 );
-        numberOfLaps = 4;
-		//if(debug==1)  numberOfLaps = 1;
-        goto LABEL_44;
+        numberOfLaps = getModIntEntry("RACE_EASY_LAPS", 4);
+		
+		goto LABEL_44;
       case 1:
         /*v32 = &aTshape01[9 * (unsigned __int8)circuitsToSelect_46126C[1]]; //TSHAPE01-19 9 bytes por texto
 		//v32 = &aTshape01[9 * (unsigned __int8)byte_46126D];
@@ -28817,7 +28820,7 @@ void __cdecl previewRaceScreen(signed int participants)
           v37 = (int *)((char *)v37 + 1);
         }
         while ( v39 );
-        numberOfLaps = 5;
+        numberOfLaps = getModIntEntry("RACE_MEDIUM_LAPS", 5);
         goto LABEL_44;
       case 2:
 		  v24 = tShape[(unsigned __int8)circuitsToSelect_46126C[2]];
@@ -28857,7 +28860,7 @@ void __cdecl previewRaceScreen(signed int participants)
           v45 = (int *)((char *)v45 + 1);
         }
         while ( v47 );
-        numberOfLaps = 6;
+        numberOfLaps = getModIntEntry("RACE_HARD_LAPS", 6);
         goto LABEL_44;
       case 3:
         /*v248 = 959530320;
@@ -28869,7 +28872,7 @@ void __cdecl previewRaceScreen(signed int participants)
         drawImageWithPosition((int)tsahpeBpk_45EB5C, 360, 274, (int)((char *)screenBuffer + 64264));
         //raceFilePrefix_45EA50[0] = 3166804; //TR0
 		strcat(raceFilePrefix_45EA50, "TR0");
-        numberOfLaps = 9;
+        numberOfLaps = getModIntEntry("RACE_ADVERSARY_LAPS", 9);
 		raceParticipant[0].isCircuitReversed_4A7AA8 = 0;
 LABEL_44:
         v23 = selectedRace_462CE8;
@@ -28901,7 +28904,7 @@ LABEL_44:
 		raceIdParticipants[0] = driverId;
     }
   }
-  strcpy(Str, "NUMBER OF LAPS: ");
+  strcpy(Str, getLanguageEntry("NUMBER OF LAPS: "));
   itoa(numberOfLaps, &DstBuf, 10);
   strcat(Str, &DstBuf);
   /*v51 = strlen(&DstBuf) + 1;
@@ -28942,7 +28945,8 @@ LABEL_44:
         while ( v63 );
         *(_DWORD *)v62 = *(_DWORD *)"$3000";
         *((_WORD *)v62 + 2) = *(_WORD *)"0";*/
-		strcpy(v60, "$3000");
+		strcpy(v60, getModCharEntry("MONEY_SYMBOL" ,"$"));
+		strcat(v60,getModCharEntry("RACE_MEDIUM_FIRST_POSITION_PRIZE" ,"3000"));
         break;
       case 2: //race hard
         /*v64 = (char *)&v246 + 3;
@@ -28952,7 +28956,8 @@ LABEL_44:
         *(_DWORD *)v64 = *(_DWORD *)"$12000";
         *((_WORD *)v64 + 2) = *(_WORD *)"00";
         v64[6] = a12000[6];*/
-		strcpy(v60, "$12000");
+		strcpy(v60, getModCharEntry("MONEY_SYMBOL" ,"$"));
+		strcat(v60,getModCharEntry("RACE_HARD_FIRST_POSITION_PRIZE" ,"12000"));
         break;
       case 3:
         /*v66 = (char *)&v246 + 3;
@@ -28961,7 +28966,7 @@ LABEL_44:
         while ( v67 );
         *(_DWORD *)v66 = 1380928583; //GLORY
         *((_WORD *)v66 + 2) = 89;*/
-		strcpy(v60, "GLORY");
+		strcpy(v60, getLanguageEntry("GLORY"));
         break;
     }
   }
@@ -28973,9 +28978,10 @@ LABEL_44:
     while ( v61 );
     *(_DWORD *)v60 = *(_DWORD *)"$750";
     v60[4] = a750[4];*/
-	  strcpy(v60, "$750");
+	  strcpy(v60, getModCharEntry("MONEY_SYMBOL" ,"$"));
+	  strcat(v60, getModCharEntry("RACE_EASY_FIRST_POSITION_PRIZE" ,"750"));
   }
-  strcpy(Str, "PRIZE:");
+  strcpy(Str, getLanguageEntry("PRIZE: "));
   strcat(Str, v60);
   /*v69 = 0;
   v70 = 0;
@@ -29944,21 +29950,21 @@ LABEL_348:
             v152 = raceParticipant[indexRaceParticipant].racePosition;
             if ( v152 == RACE_POSITION_1 && raceParticipant[indexRaceParticipant].damage != 100 )
             {
-              drivers[raceIdParticipants[v144]].lastRaceIncome += 3000;
+              drivers[raceIdParticipants[v144]].lastRaceIncome += getModIntEntry("RACE_MEDIUM_FIRST_POSITION_PRIZE" ,3000);
               if ( v144 == v126 )
-                userLasRacePriceIncome_456BDC = 3000;
+                userLasRacePriceIncome_456BDC = getModIntEntry("RACE_MEDIUM_FIRST_POSITION_PRIZE" ,3000);
             }
             if ( v152 == RACE_POSITION_2 && raceParticipant[indexRaceParticipant].damage != 100 )
             {
-				drivers[raceIdParticipants[v144]].lastRaceIncome += 1500;
+				drivers[raceIdParticipants[v144]].lastRaceIncome += getModIntEntry("RACE_MEDIUM_SECOND_POSITION_PRIZE" ,1500);
               if ( v144 == v126 )
-                userLasRacePriceIncome_456BDC = 1500;
+                userLasRacePriceIncome_456BDC = getModIntEntry("RACE_MEDIUM_SECOND_POSITION_PRIZE" ,1500);
             }
             if ( v152 == RACE_POSITION_3 && raceParticipant[indexRaceParticipant].damage != 100 )
             {
-				drivers[raceIdParticipants[v144]].lastRaceIncome += 375;
+				drivers[raceIdParticipants[v144]].lastRaceIncome += getModIntEntry("RACE_MEDIUM_THIRD_POSITION_PRIZE" ,375);
               if ( v144 == v126 )
-                userLasRacePriceIncome_456BDC = 375;
+                userLasRacePriceIncome_456BDC = getModIntEntry("RACE_MEDIUM_THIRD_POSITION_PRIZE" ,375);
             }
           }
           else if ( v143 == RACE_HARD )
@@ -29966,21 +29972,21 @@ LABEL_348:
             v151 = raceParticipant[indexRaceParticipant].racePosition;
             if ( v151 == RACE_POSITION_1 && raceParticipant[indexRaceParticipant].damage != 100 )
             {
-				drivers[raceIdParticipants[v144]].lastRaceIncome += 12000;
+				drivers[raceIdParticipants[v144]].lastRaceIncome += getModIntEntry("RACE_HARD_FIRST_POSITION_PRIZE" ,12000);
               if ( v144 == v126 )
-                userLasRacePriceIncome_456BDC = 12000;
+                userLasRacePriceIncome_456BDC = getModIntEntry("RACE_HARD_FIRST_POSITION_PRIZE" ,12000);
             }
             if ( v151 == RACE_POSITION_2 && raceParticipant[indexRaceParticipant].damage != 100 )
             {
-				drivers[raceIdParticipants[v144]].lastRaceIncome += 6000;
+				drivers[raceIdParticipants[v144]].lastRaceIncome += getModIntEntry("RACE_HARD_SECOND_POSITION_PRIZE" ,6000);
               if ( v144 == v126 )
-                userLasRacePriceIncome_456BDC = 6000;
+                userLasRacePriceIncome_456BDC = getModIntEntry("RACE_HARD_SECOND_POSITION_PRIZE" ,6000);;
             }
             if ( v151 == RACE_POSITION_3 && raceParticipant[indexRaceParticipant].damage != 100 )
             {
-				drivers[raceIdParticipants[v144]].lastRaceIncome += 1500;
+				drivers[raceIdParticipants[v144]].lastRaceIncome += getModIntEntry("RACE_HARD_THIRD_POSITION_PRIZE" ,1500);
               if ( v144 == v126 )
-                userLasRacePriceIncome_456BDC = 1500;
+                userLasRacePriceIncome_456BDC = getModIntEntry("RACE_HARD_THIRD_POSITION_PRIZE" ,1500);
             }
           }
         }
@@ -29989,21 +29995,21 @@ LABEL_348:
           v153 = raceParticipant[indexRaceParticipant].racePosition;
           if ( v153 == RACE_POSITION_1 && raceParticipant[indexRaceParticipant].damage != 100 )
           {
-			  drivers[raceIdParticipants[v144]].lastRaceIncome += 750;
+			  drivers[raceIdParticipants[v144]].lastRaceIncome += getModIntEntry("RACE_EASY_FIRST_POSITION_PRIZE" ,750);
             if ( v144 == v126 )
-              userLasRacePriceIncome_456BDC = 750;
+              userLasRacePriceIncome_456BDC = getModIntEntry("RACE_EASY_FIRST_POSITION_PRIZE" ,750);
           }
           if ( v153 == RACE_POSITION_2 && raceParticipant[indexRaceParticipant].damage != 100 )
           {
-			  drivers[raceIdParticipants[v144]].lastRaceIncome += 375;
+			  drivers[raceIdParticipants[v144]].lastRaceIncome += getModIntEntry("RACE_EASY_SECOND_POSITION_PRIZE" ,375);
             if ( v144 == v126 )
-              userLasRacePriceIncome_456BDC = 375;
+              userLasRacePriceIncome_456BDC = getModIntEntry("RACE_EASY_SECOND_POSITION_PRIZE" ,375);
           }
           if ( v153 == RACE_POSITION_3 && raceParticipant[indexRaceParticipant].damage != 100 )
           {
-			  drivers[raceIdParticipants[v144]].lastRaceIncome += 187;
+			  drivers[raceIdParticipants[v144]].lastRaceIncome += getModIntEntry("RACE_EASY_THIRD_POSITION_PRIZE" ,187);
             if ( v144 == v126 )
-              userLasRacePriceIncome_456BDC = 187;
+              userLasRacePriceIncome_456BDC = getModIntEntry("RACE_EASY_THIRD_POSITION_PRIZE" ,187);;
           }
         }
         v154 = raceIdParticipants[v144];
@@ -30514,8 +30520,8 @@ void selectRaceScreen()
           //if ( (byte)word_461EB4 == 4 && HIBYTE(word_461EB4) == 4 && byte_461EB6 == 4 )
           {
             createPopup(33, 200, 580, 112, 1);
-            drawTextWithFont((int)graphicsGeneral.fbig3aBpk, (int)&bigLetterSpacing_445848, "You did not sign up in any race.", 144048);
-            drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&letterSpacing_4458B0, "Press any key to continue.", 167248);
+			drawTextWithFont((int)graphicsGeneral.fbig3aBpk, (int)&bigLetterSpacing_445848, getLanguageEntry("You did not sign up in any race."), 144048);
+			drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&letterSpacing_4458B0, getLanguageEntry("Press any key to continue."), 167248);
             refreshAllScreen();
             loadMenuSoundEffect(1u, 23, 0, configuration.effectsVolume, dword_44518C - 4096);
             do
@@ -32941,7 +32947,8 @@ int  sub_43ACE0(double a1, int a2, int a3,char *args)
   dword_45EA40 = *(_DWORD *)(a3 + 32);
   dword_45EA44 = *(_DWORD *)(a3 + 36);  
   checkArgs(args);
-  initI18n(mainArgs.language);
+  initI18n();
+  initMod();
   inicializeScreen(a1);
   dword_4A9140 = (int)exitGame_43ACB0;
   nullsub_1();

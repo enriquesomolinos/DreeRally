@@ -10,7 +10,8 @@
 #include "graphics.h"
 #include "imageUtil.h"
 #include "drivers.h"
-
+#include "mod\mod.h"
+#include "i18n\i18n.h"
 
 
 const  int EASY_RACE=0;
@@ -33,7 +34,7 @@ void __fastcall easyRaceResults(int ecx0, int a2, int a1)
   int v10; // ecx@54
   int v11; // ST24_4@57
   int v12; // [sp+0h] [bp-4h]@1
-
+  char res[10] = "";
   v12 = ecx0;
   
   if ( selectedRace_462CE8 )
@@ -119,7 +120,7 @@ void __fastcall easyRaceResults(int ecx0, int a2, int a1)
   {
     sub_424420();
     drawImageWithPosition((int)graphicsGeneral.raceeasBpk, 272, 20, (int)((char *)screenBuffer + 54114));
-    drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&letterSpacing_4458B0, "Easy Race Results", 55440);
+    drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&letterSpacing_4458B0, getLanguageEntry("Easy Race Results"), 55440);
     drawRightPositions(4, (int)&v12);
   }
   v3 = 0;
@@ -147,9 +148,12 @@ void __fastcall easyRaceResults(int ecx0, int a2, int a1)
         {
           v8 = 12160 * BYTE1(v12) + 57190;
           v9 = (int)graphicsGeneral.fmed1aBpk;
-          drivers[v7].points += 2;
+		  drivers[v7].points += getModIntEntry("RACE_EASY_SECOND_POSITION_POINTS", 2);
 		  //dword_460884[v7] += 2;
-          drawTextWithFont(v9, (int)&unk_445928, "+2", v8);
+		  memset(res,0,strlen(res));
+		  strcat(res,"+");
+		  strcat(res, getModCharEntry("RACE_EASY_SECOND_POSITION_POINTS", "2"));
+          drawTextWithFont(v9, (int)&unk_445928, res, v8);
         }
       }
       else if ( v3 == 2 )
@@ -160,9 +164,12 @@ void __fastcall easyRaceResults(int ecx0, int a2, int a1)
 	//if ( dword_46084C[v5] != 100 && (BYTE2(v12) != driverId || lapped_456BC0 != 1) )
         {
           v6 = 12160 * BYTE2(v12) + 57190;
-          ++drivers[v5].points;
+          drivers[v5].points+=getModIntEntry("RACE_EASY_THIRD_POSITION_POINTS", 1);
 		  // ++dword_460884[v5];
-          drawTextWithFont((int)graphicsGeneral.fmed1aBpk, (int)&unk_445928, "+1", v6);
+		  memset(res,0,strlen(res));
+		  strcat(res,"+");
+		  strcat(res,  getModCharEntry("RACE_EASY_THIRD_POSITION_POINTS", "1"));
+          drawTextWithFont((int)graphicsGeneral.fmed1aBpk, (int)&unk_445928, res, v6);
         }
       }
     }
@@ -174,9 +181,12 @@ void __fastcall easyRaceResults(int ecx0, int a2, int a1)
 		  //if (dword_46084C[v10] != 100 && ((unsigned __int8)v12 != driverId || lapped_456BC0 != 1))
       {
         v11 = 12160 * (unsigned __int8)v12 + 57190;
-       drivers[v10].points += 3;
+       drivers[v10].points += getModIntEntry("RACE_EASY_FIRST_POSITION_POINTS", 3);
 		//dword_460884[v10] += 3;
-        drawTextWithFont((int)graphicsGeneral.fmed1aBpk, (int)&unk_445928, "+3", v11);
+	    memset(res,0,strlen(res));
+		  strcat(res,"+");
+		strcat(res, getModCharEntry("RACE_EASY_FIRST_POSITION_POINTS", "3"));
+        drawTextWithFont((int)graphicsGeneral.fmed1aBpk, (int)&unk_445928, res, v11);
       }
     }
     ++v3;
@@ -185,7 +195,7 @@ void __fastcall easyRaceResults(int ecx0, int a2, int a1)
   if ( a1 )
     return;
 LABEL_60:
-  drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&letterSpacing_4458B0, "Press any key to continue...", 289646);
+  drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&letterSpacing_4458B0, getLanguageEntry("Press any key to continue..."), 289646);
   refreshAllScreen();
 }
 
@@ -207,7 +217,7 @@ void __fastcall mediumRaceResults(int ecx0, int a2, int a1)
   int v15; // ST20_4@61
   int v16; // eax@61
   int v17; // [sp+0h] [bp-4h]@1
-
+  char res[10]="";
   v17 = ecx0;
   if ( selectedRace_462CE8 == 1 )
   {
@@ -290,7 +300,7 @@ void __fastcall mediumRaceResults(int ecx0, int a2, int a1)
   {
     sub_424420();
     drawImageWithPosition((int)graphicsGeneral.racemedBpk, 272, 20, (int)((char *)screenBuffer + 54114));
-    drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&letterSpacing_4458B0, "Medium Race Results", 55440);
+    drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&letterSpacing_4458B0, getLanguageEntry("Medium Race Results"), 55440);
     drawRightPositions(4, (int)&v17);
   }
   v3 = 0;
@@ -315,8 +325,11 @@ void __fastcall mediumRaceResults(int ecx0, int a2, int a1)
         {
           v8 = 12160 * BYTE1(v17) + 57190;
           v9 = (int)graphicsGeneral.fmed1aBpk;
-		  drivers[v7].points += 3;
-          drawTextWithFont(v9, (int)&unk_445928, "+3", v8);
+		  drivers[v7].points += getModIntEntry("RACE_MEDIUM_SECOND_POSITION_POINTS", 3);
+		  memset(res,0,strlen(res));
+		  strcat(res,"+");
+		  strcat(res,  getModCharEntry("RACE_MEDIUM_SECOND_POSITION_POINTS", "3"));
+          drawTextWithFont(v9, (int)&unk_445928,res, v8);
         }
       }
       else if ( v3 == 2 )
@@ -325,8 +338,11 @@ void __fastcall mediumRaceResults(int ecx0, int a2, int a1)
         if (drivers[v5].damage != 100 && (BYTE2(v17) != driverId || lapped_456BC0 != 1) )
         {
           v6 = 12160 * BYTE2(v17) + 57190;
-          ++drivers[v5].points;
-          drawTextWithFont((int)graphicsGeneral.fmed1aBpk, (int)&unk_445928, "+1", v6);
+          drivers[v5].points+=getModIntEntry("RACE_MEDIUM_THIRD_POSITION_POINTS", 1);
+		  memset(res,0,strlen(res));
+		  strcat(res,"+");
+		  strcat(res,  getModCharEntry("RACE_MEDIUM_THIRD_POSITION_POINTS", "1"));
+          drawTextWithFont((int)graphicsGeneral.fmed1aBpk, (int)&unk_445928,res , v6);
         }
       }
     }
@@ -336,8 +352,11 @@ void __fastcall mediumRaceResults(int ecx0, int a2, int a1)
       if (drivers[v10].damage != 100 && ((unsigned __int8)v17 != driverId || lapped_456BC0 != 1) )
       {
         v11 = 12160 * (unsigned __int8)v17 + 57190;
-		drivers[v10].points += 5;
-        drawTextWithFont((int)graphicsGeneral.fmed1aBpk, (int)&unk_445928, "+5", v11);
+		drivers[v10].points += getModIntEntry("RACE_MEDIUM_FIRST_POSITION_POINTS", 5);
+		memset(res,0,strlen(res));
+		  strcat(res,"+");
+		strcat(res,  getModCharEntry("RACE_MEDIUM_FIRST_POSITION_POINTS", "5"));
+        drawTextWithFont((int)graphicsGeneral.fmed1aBpk, (int)&unk_445928, res, v11);
       }
     }
     ++v3;
@@ -381,7 +400,7 @@ void __fastcall hardRaceResults(int ecx0, int a2, int a1)
   int v15; // ST18_4@61
   int v16; // eax@61
   int v17; // [sp+0h] [bp-4h]@1
-
+  char res[10]="";
   v17 = ecx0;
   if ( selectedRace_462CE8 == 2 )
   {
@@ -465,7 +484,7 @@ void __fastcall hardRaceResults(int ecx0, int a2, int a1)
   {
     sub_424420();
     drawImageWithPosition((int)graphicsGeneral.raceharBpk, 272, 20, (int)((char *)screenBuffer + 54114));
-    drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&letterSpacing_4458B0, "Hard Race Results", 55440);
+    drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&letterSpacing_4458B0, getLanguageEntry("Hard Race Results"), 55440);
     drawRightPositions(4, (int)&v17);
   }
   v3 = 0;
@@ -490,8 +509,11 @@ void __fastcall hardRaceResults(int ecx0, int a2, int a1)
         {
           v8 = 12160 * BYTE1(v17) + 57190;
           v9 = (int)graphicsGeneral.fmed1aBpk;
-		  drivers[v7].points += 7;
-          drawTextWithFont(v9, (int)&unk_445928, "+7", v8);
+		  drivers[v7].points += getModIntEntry("RACE_HARD_SECOND_POSITION_POINTS", 7);
+		  memset(res,0,strlen(res));
+		  strcat(res,"+");
+		  strcat(res, getModCharEntry("RACE_HARD_SECOND_POSITION_POINTS", "7"));
+          drawTextWithFont(v9, (int)&unk_445928,res, v8);
         }
       }
       else if ( v3 == 2 )
@@ -500,8 +522,11 @@ void __fastcall hardRaceResults(int ecx0, int a2, int a1)
         if (drivers[v5].damage != 100 && (BYTE2(v17) != driverId || lapped_456BC0 != 1) )
         {
           v6 = 12160 * BYTE2(v17) + 57190;
-		  drivers[v5].points += 4;
-          drawTextWithFont((int)graphicsGeneral.fmed1aBpk, (int)&unk_445928, "+4", v6);
+		  drivers[v5].points += getModIntEntry("RACE_HARD_THIRD_POSITION_POINTS", 4);
+		  memset(res,0,strlen(res));
+		  strcat(res,"+");
+		  strcat(res, getModCharEntry("RACE_HARD_THIRD_POSITION_POINTS", "4"));
+          drawTextWithFont((int)graphicsGeneral.fmed1aBpk, (int)&unk_445928, res, v6);
         }
       }
     }
@@ -511,8 +536,11 @@ void __fastcall hardRaceResults(int ecx0, int a2, int a1)
       if (drivers[v10].damage != 100 && ((unsigned __int8)v17 != driverId || lapped_456BC0 != 1) )
       {
         v11 = 12160 * (unsigned __int8)v17 + 57190;
-		drivers[v10].points += 10;
-        drawTextWithFont((int)graphicsGeneral.fmed1aBpk, (int)&unk_445928, "+10", v11);
+		drivers[v10].points += getModIntEntry("RACE_HARD_FIRST_POSITION_POINTS", 10);
+		memset(res,0,strlen(res));
+		  strcat(res,"+");
+		strcat(res, getModCharEntry("RACE_HARD_FIRST_POSITION_POINTS", "10"));
+        drawTextWithFont((int)graphicsGeneral.fmed1aBpk, (int)&unk_445928, res, v11);
       }
     }
     ++v3;
