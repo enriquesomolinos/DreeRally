@@ -43,6 +43,7 @@ In this version you can add a few parameters when you launch dreerally:
 - -gl: run with opengl render. 
 - -smooth
 - -lang=lang(locale): run with a specific locale
+- -mod={modName: run with a specific mod.
 - -window: run in window mode
 
 # Multiplayer
@@ -60,6 +61,16 @@ Here is the way to add a new language:
 -If everything goes well, please, do a merge request to the project 
 
 # Modding
+
+Now, you can create mods. Mods are very simple and you need to follow this instructions
+- Create a folder called mods
+- Inside this directory create another one with the name of your mod. I uploaded a mod called 'sample'
+- Create inside 'your mod name' folder a file called config.txt. THe config.txt file contains all thing that can be modded. You need to write the key-value pair that you want.
+- Create a folder files inside 'your mod name' folder.
+- Put your customized Death Rally files in uppercase. Simply name this files equals than the name of the file in Death Rally (for example FACE01.bpk or TR0-ima.bpk).
+- Launch dreerally with -mod='your mod name' parameter.
+- Enjoy dreerally with your custom options and files! 
+
 At this moment you can only put your custom files in the root directory of the game. For example if you put MENU.PAL in the root directory, the game will use your custom file and not the original file!.
 
 

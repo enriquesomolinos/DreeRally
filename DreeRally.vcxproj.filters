@@ -73,6 +73,12 @@
     <Filter Include="Resource Files\lang">
       <UniqueIdentifier>{de194950-f540-4591-a1a2-4d3cc1d493cd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\mod">
+      <UniqueIdentifier>{d781cd8a-db7f-47b8-b5f6-a26b1065b7b3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\mod">
+      <UniqueIdentifier>{52342efa-7240-446b-a512-2ee8d621972e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="anim.c">
@@ -149,6 +155,9 @@
     </ClCompile>
     <ClCompile Include="util\hash.c">
       <Filter>Source Files\util</Filter>
+    </ClCompile>
+    <ClCompile Include="mod\mod.c">
+      <Filter>Source Files\mod</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -247,6 +256,9 @@
     </ClInclude>
     <ClInclude Include="util\hash.h">
       <Filter>Header Files\util</Filter>
+    </ClInclude>
+    <ClInclude Include="mod\mod.h">
+      <Filter>Header Files\mod</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
