@@ -56,7 +56,6 @@ int checkArgs(char * args)
 			return result;
 	}	
 	return;
-
 }
 
 char byte_45FB6C; // weak
