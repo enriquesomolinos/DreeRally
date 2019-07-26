@@ -54,7 +54,9 @@ int __cdecl extractFromBpa(char *bpaFilename, void *dest, char * filename)
 	  strcat(completeFile,"mods/");
 	  strcat(completeFile, mainArgs.mod);
 	   strcat(completeFile,"/files/");
-	   strcat(completeFile,strupr(filename));
+	   strcpy(Str, filename);
+	   strupr(Str);
+	   strcat(completeFile,Str);
 	  if (	extractedFile=fopen(completeFile, "rb") ) { // file does not exist
 
 				 fseek(extractedFile, 0L, SEEK_END);

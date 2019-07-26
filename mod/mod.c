@@ -76,6 +76,9 @@ int initMod() {
 
 char * getModCharEntry(char * modEntryKey, char * fallbackValue) {
 	char * result;
+	if(!mainArgs.mod)
+		return fallbackValue;
+	
 	result = (char *)hash_lookup(modEntries, (modEntryKey));
 	if(result == NULL)
 		return fallbackValue;
@@ -84,6 +87,10 @@ char * getModCharEntry(char * modEntryKey, char * fallbackValue) {
 
 int getModIntEntry(char * modEntryKey, int fallbackValue) {
 	char * result;
+	if(!mainArgs.mod)
+		return fallbackValue ;
+
+
 	result = (char *)hash_lookup(modEntries, (modEntryKey));
 	if(result == NULL)
 		return fallbackValue;
