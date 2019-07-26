@@ -54,7 +54,9 @@ int __cdecl extractFromBpa(char *bpaFilename, void *dest, char * filename)
 	  strcat(completeFile,"mods/");
 	  strcat(completeFile, mainArgs.mod);
 	   strcat(completeFile,"/files/");
-	   strcat(completeFile,strupr(filename));
+	   strcpy(Str, filename);
+	   strupr(Str);
+	   strcat(completeFile,Str);
 	  if (	extractedFile=fopen(completeFile, "rb") ) { // file does not exist
 
 				 fseek(extractedFile, 0L, SEEK_END);
@@ -147,7 +149,7 @@ LABEL_11:
   fileDataPointer = 0;
   if (fileOrder > 0)
   {
-	  //v19 = &dword_463E2D; -> apunta a la primera posicion de tamaÒo de la cabecera deberia ser 18
+	  //v19 = &dword_463E2D; -> apunta a la primera posicion de tama√±o de la cabecera deberia ser 18
 	  fileDataPointer = 4339;
 	  	  v21 += 17;
 	  v23 = fileOrder;
@@ -167,7 +169,7 @@ LABEL_11:
 	  fseek(v20, v21, 0);
 	  fread(&fileSize, 4u, 1u, v20);
   }else{
-	   //v19 = &dword_463E2D; -> apunta a la primera posicion de tamaÒo de la cabecera deberia ser 18
+	   //v19 = &dword_463E2D; -> apunta a la primera posicion de tama√±o de la cabecera deberia ser 18
 	  fileDataPointer = 4339;
 	  v21 = 17;
 	  v23 = fileOrder;
@@ -290,7 +292,7 @@ LABEL_9:
   fileHeaderStart = 17;
   if (fileOrd > 0 )
   {
-    //v19 = &dword_463E2D; -> apunta a la primera posicion de tamaÒo de la cabecera deberia ser 18
+    //v19 = &dword_463E2D; -> apunta a la primera posicion de tama√±o de la cabecera deberia ser 18
 	 fileHeaderStart = 17;
     v20 = fileOrd;
     do

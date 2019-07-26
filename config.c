@@ -29,32 +29,33 @@ int checkArgs(char * args)
 	char *s;
 	char * pch;
 
-	if (strstr(args, "-nosound"))
-		mainArgs.configNoSound = 0;
-	if (strstr(args, "-noeffect"))
-		mainArgs.configNoSoundEffect = 0;
-	if (strstr(args, "-gl"))
-		mainArgs.configGL = 0;
-	if (strstr(args, "-smooth"))
-		mainArgs.configSmooth = 0;
-	if (strstr(args, "-lang=")){
-		s = strstr(args, "-lang=");
-		pch = strtok (s," ");
-		mainArgs.language = &pch[6];
-		pch=NULL;
+	if(args !=NULL){
+		if (strstr(args, "-nosound"))
+			mainArgs.configNoSound = 0;
+		if (strstr(args, "-noeffect"))
+			mainArgs.configNoSoundEffect = 0;
+		if (strstr(args, "-gl"))
+			mainArgs.configGL = 0;
+		if (strstr(args, "-smooth"))
+			mainArgs.configSmooth = 0;
+		if (strstr(args, "-lang=")){
+			s = strstr(args, "-lang=");
+			pch = strtok (s," ");
+			mainArgs.language = &pch[6];
+			pch=NULL;
 
-	}
-	if (strstr(args, "-mod=")){
-		s = strstr(args, "-mod=");
-		pch = strtok (s," ");
-		mainArgs.mod = &pch[5];
-		pch=NULL;
-	}
-	result = strstr(args, "-window");
-	if (result)
-		
-	return result;
-
+		}
+		if (strstr(args, "-mod=")){
+			s = strstr(args, "-mod=");
+			pch = strtok (s," ");
+			mainArgs.mod = &pch[5];
+			pch=NULL;
+		}
+		result = strstr(args, "-window");
+		if (result)
+			return result;
+	}	
+	return;
 }
 
 char byte_45FB6C; // weak
