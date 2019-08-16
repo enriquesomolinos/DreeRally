@@ -165,6 +165,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="mod\mod.c" />
+    <ClCompile Include="portability\portability.c" />
     <ClCompile Include="race\3dSystem.c" />
     <ClCompile Include="anim.c" />
     <ClCompile Include="blackmarket\blackMarket.c" />
@@ -203,6 +204,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="mod\mod.h" />
+    <ClInclude Include="portability\portability.h" />
     <ClInclude Include="race\3dSystem.h" />
     <ClInclude Include="race\anim.h" />
     <ClInclude Include="blackmarket\blackMarket.h" />

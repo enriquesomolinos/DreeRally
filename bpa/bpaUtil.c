@@ -1,5 +1,5 @@
 
-#include <windows.h>
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -13,7 +13,7 @@
 void * unk_463E20; // weak
 
 //----- (004027B0) --------------------------------------------------------
-int __cdecl extractFromBpa(char *bpaFilename, void *dest, char * filename)
+int   extractFromBpa(char *bpaFilename, void *dest, char * filename)
 {
   int v3; // ebx@1
   FILE *bpafile; // esi@1
@@ -198,7 +198,7 @@ LABEL_12:
 }
 
  //----- (00417B90) --------------------------------------------------------
-int __cdecl getFileSizeFromBpa(char *bpaFile, char * filename)
+int   getFileSizeFromBpa(char *bpaFile, char * filename)
 {
   char  v2; // ebp@1
   FILE *v3; // esi@1
@@ -312,7 +312,7 @@ LABEL_9:
 }
 
 //----- (004271F0) --------------------------------------------------------
-int __cdecl openPalFromBpa(char * filename)
+int   openPalFromBpa(char * filename)
 {
   signed int v1; // esi@1
   char *v2 = malloc(768); // edi@1

@@ -1,0 +1,37 @@
+language: c
+compiler: gcc
+dist: precise
+
+install: 
+  #- sudo apt update -qq
+  # SDL
+  - sudo apt-get install xorg-dev
+  - sudo apt-get install libsdl1.2-dev
+  - sudo apt-get install libc6-dev
+  - sudo apt-get install g++-multilib
+  - sudo apt-get install freeglut3-dev
+  - sudo apt-get install freeglut3
+  - sudo apt-get install libglu1-mesa
+  - sudo apt-get install libglu1-mesa-dev
+  - sudo apt-get install mesa-utils
+  - sudo apt-get install mesa-common-dev
+  - sudo apt-get install libx11-dev libgl1-mesa-glx
+  - sudo apt-get install build-essential libgl1-mesa-dev
+  - wget https://www.libsdl.org/release/SDL-1.2.15.tar.gz
+  - tar -xf SDL-1.2.15.tar.gz
+  - cd SDL-1.2.15
+  - ./configure
+  - make
+  - sudo make install
+  - cd ..
+  - wget https://zdoom.org/files/fmod/fmodapi375linux.tar.gz
+  - tar -xf fmodapi375linux.tar.gz
+  - sudo cp fmodapi375linux/api/libfmod-3.75.so /usr/lib
+
+services:
+  - xvfb
+
+
+script: 
+  - make -f Makefile.linux
+  

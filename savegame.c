@@ -1,16 +1,8 @@
 
-#define _CRT_NONSTDC_NO_WARNINGS
-#define  _CRT_SECURE_NO_WARNINGS
-#pragma warning ( disable: 4146  4700 4703 4005)
-
-#pragma warning(push)
-#pragma warning(disable: warning-code) //4996 for _CRT_SECURE_NO_WARNINGS equivalent
-// deprecated code here
 #include <stdio.h>
-#pragma warning(pop)
 #include "savegame.h"
 #include "defs.h"
-#include <windows.h>
+
 
 void *Str; // idb
 int savegames_unk_446DC2 =10;
@@ -20,8 +12,8 @@ char  decryptByteSavegame(int a1, char a2)
 {
 	char result; // al@1
 
-	result = *(byte *)a1 << a2;
-	*(byte *)a1 = result | (*(byte *)a1 >> (8 - a2));
+	result = *(BYTE *)a1 << a2;
+	*(BYTE *)a1 = result | (*(BYTE *)a1 >> (8 - a2));
 	return a1;
 }
 
@@ -30,8 +22,8 @@ char  encryptByteSavegame(int a1, char a2)
 {
 	char result; // al@1
 
-	result = *(byte *)a1 >> a2;
-	*(byte *)a1 = result | (*(byte *)a1 << (8 - a2));
+	result = *(BYTE *)a1 >> a2;
+	*(BYTE *)a1 = result | (*(BYTE *)a1 << (8 - a2));
 	return result;
 }
 
@@ -50,17 +42,17 @@ int  decryptEntireSavegame(int a1, char *Filename)
 	memset(v2, 0, 0x880u);
 	v3 = (int)((char *)v2 + 2176);
 	*(_WORD *)v3 = 0;
-	*(byte *)(v3 + 2) = 0;
+	*(BYTE *)(v3 + 2) = 0;
 	v4 = fopen(Filename, "rb");
 	fread(Str, 0x883u, 1u, v4);
 	fclose(v4);
-	v7 = *(byte *)Str;
+	v7 = *(BYTE *)Str;
 	v5 = 1;
 	do
 	{
 		decryptByteSavegame((int)((char *)Str + v5), v5 % 6);
-		*((byte *)Str + v5) += -17 * v5;
-		*((byte *)Str + v5++) += v7;
+		*((BYTE *)Str + v5) += -17 * v5;
+		*((BYTE *)Str + v5++) += v7;
 	} while ((signed int)v5 < 2179);
 	result = 0;
 	/*do
@@ -84,7 +76,7 @@ char* getSaveGameName(int savegame) {
 		
 		decryptEntireSavegame(0, Filename);
 
-		memcpy(saveGameName, ((byte *)Str + 4), 16);
+		memcpy(saveGameName, ((BYTE *)Str + 4), 16);
 		
 		return saveGameName;
 	}

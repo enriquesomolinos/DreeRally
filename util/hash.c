@@ -1,8 +1,17 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "hash.h"
+
 #include <malloc.h>
 #include <string.h>
+
+
+typedef struct {
+    int size;
+    char *keys[150];
+    char *values[150];
+	int filled;
+} hash_t;
+ 
 
 hash_t *hash_new (int size) {
     hash_t *h = malloc(sizeof (hash_t));
