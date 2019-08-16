@@ -1,4 +1,3 @@
-#pragma once
 
 //el tamaño de los corredores es 108
 

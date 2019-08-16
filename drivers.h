@@ -1,4 +1,4 @@
-#pragma once
+
 
 //el tamaño de los corredores es 108
 
@@ -141,6 +141,6 @@ int dword_461060; // weak
 _UNKNOWN unk_461094; // weak*/
 
 /*
-dword_45EB50				participantes carrera 0 cada uno un byte
+dword_45EB50				participantes carrera 0 cada uno un BYTE
 dword_45EB54				1
 dword_45EB58				2*/

@@ -311,7 +311,7 @@ char __cdecl FMUSIC_PlaySong_43DA40(FMUSIC_MODULE *mod_456C24) //a1
     //while ( v4 < (signed int)&unk_45C4F4 );//5800h /88=256
 	 while ( v3 < 256 );//5800h /88=256
    // v5 = *(_WORD *)(mod_456C24 + 38);
-   // v6 = *(byte *)(mod_456C24 + 296);
+   // v6 = *(BYTE *)(mod_456C24 + 296);
    
 	 
 	 
@@ -1666,7 +1666,7 @@ int __cdecl FMUSIC_XM_Resetcptr_43EB10(FMUSIC_CHANNEL *cptr, FSOUND_SAMPLE	*sptr
 
   //result = a1;
   cptr->volume = (int)sptr->defvol;//16 y 16
-  //v3 = *(byte *)(a1 + 162);
+  //v3 = *(BYTE *)(a1 + 162);
   
   cptr->pan			= sptr->defpan;// 20 y 24
   cptr->envvol		= 32;//52
@@ -1692,10 +1692,11 @@ int __cdecl FMUSIC_XM_Resetcptr_43EB10(FMUSIC_CHANNEL *cptr, FSOUND_SAMPLE	*sptr
     cptr->tremolopos=0; //137
   cptr->tremorpos	= 0;	 //146
   cptr->notectrl |= FMUSIC_VOLUME;
-  cptr->notectrl |= FMUSIC_PAN;//*(byte *)(a1 + 2) |= 6u;
+  cptr->notectrl |= FMUSIC_PAN;//*(BYTE *)(a1 + 2) |= 6u;
   //return result;
 
 }
+
 
 //----- (0043EBB0) --------------------------------------------------------
 char __cdecl sub_43EBB0(int channelId, unsigned __int8 volume)
@@ -1719,9 +1720,9 @@ unsigned __int64 __cdecl sub_43EBD0(int channelId, signed int a2)
                             - ((double)a2 * 0.000015258789 * 6.0
                              + 52.0
                              - 6.0
-                             + (double)*(byte *)(*((_DWORD *)v2 + 2) + 31))
+                             + (double)*(BYTE *)(*((_DWORD *)v2 + 2) + 31))
                             * 64.0
-                            - (double)(*(byte *)(*((_DWORD *)v2 + 2) + 17) / 2));*/
+                            - (double)(*(BYTE *)(*((_DWORD *)v2 + 2) + 17) / 2));*/
     result = (unsigned __int64)((10*12*16*4)
                             - ((double)(a2 * 0.000015258789 * 6.0)
                              + 52.0
@@ -1768,7 +1769,7 @@ int __cdecl FMUSIC_UpdateXMNote_43EC40(FMUSIC_MODULE *mod, int channelId, unsign
     cprt_inst_v9 = soundId;//v9 = 340 * soundId; 340 es el tamaño de instrumet
     iptr_v6 = &mod->instrument[soundId];//cprt_inst_v9];
 
-    cptr_v10 = iptr_v6->keymap[cptr_v5->note];//*(byte *)(cprt_inst_v9 + current_instruent_v8 + 108);
+    cptr_v10 = iptr_v6->keymap[cptr_v5->note];//*(BYTE *)(cprt_inst_v9 + current_instruent_v8 + 108);
     if ( iptr_v6->keymap[cptr_v5->note] < 0x10u ){
 		sptr_v7 = iptr_v6->sample[iptr_v6->keymap[cptr_v5->note]];
 		cptr_v5->sptr = sptr_v7;
@@ -1951,7 +1952,7 @@ char __cdecl FMUSIC_LoadXM_43EF60(FMUSIC_MODULE *mod, FSOUND_FILE_HANDLE *fp)
   int v30; // esi@70
   int v31; // eax@70
   int samplelenbytes_v32; // edi@70
-  byte *buff_v33; // ebx@71
+  BYTE *buff_v33; // ebx@71
   void (__cdecl *v34)(_DWORD, _DWORD, _DWORD, _DWORD, _DWORD); // eax@71
   signed short *wptr_v35; // edi@75
   int i; // eax@75
@@ -1998,7 +1999,7 @@ char __cdecl FMUSIC_LoadXM_43EF60(FMUSIC_MODULE *mod, FSOUND_FILE_HANDLE *fp)
   }
   while ( v2 < 16 );
   mod->Update			     = &FMUSIC_UpdateXM_43EF50;//  *(_DWORD *)(effectStruct + 344) = sub_43EF50;
-  mod->defaultglobalvolume = 64;//*(byte *)(effectStruct + 296) = 64;
+  mod->defaultglobalvolume = 64;//*(BYTE *)(effectStruct + 296) = 64;
  
  // FSOUND_File_Seek_43F7B0(fp);
 
@@ -2027,7 +2028,7 @@ char __cdecl FMUSIC_LoadXM_43EF60(FMUSIC_MODULE *mod, FSOUND_FILE_HANDLE *fp)
     v5 = 0;// effectStruct + 40; //orderlist
     do
     {
-      //v6 = *(byte *)v5;
+      //v6 = *(BYTE *)v5;
       if ( mod->orderlist[v5] >= mod->numpatterns);//+24
         mod->numpatterns = mod->orderlist[v5] + 1; //+24
       ++v5;
@@ -2283,7 +2284,7 @@ LABEL_94:
           {
            //todofix v30 = *(_DWORD *)v50;
             //v31 = *(_DWORD *)(*(_DWORD *)v50 + 4);
-            samplelenbytes_v32 = sptr_v48->length * sptr_v48->bits / 8;// (unsigned int)*(byte *)(*(_DWORD *)v50 + 28) >> 3;
+            samplelenbytes_v32 = sptr_v48->length * sptr_v48->bits / 8;// (unsigned int)*(BYTE *)(*(_DWORD *)v50 + 28) >> 3;
             if ( sptr_v48->length )
             {
 			 buff_v33 = FSOUND_Memory_Calloc((sptr_v48->length * 2)+16);
@@ -2293,14 +2294,14 @@ LABEL_94:
              ///quitado porque parece que no se usa  {
 				  //mod->samplecallback(buff, samplelenbytes, sptr->bits, count, count2);
 						//FSOUND_File_SeekCallback_43AE30(fp, samplelenbytes_v32, SEEK_CUR);
-             ///quitado porque parece que no se usa     mod->samplecallback((int)buff_v33, samplelenbytes_v32, sptr_v48->bits,v52,v51);//*(byte *)(v30 + 28), v52, v51); v34 al principio
+             ///quitado porque parece que no se usa     mod->samplecallback((int)buff_v33, samplelenbytes_v32, sptr_v48->bits,v52,v51);//*(BYTE *)(v30 + 28), v52, v51); v34 al principio
              ///quitado porque parece que no se usa    FSOUND_File_Seek_43F7B0(fp);
              ///quitado porque parece que no se usa  }
               ///quitado porque parece que no se usa else
               ///quitado porque parece que no se usa {
 			  FSOUND_File_Read_43F790(buff_v33, samplelenbytes_v32, fp);
                ///quitado porque parece que no se usa}
-              if (sptr_v48->bits == 8)// *(byte *)(v30 + 28) == 8 )
+              if (sptr_v48->bits == 8)// *(BYTE *)(v30 + 28) == 8 )
               {
                 //v35 = *(void **)v30;
                 wptr_v35 = (signed short *)sptr_v48->buff;
@@ -2308,11 +2309,11 @@ LABEL_94:
                 {
 					*wptr_v35 = (signed short)(buff_v33[i]) << 8;
 					//LOBYTE(*wptr_v35) = 0;
-                  //HIBYTE(*wptr_v35) = *((byte *)&buff_v33+i);
+                  //HIBYTE(*wptr_v35) = *((BYTE *)&buff_v33+i);
 					*wptr_v35 ++;
 
 					//LOBYTE(v37) = 0;
-                  //HIBYTE(v37) = *((byte *)v33 + i);
+                  //HIBYTE(v37) = *((BYTE *)v33 + i);
                   //v35 = (char *)v35 + 2;
        //comentado para uqe funcione  *(_DWORD *)&wptr_v35 + 1 = (signed short)(&buff_v33+i) << 8;
 					//++i;
@@ -2376,7 +2377,7 @@ LABEL_94:
 						{
 							buff[sptr_v48->loopstart+sptr_v48->looplen] = buff[sptr_v48->loopstart];// fix it
 						}
-              //v42 = *(byte *)(v30 + 29);
+              //v42 = *(BYTE *)(v30 + 29);
               /*buff_v43 = *(void **)v30;
 
 

@@ -1,17 +1,10 @@
-#define _CRT_NONSTDC_NO_WARNINGS
-#define  _CRT_SECURE_NO_WARNINGS
-#pragma warning ( disable: 4146  4700 4703 4005)
 
-#pragma warning(push)
-#pragma warning(disable: warning-code) //4996 for _CRT_SECURE_NO_WARNINGS equivalent
-
-#pragma warning(pop)
 
 #include "graphics.h"
 #include "defs.h"
 #include "menus.h"
 #include "dr.h"
-#include <windows.h>
+
 
 const int DEFAULT_BIGLETTER_SPACING_OFFSET = -23;
 
@@ -511,8 +504,8 @@ int __cdecl drawImageWithPosition2(int texture, int height, int width, int scree
         v7 = height;
         do
         {
-          v8 = *(byte *)v4++;
-          *(byte *)result++ = v8;
+          v8 = *(BYTE *)v4++;
+          *(BYTE *)result++ = v8;
           --v7;
         }
         while ( v7 );
@@ -547,8 +540,8 @@ int __cdecl drawImageWithPosition(int icon, int width, int height, int pscreenBu
         v8 = width;
         do
         {
-          if ( *(byte *)screenIcon)
-            *(byte *)screenPos = *(byte *)screenIcon;
+          if ( *(BYTE *)screenIcon)
+            *(BYTE *)screenPos = *(BYTE *)screenIcon;
           ++screenIcon;
           ++screenPos;
           --v8;
@@ -574,9 +567,9 @@ unsigned int __cdecl drawTextWithFont(int font, int a2, const char *text, int sc
   char v9; // al@3
   int v10; // [sp+10h] [bp-8h]@1
 
-  height = *(byte *)(a2 + 1); 
-  width = *(byte *)a2;
-  v10 = *(byte *)(a2 + 1);
+  height = *(BYTE *)(a2 + 1); 
+  width = *(BYTE *)a2;
+  v10 = *(BYTE *)(a2 + 1);
   /*height = 32;
   width = 32;
   v10 = 32;*/
@@ -602,11 +595,11 @@ unsigned int __cdecl drawTextWithFont(int font, int a2, const char *text, int sc
         drawImageWithPosition(font + width * height * ((unsigned __int8)v9 - 32), width, height, (int)((char *)screenBuffer + screenPositionOffset));
 		height = v10;
 		//aqui era -24 pero se ve mal!
-		if(*(byte *)a2== *(byte *)bigLetterSpacing_445848){
+		if(*(BYTE *)a2== *(BYTE *)bigLetterSpacing_445848){
 			
-			screenPositionOffset += *(byte *)(text[v6] + a2 - 30);
+			screenPositionOffset += *(BYTE *)(text[v6] + a2 - 30);
 		}else{
-			screenPositionOffset += *(byte *)(text[v6] + a2 - 24);
+			screenPositionOffset += *(BYTE *)(text[v6] + a2 - 24);
 		}
 		
       }

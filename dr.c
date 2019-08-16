@@ -12,7 +12,6 @@
 #pragma warning(pop)// _ATL_SECURE_NO_DEPRECATE._CRT_SECURE_NO_DEPRECATE
 
 
-#include <windows.h>
 #include <SDL.h>
 #include <SDL_opengl.h>
 #include <math.h>
@@ -37,7 +36,6 @@
 //#include "Music.h"
 
 #include "minifmod_modified/soundSystem.h"
-
 #include "config.h"
 
 
@@ -187,8 +185,8 @@ void loadRaceImagesHUD();
 int sub_4156B0();
 void __cdecl startRace(int a1, int a2);
 
-int __cdecl getSizeMusic(int a1);
-void *__cdecl getMusicStream(int a1);
+int __cdecl getSizeMusic(char * music);
+ void *__cdecl getMusicStream(char* musicName);
 int configJoystick(void); // weak
 char eventDetected();
 char sub_418090();
@@ -355,10 +353,10 @@ int __cdecl colorToPaletteEntry(int a1, signed int a2);
  int __cdecl convertColorToPaletteColor(int a1, int a2);
 int sub_43B2D0();
 int sub_43B2E0();
-int __cdecl draw3dTexture_43B2F0(int a1, int a2, int a3);
+int __cdecl draw3dTexture_43B2F0(int a1, int a2, int a3, int textureId);
 int __cdecl sub_43B370(int a1, int a2, int a3);
 int __cdecl drawTurboBar_43B3A0(int a1, int a2, int a3, char a4);
-void __cdecl SetVideoMode(int a1);
+ void __cdecl SetVideoMode(BOOLEAN fullScreen);
 int __cdecl refreshScreen(int a1);
 int __cdecl setWindowCaption3(int a1);
 int setWindowCaption2();
@@ -381,7 +379,12 @@ char __cdecl musicSetOrder(signed int a1);
 
 int musicPlayMusic();
 int __cdecl loadMenuSoundEffect(unsigned __int8 a1, char a2, int a3, int a4, int a5);
-unsigned __int64 __cdecl FMUSIC_SetBPM_43D8A0(FMUSIC_MODULE *mod_456C24, int bpm);
+
+#ifndef _NO_MINIFMOD
+	unsigned __int64 __cdecl FMUSIC_SetBPM_43D8A0(FMUSIC_MODULE *mod_456C24, int bpm);
+#endif
+
+
 int stopSong();
 int __cdecl stopSoundChannel_43C3E0(unsigned __int8 a1);
 int stopAndOpenMusic();
@@ -437,7 +440,7 @@ _UNKNOWN unk_45FDC4; // weak
   int _mb_cur_max;
 char dukeNukemName[12] = "DUKE NUKEM"; // weak //DUKE
 _UNKNOWN unk_4429C0; // weak
-byte byte_4429E0[28] = //drop mines
+BYTE byte_4429E0[28] = //drop mines
 {
   68,  114,  111,  112,  32,  77,  105,  110,  101,  32,  32,  32,  32,  250,  250,  250,
   250,  250,  250,  250,  250,  250,  250,  250,  0,  0,  0,  0
@@ -458,7 +461,7 @@ char dword_443798[10] = "SANIM.haf\0"; // weak //cambiado porque es este el nomb
 char aStartANewGame[17] = "Start A New Game"; // weak
 char aIswaitingForYo[43] = " is waiting for you to join the next race.";
 int dword_443C34 = 1633971813; // weak
-byte unk_443C40[] = { 0x7f,0,0,0 }; // weak
+BYTE unk_443C40[] = { 0x7f,0,0,0 }; // weak
 //_UNKNOWN unk_443C40; // weak
 
 int dword_443D18 = 1953525061; // weak
@@ -506,7 +509,7 @@ int dword_4451A0 = 163840; // weak
 int dword_4451A4 = 163840; // weak
 int dword_4451AC = 163840; // weak
 
-byte unk_4455B0[] = { 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 };
+BYTE unk_4455B0[] = { 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 };
 
 //_UNKNOWN unk_4455B0; // weak
 int dword_4456B0[] = { 0,1,3,7,0xf,0x1f,0x3f,0x7f,0xff,0x1ff,0x3ff,0x7ff,0xfff }; // weak
@@ -629,7 +632,7 @@ int dword_446E9A = 4210752250; // weak
 char byte_446E9E = 'r'; // weak
 _UNKNOWN unk_446EBC; // weak
 _UNKNOWN unk_446EEE; // weak
-byte byte_446F20[50] =  //Drop mine
+BYTE byte_446F20[50] =  //Drop mine
 {
   68,  114,  111,  112,  32,  77,  105,  110,  101,  32,  32,  32,  32,  250,  250,  250,  250,  250,  250,  250,  250,  250,  250,  250,  108,  101,  102,  116,  32,  97,  108,
   116,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0}; // idb
@@ -660,7 +663,7 @@ int dword_44721E = 4210752250; // weak
 char byte_447222 = 'r'; // weak
 _UNKNOWN unk_447240; // weak
 _UNKNOWN unk_447272; // weak
-byte byte_4472A4[156] =
+BYTE byte_4472A4[156] =
 {
   68,  114,  111,  112,  32,  77,  105,  110,  101,  32,  32,  32,  32,  250,  250,  250,  250,  250,  250,  250,  250,  250,
   250,  250,  108,  101,  102,  116,  32,  97,  108,  116,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
@@ -841,13 +844,17 @@ int dword_456BFC = 0; // weak
 int (*dword_456C00)(void) = NULL; // weak
 
 FMUSIC_MODULE *musicModule = NULL; // weak
+	
 FSOUND_STREAM *soundStream = NULL; // weak
+
 int channel_456C10 = 0; // weak
 int dword_456C14 = 0; // weak
 int dword_456C18 = 0; // weak
 GLvoid *pixels = NULL; // idb
 int sldJoystick_456C20 = 0; // weak
+
 FMUSIC_MODULE *musicModuleModified_456C24 = NULL; // idb
+
 int dword_456C28 = 0; // weak
 int sdlTicks14 = 0; // weak
 
@@ -992,7 +999,7 @@ int dword_45EB58; // weak
 void *tsahpeBpk_45EB5C; // idb
 
 
-byte animPalette[768];
+BYTE animPalette[768];
 
 void *animationSoundEffectByFrame_45EEA4; // idb
 void *repaaniBpk; // idb
@@ -2465,7 +2472,7 @@ int dword_4A7CFC; // weak
 //int dword_4A7D14[256]; // weak
 //int dword_4A7D18[256]; // weak
 //int dword_4A7D1C[256]; // weak
-//byte dword_4A7D20[64]; // idb
+//BYTE dword_4A7D20[64]; // idb
 /// dword_4A7D60[256]; // weak
 //int lastKeysReadIndex_4A7DA0[256]; // weak
 //int lastKeysReadPreviousIndex_4A7DA4[256]; // weak
@@ -2593,7 +2600,7 @@ float flt_4A9A60[256]; // weak
 int circuitRecordMilliseconds_4A9B8C; // weak
 int circuitLR1Bpk_width_4A9B90; // weak
 
-byte circuitPalette_4A9BA0[768];
+BYTE circuitPalette_4A9BA0[768];
 /*char byte_4A9BA0[256]; // weak //paleta del cicuito!
 char byte_4A9BA1[256]; // weak
 char byte_4A9BA2[256]; // weak*/
@@ -2653,7 +2660,7 @@ void *burn1aBpk; // idb
 void *obstacleBpk; // idb
 
 /*paleta de circutiro que no se cual es*/
-byte circuitPalette_4B4020[768]; // weak
+BYTE circuitPalette_4B4020[768]; // weak
 
 /*paleta de circuito 2
 _UNKNOWN unk_4B4020; // weak
@@ -2669,7 +2676,7 @@ int dword_4B4580[256]; // weak
 int dword_4B46BC[256]; // weak
 int dword_4B484C[256]; // weak
 int dword_4B49DC[256]; // weak
-byte polygonColour_4B4B6C[404]; // idb
+BYTE polygonColour_4B4B6C[404]; // idb
 _UNKNOWN unk_4B4D00; // weak
 int dword_4B4D04[256]; // weak  //3152* 100 vueltas
 int dword_4B4D08[256]; // weak
@@ -3374,7 +3381,7 @@ signed int loadCircuitPalette()
   /*v0 = 0;
   do
   {
-    v1 = *((byte *)raceFilePrefix_45EA50 + v0);
+    v1 = *((BYTE *)raceFilePrefix_45EA50 + v0);
     Filename[v0++] = v1;
   }
   while ( v1 );
@@ -3428,7 +3435,7 @@ signed int loadCircuitPalette()
    /* v9 = 0;
     do
     {
-      v10 = *((byte *)raceFilePrefix_45EA50 + v9);
+      v10 = *((BYTE *)raceFilePrefix_45EA50 + v9);
       Filename[v9++] = v10;
     }
     while ( v10 );
@@ -3462,7 +3469,7 @@ signed int loadCircuitPalette()
 	/* v13 = 0;
     do-
     {
-      v14 = *((byte *)raceFilePrefix_45EA50 + v13);
+      v14 = *((BYTE *)raceFilePrefix_45EA50 + v13);
       Filename[v13++] = v14;
     }
     while ( v14 );
@@ -3516,12 +3523,12 @@ void loadCircuitImages1()
 //  char *v10; // edi@11
 //  char v11; // al@12
 //  char v12; // [sp-1h] [bp-11h]@3
-  byte v13[16]; // [sp+0h] [bp-10h]@2
+  BYTE v13[16]; // [sp+0h] [bp-10h]@2
 
  /* v0 = 0;
   do
   {
-    v1 = *((byte *)raceFilePrefix_45EA50 + v0);
+    v1 = *((BYTE *)raceFilePrefix_45EA50 + v0);
     v13[v0++] = v1;
   }
   while ( v1 );
@@ -3541,7 +3548,7 @@ void loadCircuitImages1()
  /* v4 = 0;
   do
   {
-    v5 = *((byte *)raceFilePrefix_45EA50 + v4);
+    v5 = *((BYTE *)raceFilePrefix_45EA50 + v4);
     v13[v4++] = v5;
   }
   while ( v5 );
@@ -3559,7 +3566,7 @@ void loadCircuitImages1()
  /* v8 = 0;
   do
   {
-    v9 = *((byte *)raceFilePrefix_45EA50 + v8);
+    v9 = *((BYTE *)raceFilePrefix_45EA50 + v8);
     v13[v8++] = v9;
   }
   while ( v9 );
@@ -3648,10 +3655,10 @@ int loadCarsImages()
         v12 = participantCarBpk_5034FC;
         do
         {
-          v13 = *((byte *)v12 + v11);
+          v13 = *((BYTE *)v12 + v11);
           if ( v13 >= 0xFu && v13 <= 0x18u )
           {
-            *((byte *)v12 + v11) += 10 * indexRaceParticipant;
+            *((BYTE *)v12 + v11) += 10 * indexRaceParticipant;
             v12 = participantCarBpk_5034FC;
           }
           ++v11;
@@ -3679,12 +3686,12 @@ void parseCircuitSceFile_403190()
   int v4; // eax@5
   
   int v7; // [sp-4h] [bp-14h]@10
-  byte v8[16]; // [sp+0h] [bp-10h]@2
+  BYTE v8[16]; // [sp+0h] [bp-10h]@2
 
  /* v0 = 0;
   do
   {
-    v1 = *((byte *)raceFilePrefix_45EA50 + v0);
+    v1 = *((BYTE *)raceFilePrefix_45EA50 + v0);
     v8[v0++] = v1;
   }
   while ( v1 );
@@ -3749,12 +3756,12 @@ int loadCircuitTabFiles()
 //  char *v10; // edi@11
   char v11; // al@12
 //  char v13; // [sp-1h] [bp-11h]@3
-  byte v14[16]; // [sp+0h] [bp-10h]@2
+  BYTE v14[16]; // [sp+0h] [bp-10h]@2
 
  /* v0 = 0;
   do
   {
-    v1 = *((byte *)raceFilePrefix_45EA50 + v0);
+    v1 = *((BYTE *)raceFilePrefix_45EA50 + v0);
     v14[v0++] = v1;
   }
   while ( v1 );
@@ -3772,7 +3779,7 @@ int loadCircuitTabFiles()
  /* v4 = 0;
   do
   {
-    v5 = *((byte *)raceFilePrefix_45EA50 + v4);
+    v5 = *((BYTE *)raceFilePrefix_45EA50 + v4);
     v14[v4++] = v5;
   }
   while ( v5 );
@@ -3789,7 +3796,7 @@ int loadCircuitTabFiles()
  /* v8 = 0;
   do
   {
-    v9 = *((byte *)raceFilePrefix_45EA50 + v8);
+    v9 = *((BYTE *)raceFilePrefix_45EA50 + v8);
     v14[v8++] = v9;
   }
   while ( v9 );
@@ -3819,12 +3826,12 @@ int loadCircuitDatFiles()
 //  char *v6; // edi@7
 //  char v7; // al@8
 //  char v9; // [sp-1h] [bp-11h]@3
-  byte v10[16]; // [sp+0h] [bp-10h]@2
+  BYTE v10[16]; // [sp+0h] [bp-10h]@2
 
   /*v0 = 0;
   do
   {
-    v1 = *((byte *)raceFilePrefix_45EA50 + v0);
+    v1 = *((BYTE *)raceFilePrefix_45EA50 + v0);
     v10[v0++] = v1;
   }
   while ( v1 );
@@ -3843,7 +3850,7 @@ int loadCircuitDatFiles()
   /*v4 = 0;
   do
   {
-    v5 = *((byte *)raceFilePrefix_45EA50 + v4);
+    v5 = *((BYTE *)raceFilePrefix_45EA50 + v4);
     v10[v4++] = v5;
   }
   while ( v5 );
@@ -3868,12 +3875,12 @@ void loadCircuitShadows()
 //  char *v2; // edi@3
 //  char v3; // al@4
 //  char v4; // [sp-1h] [bp-11h]@3
-  byte v5[16]; // [sp+0h] [bp-10h]@2
+  BYTE v5[16]; // [sp+0h] [bp-10h]@2
 
  /* v0 = 0;
   do
   {
-    v1 = *((byte *)raceFilePrefix_45EA50 + v0);
+    v1 = *((BYTE *)raceFilePrefix_45EA50 + v0);
     v5[v0++] = v1;
   }
   while ( v1 );
@@ -4395,19 +4402,19 @@ int sub_404C30()
     {
       if ( v2 < v1 + 15
         || v2 > v1 + 24
-        || (v5 = v0 * *(byte *)v4,
-            *((float *)v3 - 1) = (double)((v0 * *(byte *)(v4 - 1) + 128) >> 8) * 0.011111111,
+        || (v5 = v0 * *(BYTE *)v4,
+            *((float *)v3 - 1) = (double)((v0 * *(BYTE *)(v4 - 1) + 128) >> 8) * 0.011111111,
             v6 = (v5 + 128) >> 8,
-            v7 = v0 * *(byte *)(v4 + 1),
+            v7 = v0 * *(BYTE *)(v4 + 1),
             *(float *)v3 = (double)v6 * 0.011111111,
             *((float *)v3 + 1) = (double)((v7 + 128) >> 8) * 0.011111111,
             v2 > v1 + 24) )
       {
         v1 = v61;
         v8 = (double)((signed int)(v0
-                                 * (unsigned __int64)(((double)*(byte *)(v4 + 1) * 11.3
-                                                     + (double)*(byte *)(v4 - 1) * 29.9
-                                                     + (double)*(byte *)v4 * 58.8)
+                                 * (unsigned __int64)(((double)*(BYTE *)(v4 + 1) * 11.3
+                                                     + (double)*(BYTE *)(v4 - 1) * 29.9
+                                                     + (double)*(BYTE *)v4 * 58.8)
                                                     * 0.01)
                                  + 128) >> 8)
            * 0.011111111;
@@ -4549,9 +4556,9 @@ int sub_404C30()
     v64 = (double)v62;
     do
     {
-      v35 = (signed int)(v58 * *(byte *)(v34 - 1) - (unsigned __int64)((double)*(byte *)(v34 - 1) * v64 * -1.7) + 128) >> 8;
-      v36 = (signed int)(v58 * *(byte *)v34 - (unsigned __int64)((double)*(byte *)v34 * v64 * -1.7) + 128) >> 8;
-      v37 = (signed int)(v58 * *(byte *)(v34 + 1) - (unsigned __int64)((double)*(byte *)(v34 + 1) * v64 * -1.7) + 128) >> 8;
+      v35 = (signed int)(v58 * *(BYTE *)(v34 - 1) - (unsigned __int64)((double)*(BYTE *)(v34 - 1) * v64 * -1.7) + 128) >> 8;
+      v36 = (signed int)(v58 * *(BYTE *)v34 - (unsigned __int64)((double)*(BYTE *)v34 * v64 * -1.7) + 128) >> 8;
+      v37 = (signed int)(v58 * *(BYTE *)(v34 + 1) - (unsigned __int64)((double)*(BYTE *)(v34 + 1) * v64 * -1.7) + 128) >> 8;
       if ( v35 > 63 )
         LOBYTE(v35) = 63;
       if ( v36 > 63 )
@@ -4585,9 +4592,9 @@ int sub_404C30()
     v65 = (double)v59;
     do
     {
-      v44 = (signed int)(*(byte *)(v43 - 1) * v42 - (unsigned __int64)((double)*(byte *)(v43 - 1) * v65 * -1.7) + 128) >> 8;
-      v45 = (signed int)(*(byte *)v43 * v42 - (unsigned __int64)((double)*(byte *)v43 * v65 * -1.7) + 128) >> 8;
-      v46 = (signed int)(*(byte *)(v43 + 1) * v42 - (unsigned __int64)((double)*(byte *)(v43 + 1) * v65 * -1.7) + 128) >> 8;
+      v44 = (signed int)(*(BYTE *)(v43 - 1) * v42 - (unsigned __int64)((double)*(BYTE *)(v43 - 1) * v65 * -1.7) + 128) >> 8;
+      v45 = (signed int)(*(BYTE *)v43 * v42 - (unsigned __int64)((double)*(BYTE *)v43 * v65 * -1.7) + 128) >> 8;
+      v46 = (signed int)(*(BYTE *)(v43 + 1) * v42 - (unsigned __int64)((double)*(BYTE *)(v43 + 1) * v65 * -1.7) + 128) >> 8;
       if ( v44 > 63 )
         LOBYTE(v44) = 63;
       if ( v45 > 63 )
@@ -4624,15 +4631,15 @@ int sub_404C30()
     {
       if ( v49 < 10 * v48 + 15 || v49 > 10 * v48 + 24 )
       {
-        v51 = *(byte *)(v50 - 1);
-        v52 = *(byte *)v50;
-        v53 = (unsigned __int64)(((double)*(byte *)(v50 + 1) * 11.3 + (double)v51 * 29.9 + (double)v52 * 58.8) * 0.01);
+        v51 = *(BYTE *)(v50 - 1);
+        v52 = *(BYTE *)v50;
+        v53 = (unsigned __int64)(((double)*(BYTE *)(v50 + 1) * 11.3 + (double)v51 * 29.9 + (double)v52 * 58.8) * 0.01);
         HIDWORD(v53) = v60 * v52 + v53 * v63 + 128;
         setPaletteAndGetValue(
           v57,
           (unsigned __int16)(v60 * v51 + v53 * v63 + 128) >> 8,
           SBYTE5(v53),
-          (unsigned __int16)(v60 * *(byte *)(v50 + 1) + v53 * v63 + 128) >> 8);
+          (unsigned __int16)(v60 * *(BYTE *)(v50 + 1) + v53 * v63 + 128) >> 8);
         v48 = userRaceOrder_4A9EA8;
         v49 = v57;
       }
@@ -4920,91 +4927,91 @@ int sub_4055A0()
   {
     do
     {
-      v2 = *(byte *)v1;
-      v3 = *(byte *)(v1 + 1);
-      *((float *)v0 - 1) = (double)*(byte *)(v1 - 1) * 0.011111111;
+      v2 = *(BYTE *)v1;
+      v3 = *(BYTE *)(v1 + 1);
+      *((float *)v0 - 1) = (double)*(BYTE *)(v1 - 1) * 0.011111111;
       v4 = (double)v2;
       v5 = v3;
-      v6 = *(byte *)(v1 + 2);
+      v6 = *(BYTE *)(v1 + 2);
       *(float *)v0 = v4 * 0.011111111;
       v7 = (double)v5;
       v8 = v6;
-      v9 = *(byte *)(v1 + 3);
+      v9 = *(BYTE *)(v1 + 3);
       *((float *)v0 + 1) = v7 * 0.011111111;
       v10 = (double)v8;
       v11 = v9;
-      v12 = *(byte *)(v1 + 4);
+      v12 = *(BYTE *)(v1 + 4);
       *((float *)v0 + 2) = v10 * 0.011111111;
       v13 = (double)v11;
       v14 = v12;
-      v15 = *(byte *)(v1 + 5);
+      v15 = *(BYTE *)(v1 + 5);
       *((float *)v0 + 3) = v13 * 0.011111111;
       v16 = (double)v14;
       v17 = v15;
-      v18 = *(byte *)(v1 + 6);
+      v18 = *(BYTE *)(v1 + 6);
       *((float *)v0 + 4) = v16 * 0.011111111;
       v19 = (double)v17;
       v20 = v18;
-      v21 = *(byte *)(v1 + 7);
+      v21 = *(BYTE *)(v1 + 7);
       *((float *)v0 + 5) = v19 * 0.011111111;
       v22 = (double)v20;
       v23 = v21;
-      v24 = *(byte *)(v1 + 8);
+      v24 = *(BYTE *)(v1 + 8);
       *((float *)v0 + 6) = v22 * 0.011111111;
       v25 = (double)v23;
       v26 = v24;
-      v27 = *(byte *)(v1 + 9);
+      v27 = *(BYTE *)(v1 + 9);
       *((float *)v0 + 7) = v25 * 0.011111111;
       v28 = (double)v26;
       v29 = v27;
-      v30 = *(byte *)(v1 + 10);
+      v30 = *(BYTE *)(v1 + 10);
       *((float *)v0 + 8) = v28 * 0.011111111;
       v31 = (double)v29;
       v32 = v30;
-      v33 = *(byte *)(v1 + 11);
+      v33 = *(BYTE *)(v1 + 11);
       *((float *)v0 + 9) = v31 * 0.011111111;
       v34 = (double)v32;
       v35 = v33;
-      v36 = *(byte *)(v1 + 12);
+      v36 = *(BYTE *)(v1 + 12);
       *((float *)v0 + 10) = v34 * 0.011111111;
       v37 = (double)v35;
       v38 = v36;
-      v39 = *(byte *)(v1 + 13);
+      v39 = *(BYTE *)(v1 + 13);
       *((float *)v0 + 11) = v37 * 0.011111111;
       v40 = (double)v38;
       v41 = v39;
-      v42 = *(byte *)(v1 + 14);
+      v42 = *(BYTE *)(v1 + 14);
       *((float *)v0 + 12) = v40 * 0.011111111;
       v43 = (double)v41;
       v44 = v42;
-      v45 = *(byte *)(v1 + 15);
+      v45 = *(BYTE *)(v1 + 15);
       *((float *)v0 + 13) = v43 * 0.011111111;
       *((float *)v0 + 14) = (double)v44 * 0.011111111;
       v46 = (double)v45;
-      v47 = *(byte *)(v1 + 16);
-      v48 = *(byte *)(v1 + 17);
+      v47 = *(BYTE *)(v1 + 16);
+      v48 = *(BYTE *)(v1 + 17);
       v1 += 24;
       *((float *)v0 + 15) = v46 * 0.011111111;
       v0 = (char *)v0 + 96;
       v49 = (double)v47;
       v50 = v48;
-      v51 = *(byte *)(v1 - 6);
+      v51 = *(BYTE *)(v1 - 6);
       *((float *)v0 - 8) = v49 * 0.011111111;
       v52 = (double)v50;
       v53 = v51;
-      v54 = *(byte *)(v1 - 5);
+      v54 = *(BYTE *)(v1 - 5);
       *((float *)v0 - 7) = v52 * 0.011111111;
       v55 = (double)v53;
       v56 = v54;
-      v57 = *(byte *)(v1 - 4);
+      v57 = *(BYTE *)(v1 - 4);
       *((float *)v0 - 6) = v55 * 0.011111111;
       v58 = (double)v56;
       v59 = v57;
-      v60 = *(byte *)(v1 - 3);
+      v60 = *(BYTE *)(v1 - 3);
       *((float *)v0 - 5) = v58 * 0.011111111;
       v61 = (double)v59;
       v62 = v60;
-      v63 = *(byte *)(v1 - 2);
+      v63 = *(BYTE *)(v1 - 2);
       *((float *)v0 - 4) = v61 * 0.011111111;
       *((float *)v0 - 3) = (double)v62 * 0.011111111;
       *((float *)v0 - 2) = (double)v63 * 0.011111111;
@@ -5157,91 +5164,91 @@ int sub_4055A0()
   {
     do
     {
-      v93 = *(byte *)v1;
-      v94 = *(byte *)(v1 + 1);
-      *((float *)v0 - 1) = (double)*(byte *)(v1 - 1) * 0.0066666668;
+      v93 = *(BYTE *)v1;
+      v94 = *(BYTE *)(v1 + 1);
+      *((float *)v0 - 1) = (double)*(BYTE *)(v1 - 1) * 0.0066666668;
       v95 = (double)v93;
       v96 = v94;
-      v97 = *(byte *)(v1 + 2);
+      v97 = *(BYTE *)(v1 + 2);
       *(float *)v0 = v95 * 0.0066666668;
       v98 = (double)v96;
       v99 = v97;
-      v100 = *(byte *)(v1 + 3);
+      v100 = *(BYTE *)(v1 + 3);
       *((float *)v0 + 1) = v98 * 0.0066666668;
       v101 = (double)v99;
       v102 = v100;
-      v103 = *(byte *)(v1 + 4);
+      v103 = *(BYTE *)(v1 + 4);
       *((float *)v0 + 2) = v101 * 0.0066666668;
       v104 = (double)v102;
       v105 = v103;
-      v106 = *(byte *)(v1 + 5);
+      v106 = *(BYTE *)(v1 + 5);
       *((float *)v0 + 3) = v104 * 0.0066666668;
       v107 = (double)v105;
       v108 = v106;
-      v109 = *(byte *)(v1 + 6);
+      v109 = *(BYTE *)(v1 + 6);
       *((float *)v0 + 4) = v107 * 0.0066666668;
       v110 = (double)v108;
       v111 = v109;
-      v112 = *(byte *)(v1 + 7);
+      v112 = *(BYTE *)(v1 + 7);
       *((float *)v0 + 5) = v110 * 0.0066666668;
       v113 = (double)v111;
       v114 = v112;
-      v115 = *(byte *)(v1 + 8);
+      v115 = *(BYTE *)(v1 + 8);
       *((float *)v0 + 6) = v113 * 0.0066666668;
       v116 = (double)v114;
       v117 = v115;
-      v118 = *(byte *)(v1 + 9);
+      v118 = *(BYTE *)(v1 + 9);
       *((float *)v0 + 7) = v116 * 0.0066666668;
       v119 = (double)v117;
       v120 = v118;
-      v121 = *(byte *)(v1 + 10);
+      v121 = *(BYTE *)(v1 + 10);
       *((float *)v0 + 8) = v119 * 0.0066666668;
       v122 = (double)v120;
       v123 = v121;
-      v124 = *(byte *)(v1 + 11);
+      v124 = *(BYTE *)(v1 + 11);
       *((float *)v0 + 9) = v122 * 0.0066666668;
       v125 = (double)v123;
       v126 = v124;
-      v127 = *(byte *)(v1 + 12);
+      v127 = *(BYTE *)(v1 + 12);
       *((float *)v0 + 10) = v125 * 0.0066666668;
       v128 = (double)v126;
       v129 = v127;
-      v130 = *(byte *)(v1 + 13);
+      v130 = *(BYTE *)(v1 + 13);
       *((float *)v0 + 11) = v128 * 0.0066666668;
       v131 = (double)v129;
       v132 = v130;
-      v133 = *(byte *)(v1 + 14);
+      v133 = *(BYTE *)(v1 + 14);
       *((float *)v0 + 12) = v131 * 0.0066666668;
       v134 = (double)v132;
       v135 = v133;
-      v136 = *(byte *)(v1 + 15);
+      v136 = *(BYTE *)(v1 + 15);
       *((float *)v0 + 13) = v134 * 0.0066666668;
       *((float *)v0 + 14) = (double)v135 * 0.0066666668;
       v137 = (double)v136;
-      v138 = *(byte *)(v1 + 16);
-      v139 = *(byte *)(v1 + 17);
+      v138 = *(BYTE *)(v1 + 16);
+      v139 = *(BYTE *)(v1 + 17);
       v1 += 24;
       *((float *)v0 + 15) = v137 * 0.0066666668;
       v0 = (char *)v0 + 96;
       v140 = (double)v138;
       v141 = v139;
-      v142 = *(byte *)(v1 - 6);
+      v142 = *(BYTE *)(v1 - 6);
       *((float *)v0 - 8) = v140 * 0.0066666668;
       v143 = (double)v141;
       v144 = v142;
-      v145 = *(byte *)(v1 - 5);
+      v145 = *(BYTE *)(v1 - 5);
       *((float *)v0 - 7) = v143 * 0.0066666668;
       v146 = (double)v144;
       v147 = v145;
-      v148 = *(byte *)(v1 - 4);
+      v148 = *(BYTE *)(v1 - 4);
       *((float *)v0 - 6) = v146 * 0.0066666668;
       v149 = (double)v147;
       v150 = v148;
-      v151 = *(byte *)(v1 - 3);
+      v151 = *(BYTE *)(v1 - 3);
       *((float *)v0 - 5) = v149 * 0.0066666668;
       v152 = (double)v150;
       v153 = v151;
-      v154 = *(byte *)(v1 - 2);
+      v154 = *(BYTE *)(v1 - 2);
       *((float *)v0 - 4) = v152 * 0.0066666668;
       *((float *)v0 - 3) = (double)v153 * 0.0066666668;
       *((float *)v0 - 2) = (double)v154 * 0.0066666668;
@@ -6438,7 +6445,7 @@ int keyMenuInRace_407330()
   v14 = &v115;
   do
   {
-    v15 = *((byte *)v14 + 1);
+    v15 = *((BYTE *)v14 + 1);
     v14 = (char *)v14 + 1;
   }
   while ( v15 );
@@ -6459,7 +6466,7 @@ int keyMenuInRace_407330()
   v20 = &v115;
   do
   {
-    v21 = *((byte *)v20 + 1);
+    v21 = *((BYTE *)v20 + 1);
     v20 = (char *)v20 + 1;
   }
   while ( v21 );
@@ -6478,7 +6485,7 @@ int keyMenuInRace_407330()
   v25 = &v115;
   do
   {
-    v26 = *((byte *)v25 + 1);
+    v26 = *((BYTE *)v25 + 1);
     v25 = (char *)v25 + 1;
   }
   while ( v26 );
@@ -6499,7 +6506,7 @@ int keyMenuInRace_407330()
   v32 = &v115;
   do
   {
-    v33 = *((byte *)v32 + 1);
+    v33 = *((BYTE *)v32 + 1);
     v32 = (char *)v32 + 1;
   }
   while ( v33 );
@@ -6520,7 +6527,7 @@ int keyMenuInRace_407330()
   v38 = &v115;
   do
   {
-    v39 = *((byte *)v38 + 1);
+    v39 = *((BYTE *)v38 + 1);
     v38 = (char *)v38 + 1;
   }
   while ( v39 );
@@ -6539,7 +6546,7 @@ int keyMenuInRace_407330()
   v43 = &v115;
   do
   {
-    v44 = *((byte *)v43 + 1);
+    v44 = *((BYTE *)v43 + 1);
     v43 = (char *)v43 + 1;
   }
   while ( v44 );
@@ -6560,7 +6567,7 @@ int keyMenuInRace_407330()
   v50 = &v115;
   do
   {
-    v51 = *((byte *)v50 + 1);
+    v51 = *((BYTE *)v50 + 1);
     v50 = (char *)v50 + 1;
   }
   while ( v51 );
@@ -6581,7 +6588,7 @@ int keyMenuInRace_407330()
   v56 = &v115;
   do
   {
-    v57 = *((byte *)v56 + 1);
+    v57 = *((BYTE *)v56 + 1);
     v56 = (char *)v56 + 1;
   }
   while ( v57 );
@@ -6602,7 +6609,7 @@ int keyMenuInRace_407330()
   v62 = &v115;
   do
   {
-    v63 = *((byte *)v62 + 1);
+    v63 = *((BYTE *)v62 + 1);
     v62 = (char *)v62 + 1;
   }
   while ( v63 );
@@ -6623,7 +6630,7 @@ int keyMenuInRace_407330()
   v68 = &v115;
   do
   {
-    v69 = *((byte *)v68 + 1);
+    v69 = *((BYTE *)v68 + 1);
     v68 = (char *)v68 + 1;
   }
   while ( v69 );
@@ -6642,7 +6649,7 @@ int keyMenuInRace_407330()
   v73 = &v115;
   do
   {
-    v74 = *((byte *)v73 + 1);
+    v74 = *((BYTE *)v73 + 1);
     v73 = (char *)v73 + 1;
   }
   while ( v74 );
@@ -6663,7 +6670,7 @@ int keyMenuInRace_407330()
   v80 = &v115;
   do
   {
-    v81 = *((byte *)v80 + 1);
+    v81 = *((BYTE *)v80 + 1);
     v80 = (char *)v80 + 1;
   }
   while ( v81 );
@@ -6684,7 +6691,7 @@ int keyMenuInRace_407330()
   v86 = &v115;
   do
   {
-    v87 = *((byte *)v86 + 1);
+    v87 = *((BYTE *)v86 + 1);
     v86 = (char *)v86 + 1;
   }
   while ( v87 );
@@ -6703,7 +6710,7 @@ int keyMenuInRace_407330()
   v91 = &v115;
   do
   {
-    v92 = *((byte *)v91 + 1);
+    v92 = *((BYTE *)v91 + 1);
     v91 = (char *)v91 + 1;
   }
   while ( v92 );
@@ -6724,7 +6731,7 @@ int keyMenuInRace_407330()
   v98 = &v115;
   do
   {
-    v99 = *((byte *)v98 + 1);
+    v99 = *((BYTE *)v98 + 1);
     v98 = (char *)v98 + 1;
   }
   while ( v99 );
@@ -7262,7 +7269,7 @@ int generateBigPowerUps()
         result = 0;
         do
         {
-			v21 = *((byte *)obstacleBpk + 16 * (16 * powerups[v8].powerUp_ID_501BA8 + v20 - 16) + result);
+			v21 = *((BYTE *)obstacleBpk + 16 * (16 * powerups[v8].powerUp_ID_501BA8 + v20 - 16) + result);
           if ( v21 )
           {
 			  *((char *)v10 + powerups[v8].posX_501BA0 + v11 * (powerups[v8].posY_501BA4 + v20 - 8) + result - 8) = v21;
@@ -7368,7 +7375,7 @@ int generateBigPowerUps()
           v36 = 0;
           do
           {
-            v37 = *((byte *)obstacleBpk + 16 * (16 * *(int *)((char *)powerups[result].powerUp_ID_501BA8) + v35 - 16) + v36);
+            v37 = *((BYTE *)obstacleBpk + 16 * (16 * *(int *)((char *)powerups[result].powerUp_ID_501BA8) + v35 - 16) + v36);
             if ( v37 )
             {
               *((char *)v25
@@ -7548,7 +7555,7 @@ signed int loadCircuitInfFile()
   /*v0 = 0;
   do
   {
-    v1 = *((byte *)raceFilePrefix_45EA50 + v0);
+    v1 = *((BYTE *)raceFilePrefix_45EA50 + v0);
     *(&circuitSelectedTR_464F50 + v0++) = v1;
   }
   while ( v1 );
@@ -7564,7 +7571,7 @@ signed int loadCircuitInfFile()
   /*v4 = 0;
   do
   {
-    v5 = *((byte *)raceFilePrefix_45EA50 + v4);
+    v5 = *((BYTE *)raceFilePrefix_45EA50 + v4);
     trxINFBin_5034E0[v4++] = v5;
   }
   while ( v5 );
@@ -8383,8 +8390,8 @@ int calculateCircuitReversed_40A9A0()
   v2 = circuitWidth_464F40 * circuitHeight_4A7CF8;
   for ( i = 0; i < circuitWidth_464F40 * circuitHeight_4A7CF8 / 2; ++i )
   {
-    v4 = *((byte *)circuitMatrixHxW_5034F8 + i);
-    *((byte *)circuitMatrixHxW_5034F8 + i) = *((char *)circuitMatrixHxW_5034F8 + v2 - i - 1);
+    v4 = *((BYTE *)circuitMatrixHxW_5034F8 + i);
+    *((BYTE *)circuitMatrixHxW_5034F8 + i) = *((char *)circuitMatrixHxW_5034F8 + v2 - i - 1);
     *((char *)circuitMatrixHxW_5034F8 + circuitWidth_464F40 * circuitHeight_4A7CF8 - i - 1) = v4;
     v1 = circuitHeight_4A7CF8;
     v0 = circuitWidth_464F40;
@@ -8396,8 +8403,8 @@ int calculateCircuitReversed_40A9A0()
   {
     do
     {
-      v7 = *((byte *)trxImaBpk_50A16C + v6);
-      *((byte *)trxImaBpk_50A16C + v6) = *((char *)trxImaBpk_50A16C + v5 - v6 - 1);
+      v7 = *((BYTE *)trxImaBpk_50A16C + v6);
+      *((BYTE *)trxImaBpk_50A16C + v6) = *((char *)trxImaBpk_50A16C + v5 - v6 - 1);
       *((char *)trxImaBpk_50A16C + circuitWidth_464F40 * circuitHeight_4A7CF8 - v6 - 1) = v7;
       v5 = circuitWidth_464F40 * circuitHeight_4A7CF8;
       ++v6;
@@ -8407,17 +8414,17 @@ int calculateCircuitReversed_40A9A0()
   v8 = circuitVaiBpk_width_4A6858 * circuitVaiBpk_height_503508;
   for ( j = 0; j < circuitVaiBpk_width_4A6858 * circuitVaiBpk_height_503508 / 2; ++j )
   {
-    v10 = *((byte *)trxVaiBpk_5034D0 + j);
-    *((byte *)trxVaiBpk_5034D0 + j) = *((char *)trxVaiBpk_5034D0 + v8 - j - 1);
+    v10 = *((BYTE *)trxVaiBpk_5034D0 + j);
+    *((BYTE *)trxVaiBpk_5034D0 + j) = *((char *)trxVaiBpk_5034D0 + v8 - j - 1);
     *((char *)trxVaiBpk_5034D0 + circuitVaiBpk_width_4A6858 * circuitVaiBpk_height_503508 - j - 1) = v10;
     v8 = circuitVaiBpk_width_4A6858 * circuitVaiBpk_height_503508;
   }
   v11 = circuitLR1Bpk_width_4A9B90 * circuitLR1Bpk_height_467000;
   for ( k = 0; k < circuitLR1Bpk_width_4A9B90 * circuitLR1Bpk_height_467000 / 2; ++k )
   {
-    v13 = *((byte *)trxLR1Bpk_4AA920 + k);
-    *((byte *)trxLR1Bpk_4AA920 + k) = *((char *)trxLR1Bpk_4AA920 + v11 - k - 1);
-    *((byte *)trxLR1Bpk_4AA920 + circuitLR1Bpk_width_4A9B90 * circuitLR1Bpk_height_467000 - k - 1) = v13;
+    v13 = *((BYTE *)trxLR1Bpk_4AA920 + k);
+    *((BYTE *)trxLR1Bpk_4AA920 + k) = *((char *)trxLR1Bpk_4AA920 + v11 - k - 1);
+    *((BYTE *)trxLR1Bpk_4AA920 + circuitLR1Bpk_width_4A9B90 * circuitLR1Bpk_height_467000 - k - 1) = v13;
     //v11 = circuitLR1Bpk_width_4A9B90 * circuitLR1Bpk_height_467000;
   }
   v78 = 0;
@@ -8430,9 +8437,9 @@ int calculateCircuitReversed_40A9A0()
     {
       v16 = (char *)participantCarBpk_5034FC + v78 + v15;
       v17 = *v16;
-      *v16 = *((byte *)participantCarBpk_5034FC + v14 + 153599);
+      *v16 = *((BYTE *)participantCarBpk_5034FC + v14 + 153599);
       ++v15;
-      *((byte *)participantCarBpk_5034FC + v14-- + 153599) = v17;
+      *((BYTE *)participantCarBpk_5034FC + v14-- + 153599) = v17;
     }
     while ( v15 < 76800 );
     v18 = v79;
@@ -8443,9 +8450,9 @@ int calculateCircuitReversed_40A9A0()
       v20 = 0;
       do
       {
-        v21 = *((byte *)participantCarBpk_5034FC + v18 + v20);
-        *((byte *)participantCarBpk_5034FC + v18 + v20) = *((byte *)participantCarBpk_5034FC + v19 + v20);
-        *((byte *)participantCarBpk_5034FC + v19 + v20++) = v21;
+        v21 = *((BYTE *)participantCarBpk_5034FC + v18 + v20);
+        *((BYTE *)participantCarBpk_5034FC + v18 + v20) = *((BYTE *)participantCarBpk_5034FC + v19 + v20);
+        *((BYTE *)participantCarBpk_5034FC + v19 + v20++) = v21;
       }
       while ( v20 < 1600 );
       v18 += 1600;
@@ -8463,8 +8470,8 @@ int calculateCircuitReversed_40A9A0()
       {
         v25 = (char *)participantCarBpk_5034FC + v22 + v24;
         v26 = *v25;
-        *v25 = *((byte *)participantCarBpk_5034FC + v23 + v24);
-        *((byte *)participantCarBpk_5034FC + v23 + v24++) = v26;
+        *v25 = *((BYTE *)participantCarBpk_5034FC + v23 + v24);
+        *((BYTE *)participantCarBpk_5034FC + v23 + v24++) = v26;
       }
       while ( v24 < 1600 );
       v22 += 1600;
@@ -8487,9 +8494,9 @@ int calculateCircuitReversed_40A9A0()
     {
       v32 = (char *)pedestrBpk + v29 + v30;
       v33 = *v32;
-      *v32 = *((byte *)pedestrBpk + v31 + 255);
+      *v32 = *((BYTE *)pedestrBpk + v31 + 255);
       ++v30;
-      *((byte *)pedestrBpk + v31-- + 255) = v33;
+      *((BYTE *)pedestrBpk + v31-- + 255) = v33;
     }
     while ( v30 < 128 );
     v29 += 256;
@@ -8775,7 +8782,7 @@ int calculateIAMovements_40AFC0()
           if ( v5 < 0 )
             v7 = -v5;
           if ( v7 < 20
-			  && *((byte *)participantCarBpk_5034FC + 40 * v5 + raceParticipantIngame[v2].participantBpkOffser_4A7D10 + v4 + 820) > 3u
+			  && *((BYTE *)participantCarBpk_5034FC + 40 * v5 + raceParticipantIngame[v2].participantBpkOffser_4A7D10 + v4 + 820) > 3u
             && !dword_4A7E88[v0]
             && ! raceParticipantIngame[v0].hasFinishedTheRace_4A7E0C )
             dword_4A7E88[v0] = 100;
@@ -8847,8 +8854,8 @@ int calculateIAMovements_40AFC0()
     LODWORD(v22) = circuitHeight_4A7CF8 - 1;
   if ( (v22 & 0x80000000) != 0 )
     LODWORD(v22) = 0;
-  BYTE4(v22) = *((byte *)trxLR1Bpk_4AA920 + circuitLR1Bpk_width_4A9B90 * (v19 >> 2) + (v18 >> 2));
-  v23 = *((byte *)trxLR1Bpk_4AA920 + circuitLR1Bpk_width_4A9B90 * ((signed int)v22 >> 2) + (v21 >> 2));
+  BYTE4(v22) = *((BYTE *)trxLR1Bpk_4AA920 + circuitLR1Bpk_width_4A9B90 * (v19 >> 2) + (v18 >> 2));
+  v23 = *((BYTE *)trxLR1Bpk_4AA920 + circuitLR1Bpk_width_4A9B90 * ((signed int)v22 >> 2) + (v21 >> 2));
   v24 = &raceParticipantIngame[ currentDriverSelectedIndex_503518].dword_4A7D20[dword_4A7A20];
   v66 = BYTE4(v22);
   raceParticipantIngame[ currentDriverSelectedIndex_503518].dword_4A7D20[dword_4A7A20] = 0;
@@ -8879,7 +8886,7 @@ int calculateIAMovements_40AFC0()
   v31 = dword_4A7E80[v0];
   if ( v31 < 100 )
   {
-    v32 = *((byte *)trxVaiBpk_5034D0
+    v32 = *((BYTE *)trxVaiBpk_5034D0
           + circuitVaiBpk_width_4A6858 * ((signed int)raceParticipantIngame[v0].absolutePositionY_4A7DB8 >> 2)
           + ( (signed int)raceParticipantIngame[v0].absolutePositionX_4A7DB4 >> 2));
     v33 = 16 - v66;
@@ -8912,7 +8919,7 @@ LABEL_79:
     v37 = rand() & 0x80000001;
     v36 = v37 == 0;
     if ( (v37 & 0x80000000) != 0 )
-      v36 = (((byte)v37 - 1) | 0xFFFFFFFE) == -1;
+      v36 = (((BYTE)v37 - 1) | 0xFFFFFFFE) == -1;
     v38 = currentDriverSelectedIndex_503518;
     if ( v36
       && dword_4A7E98[ currentDriverSelectedIndex_503518] > 3
@@ -9380,7 +9387,7 @@ LABEL_33:
     {
 		//if(debug==1) raceParticipantIngame[v0].currentSteeringAngleDelta_4A7DA8=2;
 		//fix para que funcione como el original
-		v2 = *((byte *)trxVaiBpk_5034D0
+		v2 = *((BYTE *)trxVaiBpk_5034D0
           + circuitVaiBpk_width_4A6858 * ((int)raceParticipantIngame[v0].absolutePositionY_4A7DB8 >> 2)
           + ((int)raceParticipantIngame[v0].absolutePositionX_4A7DB4 >> 2));
 		//v2=1;
@@ -9401,7 +9408,7 @@ LABEL_33:
     {
 	//		if(debug==1) raceParticipantIngame[v0].currentSteeringAngleDelta_4A7DA8=2;
     //fix para que funcione como el original
-		v2 = *((byte *)trxVaiBpk_5034D0
+		v2 = *((BYTE *)trxVaiBpk_5034D0
           + circuitVaiBpk_width_4A6858 * ((int)raceParticipantIngame[v0].absolutePositionY_4A7DB8 >> 2)
           + ((int) raceParticipantIngame[v0].absolutePositionX_4A7DB4 >> 2));
 		//v2=1;
@@ -9507,37 +9514,37 @@ LABEL_64:
   if ( v4 || v40 >= circuitWidth_464F40 * circuitHeight_4A7CF8 )
     v89 = 15;
   else
-    v89 = *((byte *)trxImaBpk_50A16C + v40) & 0xF;
+    v89 = *((BYTE *)trxImaBpk_50A16C + v40) & 0xF;
   v42 = raceParticipantIngame[v0].dword_4A7DC4 +  raceParticipantIngame[currentDriverSelectedIndex_503518].absolutePositionX_4A7DB4
       + circuitWidth_464F40 * (unsigned __int64)(raceParticipantIngame[currentDriverSelectedIndex_503518].absolutePositionY_4A7DB8 +raceParticipantIngame[v0].dword_4A7DC8);
   if ( v42 < 0 || v42 >= circuitWidth_464F40 * circuitHeight_4A7CF8 )
     v87 = 15;
   else
-    v87 = *((byte *)trxImaBpk_50A16C + v42) & 0xF;
+    v87 = *((BYTE *)trxImaBpk_50A16C + v42) & 0xF;
   v43 = raceParticipantIngame[v0].dword_4A7DCC + raceParticipantIngame[currentDriverSelectedIndex_503518].absolutePositionX_4A7DB4
       + circuitWidth_464F40 * (unsigned __int64)(raceParticipantIngame[currentDriverSelectedIndex_503518].absolutePositionY_4A7DB8 + raceParticipantIngame[v0].dword_4A7DD0);
   if ( v43 < 0 || v43 >= circuitWidth_464F40 * circuitHeight_4A7CF8 )
     v83 = 15;
   else
-    v83 = *((byte *)trxImaBpk_50A16C + v43) & 0xF;
+    v83 = *((BYTE *)trxImaBpk_50A16C + v43) & 0xF;
   v44 = raceParticipantIngame[v0].dword_4A7DD4 +  raceParticipantIngame[currentDriverSelectedIndex_503518].absolutePositionX_4A7DB4
       + circuitWidth_464F40 * (unsigned __int64)(raceParticipantIngame[currentDriverSelectedIndex_503518].absolutePositionY_4A7DB8 + raceParticipantIngame[v0].dword_4A7DD8);
   if ( v44 < 0 || v44 >= circuitWidth_464F40 * circuitHeight_4A7CF8 )
     v84 = 15;
   else
-    v84 = *((byte *)trxImaBpk_50A16C + v44) & 0xF;
+    v84 = *((BYTE *)trxImaBpk_50A16C + v44) & 0xF;
   v45 = raceParticipantIngame[v0].dword_4A7DDC +  raceParticipantIngame[currentDriverSelectedIndex_503518].absolutePositionX_4A7DB4
       + circuitWidth_464F40 * (unsigned __int64)(raceParticipantIngame[currentDriverSelectedIndex_503518].absolutePositionY_4A7DB8 + raceParticipantIngame[v0].dword_4A7DE0);
   if ( v45 < 0 || v45 >= circuitWidth_464F40 * circuitHeight_4A7CF8 )
     v85 = 15;
   else
-    v85 = *((byte *)trxImaBpk_50A16C + v45) & 0xF;
+    v85 = *((BYTE *)trxImaBpk_50A16C + v45) & 0xF;
   v46 = (unsigned __int64)( raceParticipantIngame[currentDriverSelectedIndex_503518].absolutePositionX_4A7DB4 + raceParticipantIngame[v0].dword_4A7DE4)
       + circuitWidth_464F40 * (unsigned __int64)(raceParticipantIngame[currentDriverSelectedIndex_503518].absolutePositionY_4A7DB8 + raceParticipantIngame[v0].dword_4A7DE8);
   if ( v46 < 0 || v46 >= circuitWidth_464F40 * circuitHeight_4A7CF8 )
     v81 = 15;
   else
-    v81 = *((byte *)trxImaBpk_50A16C + v46) & 0xF;
+    v81 = *((BYTE *)trxImaBpk_50A16C + v46) & 0xF;
   v47 = (unsigned __int64)( raceParticipantIngame[currentDriverSelectedIndex_503518].absolutePositionX_4A7DB4 + raceParticipantIngame[v0].dword_4A7DEC)
       + circuitWidth_464F40 * (unsigned __int64)(raceParticipantIngame[currentDriverSelectedIndex_503518].absolutePositionY_4A7DB8 + raceParticipantIngame[v0].dword_4A7DF0);
   /*if(debug==1) v47=1;
@@ -9548,7 +9555,7 @@ LABEL_64:
   if ( v47 < 0 || v47 >= circuitWidth_464F40 * circuitHeight_4A7CF8 )
     v82 = 15;
   else
-    v82 = *((byte *)trxImaBpk_50A16C + v47) & 0xF;
+    v82 = *((BYTE *)trxImaBpk_50A16C + v47) & 0xF;
   v48 = (unsigned __int64)( raceParticipantIngame[v0].carAngle_4A7DAC * 0.2666666666666667);
    v49 = 1600 * (v48 + 96* currentDriverSelectedIndex_503518);
   raceParticipantIngame[v0].directionRotation_4A7D0C = v48;
@@ -9934,8 +9941,8 @@ LABEL_115:
           v17 = v83 - v76;
           do
           {
-            if ( *((byte *)participantCarBpk_5034FC + v15 + raceParticipantIngame[v5/4].participantBpkOffser_4A7D10 + v16) > 3u
-              && *((byte *)participantCarBpk_5034FC + v17 + v78 + raceParticipantIngame[v6].participantBpkOffser_4A7D10 + v16) > 3u )
+            if ( *((BYTE *)participantCarBpk_5034FC + v15 + raceParticipantIngame[v5/4].participantBpkOffser_4A7D10 + v16) > 3u
+              && *((BYTE *)participantCarBpk_5034FC + v17 + v78 + raceParticipantIngame[v6].participantBpkOffser_4A7D10 + v16) > 3u )
             {
               v89 = v16 - 20;
               v81 = v17 + v16 - 20;
@@ -10159,7 +10166,7 @@ LABEL_119:
           v65 = v88 - (unsigned __int64)((raceParticipantIngame[v5].dword_4A7DD0) + raceParticipantIngame[v5].absolutePositionY_4A7DB8);
           if ( v63 < 0 )
             v65 = -v63;
-          if ( v65 < 20 && *((byte *)participantCarBpk_5034FC + 40 * v63 + raceParticipantIngame[v5].participantBpkOffser_4A7D10 + v62 + 820) > 3u )
+          if ( v65 < 20 && *((BYTE *)participantCarBpk_5034FC + 40 * v63 + raceParticipantIngame[v5].participantBpkOffser_4A7D10 + v62 + 820) > 3u )
             v74 = 1;
         }
         v66 = v61 - raceParticipantIngame[v5].dword_4A7DC4 + raceParticipantIngame[v5].absolutePositionX_4A7DB4;
@@ -10172,7 +10179,7 @@ LABEL_119:
           v69 = v88 - raceParticipantIngame[v5].dword_4A7DC8 + raceParticipantIngame[v5].absolutePositionY_4A7DB8;
           if ( v67 < 0 )
             v69 = -v67;
-          if ( v69 < 20 && *((byte *)participantCarBpk_5034FC + 40 * v67 + raceParticipantIngame[v5].participantBpkOffser_4A7D10+ v66 + 820) > 3u )
+          if ( v69 < 20 && *((BYTE *)participantCarBpk_5034FC + 40 * v67 + raceParticipantIngame[v5].participantBpkOffser_4A7D10+ v66 + 820) > 3u )
             goto LABEL_120;
         }
         if ( v74 == 1 )
@@ -10892,7 +10899,7 @@ LABEL_41:
       && v47 < circuitHeight_4A7CF8
       && v80 >= 0
       && v80 < circuitWidth_464F40
-      && (*((byte *)trxImaBpk_50A16C + v47 * circuitWidth_464F40 + v80) & 0xFu) < 4 )
+      && (*((BYTE *)trxImaBpk_50A16C + v47 * circuitWidth_464F40 + v80) & 0xFu) < 4 )
     {
       dword_4A7CF0 = v34 + dword_50350C;
       dword_4AA3E4 = v35 + dword_4A6AD8;
@@ -11031,40 +11038,40 @@ int drawGunFlames_40E960()
         {
 		  activeWeapon = raceParticipant2[currentDriverSelectedIndex_503518].activeWeapon_4A68E0;
 		  
-          v6 = *((byte *)*(&flamesBpk[raceParticipant2[currentDriverSelectedIndex_503518].weaponFlameType[activeWeapon]])
+          v6 = *((BYTE *)*(&flamesBpk[raceParticipant2[currentDriverSelectedIndex_503518].weaponFlameType[activeWeapon]])
                + 8 * (v14 + 8 * (raceParticipantIngame[v0].directionRotation_4A7D0C / 2))
                + v5);
           if ( v6 )
           {
-            *(byte *)(v5 + dword_464F14 + v4 + v2 + 96) = v6;
+            *(BYTE *)(v5 + dword_464F14 + v4 + v2 + 96) = v6;
             v0 = currentDriverSelectedIndex_503518;
           }
-          v7 = *((byte *)*(&flamesBpk[raceParticipant2[currentDriverSelectedIndex_503518].weaponFlameType[activeWeapon]])
+          v7 = *((BYTE *)*(&flamesBpk[raceParticipant2[currentDriverSelectedIndex_503518].weaponFlameType[activeWeapon]])
                + 8 * (v14 + 8 * (raceParticipantIngame[v0].directionRotation_4A7D0C / 2))
                + v5
                + 1);
           if ( v7 )
           {
-            *(byte *)(v5 + dword_464F14 + v4 + v2 + 97) = v7;
+            *(BYTE *)(v5 + dword_464F14 + v4 + v2 + 97) = v7;
             v0 = currentDriverSelectedIndex_503518;
           }
-          v8 = *((byte *)*(&flamesBpk[raceParticipant2[currentDriverSelectedIndex_503518].weaponFlameType[activeWeapon]])
+          v8 = *((BYTE *)*(&flamesBpk[raceParticipant2[currentDriverSelectedIndex_503518].weaponFlameType[activeWeapon]])
                + 8 * (v14 + 8 * (raceParticipantIngame[v0].directionRotation_4A7D0C / 2))
                + v5
                + 2);
           if ( v8 )
           {
-            *(byte *)(v5 + dword_464F14 + v4 + v2 + 98) = v8;
+            *(BYTE *)(v5 + dword_464F14 + v4 + v2 + 98) = v8;
             v0 = currentDriverSelectedIndex_503518;
           }
           v9 = v14;
-          v10 = *((byte *)*(&flamesBpk[raceParticipant2[currentDriverSelectedIndex_503518].weaponFlameType[activeWeapon]])
+          v10 = *((BYTE *)*(&flamesBpk[raceParticipant2[currentDriverSelectedIndex_503518].weaponFlameType[activeWeapon]])
                 + 8 * (v14 + 8 * (raceParticipantIngame[v0].directionRotation_4A7D0C/ 2))
                 + v5
                 + 3);
           if ( v10 )
           {
-            *(byte *)(v5 + v4 + dword_464F14 + v2 + 99) = v10;
+            *(BYTE *)(v5 + v4 + dword_464F14 + v2 + 99) = v10;
             v0 = currentDriverSelectedIndex_503518;
           }
           v5 += 4;
@@ -11158,30 +11165,30 @@ int drawShots_40EBC0()
       v6 = v3 << 9;
       do
       {
-        v7 = *((byte *)shotsBpk + v4 + v5);
+        v7 = *((BYTE *)shotsBpk + v4 + v5);
         if ( v7 )
-          *(byte *)(v2 + v6 + dword_464F14 + 96) = v7;
-        v8 = *((byte *)shotsBpk + v4 + v5 + 1);
+          *(BYTE *)(v2 + v6 + dword_464F14 + 96) = v7;
+        v8 = *((BYTE *)shotsBpk + v4 + v5 + 1);
         if ( v8 )
-          *(byte *)(v2 + v6 + dword_464F14 + 97) = v8;
-        v9 = *((byte *)shotsBpk + v4 + v5 + 2);
+          *(BYTE *)(v2 + v6 + dword_464F14 + 97) = v8;
+        v9 = *((BYTE *)shotsBpk + v4 + v5 + 2);
         if ( v9 )
-          *(byte *)(v2 + v6 + dword_464F14 + 98) = v9;
-        v10 = *((byte *)shotsBpk + v4 + v5 + 3);
+          *(BYTE *)(v2 + v6 + dword_464F14 + 98) = v9;
+        v10 = *((BYTE *)shotsBpk + v4 + v5 + 3);
         if ( v10 )
-          *(byte *)(v2 + v6 + dword_464F14 + 99) = v10;
-        v11 = *((byte *)shotsBpk + v4 + v5 + 4);
+          *(BYTE *)(v2 + v6 + dword_464F14 + 99) = v10;
+        v11 = *((BYTE *)shotsBpk + v4 + v5 + 4);
         if ( v11 )
-          *(byte *)(v2 + v6 + dword_464F14 + 100) = v11;
-        v12 = *((byte *)shotsBpk + v4 + v5 + 5);
+          *(BYTE *)(v2 + v6 + dword_464F14 + 100) = v11;
+        v12 = *((BYTE *)shotsBpk + v4 + v5 + 5);
         if ( v12 )
-          *(byte *)(v2 + v6 + dword_464F14 + 101) = v12;
-        v13 = *((byte *)shotsBpk + v4 + v5 + 6);
+          *(BYTE *)(v2 + v6 + dword_464F14 + 101) = v12;
+        v13 = *((BYTE *)shotsBpk + v4 + v5 + 6);
         if ( v13 )
-          *(byte *)(v2 + v6 + dword_464F14 + 102) = v13;
-        v14 = *((byte *)shotsBpk + v4 + v5 + 7);
+          *(BYTE *)(v2 + v6 + dword_464F14 + 102) = v13;
+        v14 = *((BYTE *)shotsBpk + v4 + v5 + 7);
         if ( v14 )
-          *(byte *)(v2 + v6 + dword_464F14 + 103) = v14;
+          *(BYTE *)(v2 + v6 + dword_464F14 + 103) = v14;
         v4 += 8;
         v6 += 512;
       }
@@ -11207,30 +11214,30 @@ int drawShots_40EBC0()
       v23 = v20 << 9;
       do
       {
-        v24 = *((byte *)shotsBpk + v22 + v21);
+        v24 = *((BYTE *)shotsBpk + v22 + v21);
         if ( v24 )
-          *(byte *)(v19 + v23 + dword_464F14 + 96) = v24;
-        v25 = *((byte *)shotsBpk + v22 + v21 + 1);
+          *(BYTE *)(v19 + v23 + dword_464F14 + 96) = v24;
+        v25 = *((BYTE *)shotsBpk + v22 + v21 + 1);
         if ( v25 )
-          *(byte *)(v19 + v23 + dword_464F14 + 97) = v25;
-        v26 = *((byte *)shotsBpk + v22 + v21 + 2);
+          *(BYTE *)(v19 + v23 + dword_464F14 + 97) = v25;
+        v26 = *((BYTE *)shotsBpk + v22 + v21 + 2);
         if ( v26 )
-          *(byte *)(v19 + v23 + dword_464F14 + 98) = v26;
-        v27 = *((byte *)shotsBpk + v22 + v21 + 3);
+          *(BYTE *)(v19 + v23 + dword_464F14 + 98) = v26;
+        v27 = *((BYTE *)shotsBpk + v22 + v21 + 3);
         if ( v27 )
-          *(byte *)(v19 + v23 + dword_464F14 + 99) = v27;
-        v28 = *((byte *)shotsBpk + v22 + v21 + 4);
+          *(BYTE *)(v19 + v23 + dword_464F14 + 99) = v27;
+        v28 = *((BYTE *)shotsBpk + v22 + v21 + 4);
         if ( v28 )
-          *(byte *)(v19 + v23 + dword_464F14 + 100) = v28;
-        v29 = *((byte *)shotsBpk + v22 + v21 + 5);
+          *(BYTE *)(v19 + v23 + dword_464F14 + 100) = v28;
+        v29 = *((BYTE *)shotsBpk + v22 + v21 + 5);
         if ( v29 )
-          *(byte *)(v19 + v23 + dword_464F14 + 101) = v29;
-        v30 = *((byte *)shotsBpk + v22 + v21 + 6);
+          *(BYTE *)(v19 + v23 + dword_464F14 + 101) = v29;
+        v30 = *((BYTE *)shotsBpk + v22 + v21 + 6);
         if ( v30 )
-          *(byte *)(v19 + v23 + dword_464F14 + 102) = v30;
-        v31 = *((byte *)shotsBpk + v22 + v21 + 7);
+          *(BYTE *)(v19 + v23 + dword_464F14 + 102) = v30;
+        v31 = *((BYTE *)shotsBpk + v22 + v21 + 7);
         if ( v31 )
-          *(byte *)(v19 + v23 + dword_464F14 + 103) = v31;
+          *(BYTE *)(v19 + v23 + dword_464F14 + 103) = v31;
         v22 += 8;
         v23 += 512;
       }
@@ -11257,30 +11264,30 @@ int drawShots_40EBC0()
       v40 = v37 << 9;
       do
       {
-        v41 = *((byte *)shotsBpk + v39 + v38);
+        v41 = *((BYTE *)shotsBpk + v39 + v38);
         if ( v41 )
-          *(byte *)(v36 + v40 + dword_464F14 + 96) = v41;
-        v42 = *((byte *)shotsBpk + v39 + v38 + 1);
+          *(BYTE *)(v36 + v40 + dword_464F14 + 96) = v41;
+        v42 = *((BYTE *)shotsBpk + v39 + v38 + 1);
         if ( v42 )
-          *(byte *)(v36 + v40 + dword_464F14 + 97) = v42;
-        v43 = *((byte *)shotsBpk + v39 + v38 + 2);
+          *(BYTE *)(v36 + v40 + dword_464F14 + 97) = v42;
+        v43 = *((BYTE *)shotsBpk + v39 + v38 + 2);
         if ( v43 )
-          *(byte *)(v36 + v40 + dword_464F14 + 98) = v43;
-        v44 = *((byte *)shotsBpk + v39 + v38 + 3);
+          *(BYTE *)(v36 + v40 + dword_464F14 + 98) = v43;
+        v44 = *((BYTE *)shotsBpk + v39 + v38 + 3);
         if ( v44 )
-          *(byte *)(v36 + v40 + dword_464F14 + 99) = v44;
-        v45 = *((byte *)shotsBpk + v39 + v38 + 4);
+          *(BYTE *)(v36 + v40 + dword_464F14 + 99) = v44;
+        v45 = *((BYTE *)shotsBpk + v39 + v38 + 4);
         if ( v45 )
-          *(byte *)(v36 + v40 + dword_464F14 + 100) = v45;
-        v46 = *((byte *)shotsBpk + v39 + v38 + 5);
+          *(BYTE *)(v36 + v40 + dword_464F14 + 100) = v45;
+        v46 = *((BYTE *)shotsBpk + v39 + v38 + 5);
         if ( v46 )
-          *(byte *)(v36 + v40 + dword_464F14 + 101) = v46;
-        v47 = *((byte *)shotsBpk + v39 + v38 + 6);
+          *(BYTE *)(v36 + v40 + dword_464F14 + 101) = v46;
+        v47 = *((BYTE *)shotsBpk + v39 + v38 + 6);
         if ( v47 )
-          *(byte *)(v36 + v40 + dword_464F14 + 102) = v47;
-        v48 = *((byte *)shotsBpk + v39 + v38 + 7);
+          *(BYTE *)(v36 + v40 + dword_464F14 + 102) = v47;
+        v48 = *((BYTE *)shotsBpk + v39 + v38 + 7);
         if ( v48 )
-          *(byte *)(v36 + v40 + dword_464F14 + 103) = v48;
+          *(BYTE *)(v36 + v40 + dword_464F14 + 103) = v48;
         v39 += 8;
         v40 += 512;
       }
@@ -11360,30 +11367,30 @@ LABEL_14:
         v8 = v6 << 9;
         do
         {
-          v9 = *((byte *)smokeBpk + v7 + v2);
+          v9 = *((BYTE *)smokeBpk + v7 + v2);
           if ( v9 )
-            *(byte *)(v5 + v8 + dword_464F14 - 1956) = v9;
-          v10 = *((byte *)smokeBpk + v7 + v2 + 1);
+            *(BYTE *)(v5 + v8 + dword_464F14 - 1956) = v9;
+          v10 = *((BYTE *)smokeBpk + v7 + v2 + 1);
           if ( v10 )
-            *(byte *)(v5 + v8 + dword_464F14 - 1955) = v10;
-          v11 = *((byte *)smokeBpk + v7 + v2 + 2);
+            *(BYTE *)(v5 + v8 + dword_464F14 - 1955) = v10;
+          v11 = *((BYTE *)smokeBpk + v7 + v2 + 2);
           if ( v11 )
-            *(byte *)(v5 + v8 + dword_464F14 - 1954) = v11;
-          v12 = *((byte *)smokeBpk + v7 + v2 + 3);
+            *(BYTE *)(v5 + v8 + dword_464F14 - 1954) = v11;
+          v12 = *((BYTE *)smokeBpk + v7 + v2 + 3);
           if ( v12 )
-            *(byte *)(v5 + v8 + dword_464F14 - 1953) = v12;
-          v13 = *((byte *)smokeBpk + v7 + v2 + 4);
+            *(BYTE *)(v5 + v8 + dword_464F14 - 1953) = v12;
+          v13 = *((BYTE *)smokeBpk + v7 + v2 + 4);
           if ( v13 )
-            *(byte *)(v5 + v8 + dword_464F14 - 1952) = v13;
-          v14 = *((byte *)smokeBpk + v7 + v2 + 5);
+            *(BYTE *)(v5 + v8 + dword_464F14 - 1952) = v13;
+          v14 = *((BYTE *)smokeBpk + v7 + v2 + 5);
           if ( v14 )
-            *(byte *)(v5 + v8 + dword_464F14 - 1951) = v14;
-          v15 = *((byte *)smokeBpk + v7 + v2 + 6);
+            *(BYTE *)(v5 + v8 + dword_464F14 - 1951) = v14;
+          v15 = *((BYTE *)smokeBpk + v7 + v2 + 6);
           if ( v15 )
-            *(byte *)(v5 + v8 + dword_464F14 - 1950) = v15;
-          v16 = *((byte *)smokeBpk + v7 + v2 + 7);
+            *(BYTE *)(v5 + v8 + dword_464F14 - 1950) = v15;
+          v16 = *((BYTE *)smokeBpk + v7 + v2 + 7);
           if ( v16 )
-            *(byte *)(v5 + v8 + dword_464F14 - 1949) = v16;
+            *(BYTE *)(v5 + v8 + dword_464F14 - 1949) = v16;
           v7 += 8;
           v8 += 512;
         }
@@ -11431,30 +11438,30 @@ LABEL_45:
       v21 = v19 << 9;
       do
       {
-        v22 = *((byte *)smokeBpk + v20 + v2);
+        v22 = *((BYTE *)smokeBpk + v20 + v2);
         if ( v22 )
-          *(byte *)(v18 + v21 + dword_464F14 - 1956) = v22;
-        v23 = *((byte *)smokeBpk + v20 + v2 + 1);
+          *(BYTE *)(v18 + v21 + dword_464F14 - 1956) = v22;
+        v23 = *((BYTE *)smokeBpk + v20 + v2 + 1);
         if ( v23 )
-          *(byte *)(v18 + v21 + dword_464F14 - 1955) = v23;
-        v24 = *((byte *)smokeBpk + v20 + v2 + 2);
+          *(BYTE *)(v18 + v21 + dword_464F14 - 1955) = v23;
+        v24 = *((BYTE *)smokeBpk + v20 + v2 + 2);
         if ( v24 )
-          *(byte *)(v18 + v21 + dword_464F14 - 1954) = v24;
-        v25 = *((byte *)smokeBpk + v20 + v2 + 3);
+          *(BYTE *)(v18 + v21 + dword_464F14 - 1954) = v24;
+        v25 = *((BYTE *)smokeBpk + v20 + v2 + 3);
         if ( v25 )
-          *(byte *)(v18 + v21 + dword_464F14 - 1953) = v25;
-        v26 = *((byte *)smokeBpk + v20 + v2 + 4);
+          *(BYTE *)(v18 + v21 + dword_464F14 - 1953) = v25;
+        v26 = *((BYTE *)smokeBpk + v20 + v2 + 4);
         if ( v26 )
-          *(byte *)(v18 + v21 + dword_464F14 - 1952) = v26;
-        v27 = *((byte *)smokeBpk + v20 + v2 + 5);
+          *(BYTE *)(v18 + v21 + dword_464F14 - 1952) = v26;
+        v27 = *((BYTE *)smokeBpk + v20 + v2 + 5);
         if ( v27 )
-          *(byte *)(v18 + v21 + dword_464F14 - 1951) = v27;
-        v28 = *((byte *)smokeBpk + v20 + v2 + 6);
+          *(BYTE *)(v18 + v21 + dword_464F14 - 1951) = v27;
+        v28 = *((BYTE *)smokeBpk + v20 + v2 + 6);
         if ( v28 )
-          *(byte *)(v18 + v21 + dword_464F14 - 1950) = v28;
-        v29 = *((byte *)smokeBpk + v20 + v2 + 7);
+          *(BYTE *)(v18 + v21 + dword_464F14 - 1950) = v28;
+        v29 = *((BYTE *)smokeBpk + v20 + v2 + 7);
         if ( v29 )
-          *(byte *)(v18 + v21 + dword_464F14 - 1949) = v29;
+          *(BYTE *)(v18 + v21 + dword_464F14 - 1949) = v29;
         v20 += 8;
         v21 += 512;
       }
@@ -11547,18 +11554,18 @@ int drawRocket_40F450()
           {
 
 			  //v11 es para poner rocker2bpks
-            v15 = *((byte *)rocket1Bpk + v11 + v13 + v14);
+            v15 = *((BYTE *)rocket1Bpk + v11 + v13 + v14);
             if ( v15 )
-              *(byte *)(v14 + v12 + dword_464F14 + v8 + 96) = v15;
-            v16 = *((byte *)&rocket1Bpk + v11 + v13 + v14 + 1);
+              *(BYTE *)(v14 + v12 + dword_464F14 + v8 + 96) = v15;
+            v16 = *((BYTE *)&rocket1Bpk + v11 + v13 + v14 + 1);
             if ( v16 )
-              *(byte *)(v14 + v12 + dword_464F14 + v8 + 97) = v16;
-            v17 = *((byte *)rocket1Bpk + v11 + v13 + v14 + 2);
+              *(BYTE *)(v14 + v12 + dword_464F14 + v8 + 97) = v16;
+            v17 = *((BYTE *)rocket1Bpk + v11 + v13 + v14 + 2);
             if ( v17 )
-              *(byte *)(v14 + v12 + dword_464F14 + v8 + 98) = v17;
-            v18 = *((byte *)rocket1Bpk + v11 + v13 + v14 + 3);
+              *(BYTE *)(v14 + v12 + dword_464F14 + v8 + 98) = v17;
+            v18 = *((BYTE *)rocket1Bpk + v11 + v13 + v14 + 3);
             if ( v18 )
-              *(byte *)(v14 + v12 + dword_464F14 + v8 + 99) = v18;
+              *(BYTE *)(v14 + v12 + dword_464F14 + v8 + 99) = v18;
             v14 += 4;
           }
           while ( v14 < 16 );
@@ -11740,30 +11747,30 @@ LABEL_85:
           v21 = 0;
           do
           {
-            v22 = *((byte *)mines1aBpk + v21);
+            v22 = *((BYTE *)mines1aBpk + v21);
             if ( v22 )
-              *((byte *)circuitMatrixHxW_5034F8 + circuitWidth_464F40 * v20 + v8) = v22;
-            v23 = *((byte *)mines1aBpk + v21 + 1);
+              *((BYTE *)circuitMatrixHxW_5034F8 + circuitWidth_464F40 * v20 + v8) = v22;
+            v23 = *((BYTE *)mines1aBpk + v21 + 1);
             if ( v23 )
-              *((byte *)circuitMatrixHxW_5034F8 + circuitWidth_464F40 * v20 + v8 + 1) = v23;
-            v24 = *((byte *)mines1aBpk + v21 + 2);
+              *((BYTE *)circuitMatrixHxW_5034F8 + circuitWidth_464F40 * v20 + v8 + 1) = v23;
+            v24 = *((BYTE *)mines1aBpk + v21 + 2);
             if ( v24 )
-              *((byte *)circuitMatrixHxW_5034F8 + circuitWidth_464F40 * v20 + v8 + 2) = v24;
-            v25 = *((byte *)mines1aBpk + v21 + 3);
+              *((BYTE *)circuitMatrixHxW_5034F8 + circuitWidth_464F40 * v20 + v8 + 2) = v24;
+            v25 = *((BYTE *)mines1aBpk + v21 + 3);
             if ( v25 )
-              *((byte *)circuitMatrixHxW_5034F8 + circuitWidth_464F40 * v20 + v8 + 3) = v25;
-            v26 = *((byte *)mines1aBpk + v21 + 4);
+              *((BYTE *)circuitMatrixHxW_5034F8 + circuitWidth_464F40 * v20 + v8 + 3) = v25;
+            v26 = *((BYTE *)mines1aBpk + v21 + 4);
             if ( v26 )
-              *((byte *)circuitMatrixHxW_5034F8 + circuitWidth_464F40 * v20 + v8 + 4) = v26;
-            v27 = *((byte *)mines1aBpk + v21 + 5);
+              *((BYTE *)circuitMatrixHxW_5034F8 + circuitWidth_464F40 * v20 + v8 + 4) = v26;
+            v27 = *((BYTE *)mines1aBpk + v21 + 5);
             if ( v27 )
-              *((byte *)circuitMatrixHxW_5034F8 + circuitWidth_464F40 * v20 + v8 + 5) = v27;
-            v28 = *((byte *)mines1aBpk + v21 + 6);
+              *((BYTE *)circuitMatrixHxW_5034F8 + circuitWidth_464F40 * v20 + v8 + 5) = v27;
+            v28 = *((BYTE *)mines1aBpk + v21 + 6);
             if ( v28 )
-              *((byte *)circuitMatrixHxW_5034F8 + circuitWidth_464F40 * v20 + v8 + 6) = v28;
-            v29 = *((byte *)mines1aBpk + v21 + 7);
+              *((BYTE *)circuitMatrixHxW_5034F8 + circuitWidth_464F40 * v20 + v8 + 6) = v28;
+            v29 = *((BYTE *)mines1aBpk + v21 + 7);
             if ( v29 )
-              *((byte *)circuitMatrixHxW_5034F8 + circuitWidth_464F40 * v20 + v8 + 7) = v29;
+              *((BYTE *)circuitMatrixHxW_5034F8 + circuitWidth_464F40 * v20 + v8 + 7) = v29;
             v21 += 8;
             ++v20;
           }
@@ -11793,7 +11800,7 @@ LABEL_85:
       if ( v33 < 0 )
         v35 = -v33;
       if ( v35 >= 20
-        || *((byte *)participantCarBpk_5034FC + 40 * v33 + raceParticipantIngame[currentDriverSelectedIndex_503518].participantBpkOffser_4A7D10 + v32 + 820) <= 3u
+        || *((BYTE *)participantCarBpk_5034FC + 40 * v33 + raceParticipantIngame[currentDriverSelectedIndex_503518].participantBpkOffser_4A7D10 + v32 + 820) <= 3u
 		|| raceMines[v31].unk_481C08 != -1 )
         goto LABEL_82;
       v36 = 0;
@@ -11803,16 +11810,16 @@ LABEL_85:
         v38 = 0;
         do
         {
-          v39 = *((byte *)blowiBpk + v37 + v38 + 1280);
+          v39 = *((BYTE *)blowiBpk + v37 + v38 + 1280);
           if ( v39 )
             *((char *)circuitMatrixHxW_5034F8 + raceMines[v31].dword_481C00 + circuitWidth_464F40 * (raceMines[v31].dword_481C04 + v36 - 8) + v38 - 8) = v39;
-          v40 = *((byte *)blowiBpk + v37 + v38 + 1281);
+          v40 = *((BYTE *)blowiBpk + v37 + v38 + 1281);
           if ( v40 )
             *((char *)circuitMatrixHxW_5034F8 + raceMines[v31].dword_481C00 + circuitWidth_464F40 * (raceMines[v31].dword_481C04+ v36 - 8) + v38 - 7) = v40;
-          v41 = *((byte *)blowiBpk + v37 + v38 + 1282);
+          v41 = *((BYTE *)blowiBpk + v37 + v38 + 1282);
           if ( v41 )
             *((char *)circuitMatrixHxW_5034F8 + raceMines[v31].dword_481C00 + circuitWidth_464F40 * (raceMines[v31].dword_481C04 + v36 - 8) + v38 - 6) = v41;
-          v42 = *((byte *)blowiBpk + v37 + v38 + 1283);
+          v42 = *((BYTE *)blowiBpk + v37 + v38 + 1283);
           if ( v42 )
             *((char *)circuitMatrixHxW_5034F8 + raceMines[v31].dword_481C00 + circuitWidth_464F40 * (raceMines[v31].dword_481C04 + v36 - 8) + v38 - 5) = v42;
           v38 += 4;
@@ -11934,18 +11941,18 @@ int drawExplosion_40FE20()
             v8 = 0;
             do
             {
-              v9 = *((byte *)blowiBpk + 16 * (v6 + 16 * raceMines[v2].unk_481C08) + v8);
+              v9 = *((BYTE *)blowiBpk + 16 * (v6 + 16 * raceMines[v2].unk_481C08) + v8);
               if ( v9 )
-                *(byte *)(v4 + v8 + v7 + dword_464F14 - 4008) = v9;
-              v10 = *((byte *)blowiBpk + 16 * (v6 + 16 *raceMines[v2].unk_481C08) + v8 + 1);
+                *(BYTE *)(v4 + v8 + v7 + dword_464F14 - 4008) = v9;
+              v10 = *((BYTE *)blowiBpk + 16 * (v6 + 16 *raceMines[v2].unk_481C08) + v8 + 1);
               if ( v10 )
-                *(byte *)(v4 + v8 + v7 + dword_464F14 - 4007) = v10;
-              v11 = *((byte *)blowiBpk + 16 * (v6 + 16 * raceMines[v2].unk_481C08) + v8 + 2);
+                *(BYTE *)(v4 + v8 + v7 + dword_464F14 - 4007) = v10;
+              v11 = *((BYTE *)blowiBpk + 16 * (v6 + 16 * raceMines[v2].unk_481C08) + v8 + 2);
               if ( v11 )
-                *(byte *)(v4 + v8 + v7 + dword_464F14 - 4006) = v11;
-              v12 = *((byte *)blowiBpk + 16 * (v6 + 16 * raceMines[v2].unk_481C08) + v8 + 3);
+                *(BYTE *)(v4 + v8 + v7 + dword_464F14 - 4006) = v11;
+              v12 = *((BYTE *)blowiBpk + 16 * (v6 + 16 * raceMines[v2].unk_481C08) + v8 + 3);
               if ( v12 )
-                *(byte *)(v4 + v8 + v7 + dword_464F14 - 4005) = v12;
+                *(BYTE *)(v4 + v8 + v7 + dword_464F14 - 4005) = v12;
               v8 += 4;
             }
             while ( v8 < 16 );
@@ -12344,7 +12351,7 @@ LABEL_76:
               v28 = 0;
               do
               {
-				  v29 = *((byte *)obstacleBpk + 16 * (16 * powerups[v11].powerUp_ID_501BA8 + v27 - 16) + v28);
+				  v29 = *((BYTE *)obstacleBpk + 16 * (16 * powerups[v11].powerUp_ID_501BA8 + v27 - 16) + v28);
                 if ( v29 )
                 {
 					*((char *)v17 + powerups[v11].posX_501BA0 + v18 * (powerups[v11].posY_501BA4 + v27 - 8) + v28 - 8) = v29;
@@ -12422,7 +12429,7 @@ LABEL_95:
         v38 = 0;
         do
         {
-          v39 = *((byte *)obstacleBpk + 16 * (16 * powerups[v33].powerUp_ID_501BA8 + v37 - 16) + v38);
+          v39 = *((BYTE *)obstacleBpk + 16 * (16 * powerups[v33].powerUp_ID_501BA8 + v37 - 16) + v38);
           if ( v39 )
           {
 			  *((char *)v17 + powerups[v33].posX_501BA0 + v18 * (powerups[v33].posY_501BA4 + v37 - 8) + v38 - 8) = v39;
@@ -12611,9 +12618,9 @@ char getRacePowerUps_410B90()
         LOBYTE(v3) = v6[v2 + 738];
         v7 = (int)&v6[v2];
         if ( (unsigned __int8)v3 > 3u
-          || *(byte *)(v7 + 742) > 3u
-          || *(byte *)(v7 + 898) > 3u
-          || *(byte *)(v7 + 902) > 3u )
+          || *(BYTE *)(v7 + 742) > 3u
+          || *(BYTE *)(v7 + 898) > 3u
+          || *(BYTE *)(v7 + 902) > 3u )
         {
 			v3 = powerups[v1].powerUp_ID_501BA8;
           if ( v3 > 0 )
@@ -12814,7 +12821,7 @@ int killPedestrian_410FA0()
         v6 = raceParticipantIngame[currentDriverSelectedIndex_503518].absolutePositionY_4A7DB8- pedestrian_479AA4[pedestrianIndex].positionY - 8;
         if ( v4 < 0 )
           v6 = -v4;
-        if ( v6 < 20 && *((byte *)participantCarBpk_5034FC + 40 * v4 +raceParticipantIngame[v1].participantBpkOffser_4A7D10 + v3 + 820) > 3u )
+        if ( v6 < 20 && *((BYTE *)participantCarBpk_5034FC + 40 * v4 +raceParticipantIngame[v1].participantBpkOffser_4A7D10 + v3 + 820) > 3u )
         {
 			pedestrian_479AA4[pedestrianIndex].isDied = 1;
            pedestrian_479AA4[pedestrianIndex].byte5= 0;
@@ -13504,12 +13511,12 @@ int recalculateCarBoundary_411D10()
 		  /*TODO FIX esto esta sin inicializarif ( !v22 )
             v21 = v21 + 1.0;*/
           v23 = v17 + circuitWidth_464F40 * (unsigned __int64)v21;
-          if ( (*((byte *)trxImaBpk_50A16C + v23) & 0xF) == 15 )
+          if ( (*((BYTE *)trxImaBpk_50A16C + v23) & 0xF) == 15 )
           {
-            *((byte *)circuitMatrixHxW_5034F8 + v23) = trxBLOTab_479D40[*((byte *)circuitMatrixHxW_5034F8 + v23)];
-            *((byte *)circuitMatrixHxW_5034F8 + v23 + 1) = trxBLOTab_479D40[*((byte *)circuitMatrixHxW_5034F8 + v23 + 1)];
-            *((byte *)circuitMatrixHxW_5034F8 + circuitWidth_464F40 + v23) = trxBLOTab_479D40[*((byte *)circuitMatrixHxW_5034F8 + circuitWidth_464F40 + v23)];
-            *((byte *)circuitMatrixHxW_5034F8 + circuitWidth_464F40 + v23 + 1) = trxBLOTab_479D40[*((byte *)circuitMatrixHxW_5034F8
+            *((BYTE *)circuitMatrixHxW_5034F8 + v23) = trxBLOTab_479D40[*((BYTE *)circuitMatrixHxW_5034F8 + v23)];
+            *((BYTE *)circuitMatrixHxW_5034F8 + v23 + 1) = trxBLOTab_479D40[*((BYTE *)circuitMatrixHxW_5034F8 + v23 + 1)];
+            *((BYTE *)circuitMatrixHxW_5034F8 + circuitWidth_464F40 + v23) = trxBLOTab_479D40[*((BYTE *)circuitMatrixHxW_5034F8 + circuitWidth_464F40 + v23)];
+            *((BYTE *)circuitMatrixHxW_5034F8 + circuitWidth_464F40 + v23 + 1) = trxBLOTab_479D40[*((BYTE *)circuitMatrixHxW_5034F8
                                                                             + circuitWidth_464F40
                                                                             + v23
                                                                             + 1)];
@@ -13527,12 +13534,12 @@ int recalculateCarBoundary_411D10()
           /*TODO FIX esto esta sin inicializarif ( !v34 )
             v33 = v33 + 1.0;*/
           v35 = v29 + circuitWidth_464F40 * (unsigned __int64)v33;
-          if ( (*((byte *)trxImaBpk_50A16C + v35) & 0xF) == 15 )
+          if ( (*((BYTE *)trxImaBpk_50A16C + v35) & 0xF) == 15 )
           {
-            *((byte *)circuitMatrixHxW_5034F8 + v35) = trxBLOTab_479D40[*((byte *)circuitMatrixHxW_5034F8 + v35)];
-            *((byte *)circuitMatrixHxW_5034F8 + v35 + 1) = trxBLOTab_479D40[*((byte *)circuitMatrixHxW_5034F8 + v35 + 1)];
-            *((byte *)circuitMatrixHxW_5034F8 + circuitWidth_464F40 + v35) = trxBLOTab_479D40[*((byte *)circuitMatrixHxW_5034F8 + circuitWidth_464F40 + v35)];
-            *((byte *)circuitMatrixHxW_5034F8 + circuitWidth_464F40 + v35 + 1) = trxBLOTab_479D40[*((byte *)circuitMatrixHxW_5034F8
+            *((BYTE *)circuitMatrixHxW_5034F8 + v35) = trxBLOTab_479D40[*((BYTE *)circuitMatrixHxW_5034F8 + v35)];
+            *((BYTE *)circuitMatrixHxW_5034F8 + v35 + 1) = trxBLOTab_479D40[*((BYTE *)circuitMatrixHxW_5034F8 + v35 + 1)];
+            *((BYTE *)circuitMatrixHxW_5034F8 + circuitWidth_464F40 + v35) = trxBLOTab_479D40[*((BYTE *)circuitMatrixHxW_5034F8 + circuitWidth_464F40 + v35)];
+            *((BYTE *)circuitMatrixHxW_5034F8 + circuitWidth_464F40 + v35 + 1) = trxBLOTab_479D40[*((BYTE *)circuitMatrixHxW_5034F8
                                                                             + circuitWidth_464F40
                                                                             + v35
                                                                             + 1)];
@@ -13549,12 +13556,12 @@ int recalculateCarBoundary_411D10()
           /*TODO FIX esto esta sin inicializarif ( !v46 )
             v45 = v45 + 1.0;*/
           v47 = v41 + circuitWidth_464F40 * (unsigned __int64)v45;
-          if ( (*((byte *)trxImaBpk_50A16C + v47) & 0xF) == 15 )
+          if ( (*((BYTE *)trxImaBpk_50A16C + v47) & 0xF) == 15 )
           {
-            *((byte *)circuitMatrixHxW_5034F8 + v47) = trxBLOTab_479D40[*((byte *)circuitMatrixHxW_5034F8 + v47)];
-            *((byte *)circuitMatrixHxW_5034F8 + v47 + 1) = trxBLOTab_479D40[*((byte *)circuitMatrixHxW_5034F8 + v47 + 1)];
-            *((byte *)circuitMatrixHxW_5034F8 + circuitWidth_464F40 + v47) = trxBLOTab_479D40[*((byte *)circuitMatrixHxW_5034F8 + circuitWidth_464F40 + v47)];
-            *((byte *)circuitMatrixHxW_5034F8 + circuitWidth_464F40 + v47 + 1) = trxBLOTab_479D40[*((byte *)circuitMatrixHxW_5034F8
+            *((BYTE *)circuitMatrixHxW_5034F8 + v47) = trxBLOTab_479D40[*((BYTE *)circuitMatrixHxW_5034F8 + v47)];
+            *((BYTE *)circuitMatrixHxW_5034F8 + v47 + 1) = trxBLOTab_479D40[*((BYTE *)circuitMatrixHxW_5034F8 + v47 + 1)];
+            *((BYTE *)circuitMatrixHxW_5034F8 + circuitWidth_464F40 + v47) = trxBLOTab_479D40[*((BYTE *)circuitMatrixHxW_5034F8 + circuitWidth_464F40 + v47)];
+            *((BYTE *)circuitMatrixHxW_5034F8 + circuitWidth_464F40 + v47 + 1) = trxBLOTab_479D40[*((BYTE *)circuitMatrixHxW_5034F8
                                                                             + circuitWidth_464F40
                                                                             + v47
                                                                             + 1)];
@@ -13571,12 +13578,12 @@ int recalculateCarBoundary_411D10()
           /*TODO FIX esto esta sin inicializarif ( !v58 )
             v57 = v57 + 1.0;*/
           v59 = v53 + circuitWidth_464F40 * (unsigned __int64)v57;
-          if ( (*((byte *)trxImaBpk_50A16C + v59) & 0xF) == 15 )
+          if ( (*((BYTE *)trxImaBpk_50A16C + v59) & 0xF) == 15 )
           {
-            *((byte *)circuitMatrixHxW_5034F8 + v59) = trxBLOTab_479D40[*((byte *)circuitMatrixHxW_5034F8 + v59)];
-            *((byte *)circuitMatrixHxW_5034F8 + v59 + 1) = trxBLOTab_479D40[*((byte *)circuitMatrixHxW_5034F8 + v59 + 1)];
-            *((byte *)circuitMatrixHxW_5034F8 + circuitWidth_464F40 + v59) = trxBLOTab_479D40[*((byte *)circuitMatrixHxW_5034F8 + circuitWidth_464F40 + v59)];
-            *((byte *)circuitMatrixHxW_5034F8 + circuitWidth_464F40 + v59 + 1) = trxBLOTab_479D40[*((byte *)circuitMatrixHxW_5034F8
+            *((BYTE *)circuitMatrixHxW_5034F8 + v59) = trxBLOTab_479D40[*((BYTE *)circuitMatrixHxW_5034F8 + v59)];
+            *((BYTE *)circuitMatrixHxW_5034F8 + v59 + 1) = trxBLOTab_479D40[*((BYTE *)circuitMatrixHxW_5034F8 + v59 + 1)];
+            *((BYTE *)circuitMatrixHxW_5034F8 + circuitWidth_464F40 + v59) = trxBLOTab_479D40[*((BYTE *)circuitMatrixHxW_5034F8 + circuitWidth_464F40 + v59)];
+            *((BYTE *)circuitMatrixHxW_5034F8 + circuitWidth_464F40 + v59 + 1) = trxBLOTab_479D40[*((BYTE *)circuitMatrixHxW_5034F8
                                                                             + circuitWidth_464F40
                                                                             + v59
                                                                             + 1)];
@@ -13728,14 +13735,14 @@ int recalculateCarBoundary_411D10()
                   if ( !v116 )
                     v116 = v116 + 1.0;
                   v118 = v112 + circuitWidth_464F40 * (unsigned __int64)v116;
-                  if ( (*((byte *)trxImaBpk_50A16C + v118) & 0xF) == 15 )
+                  if ( (*((BYTE *)trxImaBpk_50A16C + v118) & 0xF) == 15 )
                   {
-                    *((byte *)circuitMatrixHxW_5034F8 + v118) = trxSKITab_501AA0[*((byte *)circuitMatrixHxW_5034F8 + v118)];
-                    *((byte *)circuitMatrixHxW_5034F8 + v118 + 1) = trxSKITab_501AA0[*((byte *)circuitMatrixHxW_5034F8 + v118 + 1)];
-                    *((byte *)circuitMatrixHxW_5034F8 + circuitWidth_464F40 + v118) = trxSKITab_501AA0[*((byte *)circuitMatrixHxW_5034F8
+                    *((BYTE *)circuitMatrixHxW_5034F8 + v118) = trxSKITab_501AA0[*((BYTE *)circuitMatrixHxW_5034F8 + v118)];
+                    *((BYTE *)circuitMatrixHxW_5034F8 + v118 + 1) = trxSKITab_501AA0[*((BYTE *)circuitMatrixHxW_5034F8 + v118 + 1)];
+                    *((BYTE *)circuitMatrixHxW_5034F8 + circuitWidth_464F40 + v118) = trxSKITab_501AA0[*((BYTE *)circuitMatrixHxW_5034F8
                                                                                  + circuitWidth_464F40
                                                                                  + v118)];
-                    *((byte *)circuitMatrixHxW_5034F8 + circuitWidth_464F40 + v118 + 1) = trxSKITab_501AA0[*((byte *)circuitMatrixHxW_5034F8
+                    *((BYTE *)circuitMatrixHxW_5034F8 + circuitWidth_464F40 + v118 + 1) = trxSKITab_501AA0[*((BYTE *)circuitMatrixHxW_5034F8
                                                                                      + circuitWidth_464F40
                                                                                      + v118
                                                                                      + 1)];
@@ -13753,14 +13760,14 @@ int recalculateCarBoundary_411D10()
                   if ( !v128 )
                     v128 = v128 + 1.0;
                   v130 = v124 + circuitWidth_464F40 * (unsigned __int64)v128;
-                  if ( (*((byte *)trxImaBpk_50A16C + v130) & 0xF) == 15 )
+                  if ( (*((BYTE *)trxImaBpk_50A16C + v130) & 0xF) == 15 )
                   {
-                    *((byte *)circuitMatrixHxW_5034F8 + v130) = trxSKITab_501AA0[*((byte *)circuitMatrixHxW_5034F8 + v130)];
-                    *((byte *)circuitMatrixHxW_5034F8 + v130 + 1) = trxSKITab_501AA0[*((byte *)circuitMatrixHxW_5034F8 + v130 + 1)];
-                    *((byte *)circuitMatrixHxW_5034F8 + circuitWidth_464F40 + v130) = trxSKITab_501AA0[*((byte *)circuitMatrixHxW_5034F8
+                    *((BYTE *)circuitMatrixHxW_5034F8 + v130) = trxSKITab_501AA0[*((BYTE *)circuitMatrixHxW_5034F8 + v130)];
+                    *((BYTE *)circuitMatrixHxW_5034F8 + v130 + 1) = trxSKITab_501AA0[*((BYTE *)circuitMatrixHxW_5034F8 + v130 + 1)];
+                    *((BYTE *)circuitMatrixHxW_5034F8 + circuitWidth_464F40 + v130) = trxSKITab_501AA0[*((BYTE *)circuitMatrixHxW_5034F8
                                                                                  + circuitWidth_464F40
                                                                                  + v130)];
-                    *((byte *)circuitMatrixHxW_5034F8 + circuitWidth_464F40 + v130 + 1) = trxSKITab_501AA0[*((byte *)circuitMatrixHxW_5034F8
+                    *((BYTE *)circuitMatrixHxW_5034F8 + circuitWidth_464F40 + v130 + 1) = trxSKITab_501AA0[*((BYTE *)circuitMatrixHxW_5034F8
                                                                                      + circuitWidth_464F40
                                                                                      + v130
                                                                                      + 1)];
@@ -13779,14 +13786,14 @@ int recalculateCarBoundary_411D10()
                 if ( !v140 )
                   v140 = v140 + 1.0;
                 v142 = v136 + circuitWidth_464F40 * (unsigned __int64)v140;
-                if ( (*((byte *)trxImaBpk_50A16C + v142) & 0xF) == 15 )
+                if ( (*((BYTE *)trxImaBpk_50A16C + v142) & 0xF) == 15 )
                 {
-                  *((byte *)circuitMatrixHxW_5034F8 + v142) = trxSKITab_501AA0[*((byte *)circuitMatrixHxW_5034F8 + v142)];
-                  *((byte *)circuitMatrixHxW_5034F8 + v142 + 1) = trxSKITab_501AA0[*((byte *)circuitMatrixHxW_5034F8 + v142 + 1)];
-                  *((byte *)circuitMatrixHxW_5034F8 + circuitWidth_464F40 + v142) = trxSKITab_501AA0[*((byte *)circuitMatrixHxW_5034F8
+                  *((BYTE *)circuitMatrixHxW_5034F8 + v142) = trxSKITab_501AA0[*((BYTE *)circuitMatrixHxW_5034F8 + v142)];
+                  *((BYTE *)circuitMatrixHxW_5034F8 + v142 + 1) = trxSKITab_501AA0[*((BYTE *)circuitMatrixHxW_5034F8 + v142 + 1)];
+                  *((BYTE *)circuitMatrixHxW_5034F8 + circuitWidth_464F40 + v142) = trxSKITab_501AA0[*((BYTE *)circuitMatrixHxW_5034F8
                                                                                + circuitWidth_464F40
                                                                                + v142)];
-                  *((byte *)circuitMatrixHxW_5034F8 + circuitWidth_464F40 + v142 + 1) = trxSKITab_501AA0[*((byte *)circuitMatrixHxW_5034F8
+                  *((BYTE *)circuitMatrixHxW_5034F8 + circuitWidth_464F40 + v142 + 1) = trxSKITab_501AA0[*((BYTE *)circuitMatrixHxW_5034F8
                                                                                    + circuitWidth_464F40
                                                                                    + v142
                                                                                    + 1)];
@@ -13804,14 +13811,14 @@ int recalculateCarBoundary_411D10()
                 if ( !v152 )
                   v152 = v152 + 1.0;
                 v154 = v148 + circuitWidth_464F40 * (unsigned __int64)v152;
-                if ( (*((byte *)trxImaBpk_50A16C + v154) & 0xF) == 15 )
+                if ( (*((BYTE *)trxImaBpk_50A16C + v154) & 0xF) == 15 )
                 {
-                  *((byte *)circuitMatrixHxW_5034F8 + v154) = trxSKITab_501AA0[*((byte *)circuitMatrixHxW_5034F8 + v154)];
-                  *((byte *)circuitMatrixHxW_5034F8 + v154 + 1) = trxSKITab_501AA0[*((byte *)circuitMatrixHxW_5034F8 + v154 + 1)];
-                  *((byte *)circuitMatrixHxW_5034F8 + circuitWidth_464F40 + v154) = trxSKITab_501AA0[*((byte *)circuitMatrixHxW_5034F8
+                  *((BYTE *)circuitMatrixHxW_5034F8 + v154) = trxSKITab_501AA0[*((BYTE *)circuitMatrixHxW_5034F8 + v154)];
+                  *((BYTE *)circuitMatrixHxW_5034F8 + v154 + 1) = trxSKITab_501AA0[*((BYTE *)circuitMatrixHxW_5034F8 + v154 + 1)];
+                  *((BYTE *)circuitMatrixHxW_5034F8 + circuitWidth_464F40 + v154) = trxSKITab_501AA0[*((BYTE *)circuitMatrixHxW_5034F8
                                                                                + circuitWidth_464F40
                                                                                + v154)];
-                  *((byte *)circuitMatrixHxW_5034F8 + circuitWidth_464F40 + v154 + 1) = trxSKITab_501AA0[*((byte *)circuitMatrixHxW_5034F8
+                  *((BYTE *)circuitMatrixHxW_5034F8 + circuitWidth_464F40 + v154 + 1) = trxSKITab_501AA0[*((BYTE *)circuitMatrixHxW_5034F8
                                                                                    + circuitWidth_464F40
                                                                                    + v154
                                                                                    + 1)];
@@ -13892,15 +13899,15 @@ int checkVaiZones_412DF0()
     {
       v4 = 864 * v1;
       v5 = raceParticipantIngame[v1].actualVaiZone_4A7D00 + 1;
-      if ( *((byte *)v2
+      if ( *((BYTE *)v2
            + v3 * (raceParticipantIngame[v1].frontLeftAbsoluteYPosition_4A7E14 >> 2)
            + (raceParticipantIngame[v1].frontLeftAbsoluteXPosition_4A7E10 >> 2)) == v5
-        || *((byte *)v2
+        || *((BYTE *)v2
            + circuitVaiBpk_width_4A6858 * (raceParticipantIngame[v1].frontRightAbsoluteYPosition_4A7E24  >> 2)
            + (raceParticipantIngame[v1].frontRightAbsoluteXPosition_4A7E20>> 2)) == v5 )
         ++raceParticipantIngame[v1].actualVaiZone_4A7D00;
       v3 = circuitVaiBpk_width_4A6858;
-       if ( *((byte *)v2
+       if ( *((BYTE *)v2
            + circuitVaiBpk_width_4A6858 * ((signed int)(unsigned __int64)raceParticipantIngame[v1].absolutePositionY_4A7DB8 >> 2)
            + ((signed int)(unsigned __int64)raceParticipantIngame[v1].absolutePositionX_4A7DB4 >> 2)) == circuitVaiZones_4A685C
         && raceParticipantIngame[v1].actualVaiZone_4A7D00 < circuitVaiZones_4A685C )
@@ -14242,7 +14249,7 @@ int sub_413500()
   int v1; // ebx@2
   signed int v2; // edx@3
   int v3; // esi@3
-  byte *v4; // eax@4
+  BYTE *v4; // eax@4
   int v5; // ecx@5
   int v6; // ebp@9
   int v7; // edi@10
@@ -14580,7 +14587,7 @@ int  drawSmallLeftBar_413C90(int a1)
       if ( v5 )
       {
         a1 = dword_464F14;
-        *(byte *)(dword_464F14 + v2) = v5;
+        *(BYTE *)(dword_464F14 + v2) = v5;
       }
       v6 = smallbarBpk_50E720[v1+1];
       v7 = v1 + 1;
@@ -14588,7 +14595,7 @@ int  drawSmallLeftBar_413C90(int a1)
       if ( v6 )
       {
         a1 = dword_464F14;
-        *(byte *)(dword_464F14 + v8) = v6;
+        *(BYTE *)(dword_464F14 + v8) = v6;
       }
       v9 = smallbarBpk_50E720[v7];
       v10 = v7 + 1;
@@ -14596,7 +14603,7 @@ int  drawSmallLeftBar_413C90(int a1)
       if ( v9 )
       {
         a1 = dword_464F14;
-        *(byte *)(dword_464F14 + v11) = v9;
+        *(BYTE *)(dword_464F14 + v11) = v9;
       }
       v12 = smallbarBpk_50E720[v10];
       v13 = v10 + 1;
@@ -14604,7 +14611,7 @@ int  drawSmallLeftBar_413C90(int a1)
       if ( v12 )
       {
         a1 = dword_464F14;
-        *(byte *)(dword_464F14 + v14) = v12;
+        *(BYTE *)(dword_464F14 + v14) = v12;
       }
       v1 = v13 + 1;
       v2 = v14 + 1;
@@ -14896,7 +14903,7 @@ int drawLeftRaceBar_414220()
       do
       {
         for ( i = v9 % 2; i < 64; i += 2 )
-          *(byte *)(leftMenuInRaceWidth_456AA0 + ((v8 + v9) << 9) + dword_464F14 + i + 53280) = 0;
+          *(BYTE *)(leftMenuInRaceWidth_456AA0 + ((v8 + v9) << 9) + dword_464F14 + i + 53280) = 0;
         ++v9;
       }
       while ( v9 < 32 );
@@ -15289,7 +15296,7 @@ void loadRaceImagesHUD()
  /* v5 = 0;
   do
   {
-    v6 = *((byte *)raceFilePrefix_45EA50 + v5);
+    v6 = *((BYTE *)raceFilePrefix_45EA50 + v5);
     *(&circuitSelectedTR_464F50 + v5++) = v6;
   }
   while ( v6 );
@@ -16784,13 +16791,13 @@ void *__cdecl getMusicStream(char* musicName)
 		if (filePos ==69) {
 			int z = 0;
 		}
-		v6 = (byte)fileContent[filePos];
+		v6 = (BYTE)fileContent[filePos];
 		 a1 = v6;
 		 a2 = filePos % 7;
-		 result = (byte)a1 << a2;
-		(byte)v6 = result | (byte)a1 >> (8 - a2);
-		v6 = -109 - (17 * filePos) + (byte)v6;
-		v6 = (byte)v6;
+		 result = (BYTE)a1 << a2;
+		v6 = result | (BYTE)a1 >> (8 - a2);
+		v6 = -109 - (17 * filePos) + (BYTE)v6;
+		v6 = (BYTE)v6;
 		
 		fileContent[filePos] = v6;
 		++filePos;
@@ -16835,16 +16842,16 @@ char eventDetected()
   v1 = dword_456B04;
   if ( dword_456B08 )
   {
-    *(byte *)(dword_456B04 + dword_463E08) = v0;
+    *(BYTE *)(dword_456B04 + dword_463E08) = v0;
     v1 = dword_456B04++ + 1;
   }
   if ( dword_456B0C )
   {
-    if ( *(byte *)(v1 + dword_463E08) == 69
-      && *(byte *)(v1 + dword_463E08 + 1) == 78
-      && *(byte *)(v1 + dword_463E08 + 2) == 68 )
+    if ( *(BYTE *)(v1 + dword_463E08) == 69
+      && *(BYTE *)(v1 + dword_463E08 + 1) == 78
+      && *(BYTE *)(v1 + dword_463E08 + 2) == 68 )
       dword_456B0C = 0;
-    v0 = *(byte *)(v1 + dword_463E08);
+    v0 = *(BYTE *)(v1 + dword_463E08);
     dword_456B04 = v1 + 1;
   }
   if ( isDemo_456B10 )
@@ -16923,16 +16930,16 @@ char sub_418090()
   v1 = dword_456B04;
   if ( dword_456B08 )
   {
-    *(byte *)(dword_456B04 + dword_463E08) = v0;
+    *(BYTE *)(dword_456B04 + dword_463E08) = v0;
     v1 = dword_456B04++ + 1;
   }
   if ( dword_456B0C )
   {
-    if ( *(byte *)(v1 + dword_463E08) == 69
-      && *(byte *)(v1 + dword_463E08 + 1) == 78
-      && *(byte *)(v1 + dword_463E08 + 2) == 68 )
+    if ( *(BYTE *)(v1 + dword_463E08) == 69
+      && *(BYTE *)(v1 + dword_463E08 + 1) == 78
+      && *(BYTE *)(v1 + dword_463E08 + 2) == 68 )
       dword_456B0C = 0;
-    v0 = *(byte *)(v1 + dword_463E08);
+    v0 = *(BYTE *)(v1 + dword_463E08);
     dword_456B04 = v1 + 1;
   }
   if ( isDemo_456B10 )
@@ -17027,20 +17034,20 @@ unsigned int sub_4181E0()
 		dword_45F028 = (int)byte_4610C0;//esto empieza con 0
 		//dword_456B40=301
 			
-			v1 = *((byte *)DstBuf + dword_456B40);
+			v1 = *((BYTE *)DstBuf + dword_456B40);
 			v3 = dword_456B40 + 1;
-			dword_456B38 = *((byte *)DstBuf + dword_456B40++);
+			dword_456B38 = *((BYTE *)DstBuf + dword_456B40++);
 			if (v1)
 			{
 				for (i = 0; i < v1 ; dword_456B40 = v3)
 				{
-					v6 = *((byte *)v2 + v3++);
+					v6 = *((BYTE *)v2 + v3++);
 					byte_4610C0[i++] = v6;
 				}
 			}
 		
     }
-    v7 = *(byte *)v4;
+    v7 = *(BYTE *)v4;
     v8 = v4 + 1;
     v0 = 8;
     --v1;
@@ -17061,7 +17068,7 @@ unsigned int sub_4181E0()
         v8 = (int)byte_4610C0;
         dword_45F028 = (int)byte_4610C0;
 		
-		v1 = *((byte *)v2 + v3++);
+		v1 = *((BYTE *)v2 + v3++);
 		
         
 		
@@ -17071,12 +17078,12 @@ unsigned int sub_4181E0()
         {
           for ( j = 0; j < v1 ; dword_456B40 = v3 )
           {
-            v12 = *((byte *)v2 + v3++);
+            v12 = *((BYTE *)v2 + v3++);
 			byte_4610C0[j++] = v12;
           }
         }
       }
-      byte_461F18 = *( byte *)v8;
+      byte_461F18 = *( BYTE *)v8;
       v13 = (unsigned __int8)byte_461F18 << v0;
       ++v8;
       v0 += 8;
@@ -17132,13 +17139,13 @@ void decryptAnimFrame()
   ///lee la paleta de colores que esta al principio
   do
   {
-    *(byte *)v2 = *((byte *)dataBuffer + v1);
+    *(BYTE *)v2 = *((BYTE *)dataBuffer + v1);
     v3 = v2 + 1;
     v4 = v1 + 1;
     dword_456B40 = v4;
-    *(byte *)v3++ = *((byte *)dataBuffer + v4++);
+    *(BYTE *)v3++ = *((BYTE *)dataBuffer + v4++);
     dword_456B40 = v4;
-    *(byte *)v3 = *((byte *)dataBuffer + v4);
+    *(BYTE *)v3 = *((BYTE *)dataBuffer + v4);
     v2 = v3 + 1;
     v1 = v4 + 1;
     dword_456B40 = v1;
@@ -17147,7 +17154,7 @@ void decryptAnimFrame()
   while ( i <256);
  
   //while (v2 < (signed int)&configuration.leftSteeringGamepad);
-  v5 = *((byte *)dataBuffer + v1);
+  v5 = *((BYTE *)dataBuffer + v1);
   dword_456B40 = v1 + 1;
   dword_45FB9C = v6;
   dword_45EA94 = v7;
@@ -17186,7 +17193,7 @@ void decryptAnimFrame()
           break;
         if ( (signed int)v15 >= v12 )
           v15 = 0;
-        *((byte *)anim_currentFrameData + dword_456B44) = v15;
+        *((BYTE *)anim_currentFrameData + dword_456B44) = v15;
         v19 = v15;
         v18 = v15;
         ++dword_456B44;
@@ -17197,7 +17204,7 @@ void decryptAnimFrame()
         if ( (signed int)v14 >= dword_462D5C )
         {
           v16 = v18;
-          *(byte *)v13 = v19;
+          *(BYTE *)v13 = v19;
           v12 = dword_46125C;
           ++v13;
         }
@@ -17205,17 +17212,17 @@ void decryptAnimFrame()
         {
           do
           {
-            *(byte *)v13 = *((byte *)dword_45EA94 + v16);
+            *(BYTE *)v13 = *((BYTE *)dword_45EA94 + v16);
             v16 = *((_DWORD *)dword_462D78 + v16);
             ++v13;
           }
           while ( v16 >= dword_46125C );
         }
 		
-			*(byte *)v13++ = v16;
+			*(BYTE *)v13++ = v16;
 		
         if ( dword_462D5C >= dword_45FC28
-          || (*((byte *)dword_45EA94 + dword_462D5C) = v16,
+          || (*((BYTE *)dword_45EA94 + dword_462D5C) = v16,
               v19 = v16,
               *((_DWORD *)dword_462D78 + dword_462D5C) = v18,
               v18 = v14,
@@ -17230,8 +17237,8 @@ void decryptAnimFrame()
         }
         for ( ; v13 > (unsigned int)dword_45FB9C ; ++dword_456B44 )
         {
-          v17 = *(byte *)(v13-- - 1);
-          *((byte *)anim_currentFrameData + dword_456B44) = v17;
+          v17 = *(BYTE *)(v13-- - 1);
+          *((BYTE *)anim_currentFrameData + dword_456B44) = v17;
         }
       }
       v14 = sub_4181E0();
@@ -17319,12 +17326,12 @@ void __cdecl openAnimation(const char *animFile, int a2, int music, int a4, int 
   //allocateMemory(0xFA00u);
   //allocateMemoryPtr((void*)&v14, 0xFA00u);
   DstBuf = v14;
-  if ( (byte)a2 )
+  if ( (BYTE)a2 )
     loadMusic(a2, music, a4, effect);
   nullsub_1();
   setWindowCaption3(19);
   recalculateSDLTicks_43C740();
-  if ( (byte)a2 )
+  if ( (BYTE)a2 )
   {
     nullsub_1();
     musicPlayMusic();
@@ -17338,8 +17345,8 @@ void __cdecl openAnimation(const char *animFile, int a2, int music, int a4, int 
   fAnimFile = fopen(animFile, "rb");
   //v16 = fopen(&Filename, "rb");
   //dos primeros bytes los frames
-  //para cada frame un byte determina duracion
-  //para cada frame un byte determina el efecto de sonido  
+  //para cada frame un BYTE determina duracion
+  //para cada frame un BYTE determina el efecto de sonido  
   //ahora la paleta de 720 colores porque los 16 * 3 primeros son de los frames de arriba y abajo
   //datos de cada frame
   v17 = getc(fAnimFile);
@@ -17354,14 +17361,14 @@ void __cdecl openAnimation(const char *animFile, int a2, int music, int a4, int 
   v20 = frames;
   for ( i = 0; i < (signed int)frames; ++i )
   {
-    *((byte *)animationSoundEffectByFrame_45EEA4 + i) = getc(fAnimFile);
+    *((BYTE *)animationSoundEffectByFrame_45EEA4 + i) = getc(fAnimFile);
     v20 = frames;
   }
   v22 = 0;
   if ( (signed int)v20 > 0 )
   {
     do
-      *((byte *)framesDelay + v22++) = getc(fAnimFile);
+      *((BYTE *)framesDelay + v22++) = getc(fAnimFile);
     while ( v22 < (signed int)frames);
   }
   v23 = 0;
@@ -17402,23 +17409,23 @@ void __cdecl openAnimation(const char *animFile, int a2, int music, int a4, int 
       v29 = getc(fAnimFile);
       fread(DstBuf, v28 + (v29 << 8), 1u, fAnimFile);
 	  decryptAnimFrame();
-      v30 = v27 + *((byte *)framesDelay + currentFrame);
+      v30 = v27 + *((BYTE *)framesDelay + currentFrame);
       while ( refreshScreenWithDelay() < (unsigned int)v30 )
         ;
       if ( dword_45EA08 )
         callRefreshOrExecuteBackgroundFunction_43C8F0();
       v31 = 16;
       //v32 = (int)&unk_45EBD0;
-	  v32 = (byte *)animPalette+48;
+	  v32 = (BYTE *)animPalette+48;
 
 	  
 	  //seteo lapaleta con el valor fijo
       do
       {
-        v33 = *(byte *)v32;
-        v34 = *(byte *)(v32 + 1);
+        v33 = *(BYTE *)v32;
+        v34 = *(BYTE *)(v32 + 1);
         v35 = v32 + 1;
-        v36 = *(byte *)(v35 + 1);
+        v36 = *(BYTE *)(v35 + 1);
         v32 = v35 + 2;
         
 		setPaletteValue(v31++, v33, v34, v36);
@@ -17436,7 +17443,7 @@ void __cdecl openAnimation(const char *animFile, int a2, int music, int a4, int 
       }
 	  //pinta los datos en pantalla
       memcpy((void *)screenFrameStartPosition, anim_currentFrameData, 4 * screenFrameSize);
-      v39 = *((byte *)animationSoundEffectByFrame_45EEA4 + currentFrame);
+      v39 = *((BYTE *)animationSoundEffectByFrame_45EEA4 + currentFrame);
       if ( v39 )
       {
         v40 = v43;
@@ -17800,22 +17807,22 @@ signed int isVesaCompatible()
 
   dword_456BA4 = 0;
   updateScreenPtr(0);
-  *(byte *)screenPtr = 0;
+  *(BYTE *)screenPtr = 0;
   updateScreenPtr(1);
-  *(byte *)screenPtr = 0;
+  *(BYTE *)screenPtr = 0;
   updateScreenPtr(0);
-  *(byte *)screenPtr = 1;
+  *(BYTE *)screenPtr = 1;
   updateScreenPtr(1);
-  if ( *(byte *)screenPtr == 1 )
+  if ( *(BYTE *)screenPtr == 1 )
   {
     result = 1;
   }
   else
   {
     updateScreenPtr(0);
-    *(byte *)screenPtr = 0;
+    *(BYTE *)screenPtr = 0;
     updateScreenPtr(1);
-    *(byte *)screenPtr = 0;
+    *(BYTE *)screenPtr = 0;
     result = 0;
   }
   return result;
@@ -18013,7 +18020,7 @@ int __cdecl drawKeyCursor(signed int a1, const void *a2, unsigned int a3, int a4
           v9 = v4 >> 16;
           if ( v5 != v4 >> 16 )
             updateScreenPtr(v4 >> 16);
-          *(byte *)(v4++ % 0x10000 + screenPtr) = *(byte *)v7;
+          *(BYTE *)(v4++ % 0x10000 + screenPtr) = *(BYTE *)v7;
           v7 = (char *)v7 + 1;
           v10 = v11 == 1;
           v5 = v9;
@@ -18679,7 +18686,7 @@ unsigned int sub_41CA40()
     *(_DWORD *)(v9 + 4) = 1095518529;
     v9 += 15;
     *(_DWORD *)(v10 + 8) = 541412418;
-    *(byte *)(v10 + 12) = 0;
+    *(BYTE *)(v10 + 12) = 0;
   }
   while ( v9 < (signed int)&numberOfLaps );
   dword_462DAF = 543388517;
@@ -19215,7 +19222,7 @@ unsigned int sub_41CA40()
   v75 = &byte_446F20[-1];
   do
   {
-    v76 = *((byte *)v75 + 1);
+    v76 = *((BYTE *)v75 + 1);
     v75 = (char *)v75 + 1;
   }
   while ( v76 );
@@ -19230,7 +19237,7 @@ unsigned int sub_41CA40()
     v82 = *v80++;
   while ( v82 );
   //TODO fix
-  v83 = v80 - (byte *)v81;
+  v83 = v80 - (char *)v81;
   v84 = (char *)&unk_446F52 - 1;
   do
     v85 = (v84++)[1];
@@ -19368,7 +19375,7 @@ unsigned int sub_41CA40()
   v152 = &byte_4472A4[-1];
   do
   {
-    v153 = *((byte *)v152 + 1);
+    v153 = *((BYTE *)v152 + 1);
     v152 = (char *)v152 + 1;
   }
   while ( v153 );
@@ -19437,12 +19444,12 @@ char drawBottomMenuText()
   v5 = 241932;
   do
   {
-    result = *((byte *)&word_461ED0 + v3);
+    result = *((BYTE *)&word_461ED0 + v3);
     if ( !result )
       result = drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&letterSpacing_4458B0, v4, v5);
-    if ( *((byte *)&word_461ED0 + v3) == 1 )
+    if ( *((BYTE *)&word_461ED0 + v3) == 1 )
       result = drawTextWithFont((int)graphicsGeneral.fsma3bBpk, (int)&letterSpacing_4458B0, v4, v5);
-    if ( *((byte *)&word_461ED0 + v3) == 2 )
+    if ( *((BYTE *)&word_461ED0 + v3) == 2 )
       result = drawTextWithFont((int)graphicsGeneral.fsma3cBpk, (int)&letterSpacing_4458B0, v4, v5);
     v5 += 9600;
     ++v3;
@@ -20214,7 +20221,7 @@ int showCarBought()
   v1 = &v5;
   do
   {
-    v2 = *((byte *)v1 + 1);
+    v2 = *((BYTE *)v1 + 1);
     v1 = (char *)v1 + 1;
   }
   while ( v2 );
@@ -20393,7 +20400,7 @@ signed int __cdecl hasInsuficientMoneyToBuy(int a1)
     v4 = &v10;
     do
     {
-      v5 = *((byte *)v4 + 1);
+      v5 = *((BYTE *)v4 + 1);
       v4 = (char *)v4 + 1;
     }
     while ( v5 );
@@ -20518,13 +20525,13 @@ signed int autoLoadSave()
       memset(v1, 0, 0x880u);
       v2 = (int)((char *)v1 + 2176);
       *(_WORD *)v2 = 0;
-      *(byte *)(v2 + 2) = 0;
+      *(BYTE *)(v2 + 2) = 0;
       v3 = rand();
       v4 = v3 % 255;
-      *(byte *)Str = v3 % 255;
-      *((byte *)Str + 1) = driverId;
-      *((byte *)Str + 2) = useWeapons;
-      *((byte *)Str + 3) = configuration.difficulty;
+      *(BYTE *)Str = v3 % 255;
+      *((BYTE *)Str + 1) = driverId;
+      *((BYTE *)Str + 2) = useWeapons;
+      *((BYTE *)Str + 3) = configuration.difficulty;
       v21 = 1667855697;
       v22 = 1986098027;
       v23 = 1817387109;
@@ -20535,7 +20542,7 @@ signed int autoLoadSave()
       v6 = 0;
       do
       {
-        v7 = *(byte *)v5;
+        v7 = *(BYTE *)v5;
         v5 = (int *)((char *)v5 + 1);
       }
       while ( v7 );
@@ -20543,7 +20550,7 @@ signed int autoLoadSave()
       {
         do
         {
-          *((byte *)Str + v6 + 4) = *((byte *)&v21 + v6);
+          *((BYTE *)Str + v6 + 4) = *((BYTE *)&v21 + v6);
           ++v6;
         }
         while ( v6 < strlen((const char *)&v21) );
@@ -20552,8 +20559,8 @@ signed int autoLoadSave()
       v8 = 1;
       while ( 1 )
       {
-        *((byte *)Str + v8) -= v4;
-        *((byte *)Str + v8) += 17 * v8;
+        *((BYTE *)Str + v8) -= v4;
+        *((BYTE *)Str + v8) += 17 * v8;
         encryptByteSavegame((int)((char *)Str + v8), v8 % 6);
         ++v8;
         if ( (signed int)v8 >= 2179 )
@@ -20575,25 +20582,25 @@ signed int autoLoadSave()
     memset(v10, 0, 0x880u);
     v11 = (int)((char *)v10 + 2176);
     *(_WORD *)v11 = 0;
-    *(byte *)(v11 + 2) = 0;
+    *(BYTE *)(v11 + 2) = 0;
     v12 = fopen("DR.SG7", "rb");
     v13 = v12;
     if ( v12 )
     {
       fread(Str, 0x883u, 1u, v12);
       fclose(v13);
-      v20 = *(byte *)Str;
+      v20 = *(BYTE *)Str;
       v14 = 1;
       do
       {
         decryptByteSavegame((int)((char *)Str + v14), v14 % 6);
-        *((byte *)Str + v14) += -17 * v14;
-        *((byte *)Str + v14++) += v20;
+        *((BYTE *)Str + v14) += -17 * v14;
+        *((BYTE *)Str + v14++) += v20;
       }
       while ( (signed int)v14 < 2179 );
-      driverId = *((byte *)Str + 1);
-      useWeapons = *((byte *)Str + 2);
-	  configuration.difficulty = *((byte *)Str + 3);
+      driverId = *((BYTE *)Str + 1);
+      useWeapons = *((BYTE *)Str + 2);
+	  configuration.difficulty = *((BYTE *)Str + 3);
       memcpy(byte_460840, (char *)Str + 19, 0x870u);
       free(Str);
       v15 = drivers[driverId].spikes;
@@ -20656,8 +20663,8 @@ int sub_4224E0()
     v2 = (unsigned __int8)v1[v0 + 2];
     v3 = (int)&v1[v0];
     v4 = (double)v2;
-    v5 = (double)*(byte *)(v3 + 1);
-    v6 = (double)*(byte *)v3;
+    v5 = (double)*(BYTE *)(v3 + 1);
+    v6 = (double)*(BYTE *)v3;
     sub_418B00(v6, v5, v4);
     //v7 = dword_46086C[27 * driverId];
 	v7 = drivers[driverId].colour;
@@ -20665,8 +20672,8 @@ int sub_4224E0()
     v9 = (unsigned __int8)v8[v7 + 2];
     v10 = (int)&v8[v7];
     v11 = (double)v9;
-    v12 = (double)*(byte *)(v10 + 1);
-    v13 = (double)*(byte *)v10;
+    v12 = (double)*(BYTE *)(v10 + 1);
+    v13 = (double)*(BYTE *)v10;
     sub_41ED20(v13, v12, v11);
   }
   if (graphicsGeneral.bgcopPal)
@@ -20680,21 +20687,21 @@ int sub_4224E0()
     {
       v15 = (double)v29;
       v16 = colorToPaletteEntry(
-              (unsigned int)(unsigned __int64)((double)*((byte *)graphicsGeneral.bgcopPal + 2 * dword_456754 + dword_456754)
+              (unsigned int)(unsigned __int64)((double)*((BYTE *)graphicsGeneral.bgcopPal + 2 * dword_456754 + dword_456754)
                                              * 0.015625
                                              * v15) << 16,
               6553600);
       v17 = graphicsGeneral.bgcopPal;
       palette1[index] = v16;
       v18 = colorToPaletteEntry(
-              (unsigned int)(unsigned __int64)((double)*((byte *)v17 + 2 * dword_456754 + dword_456754 + 1)
+              (unsigned int)(unsigned __int64)((double)*((BYTE *)v17 + 2 * dword_456754 + dword_456754 + 1)
                                              * 0.015625
                                              * v15) << 16,
               6553600);
       v19 = graphicsGeneral.bgcopPal;
 	  palette1[index+1] = v18;
 	  palette1[index+2] = colorToPaletteEntry(
-                               (unsigned int)(unsigned __int64)((double)*((byte *)v19
+                               (unsigned int)(unsigned __int64)((double)*((BYTE *)v19
                                                                         + 2 * dword_456754
                                                                         + dword_456754
                                                                         + 2)
@@ -20705,21 +20712,21 @@ int sub_4224E0()
 	  index = index + 3;
 	 /* v15 = (double)v29;
 	  v16 = colorToPaletteEntry(
-		  (unsigned int)(unsigned __int64)((double)*((byte *)graphicsGeneral.bgcopPal + 2 * dword_456754 + dword_456754)
+		  (unsigned int)(unsigned __int64)((double)*((BYTE *)graphicsGeneral.bgcopPal + 2 * dword_456754 + dword_456754)
 			  * 0.015625
 			  * v15) << 16,
 		  6553600);
 	  v17 = graphicsGeneral.bgcopPal;
 	  *(_DWORD *)(v14 - 4) = v16;
 	  v18 = colorToPaletteEntry(
-		  (unsigned int)(unsigned __int64)((double)*((byte *)v17 + 2 * dword_456754 + dword_456754 + 1)
+		  (unsigned int)(unsigned __int64)((double)*((BYTE *)v17 + 2 * dword_456754 + dword_456754 + 1)
 			  * 0.015625
 			  * v15) << 16,
 		  6553600);
 	  v19 = graphicsGeneral.bgcopPal;
 	  *(_DWORD *)v14 = v18;
 	  *(_DWORD *)(v14 + 4) = colorToPaletteEntry(
-		  (unsigned int)(unsigned __int64)((double)*((byte *)v19
+		  (unsigned int)(unsigned __int64)((double)*((BYTE *)v19
 			  + 2 * dword_456754
 			  + dword_456754
 			  + 2)
@@ -20993,17 +21000,17 @@ void __cdecl addParticipantToRace(signed int a1)
       }
       while ( participantInRaceById_45EA80[v3] == 1 );
       v14 = participantsRace[race];
-	  //v14 = *((byte *)&word_461EB4 + race);
+	  //v14 = *((BYTE *)&word_461EB4 + race);
 	  
       v15 = v3;
 	  //v15 = 108 * v3;
       participantInRaceById_45EA80[v3] = 1;
 	  
 	  racePositions[race][v14] = v3;
-	  //*((byte *)&dword_45EB50[race] + v14) = v3;
+	  //*((BYTE *)&dword_45EB50[race] + v14) = v3;
 
 	 
-	 //* ((byte *)&word_461EB4 + race) = v14 + 1;
+	 //* ((BYTE *)&word_461EB4 + race) = v14 + 1;
 	  participantsRace[race ] = v14 + 1;
       itoa(drivers[v3].rank, &DstBuf, 10);
 	  //itoa(dword_460888[27 * v3], &DstBuf, 10);
@@ -21020,7 +21027,7 @@ void __cdecl addParticipantToRace(signed int a1)
       v19 = &v34;
       do
       {
-        v20 = *((byte *)v19 + 1);
+        v20 = *((BYTE *)v19 + 1);
         v19 = (char *)v19 + 1;
       }
       while ( v20 );
@@ -21046,7 +21053,7 @@ void __cdecl addParticipantToRace(signed int a1)
       v27 = &v34;
       do
       {
-        v28 = *((byte *)v27 + 1);
+        v28 = *((BYTE *)v27 + 1);
         v27 = (char *)v27 + 1;
       }
       while ( v28 );
@@ -21055,7 +21062,7 @@ void __cdecl addParticipantToRace(signed int a1)
       v29 = (char *)v27 + 4 * (v26 >> 2);
       v31 = v26 & 3;
 	  */
-	  //v32 = 9 * *((byte *)&word_461EB4 + race);
+	  //v32 = 9 * *((BYTE *)&word_461EB4 + race);
 	  v32 = 9 * participantsRace[race];
       //memcpy(v29, v30, v31);
       drawTextWithFont((int)graphicsGeneral.fmed1aBpk, (int)&unk_445928, v24, 160 * (race  + 8 * v32) + 163874);
@@ -21137,14 +21144,14 @@ int __cdecl sub_423C90(int a1, int a2)
         v12 = 0;
         do
         {
-          v13 = *((byte *)&dword_45FA74 + v12);
+          v13 = *((BYTE *)&dword_45FA74 + v12);
           if ( v13 == v5 )
           {
-            *((byte *)&dword_45FA74 + v12) = v17;
+            *((BYTE *)&dword_45FA74 + v12) = v17;
           }
           else if ( v13 == v17 )
           {
-            *((byte *)&dword_45FA74 + v12) = v5;
+            *((BYTE *)&dword_45FA74 + v12) = v5;
           }
           ++v12;
         }
@@ -21369,7 +21376,7 @@ int calculateNextRaces()
     v6 = rand() & 0x80000001;
     v5 = v6 == 0;
     if ( (v6 & 0x80000000) != 0 )
-      v5 = (((byte)v6 - 1) | 0xFFFFFFFE) == -1;
+      v5 = (((BYTE)v6 - 1) | 0xFFFFFFFE) == -1;
     if ( v5 )
       circuitsToSelect_46126C[0] += 9;
   }  
@@ -21383,7 +21390,7 @@ int calculateNextRaces()
     v8 = rand() & 0x80000001;
     v7 = v8 == 0;
     if ( (v8 & 0x80000000) != 0 )
-      v7 = (((byte)v8 - 1) | 0xFFFFFFFE) == -1;
+      v7 = (((BYTE)v8 - 1) | 0xFFFFFFFE) == -1;
     v9 = circuitsToSelect_46126C[1];
 	//v9 = byte_46126D;
     if ( v7 )
@@ -21412,8 +21419,8 @@ int calculateNextRaces()
 	  //byte_46126E += 9;
     }
   }
-  //while ( dword_456788 == (unsigned __int8)result || byte_46126D == (byte)result );
-  while (lastCircuitsSelected_456780[2] == (unsigned __int8)result || circuitsToSelect_46126C[1] == (byte)result);
+  //while ( dword_456788 == (unsigned __int8)result || byte_46126D == (BYTE)result );
+  while (lastCircuitsSelected_456780[2] == (unsigned __int8)result || circuitsToSelect_46126C[1] == (BYTE)result);
   lastCircuitsSelected_456780[2] = (unsigned __int8)result;
 
   //TODO esto es para que salgan fijas
@@ -21594,26 +21601,26 @@ int __cdecl sub_424510(int a1, int a2, int raceId)
   while ( 1 )
   {
     result = drivers[racePositions[raceId][(v4 + v3) / 2]].carType;
-	//result = dword_46085C[27 * *((byte *)&dword_45EB50[a3] + (v4 + v3) / 2)];
+	//result = dword_46085C[27 * *((BYTE *)&dword_45EB50[a3] + (v4 + v3) / 2)];
     v7 = v4;
     v8 = v3;
     do
     {
       if (drivers[racePositions[raceId][v7]].carType < result )
-		  ///if (dword_46085C[27 * *(byte *)(v7 + v5)] < result)
+		  ///if (dword_46085C[27 * *(BYTE *)(v7 + v5)] < result)
       {
         do
           v9 = racePositions[raceId][v7++ + 1];
-		//v9 = *(byte *)(v7++ + v5 + 1);
+		//v9 = *(BYTE *)(v7++ + v5 + 1);
         while (drivers[v9].carType < result );
 		//while (dword_46085C[27 * v9] < result);
       }
       if ( result < drivers[racePositions[raceId][v8]].carType )
-		  //if (result < dword_46085C[27 * *(byte *)(v8 + v5)])
+		  //if (result < dword_46085C[27 * *(BYTE *)(v8 + v5)])
       {
         do
           v10 = racePositions[raceId][v8-- - 1];
-		//v10 = *(byte *)(v8-- + v5 - 1);
+		//v10 = *(BYTE *)(v8-- + v5 - 1);
         while ( result < drivers[v10].carType );
 		//while (result < dword_46085C[27 * v10]);
       }
@@ -21621,12 +21628,12 @@ int __cdecl sub_424510(int a1, int a2, int raceId)
         break;
       v11 = racePositions[raceId][v7];
 	  racePositions[raceId][v7] = racePositions[raceId][v8];
-	 // v11 = *(byte *)(v7 + v5);
-	 // *(byte *)(v7 + v5) = *(byte *)(v8 + v5);
+	 // v11 = *(BYTE *)(v7 + v5);
+	 // *(BYTE *)(v7 + v5) = *(BYTE *)(v8 + v5);
       v3 = a2;
       ++v7;
 	  racePositions[raceId][v8--] = v11;
-	  //*(byte *)(v8-- + v5) = v11;
+	  //*(BYTE *)(v8-- + v5) = v11;
     }
     while ( v7 < v8 );
     if ( v4 < v8 )
@@ -22202,7 +22209,7 @@ unsigned int drawStadistics()
     v76 = &v171;
     do
     {
-      v77 = *((byte *)v76 + 1);
+      v77 = *((BYTE *)v76 + 1);
       v76 = (char *)v76 + 1;
     }
     while ( v77 );
@@ -22216,7 +22223,7 @@ unsigned int drawStadistics()
     v81 = &v171;
     do
     {
-      v82 = *((byte *)v81 + 1);
+      v82 = *((BYTE *)v81 + 1);
       v81 = (char *)v81 + 1;
     }
     while ( v82 );
@@ -22354,7 +22361,7 @@ unsigned int drawStadistics()
     v128 = &v171;
     do
     {
-      v129 = *((byte *)v128 + 1);
+      v129 = *((BYTE *)v128 + 1);
       v128 = (char *)v128 + 1;
     }
     while ( v129 != v104 );
@@ -22372,7 +22379,7 @@ unsigned int drawStadistics()
     v135 = &v171;
     do
     {
-      v136 = *((byte *)v135 + 1);
+      v136 = *((BYTE *)v135 + 1);
       v135 = (char *)v135 + 1;
     }
     while ( v136 != v104 );
@@ -22458,7 +22465,7 @@ unsigned int drawStadistics()
     v156 = &v171;
     do
     {
-      v157 = *((byte *)v156 + 1);
+      v157 = *((BYTE *)v156 + 1);
       v156 = (char *)v156 + 1;
     }
     while ( v157 != v104 );
@@ -22476,7 +22483,7 @@ unsigned int drawStadistics()
     v163 = &v171;
     do
     {
-      v164 = *((byte *)v163 + 1);
+      v164 = *((BYTE *)v163 + 1);
       v163 = (char *)v163 + 1;
     }
     while ( v164 != v104 );
@@ -22686,7 +22693,7 @@ int __cdecl drawRightPositions(int numDrivers, int a2)
     v6 = 640 * v4;
     do
     {
-      v7 = *((byte *)&a2 + v68);
+      v7 = *((BYTE *)&a2 + v68);
       //v8 = 27 * v7;
 	  v8 =  v7;
 	  memset(DstBuf, 0, 20);
@@ -22755,8 +22762,8 @@ int __cdecl drawRightPositions(int numDrivers, int a2)
     v23 = (unsigned __int8)v22[v21 + 2];
     v24 = (int)&v22[v21];
     v62 = (double)v23;
-    v61 = (double)*(byte *)(v24 + 1);
-    v20 = (double)*(byte *)v24;
+    v61 = (double)*(BYTE *)(v24 + 1);
+    v20 = (double)*(BYTE *)v24;
   }
   else
   {
@@ -22766,8 +22773,8 @@ int __cdecl drawRightPositions(int numDrivers, int a2)
     v18 = (unsigned __int8)v17[v16 + 2];
     v19 = (int)&v17[v16];
     v62 = (double)v18;
-    v61 = (double)*(byte *)(v19 + 1);
-    v20 = (double)*(byte *)v19;
+    v61 = (double)*(BYTE *)(v19 + 1);
+    v20 = (double)*(BYTE *)v19;
   }
   v25 = v20;
   sub_424240(64, v25, v61, v62);
@@ -22779,8 +22786,8 @@ int __cdecl drawRightPositions(int numDrivers, int a2)
     v33 = (unsigned __int8)v32[v31 + 2];
     v34 = (int)&v32[v31];
     v65 = (double)v33;
-    v63 = (double)*(byte *)(v34 + 1);
-    v30 = (double)*(byte *)v34;
+    v63 = (double)*(BYTE *)(v34 + 1);
+    v30 = (double)*(BYTE *)v34;
   }
   else
   {
@@ -22790,8 +22797,8 @@ int __cdecl drawRightPositions(int numDrivers, int a2)
     v28 = (unsigned __int8)v27[v26 + 2];
     v29 = (int)&v27[v26];
     v65 = (double)v28;
-    v63 = (double)*(byte *)(v29 + 1);
-    v30 = (double)*(byte *)v29;
+    v63 = (double)*(BYTE *)(v29 + 1);
+    v30 = (double)*(BYTE *)v29;
   }
   v35 = v30;
   sub_424240(80, v35, v63, v65);
@@ -22803,8 +22810,8 @@ int __cdecl drawRightPositions(int numDrivers, int a2)
     v43 = (unsigned __int8)v42[v41 + 2];
     v44 = (int)&v42[v41];
     v66 = (double)v43;
-    v64 = (double)*(byte *)(v44 + 1);
-    v40 = (double)*(byte *)v44;
+    v64 = (double)*(BYTE *)(v44 + 1);
+    v40 = (double)*(BYTE *)v44;
   }
   else
   {
@@ -22814,8 +22821,8 @@ int __cdecl drawRightPositions(int numDrivers, int a2)
     v38 = (unsigned __int8)v37[v36 + 2];
     v39 = (int)&v37[v36];
     v66 = (double)v38;
-    v64 = (double)*(byte *)(v39 + 1);
-    v40 = (double)*(byte *)v39;
+    v64 = (double)*(BYTE *)(v39 + 1);
+    v40 = (double)*(BYTE *)v39;
   }
   v45 = v40;
   sub_424240(224, v45, v64, v66);
@@ -22827,8 +22834,8 @@ int __cdecl drawRightPositions(int numDrivers, int a2)
     v56 = (unsigned __int8)v55[v54 + 2];
     v57 = (int)&v55[v54];
     v58 = (double)v56;
-    v59 = (double)*(byte *)(v57 + 1);
-    v60 = (double)*(byte *)v57;
+    v59 = (double)*(BYTE *)(v57 + 1);
+    v60 = (double)*(BYTE *)v57;
     result = sub_424240(240, v60, v59, v58);
   }
   else
@@ -22839,8 +22846,8 @@ int __cdecl drawRightPositions(int numDrivers, int a2)
     v48 = (unsigned __int8)v47[v46 + 2];
     v49 = (int)&v47[v46];
     v50 = (double)v48;
-    v51 = (double)*(byte *)(v49 + 1);
-    v52 = (double)*(byte *)v49;
+    v51 = (double)*(BYTE *)(v49 + 1);
+    v52 = (double)*(BYTE *)v49;
     result = sub_424240(240, v52, v51, v50);
   }
   return result;
@@ -23232,13 +23239,13 @@ int apogeeScreen()
   do
   {
    palette1[v5] = colorToPaletteEntry(
-                            (unsigned __int8)(*(byte *)(*(_DWORD *)(**(_DWORD **)(image + 4) + 4) + v4) & 0xFC) << 14,
+                            (unsigned __int8)(*(BYTE *)(*(_DWORD *)(**(_DWORD **)(image + 4) + 4) + v4) & 0xFC) << 14,
                             6553600);
    palette1[v5+1] = colorToPaletteEntry(
-                      (unsigned __int8)(*(byte *)(*(_DWORD *)(**(_DWORD **)(image + 4) + 4) + v4 + 1) & 0xFC) << 14,
+                      (unsigned __int8)(*(BYTE *)(*(_DWORD *)(**(_DWORD **)(image + 4) + 4) + v4 + 1) & 0xFC) << 14,
                       6553600);
    palette1[v5+2] = colorToPaletteEntry(
-                            (unsigned __int8)(*(byte *)(*(_DWORD *)(**(_DWORD **)(image + 4) + 4) + v4 + 2) & 0xFC) << 14,
+                            (unsigned __int8)(*(BYTE *)(*(_DWORD *)(**(_DWORD **)(image + 4) + 4) + v4 + 2) & 0xFC) << 14,
                             6553600);
     v5 += 3;
 	//v5 += 12;
@@ -23374,15 +23381,15 @@ int showEndScreen()
   do
   {
     palette1[v3] = colorToPaletteEntry(
-                            (unsigned __int8)(*(byte *)(*(_DWORD *)(**(_DWORD **)(v1 + 4) + 4) + v2) & 0xFC) << 14,
+                            (unsigned __int8)(*(BYTE *)(*(_DWORD *)(**(_DWORD **)(v1 + 4) + 4) + v2) & 0xFC) << 14,
 
 
 							6553600);
 	palette1[v3+1] = colorToPaletteEntry(
-                      (unsigned __int8)(*(byte *)(*(_DWORD *)(**(_DWORD **)(v1 + 4) + 4) + v2 + 1) & 0xFC) << 14,
+                      (unsigned __int8)(*(BYTE *)(*(_DWORD *)(**(_DWORD **)(v1 + 4) + 4) + v2 + 1) & 0xFC) << 14,
                       6553600);
 	palette1[v3+2] = colorToPaletteEntry(
-                            (unsigned __int8)(*(byte *)(*(_DWORD *)(**(_DWORD **)(v1 + 4) + 4) + v2 + 2) & 0xFC) << 14,
+                            (unsigned __int8)(*(BYTE *)(*(_DWORD *)(**(_DWORD **)(v1 + 4) + 4) + v2 + 2) & 0xFC) << 14,
                             6553600);
     v3 += 3;
     v2 += 4;
@@ -23464,7 +23471,7 @@ FILE *checkAndOpenAnimation()
     v1 = &v8;
     do
     {
-      v2 = *((byte *)v1 + 1);
+      v2 = *((BYTE *)v1 + 1);
       v1 = (char *)v1 + 1;
     }
     while ( v2 );
@@ -23549,8 +23556,8 @@ char sub_4279C0()
       v4 = v3;
       do
       {
-        v5 = *(byte *)v4;
-        *(byte *)(v4 - 150) = *(byte *)v4;
+        v5 = *(BYTE *)v4;
+        *(BYTE *)(v4 - 150) = *(BYTE *)v4;
         ++v4;
       }
       while ( v5 );
@@ -23563,8 +23570,8 @@ char sub_4279C0()
   unk_461EC1 = v0;
   do
     v6 = rand() % 19;
-  while ( *((byte *)&dword_45F000 + v6) == 1 );
-  *((byte *)&dword_45F000 + v6) = 1;
+  while ( *((BYTE *)&dword_45F000 + v6) == 1 );
+  *((BYTE *)&dword_45F000 + v6) = 1;
   v7 = 280 * v6;
   v8 = &aThisIsIt_Here_[v7];
   do
@@ -23666,8 +23673,8 @@ int sub_427BC0()
       v4 = v3;
       do
       {
-        v5 = *(byte *)v4;
-        *(byte *)(v4 - 150) = *(byte *)v4;
+        v5 = *(BYTE *)v4;
+        *(BYTE *)(v4 - 150) = *(BYTE *)v4;
         ++v4;
       }
       while ( v5 );
@@ -23827,7 +23834,7 @@ LABEL_17:
     v17 = (int)((char *)v31 - 16);
     v18 = (char *)v31 - 16;
     do
-      v19 = *(byte *)v17++;
+      v19 = *(BYTE *)v17++;
     while ( v19 );
     v20 = v17 - (_DWORD)v18;
     v21 = (char *)&v32 + 3;
@@ -24371,9 +24378,9 @@ int sub_42A480()
     v4 = (int)&v2[v1];
     v5 = 0;
     v9 = (double)v3 * 0.015625;
-    v8 = (double)*(byte *)(v4 + 1) * 0.015625;
+    v8 = (double)*(BYTE *)(v4 + 1) * 0.015625;
     v6 = 0;
-    v7 = (double)*(byte *)(v4 + 2) * 0.015625;
+    v7 = (double)*(BYTE *)(v4 + 2) * 0.015625;
     do
     {
       result = setPaletteAndGetValue(
@@ -24468,9 +24475,9 @@ void refreshAndCheckConnection_42A570()
     v3 = (int)&v1[v0];
     v4 = 0;
     v51 = (double)v2 * 0.015625;
-    v50 = (double)*(byte *)(v3 + 1) * 0.015625;
+    v50 = (double)*(BYTE *)(v3 + 1) * 0.015625;
     v49 = 0;
-    v52 = (double)*(byte *)(v3 + 2) * 0.015625;
+    v52 = (double)*(BYTE *)(v3 + 2) * 0.015625;
     do
     {
       setPaletteAndGetValue(
@@ -24509,8 +24516,8 @@ void refreshAndCheckConnection_42A570()
         v6 = v5;
         do
         {
-          v7 = *(byte *)v6;
-          *(byte *)(v6 - 150) = *(byte *)v6;
+          v7 = *(BYTE *)v6;
+          *(BYTE *)(v6 - 150) = *(BYTE *)v6;
           ++v6;
         }
         while ( v7 );
@@ -24521,7 +24528,7 @@ void refreshAndCheckConnection_42A570()
       do
       {
         v9 = v54[v8];
-        *((byte *)&dword_462C4E + v8++) = v9;
+        *((BYTE *)&dword_462C4E + v8++) = v9;
       }
       while ( v9 );
       HIBYTE(word_461ED4) = 1;
@@ -24563,8 +24570,8 @@ void refreshAndCheckConnection_42A570()
         v11 = v10;
         do
         {
-          v12 = *(byte *)v11;
-          *(byte *)(v11 - 150) = *(byte *)v11;
+          v12 = *(BYTE *)v11;
+          *(BYTE *)(v11 - 150) = *(BYTE *)v11;
           ++v11;
         }
         while ( v12 );
@@ -24575,7 +24582,7 @@ void refreshAndCheckConnection_42A570()
       do
       {
         v14 = v54[v13];
-        *((byte *)&dword_462C4E + v13++) = v14;
+        *((BYTE *)&dword_462C4E + v13++) = v14;
       }
       while ( v14 );
       HIBYTE(word_461ED4) = 0;
@@ -24643,8 +24650,8 @@ void refreshAndCheckConnection_42A570()
         v24 = v23;
         do
         {
-          v25 = *(byte *)v24;
-          *(byte *)(v24 - 150) = *(byte *)v24;
+          v25 = *(BYTE *)v24;
+          *(BYTE *)(v24 - 150) = *(BYTE *)v24;
           ++v24;
         }
         while ( v25 );
@@ -24655,7 +24662,7 @@ void refreshAndCheckConnection_42A570()
       do
       {
         v27 = v54[v26];
-        *((byte *)&dword_462C4E + v26++) = v27;
+        *((BYTE *)&dword_462C4E + v26++) = v27;
       }
       while ( v27 );
       HIBYTE(word_461ED4) = 0;
@@ -24702,8 +24709,8 @@ void refreshAndCheckConnection_42A570()
         v29 = v28;
         do
         {
-          v30 = *(byte *)v29;
-          *(byte *)(v29 - 150) = *(byte *)v29;
+          v30 = *(BYTE *)v29;
+          *(BYTE *)(v29 - 150) = *(BYTE *)v29;
           ++v29;
         }
         while ( v30 );
@@ -24714,7 +24721,7 @@ void refreshAndCheckConnection_42A570()
       do
       {
         v32 = v54[v31];
-        *((byte *)&dword_462C4E + v31++) = v32;
+        *((BYTE *)&dword_462C4E + v31++) = v32;
       }
       while ( v32 );
       HIBYTE(word_461ED4) = 0;
@@ -24760,8 +24767,8 @@ void refreshAndCheckConnection_42A570()
         v34 = v33;
         do
         {
-          v35 = *(byte *)v34;
-          *(byte *)(v34 - 150) = *(byte *)v34;
+          v35 = *(BYTE *)v34;
+          *(BYTE *)(v34 - 150) = *(BYTE *)v34;
           ++v34;
         }
         while ( v35 );
@@ -24830,8 +24837,8 @@ void refreshAndCheckConnection_42A570()
         v46 = v45;
         do
         {
-          v47 = *(byte *)v46;
-          *(byte *)(v46 - 150) = *(byte *)v46;
+          v47 = *(BYTE *)v46;
+          *(BYTE *)(v46 - 150) = *(BYTE *)v46;
           ++v46;
         }
         while ( v47 );
@@ -25272,7 +25279,7 @@ LABEL_15:
         v33 = &v91;
         do
         {
-          v34 = *((byte *)v33 + 1);
+          v34 = *((BYTE *)v33 + 1);
           v33 = (char *)v33 + 1;
         }
         while ( v34 );
@@ -25419,7 +25426,7 @@ LABEL_15:
       v79 = &v91;
       do
       {
-        v80 = *((byte *)v79 + 1);
+        v80 = *((BYTE *)v79 + 1);
         v79 = (char *)v79 + 1;
       }
       while ( v80 );
@@ -26181,8 +26188,8 @@ LABEL_14:
           goto LABEL_13;
         continue;
       case KEY_F1:
-        if ( isMultiplayerGame )
-          multiplayer_sub_42CCF0();
+        //if ( isMultiplayerGame )
+         // multiplayer_sub_42CCF0();
         continue;
       case KEY_UP:
       case 0xC8:
@@ -26277,8 +26284,8 @@ bool __cdecl drawYesNoMenu(int a1, int a2, int a3, signed int *a4)
       default:
         continue;
       case KEY_F1:
-        if ( isMultiplayerGame )
-          multiplayer_sub_42CCF0();
+        //if ( isMultiplayerGame )
+        //  multiplayer_sub_42CCF0();
         continue;
       case KEY_LEFT:
       case 0xCB:
@@ -26488,10 +26495,10 @@ signed int __cdecl readKeyboard(const char *a1, int a2, int a3, int a4, unsigned
 	  a++;
 	 face = initialFace;
 
-	  v68 = *((byte *)graphicsGeneral.copperPal + v65 + 2);
+	  v68 = *((BYTE *)graphicsGeneral.copperPal + v65 + 2);
     v22 = (double)v68;
-    v23 = *((byte *)graphicsGeneral.copperPal + v65);
-    v68 = *((byte *)graphicsGeneral.copperPal + v65 + 1);
+    v23 = *((BYTE *)graphicsGeneral.copperPal + v65);
+    v68 = *((BYTE *)graphicsGeneral.copperPal + v65 + 1);
     v24 = v22;
     v25 = (double)v68;
     v68 = v23;
@@ -26507,8 +26514,8 @@ signed int __cdecl readKeyboard(const char *a1, int a2, int a3, int a4, unsigned
     switch ( v15 )
     {
       case KEY_F1:
-        if ( ingame && isMultiplayerGame )
-          multiplayer_sub_42CCF0();
+        //if ( ingame && isMultiplayerGame )
+        //  multiplayer_sub_42CCF0();
         goto LABEL_66;
       case KEY_UP:
       case 0xC8:
@@ -26588,10 +26595,10 @@ signed int __cdecl readKeyboard(const char *a1, int a2, int a3, int a4, unsigned
           v65 -= 6;
           v66 -= 2;
         }
-        v68 = *((byte *)graphicsGeneral.copperPal + v21 + 2);
+        v68 = *((BYTE *)graphicsGeneral.copperPal + v21 + 2);
         v22 = (double)v68;
-        v23 = *((byte *)graphicsGeneral.copperPal + v21);
-        v68 = *((byte *)graphicsGeneral.copperPal + v21 + 1);
+        v23 = *((BYTE *)graphicsGeneral.copperPal + v21);
+        v68 = *((BYTE *)graphicsGeneral.copperPal + v21 + 1);
         v24 = v22;
         v25 = (double)v68;
         v68 = v23;
@@ -26625,10 +26632,10 @@ signed int __cdecl readKeyboard(const char *a1, int a2, int a3, int a4, unsigned
           v65 += 6;
           v66 += 2;
         }
-        v68 = *((byte *)graphicsGeneral.copperPal + v31 + 2);
+        v68 = *((BYTE *)graphicsGeneral.copperPal + v31 + 2);
         v32 = (double)v68;
-        v33 = *((byte *)graphicsGeneral.copperPal + v31);
-        v68 = *((byte *)graphicsGeneral.copperPal + v31 + 1);
+        v33 = *((BYTE *)graphicsGeneral.copperPal + v31);
+        v68 = *((BYTE *)graphicsGeneral.copperPal + v31 + 1);
         v34 = v32;
         v35 = (double)v68;
         v68 = v33;
@@ -26692,7 +26699,7 @@ signed int __cdecl readKeyboard(const char *a1, int a2, int a3, int a4, unsigned
           memset(
             (char *)screenBuffer + v48 + v10 + a2,
             0xC4u,
-            (unsigned __int8)bigLetterSpacing_445848[DEFAULT_BIGLETTER_SPACING_OFFSET+ *((byte *)&v71 + strlen(v72) + 3)] + 20);
+            (unsigned __int8)bigLetterSpacing_445848[DEFAULT_BIGLETTER_SPACING_OFFSET+ *((BYTE *)&v71 + strlen(v72) + 3)] + 20);
           v48 += 640;
           --v68;
         }
@@ -26700,10 +26707,10 @@ signed int __cdecl readKeyboard(const char *a1, int a2, int a3, int a4, unsigned
         drawKeyCursor(
           v10 + v69,
           (char *)screenBuffer + v67 + v10 + a2,
-          (unsigned __int8)bigLetterSpacing_445848[DEFAULT_BIGLETTER_SPACING_OFFSET+ *((byte *)&v71 + strlen(v72) + 3)] + 20,
+          (unsigned __int8)bigLetterSpacing_445848[DEFAULT_BIGLETTER_SPACING_OFFSET+ *((BYTE *)&v71 + strlen(v72) + 3)] + 20,
           32);
         v16 = v71;
-        *((byte *)&v71 + strlen(v72) + 3) = 0;
+        *((BYTE *)&v71 + strlen(v72) + 3) = 0;
         goto LABEL_65;
       default:
 		
@@ -26804,7 +26811,7 @@ signed int loadGame()
     *(_DWORD *)v1 = 1953525061; //Empty slot
     *(_DWORD *)(v1 + 4) = 1817387129;
     *(_WORD *)(v1 + 8) = 29807;
-    *(byte *)(v1 + 10) = 0;
+    *(BYTE *)(v1 + 10) = 0;
     menuActive_4457F0[45+v0] = 1;
     strcpy(Filename, "DR.SG");
     itoa(v0, DstBuf, 10);
@@ -26812,7 +26819,7 @@ signed int loadGame()
    /* v3 = &v20;
     do
     {
-      v4 = *((byte *)v3 + 1);
+      v4 = *((BYTE *)v3 + 1);
       v3 = (char *)v3 + 1;
     }
     while ( v4 );
@@ -26878,14 +26885,14 @@ signed int loadGame()
   memset(v9, 0, 0x880u);
   v10 = (int)((char *)v9 + 2176);
   *(_WORD *)v10 = 0;
-  *(byte *)(v10 + 2) = 0;
+  *(BYTE *)(v10 + 2) = 0;
   strcpy(Filename, "DR.SG");
   itoa(v6, DstBuf, 10);
   /*v11 = strlen(&DstBuf) + 1;
   v12 = &v20;
   do
   {
-    v13 = *((byte *)v12 + 1);
+    v13 = *((BYTE *)v12 + 1);
     v12 = (char *)v12 + 1;
   }
   while ( v13 );
@@ -26894,20 +26901,20 @@ signed int loadGame()
   v14 = fopen(Filename, "rb");
   fread(Str, 0x883u, 1u, v14);
   fclose(v14);
-  v19 = *(byte *)Str;
+  v19 = *(BYTE *)Str;
   v15 = 1;
   do
   {
 	  decryptByteSavegame((int)((char *)Str + v15), v15 % 6);
     //decryptByteSavegame((int)((char *)Str + v15), v15 % 6);
-    *((byte *)Str + v15) += -17 * v15;
-    *((byte *)Str + v15++) += v19;
+    *((BYTE *)Str + v15) += -17 * v15;
+    *((BYTE *)Str + v15++) += v19;
   }
   while ( (signed int)v15 < 2179 );
 
-  driverId = *((byte *)Str + 1);
-  useWeapons = *((byte *)Str + 2);
-  configuration.difficulty = *((byte *)Str + 3);
+  driverId = *((BYTE *)Str + 1);
+  useWeapons = *((BYTE *)Str + 2);
+  configuration.difficulty = *((BYTE *)Str + 3);
   memcpy(drivers, (char *)Str + 19, 0x870u);
   free(Str);
   v16 = drivers[driverId].spikes;
@@ -26961,7 +26968,7 @@ __int16 savegameWithName()
     *(_DWORD *)v1 = 1953525061; //EMPTY slot
     *(_DWORD *)(v1 + 4) = 1817387129;
     *(_WORD *)(v1 + 8) = 29807;
-    *(byte *)(v1 + 10) = 0;
+    *(BYTE *)(v1 + 10) = 0;
 	menuActive_4457F0[45+v0] = 1;
     strcpy(Filename, "DR.SG");
     itoa(v0, DstBuf, 10);
@@ -27025,14 +27032,14 @@ __int16 savegameWithName()
     memset(v10, 0, 0x880u);
     v11 = (int)((char *)v10 + 2176);
     *(_WORD *)v11 = 0;
-    *(byte *)(v11 + 2) = 0;
+    *(BYTE *)(v11 + 2) = 0;
     v12 = rand();
     v13 = v12 % 255;
     v14 = 0;
-    *(byte *)Str = v12 % 255;
-    *((byte *)Str + 1) = driverId;
-    *((byte *)Str + 2) = useWeapons;
-    *((byte *)Str + 3) = configuration.difficulty;
+    *(BYTE *)Str = v12 % 255;
+    *((BYTE *)Str + 1) = driverId;
+    *((BYTE *)Str + 2) = useWeapons;
+    *((BYTE *)Str + 3) = configuration.difficulty;
     v15 = v27;
     v24 = v13;
     do
@@ -27043,7 +27050,7 @@ __int16 savegameWithName()
     {
       do
       {
-        *((byte *)Str + v14 + 4) = v27[v14];
+        *((BYTE *)Str + v14 + 4) = v27[v14];
         ++v14;
       }
       while ( v14 < strlen(v27) );
@@ -27053,8 +27060,8 @@ __int16 savegameWithName()
     v17 = 1;
     while ( 1 )
     {
-      *((byte *)Str + v17) -= v13;
-      *((byte *)Str + v17) += 17 * v17;
+      *((BYTE *)Str + v17) -= v13;
+      *((BYTE *)Str + v17) += 17 * v17;
       encryptByteSavegame((int)((char *)Str + v17), v17 % 6);
       ++v17;
       if ( (signed int)v17 >= 2179 )
@@ -27380,7 +27387,7 @@ LABEL_34:
         v33 = &byte_446F20[-1];
         do
         {
-          v34 = *((byte *)v33 + 1);
+          v34 = *((BYTE *)v33 + 1);
           v33 = (char *)v33 + 1;
         }
         while ( v34 );
@@ -27709,7 +27716,7 @@ signed int defineGamepadJoystickMenu()
         v35 = &byte_4472A4[-1];
         do
         {
-          v36 = *((byte *)v35 + 1);
+          v36 = *((BYTE *)v35 + 1);
           v35 = (char *)v35 + 1;
         }
         while ( v36 );
@@ -27845,8 +27852,8 @@ LABEL_2:
                 v18 += 2;
               break;
             default:
-              if ( v3 == 59 && isMultiplayerGame )
-                multiplayer_sub_42CCF0();
+              //if ( v3 == 59 && isMultiplayerGame )
+              //  multiplayer_sub_42CCF0();
               break;
           }
           v4 = 0;
@@ -27910,8 +27917,8 @@ LABEL_2:
           }
           else if ( v10 != -51 && v10 != KEY_RIGHT)
           {
-            if ( v10 == 59 && isMultiplayerGame )
-              multiplayer_sub_42CCF0();
+            //if ( v10 == 59 && isMultiplayerGame )
+            //  multiplayer_sub_42CCF0();
           }
           else if ( v0 < 128 )
           {
@@ -28104,8 +28111,8 @@ LABEL_12:
     v18 = (char *)(DstBuf - (char *)v17);
     do
     {
-      v19 = *(byte *)v17;
-      *((byte *)v17 + (_DWORD)v18) = *(byte *)v17;
+      v19 = *(BYTE *)v17;
+      *((BYTE *)v17 + (_DWORD)v18) = *(BYTE *)v17;
       v17 = (int *)((char *)v17 + 1);
     }
     while ( v19 );
@@ -28125,8 +28132,8 @@ LABEL_12:
     v24 = &DstBuf[-v23];
     do
     {
-      v25 = *(byte *)v23;
-      v24[v23] = *(byte *)v23;
+      v25 = *(BYTE *)v23;
+      v24[v23] = *(BYTE *)v23;
       ++v23;
     }
     while ( v25 );
@@ -28150,7 +28157,7 @@ LABEL_12:
         break;
       if ( !isMultiplayerGame )
         goto LABEL_36;
-      multiplayer_sub_42CCF0();
+      //multiplayer_sub_42CCF0();
     }
   }
   while ( !v27 );
@@ -28230,9 +28237,9 @@ void showEndAnim_4312D0()
   v9 = (char *)graphicsGeneral.copperPal + 2 * v8;
   v10 = (unsigned __int8)v9[v8 + 2];
   v11 = (int)&v9[v8];
-  v12 = *(byte *)(v11 + 1);
+  v12 = *(BYTE *)(v11 + 1);
   v13 = (double)v10;
-  v23 = *(byte *)v11;
+  v23 = *(BYTE *)v11;
   v14 = (double)v12;
   v15 = (double)v23;
   sub_418B00(v15, v14, v13);
@@ -28651,7 +28658,7 @@ void __cdecl previewRaceScreen(signed int participants)
         v5 = ((unsigned int)(99 - v3) >> 1) + 1;
         do
         {
-          *((byte *)screenBuffer + v4 + 167171) = -60;
+          *((BYTE *)screenBuffer + v4 + 167171) = -60;
           v4 += 2;
           --v5;
         }
@@ -28675,7 +28682,7 @@ void __cdecl previewRaceScreen(signed int participants)
         v10 = ((unsigned int)(99 - v8) >> 1) + 1;
         do
         {
-          *((byte *)screenBuffer + v9 + 142099) = -60;
+          *((BYTE *)screenBuffer + v9 + 142099) = -60;
           v9 += 2;
           --v10;
         }
@@ -28695,7 +28702,7 @@ void __cdecl previewRaceScreen(signed int participants)
     //allocateMemoryPtr((void*)&v11,4u);
     //TODO fix
 	//Str = v11;
-    *(byte *)v11 = driverId;
+    *(BYTE *)v11 = driverId;
     multiplayer_41EA70((int)Str, 1, 19);
     free(Str);
     v12 = (unsigned __int8)byte_45FC10[dword_456BCC];
@@ -28726,8 +28733,8 @@ void __cdecl previewRaceScreen(signed int participants)
     v21 = (char *)&raceFilePrefix_45EA50[-v19] - (char *)&v251;
     do
     {
-      v22 = *(byte *)v20;
-      *((byte *)v20 + v21) = *(byte *)v20;
+      v22 = *(BYTE *)v20;
+      *((BYTE *)v20 + v21) = *(BYTE *)v20;
       v20 = (int *)((char *)v20 + 1);
     }
     while ( v22 );
@@ -28773,8 +28780,8 @@ void __cdecl previewRaceScreen(signed int participants)
         v30 = (char *)&raceFilePrefix_45EA50[-(unsigned __int8)circuitsToSelect_46126C[0]] - (char *)&v251;
         do
         {
-          v31 = *(byte *)v29;
-          *((byte *)v29 + v30) = *(byte *)v29;
+          v31 = *(BYTE *)v29;
+          *((BYTE *)v29 + v30) = *(BYTE *)v29;
           v29 = (int *)((char *)v29 + 1);
         }
         while ( v31 );
@@ -28815,8 +28822,8 @@ void __cdecl previewRaceScreen(signed int participants)
 		//v38 = (char *)&raceFilePrefix_45EA50[-(unsigned __int8)byte_46126D] - (char *)&v251;
         do
         {
-          v39 = *(byte *)v37;
-          *((byte *)v37 + v38) = *(byte *)v37;
+          v39 = *(BYTE *)v37;
+          *((BYTE *)v37 + v38) = *(BYTE *)v37;
           v37 = (int *)((char *)v37 + 1);
         }
         while ( v39 );
@@ -28855,8 +28862,8 @@ void __cdecl previewRaceScreen(signed int participants)
 		//v46 = (char *)&raceFilePrefix_45EA50[-(unsigned __int8)byte_46126E] - (char *)&v251;
         do
         {
-          v47 = *(byte *)v45;
-          *((byte *)v45 + v46) = *(byte *)v45;
+          v47 = *(BYTE *)v45;
+          *((BYTE *)v45 + v46) = *(BYTE *)v45;
           v45 = (int *)((char *)v45 + 1);
         }
         while ( v47 );
@@ -29134,7 +29141,7 @@ LABEL_110:
     //allocateMemory(4u);
     //TODO fix
    // Str = v93;
-    *(byte *)v93 = driverId;
+    *(BYTE *)v93 = driverId;
     nullsub_1();
     v94 = 0;
     v95 = 0;
@@ -29244,9 +29251,9 @@ LABEL_112:
 		raceParticipant[iRacePArticipant].b = (unsigned __int8)v116[2];
         if ( !isMultiplayerGame || v101 <= raceDrivers_456758 - 1 )
           goto LABEL_157;
-		raceParticipant[iRacePArticipant].r = *((byte *)v112 + 30);
-		raceParticipant[iRacePArticipant].g = *((byte *)v112 + 31);
-        v115 = *((byte *)v112 + 32);
+		raceParticipant[iRacePArticipant].r = *((BYTE *)v112 + 30);
+		raceParticipant[iRacePArticipant].g = *((BYTE *)v112 + 31);
+        v115 = *((BYTE *)v112 + 32);
       }
       else
       {
@@ -29274,9 +29281,9 @@ LABEL_160:
 
     do
     {
-		raceParticipant[iRacePArticipant].r=  *((byte *)v112 + 30);
-		raceParticipant[iRacePArticipant].g = *((byte *)v112 + 31);
-		raceParticipant[iRacePArticipant].b = *((byte *)v112 + 32);
+		raceParticipant[iRacePArticipant].r=  *((BYTE *)v112 + 30);
+		raceParticipant[iRacePArticipant].g = *((BYTE *)v112 + 31);
+		raceParticipant[iRacePArticipant].b = *((BYTE *)v112 + 32);
 		iRacePArticipant++;
     }
     while (iRacePArticipant < participants);
@@ -29312,12 +29319,12 @@ LABEL_160:
 	  raceParticipant[0].spikes = 1;
 	  raceParticipant[0].useWeapons = useWeapons;
 	  raceParticipant[0].mines = useWeapons != 0 ? 8 : 0;
-	  raceParticipant[2].r = *((byte *)v112 + 30);
-	raceParticipant[2].g = *((byte *)v112 + 31);
-	raceParticipant[2].b = *((byte *)v112 + 32);
-	raceParticipant[3].r = *((byte *)v112 + 30);
-	raceParticipant[3].g = *((byte *)v112 + 31);
-	raceParticipant[3].b = *((byte *)v112 + 32);
+	  raceParticipant[2].r = *((BYTE *)v112 + 30);
+	raceParticipant[2].g = *((BYTE *)v112 + 31);
+	raceParticipant[2].b = *((BYTE *)v112 + 32);
+	raceParticipant[3].r = *((BYTE *)v112 + 30);
+	raceParticipant[3].g = *((BYTE *)v112 + 31);
+	raceParticipant[3].b = *((BYTE *)v112 + 32);
   }
   v123 = 24 * ((unsigned __int8)circuitsToSelect_46126C[selectedRace_462CE8] + 18 * drivers[v121].carType);
   circuitRecordMinutes_50A160 = *(int *)((char *)&dword_45F04C + v123);
@@ -29607,8 +29614,8 @@ LABEL_534:
         v176 = v162;
         do
         {
-          v177 = *(byte *)v176;
-          *(byte *)(v176 - 150) = *(byte *)v176;
+          v177 = *(BYTE *)v176;
+          *(BYTE *)(v176 - 150) = *(BYTE *)v176;
           ++v176;
         }
         while ( v177 );
@@ -29680,8 +29687,8 @@ LABEL_534:
         v197 = v196;
         do
         {
-          v198 = *(byte *)v197;
-          *(byte *)(v197 - 150) = *(byte *)v197;
+          v198 = *(BYTE *)v197;
+          *(BYTE *)(v197 - 150) = *(BYTE *)v197;
           ++v197;
         }
         while ( v198 );
@@ -29697,8 +29704,8 @@ LABEL_534:
         v163 = v162;
         do
         {
-          v164 = *(byte *)v163;
-          *(byte *)(v163 - 150) = *(byte *)v163;
+          v164 = *(BYTE *)v163;
+          *(BYTE *)(v163 - 150) = *(BYTE *)v163;
           ++v163;
         }
         while ( v164 );
@@ -29750,8 +29757,8 @@ LABEL_534:
         v174 = v173;
         do
         {
-          v175 = *(byte *)v174;
-          *(byte *)(v174 - 150) = *(byte *)v174;
+          v175 = *(BYTE *)v174;
+          *(BYTE *)(v174 - 150) = *(BYTE *)v174;
           ++v174;
         }
         while ( v175 );
@@ -30073,9 +30080,9 @@ LABEL_477:
     v223 = (char *)graphicsGeneral.copperPal + 2 * v222;
     v224 = (unsigned __int8)v223[v222 + 2];
     v225 = (int)&v223[v222];
-    v226 = *(byte *)(v225 + 1);
+    v226 = *(BYTE *)(v225 + 1);
     v227 = (double)v224;
-    v244 = *(byte *)v225;
+    v244 = *(BYTE *)v225;
     v228 = (double)v226;
     v229 = (double)v244;
     setPaletteValueWithFloats(v229, v228, v227);
@@ -30127,13 +30134,13 @@ LABEL_477:
         do
         {
           v235 = rand() % 4;
-          v236 = *((byte *)&v246 + v235 + 4);
+          v236 = *((BYTE *)&v246 + v235 + 4);
           v237 = v235 + 1;
           raceParticipant[indexRaceParticipant].racePosition = v237;
         }
         while ( v236 );
         //v234 += 84;
-        *((byte *)&v246 + v237 + 3) = 1;
+        *((BYTE *)&v246 + v237 + 3) = 1;
 		indexRaceParticipant++;
       }
       while (indexRaceParticipant < 4 );
@@ -30510,14 +30517,14 @@ void selectRaceScreen()
           showHardWarningRace = 0;
           goto LABEL_26;
         }
-		//if (*((byte *)&word_461EB4 + selectedRaceId) >= 4u)
+		//if (*((BYTE *)&word_461EB4 + selectedRaceId) >= 4u)
         if (participantsRace[selectedRaceId] >= 4u )			
         {
           loadMenuSoundEffect(1u, 29, 0, configuration.effectsVolume, dword_4451A4);
 	 LABEL_26:
 		  
 		  if (participantsRace[0] == 4 && participantsRace[1] == 4 && participantsRace[2] == 4)
-          //if ( (byte)word_461EB4 == 4 && HIBYTE(word_461EB4) == 4 && byte_461EB6 == 4 )
+          //if ( (BYTE)word_461EB4 == 4 && HIBYTE(word_461EB4) == 4 && byte_461EB6 == 4 )
           {
             createPopup(33, 200, 580, 112, 1);
 			drawTextWithFont((int)graphicsGeneral.fbig3aBpk, (int)&bigLetterSpacing_445848, getLanguageEntry("You did not sign up in any race."), 144048);
@@ -30580,7 +30587,7 @@ void selectRaceScreen()
 			(int)graphics4.signlineBpk,
 			136,
 			2,
-			(int)((char *)screenBuffer + 160 * (selectedRaceId + 72 * *((byte *)&word_461EB4 + selectedRaceId)) + 179227));
+			(int)((char *)screenBuffer + 160 * (selectedRaceId + 72 * *((BYTE *)&word_461EB4 + selectedRaceId)) + 179227));
 		itoa(dword_460888[27 * driverId], DstBuf, 10);*/
         //v54 = 0;
         /*if ( strlen(DstBuf) < 2 )
@@ -30631,16 +30638,16 @@ void selectRaceScreen()
 			(int)graphicsGeneral.fmed1aBpk,
 			(int)&unk_445928,
 			&v54,
-			160 * (selectedRaceId + 72 * *((byte *)&word_461EB4 + selectedRaceId)) + 175394);*/
+			160 * (selectedRaceId + 72 * *((BYTE *)&word_461EB4 + selectedRaceId)) + 175394);*/
         v29 = selectedRaceId;
 		v30 = participantsRace[selectedRaceId];
-		//v30 = *((byte *)&word_461EB4 + selectedRaceId);
+		//v30 = *((BYTE *)&word_461EB4 + selectedRaceId);
         selectedRace_462CE8 = selectedRaceId;
 		racePositions[selectedRaceId][v30] = driverId;
-        //*((byte *)&dword_45EB50[selectedRaceId] + v30) = driverId;
+        //*((BYTE *)&dword_45EB50[selectedRaceId] + v30) = driverId;
         userRaceOrder_45FC20 = v30;
         participantsRace[v29] = v30 + 1;
-		//*((byte *)&word_461EB4 + v29) = v30 + 1;
+		//*((BYTE *)&word_461EB4 + v29) = v30 + 1;
         refreshAllScreen();
         do
         {
@@ -30659,16 +30666,16 @@ void selectRaceScreen()
         v31 = &dword_45EB50[2];//45EB52
         do
         {
-          v32 = *(byte *)(v31 - 2);
-          v33 = *(byte *)(v31 + 1);
+          v32 = *(BYTE *)(v31 - 2);
+          v33 = *(BYTE *)(v31 + 1);
           *(_DWORD *)DstBuf = 0;
           v50 = 0;
           v51 = 0;
           v52 = 0;
           v53 = 0;
-          v34 = *(byte *)(v31 - 1);
+          v34 = *(BYTE *)(v31 - 1);
           Str = v32;
-          v35 = *(byte *)v31;
+          v35 = *(BYTE *)v31;
           v48 = v33;
           v46 = v34;
           v47 = v35;
@@ -30689,7 +30696,7 @@ void selectRaceScreen()
               v40 = (unsigned __int8)v33;
             v41 = v40 == driverId;
             DstBuf[v40] = 1;
-           //>TODO FIX LO HE QUITADO PORQU PETA *(byte *)(v31 + v36 - 2) = v40;
+           //>TODO FIX LO HE QUITADO PORQU PETA *(BYTE *)(v31 + v36 - 2) = v40;
             if ( v41 )
               userRaceOrder_45FC20 = v36;
             ++v36;
@@ -30701,16 +30708,16 @@ void selectRaceScreen()
 		/*v31 = 4582226;//45EB52
         do
         {
-          v32 = *(byte *)(v31 - 2);
-          v33 = *(byte *)(v31 + 1);
+          v32 = *(BYTE *)(v31 - 2);
+          v33 = *(BYTE *)(v31 + 1);
           *(_DWORD *)DstBuf = 0;
           v50 = 0;
           v51 = 0;
           v52 = 0;
           v53 = 0;
-          v34 = *(byte *)(v31 - 1);
+          v34 = *(BYTE *)(v31 - 1);
           Str = v32;
-          v35 = *(byte *)v31;
+          v35 = *(BYTE *)v31;
           v48 = v33;
           v46 = v34;
           v47 = v35;
@@ -30731,7 +30738,7 @@ void selectRaceScreen()
               v40 = (unsigned __int8)v33;
             v41 = v40 == driverId;
             DstBuf[v40] = 1;
-            *(byte *)(v31 + v36 - 2) = v40;
+            *(BYTE *)(v31 + v36 - 2) = v40;
             if ( v41 )
               userRaceOrder_45FC20 = v36;
             ++v36;
@@ -30906,7 +30913,7 @@ void enterShop()
     v4 = 0;
   itoa(v4, DstBuf, 10);
   //todo comentado porque falla
-  //*((byte *)&v97 + strlen(DstBuf) + 3) = 48;
+  //*((BYTE *)&v97 + strlen(DstBuf) + 3) = 48;
   v5 = atoi(DstBuf);
   switch ( menuOptionSelected_463DF0 )
   {
@@ -31091,8 +31098,8 @@ void enterShop()
           default:
             continue;
           case KEY_F1:
-            if ( isMultiplayerGame )
-              multiplayer_sub_42CCF0();
+            //if ( isMultiplayerGame )
+            //  multiplayer_sub_42CCF0();
             continue;
           case KEY_LEFT:
           case 0xCB:
@@ -31174,8 +31181,8 @@ void enterShop()
               v59 = eventDetected();
               if ( v59 == 59 )
               {
-                if ( isMultiplayerGame )
-                  multiplayer_sub_42CCF0();
+                //if ( isMultiplayerGame )
+                //  multiplayer_sub_42CCF0();
                 v60 = driverId;
               }
               else
@@ -31213,9 +31220,9 @@ void enterShop()
               v62 = (char *)graphicsGeneral.copperPal + 2 * v61;
               v63 = (unsigned __int8)v62[v61 + 2];
               v64 = (int)&v62[v61];
-              v65 = *(byte *)(v64 + 1);
+              v65 = *(BYTE *)(v64 + 1);
               v66 = (double)v63;
-              v97 = *(byte *)v64;
+              v97 = *(BYTE *)v64;
               v67 = (double)v65;
               v68 = (double)v97;
               setPaletteValueWithFloats(v68, v67, v66);
@@ -31579,8 +31586,8 @@ char postLoadedOrLicense()
     v6 = (unsigned __int8)v5[v4 + 2];
     v7 = (int)&v5[v4];
     v8 = (double)v6;
-    v9 = (double)*(byte *)(v7 + 1);
-    v10 = (double)*(byte *)v7;
+    v9 = (double)*(BYTE *)(v7 + 1);
+    v10 = (double)*(BYTE *)v7;
     setPaletteValueWithFloats(v10, v9, v8);
     screenBuffer = (void *)dword_461250;
     sub_42C4A0();
@@ -32149,8 +32156,8 @@ LABEL_220:
     switch ( v42 )
     {
       case KEY_F1:
-        if ( isMultiplayerGame )
-          multiplayer_sub_42CCF0();
+        //if ( isMultiplayerGame )
+        //  multiplayer_sub_42CCF0();
         break;
       case KEY_UP:
       case 0xC8:
@@ -32578,8 +32585,8 @@ int mainMenu()
   v4 = (unsigned __int8)v3[v2 + 2];
   v5 = (int)&v3[v2];
   v6 = (double)v4;
-  v7 = (double)*(byte *)(v5 + 1);
-  v8 = (double)*(byte *)v5;
+  v7 = (double)*(BYTE *)(v5 + 1);
+  v8 = (double)*(BYTE *)v5;
   sub_418B00(v8, v7, v6);
   
   memcpy(screenBuffer, graphicsGeneral.menubg5Bpk, 0x4B000u); //tamaño pantalla
@@ -32598,7 +32605,7 @@ int mainMenu()
   word_461ED4 = 0;
   do
   {
-    *(byte *)v10 = 0;
+    *(BYTE *)v10 = 0;
     v10 += 150;
   }
   while ( v10 < (signed int)&blacktx1Bpk );
@@ -32629,8 +32636,8 @@ int mainMenu()
     v16 = v15;
     do
     {
-      v17 = *(byte *)v16;
-      *(byte *)(v16 - 150) = *(byte *)v16;
+      v17 = *(BYTE *)v16;
+      *(BYTE *)(v16 - 150) = *(BYTE *)v16;
       ++v16;
     }
     while ( v17 );
@@ -32662,8 +32669,8 @@ int mainMenu()
     v61 = v21;
     do
     {
-      v22 = *(byte *)v61;
-      *(byte *)(v61 - 150) = *(byte *)v61;
+      v22 = *(BYTE *)v61;
+      *(BYTE *)(v61 - 150) = *(BYTE *)v61;
       ++v61;
     }
     while ( v22 );
@@ -32685,7 +32692,7 @@ int mainMenu()
   unk_461ECF = word_461ED0;
   HIBYTE(word_461ED0) = unk_461ED2;
   v23 = unk_461ED3;
-  *((byte *)&dword_462C4E + 56) = aCRemedyEnterta[56];
+  *((BYTE *)&dword_462C4E + 56) = aCRemedyEnterta[56];
   v24 = (signed int)&unk_462096;
   unk_461ED2 = v23;
   LOBYTE(word_461ED4) = 1;
@@ -32694,8 +32701,8 @@ int mainMenu()
     v25 = v24;
     do
     {
-      v26 = *(byte *)v25;
-      *(byte *)(v25 - 150) = *(byte *)v25;
+      v26 = *(BYTE *)v25;
+      *(BYTE *)(v25 - 150) = *(BYTE *)v25;
       ++v25;
     }
     while ( v26 );
@@ -32727,8 +32734,8 @@ int mainMenu()
     v29 = v28;
     do
     {
-      v30 = *(byte *)v29;
-      *(byte *)(v29 - 150) = *(byte *)v29;
+      v30 = *(BYTE *)v29;
+      *(BYTE *)(v29 - 150) = *(BYTE *)v29;
       ++v29;
     }
     while ( v30 );
@@ -32986,9 +32993,9 @@ char __cdecl drawCarSprite_43AEC0(int xpos, int ypos, int participantBpkOffset)
       v7 = 40;
       do
       {
-        result = *((byte *)participantCarBpk_5034FC + v3++);
+        result = *((BYTE *)participantCarBpk_5034FC + v3++);
         if ( result )
-          *(byte *)(dword_464F14 + v5) = result;
+          *(BYTE *)(dword_464F14 + v5) = result;
         ++v5;
         --v7;
       }
@@ -33032,9 +33039,9 @@ char __cdecl drawCarFire_43AFC0(int posx, int posy, int spriteOffset)
       v7 = 16;
       do
       {
-        result = *((byte *)burn1aBpk + v3++);
+        result = *((BYTE *)burn1aBpk + v3++);
         if ( result )
-          *(byte *)(dword_464F14 + v5) = result;
+          *(BYTE *)(dword_464F14 + v5) = result;
         ++v5;
         --v7;
       }
@@ -33061,7 +33068,7 @@ int __cdecl sub_43B030(int a1, int a2)
   do
   {
     if ( v2 >= 0 )
-      *(byte *)result = 0;
+      *(BYTE *)result = 0;
     ++result;
     ++v2;
     --v4;
@@ -33085,7 +33092,7 @@ int __cdecl sub_43B050(int a1, signed int a2)
     if ( v2 > 255 )
       break;
     ++result;
-    *(byte *)(result - 1) = 0;
+    *(BYTE *)(result - 1) = 0;
     ++v2;
     ++v4;
   }
@@ -33115,8 +33122,8 @@ int __cdecl sub_43B080(int a1, int a2, int a3, int a4, int a5)
         v9 = a3;
         do
         {
-          if ( *(byte *)v8 )
-            *(byte *)result = *(byte *)v6;
+          if ( *(BYTE *)v8 )
+            *(BYTE *)result = *(BYTE *)v6;
           ++v6;
           ++result;
           ++v8;
@@ -33155,7 +33162,7 @@ int __cdecl extractBits(int src, signed int bitOffset, int bitLenght)
     v6 = bitOffset / 8 + src;
     do
     {
-      v3 |= ((*(byte *)v6 & (unsigned __int8)(1 << v5++)) != 0) << v4++;
+      v3 |= ((*(BYTE *)v6 & (unsigned __int8)(1 << v5++)) != 0) << v4++;
       if ( v5 == 8 )
       {
         v5 = 0;
@@ -33188,7 +33195,7 @@ int __cdecl drawInRaceImageToBuffer_43B160(int image, int sizex, int sizey, int 
         v7 = sizex;
         do
         {
-          *(byte *)result++ = *(byte *)v5++;
+          *(BYTE *)result++ = *(BYTE *)v5++;
           --v7;
         }
         while ( v7 );
@@ -33224,9 +33231,9 @@ int __cdecl drawRaceCharInMenu_43B1A0(int a1, int a2, int a3, int a4)
         v8 = a2;
         do
         {
-          v9 = *(byte *)v6++;
+          v9 = *(BYTE *)v6++;
           if ( v9 )
-            *(byte *)v5 = v9;
+            *(BYTE *)v5 = v9;
           ++v5;
           --v8;
         }
@@ -33264,9 +33271,9 @@ int __cdecl drawCharInRaceScreen(int a1, int a2, int a3, int a4)
         v8 = a2;
         do
         {
-          v9 = *(byte *)v6++;
+          v9 = *(BYTE *)v6++;
           if ( v9 )
-            *(byte *)v5 = v9;
+            *(BYTE *)v5 = v9;
           ++v5;
           --v8;
         }
@@ -33304,9 +33311,9 @@ int __cdecl drawImageInRace_43B240(int filename, int width, int height, int offs
         v8 = width;
         do
         {
-          v9 = *(byte *)v6++;
+          v9 = *(BYTE *)v6++;
           if ( v9 )
-            *(byte *)v5 = v9;
+            *(BYTE *)v5 = v9;
           ++v5;
           --v8;
         }
@@ -33389,7 +33396,7 @@ int __cdecl draw3dTexture_43B2F0(int a1, int a2, int a3, int textureId)//offsetx
         do
         {
           if ( *v6 )
-            *(byte *)result = *v6;
+            *(BYTE *)result = *v6;
           ++result;
           ++v6;
           --v9;
@@ -33424,10 +33431,10 @@ int __cdecl sub_43B370(int a1, int a2, int a3)
   v6 = 256;
   do
   {
-    v7 = *(byte *)v3;
+    v7 = *(BYTE *)v3;
     result += a3;
     ++v3;
-    *(byte *)v4 = v7;
+    *(BYTE *)v4 = v7;
     if ( BYTE1(result) & 1 )
     {
       result = (unsigned __int8)result;
@@ -33458,8 +33465,8 @@ int __cdecl drawTurboBar_43B3A0(int a1, int a2, int a3, char a4)
         v6 = a2;
         do
         {
-          if ( *(byte *)result >= 0x40u )
-            *(byte *)result = a4;
+          if ( *(BYTE *)result >= 0x40u )
+            *(BYTE *)result = a4;
           ++result;
           --v6;
         }
@@ -33475,7 +33482,7 @@ int __cdecl drawTurboBar_43B3A0(int a1, int a2, int a3, char a4)
 
 
 //----- (0043B3E0) --------------------------------------------------------
-void __cdecl SetVideoMode(boolean fullScreen)
+void __cdecl SetVideoMode(BOOLEAN fullScreen)
 {
   
   unsigned int flagsNoGL; // esi@1
@@ -33632,16 +33639,16 @@ SDL_Color* color;
         v5 = 64;
         do
         {
-          *(_DWORD *)v4 = palette[*(byte *)v2] | 0xFF000000;
-          v6 = palette[*(byte *)(v2 + 1)];
+          *(_DWORD *)v4 = palette[*(BYTE *)v2] | 0xFF000000;
+          v6 = palette[*(BYTE *)(v2 + 1)];
           v7 = v2 + 1;
           *((_DWORD *)v4 + 1) = v6 | 0xFF000000;
-          v8 = palette[*(byte *)(v7++ + 1)];
+          v8 = palette[*(BYTE *)(v7++ + 1)];
           *((_DWORD *)v4 + 2) = v8 | 0xFF000000;
-          v9 = palette[*(byte *)(v7 + 1)];
+          v9 = palette[*(BYTE *)(v7 + 1)];
           v7 += 2;
           *((_DWORD *)v4 + 3) = v9 | 0xFF000000;
-          *((_DWORD *)v4 + 4) = palette[*(byte *)v7] | 0xFF000000;
+          *((_DWORD *)v4 + 4) = palette[*(BYTE *)v7] | 0xFF000000;
           v2 = v7 + 1;
           v4 += 20;
           --v5;
@@ -33701,16 +33708,16 @@ LABEL_20:
         v17 = 128;
         do
         {
-          *(_DWORD *)v16 = palette[*(byte *)v2] | 0xFF000000;
-          v18 = palette[*(byte *)(v2 + 1)];
+          *(_DWORD *)v16 = palette[*(BYTE *)v2] | 0xFF000000;
+          v18 = palette[*(BYTE *)(v2 + 1)];
           v19 = v2 + 1;
           *((_DWORD *)v16 + 1) = v18 | 0xFF000000;
-          v20 = palette[*(byte *)(v19++ + 1)];
+          v20 = palette[*(BYTE *)(v19++ + 1)];
           *((_DWORD *)v16 + 2) = v20 | 0xFF000000;
-          v21 = palette[*(byte *)(v19 + 1)];
+          v21 = palette[*(BYTE *)(v19 + 1)];
           v19 += 2;
           *((_DWORD *)v16 + 3) = v21 | 0xFF000000;
-          *((_DWORD *)v16 + 4) = palette[*(byte *)v19] | 0xFF000000;
+          *((_DWORD *)v16 + 4) = palette[*(BYTE *)v19] | 0xFF000000;
           v2 = v19 + 1;
           v16 += 20;
           --v17;
@@ -33771,12 +33778,12 @@ LABEL_20:
         v31 = 64;
         do
         {
-          v32 = palette[*(byte *)v2];
+          v32 = palette[*(BYTE *)v2];
           *(_DWORD *)v30 = v32;
           *(_DWORD *)(v30 + 4 * v27) = v32;
           *(_DWORD *)(v30 + 4) = v32;
           *(_DWORD *)(v30 + 4 * v27 + 4) = v32;
-          v33 = palette[*(byte *)(v2 + 1)];
+          v33 = palette[*(BYTE *)(v2 + 1)];
           v34 = v30 + 4;
           *(_DWORD *)(v34 + 4) = v33;
           *(_DWORD *)(v34 + 4 * v27 + 4) = v33;
@@ -33784,7 +33791,7 @@ LABEL_20:
           *(_DWORD *)(v34 + 4) = v33;
           *(_DWORD *)(v34 + 4 * v27 + 4) = v33;
           v35 = v2 + 1;
-          v36 = palette[*(byte *)(v35 + 1)];
+          v36 = palette[*(BYTE *)(v35 + 1)];
           v34 += 4;
           *(_DWORD *)(v34 + 4) = v36;
           *(_DWORD *)(v34 + 4 * v27 + 4) = v36;
@@ -33792,7 +33799,7 @@ LABEL_20:
           *(_DWORD *)(v34 + 4) = v36;
           ++v35;
           *(_DWORD *)(v34 + 4 * v27 + 4) = v36;
-          v37 = palette[*(byte *)(v35 + 1)];
+          v37 = palette[*(BYTE *)(v35 + 1)];
           v34 += 4;
           *(_DWORD *)(v34 + 4) = v37;
           ++v35;
@@ -33801,7 +33808,7 @@ LABEL_20:
           *(_DWORD *)(v34 + 4) = v37;
           v34 += 4;
           *(_DWORD *)(v34 + 4 * v27) = v37;
-          v38 = palette[*(byte *)(v35 + 1)];
+          v38 = palette[*(BYTE *)(v35 + 1)];
           v34 += 4;
           *(_DWORD *)v34 = v38;
           *(_DWORD *)(v34 + 4 * v27) = v38;
@@ -33830,16 +33837,16 @@ LABEL_20:
         v42 = 64;
         do
         {
-          *(_DWORD *)v41 = palette[*(byte *)v2];
-          v43 = palette[*(byte *)(v2 + 1)];
+          *(_DWORD *)v41 = palette[*(BYTE *)v2];
+          v43 = palette[*(BYTE *)(v2 + 1)];
           v44 = v2 + 1;
           *(_DWORD *)(v41 + 8) = v43;
-          v45 = palette[*(byte *)(v44 + 1)];
+          v45 = palette[*(BYTE *)(v44 + 1)];
           v44 += 2;
           *(_DWORD *)(v41 + 16) = v45;
-          v46 = palette[*(byte *)v44++];
+          v46 = palette[*(BYTE *)v44++];
           *(_DWORD *)(v41 + 24) = v46;
-          *(_DWORD *)(v41 + 32) = palette[*(byte *)v44];
+          *(_DWORD *)(v41 + 32) = palette[*(BYTE *)v44];
           v2 = v44 + 1;
           v41 += 40;
           --v42;
@@ -33908,17 +33915,17 @@ LABEL_20:
         v58 = v57 + (unsigned char*)screenSurfaceTemp->pixels;
         for ( i = 0; i < v56; ++i )
         {
-			//*(_DWORD *)v58 = &screenSurfaceTemp->format->palette->colors[*(byte *)v2];
+			//*(_DWORD *)v58 = &screenSurfaceTemp->format->palette->colors[*(BYTE *)v2];
 			
 			if (palette[1] != 0) {
 				int a = 0;
 			}
-			*(unsigned int *)v58 = palette[(*(byte *)v2)];
+			*(unsigned int *)v58 = palette[(*(BYTE *)v2)];
 			//*(unsigned int *)v58 = palette[248];
-			//*(unsigned int *)v58 = SDL_MapRGBA(screenSurface->format,BYTE2(palette[(*(byte *)v2)]),BYTE1(palette[(*(byte *)v2)]) ,BYTE4(palette[(*(byte *)v2)]) ,0);
+			//*(unsigned int *)v58 = SDL_MapRGBA(screenSurface->format,BYTE2(palette[(*(BYTE *)v2)]),BYTE1(palette[(*(BYTE *)v2)]) ,BYTE4(palette[(*(BYTE *)v2)]) ,0);
 
 		 
-		  color = (SDL_Color *)&palette[*(byte *)v2];
+		  color = (SDL_Color *)&palette[*(BYTE *)v2];
 		  
 		  screenSurfaceTemp = screenSurface;
           //v56 = screenSurface->w;
@@ -34146,11 +34153,11 @@ int __cdecl sub_43BFE0(int a1, int a2)//a1 posicion de participant.bpk y a2 es e
     v5 = 0;
     do
     {
-      if ( *(byte *)v3 > 3u && (*(byte *)v2 & 0xFu) < 4 )
+      if ( *(BYTE *)v3 > 3u && (*(BYTE *)v2 & 0xFu) < 4 )
       {
         dword_508D20 = v4;
         dword_4A7A40 = v5;
-        return *(byte *)v2 & 0xF;
+        return *(BYTE *)v2 & 0xF;
       }
       ++v3;
       ++v2;
@@ -34267,10 +34274,10 @@ int __cdecl regenerateRacePalette(int a1)
   {
     do
     {
-      *(byte *)result = (*(_DWORD *)v2 >> 2) & 0x3F;
+      *(BYTE *)result = (*(_DWORD *)v2 >> 2) & 0x3F;
       v3 = result + 1;
-      *(byte *)v3++ = (*(_DWORD *)v2 >> 10) & 0x3F;
-      *(byte *)v3 = (*(_DWORD *)v2 >> 18) & 0x3F;
+      *(BYTE *)v3++ = (*(_DWORD *)v2 >> 10) & 0x3F;
+      *(BYTE *)v3 = (*(_DWORD *)v2 >> 18) & 0x3F;
       v2 += 4;
       result = v3 + 1;
 	  index += 3;
@@ -34283,10 +34290,10 @@ int __cdecl regenerateRacePalette(int a1)
 	  index = 0;
     do
     {
-      *(byte *)result = (*(_DWORD *)v2 >> 18) & 0x3F;
+      *(BYTE *)result = (*(_DWORD *)v2 >> 18) & 0x3F;
       v4 = result + 1;
-      *(byte *)v4++ = (*(_DWORD *)v2 >> 10) & 0x3F;
-      *(byte *)v4 = (*(_DWORD *)v2 >> 2) & 0x3F;
+      *(BYTE *)v4++ = (*(_DWORD *)v2 >> 10) & 0x3F;
+      *(BYTE *)v4 = (*(_DWORD *)v2 >> 2) & 0x3F;
       v2 += 4;
       result = v4 + 1;
 	  index += 3;
@@ -34313,10 +34320,10 @@ int __cdecl generateSnapshotData_43C160(int a1)
   {
     do
     {
-      *(byte *)result = *(byte *)v2;
+      *(BYTE *)result = *(BYTE *)v2;
       v3 = result + 1;
-      *(byte *)v3++ = *(_WORD *)v2 >> 8;
-      *(byte *)v3 = *(byte *)(v2 + 2);
+      *(BYTE *)v3++ = *(_WORD *)v2 >> 8;
+      *(BYTE *)v3 = *(BYTE *)(v2 + 2);
       v2 += 4;
 	  v1++;
       result = v3 + 1;
@@ -34328,10 +34335,10 @@ int __cdecl generateSnapshotData_43C160(int a1)
   {
     do
     {
-      *(byte *)result = *(byte *)(v2 + 2);
+      *(BYTE *)result = *(BYTE *)(v2 + 2);
       v4 = result + 1;
-      *(byte *)v4++ = *(_WORD *)v2 >> 8;
-      *(byte *)v4 = *(byte *)v2;
+      *(BYTE *)v4++ = *(_WORD *)v2 >> 8;
+      *(BYTE *)v4 = *(BYTE *)v2;
       v2 += 4;
       result = v4 + 1;
 	  v1++;
@@ -34351,8 +34358,10 @@ int __cdecl sub_43C1B0(unsigned __int8 channelNumber, int a2, signed int a3)
   result = mainArgs.configNoSound;
   if ( !mainArgs.configNoSound )
   {
-    sub_43EBB0(channelNumber - 1, (a2 << 6 >> 16) + 16);
-    result = sub_43EBD0((unsigned int)channelNumber - 1, a3);
+	#ifndef _NO_MINIFMOD
+		sub_43EBB0(channelNumber - 1, (a2 << 6 >> 16) + 16);
+		result = sub_43EBD0((unsigned int)channelNumber - 1, a3);
+	#endif
   }
   return result;
 }
@@ -34374,7 +34383,9 @@ int sub_43C1F0()
 char __stdcall sub_43C220(int a1, int a2, signed int a3, int a4)//void streamcallback(FSOUND_STREAM *stream, void *buff, int len, int param) 
 {
   if ( !mainArgs.configNoSound )
-    FSOUND_Software_Fill_43DCB0(a3 / 4, a2);
+	  #ifndef _NO_MINIFMOD
+			FSOUND_Software_Fill_43DCB0(a3 / 4, a2);
+		#endif
   return TRUE;
 }
 // 456C04: using guessed type int configNoSound;
@@ -34467,8 +34478,11 @@ int __cdecl loadMenuSoundEffect(unsigned __int8 channelNumber, char soundNumber,
   int result; // eax@1
 
   result = mainArgs.configNoSoundEffect;
-  if ( mainArgs.configNoSoundEffect)
-    result = FMUSIC_UpdateXMNote_43EC40((int)musicModuleModified_456C24, channelNumber - 1, soundNumber - 1, a5, (a4 << 6 >> 16) + 16);
+  if ( mainArgs.configNoSoundEffect)	
+	#ifndef _NO_MINIFMOD
+	    result = FMUSIC_UpdateXMNote_43EC40((int)musicModuleModified_456C24, channelNumber - 1, soundNumber - 1, a5, (a4 << 6 >> 16) + 16);
+	#endif
+
   return result;
 }
 // 456C04: using guessed type int configNoSound;
@@ -34488,25 +34502,28 @@ int stopSong()
 //----- (0043C3E0) --------------------------------------------------------
 int __cdecl stopSoundChannel_43C3E0(unsigned __int8 a1)
 {
-  int result; // eax@1
-  FSOUND_CHANNEL *ccptr;
-  result = mainArgs.configNoSound;
-  if ( !mainArgs.configNoSound )
-  {
-    //result = &FSOUND_Channel[43 * (a1 - 1)];
-	//result = dword_45C4E4[43 * (a1 - 1)]; //cambiado porque tiene la direccion de memoria
-	ccptr = &FSOUND_Channel[(a1 - 1)];
-	ccptr->mixposlo = 0;
-	ccptr->mixpos = 0;
-    ccptr->sptr = NULL;
-	ccptr->sampleoffset = 0;
-    /**(_DWORD *)(result + 44) = 0;
-    *(_DWORD *)(result + 40) = 0;
-    *(_DWORD *)(result + 28) = 0;
-    *(_DWORD *)(result + 24) = 0;*/
+
+  #ifndef _NO_MINIFMOD
+	  int result; // eax@1
+	  FSOUND_CHANNEL *ccptr;
+	  result = mainArgs.configNoSound;
+	  if ( !mainArgs.configNoSound )
+	  {
+		//result = &FSOUND_Channel[43 * (a1 - 1)];
+		//result = dword_45C4E4[43 * (a1 - 1)]; //cambiado porque tiene la direccion de memoria
+		ccptr = &FSOUND_Channel[(a1 - 1)];
+		ccptr->mixposlo = 0;
+		ccptr->mixpos = 0;
+		ccptr->sptr = NULL;
+		ccptr->sampleoffset = 0;
+		/**(_DWORD *)(result + 44) = 0;
+		*(_DWORD *)(result + 40) = 0;
+		*(_DWORD *)(result + 28) = 0;
+		*(_DWORD *)(result + 24) = 0;*/
 	
-  }
-  return ccptr;
+	  }
+	  return ccptr;
+	#endif
 }
 
 
@@ -34520,8 +34537,10 @@ int stopAndOpenMusic()
   {
     FSOUND_Stream_Stop(soundStream);
     FSOUND_Stream_Close(soundStream);
-    FMUSIC_FreeSong_43D940(musicModuleModified_456C24);
-    result = FMUSIC_FreeSong_43D940(musicModule);
+	#ifndef _NO_MINIFMOD
+	 FMUSIC_FreeSong_43D940(musicModuleModified_456C24);
+	 result = FMUSIC_FreeSong_43D940(musicModule);
+	#endif
 	musicModule = NULL;
     musicModuleModified_456C24 = 0;
   }
@@ -34602,13 +34621,17 @@ int  inicializeScreen(double a1)
     exit(-1);
   if ( !mainArgs.configNoSound && (unsigned __int8)FSOUND_Init(44100, 64, 0) )
   {
-    if ( !mainArgs.configNoSound )
-      FSOUND_File_SetCallbacks_43F6B0(
-        (int (__cdecl *)(_DWORD))FSOUND_File_OpenCallback_43AD80,
-        (int (__cdecl *)(_DWORD))FSOUND_File_CloseCallback_43ADD0,
-        (int (__cdecl *)(_DWORD, _DWORD, _DWORD))FSOUND_File_ReadCallback_43ADF0,
-        (int (__cdecl *)(_DWORD))FSOUND_File_SeekCallback_43AE30,
-        FSOUND_File_TellCallback_43AE70);
+	 #ifndef _NO_MINIFMOD
+		if ( !mainArgs.configNoSound )
+     
+
+		  FSOUND_File_SetCallbacks_43F6B0(
+			(int (__cdecl *)(_DWORD))FSOUND_File_OpenCallback_43AD80,
+			(int (__cdecl *)(_DWORD))FSOUND_File_CloseCallback_43ADD0,
+			(int (__cdecl *)(_DWORD, _DWORD, _DWORD))FSOUND_File_ReadCallback_43ADF0,
+			(int (__cdecl *)(_DWORD))FSOUND_File_SeekCallback_43AE30,
+			FSOUND_File_TellCallback_43AE70);
+	  #endif
   }
   else
   {
@@ -34622,7 +34645,7 @@ int  inicializeScreen(double a1)
   v3 = (double)screenWidth / (double)screenHeight;
   screenColors = videoInfo->vfmt->BitsPerPixel; //ojo que esto tiene que ser 32
   
-//  screenColors = *(byte *)(*(_DWORD *)(videoInfo->vfmt->BitsPerPixel + 8) + 4);
+//  screenColors = *(BYTE *)(*(_DWORD *)(videoInfo->vfmt->BitsPerPixel + 8) + 4);
   if ( v3 <= 1.3333334 )
     y = v3 * 0.75;
   else
@@ -34761,8 +34784,8 @@ int __cdecl sub_43C7E0(int a1, int a2, int a3, signed int a4, char a5)
       v8 = 2;
       do
       {
-        if ( *(byte *)v7 >= 0x40u )
-          *(byte *)v7 = a5;
+        if ( *(BYTE *)v7 >= 0x40u )
+          *(BYTE *)v7 = a5;
         ++v7;
         --v8;
       }
@@ -34903,7 +34926,7 @@ LABEL_26:
         v10 = lenght == 0;
         goto LABEL_27;
       }
-	  *(byte *)(imageDestposition++ + dest) = (32* i | (i >> 3)) ;
+	  *(BYTE *)(imageDestposition++ + dest) = (32* i | (i >> 3)) ;
       v10 = lenght-- == 1;
 LABEL_27:
       if ( v10 )
@@ -34912,18 +34935,18 @@ LABEL_27:
     v11 = v8;
     if ( v8 >= v7 )
     {
-      *(byte *)v6 = v17;
+      *(BYTE *)v6 = v17;
       v11 = v4;
       v6 = (char *)v6 + 1;
     }
     for ( ; v11 >= 258; v6 = (char *)v6 + 1 )
     {
-      *(byte *)v6 = *((byte *)v18 + v11);
+      *(BYTE *)v6 = *((BYTE *)v18 + v11);
       v11 = *((int *)v19 + v11);
     }
-    *(byte *)v6 = v11;
+    *(BYTE *)v6 = v11;
     v6 = (char *)v6 + 1;
-    if ( v7 >= v14 || (*((byte *)v18 + v7) = v11, v17 = v11, *((int *)v19 + v7) = v4, v4 = v8, ++v7, v7 >= v14) )
+    if ( v7 >= v14 || (*((BYTE *)v18 + v7) = v11, v17 = v11, *((int *)v19 + v7) = v4, v4 = v8, ++v7, v7 >= v14) )
     {
       if ( v13 < 12 )
       {
@@ -34941,7 +34964,7 @@ LABEL_27:
       }
       else
       {
-        *(byte *)(imageDestposition++ + dest) = (32*(byte)v12 | ((byte)v12 >> 3));
+        *(BYTE *)(imageDestposition++ + dest) = (32*(BYTE)v12 | ((BYTE)v12 >> 3));
         --lenght;
         if ( !lenght)
           goto LABEL_28;
@@ -35017,7 +35040,7 @@ void __cdecl loadMusic(int a1, char * music1, int a3, char* soundEffect)
 			do
 			{
 				//96 es 60h huele a que son los instrumentos del xm
-				if (*((byte *)musicStream + v8 + 96) >= 0xFEu)
+				if (*((BYTE *)musicStream + v8 + 96) >= 0xFEu)
 					++v10;
 				musicOrder_45DC60[v8] = v10;
 				dword_45E1E0[v8] = v8 + v10;
@@ -35034,21 +35057,23 @@ void __cdecl loadMusic(int a1, char * music1, int a3, char* soundEffect)
 
 		if (mainArgs.configNoSoundEffect) {
 			//musicModuleModified_456C24 = (void *)FMUSIC_LoadSong_43DC50((int)&v13, 0);
-			
-			musicModuleModified_456C24 = (void *)FMUSIC_LoadSong_43DC50(soundEffectSize,soundEffectStream, 0);
-		//	musicModuleModified_456C24 = (void *)FMUSIC_LoadSong_43DC50(soundEffectStream, 0);
+			#ifndef _NO_MINIFMOD
+
+				musicModuleModified_456C24 = (void *)FMUSIC_LoadSong_43DC50(soundEffectSize,soundEffectStream, 0);
+			//	musicModuleModified_456C24 = (void *)FMUSIC_LoadSong_43DC50(soundEffectStream, 0);
 			
 
-			FMUSIC_PlaySong_43DA40(musicModuleModified_456C24);
-			sound_stream = FSOUND_Stream_Create(sub_43C220, 4096, FSOUND_UNSIGNED, 44100, 0); //int length,unsigned int mode 80,int samplerate,int userdata
-			soundStream = sound_stream;
-			channel = FSOUND_Stream_Play(-1, sound_stream);
-			channel_456C10 = channel;
-			if (!mainArgs.configNoSound)
-			{
-				effectVolume_456A2C = effectVolume_456A2C << 8 >> 8;
-				FSOUND_SetVolume(channel, volumeMask_456A34 * effectVolume_456A2C >> 8);
-			}
+				FMUSIC_PlaySong_43DA40(musicModuleModified_456C24);
+				sound_stream = FSOUND_Stream_Create(sub_43C220, 4096, FSOUND_UNSIGNED, 44100, 0); //int length,unsigned int mode 80,int samplerate,int userdata
+				soundStream = sound_stream;
+				channel = FSOUND_Stream_Play(-1, sound_stream);
+				channel_456C10 = channel;
+				if (!mainArgs.configNoSound)
+				{
+					effectVolume_456A2C = effectVolume_456A2C << 8 >> 8;
+					FSOUND_SetVolume(channel, volumeMask_456A34 * effectVolume_456A2C >> 8);
+				}
+			#endif
 		}
 		//free(musicStream);
 		//free(soundEffectStream);
@@ -35188,7 +35213,7 @@ LABEL_26:
           if ( (signed int)v27 > 512 )
             LODWORD(v27) = 512;
           for ( i = v26; i < (signed int)v27; ++i )
-            *(byte *)((v11 << 9) + dword_464F14 + i + 96) = value;
+            *(BYTE *)((v11 << 9) + dword_464F14 + i + 96) = value;
         }
         result = v33;
         ++v11;
@@ -35226,7 +35251,7 @@ LABEL_26:
         if ( v22 < (signed int)v23 )
         {
           do
-            *(byte *)((v11 << 9) + dword_464F14 + v24++ + 96) =value;
+            *(BYTE *)((v11 << 9) + dword_464F14 + v24++ + 96) =value;
           while ( v24 < (signed int)v23 );
           v19 = v39;
         }
@@ -35431,7 +35456,7 @@ LABEL_28:
             {
               v44 = (unsigned __int64)v41;
               v41 = v41 + v56;
-              *(byte *)(v42++ + dword_464F14 + 96) = v44;
+              *(BYTE *)(v42++ + dword_464F14 + 96) = v44;
               --v43;
             }
             while ( v43 );
@@ -35493,7 +35518,7 @@ LABEL_28:
           {
             v34 = (unsigned __int64)v32;
             v32 = v32 + v72;
-            *(byte *)(v61 + dword_464F14 + 96) = v34;
+            *(BYTE *)(v61 + dword_464F14 + 96) = v34;
             --v33;
             ++v61;
           }
@@ -35674,7 +35699,7 @@ LABEL_28:
             for ( i = v11 << 9; ; i = v11 << 9 )
             {
               v34 = dword_464F14 + i + v32++ + 96;
-              *(byte *)v34 = *(byte *)(*(byte *)v34 + a7);
+              *(BYTE *)v34 = *(BYTE *)(*(BYTE *)v34 + a7);
               if ( v32 >= v31 )
                 break;
             }
@@ -35725,7 +35750,7 @@ LABEL_28:
           for ( j = v11 << 9; ; j = v11 << 9 )
           {
             v27 = dword_464F14 + j + v24++ + 96;
-            *(byte *)v27 = *(byte *)(*(byte *)v27 + a7);
+            *(BYTE *)v27 = *(BYTE *)(*(BYTE *)v27 + a7);
             if ( v24 >= v25 )
               break;
           }
@@ -35945,46 +35970,46 @@ int __cdecl sub_43FF90(int *a1, int a2)
 
   v2 = a1;
   v3 = 0;
-  if ( *(byte *)a1 )
+  if ( *(BYTE *)a1 )
   {
     do
     {
       while ( 1 )
       {
-        v4 = _mb_cur_max <= 1 ? pctype[*(byte *)v2] & 8 : _isctype(*(byte *)v2, 8);
+        v4 = _mb_cur_max <= 1 ? pctype[*(BYTE *)v2] & 8 : _isctype(*(BYTE *)v2, 8);
         if ( !v4 )
           break;
         v2 = (int *)((char *)v2 + 1);
       }
-      if ( *(byte *)v2 == 34 )
+      if ( *(BYTE *)v2 == 34 )
       {
-        v5 = *((byte *)v2 + 1);
+        v5 = *((BYTE *)v2 + 1);
         v2 = (int *)((char *)v2 + 1);
         if ( !v5 )
           break;
         if ( a2 )
           *(_DWORD *)(a2 + 4 * v3) = v2;
-        v6 = *(byte *)v2;
+        v6 = *(BYTE *)v2;
         ++v3;
-        if ( *(byte *)v2 )
+        if ( *(BYTE *)v2 )
         {
           do
           {
             if ( v6 == 34 )
               break;
-            v6 = *((byte *)v2 + 1);
+            v6 = *((BYTE *)v2 + 1);
             v2 = (int *)((char *)v2 + 1);
           }
           while ( v6 );
         }
       }
-      else if ( *(byte *)v2 )
+      else if ( *(BYTE *)v2 )
       {
         if ( a2 )
           *(_DWORD *)(a2 + 4 * v3) = v2;
-        v7 = *(byte *)v2;
+        v7 = *(BYTE *)v2;
         ++v3;
-        if ( *(byte *)v2 )
+        if ( *(BYTE *)v2 )
         {
           do
           {
@@ -35994,17 +36019,17 @@ int __cdecl sub_43FF90(int *a1, int a2)
               v8 = _isctype(v7, 8);
             if ( v8 )
               break;
-            v7 = *((byte *)v2 + 1);
+            v7 = *((BYTE *)v2 + 1);
             v2 = (int *)((char *)v2 + 1);
           }
           while ( v7 );
         }
       }
-      if ( !*(byte *)v2 )
+      if ( !*(BYTE *)v2 )
         break;
       if ( a2 )
-        *(byte *)v2 = 0;
-      v9 = *((byte *)v2 + 1);
+        *(BYTE *)v2 = 0;
+      v9 = *((BYTE *)v2 + 1);
       v2 = (int *)((char *)v2 + 1);
     }
     while ( v9 );

@@ -1,16 +1,16 @@
 
 
 
-#include <windows.h>
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include "race/anim.h"
-#include "defs.h"
 #include "dr.h"
 #include "drivers.h"
 #include "cars.h"
 #include "graphics.h"
+#include "defs.h"
 
 
 //esto es la duracion de los frames para los coches!!!!!
@@ -448,7 +448,7 @@ int reloadRepairAnimation()
     v7 = &v20;
     do
     {
-      v11 = *((byte *)v7 + 1);
+      v11 = *((BYTE *)v7 + 1);
       v7 = (char *)v7 + 1;
     }
     while ( v11 );
@@ -475,7 +475,7 @@ int reloadRepairAnimation()
     v7 = &v20;
     do
     {
-      v8 = *((byte *)v7 + 1);
+      v8 = *((BYTE *)v7 + 1);
       v7 = (char *)v7 + 1;
     }
     while ( v8 );
@@ -589,7 +589,7 @@ int reloadEngineAnimation()
     v2 = &v6;
     do
     {
-      v3 = *((byte *)v2 + 1);
+      v3 = *((BYTE *)v2 + 1);
       v2 = (char *)v2 + 1;
     }
     while ( v3 );
@@ -639,7 +639,7 @@ int reloadTireAnimation()
     v2 = &v6;
     do
     {
-      v3 = *((byte *)v2 + 1);
+      v3 = *((BYTE *)v2 + 1);
       v2 = (char *)v2 + 1;
     }
     while ( v3 );
@@ -689,7 +689,7 @@ int reloadArmourAnimation()
     v2 = &v6;
     do
     {
-      v3 = *((byte *)v2 + 1);
+      v3 = *((BYTE *)v2 + 1);
       v2 = (char *)v2 + 1;
     }
     while ( v3 );

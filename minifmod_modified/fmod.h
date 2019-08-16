@@ -1164,11 +1164,12 @@ DLL_API signed char     F_API FMUSIC_PlaySong(FMUSIC_MODULE *mod);
 DLL_API signed char     F_API FMUSIC_StopSong(FMUSIC_MODULE *mod);
 DLL_API void            F_API FMUSIC_StopAllSongs();
 
-DLL_API signed char     F_API FMUSIC_SetZxxCallback(FMUSIC_MODULE *mod, FMUSIC_CALLBACK callback);
-DLL_API signed char     F_API FMUSIC_SetRowCallback(FMUSIC_MODULE *mod, FMUSIC_CALLBACK callback, int rowstep);
-DLL_API signed char     F_API FMUSIC_SetOrderCallback(FMUSIC_MODULE *mod, FMUSIC_CALLBACK callback, int orderstep);
-DLL_API signed char     F_API FMUSIC_SetInstCallback(FMUSIC_MODULE *mod, FMUSIC_CALLBACK callback, int instrument);
-
+#ifndef _NO_MINIFMOD
+	DLL_API signed char     F_API FMUSIC_SetZxxCallback(FMUSIC_MODULE *mod, FMUSIC_CALLBACK callback);
+	DLL_API signed char     F_API FMUSIC_SetRowCallback(FMUSIC_MODULE *mod, FMUSIC_CALLBACK callback, int rowstep);
+	DLL_API signed char     F_API FMUSIC_SetOrderCallback(FMUSIC_MODULE *mod, FMUSIC_CALLBACK callback, int orderstep);
+	DLL_API signed char     F_API FMUSIC_SetInstCallback(FMUSIC_MODULE *mod, FMUSIC_CALLBACK callback, int instrument);
+#endif
 DLL_API signed char     F_API FMUSIC_SetSample(FMUSIC_MODULE *mod, int sampno, FSOUND_SAMPLE *sptr);
 DLL_API signed char     F_API FMUSIC_SetUserData(FMUSIC_MODULE *mod, void *userdata);
 DLL_API signed char     F_API FMUSIC_OptimizeChannels(FMUSIC_MODULE *mod, int maxchannels, int minvolume);

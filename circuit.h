@@ -1,8 +1,5 @@
-#pragma once
-
 #include "defs.h"
-#include <Windows.h>
-extern byte circuitOrder_45673C[];
+extern BYTE circuitOrder_45673C[];
 
 extern char *circuits[];
 

@@ -1,5 +1,5 @@
 #include "drivers.h"
-#include <windows.h>
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -449,11 +449,11 @@ int initDrivers()
     *(_DWORD *)(v5 - 8) = v4 + 1; ///esta es la posicion
 
 	//esto setea el nombre
-    while ( *((byte *)&v103 + v14) || v14 == dword_460880[27 * driverId] )
+    while ( *((BYTE *)&v103 + v14) || v14 == dword_460880[27 * driverId] )
       ++v14;
 	  //esto devuelve el nombre del piloto
     v15 = (char *)&v23 + 11 * v14;
-    *((byte *)&v103 + v14) = 1;
+    *((BYTE *)&v103 + v14) = 1;
     v16 = v5 - (_DWORD)v15 - 80;
     do
     {

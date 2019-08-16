@@ -1,13 +1,6 @@
-#define _CRT_NONSTDC_NO_WARNINGS
-#define  _CRT_SECURE_NO_WARNINGS
-#pragma warning ( disable: 4146  4700 4703 4005)
 
-#pragma warning(push)
-#pragma warning(disable: warning-code) //4996 for _CRT_SECURE_NO_WARNINGS equivalent
-// deprecated code here
 #include <stdio.h>
-#pragma warning(pop)
-#include <windows.h>
+
 #include "../defs.h"
 
 #include "../graphics.h"
@@ -92,8 +85,8 @@ int seeHallOfFame()
     v7 = (char *)(DstBuf - (char *)v6);
     do
     {
-      v8 = *(byte *)v6;
-      *((byte *)v6 + (_DWORD)v7) = *(byte *)v6;
+      v8 = *(BYTE *)v6;
+      *((BYTE *)v6 + (_DWORD)v7) = *(BYTE *)v6;
       v6 = (int *)((char *)v6 + 1);
     }
     while ( v8 );
@@ -119,8 +112,8 @@ int seeHallOfFame()
     v13 = &DstBuf[-v12];
     do
     {
-      v14 = *(byte *)v12;
-      v13[v12] = *(byte *)v12;
+      v14 = *(BYTE *)v12;
+      v13[v12] = *(BYTE *)v12;
       ++v12;
     }
     while ( v14 );*/
@@ -132,7 +125,9 @@ int seeHallOfFame()
   while ( v1 < 10 );
   screenBuffer = (void *)dword_461250;
   sub_42C560(-1);
-  LOWORD(dword_462D7C) = sub_43C1F0() & 0xFF00;
+
+ //FIX ME LOWORD(dword_462D7C) = sub_43C1F0() & 0xFF00;
+
   dword_462D7C = (unsigned __int16)dword_462D7C;
   musicSetOrder(20736);
   setMusicVolume(0x10000);
@@ -148,7 +143,7 @@ int seeHallOfFame()
         break;
       if ( !isMultiplayerGame )
         goto LABEL_25;
-      multiplayer_sub_42CCF0();
+      //multiplayer_sub_42CCF0();
     }
   }
   while ( !v16 );
@@ -177,8 +172,8 @@ LABEL_25:
       default:
         continue;
       case 58:
-        if ( isMultiplayerGame )
-          multiplayer_sub_42CCF0();
+        //if ( isMultiplayerGame )
+        //  multiplayer_sub_42CCF0();
         break;
       case 74:
       case 202://right
@@ -655,8 +650,8 @@ int __cdecl drawRecordByCircuit(int a1)
     /*v18 = v37;
     do
     {
-      v19 = *(byte *)v18;
-      *(byte *)(v18 + v14) = *(byte *)v18;
+      v19 = *(BYTE *)v18;
+      *(BYTE *)(v18 + v14) = *(BYTE *)v18;
       ++v18;
     }
     while ( v19 );
@@ -666,8 +661,8 @@ int __cdecl drawRecordByCircuit(int a1)
     /*v20 = (int)(v17 - 12);
     do
     {
-      v21 = *(byte *)v20;
-      *(byte *)(v20 + v15) = *(byte *)v20;
+      v21 = *(BYTE *)v20;
+      *(BYTE *)(v20 + v15) = *(BYTE *)v20;
       ++v20;
     }
     while ( v21 );

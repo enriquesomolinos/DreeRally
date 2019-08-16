@@ -1,18 +1,10 @@
-#define _CRT_NONSTDC_NO_WARNINGS
-#define  _CRT_SECURE_NO_WARNINGS
-#pragma warning ( disable: 4146  4700 4703 4005)
-
-#pragma warning(push)
-#pragma warning(disable: warning-code) //4996 for _CRT_SECURE_NO_WARNINGS equivalent
-
-#pragma warning(pop)
 
 #include "../graphics.h"
 #include "../defs.h"
 #include "../menus.h"
 #include "../dr.h"
 #include "licenseScreen.h"
-#include <windows.h>
+
 #include "../imageUtil.h"
 #include "../drivers.h"
 #include "../config.h"
@@ -22,7 +14,7 @@ char aSpeedMakesMeDi[21] = "speed makes me dizzy"; // weak
 char aILiveToRide[15] = "i live to ride"; // weak
 char aPetrolInMyVein[19] = "petrol in my veins"; // weak
 
- byte unk_4455B0_2[] = { 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 };
+ BYTE unk_4455B0_2[] = { 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 };
 
 //----- (00434800) --------------------------------------------------------
 int __cdecl licenseScreen(int useWeapons_mal)
@@ -99,9 +91,9 @@ int __cdecl licenseScreen(int useWeapons_mal)
   drivers[driverId].colour = 0;
   drawTransparentBlock(0, 371, 639, 109);
   drawBottomMenuText();
-  v1 = *((byte *)graphicsGeneral.copperPal + 385);
-  v2 = (double)*((byte *)graphicsGeneral.copperPal + 386);
-  v58 = *((byte *)graphicsGeneral.copperPal + 384);
+  v1 = *((BYTE *)graphicsGeneral.copperPal + 385);
+  v2 = (double)*((BYTE *)graphicsGeneral.copperPal + 386);
+  v58 = *((BYTE *)graphicsGeneral.copperPal + 384);
   v3 = (double)v1;
   v4 = (double)v58;
   setPaletteValueWithFloats(v4, v3, v2);
@@ -120,7 +112,7 @@ int __cdecl licenseScreen(int useWeapons_mal)
     do
     {
       for ( i = v5 % 2; i < 530; i += 2 )
-        *((byte *)screenBuffer + v6 + i + 63) = -60;
+        *((BYTE *)screenBuffer + v6 + i + 63) = -60;
       v6 += 640;
       ++v5;
     }
@@ -221,7 +213,7 @@ int __cdecl licenseScreen(int useWeapons_mal)
   do
   {
     for ( k = v25 % 2; k < 530; k += 2 )
-      *((byte *)screenBuffer + v26 + k + 63) = -60;
+      *((BYTE *)screenBuffer + v26 + k + 63) = -60;
     v26 += 640;
     ++v25;
   }
@@ -400,8 +392,8 @@ LABEL_74:
   v41 = (unsigned __int8)v40[v39 + 2];
   v42 = (int)&v40[v39];
   v43 = (double)v41;
-  v44 = (double)*(byte *)(v42 + 1);
-  v45 = (double)*(byte *)v42;
+  v44 = (double)*(BYTE *)(v42 + 1);
+  v45 = (double)*(BYTE *)v42;
   setPaletteValueWithFloats(v45, v44, v43);
   v46 = v57;
 LABEL_86:

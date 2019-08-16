@@ -1,4 +1,3 @@
-#pragma once
 
 typedef struct Graphics4 {
 	void *badtitBpk;
