@@ -24161,14 +24161,14 @@ int sub_4291D0()
 
 
 //----- (00429280) --------------------------------------------------------
-//void __fastcall easyRaceResults(int ecx0, int a2, int a1)
+//void   easyRaceResults(int ecx0, int a2, int a1)
 
 //----- (004295E0) --------------------------------------------------------
-//void __fastcall mediumRaceResults(int ecx0, int a2, int a1)
+//void   mediumRaceResults(int ecx0, int a2, int a1)
 
 
 //----- (00429990) --------------------------------------------------------
-//void __fastcall hardRaceResults(int ecx0, int a2, int a1)
+//void   hardRaceResults(int ecx0, int a2, int a1)
 
 //----- (00429CF0) --------------------------------------------------------
 int   sub_429CF0(unsigned __int8 *a1, signed int a2)

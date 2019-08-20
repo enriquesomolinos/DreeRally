@@ -22,7 +22,7 @@ extern const int NUM_RACES = 3;
 int racePositions[3][4];//para cada carrera 4 participantes ordenados por posicion 
 
 //----- (00429280) --------------------------------------------------------
-void __fastcall easyRaceResults(int ecx0, int a2, int a1)
+void   easyRaceResults(int ecx0, int a2, int a1)
 {
   signed int v3; // edi@37
   int v4; // eax@39
@@ -200,7 +200,7 @@ LABEL_60:
 }
 
 //----- (004295E0) --------------------------------------------------------
-void __fastcall mediumRaceResults(int ecx0, int a2, int a1)
+void   mediumRaceResults(int ecx0, int a2, int a1)
 {
   signed int v3; // edi@37
   int v4; // eax@39
@@ -383,7 +383,7 @@ LABEL_60:
 
 
 //----- (00429990) --------------------------------------------------------
-void __fastcall hardRaceResults(int ecx0, int a2, int a1)
+void   hardRaceResults(int ecx0, int a2, int a1)
 {
   signed int v3; // edi@37
   int v4; // eax@39
