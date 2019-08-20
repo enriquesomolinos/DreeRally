@@ -65,7 +65,7 @@ const int DEFAULT_BIGLETTER_SPACING_OFFSET = -23;
 	  
 	  drawImageWithPosition2((int)fsma3fBpk+16*13*v5, 16, 13,(int)((char *)screenBuffer+v5*16));
   }*/
-unsigned int __cdecl drawInGamePrices(const char *text, int position)
+unsigned int   drawInGamePrices(const char *text, int position)
 
 {
   int height; // ebx@1
@@ -111,7 +111,7 @@ unsigned int __cdecl drawInGamePrices(const char *text, int position)
 // 445916: using guessed type char byte_445916;
 
 //----- (0041A430) --------------------------------------------------------
-int __cdecl writeTextInScreen(const char *text, int screenOffset)
+int   writeTextInScreen(const char *text, int screenOffset)
 {
   int v2; // esi@1
   unsigned int v3; // ebp@1
@@ -196,7 +196,7 @@ LABEL_17:
 
 
 //----- (0041C9F0) --------------------------------------------------------
-int __cdecl getBoxBigTextOffset(const char *a1)
+int   getBoxBigTextOffset(const char *a1)
 {
   const char *v1; // ecx@1
   int result; // eax@1
@@ -223,7 +223,7 @@ int __cdecl getBoxBigTextOffset(const char *a1)
  
  
  //----- (0041FA50) --------------------------------------------------------
-int __cdecl sub_41FA50(const char *a1)
+int   sub_41FA50(const char *a1)
 {
   const char *v1; // eax@1
   int v2; // ebx@1
@@ -247,7 +247,7 @@ int __cdecl sub_41FA50(const char *a1)
 
 //----- (0041FAB0) --------------------------------------------------------
 //offset para los textos en los recuadros de las pantallas para que quede centrado el texto
-int __cdecl getBoxTextOffset(const char *a1)
+int   getBoxTextOffset(const char *a1)
 {
   const char *v1; // eax@1
   int v2; // ebp@1
@@ -281,7 +281,7 @@ int __cdecl getBoxTextOffset(const char *a1)
 // 445916: using guessed type char byte_445916;
 
 //----- (0041FB20) --------------------------------------------------------
-int __cdecl getBoxTextSize(const char *a1)
+int   getBoxTextSize(const char *a1)
 {
   const char *v1; // ecx@1
   int result; // eax@1
@@ -306,7 +306,7 @@ int __cdecl getBoxTextSize(const char *a1)
 
 //----- (0041FB70) --------------------------------------------------------
 /*esto creo que no es necesario*/
-int __cdecl getNameOffsetPositionRight(const char *a1)
+int   getNameOffsetPositionRight(const char *a1)
 {
   const char *v1; // eax@1
   int v2; // ebx@1
@@ -333,7 +333,7 @@ int __cdecl getNameOffsetPositionRight(const char *a1)
 }
 
 //----- (0041FBD0) --------------------------------------------------------
-int __cdecl getBigTextMidSize(const char *a1)
+int   getBigTextMidSize(const char *a1)
 {
   const char *v1; // ecx@1
   signed int v2; // eax@1
@@ -362,7 +362,7 @@ int __cdecl getBigTextMidSize(const char *a1)
 
 
 //----- (00421AE0) --------------------------------------------------------
-int __cdecl drawBorder(int a1, int a2, int a3, int a4)
+int   drawBorder(int a1, int a2, int a3, int a4)
 {
   int v4; // edi@1
   int v5; // ebx@1
@@ -415,7 +415,7 @@ int __cdecl drawBorder(int a1, int a2, int a3, int a4)
 }
 
 //----- (00421C40) --------------------------------------------------------
-int __cdecl drawBorder2(int a1, int a2, unsigned int a3, int a4)
+int   drawBorder2(int a1, int a2, unsigned int a3, int a4)
 {
   int result; // eax@1
   int v5; // edx@1
@@ -484,7 +484,7 @@ int __cdecl drawBorder2(int a1, int a2, unsigned int a3, int a4)
 }
 
 //----- (0043BF50) --------------------------------------------------------
-int __cdecl drawImageWithPosition2(int texture, int height, int width, int screenBufferPtr)
+int   drawImageWithPosition2(int texture, int height, int width, int screenBufferPtr)
 {
   int v4; // ecx@1
   int result; // eax@1
@@ -519,7 +519,7 @@ int __cdecl drawImageWithPosition2(int texture, int height, int width, int scree
 }
 
 //----- (0043BF90) --------------------------------------------------------
-int __cdecl drawImageWithPosition(int icon, int width, int height, int pscreenBufferPos)
+int   drawImageWithPosition(int icon, int width, int height, int pscreenBufferPos)
 {
   int result; // eax@1
   int screenIcon; // edx@1
@@ -557,7 +557,7 @@ int __cdecl drawImageWithPosition(int icon, int width, int height, int pscreenBu
   return result;
 }
 
-unsigned int __cdecl drawTextWithFont(int font, int a2, const char *text, int screenPosition)
+unsigned int   drawTextWithFont(int font, int a2, const char *text, int screenPosition)
 {
   int height; // edx@1
   int width; // ebp@1

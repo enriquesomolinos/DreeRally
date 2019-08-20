@@ -12,5 +12,5 @@ typedef struct Pedestrian {
 
 extern Pedestrian pedestrian_479AA4[20];
 
-char __cdecl drawPedestrian_43AF30(int screenOffset, int pedestrianbpkOffset, int sizeToPaint);
+char   drawPedestrian_43AF30(int screenOffset, int pedestrianbpkOffset, int sizeToPaint);
 char drawShotPedestrian_4111F0();

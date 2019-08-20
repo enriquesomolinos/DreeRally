@@ -2,7 +2,7 @@
 #include "util.h"
 
 //----- (00402740) --------------------------------------------------------
-FILE *__cdecl fileExists(char *Filename)
+FILE *  fileExists(char *Filename)
 {
 	FILE *result; // eax@1
 	FILE *v2; // esi@1

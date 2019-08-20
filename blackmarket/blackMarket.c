@@ -197,7 +197,7 @@ int loadAcceptedText()
 }
 
 //----- (00422810) --------------------------------------------------------
-int __cdecl getBlackMarketElementText(int a1)
+int   getBlackMarketElementText(int a1)
 {
   createPopup(144, 114, 384, 119, 1);
   writeTextInScreen(&aMines[240 * a1], 79530);
@@ -209,7 +209,7 @@ int __cdecl getBlackMarketElementText(int a1)
 }
 
 //----- (004228A0) --------------------------------------------------------
-int __cdecl getBlackMarketElementPurchasedText(int a1)
+int   getBlackMarketElementPurchasedText(int a1)
 {
   createPopup(144, 114, 384, 119, 1);
   writeTextInScreen(&a8MinesLoadedIn[240 * a1], 79530);

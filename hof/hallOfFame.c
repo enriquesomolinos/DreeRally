@@ -537,7 +537,7 @@ HallOfFameEntry* getDefaultHallOfFame() {
 
 
 //----- (0041E490) --------------------------------------------------------
-int __cdecl drawRecordByCircuit(int a1)
+int   drawRecordByCircuit(int a1)
 {
   signed int v1; // eax@1
   char *v2; // esi@2

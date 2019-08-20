@@ -1390,7 +1390,7 @@ unsigned int endGamePopup()
   return result;
 }
 //----- (0042DC70) --------------------------------------------------------
-char __cdecl confirmationPopup(const char *a1)
+char   confirmationPopup(const char *a1)
 {
   int v1; // eax@1
 
@@ -1522,7 +1522,7 @@ unsigned int welcomePopup()
 
 
 //----- (0041A530) esto pinta el recuadro parece que es x , offset x , y , offset y --------------------------------------------------------
-signed int __cdecl createPopup(int x, int xLenght, int y, int yLenght, int cornerType)
+signed int   createPopup(int x, int xLenght, int y, int yLenght, int cornerType)
 {
   int v5; // ebp@1
   int v6; // edx@2

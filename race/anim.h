@@ -1,5 +1,5 @@
 
-int __cdecl drawMenuAnimation(int x, int y, int frame, int animation, int frameSizes[]);
+int   drawMenuAnimation(int x, int y, int frame, int animation, int frameSizes[]);
 int reloadContinueAnimation();
 int reloadEngineAnimation();
 int reloadTireAnimation();

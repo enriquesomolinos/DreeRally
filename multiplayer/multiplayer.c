@@ -1,20 +1,20 @@
 int multiplayer_415280();
-int __cdecl multiplayer_406D30(int a1);
-void __cdecl multiplayer_406BE0(char a1);
+int   multiplayer_406D30(int a1);
+void   multiplayer_406BE0(char a1);
 void multiplayer_403960();
 int multiplayer_403D50();
 int multiplayer_4039D0();
 int multiplayer_403B30();
 int multiplayer_403BB0();
 int multiplayer_403E30();
-signed int __cdecl multiplayer_4069D0(char a1);
+signed int   multiplayer_4069D0(char a1);
 void multiplayer_4181B0();
-void __cdecl multiplayer_41EA70(int a1, int a2, char a3);
+void   multiplayer_41EA70(int a1, int a2, char a3);
 void multiplayer_42A300();
 int multiplayer_sub_42CCF0(void); // weak
-signed int __cdecl sub_41EB80(int a1, int a2);
+signed int   sub_41EB80(int a1, int a2);
 char sub_41E9A0();
-void __cdecl sub_428070(int a1);
+void   sub_428070(int a1);
 char multiplayer_42BD10();
 
 char multiplayer_42BD10()
@@ -409,7 +409,7 @@ LABEL_76:
 }
 
 
-void __cdecl sub_428070(int a1)
+void   sub_428070(int a1)
 {
   /*char v1; // al@2
   char v2; // bl@2
@@ -602,7 +602,7 @@ char sub_41E9A0()
   return result;*/
 }
 
-signed int __cdecl sub_41EB80(int a1, int a2)
+signed int   sub_41EB80(int a1, int a2)
 {
   /*int v2; // eax@2
   int v3; // ecx@2
@@ -1216,7 +1216,7 @@ void multiplayer_42A300()
   }
   isMultiplayerGame = 1;
 }
-void __cdecl multiplayer_41EA70(int a1, int a2, char a3)
+void   multiplayer_41EA70(int a1, int a2, char a3)
 {
   char v3; // al@2
   int i; // ecx@2
@@ -1242,7 +1242,7 @@ void multiplayer_4181B0()
       nullsub_1();
   }
 }
-signed int __cdecl multiplayer_4069D0(char a1)
+signed int   multiplayer_4069D0(char a1)
 {
   int v1; // edi@2
   int v2; // ecx@3
@@ -1835,7 +1835,7 @@ void multiplayer_403960()
   dword_4A7CFC = 0;
 }
 
-void __cdecl multiplayer_406BE0(char a1)
+void   multiplayer_406BE0(char a1)
 {
   if ( isMultiplayerGame )
   {
@@ -1855,7 +1855,7 @@ void __cdecl multiplayer_406BE0(char a1)
 // 45E064: using guessed type int dword_45E064;
 // 45EA04: using guessed type int isMultiplayerGame;
 
-int __cdecl multiplayer_406D30(int a1)
+int   multiplayer_406D30(int a1)
 {
   void *v1; // eax@1
   void *v2; // eax@5

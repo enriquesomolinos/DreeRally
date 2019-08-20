@@ -89,18 +89,18 @@ float arrayDamageMultiplier[7] ={0.2,0.35,0.5,0.65,0.8,0.95,0.95};
 
 #define ADS 256;
 
-#define __thiscall __cdecl // Test compile in C mode
+#define __thiscall   // Test compile in C mode
 
-void __cdecl allocateMemory(size_t Size);
-void __cdecl free(void *Memory);
+void   allocateMemory(size_t Size);
+void   free(void *Memory);
 int initParticipantValues_401060();
 int updateRacePositions();
 int sub_4022A0();
 unsigned int showEndRaceFlag_402490();
-unsigned int __cdecl writeTextInRace_402510(int a1, const char *a2);
-int __cdecl drawSprite_402590(int a1, int a2, int a3, signed int a4, int a5, int a6, int a7, int a8);
+unsigned int   writeTextInRace_402510(int a1, const char *a2);
+int   drawSprite_402590(int a1, int a2, int a3, signed int a4, int a5, int a6, int a7, int a8);
 
-//void __cdecl __noreturn errorExitScreen(int a1);
+//void   __noreturn errorExitScreen(int a1);
 
 signed int loadCircuitPalette();
 void loadCircuitImages1();
@@ -128,19 +128,19 @@ int sub_405430();
 int sub_4055A0();
 char drawRacepopupEffect_406100();
 int sub_406330();
-unsigned int __cdecl drawTextInRaceScreen(int a1, int a2, const char *a3);
-signed int __cdecl racePauseMenu_4064A0(int a1);
+unsigned int   drawTextInRaceScreen(int a1, int a2, const char *a3);
+signed int   racePauseMenu_4064A0(int a1);
 
 
 
-unsigned int __cdecl drawInRaceMenuText_4072C0(int a1, const char *a2);
+unsigned int   drawInRaceMenuText_4072C0(int a1, const char *a2);
 int keyMenuInRace_407330();
 void __noreturn exitCtrlAltDel();
 int makeSnapshot_4092B0();
 int generateBigPowerUps();
 int initRaceValues_409A90();
 signed int loadCircuitInfFile();
-unsigned __int64 __cdecl setCircuitPaletteValues(int a1, float a2, float a3, float a4);
+unsigned __int64   setCircuitPaletteValues(int a1, float a2, float a3, float a4);
 int *initRaceValues_409F90();
 int processSceFile_40A360();
 int calculateSceTextureStructure_40A880();
@@ -166,7 +166,7 @@ char getRacePowerUps_410B90();
 int killPedestrian_410FA0();
 //char drawShotPedestrian_4111F0();
 int sub_411530();
-int __cdecl sub_4115C0(int a1, int a2);
+int   sub_4115C0(int a1, int a2);
 void draw3dElements_4116D0();
 int recalculateCarBoundary_411D10();
 int checkVaiZones_412DF0();
@@ -183,10 +183,10 @@ int raceSemaphore_414FC0 ();
 void loadRaceImagesHUD();
 
 int sub_4156B0();
-void __cdecl startRace(int a1, int a2);
+void   startRace(int a1, int a2);
 
-int __cdecl getSizeMusic(char * music);
- void *__cdecl getMusicStream(char* musicName);
+int   getSizeMusic(char * music);
+ void *  getMusicStream(char* musicName);
 int configJoystick(void); // weak
 char eventDetected();
 char sub_418090();
@@ -194,12 +194,12 @@ int transformJoystickReadValue_418150();
 
 unsigned int sub_4181E0();
 void decryptAnimFrame();
-void __cdecl openAnimation(const char *a1, int a2, int a3, int a4, int a5, char a6, char a7);
-int __cdecl setPaletteValueWithFloats(float, float, float); // idb
-int __cdecl sub_418B00(float, float, float); // idb
+void   openAnimation(const char *a1, int a2, int a3, int a4, int a5, char a6, char a7);
+int   setPaletteValueWithFloats(float, float, float); // idb
+int   sub_418B00(float, float, float); // idb
 
 void loadGraphics2();
-int __cdecl loadPaletteMenu();
+int   loadPaletteMenu();
 void freeMemoryGraphics2();
 signed int isVesaCompatible();
 void refreshBottomScreen();
@@ -207,14 +207,14 @@ void refreshAllScreen();
 
 
 
-int __cdecl drawTransparentBlock(int a1, int a2, int a3, int a4);
-int __cdecl drawMenu(int a1, int a2);
-int __cdecl drawKeyCursor(signed int a1, const void *a2, unsigned int a3, int a4);
-int __cdecl updateCursor(int a1);
-int __cdecl drawCursor(int a1, int a2);
-int __cdecl sub_41ACF0(int a1);
-int __cdecl refreshMenuUp(int a1);
-int __cdecl refreshMenuDown(int a1);
+int   drawTransparentBlock(int a1, int a2, int a3, int a4);
+int   drawMenu(int a1, int a2);
+int   drawKeyCursor(signed int a1, const void *a2, unsigned int a3, int a4);
+int   updateCursor(int a1);
+int   drawCursor(int a1, int a2);
+int   sub_41ACF0(int a1);
+int   refreshMenuUp(int a1);
+int   refreshMenuDown(int a1);
 
 
 
@@ -226,7 +226,7 @@ char sub_41E8D0();
 
 
 
-int __cdecl sub_41ED20(float, float, float); // idb
+int   sub_41ED20(float, float, float); // idb
 void loadGraphics3();
 void freeMemoryGraphics3();
 
@@ -234,11 +234,11 @@ int drawCarRightSide();
 
 int showCarBought();
 
-int __cdecl sub_421980(int a1, int a2, int a3, int a4);
+int   sub_421980(int a1, int a2, int a3, int a4);
 
 void shopScreenMoveUp_421D90();
 void shopScreenMoveDown_421DF0();
-signed int __cdecl hasInsuficientMoneyToBuy(int a1);
+signed int   hasInsuficientMoneyToBuy(int a1);
 
 int sub_4220D0();
 signed int autoLoadSave();
@@ -247,23 +247,23 @@ int copyPalette1toPalette(void); // weak
 int getReapirCostByCarType();
 
 
-void __cdecl addParticipantToRace(signed int a1);
-int __cdecl sub_423C90(int a1, int a2);
-void __cdecl recalcRank(int a1);
+void   addParticipantToRace(signed int a1);
+int   sub_423C90(int a1, int a2);
+void   recalcRank(int a1);
 int drawSelectRaceScreen();
 int calculateNextRaces();
-int __cdecl sub_424240(int, float, float, float); // idb
+int   sub_424240(int, float, float, float); // idb
 int sub_424420();
-int __cdecl sub_424510(int a1, int a2, int a3);
+int   sub_424510(int a1, int a2, int a3);
 unsigned int drawStadistics();
-int __cdecl writeDriverList(int a1);
-int __cdecl drawRightPositions(int a1, int a2);
+int   writeDriverList(int a1);
+int   drawRightPositions(int a1, int a2);
 signed int sub_426080();
 int drawPressAnyKeyToContinue();
 signed int drawCircuitPreviewImage();
 int drawWaitMultiplayer_4261D0();
 int sub_426280();
-int __cdecl sub_426460(unsigned __int8 a1, unsigned __int8 a2);
+int   sub_426460(unsigned __int8 a1, unsigned __int8 a2);
 
 
 
@@ -285,21 +285,21 @@ signed int sub_428740();
 int drawShopAnimationAndRightSide();
 int sub_4291D0();
 
-int __cdecl sub_429CF0(unsigned __int8 *a1, signed int a2);
+int   sub_429CF0(unsigned __int8 *a1, signed int a2);
 int makeSnapshot_429DC0();
 void __noreturn exitGame();
 
 
 int sub_42A480();
 void refreshAndCheckConnection_42A570();
-void __cdecl selectRaceWarningPopup(int a1);
-int __cdecl main(int argc, const char **argv, const char **envp);
+void   selectRaceWarningPopup(int a1);
+int   main(int argc, const char **argv, const char **envp);
 
 char sub_42C4A0();
-char __cdecl sub_42C560(int a1);
-int __cdecl sub_42C670(int a1);
+char   sub_42C560(int a1);
+int   sub_42C670(int a1);
 char drawPopupCursor_42C780 ();
-int __cdecl sub_42C7F0(int a1, int a2, int a3, int a4, int a5, int a6);
+int   sub_42C7F0(int a1, int a2, int a3, int a4, int a5, int a6);
 char sub_42C940();
 char sub_42CBF0();
 
@@ -308,10 +308,10 @@ void shopScreenMoveLeft_421DF0();
 void shopScreenMoveRight_42DAB0();
 
 
-signed int __cdecl readEventInMenu(int a1);
-bool __cdecl drawYesNoMenu(int a1, int a2, int a3, signed int *a4);
+signed int   readEventInMenu(int a1);
+bool   drawYesNoMenu(int a1, int a2, int a3, signed int *a4);
 
-signed int __cdecl readKeyboard(const char *a1, int a2, int a3, int a4, unsigned int a5, signed int a6, int a7, int a8, int a9);
+signed int   readKeyboard(const char *a1, int a2, int a3, int a4, unsigned int a5, signed int a6, int a7, int a8, int a9);
 signed int loadGame();
 __int16 savegameWithName();
 signed int redefineControls();
@@ -321,7 +321,7 @@ char sub_430FA0();
 void showEndAnim_4312D0();
 
 
-void __cdecl previewRaceScreen(signed int a1);
+void   previewRaceScreen(signed int a1);
 
 // int __usercall adversaryPreviewScreen@<eax>(const char **a1@<ebx>);
 void selectRaceScreen();
@@ -335,99 +335,99 @@ int mainMenu(void); // weak
 void __noreturn exitGame_43ACB0();
 
 
-int __cdecl sub_43AE80(int a1, int a2, int a3, int a4);
-char __cdecl drawCarSprite_43AEC0(int a1, int a2, int a3);
-//char __cdecl drawPedestrian_43AF30(int a1, int a2, int a3);
+int   sub_43AE80(int a1, int a2, int a3, int a4);
+char   drawCarSprite_43AEC0(int a1, int a2, int a3);
+//char   drawPedestrian_43AF30(int a1, int a2, int a3);
 
-char __cdecl drawCarFire_43AFC0(int a1, int a2, int a3);
-int __cdecl sub_43B030(int a1, int a2);
-int __cdecl sub_43B050(int a1, signed int a2);
-int __cdecl sub_43B080(int a1, int a2, int a3, int a4, int a5);
-void __cdecl copyBuffer2Screen(void *a1, const void *a2, int a3);
-int __cdecl extractBits(int a1, signed int a2, int a3);
-int __cdecl drawInRaceImageToBuffer_43B160(int a1, int a2, int a3, int a4);
-int __cdecl drawRaceCharInMenu_43B1A0(int a1, int a2, int a3, int a4);
-int __cdecl drawCharInRaceScreen(int a1, int a2, int a3, int a4);
-int __cdecl drawImageInRace_43B240(int a1, int a2, int a3, int a4);
-int __cdecl colorToPaletteEntry(int a1, signed int a2);
- int __cdecl convertColorToPaletteColor(int a1, int a2);
+char   drawCarFire_43AFC0(int a1, int a2, int a3);
+int   sub_43B030(int a1, int a2);
+int   sub_43B050(int a1, signed int a2);
+int   sub_43B080(int a1, int a2, int a3, int a4, int a5);
+void   copyBuffer2Screen(void *a1, const void *a2, int a3);
+int   extractBits(int a1, signed int a2, int a3);
+int   drawInRaceImageToBuffer_43B160(int a1, int a2, int a3, int a4);
+int   drawRaceCharInMenu_43B1A0(int a1, int a2, int a3, int a4);
+int   drawCharInRaceScreen(int a1, int a2, int a3, int a4);
+int   drawImageInRace_43B240(int a1, int a2, int a3, int a4);
+int   colorToPaletteEntry(int a1, signed int a2);
+ int   convertColorToPaletteColor(int a1, int a2);
 int sub_43B2D0();
 int sub_43B2E0();
-int __cdecl draw3dTexture_43B2F0(int a1, int a2, int a3, int textureId);
-int __cdecl sub_43B370(int a1, int a2, int a3);
-int __cdecl drawTurboBar_43B3A0(int a1, int a2, int a3, char a4);
- void __cdecl SetVideoMode(BOOLEAN fullScreen);
-int __cdecl refreshScreen(int a1);
-int __cdecl setWindowCaption3(int a1);
+int   draw3dTexture_43B2F0(int a1, int a2, int a3, int textureId);
+int   sub_43B370(int a1, int a2, int a3);
+int   drawTurboBar_43B3A0(int a1, int a2, int a3, char a4);
+ void   SetVideoMode(BOOLEAN fullScreen);
+int   refreshScreen(int a1);
+int   setWindowCaption3(int a1);
 int setWindowCaption2();
 int setWindowCaption();
 int setRaceWindowCaption();
  int  drawWeaponsBar_43BEF0(int a1, void *a2, unsigned int a3, int a4, char a5);
 
-int __cdecl sub_43BFE0(int a1, int a2);
-int __cdecl setPaletteValue(int a1, int a2, int a3, int a4);
-int __cdecl setPaletteAndGetValue(unsigned __int8 a1, unsigned __int8 a2, char a3, unsigned __int8 a4);
-int __cdecl regenerateRacePalette(int a1);
-int __cdecl generateSnapshotData_43C160(int a1);
-int __cdecl sub_43C1B0(unsigned __int8 a1, int a2, signed int a3);
+int   sub_43BFE0(int a1, int a2);
+int   setPaletteValue(int a1, int a2, int a3, int a4);
+int   setPaletteAndGetValue(unsigned __int8 a1, unsigned __int8 a2, char a3, unsigned __int8 a4);
+int   regenerateRacePalette(int a1);
+int   generateSnapshotData_43C160(int a1);
+int   sub_43C1B0(unsigned __int8 a1, int a2, signed int a3);
 int sub_43C1F0();
 char __stdcall sub_43C220(int a1, int a2, signed int a3, int a4);
-int __cdecl musicSetVolume(signed int a1);
-int __cdecl musicSetmusicVolume(signed int a1);
-int __cdecl setMusicVolume(signed int a1);
-char __cdecl musicSetOrder(signed int a1);
+int   musicSetVolume(signed int a1);
+int   musicSetmusicVolume(signed int a1);
+int   setMusicVolume(signed int a1);
+char   musicSetOrder(signed int a1);
 
 int musicPlayMusic();
-int __cdecl loadMenuSoundEffect(unsigned __int8 a1, char a2, int a3, int a4, int a5);
+int   loadMenuSoundEffect(unsigned __int8 a1, char a2, int a3, int a4, int a5);
 
 #ifndef _NO_MINIFMOD
-	unsigned __int64 __cdecl FMUSIC_SetBPM_43D8A0(FMUSIC_MODULE *mod_456C24, int bpm);
+	unsigned __int64   FMUSIC_SetBPM_43D8A0(FMUSIC_MODULE *mod_456C24, int bpm);
 #endif
 
 
 int stopSong();
-int __cdecl stopSoundChannel_43C3E0(unsigned __int8 a1);
+int   stopSoundChannel_43C3E0(unsigned __int8 a1);
 int stopAndOpenMusic();
-int __cdecl sub_43C450(int a1);
-__int16 __cdecl convert320to320_43C470(int a1, int a2);
-__int16 __cdecl conver512to320_43C490(int a1, int a2);
+int   sub_43C450(int a1);
+__int16   convert320to320_43C470(int a1, int a2);
+__int16   conver512to320_43C490(int a1, int a2);
 int sub_43C4B0();
-//void __cdecl operator delete(size_t Size); 
+//void   operator delete(size_t Size); 
 int freeMusic();
-void __cdecl free(void *Memory);
-void __cdecl logJoystickClose();
+void   free(void *Memory);
+void   logJoystickClose();
 // int __usercall inicializeScreen@<eax>(double a1@<st0>);
 signed int SDLCheckJoystick();
-void __cdecl nullsub_1();
+void   nullsub_1();
 void removeBackgroundRefreshFunction_43C730();
 signed __int64 recalculateSDLTicks_43C740();
 int refreshScreenWithDelay();
-int (*__cdecl setBackgroundRefreshFunction_43C7B0(int (*a1)(void)))(void);
-int __cdecl updateScreenPtr(int a1);
-int __cdecl sub_43C7E0(int a1, int a2, int a3, signed int a4, char a5);
+int (*  setBackgroundRefreshFunction_43C7B0(int (*a1)(void)))(void);
+int   updateScreenPtr(int a1);
+int   sub_43C7E0(int a1, int a2, int a3, signed int a4, char a5);
 int refreshOrExecuteBackgroundFunction_43C850(void); // weak
 int callRefreshOrExecuteBackgroundFunction_43C8F0();
 int SDLConfigureJoystick();
-void __cdecl decryptTexture(int a1, int a2, int a3, int a4);
-void __cdecl copyImageToBuffer(int a1, int a2);
+void   decryptTexture(int a1, int a2, int a3, int a4);
+void   copyImageToBuffer(int a1, int a2);
 unsigned int waitTwoSeconsAndExecFunc_43CBB0();
-void __cdecl loadMusic(int a1, char* music1, int a3, char* music2);
-int __cdecl setTriangleValue_43CD50(int a1, int a2, int a3, int a4, int a5, int a6, char a7);
-int __cdecl sub_43D050(int a1, int a2, int a3, int a4, int a5, int a6, int a7, int a8, int a9);
-int __cdecl iluminateTriangle_43D530(int a1, int a2, int a3, int a4, int a5, int a6, int a7);
+void   loadMusic(int a1, char* music1, int a3, char* music2);
+int   setTriangleValue_43CD50(int a1, int a2, int a3, int a4, int a5, int a6, char a7);
+int   sub_43D050(int a1, int a2, int a3, int a4, int a5, int a6, int a7, int a8, int a9);
+int   iluminateTriangle_43D530(int a1, int a2, int a3, int a4, int a5, int a6, int a7);
 int waitWithRefresh();
 
 
 void sub_43FC72();
-void __cdecl sub_43FCB6();
+void   sub_43FCB6();
 int sub_43FD12();
 // int __usercall initSystem@<eax>(double st7_0@<st0>, int a1, const char **a2);
-int __cdecl logError(int a1, int a2);
+int   logError(int a1, int a2);
 int outOfMemoryError(void); // weak
-void __cdecl SDL_Quit();
-void __cdecl generateExitError();
+void   SDL_Quit();
+void   generateExitError();
 int __stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nShowCmd);
-int __cdecl sub_43FF90(int *a1, int a2);
+int   sub_43FF90(int *a1, int a2);
 
 //-------------------------------------------------------------------------
 // Data declarations
@@ -2798,7 +2798,7 @@ int circuitPaletteProcesed_50EF40[768]; // weak
 int dword_50FB44; // weak*/
 
 
-void __cdecl nullsub_1() {
+void   nullsub_1() {
 
 }
 
@@ -2809,7 +2809,7 @@ int callRefreshOrExecuteBackgroundFunction_43C8F0()
 }
 
 //----- (00401000) --------------------------------------------------------
-void __cdecl allocateMemory(size_t Size)
+void   allocateMemory(size_t Size)
 {
   int v1=1; // eax@1
 
@@ -3237,7 +3237,7 @@ unsigned int showEndRaceFlag_402490()
 }
 
 //----- (00402510) --------------------------------------------------------
-unsigned int __cdecl writeTextInRace_402510(int a1, const char *a2)
+unsigned int   writeTextInRace_402510(int a1, const char *a2)
 {
   unsigned int v2; // esi@1
   unsigned int result; // eax@1
@@ -3264,7 +3264,7 @@ unsigned int __cdecl writeTextInRace_402510(int a1, const char *a2)
 // 464F14: using guessed type int dword_464F14;
 
 //----- (00402590) --------------------------------------------------------
-int __cdecl drawSprite_402590(int baseImage, int width, int height, signed int a4, int spriteNumber, int a6, int a7, int a8)
+int   drawSprite_402590(int baseImage, int width, int height, signed int a4, int spriteNumber, int a6, int a7, int a8)
 {
   signed int v8; // eax@1
   int v9; // ebx@1
@@ -3334,7 +3334,7 @@ LABEL_8:
 
 
 //----- (00402780) --------------------------------------------------------
-void __cdecl  errorExitScreen(int a1)
+void    errorExitScreen(int a1)
 {
   setWindowCaption();
   printf("DEATH RALLY Error: %s\n", a1);
@@ -3344,7 +3344,7 @@ void __cdecl  errorExitScreen(int a1)
 }
 
 //----- (004027B0) --------------------------------------------------------
-//int __cdecl extractFromBpa(char *bpaFilename, void *dest, char * filename)
+//int   extractFromBpa(char *bpaFilename, void *dest, char * filename)
 
 
 
@@ -5549,7 +5549,7 @@ int sub_406330()
 // 5034F0: using guessed type int dword_5034F0;
 
 //----- (00406410) --------------------------------------------------------
-unsigned int __cdecl drawTextInRaceScreen(int a1, int a2, const char *text)
+unsigned int   drawTextInRaceScreen(int a1, int a2, const char *text)
 {
   unsigned int v3; // esi@1
   unsigned int result; // eax@1
@@ -5573,7 +5573,7 @@ unsigned int __cdecl drawTextInRaceScreen(int a1, int a2, const char *text)
 }
 
 //----- (004064A0) --------------------------------------------------------
-signed int __cdecl racePauseMenu_4064A0(int a1)
+signed int   racePauseMenu_4064A0(int a1)
 {
   void *v1; // eax@1
   void *v2; // eax@5
@@ -5800,7 +5800,7 @@ signed int __cdecl racePauseMenu_4064A0(int a1)
 //----- (00406D30) --------------------------------------------------------
 
 //----- (004072C0) --------------------------------------------------------
-unsigned int __cdecl drawInRaceMenuText_4072C0(int a1, const char *a2)
+unsigned int   drawInRaceMenuText_4072C0(int a1, const char *a2)
 {
   unsigned int v2; // esi@1
   unsigned int result; // eax@1
@@ -7102,7 +7102,7 @@ int generateBigPowerUps()
   signed int v1; // eax@3
   signed int v2; // eax@5
   signed int v3; // eax@7
-  int (__cdecl *v4)(); // edi@9
+  int (  *v4)(); // edi@9
   signed int v5; // esi@9
   signed int v6; // eax@11
   int result; // eax@13
@@ -7700,7 +7700,7 @@ signed int loadCircuitInfFile()
 
 
 //----- (00409E50) --------------------------------------------------------
-unsigned __int64 __cdecl setCircuitPaletteValues(int position, float a2, float a3, float a4)
+unsigned __int64   setCircuitPaletteValues(int position, float a2, float a3, float a4)
 {
   signed int v4; // edi@1
 //  char *v5; // esi@1
@@ -12104,7 +12104,7 @@ int generatePowerUps()
   signed int v5; // ecx@14
   signed int v6; // ecx@17
   signed int v7; // ecx@20
-  int (__cdecl *v8)(); // ebx@24
+  int (  *v8)(); // ebx@24
   signed int v9; // ecx@26
   signed int v10; // eax@26
   int v11; // edx@41
@@ -12923,7 +12923,7 @@ int sub_411530()
 
 
 //----- (004115C0) --------------------------------------------------------
-int __cdecl sub_4115C0(int a1, int a2)
+int   sub_4115C0(int a1, int a2)
 {
   int v2; // ecx@1
   int v3; // ebx@1
@@ -15417,7 +15417,7 @@ int sub_4156B0()
 
 
 //----- (00415710) --------------------------------------------------------
-void __cdecl startRace(int a1, int numberOfParticipants)
+void   startRace(int a1, int numberOfParticipants)
 {
 	int v1;
 //  int v2; // edx@2
@@ -16752,16 +16752,16 @@ LABEL_460:
 }
 
 //----- (00417B90) --------------------------------------------------------
-//int __cdecl getFileSizeFromBpa(char *bpaFile, char * filename)
+//int   getFileSizeFromBpa(char *bpaFile, char * filename)
 
 //----- (00417DF0) --------------------------------------------------------
-int __cdecl getSizeMusic(char * music)
+int   getSizeMusic(char * music)
 {
   return getFileSizeFromBpa("MUSICS.BPA", music);
 }
 
 //----- (00417E10) --------------------------------------------------------
-void *__cdecl getMusicStream(char* musicName)
+void *  getMusicStream(char* musicName)
 {
   size_t v1; // eax@1
   unsigned int v2; // edi@1
@@ -17256,7 +17256,7 @@ void decryptAnimFrame()
 
 
 //----- (004185B0) --------------------------------------------------------
-void __cdecl openAnimation(const char *animFile, int a2, int music, int a4, int effect, char onKeyPressExit, char screenResolution)
+void   openAnimation(const char *animFile, int a2, int music, int a4, int effect, char onKeyPressExit, char screenResolution)
 {
 	
   unsigned int v7; // eax@2
@@ -17267,7 +17267,7 @@ void __cdecl openAnimation(const char *animFile, int a2, int music, int a4, int 
   char v12; // cl@6
   void *v13 =malloc(0xFA00u); // eax@7
   void *v14 = malloc(0xFA00u); // eax@7
-  int (__cdecl *v15)(FILE *); // ebx@11
+  int (  *v15)(FILE *); // ebx@11
   FILE *fAnimFile; // ebp@11
   unsigned __int8 v17; // ST3F_1@11
   void *v18; // eax@11
@@ -17475,7 +17475,7 @@ void __cdecl openAnimation(const char *animFile, int a2, int music, int a4, int 
 }
 
 //----- (004189C0) --------------------------------------------------------
-int __cdecl setPaletteValueWithFloats(float a1, float a2, float a3)
+int   setPaletteValueWithFloats(float a1, float a2, float a3)
 {
   signed int v3; // edi@1
   char v4; // si@1
@@ -17533,7 +17533,7 @@ int __cdecl setPaletteValueWithFloats(float a1, float a2, float a3)
 }
 
 //----- (00418B00) --------------------------------------------------------
-int __cdecl sub_418B00(float a1, float a2, float a3)
+int   sub_418B00(float a1, float a2, float a3)
 {
   signed int v3; // edi@1
 //  _UNKNOWN *v4; // esi@1
@@ -17717,7 +17717,7 @@ void loadGraphics2()
 
 
 //----- (00419EA0) --------------------------------------------------------
-int __cdecl loadPaletteMenu()
+int   loadPaletteMenu()
 {
 	char *v0; // eax@1
   signed int v1; // esi@1
@@ -17857,19 +17857,19 @@ void refreshAllScreen() //esto refresca la imagen
 // 456BF0: using guessed type int screenPtr;
 
 //----- (0041A2D0) --------------------------------------------------------
-//unsigned int __cdecl drawTextWithFont(int font, int a2, const char *text, int screenPosition)
+//unsigned int   drawTextWithFont(int font, int a2, const char *text, int screenPosition)
 
 //----- (0041A370) --------------------------------------------------------
-//unsigned int __cdecl drawInGamePrices(const char *text, int position)
+//unsigned int   drawInGamePrices(const char *text, int position)
 
 //----- (0041A430) --------------------------------------------------------
-//int __cdecl writeTextInScreen(const char *text, int screenOffset)
+//int   writeTextInScreen(const char *text, int screenOffset)
 
 
-//signed int __cdecl createPopup(int x, int xLenght, int y, int yLenght, int cornerType)
+//signed int   createPopup(int x, int xLenght, int y, int yLenght, int cornerType)
 
 //----- (0041A7A0) --------------------------------------------------------
-int __cdecl drawTransparentBlock(int a1, int a2, int a3, int a4)
+int   drawTransparentBlock(int a1, int a2, int a3, int a4)
 {
   int v4; // ebx@1
   int v5; // esi@1
@@ -17907,7 +17907,7 @@ int __cdecl drawTransparentBlock(int a1, int a2, int a3, int a4)
 //menu type
 // 0 es el menu principal
 // 1 es comenzar racing
-int __cdecl drawMenu(int menuType, int top)
+int   drawMenu(int menuType, int top)
 {
   int v2; // edi@1
   int v3; // esi@1
@@ -17989,7 +17989,7 @@ LABEL_14:
 
 
 //----- (0041AA40) --------------------------------------------------------
-int __cdecl drawKeyCursor(signed int a1, const void *a2, unsigned int a3, int a4)
+int   drawKeyCursor(signed int a1, const void *a2, unsigned int a3, int a4)
 {
   signed int v4; // ebx@1
   signed int v5; // edi@1
@@ -18051,7 +18051,7 @@ LABEL_12:
 // 456BF0: using guessed type int screenPtr;
 
 //----- (0041AB50) --------------------------------------------------------
-int __cdecl updateCursor(int a1)
+int   updateCursor(int a1)
 {
   int v1; // esi@1
   int v2; // edi@1
@@ -18097,7 +18097,7 @@ int __cdecl updateCursor(int a1)
 
 
 //----- (0041AC50) --------------------------------------------------------
-int __cdecl drawCursor(int a1, int a2)
+int   drawCursor(int a1, int a2)
 {
   signed int v2; // esi@1
   signed int v3; // eax@1
@@ -18133,7 +18133,7 @@ int __cdecl drawCursor(int a1, int a2)
 // 45FBF8: using guessed type int cursorBpkFrame;
 
 //----- (0041ACF0) --------------------------------------------------------
-int __cdecl sub_41ACF0(int a1)
+int   sub_41ACF0(int a1)
 {
   int v1; // esi@1
   int v2; // ebx@1
@@ -18220,7 +18220,7 @@ int __cdecl sub_41ACF0(int a1)
 // 45FBF8: using guessed type int cursorBpkFrame;
 
 //----- (0041AF40) --------------------------------------------------------
-int __cdecl refreshMenuUp(int a1)
+int   refreshMenuUp(int a1)
 {
   int v1; // esi@1
   int v2; // ebx@1
@@ -18324,7 +18324,7 @@ int __cdecl refreshMenuUp(int a1)
 
 
 //----- (0041B1A0) --------------------------------------------------------
-int __cdecl refreshMenuDown(int a1)
+int   refreshMenuDown(int a1)
 {
   int v1; // esi@1
   int v2; // ebx@1
@@ -18472,7 +18472,7 @@ int __cdecl refreshMenuDown(int a1)
 
 
 //----- (0041C9F0) --------------------------------------------------------
-//int __cdecl getBoxBigTextOffset(const char *a1)
+//int   getBoxBigTextOffset(const char *a1)
 
 
 //----- (0041CA40) --------------------------------------------------------
@@ -19405,7 +19405,7 @@ char GamepadNotFoundPopup_41E3B0()
 // 45DC18: using guessed type int configuration.effectsVolume;
 
 //----- (0041E490) --------------------------------------------------------
-//int __cdecl drawRecordByCircuit(int a1)
+//int   drawRecordByCircuit(int a1)
 
 // 41E490: using guessed type char Str[20];
 
@@ -19516,7 +19516,7 @@ char sub_41E8D0()
 
 
 //----- (0041ED20) --------------------------------------------------------
-int __cdecl sub_41ED20(float a1, float a2, float a3)
+int   sub_41ED20(float a1, float a2, float a3)
 {
   float v3; // ST2C_4@2
   signed int v4; // esi@1
@@ -19891,22 +19891,22 @@ void freeMemoryGraphics3()
 }
 
 //----- (0041FA50) --------------------------------------------------------
-//int __cdecl sub_41FA50(const char *a1)
+//int   sub_41FA50(const char *a1)
 
 //----- (0041FAB0) --------------------------------------------------------
-//int __cdecl getBoxTextOffset(const char *a1)
+//int   getBoxTextOffset(const char *a1)
 
 // 445916: using guessed type char byte_445916;
 
 //----- (0041FB20) --------------------------------------------------------
-//int __cdecl getBoxTextSize(const char *a1)
+//int   getBoxTextSize(const char *a1)
 
 
 //----- (0041FB70) --------------------------------------------------------
-//int __cdecl getNameOffsetPositionRight(const char *a1)
+//int   getNameOffsetPositionRight(const char *a1)
 
 //----- (0041FBD0) --------------------------------------------------------
-//int __cdecl getBigTextMidSize(const char *a1)
+//int   getBigTextMidSize(const char *a1)
 
 //----- (0041FC20) --------------------------------------------------------
 int drawCarRightSide()
@@ -20174,7 +20174,7 @@ int drawCarRightSide()
 }
 
 //----- (004201F0) --------------------------------------------------------
-//int __cdecl drawMenuAnimation(int x, int y, int frame, int animation, int frameSizes[])
+//int   drawMenuAnimation(int x, int y, int frame, int animation, int frameSizes[])
 
 //----- (00420250) --------------------------------------------------------
 //int reloadCarAnimation2()
@@ -20264,7 +20264,7 @@ strcpy(v5,"$"); /* copy name into the new var */
 
 
 //----- (00421980) --------------------------------------------------------
-int __cdecl sub_421980(int a1, int a2, int a3, int a4)
+int   sub_421980(int a1, int a2, int a3, int a4)
 {
   int v4; // edi@1
   int v5; // ebx@1
@@ -20317,10 +20317,10 @@ int __cdecl sub_421980(int a1, int a2, int a3, int a4)
 }
 
 //----- (00421AE0) --------------------------------------------------------
-//int __cdecl drawBorder(int a1, int a2, int a3, int a4)
+//int   drawBorder(int a1, int a2, int a3, int a4)
 
 //----- (00421C40) --------------------------------------------------------
-//int __cdecl drawBorder2(int a1, int a2, unsigned int a3, int a4)
+//int   drawBorder2(int a1, int a2, unsigned int a3, int a4)
 
 //----- (00421D90) --------------------------------------------------------
 void shopScreenMoveUp_421D90()
@@ -20355,7 +20355,7 @@ void shopScreenMoveDown_421DF0()
 // 463DF0: using guessed type int menuOptionSelected_463DF0;
 
 //----- (00421E50) --------------------------------------------------------
-signed int __cdecl hasInsuficientMoneyToBuy(int a1)
+signed int   hasInsuficientMoneyToBuy(int a1)
 {
   signed int v1; // edx@2
   char *v2; // edi@3
@@ -20819,11 +20819,11 @@ int getReapirCostByCarType()
 }
 
 //----- (00422810) --------------------------------------------------------
-//int __cdecl getBlackMarketElementText(int a1)
+//int   getBlackMarketElementText(int a1)
 
 
 //----- (004228A0) --------------------------------------------------------
-//int __cdecl getBlackMarketElementPurchasedText(int a1)
+//int   getBlackMarketElementPurchasedText(int a1)
 
 
 //----- (00422930) --------------------------------------------------------
@@ -20885,7 +20885,7 @@ int getReapirCostByCarType()
 
 
 //----- (00423A20) --------------------------------------------------------
-void __cdecl addParticipantToRace(signed int a1)
+void   addParticipantToRace(signed int a1)
 {
   signed int v1; // esi@2
   int race; // ebx@3
@@ -21073,7 +21073,7 @@ void __cdecl addParticipantToRace(signed int a1)
 
 
 //----- (00423C90) --------------------------------------------------------
-int __cdecl sub_423C90(int a1, int a2)
+int   sub_423C90(int a1, int a2)
 {
   int v2; // esi@1
   int v3; // ecx@1
@@ -21183,7 +21183,7 @@ int __cdecl sub_423C90(int a1, int a2)
 // 463CE8: using guessed type int driverId;
 
 //----- (00423E20) --------------------------------------------------------
-void __cdecl recalcRank(int a1)
+void   recalcRank(int a1)
 {
 	void *v1 = malloc(0x870u); // eax@1
   int v2; // ebx@1
@@ -21437,7 +21437,7 @@ if(debug==1){
 
 
 //----- (00424240) --------------------------------------------------------
-int __cdecl sub_424240(int a1, float a2, float a3, float a4)
+int   sub_424240(int a1, float a2, float a3, float a4)
 {
   signed int v4; // edi@1
   int v5; // esi@1
@@ -21582,7 +21582,7 @@ int sub_424420()
 // 45EA04: using guessed type int isMultiplayerGame;
 
 //----- (00424510) --------------------------------------------------------
-int __cdecl sub_424510(int a1, int a2, int raceId)
+int   sub_424510(int a1, int a2, int raceId)
 {
   int v3; // ebx@1
   int v4; // edi@1
@@ -22514,7 +22514,7 @@ unsigned int drawStadistics()
 }
 
 //----- (00425980) --------------------------------------------------------
-int __cdecl writeDriverList(int a1)
+int   writeDriverList(int a1)
 {
   int result; // eax@1
   int v2; // esi@1
@@ -22608,7 +22608,7 @@ int v14 = 0;
 
 
 //----- (00425BD0) --------------------------------------------------------
-int __cdecl drawRightPositions(int numDrivers, int a2)
+int   drawRightPositions(int numDrivers, int a2)
 {
   int v2; // ebx@1
   int v3; // eax@1
@@ -23019,7 +23019,7 @@ int sub_426280()
 // 426280: using guessed type char DstBuf[20];
 
 //----- (00426460) --------------------------------------------------------
-int __cdecl sub_426460(unsigned __int8 a1, unsigned __int8 a2)
+int   sub_426460(unsigned __int8 a1, unsigned __int8 a2)
 {
   int result; // eax@4
 
@@ -23045,7 +23045,7 @@ int __cdecl sub_426460(unsigned __int8 a1, unsigned __int8 a2)
 }
 
 //----- (004271F0) --------------------------------------------------------
-//int __cdecl openPalFromBpa(char * filename)
+//int   openPalFromBpa(char * filename)
 
 
 //----- (00427280) --------------------------------------------------------
@@ -23736,7 +23736,7 @@ int checkIntro()
   char v9; // cl@9
   FILE *v10; // eax@10
   FILE *v11; // esi@10
-  __int32 (__cdecl *v12)(FILE *); // ebp@11
+  __int32 (  *v12)(FILE *); // ebp@11
   __int32 v13; // edi@11
   unsigned int v14; // eax@20
   char *v15; // edi@20
@@ -24171,7 +24171,7 @@ int sub_4291D0()
 //void __fastcall hardRaceResults(int ecx0, int a2, int a1)
 
 //----- (00429CF0) --------------------------------------------------------
-int __cdecl sub_429CF0(unsigned __int8 *a1, signed int a2)
+int   sub_429CF0(unsigned __int8 *a1, signed int a2)
 {
   unsigned __int8 *v2; // ebp@1
   unsigned __int8 v3; // si@1
@@ -24875,7 +24875,7 @@ void refreshAndCheckConnection_42A570()
 
 
 //----- (0042B1B0) --------------------------------------------------------
-void __cdecl selectRaceWarningPopup(int a1)
+void   selectRaceWarningPopup(int a1)
 {
   int v1; // edi@1
 //  const char *v2; // esi@1
@@ -24939,7 +24939,7 @@ void __cdecl selectRaceWarningPopup(int a1)
 // 45DC18: using guessed type int configuration.effectsVolume;
 
 //----- (0042B290) --------------------------------------------------------
-int __cdecl main(int argc, const char **argv, const char **envp)
+int   main(int argc, const char **argv, const char **envp)
 {
   signed int v3; // ebx@1
   int v4; // esi@2
@@ -25540,7 +25540,7 @@ char sub_42C4A0()
 }
 
 //----- (0042C560) --------------------------------------------------------
-char __cdecl sub_42C560(int a1)
+char   sub_42C560(int a1)
 {
   signed int v1; // ebp@2
   int v2; // edi@3
@@ -25604,7 +25604,7 @@ char __cdecl sub_42C560(int a1)
 }
 
 //----- (0042C670) --------------------------------------------------------
-int __cdecl sub_42C670(int a1)
+int   sub_42C670(int a1)
 {
   signed int v1; // ebp@1
   int v2; // ebx@2
@@ -25692,7 +25692,7 @@ char drawPopupCursor_42C780 ()
 }
 
 //----- (0042C7F0) --------------------------------------------------------
-int __cdecl sub_42C7F0(int a1, int a2, int a3, int a4, int a5, int a6)
+int   sub_42C7F0(int a1, int a2, int a3, int a4, int a5, int a6)
 {
   bool v6; // zf@1
   bool v7; // sf@1
@@ -26132,7 +26132,7 @@ void shopScreenMoveRight_42DAB0()
 // 463DF0: using guessed type int menuOptionSelected_463DF0;
 
 //----- (0042DC70) --------------------------------------------------------
-//char __cdecl confirmationPopup(const char *a1)
+//char   confirmationPopup(const char *a1)
 
 
 //----- (0042DD10) --------------------------------------------------------
@@ -26140,7 +26140,7 @@ void shopScreenMoveRight_42DAB0()
 
 
 //----- (0042E0B0) --------------------------------------------------------
-signed int __cdecl readEventInMenu(int menuType)
+signed int   readEventInMenu(int menuType)
 {
   int v1; // edi@6
   signed int result; // eax@14
@@ -26209,7 +26209,7 @@ LABEL_14:
 
 
 //----- (0042E310) --------------------------------------------------------
-bool __cdecl drawYesNoMenu(int a1, int a2, int a3, signed int *a4)
+bool   drawYesNoMenu(int a1, int a2, int a3, signed int *a4)
 {
   signed int v4; // ebx@1
   int v5; // esi@1
@@ -26342,7 +26342,7 @@ bool __cdecl drawYesNoMenu(int a1, int a2, int a3, signed int *a4)
 
 
 //----- (0042E7F0) --------------------------------------------------------
-signed int __cdecl readKeyboard(const char *a1, int a2, int a3, int a4, unsigned int a5, signed int a6, int ingame, int a8, int a9)
+signed int   readKeyboard(const char *a1, int a2, int a3, int a4, unsigned int a5, signed int a6, int ingame, int a8, int a9)
 {
   char *v9; // eax@1
   signed int v10; // ebp@1
@@ -28289,7 +28289,7 @@ void showEndAnim_4312D0()
 
 
 //----- (004321B0) --------------------------------------------------------
-void __cdecl previewRaceScreen(signed int participants)
+void   previewRaceScreen(signed int participants)
 {
   signed int v1; // edi@2
   signed int v2; // esi@2
@@ -30160,7 +30160,7 @@ LABEL_477:
 
 
 //----- (00434800) --------------------------------------------------------
-//int __cdecl licenseScreen(int useWeapons_mal)
+//int   licenseScreen(int useWeapons_mal)
 
 //----- (00435320) --------------------------------------------------------
 int  adversaryPreviewScreen(const char **a1)
@@ -32969,7 +32969,7 @@ int  sub_43ACE0(double a1, int a2, int a3,char *args)
 
 
 //----- (0043AEC0) --------------------------------------------------------
-char __cdecl drawCarSprite_43AEC0(int xpos, int ypos, int participantBpkOffset)
+char   drawCarSprite_43AEC0(int xpos, int ypos, int participantBpkOffset)
 {
   int v3; // edx@1
   char result; // al@1
@@ -33010,12 +33010,12 @@ char __cdecl drawCarSprite_43AEC0(int xpos, int ypos, int participantBpkOffset)
 // 464F14: using guessed type int dword_464F14;
 
 //----- (0043AF30) --------------------------------------------------------
-//char __cdecl drawPedestrian_43AF30(int screenOffset, int pedestrianbpkOffset, int sizeToPaint)
+//char   drawPedestrian_43AF30(int screenOffset, int pedestrianbpkOffset, int sizeToPaint)
 
 
 
 //----- (0043AFC0) --------------------------------------------------------
-char __cdecl drawCarFire_43AFC0(int posx, int posy, int spriteOffset)
+char   drawCarFire_43AFC0(int posx, int posy, int spriteOffset)
 {
   int v3; // edx@1
   char result; // al@1
@@ -33056,7 +33056,7 @@ char __cdecl drawCarFire_43AFC0(int posx, int posy, int spriteOffset)
 // 464F14: using guessed type int dword_464F14;
 
 //----- (0043B030) --------------------------------------------------------
-int __cdecl sub_43B030(int a1, int a2)
+int   sub_43B030(int a1, int a2)
 {
   int v2; // ecx@1
   int result; // eax@1
@@ -33078,7 +33078,7 @@ int __cdecl sub_43B030(int a1, int a2)
 }
 
 //----- (0043B050) --------------------------------------------------------
-int __cdecl sub_43B050(int a1, signed int a2)
+int   sub_43B050(int a1, signed int a2)
 {
   signed int v2; // edx@1
   int result; // eax@1
@@ -33101,7 +33101,7 @@ int __cdecl sub_43B050(int a1, signed int a2)
 }
 
 //----- (0043B080) --------------------------------------------------------
-int __cdecl sub_43B080(int a1, int a2, int a3, int a4, int a5)
+int   sub_43B080(int a1, int a2, int a3, int a4, int a5)
 {
   int v5; // edx@1
   int v6; // ecx@1
@@ -33141,13 +33141,13 @@ int __cdecl sub_43B080(int a1, int a2, int a3, int a4, int a5)
 }
 
 //----- (0043B0D0) --------------------------------------------------------
-void __cdecl copyBuffer2Screen(void *a1, const void *a2, int a3)
+void   copyBuffer2Screen(void *a1, const void *a2, int a3)
 {
   memcpy(a1, a2, 4 * a3);
 }
 
 //----- (0043B0F0) --------------------------------------------------------
-int __cdecl extractBits(int src, signed int bitOffset, int bitLenght)
+int   extractBits(int src, signed int bitOffset, int bitLenght)
 {
   int v3; // ebp@1
   int v4; // esi@1
@@ -33175,7 +33175,7 @@ int __cdecl extractBits(int src, signed int bitOffset, int bitLenght)
 }
 
 //----- (0043B160) --------------------------------------------------------
-int __cdecl drawInRaceImageToBuffer_43B160(int image, int sizex, int sizey, int buffer)
+int   drawInRaceImageToBuffer_43B160(int image, int sizex, int sizey, int buffer)
 {
   int result; // eax@1
   int v5; // ecx@2
@@ -33209,7 +33209,7 @@ int __cdecl drawInRaceImageToBuffer_43B160(int image, int sizex, int sizey, int 
 }
 
 //----- (0043B1A0) --------------------------------------------------------
-int __cdecl drawRaceCharInMenu_43B1A0(int a1, int a2, int a3, int a4)
+int   drawRaceCharInMenu_43B1A0(int a1, int a2, int a3, int a4)
 {
   int result; // eax@1
   int v5; // ecx@2
@@ -33249,7 +33249,7 @@ int __cdecl drawRaceCharInMenu_43B1A0(int a1, int a2, int a3, int a4)
 }
 
 //----- (0043B1F0) --------------------------------------------------------
-int __cdecl drawCharInRaceScreen(int a1, int a2, int a3, int a4)
+int   drawCharInRaceScreen(int a1, int a2, int a3, int a4)
 {
   int result; // eax@1
   int v5; // ecx@2
@@ -33289,7 +33289,7 @@ int __cdecl drawCharInRaceScreen(int a1, int a2, int a3, int a4)
 }
 
 //----- (0043B240) --------------------------------------------------------
-int __cdecl drawImageInRace_43B240(int filename, int width, int height, int offset)
+int   drawImageInRace_43B240(int filename, int width, int height, int offset)
 {
   int result; // eax@1
   int v5; // ecx@2
@@ -33329,7 +33329,7 @@ int __cdecl drawImageInRace_43B240(int filename, int width, int height, int offs
 }
 
 //----- (0043B290) --------------------------------------------------------
-int __cdecl colorToPaletteEntry(int a1, signed int a2)
+int   colorToPaletteEntry(int a1, signed int a2)
 {
   signed __int64 v2; // rax@2
 
@@ -33363,7 +33363,7 @@ int sub_43B2E0()
 // 456BF8: using guessed type int dword_456BF8;
 
 //----- (0043B2F0) --------------------------------------------------------
-int __cdecl draw3dTexture_43B2F0(int a1, int a2, int a3, int textureId)//offsetx, offsety , textura,index
+int   draw3dTexture_43B2F0(int a1, int a2, int a3, int textureId)//offsetx, offsety , textura,index
 {
   int v3; // ebx@1
   int v4; // edi@1
@@ -33417,7 +33417,7 @@ int __cdecl draw3dTexture_43B2F0(int a1, int a2, int a3, int textureId)//offsetx
 // 464F14: using guessed type int dword_464F14;
 
 //----- (0043B370) --------------------------------------------------------
-int __cdecl sub_43B370(int a1, int a2, int a3)
+int   sub_43B370(int a1, int a2, int a3)
 {
   int v3; // ecx@1
   int v4; // esi@1
@@ -33447,7 +33447,7 @@ int __cdecl sub_43B370(int a1, int a2, int a3)
 }
 
 //----- (0043B3A0) --------------------------------------------------------
-int __cdecl drawTurboBar_43B3A0(int a1, int a2, int a3, char a4)
+int   drawTurboBar_43B3A0(int a1, int a2, int a3, char a4)
 {
   int result; // eax@1
   int v5; // edi@2
@@ -33482,7 +33482,7 @@ int __cdecl drawTurboBar_43B3A0(int a1, int a2, int a3, char a4)
 
 
 //----- (0043B3E0) --------------------------------------------------------
-void __cdecl SetVideoMode(BOOLEAN fullScreen)
+void   SetVideoMode(BOOLEAN fullScreen)
 {
   
   unsigned int flagsNoGL; // esi@1
@@ -33546,7 +33546,7 @@ void __cdecl SetVideoMode(BOOLEAN fullScreen)
 
 
 //----- (0043B580) --------------------------------------------------------
-int __cdecl refreshScreen(int a1)
+int   refreshScreen(int a1)
 {
   int result; // eax@1
   int v2; // esi@1
@@ -33993,7 +33993,7 @@ LABEL_68:
 
 
 //----- (0043BD70) --------------------------------------------------------
-int __cdecl setWindowCaption3(int a1)
+int   setWindowCaption3(int a1)
 {
   int result; // eax@1
   int v2; // esi@4
@@ -34130,15 +34130,15 @@ int  drawWeaponsBar_43BEF0(int a1, void *a2, unsigned int a3, int a4, char a5)
 }
 
 //----- (0043BF50) --------------------------------------------------------
-//int __cdecl drawImageWithPosition2(int texture, int height, int width, int screenBufferPtr)
+//int   drawImageWithPosition2(int texture, int height, int width, int screenBufferPtr)
 
 //----- (0043BF90) --------------------------------------------------------
-//int __cdecl drawImageWithPosition(int icon, int width, int height, int pscreenBufferPos)
+//int   drawImageWithPosition(int icon, int width, int height, int pscreenBufferPos)
 
 //----- (0043BFE0) --------------------------------------------------------
 //devulve 15 si estas dentro del circuito y sino cero
 
-int __cdecl sub_43BFE0(int a1, int a2)//a1 posicion de participant.bpk y a2 es el valor del circuito para la nueva absolute positionx e y 
+int   sub_43BFE0(int a1, int a2)//a1 posicion de participant.bpk y a2 es el valor del circuito para la nueva absolute positionx e y 
 {
   int v2; // eax@1
   int v3; // esi@1
@@ -34177,7 +34177,7 @@ int __cdecl sub_43BFE0(int a1, int a2)//a1 posicion de participant.bpk y a2 es e
 // 508D20: using guessed type int dword_508D20;
 
 //----- (0043C040) --------------------------------------------------------
-int __cdecl setPaletteValue(int pos, int r, int g, int b)
+int   setPaletteValue(int pos, int r, int g, int b)
 {
   int result; // eax@2
 SDL_Color* color ;
@@ -34213,7 +34213,7 @@ SDL_Color* color ;
 
 
 //----- (0043C0A0) --------------------------------------------------------
-int __cdecl setPaletteAndGetValue(unsigned __int8 pos, unsigned __int8 r, char g, unsigned __int8 b)
+int   setPaletteAndGetValue(unsigned __int8 pos, unsigned __int8 r, char g, unsigned __int8 b)
 {
   unsigned __int16 v4; // ax@2
   int result; // eax@
@@ -34260,7 +34260,7 @@ int __cdecl setPaletteAndGetValue(unsigned __int8 pos, unsigned __int8 r, char g
 
 
 //----- (0043C0F0) --------------------------------------------------------
-int __cdecl regenerateRacePalette(int a1)
+int   regenerateRacePalette(int a1)
 {
   int result; // eax@1
   signed int v2; // ecx@1
@@ -34306,7 +34306,7 @@ int __cdecl regenerateRacePalette(int a1)
 
 
 //----- (0043C160) --------------------------------------------------------
-int __cdecl generateSnapshotData_43C160(int a1)
+int   generateSnapshotData_43C160(int a1)
 {
   int result; // eax@1
   signed int v2; // ecx@1
@@ -34351,7 +34351,7 @@ int __cdecl generateSnapshotData_43C160(int a1)
 
 
 //----- (0043C1B0) --------------------------------------------------------
-int __cdecl sub_43C1B0(unsigned __int8 channelNumber, int a2, signed int a3)
+int   sub_43C1B0(unsigned __int8 channelNumber, int a2, signed int a3)
 {
   int result; // eax@1
 
@@ -34391,7 +34391,7 @@ char __stdcall sub_43C220(int a1, int a2, signed int a3, int a4)//void streamcal
 // 456C04: using guessed type int configNoSound;
 
 //----- (0043C250) --------------------------------------------------------
-int __cdecl musicSetVolume(signed int a1)
+int   musicSetVolume(signed int a1)
 {
   int result; // eax@1
 
@@ -34406,7 +34406,7 @@ int __cdecl musicSetVolume(signed int a1)
 
 
 //----- (0043C280) --------------------------------------------------------
-int __cdecl musicSetmusicVolume(signed int a1)
+int   musicSetmusicVolume(signed int a1)
 {
   int result; // eax@1
 
@@ -34423,7 +34423,7 @@ int __cdecl musicSetmusicVolume(signed int a1)
 
 
 //----- (0043C2B0) --------------------------------------------------------
-int __cdecl setMusicVolume(signed int a1)
+int   setMusicVolume(signed int a1)
 {
   int result; // eax@1
 
@@ -34447,7 +34447,7 @@ int __cdecl setMusicVolume(signed int a1)
 
 
 //----- (0043C320) --------------------------------------------------------
-char __cdecl musicSetOrder(signed int a1)
+char   musicSetOrder(signed int a1)
 {
   if ( !mainArgs.configNoSound )
     FMUSIC_SetOrder(musicModule, (a1 >> 8) - musicOrder_45DC60[a1 >> 8]);
@@ -34469,7 +34469,7 @@ int musicPlayMusic()
 
 
 //----- (0043C380) --------------------------------------------------------
-int __cdecl loadMenuSoundEffect(unsigned __int8 channelNumber, char soundNumber, int a3, int a4, int a5) 
+int   loadMenuSoundEffect(unsigned __int8 channelNumber, char soundNumber, int a3, int a4, int a5) 
 //  loadMenuSoundEffect(2u, 23, 0, 62720, dword_44518C - 28672)
 // indice del fichero, numero de entrada
 {
@@ -34500,7 +34500,7 @@ int stopSong()
 
 
 //----- (0043C3E0) --------------------------------------------------------
-int __cdecl stopSoundChannel_43C3E0(unsigned __int8 a1)
+int   stopSoundChannel_43C3E0(unsigned __int8 a1)
 {
 
   #ifndef _NO_MINIFMOD
@@ -34549,7 +34549,7 @@ int stopAndOpenMusic()
 
 
 //----- (0043C450) --------------------------------------------------------
-int __cdecl sub_43C450(int a1)
+int   sub_43C450(int a1)
 {
   int result; // eax@1
 
@@ -34560,7 +34560,7 @@ int __cdecl sub_43C450(int a1)
 }
 
 //----- (0043C470) --------------------------------------------------------
-__int16 __cdecl convert320to320_43C470(int a1, int a2)
+__int16   convert320to320_43C470(int a1, int a2)
 {
   __int16 result; // ax@1
 
@@ -34571,7 +34571,7 @@ __int16 __cdecl convert320to320_43C470(int a1, int a2)
 }
 
 //----- (0043C490) --------------------------------------------------------
-__int16 __cdecl conver512to320_43C490(int a1, int a2)
+__int16   conver512to320_43C490(int a1, int a2)
 {
   __int16 result; // ax@1
 
@@ -34599,7 +34599,7 @@ int freeMusic()
   return result;
 }
 //----- (0043C4F0) ----
-void __cdecl logJoystickClose()
+void   logJoystickClose()
 {
   if ( sldJoystick_456C20 )
     SDL_JoystickClose(sldJoystick_456C20);
@@ -34626,10 +34626,10 @@ int  inicializeScreen(double a1)
      
 
 		  FSOUND_File_SetCallbacks_43F6B0(
-			(int (__cdecl *)(_DWORD))FSOUND_File_OpenCallback_43AD80,
-			(int (__cdecl *)(_DWORD))FSOUND_File_CloseCallback_43ADD0,
-			(int (__cdecl *)(_DWORD, _DWORD, _DWORD))FSOUND_File_ReadCallback_43ADF0,
-			(int (__cdecl *)(_DWORD))FSOUND_File_SeekCallback_43AE30,
+			(int (  *)(_DWORD))FSOUND_File_OpenCallback_43AD80,
+			(int (  *)(_DWORD))FSOUND_File_CloseCallback_43ADD0,
+			(int (  *)(_DWORD, _DWORD, _DWORD))FSOUND_File_ReadCallback_43ADF0,
+			(int (  *)(_DWORD))FSOUND_File_SeekCallback_43AE30,
 			FSOUND_File_TellCallback_43AE70);
 	  #endif
   }
@@ -34742,7 +34742,7 @@ int refreshScreenWithDelay()
 
 
 //----- (0043C7B0) --------------------------------------------------------
-int (*__cdecl setBackgroundRefreshFunction_43C7B0(int (*a1)(void)))(void)
+int (*  setBackgroundRefreshFunction_43C7B0(int (*a1)(void)))(void)
 {
   int (*result)(void); // eax@1
 
@@ -34753,7 +34753,7 @@ int (*__cdecl setBackgroundRefreshFunction_43C7B0(int (*a1)(void)))(void)
 
 
 //----- (0043C7C0) --------------------------------------------------------
-int __cdecl updateScreenPtr(int a1)
+int   updateScreenPtr(int a1)
 {
   int result; // eax@1
 
@@ -34764,7 +34764,7 @@ int __cdecl updateScreenPtr(int a1)
 
 
 //----- (0043C7E0) --------------------------------------------------------
-int __cdecl sub_43C7E0(int a1, int a2, int a3, signed int a4, char a5)
+int   sub_43C7E0(int a1, int a2, int a3, signed int a4, char a5)
 {
   __int64 v5; // rax@1
   int v6; // edi@2
@@ -34868,7 +34868,7 @@ LABEL_13:
 
 
 //----- (0043C980) --------------------------------------------------------//
-void __cdecl decryptTexture(int src,  int dest, int startPos, int lenght)
+void   decryptTexture(int src,  int dest, int startPos, int lenght)
 {
   int v4; // ebx@1
   signed int v5; // ebp@1
@@ -34980,7 +34980,7 @@ LABEL_28:
 }
 
 //----- (0043CB90) --------------------------------------------------------
-void __cdecl copyImageToBuffer(int a1, int a2)
+void   copyImageToBuffer(int a1, int a2)
 {
 
  decryptTexture(a1, a2, 0, 0x40000000);
@@ -35002,7 +35002,7 @@ unsigned int waitTwoSeconsAndExecFunc_43CBB0()
 }
 
 //----- (0043CBF0) --------------------------------------------------------
-void __cdecl loadMusic(int a1, char * music1, int a3, char* soundEffect)
+void   loadMusic(int a1, char * music1, int a3, char* soundEffect)
 {
 	char *musicStream = NULL; // esi@1
 	char *soundEffectStream = NULL; // ebx@1
@@ -35082,7 +35082,7 @@ void __cdecl loadMusic(int a1, char * music1, int a3, char* soundEffect)
 
 
 //----- (0043CD50) --------------------------------------------------------
-int __cdecl setTriangleValue_43CD50(int pos1x, int pos1y, int pos2x, int pos2y, int pos3x, int pos3y, char value)
+int   setTriangleValue_43CD50(int pos1x, int pos1y, int pos2x, int pos2y, int pos3x, int pos3y, char value)
 {
   int v7; // ecx@1
   signed int v8; // ecx@2
@@ -35271,7 +35271,7 @@ LABEL_26:
 // 464F14: using guessed type int dword_464F14;
 
 //----- (0043D050) --------------------------------------------------------
-int __cdecl sub_43D050(int a1, int a2, int a3, int a4, int a5, int a6, int a7, int a8, int a9)
+int   sub_43D050(int a1, int a2, int a3, int a4, int a5, int a6, int a7, int a8, int a9)
 {
   int v9; // edx@1
   signed int v10; // edx@2
@@ -35545,7 +35545,7 @@ LABEL_28:
 // 464F14: using guessed type int dword_464F14;
 
 //----- (0043D530) --------------------------------------------------------
-int __cdecl iluminateTriangle_43D530(int pos1x, int pos1y, int pos2x, int pos2y, int pos3x, int pos3y, int a7)
+int   iluminateTriangle_43D530(int pos1x, int pos1y, int pos2x, int pos2y, int pos3x, int pos3y, int a7)
 {
   int v7; // ecx@1
   signed int v8; // ecx@2
@@ -35784,7 +35784,7 @@ int waitWithRefresh()
 }
 
 //----- (0043AE80) --------------------------------------------------------
-int __cdecl sub_43AE80(int a1, int a2, int a3, int a4)//a1 puntero a pantalla, a2 posicion de la imagen ,a3 4 a4 204
+int   sub_43AE80(int a1, int a2, int a3, int a4)//a1 puntero a pantalla, a2 posicion de la imagen ,a3 4 a4 204
 {
   int v4; // ecx@1
   int result; // eax@1
@@ -35814,7 +35814,7 @@ void sub_43FC72()
 //----- (0043FC72) --------------------------------------------------------
 
 //----- (0043FCB6) --------------------------------------------------------
-void __cdecl sub_43FCB6()
+void   sub_43FCB6()
 {
   unsigned int i; // [sp+Ch] [bp-1Ch]@1
 
@@ -35887,7 +35887,7 @@ int  initSystem(double fmodMinVersion, int a1, const char **a2, const char *args
 
 
 
-int __cdecl logError(int a1, int a2)
+int   logError(int a1, int a2)
 {
   return fprintf((FILE *)&iob[0] + 2, aSS, a1, a2);
   //return fprintf((FILE *)iob[0]._ptr + 2, aSS, a1, a2);
@@ -35902,7 +35902,7 @@ int outOfMemoryError()
 // 43FE80: using guessed type int outOfMemoryError(void);
 
 
-void __cdecl generateExitError()
+void   generateExitError()
 {
  // fclose((FILE *)&iob[0] + 1);
   //fclose((FILE *)&iob[0] + 2);
@@ -35956,7 +35956,7 @@ int __stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdL
 
 
 //----- (0043FF90) --------------------------------------------------------
-int __cdecl sub_43FF90(int *a1, int a2)
+int   sub_43FF90(int *a1, int a2)
 {
   int *v2; // esi@1
   int v3; // ebx@1
@@ -36042,7 +36042,7 @@ int __cdecl sub_43FF90(int *a1, int a2)
 
 //----- (0043B2C0) --------------------------------------------------------
 
-int __cdecl convertColorToPaletteColor(int a1, int a2)
+int   convertColorToPaletteColor(int a1, int a2)
 {
   return a2 * (signed __int64)a1 >> 16;
 }

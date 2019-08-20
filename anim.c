@@ -153,7 +153,7 @@ char byte_451D80[720] =
 _UNKNOWN unk_4433D4; // weak
 _UNKNOWN unk_445928;
 //----- (004201F0) --------------------------------------------------------
-int __cdecl drawMenuAnimation(int x, int y, int frame, int animation, int frameSizes[])
+int   drawMenuAnimation(int x, int y, int frame, int animation, int frameSizes[])
 {
   int v5; // ecx@1
   int i; // eax@1

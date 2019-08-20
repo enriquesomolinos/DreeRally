@@ -10,7 +10,7 @@
 Pedestrian pedestrian_479AA4[20];
 
 //----- (0043AF30) --------------------------------------------------------
-char __cdecl drawPedestrian_43AF30(int screenOffset, int pedestrianbpkOffset, int sizeToPaint)
+char   drawPedestrian_43AF30(int screenOffset, int pedestrianbpkOffset, int sizeToPaint)
 {
   char result; // al@1
   int v4; // edx@2
