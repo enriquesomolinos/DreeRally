@@ -35854,7 +35854,9 @@ int  initSystem(double fmodMinVersion, int a1, const char **a2, const char *args
 //  void *v9; // esp@7
   int result; // eax@8
   char* sdlError; // eax@10
+#ifndef PORTABILITY
   HMODULE v12; // eax@11
+#endif
   int v13; // eax@12
   int v14; // [sp+0h] [bp-Ch]@7
 
@@ -35880,9 +35882,11 @@ int  initSystem(double fmodMinVersion, int a1, const char **a2, const char *args
     {
       atexit(generateExitError);
       atexit(SDL_Quit);
+	  #ifndef PORTABILITY
       v12 = GetModuleHandleA(0);
       SDL_SetModuleHandle(v12);
-      v13 = sub_43ACE0(fmodMinVersion, a1, (int)a2, args);
+		#endif
+	  v13 = sub_43ACE0(fmodMinVersion, a1, (int)a2, args);
       exit(v13);
     }
     sdlError = SDL_GetError();
