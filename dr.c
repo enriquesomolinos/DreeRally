@@ -767,7 +767,7 @@ char aWinmainError[16] = "WinMain() error"; // weak
 char aSS[] = "%s: %s\n"; // idb
 char aFatalError[12] = "Fatal Error"; // weak
 char aOutOfMemoryAbo[25] = "Out of memory - aborting"; // weak
-CHAR LibFileName[] = "DDRAW.DLL"; // idb
+char LibFileName[] = "DDRAW.DLL"; // idb
 int leftMenuInRaceWidth_456AA0 = 0; // weak
 int mushroomTaken_456AA4 = 0; // weak
 int isCircuitReversed_456AA8 = 0; // weak
@@ -34397,7 +34397,7 @@ char __stdcall sub_43C220(int a1, int a2, signed int a3, int a4)//void streamcal
 	  #ifndef _NO_MINIFMOD
 			FSOUND_Software_Fill_43DCB0(a3 / 4, a2);
 		#endif
-  return true;
+  return 1;
 }
 // 456C04: using guessed type int configNoSound;
 
