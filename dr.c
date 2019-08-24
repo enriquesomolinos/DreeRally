@@ -35922,7 +35922,46 @@ void   generateExitError()
 #ifdef PORTABILITY
 
 int main( int argc, char* argv[] ){
+	 double fmodMinVersion=3.75; // st7@0
+  unsigned int argLenght; // kr04_4@3
+  int v8; // eax@3
+  char *arg; // ebx@3
+  int result; // eax@4
+  int v11; // eax@5
+  int v12; // ebx@5
+//  int v13; // eax@5
+//  void *v14; // esp@5
+  int v15; // [sp+0h] [bp-Ch]@3
 
+  char* toPrint;
+  int i;
+  arg = getcwd(0,0);
+  for (i = 0; i < argc; i++)
+    strcat (arg, argv[i]);
+  argLenght = strlen(argv) + 1;
+  v8 = argLenght - 1 + 4;
+  
+  if ( &v15 )
+  {
+    SDL_strlcpy(&v15, &arg, argLenght);
+    v11 = sub_43FF90(&v15, 0);
+	v12 = v11;
+   
+    if ( &v15 )
+    {
+      sub_43FF90(&v15, (int)&v15);
+      initSystem(fmodMinVersion, v12, (const char **)&v15, arg);
+      result = 0;
+    }
+    else
+    {
+      result = outOfMemoryError();
+    }
+  }  else
+  {
+    result = outOfMemoryError();
+  }
+  return result;
 }
 #endif
 #ifndef PORTABILITY
