@@ -293,7 +293,7 @@ void __noreturn exitGame();
 int sub_42A480();
 void refreshAndCheckConnection_42A570();
 void   selectRaceWarningPopup(int a1);
-int   main(int argc, const char **argv, const char **envp);
+int   postRaceMain(int argc, const char **argv, const char **envp);
 
 char sub_42C4A0();
 char   sub_42C560(int a1);
@@ -426,7 +426,18 @@ int   logError(int a1, int a2);
 int outOfMemoryError(void); // weak
 void   SDL_Quit();
 void   generateExitError();
+
+#ifndef PORTABILITY
+
 int __stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nShowCmd);
+
+#endif
+
+#ifdef PORTABILITY
+
+int main( int argc, char* argv[] );
+
+#endif
 int   sub_43FF90(int *a1, int a2);
 
 //-------------------------------------------------------------------------
@@ -24939,7 +24950,7 @@ void   selectRaceWarningPopup(int a1)
 // 45DC18: using guessed type int configuration.effectsVolume;
 
 //----- (0042B290) --------------------------------------------------------
-int   main(int argc, const char **argv, const char **envp)
+int   postRaceMain(int argc, const char **argv, const char **envp)
 {
   signed int v3; // ebx@1
   int v4; // esi@2
@@ -25844,7 +25855,7 @@ char sub_42C940()
   //esto es mio 
   v26 = malloc(10);
   v25 = malloc(10);
-  main(2, v25, v26);
+  postRaceMain(2, v25, v26);
   memcpy(screenBuffer, graphicsGeneral.menubg5Bpk, 0x4B000u);
   drawMenu(INITIAL_MENU, 0);
   drawMenu(START_NEW_GAME_MENU, 1);
@@ -30112,7 +30123,7 @@ LABEL_477:
 	maxDriverPoints = getMaxDriverPoints(driverId);
     if ( drivers[driverId].points <= maxDriverPoints)
     {
-      main(0, "", "");
+      postRaceMain(0, "", "");
     }
     else
     {
@@ -30151,7 +30162,7 @@ LABEL_477:
       }
       else
       {
-        main(0, "", "");
+        postRaceMain(0, "", "");
         dword_456B58 = 1;
       }
     }
@@ -30353,7 +30364,7 @@ LABEL_11:
   }
   while (indexRaceParticipant < 4 );
   //while (v17 < (signed int)&unk_4A7BF0);
-  main(1, v26, v27);
+  postRaceMain(1, v26, v27);
   result = 0;
   result = getMaxDriverPoints(driverId);
   if ( isMultiplayerGame
@@ -30570,8 +30581,8 @@ void selectRaceScreen()
             do
               setPaletteAndGetValue(v14++, 0, 0, 0);
             while ( v14 < 256 );
-         // //TODO fix   main(1, v43, v44);
-			main(1, "", "");
+         // //TODO fix   postRaceMain(1, v43, v44);
+			postRaceMain(1, "", "");
             goto LABEL_44;
           }
           continue;
@@ -35908,7 +35919,13 @@ void   generateExitError()
   //fclose((FILE *)&iob[0] + 2);
 }
 
+#ifdef PORTABILITY
 
+int main( int argc, char* argv[] ){
+
+}
+#endif
+#ifndef PORTABILITY
 int __stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nShowCmd)
 {
   double fmodMinVersion=3.75; // st7@0
@@ -35954,6 +35971,7 @@ int __stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdL
   return result;
 }
 
+#endif
 
 //----- (0043FF90) --------------------------------------------------------
 int   sub_43FF90(int *a1, int a2)
