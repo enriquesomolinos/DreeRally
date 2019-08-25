@@ -356,7 +356,7 @@ int sub_43B2E0();
 int   draw3dTexture_43B2F0(int a1, int a2, int a3, int textureId);
 int   sub_43B370(int a1, int a2, int a3);
 int   drawTurboBar_43B3A0(int a1, int a2, int a3, char a4);
- void   SetVideoMode(bool fullScreen);
+ void   SetVideoMode(int fullScreen);
 int   refreshScreen(int a1);
 int   setWindowCaption3(int a1);
 int setWindowCaption2();
@@ -33493,7 +33493,7 @@ int   drawTurboBar_43B3A0(int a1, int a2, int a3, char a4)
 
 
 //----- (0043B3E0) --------------------------------------------------------
-void   SetVideoMode(bool fullScreen)
+void   SetVideoMode(int fullScreen)
 {
   
   unsigned int flagsNoGL; // esi@1

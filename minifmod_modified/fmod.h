@@ -10,9 +10,11 @@
 /* ========================================================================================== */
 
 #if (!defined(WIN32) && !defined(_WIN32) && !defined(__WIN32__) && !defined(_WIN64) && !defined(_WIN32_WCE) && !defined(_XBOX)) || (defined(__GNUC__) && defined(WIN32))
-    #ifndef  
+#ifndef PORTABILITY
+	#ifndef  
         #define  
     #endif
+#endif
     #ifndef __stdcall
         #define __stdcall
     #endif
