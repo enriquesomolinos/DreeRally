@@ -10,8 +10,8 @@
 #include "graphics.h"
 #include "imageUtil.h"
 #include "drivers.h"
-#include "mod\mod.h"
-#include "i18n\i18n.h"
+#include "mod/mod.h"
+#include "i18n/i18n.h"
 
 
 const  int EASY_RACE=0;
