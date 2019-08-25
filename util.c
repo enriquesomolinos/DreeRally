@@ -6,7 +6,7 @@ FILE *  fileExists(char *Filename)
 {
 	FILE *result; // eax@1
 	FILE *v2; // esi@1
-	__int32 v3; // edi@2
+	int v3; // edi@2
 
 	result = fopen(Filename, "rb");
 	v2 = result;
