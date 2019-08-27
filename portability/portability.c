@@ -16,7 +16,7 @@ char *strupr(char s[])
 }	/* END STRUPR */
 
 /* -------------------------------------------------------------------- */
-char *strlower(char s[])
+char *strlwr(char s[])
 {
   char	*p;
 
