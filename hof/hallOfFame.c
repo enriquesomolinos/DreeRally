@@ -14,6 +14,9 @@
 #include "../dr.h"
 #include "../circuit.h"
 
+#ifdef PORTABILITY
+	#include "../portability/portability.h"
+#endif
 extern char  unk_445928[];
 extern int dword_45FC00; // wea
 extern  int dword_461250; // weak
