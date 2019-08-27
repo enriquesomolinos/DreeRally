@@ -438,8 +438,10 @@ int __stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdL
 int main( int argc, char* argv[] );
 
 #endif
-int   sub_43FF90(int *a1, int a2);
 
+#ifndef PORTABILITY
+int   sub_43FF90(int *a1, int a2);
+#endif
 //-------------------------------------------------------------------------
 // Data declarations
 
@@ -35948,7 +35950,8 @@ int main( int argc, char* argv[] ){
   if ( &v15 )
   {
     SDL_strlcpy(&v15, &arg, argLenght);
-    v11 = sub_43FF90(&v15, 0);
+    //v11 = sub_43FF90(&v15, 0);
+	v11=1;
 	v12 = v11;
    
     if ( &v15 )
@@ -36017,6 +36020,8 @@ int __stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdL
 #endif
 
 //----- (0043FF90) --------------------------------------------------------
+
+#ifndef PORTABILITY
 int   sub_43FF90(int *a1, int a2)
 {
   int *v2; // esi@1
@@ -36100,7 +36105,7 @@ int   sub_43FF90(int *a1, int a2)
     *(_DWORD *)(a2 + 4 * v3) = 0;
   return result;
 }
-
+#endif
 //----- (0043B2C0) --------------------------------------------------------
 
 int   convertColorToPaletteColor(int a1, int a2)
