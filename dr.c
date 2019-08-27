@@ -35956,7 +35956,7 @@ int main( int argc, char* argv[] ){
    
     if ( &v15 )
     {
-      sub_43FF90(&v15, (int)&v15);
+     // sub_43FF90(&v15, (int)&v15);
       initSystem(fmodMinVersion, v12, (const char **)&v15, arg);
       result = 0;
     }
