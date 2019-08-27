@@ -1,3 +1,32 @@
+#include <ctype.h>
+
+/* -------------------------------------------------------------------- */
+char *strupr(char s[])
+{
+  char	*p;
+
+  for (p = s; *p; ++p)
+    *p = toupper(*p);
+
+  return(s);
+
+}	/* END STRUPR */
+
+/* -------------------------------------------------------------------- */
+char *strlower(char s[])
+{
+  char	*p;
+
+  for (p = s; *p; ++p)
+    *p = tolower(*p);
+
+  return(s);
+
+}	/* END STRLOWER */
+
+/* END STRUPR.C */
+
+
 /* The Itoa code is in the puiblic domain */
 char* itoa(int value, char* str, int radix) {
     static char dig[] =
