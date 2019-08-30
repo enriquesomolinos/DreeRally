@@ -10842,7 +10842,7 @@ LABEL_16:
     {
 		v37 = (int)raceParticipant2[0].damageBar_4A6898;
 		v72 = (int)raceParticipant2[0].damageBar_4A6898;
-      //v71 = (int)absolutePositionY_4A7DB8;//parece daño de otro
+      //v71 = (int)absolutePositionY_4A7DB8;//parece da\F1o de otro
 		v71=0;
       while ( v36 == v32 )
       {
@@ -11557,7 +11557,7 @@ int drawRocket_40F450()
         v10 = raceParticipantIngame[v2].directionRotation_4A7D0C;
         v11 = dword_456AFC;//parece que es el frame
         v12 = v9 << 9;
-        v13 = v10 / 4 << 8;//12288 es el tamaño de la images y tiene 24 sprites 12288/24=512 bytes por sprite
+        v13 = v10 / 4 << 8;//12288 es el tama\F1o de la images y tiene 24 sprites 12288/24=512 bytes por sprite
         v23 = 16;
 		//if(debug==1) v13=0;
         do
@@ -12719,7 +12719,7 @@ LABEL_18:
 					  v18 = &raceParticipant2[ currentDriverSelectedIndex_503518].turboBar_4A68B4;
 					  v19 = raceParticipant2[ currentDriverSelectedIndex_503518].turboBar_4A68B4 + 15360;
                     goto LABEL_32;
-                  case POWERUP_SMALL_MONEY: //dinero pequeño pillado
+                  case POWERUP_SMALL_MONEY: //dinero peque\F1o pillado
                     ++raceParticipant2[currentDriverSelectedIndex_503518].moneyPicked;
                     break;
                   case POWERUP_DRUNK://bebido
@@ -12729,7 +12729,7 @@ LABEL_18:
 						//SOUND_SIENI
                       loadMenuSoundEffect(2u, 6, 0, 0x10000, 327680);
                     break;
-                  case POWERUP_SMALL_REPAIR://llave pequeña de reparacion
+                  case POWERUP_SMALL_REPAIR://llave peque\F1a de reparacion
                     v21 = rand() % 4;
 					v22 = raceParticipant2[currentDriverSelectedIndex_503518].damageBar_4A6898;
                     v21 += 2;
@@ -12990,7 +12990,7 @@ int   sub_4115C0(int a1, int a2)
       v12 = sce2Texture[v5].dword_4B4F68;
       sce2Texture[result].dword_4B4F68 = sce2Texture[v6].dword_4B4F68;
       v13 = sce2Texture[v6].dword_4B4F6C;
-	  //TODO FIX se pasa de tamaño
+	  //TODO FIX se pasa de tama\F1o
      sce2Texture[v11].dword_4B4F68 = v12;
       v14 = sce2Texture[v5++].dword_4B4F6C;
       --v6;
@@ -16501,7 +16501,7 @@ LABEL_318:
     
     v92 = raceEffectiveWidth_445010;
 
-	//calcula el tamaño efectivo de la pantalla descontando el panel lateral de la izquierda
+	//calcula el tama\F1o efectivo de la pantalla descontando el panel lateral de la izquierda
     if ( raceShowLeftPanel_445028 )
     {
       v94 = __OFSUB__(raceEffectiveWidth_445010, 256);
@@ -17417,7 +17417,7 @@ void   openAnimation(const char *animFile, int a2, int music, int a4, int effect
       }
       v27 = refreshScreenWithDelay();
       
-	  //los dos primeros bytes contienen el tamaño del frame
+	  //los dos primeros bytes contienen el tama\F1o del frame
 	  v28 = v15(fAnimFile);
       v29 = getc(fAnimFile);
       fread(DstBuf, v28 + (v29 << 8), 1u, fAnimFile);
@@ -32042,7 +32042,7 @@ LABEL_166:
 			  getEngineBpkById(drivers[driverId].engine),
             (int)((char *)&engineAnimFrameSize_445F68 + 24 * drivers[driverId].engine));
           drawKeyCursor(172176, (char *)screenBuffer + 172176, 0x60u, 64);
-		  engineAnimCurrentFrame_462D80 = (engineAnimCurrentFrame_462D80 + 1) % 24; ///aqui va 24 pòprque son 24 frames
+		  engineAnimCurrentFrame_462D80 = (engineAnimCurrentFrame_462D80 + 1) % 24; ///aqui va 24 p\F2prque son 24 frames
           
         }
         if ( framesToWaitAfterBuy_456B70 == 1 )
@@ -32058,7 +32058,7 @@ LABEL_166:
           drawMenuAnimation(120, 269, tireAnimCurrentFrame_45F034, 
 			  getTireBpkById(drivers[driverId].tire) , (int)((char *)&tireAnimFrameSize_4460E8 + 12 * drivers[driverId].tire));
           drawKeyCursor(172280, (char *)screenBuffer + 172280, 0x60u, 64);
-		  tireAnimCurrentFrame_45F034 = (tireAnimCurrentFrame_45F034 + 1) % 12; ///aqui va 23 pòprque son 23 frames
+		  tireAnimCurrentFrame_45F034 = (tireAnimCurrentFrame_45F034 + 1) % 12; ///aqui va 23 p\F2prque son 23 frames
           
         }
         if ( framesToWaitAfterBuy_456B70 == 1 )
@@ -32099,12 +32099,12 @@ LABEL_166:
       case REPAIR:
         drawMenuAnimation(328, 269, repairAnimCurrentFrame_45EEAC, (int)repaaniBpk, (int)&repairAnimFrameSize_446308);
         drawKeyCursor(172488, (char *)screenBuffer + 172488, 0x60u, 64);
-		repairAnimCurrentFrame_45EEAC = (repairAnimCurrentFrame_45EEAC + 1) % 23; ///aqui va 23 pòprque son 23 frames
+		repairAnimCurrentFrame_45EEAC = (repairAnimCurrentFrame_45EEAC + 1) % 23; ///aqui va 23 p\F2prque son 23 frames
         break;
       case CONTINUE:
         drawMenuAnimation(432, 269, continueAnimCurrentFrame_4611D0, (int)contaniBpk, (int)continueAnimFramesSize_4611D0);
         drawKeyCursor(172592, (char *)screenBuffer + 172592, 0x60u, 64);
-		continueAnimCurrentFrame_4611D0 = (continueAnimCurrentFrame_4611D0 + 1)%2; ///aqui va 22 pòprque son 22 frames
+		continueAnimCurrentFrame_4611D0 = (continueAnimCurrentFrame_4611D0 + 1)%2; ///aqui va 22 p\F2prque son 22 frames
         
         break;
       default:
@@ -32574,7 +32574,7 @@ int mainMenu()
     exit(112);
   }
   recalculateSDLTicks_43C740();
- // allocateMemoryPtr((void *)&v1,0x4B000u); //tamaño pantalla
+ // allocateMemoryPtr((void *)&v1,0x4B000u); //tama\F1o pantalla
   //puesto por mi
   screenBuffer = v1;
   dword_461250 = v1;  
@@ -32602,7 +32602,7 @@ int mainMenu()
   v8 = (double)*(BYTE *)v5;
   sub_418B00(v8, v7, v6);
   
-  memcpy(screenBuffer, graphicsGeneral.menubg5Bpk, 0x4B000u); //tamaño pantalla
+  memcpy(screenBuffer, graphicsGeneral.menubg5Bpk, 0x4B000u); //tama\F1o pantalla
 
   
 
@@ -34625,7 +34625,7 @@ int  inicializeScreen(double a1)
   double v3; // st7@12
   int v4; // eax@15
   int result; // eax@15
-
+char * error;
   v1 = 0;
   if ( mainArgs.configWindow )
     v1 = 2147483648;
@@ -34650,8 +34650,15 @@ int  inicializeScreen(double a1)
   {
     mainArgs.configNoSound = 1;
   }
-  if ( SDL_Init(1049120) )
-    exit(-1);
+
+SDL_InitSubSystem(SDL_INIT_NOPARACHUTE);
+SDL_InitSubSystem(SDL_INIT_JOYSTICK);
+printf(SDL_getenv("SDL_VIDEODRIVER"));
+printf ("hola");
+SDL_InitSubSystem( SDL_INIT_VIDEO);
+error=SDL_GetError();
+  //if ( SDL_Init(SDL_INIT_NOPARACHUTE | SDL_INIT_JOYSTICK | SDL_INIT_VIDEO))
+    //exit(-1);
   videoInfo = SDL_GetVideoInfo();
   screenWidth = videoInfo->current_w;
   screenHeight = videoInfo->current_h;
@@ -35888,6 +35895,7 @@ int  initSystem(double fmodMinVersion, int a1, const char **a2, const char *args
       v12 = GetModuleHandleA(0);
       SDL_SetModuleHandle(v12);
 		#endif
+    
 	  v13 = sub_43ACE0(fmodMinVersion, a1, (int)a2, args);
       exit(v13);
     }
