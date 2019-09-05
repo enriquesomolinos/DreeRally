@@ -10,6 +10,7 @@ install:
 services:
   - xvfb
 
+
 script: 
   - make -f Makefile.linux
   
