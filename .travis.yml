@@ -1,0 +1,15 @@
+language: c
+compiler: gcc
+dist: precise
+
+install: 
+  - sudo apt update -qq
+  # SDL
+  - sudo apt-get install libsdl1.2-dev
+
+services:
+  - xvfb
+
+script: 
+  - make -f Makefile.linux
+  
