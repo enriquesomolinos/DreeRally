@@ -15,7 +15,7 @@ install:
   - wget https://zdoom.org/files/fmod/fmodapi375linux.tar.gz
   - tar -xvf fmodapi375linux.tar.gz
   - cd fmodapi375linux/api
-  - cp libfmod375.so /usr/lib
+  - cp libfmod-3.75.so /usr/lib
 
 services:
   - xvfb
