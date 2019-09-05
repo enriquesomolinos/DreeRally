@@ -3,7 +3,7 @@ compiler: gcc
 dist: precise
 
 install: 
-  - sudo apt update -qq
+  #- sudo apt update -qq
   # SDL
   - sudo apt-get install libsdl1.2-dev
 
