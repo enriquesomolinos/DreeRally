@@ -13,9 +13,8 @@ install:
   - sudo apt-get install mesa-utils
   - sudo apt-get install build-essential libgl1-mesa-dev
   - wget https://zdoom.org/files/fmod/fmodapi375linux.tar.gz
-  - tar -xvf fmodapi375linux.tar.gz
-  - cd fmodapi375linux/api
-  - sudo cp libfmod-3.75.so /usr/lib
+  - tar -xf fmodapi375linux.tar.gz
+  - sudo cp fmodapi375linux/api/libfmod-3.75.so /usr/lib
 
 services:
   - xvfb
