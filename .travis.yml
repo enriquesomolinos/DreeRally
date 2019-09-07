@@ -22,7 +22,7 @@ install:
   - ./configure
   - make
   - sudo make install
-  - cd..
+  - cd ..
   - wget https://zdoom.org/files/fmod/fmodapi375linux.tar.gz
   - tar -xf fmodapi375linux.tar.gz
   - sudo cp fmodapi375linux/api/libfmod-3.75.so /usr/lib
