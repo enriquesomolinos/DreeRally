@@ -8,16 +8,14 @@ install:
   - sudo apt-get install xorg-dev
   
   - sudo apt-get install libsdl1.2debian
-  - sudo apt-get install ia32-libs-sdl
   - sudo apt-get install libsdl1.2-dev
-  - sudo apt-get install libsdl1.2debian
   - sudo apt-get install libc6-dev
   - sudo apt-get install g++-multilib
   - sudo apt-get install freeglut3-dev
+  - sudo apt-get install freeglut3
   - sudo apt-get install libglu1-mesa
   - sudo apt-get install libglu1-mesa-dev
   - sudo apt-get install mesa-utils
-  - sudo apt-get install mesa-common-dev
   - sudo apt-get install build-essential libgl1-mesa-dev
   - wget https://zdoom.org/files/fmod/fmodapi375linux.tar.gz
   - tar -xf fmodapi375linux.tar.gz
