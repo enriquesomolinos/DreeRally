@@ -14,6 +14,7 @@ install:
   - sudo apt-get install libglu1-mesa
   - sudo apt-get install libglu1-mesa-dev
   - sudo apt-get install mesa-utils
+  - sudo apt-get install mesa-common-dev
   - sudo apt-get install libx11-dev libgl1-mesa-glx
   - sudo apt-get install build-essential libgl1-mesa-dev
   - wget https://www.libsdl.org/release/SDL-1.2.15.tar.gz
