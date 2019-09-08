@@ -7,7 +7,7 @@ install:
   # SDL
   - sudo apt-get install xorg-dev
   - sudo apt-get install libsdl1.2-dev 
-  - sudo apt-get install libsdl1.2:i386
+  - sudo apt-get install libsdl1.2debian:i386
   - sudo apt-get install libc6-dev
   - sudo apt-get install g++-multilib
   - sudo apt-get install freeglut3-dev
