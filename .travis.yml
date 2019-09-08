@@ -5,10 +5,13 @@ dist: xenial
 install: 
   #- sudo apt update -qq
   # SDL
+  - sudo dpkg --add-architecture i386
+  - sudo apt-get update
+  - sudo apt-get install libc6:i386 libstdc++6:i386
   - sudo apt-get install xorg-dev
   - sudo apt-get install libsdl1.2-dev 
   - sudo apt-get install libsdl1.2debian:i386
-  - sudo apt-get install libc6-dev
+  #- sudo apt-get install libc6-dev
   - sudo apt-get install g++-multilib
   - sudo apt-get install freeglut3-dev
   - sudo apt-get install freeglut3:i386
