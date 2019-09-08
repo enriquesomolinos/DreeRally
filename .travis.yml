@@ -1,6 +1,6 @@
 language: c
 compiler: gcc
-dist: precise
+dist: xenial
 
 install: 
   #- sudo apt update -qq
