@@ -22,7 +22,7 @@ clean: clean-custom
 	${RM} $(OBJ) 
 
 $(BIN): $(OBJ)
-	ld $(LINKOBJ) -o $(BIN) $(LIBS)
+	$(CC) $(LINKOBJ) -o $(BIN) $(LIBS)
 
 portability.o: portability/portability.c
 	$(CC) -c portability/portability.c -o portability.o $(CFLAGS)
