@@ -11,9 +11,9 @@ install:
   - sudo apt-get install gcc-7-multilib gcc-multilib
   - sudo apt-get install g++-7-multilib g++-multilib
   - sudo apt-get install xorg-dev
-  - sudo apt-get install libsdl1.2-dev 
+  - sudo apt-get install libsdl1.2-dev:i386 
   - sudo apt-get install libsdl1.2debian:i386
-  - sudo apt-get install freeglut3-dev
+  - sudo apt-get install freeglut3-dev:i386
   - sudo apt-get install freeglut3:i386
   - sudo apt-get install libglu1-mesa:i386
   - sudo apt-get install libglu1-mesa-dev
