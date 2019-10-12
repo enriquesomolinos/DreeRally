@@ -1,6 +1,6 @@
 language: c
 compiler: gcc
-dist: xenial
+dist: bionic
 
 install: 
   #- sudo apt update -qq
