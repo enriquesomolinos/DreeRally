@@ -3,8 +3,6 @@ compiler: gcc
 dist: bionic
 
 install: 
-  #- sudo apt update -qq
-  # SDL
   - sudo dpkg --add-architecture i386
   - sudo apt-get update
   - sudo apt-get install libc6-i386
@@ -22,13 +20,6 @@ install:
   - sudo apt-get install libx11-dev libgl1-mesa-glx
   - sudo apt-get install build-essential libgl1-mesa-dev
   - sudo apt-get install libgl1-mesa-glx:i386
-  #- wget https://www.libsdl.org/release/SDL-1.2.15.tar.gz
-  #- tar -xf SDL-1.2.15.tar.gz
-  #- cd SDL-1.2.15
-  #- ./configure
-  #- make
-  #- sudo make install
-  #- cd ..
   - wget https://zdoom.org/files/fmod/fmodapi375linux.tar.gz
   - tar -xf fmodapi375linux.tar.gz
   - sudo cp fmodapi375linux/api/libfmod-3.75.so /usr/lib
