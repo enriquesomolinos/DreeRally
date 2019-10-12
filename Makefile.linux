@@ -1,8 +1,8 @@
 # Project: DrWin
 # Makefile created by Dev-C++ 5.11
 
-CPP      = g++ -m32 -D__DEBUG__
-CC       = gcc -m32 
+CPP      = g++ -ggdb -m32 -D__DEBUG__
+CC       = gcc -ggdb -m32 
 WINDRES  = windres.exe
 OBJ      = portability.o anim.o blackMarket.o bpaUtil.o cars.o circuit.o config.o dr.o drivers.o graphics.o hallOfFame.o imageUtil.o licenseScreen.o menus.o pedestrian.o popup.o raceParticipant.o raceResults.o savegame.o util.o 3dSystem.o powerup.o mod.o i18n.o hash.o
 LINKOBJ  = portability.o anim.o blackMarket.o bpaUtil.o cars.o circuit.o config.o dr.o drivers.o graphics.o hallOfFame.o imageUtil.o licenseScreen.o menus.o pedestrian.o popup.o raceParticipant.o raceResults.o savegame.o util.o 3dSystem.o powerup.o mod.o i18n.o hash.o
