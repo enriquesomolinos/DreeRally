@@ -1,16 +1,17 @@
 # Project: DrWin
 # Makefile created by Dev-C++ 5.11
 
-CPP      = g++ -D__DEBUG__
+CPP      = g++ -ggdb -m32 -D__DEBUG__
 CC       = gcc -ggdb -m32 
 WINDRES  = windres.exe
 OBJ      = portability.o anim.o blackMarket.o bpaUtil.o cars.o circuit.o config.o dr.o drivers.o graphics.o hallOfFame.o imageUtil.o licenseScreen.o menus.o pedestrian.o popup.o raceParticipant.o raceResults.o savegame.o util.o 3dSystem.o powerup.o mod.o i18n.o hash.o
 LINKOBJ  = portability.o anim.o blackMarket.o bpaUtil.o cars.o circuit.o config.o dr.o drivers.o graphics.o hallOfFame.o imageUtil.o licenseScreen.o menus.o pedestrian.o popup.o raceParticipant.o raceResults.o savegame.o util.o 3dSystem.o powerup.o mod.o i18n.o hash.o
 
-LIBS =   -lglut -lGLU -lGL -lm -lSDL -lfmod-3.75 -static-libstdc++ -static-libgcc  -g3
+LIBS     = -lstdc++ -lglut -lGLU -lGL -lm -lSDL -lc -lfmod-3.75
 INCS     = $(sdl-config --libs --cflags) -I"/usr/include/x86_64-linux-gnu" -I"/usr/include/" -I"/usr/include/SDL" -I"./linux/includes" -I"C:\Program Files (x86)\mingw-w64\i686-8.1.0-posix-dwarf-rt_v6-rev0\mingw32/include" -I"C:\Program Files (x86)\mingw-w64\i686-8.1.0-posix-dwarf-rt_v6-rev0\mingw32/i686-w64-mingw32/include" -I"C:\Program Files (x86)\mingw-w64\i686-8.1.0-posix-dwarf-rt_v6-rev0\mingw32/include" 
 BIN      = dreerally.exe
 CFLAGS   = $(INCS) -g3 -D_WINDOWS_TYPES1 -D__WIN32__2 -DPORTABILITY -D_NO_MINIFMOD -w
+LDFLAGS  = -m32
 RM       = del
 
 

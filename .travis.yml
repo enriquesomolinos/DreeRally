@@ -1,32 +1,29 @@
 language: c
 compiler: gcc
-dist: precise
+dist: bionic
 
 install: 
-  #- sudo apt update -qq
-  # SDL
+  - sudo dpkg --add-architecture i386
+  - sudo apt-get update
+  - sudo apt-get install libc6-i386
+  - sudo apt-get install gcc-7-multilib gcc-multilib
+  - sudo apt-get install g++-7-multilib g++-multilib
   - sudo apt-get install xorg-dev
-  - sudo apt-get install libsdl1.2-dev
-  - sudo apt-get install libc6-dev
-  - sudo apt-get install g++-multilib
-  - sudo apt-get install freeglut3-dev
-  - sudo apt-get install freeglut3
-  - sudo apt-get install libglu1-mesa
+  - sudo apt-get install libsdl1.2-dev:i386 
+  - sudo apt-get install libsdl1.2debian:i386
+  - sudo apt-get install freeglut3-dev:i386
+  - sudo apt-get install freeglut3:i386
+  - sudo apt-get install libglu1-mesa:i386
   - sudo apt-get install libglu1-mesa-dev
   - sudo apt-get install mesa-utils
   - sudo apt-get install mesa-common-dev
   - sudo apt-get install libx11-dev libgl1-mesa-glx
   - sudo apt-get install build-essential libgl1-mesa-dev
-  - wget https://www.libsdl.org/release/SDL-1.2.15.tar.gz
-  - tar -xf SDL-1.2.15.tar.gz
-  - cd SDL-1.2.15
-  - ./configure
-  - make
-  - sudo make install
-  - cd ..
+  - sudo apt-get install libgl1-mesa-glx:i386
   - wget https://zdoom.org/files/fmod/fmodapi375linux.tar.gz
   - tar -xf fmodapi375linux.tar.gz
   - sudo cp fmodapi375linux/api/libfmod-3.75.so /usr/lib
+  - ls /usr/lib/i386-linux-gnu/
 
 services:
   - xvfb
