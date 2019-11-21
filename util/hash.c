@@ -44,14 +44,7 @@ void *hash_lookup (hash_t *h, char *key) {
     signed int i = hash_index(h, key);
     if(i==-1)
 		return NULL;
-	return h->values[i];
-}
 	h->filled = h->filled +1;
-}
- 
-void *hash_lookup (hash_t *h, char *key) {
-    signed int i = hash_index(h, key);
-    if(i==-1)
-		return NULL;
+
 	return h->values[i];
 }

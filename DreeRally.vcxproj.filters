@@ -165,9 +165,6 @@
     <ClCompile Include="mod\mod.c">
       <Filter>Source Files\mod</Filter>
     </ClCompile>
-    <ClCompile Include="portability\portability.c">
-      <Filter>Source Files\portability</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="cars.h">

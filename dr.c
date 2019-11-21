@@ -13,7 +13,12 @@
 
 
 #include <SDL.h>
+
+#ifndef PORTABILITY
+
 #include <SDL_opengl.h>
+#endif
+
 #include <math.h>
 
 #include "race/anim.h"
@@ -762,8 +767,20 @@ int dword_456A1C = 1; // weak
 int effectVolume_456A2C = 255; // weak
 int musicVolume_456A30 = 255; // weak
 int volumeMask_456A34 = 255; // weak
+
+#ifndef PORTABILITY
+
 GLfloat x =  1.0; // idb
 GLfloat y =  1.0; // idb
+
+#endif
+#ifdef PORTABILITY
+
+float x =  1.0; // idb
+float y =  1.0; // idb
+
+#endif
+
 
 char aWinmainError[16] = "WinMain() error"; // weak
 char aSS[] = "%s: %s\n"; // idb
@@ -863,7 +880,12 @@ FSOUND_STREAM *soundStream = NULL; // weak
 int channel_456C10 = 0; // weak
 int dword_456C14 = 0; // weak
 int dword_456C18 = 0; // weak
+
+#ifndef PORTABILITY
 GLvoid *pixels = NULL; // idb
+
+#endif
+
 int sldJoystick_456C20 = 0; // weak
 
 FMUSIC_MODULE *musicModuleModified_456C24 = NULL; // idb
@@ -33501,15 +33523,22 @@ void   SetVideoMode(int fullScreen)
   
   unsigned int flagsNoGL; // esi@1
   signed int v3; // ebp@4
+#ifndef PORTABILITY
   GLsizei glWidth; // esi@4
   GLsizei glHeight; // ebx@4
   GLvoid *v6; // edi@5
+
+#endif
+
   int flags; // [sp+0h] [bp-4h]@4
 
   flagsNoGL = 0;
   if (fullScreen)
 	  flagsNoGL = SDL_FULLSCREEN;
   SDL_ShowCursor(fullScreen == 0);
+
+#ifndef PORTABILITY
+
   if ( mainArgs.configGL )
   {
     v3 = 32;
@@ -33552,10 +33581,15 @@ void   SetVideoMode(int fullScreen)
   }
   else
   {
+#endif
 
     //screenSurface = SDL_SetVideoMode(640, 480, 32, v2);
 	screenSurface = SDL_SetVideoMode(640, 480, 32, flagsNoGL);
+#ifndef PORTABILITY
+
   }
+#endif
+
 }
 
 
@@ -33642,6 +33676,10 @@ SDL_Color* color;
     return result;
   dword_456C18 = a1;
   SDL_Delay(1);
+
+#ifndef PORTABILITY
+
+
   if ( mainArgs.configGL )
   {
     v3 = 0;
@@ -33774,6 +33812,8 @@ LABEL_20:
     SDL_GL_SwapBuffers();
     goto LABEL_49;
   }
+#endif
+
   screenSurfaceTemp = screenSurface;
   v27 = screenSurface->pitch >> 2;
   //v27 = (unsigned int)*(_WORD *)(screenSurface + 16) >> 2;
@@ -34629,7 +34669,7 @@ int  inicializeScreen(double a1)
 char * error;
   v1 = 0;
   if ( mainArgs.configWindow )
-    v1 = 2147483648;
+    v1 = 0;
   FSOUND_GetVersion();
   if ( a1 < 3.75 )
     exit(-1);
@@ -34652,14 +34692,8 @@ char * error;
     mainArgs.configNoSound = 1;
   }
 
-SDL_InitSubSystem(SDL_INIT_NOPARACHUTE);
-SDL_InitSubSystem(SDL_INIT_JOYSTICK);
-printf(SDL_getenv("SDL_VIDEODRIVER"));
-printf ("hola");
-SDL_InitSubSystem( SDL_INIT_VIDEO);
-error=SDL_GetError();
-  //if ( SDL_Init(SDL_INIT_NOPARACHUTE | SDL_INIT_JOYSTICK | SDL_INIT_VIDEO))
-    //exit(-1);
+  if ( SDL_Init(SDL_INIT_NOPARACHUTE | SDL_INIT_JOYSTICK | SDL_INIT_VIDEO))
+    exit(-1);
   videoInfo = SDL_GetVideoInfo();
   screenWidth = videoInfo->current_w;
   screenHeight = videoInfo->current_h;
@@ -35951,8 +35985,9 @@ int main( int argc, char* argv[] ){
   char* toPrint;
   int i;
   arg = getcwd(0,0);
-  for (i = 0; i < argc; i++)
-    strcat (arg, argv[i]);
+//TODO calculate corretly the command line args
+  //for (i = 0; i < argc; i++)
+   // strcat (arg, argv[i]);
   argLenght = strlen(argv) + 1;
   v8 = argLenght - 1 + 4;
   
