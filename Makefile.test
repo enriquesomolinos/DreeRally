@@ -1,0 +1,96 @@
+# Project: DrWin
+# Makefile created by Dev-C++ 5.11
+
+CPP      = g++ -D__DEBUG__
+CC       = gcc   
+WINDRES  = windres.exe
+OBJ      = anim.o blackMarket.o bpaUtil.o cars.o circuit.o config.o dr.o drivers.o graphics.o hallOfFame.o imageUtil.o licenseScreen.o menus.o pedestrian.o popup.o raceParticipant.o raceResults.o savegame.o util.o 3dsystem.o powerup.o mod.o i18n.o hash.o
+LINKOBJ  = anim.o blackMarket.o bpaUtil.o cars.o circuit.o config.o dr.o drivers.o graphics.o hallOfFame.o imageUtil.o licenseScreen.o menus.o pedestrian.o popup.o raceParticipant.o raceResults.o savegame.o util.o 3dsystem.o powerup.o mod.o i18n.o hash.o
+
+LIBS = -lopengl32 -lglu32 -lmingw32 MINGW32/libs/libSDL.dll.a MINGW32/libs/libSDLmain.a	 MINGW32/libs/fmodvc.lib -static-libstdc++ -static-libgcc  -g3
+INCS     = -I"/usr/include/x86_64-linux-gnu" -I"/usr/include/" -I"./MINGW32/includes" -I"C:\Program Files (x86)\mingw-w64\i686-8.1.0-posix-dwarf-rt_v6-rev0\mingw32/include" -I"C:\Program Files (x86)\mingw-w64\i686-8.1.0-posix-dwarf-rt_v6-rev0\mingw32/i686-w64-mingw32/include" -I"C:\Program Files (x86)\mingw-w64\i686-8.1.0-posix-dwarf-rt_v6-rev0\mingw32/include" 
+BIN      = dreerally.exe
+CFLAGS   = $(INCS) -g3 -D_WINDOWS_TYPES1 -D__WIN32__ -D_NO_MINIFMOD -D_SDL_main_h -DSDL_main_h_ -w
+RM       = del
+
+
+.PHONY: all all-before all-after clean clean-custom
+
+all: all-before $(BIN) all-after
+
+clean: clean-custom
+	${RM} $(OBJ) 
+
+$(BIN): $(OBJ)
+	$(CC) $(LINKOBJ) -o $(BIN) $(LIBS)
+
+anim.o: anim.c
+	$(CC) -c anim.c -o anim.o $(CFLAGS)
+
+blackMarket.o: blackmarket/blackMarket.c
+	$(CC) -c blackmarket/blackMarket.c -o blackMarket.o $(CFLAGS)
+
+bpaUtil.o: bpa/bpaUtil.c
+	$(CC) -c bpa/bpaUtil.c -o bpaUtil.o $(CFLAGS)
+
+cars.o: cars.c
+	$(CC) -c cars.c -o cars.o $(CFLAGS)
+
+circuit.o: circuit.c
+	$(CC) -c circuit.c -o circuit.o $(CFLAGS)
+
+config.o: config.c
+	$(CC) -c config.c -o config.o $(CFLAGS)
+		
+
+drivers.o: drivers.c
+	$(CC) -c drivers.c -o drivers.o $(CFLAGS)
+
+graphics.o: graphics.c
+	$(CC) -c graphics.c -o graphics.o $(CFLAGS)
+
+hallOfFame.o: hof/hallOfFame.c
+	$(CC) -c hof/hallOfFame.c -o hallOfFame.o $(CFLAGS)
+
+imageUtil.o: imageUtil.c
+	$(CC) -c imageUtil.c -o imageUtil.o $(CFLAGS)
+
+licenseScreen.o: license/licenseScreen.c
+	$(CC) -c license/licenseScreen.c -o licenseScreen.o $(CFLAGS)
+
+menus.o: menus.c
+	$(CC) -c menus.c -o menus.o $(CFLAGS)
+
+pedestrian.o: race/pedestrian.c
+	$(CC) -c race/pedestrian.c -o pedestrian.o $(CFLAGS)
+
+popup.o: popup/popup.c
+	$(CC) -c popup/popup.c -o popup.o $(CFLAGS)
+
+raceParticipant.o: raceParticipant.c
+	$(CC) -c raceParticipant.c -o raceParticipant.o $(CFLAGS)
+
+raceResults.o: raceResults.c
+	$(CC) -c raceResults.c -o raceResults.o $(CFLAGS)
+
+savegame.o: savegame.c
+	$(CC) -c savegame.c -o savegame.o $(CFLAGS)
+
+util.o: util.c
+	$(CC) -c util.c -o util.o $(CFLAGS)
+
+
+3dsystem.o: race/3dsystem.c
+	$(CC) -c race/3dsystem.c -o 3dsystem.o $(CFLAGS)
+
+powerup.o: race/powerup.c
+	$(CC) -c race/powerup.c -o powerup.o $(CFLAGS)
+
+mod.o: mod/mod.c
+	$(CC) -c mod/mod.c -o mod.o $(CFLAGS)
+
+i18n.o: i18n/i18n.c
+	$(CC) -c i18n/i18n.c -o i18n.o $(CFLAGS)
+
+hash.o: util/hash.c
+	$(CC) -c util/hash.c -o hash.o $(CFLAGS)

@@ -8,8 +8,8 @@ typedef enum
 
 }UnderGroundMenu;
 
-int __cdecl getBlackMarketElementText(int a1);
-int __cdecl getBlackMarketElementPurchasedText(int a1);
+int   getBlackMarketElementText(int a1);
+int   getBlackMarketElementPurchasedText(int a1);
 int outOfStockPopup_422930();
 int blackMarketSharewarePopup_4229B0();
 int drawLoanShark();

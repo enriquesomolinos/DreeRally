@@ -1,3 +1,4 @@
+[![Gitter](https://img.shields.io/gitter/room/DAVFoundation/DAV-Contributors.svg?style=flat-square)](https://gitter.im/DreeRally-deathrally/community#)
 [![Build status](https://ci.appveyor.com/api/projects/status/u7idbsek3njnh648/branch/master?svg=true&passingText=master%20-%20OK&failingText=master%20-%20Fails)](https://ci.appveyor.com/project/enriquesomolinos/dreerally/branch/master)
 [![Build status](https://ci.appveyor.com/api/projects/status/u7idbsek3njnh648/branch/0.2.x?svg=true&passingText=0.2.x%20-%20OK&failingText=0.2.x%20-%20Fails)](https://ci.appveyor.com/project/enriquesomolinos/dreerally/branch/0.2.x)
 
@@ -32,6 +33,10 @@ Follow us on [Dreerally](http://www.dreerally.com)
 
 # Building with Visual Studio 2010-2017
 - Open the project solution `DreeRally.sln`, choose `Debug` or `Release`, and then `Build Solution`.
+
+# Building under Linux
+- Run make -f Makefile.linux
+
 
 # Installing
 Once compiled, the DreeRally binary will serve as a replacement for `DeathRally.exe`. The following files from the original game need to be present: `ENDANI.haf`, `ENGINE.BPA`, `fmod.dll`, `IBFILES.BPA`,  `MENU.BPA`, `msvcr71.dll`, `MUSICS.BPA`, `SANIM.haf`, `SDL.dll`, and `TRX.BPA`.

@@ -1,8 +1,7 @@
-#pragma once
+#ifndef HALL_OF_FAME_H
+#define HALL_OF_FAME_H
 
-
-
-int __cdecl drawRecordByCircuit(int a1);
+int   drawRecordByCircuit(int a1);
 int seeHallOfFame();
 
 
@@ -46,3 +45,4 @@ typedef struct CircuitRecords {
 HallOfFameEntry* getDefaultHallOfFame();
 
 CircuitRecords* getDefaulRecords();
+#endif
