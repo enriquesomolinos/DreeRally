@@ -1,6 +1,4 @@
-#include "hof/hallOfFame.h"
-
-
+#include "ui/hallOfFame.h"
 
 typedef struct MainArgs {
 	int configNoSound;
@@ -75,6 +73,5 @@ int checkArgs(char * args);
 int saveConfiguration();
 
 char loadConfig();
-
 
 //dword_461F20 es la estructura halloffame

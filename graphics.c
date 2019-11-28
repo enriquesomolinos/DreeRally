@@ -1,21 +1,163 @@
 #include "graphics.h"
-
+#include "asset/bpaUtil.h"
+#include "dr.h"
+#include <stdlib.h>
 int textureTemp[0xFFFFFu]; // weak
 
 GraphicsGeneral graphicsGeneral;
 
+Graphics2 graphics2;
 Graphics4 graphics4;
 
 void *screenBuffer;
+
+//----- (00419F80) --------------------------------------------------------
+void freeMemoryGraphics2()
+{
+  free(graphics2.chattextBpk);
+  //TODO FIX peta no se porque free(fasesel1Bpk);
+  free(graphics2.facearr1Bpk);
+  free(graphics2.enterx2Bpk);
+//  free(shoptxt1Bpk);
+  //TODO FIX peta no se porque free(shoptxt2Bpk);
+  free(graphics2.fametxtBpk);
+  free(graphics2.recotxtBpk);
+  free(graphics2.recobarBpk);
+  free(graphics2.linlin1Bpk);
+  free(graphics2.chatlin1Bpk);
+  free(graphics2.cursorBpk);
+  free(graphics2.fbig3dBpk);
+  free(graphics2.fbig3bBpk);
+  free(graphics2.mseletx1Bpk);
+  free(graphics2.trarr1Bpk);
+  free(graphics2.trsnap2m1Bpk[0]);
+  free(graphics2.trsnap2m1Bpk[1]);
+  free(graphics2.trsnap2m1Bpk[2]);
+  free(graphics2.trsnap2m1Bpk[3]);
+  free(graphics2.trsnap2m1Bpk[4]);
+  free(graphics2.trsnap2m1Bpk[5]);
+  free(graphics2.trsnap2m1Bpk[6]);
+  free(graphics2.trsnap2m1Bpk[7]);
+  free(graphics2.trsnap2m1Bpk[8]);
+  free(graphics2.trsnap2m1Bpk[9]);
+  free(graphics2.trsnap2m1Bpk[10]);
+  free(graphics2.trsnap2m1Bpk[11]);
+  free(graphics2.trsnap2m1Bpk[12]);
+  free(graphics2.trsnap2m1Bpk[13]);
+  free(graphics2.trsnap2m1Bpk[14]);
+  free(graphics2.trsnap2m1Bpk[15]);
+  free(graphics2.trsnap2m1Bpk[16]);
+  free(graphics2.trsnap2m1Bpk[17]);
+  free(graphics2.trsnap2m1Bpk[18]);
+  free(graphics2.trsnap2m1Bpk[19]);
+  
+}
+
+//----- (00419950) --------------------------------------------------------
+void loadGraphics2()
+{
+  int v0; // edi@1
+  
+  int *v38; // esi@1
+   int index = 0;
+  v0 = 0;
+  cursorBpkFrame = 0;
+  graphics2.chattextBpk = malloc(0x7530u);
+  graphics2.fasesel1Bpk = malloc(0x1B18u);
+  graphics2.facearr1Bpk = malloc(0x1100u);
+  graphics2.enterx2Bpk = malloc(0x5000u);
+  graphics2.shoptxt1Bpk = malloc(0x2800u);
+  graphics2.shoptxt2Bpk = malloc(0x2800u);
+  graphics2.fametxtBpk = malloc(0x8700u);
+  graphics2.recotxtBpk = malloc(0x2800u);
+  graphics2.recobarBpk = malloc(0xAA00u);
+  graphics2.linlin1Bpk = malloc(0x111Cu);
+  graphics2.chatlin1Bpk = malloc(0x1900u);
+  graphics2.cursorBpk = malloc(0x4E20u);
+  graphics2.fbig3dBpk = malloc(0x18000u);
+  graphics2.fbig3bBpk = malloc(0x18000u);
+  graphics2.mseletx1Bpk = malloc(0x2800u);
+  graphics2.trarr1Bpk = malloc(0x1500u);
+  graphics2.trsnap2m1Bpk[0] = malloc(0x3800u);
+  graphics2.trsnap2m1Bpk[1] = malloc(0x3800u);
+  graphics2.trsnap2m1Bpk[2] = malloc(0x3800u);
+  graphics2.trsnap2m1Bpk[3] = malloc(0x3800u);
+  graphics2.trsnap2m1Bpk[4] = malloc(0x3800u);
+  graphics2.trsnap2m1Bpk[5] = malloc(0x3800u);
+  graphics2.trsnap2m1Bpk[6] = malloc(0x3800u);
+  graphics2.trsnap2m1Bpk[7] = malloc(0x3800u);
+  graphics2.trsnap2m1Bpk[8] = malloc(0x3800u);
+  graphics2.trsnap2m1Bpk[9] = malloc(0x3800u);
+  graphics2.trsnap2m1Bpk[10] = malloc(0x3800u);
+  graphics2.trsnap2m1Bpk[11] = malloc(0x3800u);
+  graphics2.trsnap2m1Bpk[12] = malloc(0x3800u);
+  graphics2.trsnap2m1Bpk[13] = malloc(0x3800u);
+  graphics2.trsnap2m1Bpk[14] = malloc(0x3800u);
+  graphics2.trsnap2m1Bpk[15] = malloc(0x3800u);
+  graphics2.trsnap2m1Bpk[16] = malloc(0x3800u);
+  graphics2.trsnap2m1Bpk[17] = malloc(0x3800u);
+  graphics2.trsnap2m1Bpk[18] = malloc(0x3800u);
+  graphics2.trsnap2m1Bpk[19] = malloc(0x3800u);
+  
+ 
+  v38 = (int *)&graphics2.trsnap2m1Bpk;
+  do
+  {
+    extractFromBpa("MENU.BPA", textureTemp, "trsnap2m.bpk");
+    decryptTexture((int)textureTemp, graphics2.trsnap2m1Bpk[index], v0, 14336);
+    ++v38;
+	index++;
+    v0 += 14336;
+  }
+  while (index < 20);
+  //while ((signed int)v38 < (signed int)&configuration.turboGamepad);
+  /*extractFromBpa("MENU.BPA", textureTemp, "trsnap2m.bpk");
+  decryptTexture((int)textureTemp, (int)trsnap2m2Bpk, 258048, 14336);
+  extractFromBpa("MENU.BPA", textureTemp, "trsnap2m.bpk");
+  decryptTexture((int)textureTemp, (int)trsnap2m3Bpk, 272384, 14336);*/
+  extractFromBpa("MENU.BPA", textureTemp, "cursor.bpk");
+  copyImageToBuffer((int)textureTemp, (int)graphics2.cursorBpk);
+  extractFromBpa("MENU.BPA", textureTemp,"f-big3b.bpk");
+  copyImageToBuffer((int)textureTemp, (int)graphics2.fbig3bBpk);
+  extractFromBpa("MENU.BPA", textureTemp, "f-big3d.bpk");
+  copyImageToBuffer((int)textureTemp, (int)graphics2.fbig3dBpk);
+  extractFromBpa("MENU.BPA", textureTemp, "chatlin1.bpk");
+  copyImageToBuffer((int)textureTemp, (int)graphics2.chatlin1Bpk);
+  extractFromBpa("MENU.BPA", textureTemp, "chattext.bpk");
+  copyImageToBuffer((int)textureTemp, (int)graphics2.chattextBpk);
+  extractFromBpa("MENU.BPA", textureTemp, "entertx2.bpk");
+  copyImageToBuffer((int)textureTemp, (int)graphics2.enterx2Bpk);
+  extractFromBpa("MENU.BPA", textureTemp, "shoptxt1.bpk");
+  copyImageToBuffer((int)textureTemp, (int)graphics2.shoptxt1Bpk);
+  extractFromBpa("MENU.BPA", textureTemp, "shoptxt2.bpk");
+  copyImageToBuffer((int)textureTemp, (int)graphics2.shoptxt2Bpk);
+  extractFromBpa("MENU.BPA", textureTemp, "fametxt.bpk");
+  copyImageToBuffer((int)textureTemp, (int)graphics2.fametxtBpk);
+  extractFromBpa("MENU.BPA", textureTemp, "recotxt.bpk");
+  copyImageToBuffer((int)textureTemp, (int)graphics2.recotxtBpk);
+  extractFromBpa("MENU.BPA", textureTemp, "recobar.bpk");
+  copyImageToBuffer((int)textureTemp, (int)graphics2.recobarBpk);
+  extractFromBpa("MENU.BPA", textureTemp, "lic-lin1.bpk");
+  copyImageToBuffer((int)textureTemp, (int)graphics2.linlin1Bpk);
+  extractFromBpa("MENU.BPA", textureTemp, "facesel1.bpk");
+  copyImageToBuffer((int)textureTemp, (int)graphics2.fasesel1Bpk);
+  extractFromBpa("MENU.BPA", textureTemp, "facearr1.bpk");
+  copyImageToBuffer((int)textureTemp, (int)graphics2.facearr1Bpk);
+  extractFromBpa("MENU.BPA", textureTemp, "mseletx1.bpk");
+  copyImageToBuffer((int)textureTemp, (int)graphics2.mseletx1Bpk);
+  extractFromBpa("MENU.BPA", textureTemp, "trarr1.bpk");
+  copyImageToBuffer((int)textureTemp, (int)graphics2.trarr1Bpk);
+}
+
 void loadGraphics4()
 {
-	graphics4.badtitBpk = malloc(0x1B80u); // eax@1
-	graphics4.badsnapBpk = malloc(0xE400u); // eax@1
-	graphics4.escboxBpk = malloc(0x2EB8u); // eax@1
-	graphics4.signlineBpk = malloc(0x110u); // eax@1
-	graphics4.prep4Bpk = malloc(0x8700u); // eax@1
+	graphics4.badtitBpk =(void *) malloc(0x1B80u); // eax@1
+	graphics4.badsnapBpk =(void *) malloc(0xE400u); // eax@1
+	graphics4.escboxBpk =(void *) malloc(0x2EB8u); // eax@1
+	graphics4.signlineBpk =(void *) malloc(0x110u); // eax@1
+	graphics4.prep4Bpk =(void *) malloc(0x8700u); // eax@1
 	
-	graphics4.prepw1Bpk = malloc(0xF0D2u); // eax@1
+	graphics4.prepw1Bpk =(void *) malloc(0xF0D2u); // eax@1
 
 	
 	extractFromBpa("MENU.BPA", textureTemp, "badtit.bpk");
@@ -44,64 +186,60 @@ void freeMemoryGraphics4()
 	free(graphics4.prepw1Bpk);
 }
 
-
-
-
-
 //----- (00418CC0) --------------------------------------------------------
 void loadGraphics1()
 {
-	graphicsGeneral.t15x150Bpk = malloc(0x18CAu);
+	graphicsGeneral.t15x150Bpk = (void *)malloc(0x18CAu);
 
-	graphicsGeneral.corn3bBpk = malloc(0xA00u);
-	graphicsGeneral.corn3aBpk = malloc(0xA00u);
-	graphicsGeneral.copperPal = malloc(0x300u);
-	graphicsGeneral.carcolPal = malloc(0x300u);
-	graphicsGeneral.bgcopPal = malloc(0x600u);	
-	graphicsGeneral.fbig3aBpk = malloc(0x18000u);
-	graphicsGeneral.fsma3bBpk = malloc(0x6000u);
-	graphicsGeneral.fsma3cBpk = malloc(0x6000u);
-	graphicsGeneral.fsma3aBpk = malloc(0x6000u);
-	graphicsGeneral.fmed1aBpk = malloc(0x1A28u);
-	graphicsGeneral.menubg5Bpk = malloc(0x4B000u);
-	graphicsGeneral.mulsbg2Bpk = malloc(0x2E00u);
-	graphicsGeneral.rank1cBpk = malloc(0x516Cu);
-	graphicsGeneral.resupok1Bpk = malloc(0x19A20u);
-	graphicsGeneral.rankinf1Bpk = malloc(0x22Eu);
-	graphicsGeneral.rankinf2Bpk = malloc(0x71Au);
-	graphicsGeneral.rankinf3Bpk = malloc(0x3BAu);
-	graphicsGeneral.raceeasBpk = malloc(0x3FC0u);
-	graphicsGeneral.racemedBpk = malloc(0x3FC0u);
-	graphicsGeneral.raceharBpk = malloc(0x3FC0u);
-	graphicsGeneral.pnameBpk = malloc(0x71Au);
-	graphicsGeneral.ppistBpk = malloc(0x3BAu);
-	graphicsGeneral.prankBpk = malloc(0x22Eu);
-	graphicsGeneral.ptseasyBpk = malloc(0x2F4u);
-	graphicsGeneral.ptsmedBpk = malloc(0x2F4u);
-	graphicsGeneral.ptshardBpk = malloc(0x2F4u);
-	graphicsGeneral.placingBpk = malloc(0x3A64u);
-	graphicsGeneral.carresBpk = malloc(0x1E780u);
-	graphicsGeneral.face01Bpk = malloc(0x1000u);
-	graphicsGeneral.face02Bpk = malloc(0x1000u);
-	graphicsGeneral.face03Bpk = malloc(0x1000u);
-	graphicsGeneral.face04Bpk = malloc(0x1000u);
-	graphicsGeneral.face05Bpk = malloc(0x1000u);
-	graphicsGeneral.face06Bpk = malloc(0x1000u);
-	graphicsGeneral.face07Bpk = malloc(0x1000u);
-	graphicsGeneral.face08Bpk = malloc(0x1000u);
-	graphicsGeneral.face09Bpk = malloc(0x1000u);
-	graphicsGeneral.face10Bpk = malloc(0x1000u);
-	graphicsGeneral.face11Bpk = malloc(0x1000u);
-	graphicsGeneral.face12Bpk = malloc(0x1000u);
-	graphicsGeneral.face13Bpk = malloc(0x1000u);
-	graphicsGeneral.face14Bpk = malloc(0x1000u);
-	graphicsGeneral.face15Bpk = malloc(0x1000u);
-	graphicsGeneral.face16Bpk = malloc(0x1000u);
-	graphicsGeneral.face17Bpk = malloc(0x1000u);
-	graphicsGeneral.face18Bpk = malloc(0x1000u);
-	graphicsGeneral.face19Bpk = malloc(0x1000u);
-	graphicsGeneral.face20Bpk = malloc(0x1000u);
-	graphicsGeneral.facexxBpk = malloc(0x1000u);
+	graphicsGeneral.corn3bBpk =(void *) malloc(0xA00u);
+	graphicsGeneral.corn3aBpk =(void *) malloc(0xA00u);
+	graphicsGeneral.copperPal =(void *) malloc(0x300u);
+	graphicsGeneral.carcolPal =(void *) malloc(0x300u);
+	graphicsGeneral.bgcopPal = (void *)malloc(0x600u);	
+	graphicsGeneral.fbig3aBpk = (void *)malloc(0x18000u);
+	graphicsGeneral.fsma3bBpk =(void *) malloc(0x6000u);
+	graphicsGeneral.fsma3cBpk =(void *) malloc(0x6000u);
+	graphicsGeneral.fsma3aBpk =(void *) malloc(0x6000u);
+	graphicsGeneral.fmed1aBpk = (void *)malloc(0x1A28u);
+	graphicsGeneral.menubg5Bpk = (void *)malloc(0x4B000u);
+	graphicsGeneral.mulsbg2Bpk = (void *)malloc(0x2E00u);
+	graphicsGeneral.rank1cBpk = (void *)malloc(0x516Cu);
+	graphicsGeneral.resupok1Bpk = (void *)malloc(0x19A20u);
+	graphicsGeneral.rankinf1Bpk = (void *)malloc(0x22Eu);
+	graphicsGeneral.rankinf2Bpk =(void *) malloc(0x71Au);
+	graphicsGeneral.rankinf3Bpk =(void *) malloc(0x3BAu);
+	graphicsGeneral.raceeasBpk =(void *) malloc(0x3FC0u);
+	graphicsGeneral.racemedBpk =(void *) malloc(0x3FC0u);
+	graphicsGeneral.raceharBpk =(void *) malloc(0x3FC0u);
+	graphicsGeneral.pnameBpk =(void *) malloc(0x71Au);
+	graphicsGeneral.ppistBpk =(void *) malloc(0x3BAu);
+	graphicsGeneral.prankBpk =(void *) malloc(0x22Eu);
+	graphicsGeneral.ptseasyBpk =(void *) malloc(0x2F4u);
+	graphicsGeneral.ptsmedBpk =(void *) malloc(0x2F4u);
+	graphicsGeneral.ptshardBpk =(void *) malloc(0x2F4u);
+	graphicsGeneral.placingBpk =(void *) malloc(0x3A64u);
+	graphicsGeneral.carresBpk =(void *) malloc(0x1E780u);
+	graphicsGeneral.face01Bpk =(void *) malloc(0x1000u);
+	graphicsGeneral.face02Bpk =(void *) malloc(0x1000u);
+	graphicsGeneral.face03Bpk =(void *) malloc(0x1000u);
+	graphicsGeneral.face04Bpk =(void *) malloc(0x1000u);
+	graphicsGeneral.face05Bpk =(void *) malloc(0x1000u);
+	graphicsGeneral.face06Bpk = (void *)malloc(0x1000u);
+	graphicsGeneral.face07Bpk = (void *)malloc(0x1000u);
+	graphicsGeneral.face08Bpk = (void *)malloc(0x1000u);
+	graphicsGeneral.face09Bpk = (void *)malloc(0x1000u);
+	graphicsGeneral.face10Bpk = (void *)malloc(0x1000u);
+	graphicsGeneral.face11Bpk = (void *)malloc(0x1000u);
+	graphicsGeneral.face12Bpk = (void *)malloc(0x1000u);
+	graphicsGeneral.face13Bpk = (void *)malloc(0x1000u);
+	graphicsGeneral.face14Bpk = (void *)malloc(0x1000u);
+	graphicsGeneral.face15Bpk =(void *) malloc(0x1000u);
+	graphicsGeneral.face16Bpk =(void *) malloc(0x1000u);
+	graphicsGeneral.face17Bpk =(void *) malloc(0x1000u);
+	graphicsGeneral.face18Bpk =(void *) malloc(0x1000u);
+	graphicsGeneral.face19Bpk =(void *) malloc(0x1000u);
+	graphicsGeneral.face20Bpk =(void *) malloc(0x1000u);
+	graphicsGeneral.facexxBpk =(void *) malloc(0x1000u);
 	
 	extractFromBpa("MENU.BPA", graphicsGeneral.bgcopPal, "bgcop.pal");
 	extractFromBpa("MENU.BPA", textureTemp, "15x150.bpk");
@@ -201,7 +339,6 @@ void loadGraphics1()
 	extractFromBpa("MENU.BPA", textureTemp, "menubg5.bpk");
 	copyImageToBuffer((int)textureTemp, graphicsGeneral.menubg5Bpk);
 }
-
 
 //----- (004196F0) --------------------------------------------------------
 void freeMemoryGraphics1()

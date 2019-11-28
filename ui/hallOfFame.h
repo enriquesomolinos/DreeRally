@@ -3,7 +3,8 @@
 
 int   drawRecordByCircuit(int a1);
 int seeHallOfFame();
-
+char showHallOfFameEndGame_430FA0();//muestra hall of fame
+int sub_427BC0();
 
 typedef enum {
 	SUBURBIA_CIRCUIT = 0,
@@ -40,7 +41,6 @@ typedef struct CircuitRecords {
 	int cen;
 
 }CircuitRecords;
-
 
 HallOfFameEntry* getDefaultHallOfFame();
 

@@ -1,6 +1,5 @@
 
 
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -11,10 +10,11 @@
 #include "../cars.h"
 #include "../graphics.h"
 #include "../config.h"
-#include "blackMarket.h"
+#include "blackMarketScreen.h"
 #include "../variables.h"
 #include "../imageUtil.h"
 #include "../menus.h"
+#include "../popup/popup.h"
 
 _UNKNOWN unk_444160;
  _UNKNOWN unk_45FDC4; // weak;
@@ -72,8 +72,6 @@ char aTheStartThatIC[34] = "the start that I could trust you."; // weak
 char aLetSDoThisAgai[29] = "Let's do this again anytime."; // weak
 _UNKNOWN unk_452C80; // weak
 
-
-
 char aMines[7] = "[Mines"; // weak
 _UNKNOWN unk_453400; // weak
 char aSowTheseSeedsO[31] = "Sow these seeds of destruction"; // weak
@@ -111,14 +109,12 @@ char byte_453B30[720] =
   '\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','[','S','p','i','k','e','d',' ','b','u','m','p','e','r','s',' ','i','n','s','t','a','l','l','e','d','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','N','o','w',' ','y','o','u',' ','a','r','e',' ','s','a','y','i','n','g',':',' ','\'','S','t','a','y',' ','b','a','c','k',' ','o','r','\0','\0','\0','\0','\0','\0','\0','y','o','u',' ','s','o','r','r','y',',',' ','y','o','u',' ','d','e','a','d','.','\'',' ','N','o','w',' ','t','h','a','t','\'','s','\0','\0','\0','\0','\0','\0','\0','\0','t','h','e',' ','a','t','t','i','t','u','d','e','.','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','[','R','o','c','k','e','t',' ','F','u','e','l',' ','b','o','u','g','h','t','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','W','a','r','n','i','n','g','!',' ','W','e','\'','r','e',' ','t','a','l','k','i','n','g',' ','\'','b','o','u','t',' ','a','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','b','a','c','k','d','r','a','f','t',' ','b','a','r','b','e','c','u','e',' ','p','a','r','t','y',' ','h','e','r','e','.','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','[','U','s','i','n','g',' ','t','h','e',' ','f','u','e','l',' ','c','a','u','s','e','s',' ','d','a','m','a','g','e','!','{','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','[','S','a','b','o','t','a','g','e',' ','i','n',' ','p','r','o','g','r','e','s','s','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','S','w','e','e','t',' ','d','e','a','l','.',' ','N','o','w',' ','y','o','u','r',' ','a','r','c','h','-','r','a','c','i','n','g','-','\0','\0','\0','\0','\0','\0','\0','r','i','v','a','l',' ','w','i','l','l',' ','t','a','i','l','s','l','i','d','e',' ','d','o','w','n',' ','t','h','a','t','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','v','i','l','e',' ','r','o','a','d',' ','t','o',' ','w','r','e','c','k','h','o','o','d',' ','o','b','l','i','v','i','o','n','.','\0','\0','\0','\0','\0','\0','\0','\0'
 }; // idb
 
-
 char aContinue_2[10] = "[CONTINUE"; // weak
 _UNKNOWN unk_454B70; // weak
 char aExitTheUndergr[32] = "Exit the Underground Market and"; // weak
 char aEnterTheRaceSi[24] = "enter the Race Sign-Up."; // weak
 _UNKNOWN unk_454BE8; // weak
 char aPressEscForP_1[30] = "Press [Esc{ for previous menu"; // weak
-
 
 //----- (00421FB0) --------------------------------------------------------
 signed int setUndergroundMarketPrices()
@@ -176,7 +172,6 @@ signed int setUndergroundMarketPrices()
 }
 // 46085C: using guessed type int dword_46085C[];
 // 463CE8: using guessed type int driverId;
-
 
 int loadAcceptedText()
 {
@@ -288,24 +283,24 @@ int drawLoanShark()
     }
     while ( v6 );
     if ( drivers[driverId].loanType == LOAN_DELIVERATOR)
-      itoa((unsigned __int64)((double)(drivers[driverId].loanRaces - 1) * 0.3333333333333333 * 6000.0 + 12000.0), DstBuf, 10);
+      _itoa((unsigned __int64)((double)(drivers[driverId].loanRaces - 1) * 0.3333333333333333 * 6000.0 + 12000.0), DstBuf, 10);
     if (drivers[driverId].loanType == LOAN_WRAIGHT )
-      itoa(
+      _itoa(
         (unsigned __int64)((double)(drivers[driverId].loanRaces - 1) * 0.3333333333333333 * 4500.0 + 9000.0),
         DstBuf,
         10);
     if (drivers[driverId].loanType == LOAN_SHRIEKER )
-      itoa(
+      _itoa(
         (unsigned __int64)((double)(drivers[driverId].loanRaces - 1) * 0.3333333333333333 * 3000.0 + 6000.0),
         DstBuf,
         10);
     if (drivers[driverId].loanType == LOAN_SENTINEL )
-      itoa(
+      _itoa(
         (unsigned __int64)((double)(drivers[driverId].loanRaces - 1) * 0.3333333333333333 * 1500.0 + 3000.0),
         DstBuf,
         10);
     if (drivers[driverId].loanType == LOAN_DERVISH )
-      itoa(
+      _itoa(
         (unsigned __int64)((double)(drivers[driverId].loanRaces - 1) * 0.3333333333333333 * 750.0 + 1500.0),
         DstBuf,
         10);
@@ -373,7 +368,7 @@ int drawBlackMarketElement0()
   {
     drawImageWithPosition2((int)maret1eBpk, 96, 96, (int)((char *)screenBuffer + 161936));
     getBlackMarketElementText(0);
-    itoa(minesCost_462D40, DstBuf, 10);
+    _itoa(minesCost_462D40, DstBuf, 10);
     v6 = 36;
     v0 = strlen(DstBuf) + 1;
     v1 = &v5;
@@ -418,7 +413,7 @@ if (spikesAvailable_45EFF4 == 1)
 {
 	drawImageWithPosition2((int)((char *)maret1eBpk + 9216), 96, 96, (int)((char *)screenBuffer + 162040));
 	getBlackMarketElementText(1);
-	itoa(spikesCost_dword_462D44, DstBuf, 10);
+	_itoa(spikesCost_dword_462D44, DstBuf, 10);
 	v6 = 36;
 	v0 = strlen(DstBuf) + 1;
 	v1 = &v5;
@@ -462,7 +457,7 @@ int drawBlackMarketElement2()
 	{
 		drawImageWithPosition2((int)((char *)maret1eBpk + 18432), 96, 96, (int)((char *)screenBuffer + 162144));
 		getBlackMarketElementText(2);
-		itoa(rocketCost_462D48, DstBuf, 10);
+		_itoa(rocketCost_462D48, DstBuf, 10);
 		//v6 = 36; // es el dolar $
 		v0 = strlen(DstBuf) + 1;
 
@@ -521,14 +516,13 @@ int drawBlackMarketElement3()
   {
     drawImageWithPosition2((int)((char *)maret1eBpk + 27648), 96, 96, (int)((char *)screenBuffer + 162248));
     getBlackMarketElementText(3);
-    itoa(sabotageCost_462D4C, DstBuf, 10);
+    _itoa(sabotageCost_462D4C, DstBuf, 10);
     v3 = strlen(DstBuf) + 1;
 
 	v4 = malloc(v3); //coste + el $
 	strcpy(v4,"$"); /* copy name into the new var */
 	strcat(v4, DstBuf);
 	v6 = getBoxTextOffset(v4);//get small text size
-
 
     drawInGamePrices(v4, v6 + 214728);
   }
@@ -559,7 +553,6 @@ int drawBlackMarketElement3()
   return result;
 }
 
-
 //----- (00423350) --------------------------------------------------------
 int drawBlackMarketContinue()
 {
@@ -571,7 +564,7 @@ int drawBlackMarketContinue()
   writeTextInScreen(aEnterTheRaceSi, 110250);
   writeTextInScreen((const char *)&unk_454BE8, 120490);
   writeTextInScreen(aPressEscForP_1, 130730);
-  return drawMenuAnimation(432, 269, continueAnimCurrentFrame_4611D0, (int)contaniBpk, (int)continueAnimFramesSize_4611D0);
+  return drawMenuAnimation(432, 269, continueAnimCurrentFrame_4611D0, (int)contaniBpk, continueAnimFramesSize_4611D0);
 }
 // 4462A8: using guessed type int continueAnimFramesSize_4611D0[];
 // 4611D0: using guessed type int continueAnimCurrentFrame_4611D0;
@@ -666,7 +659,6 @@ void underGroundMenuRight()
   }
 }
 
-
 //----- (004236D0) --------------------------------------------------------
 int reInitUnderGroundMarketStock()
 {
@@ -689,7 +681,6 @@ int reInitUnderGroundMarketStock()
     sabotageAvailable_45EFFC = 0;
   return maxDriverPoints;
 }
-
 
 //----- (004237A0) --------------------------------------------------------
 int drawBlackMarketScreen()
@@ -933,7 +924,6 @@ LABEL_48:
   }
 }
 
-
 //----- (00436700) --------------------------------------------------------
 void enterBlackMarketScreen()
 {
@@ -1021,7 +1011,7 @@ void enterBlackMarketScreen()
       copyImageToBuffer((int)((char *)contaniBpk + v5), (int)dword_461EA4);
       drawImageWithPosition2((int)dword_461EA4, 96, 64, (int)((char *)screenBuffer + 172592));	  
       drawKeyCursor(172592, (char *)screenBuffer + 172592, 0x60u, 64);
-	  continueAnimCurrentFrame_4611D0 = continueAnimCurrentFrame_4611D0 % 24;
+	  continueAnimCurrentFrame_4611D0 = continueAnimCurrentFrame_4611D0 % 2;//% 24;
     }
     v10 = 0;
     v11 =0;
@@ -1354,7 +1344,7 @@ void enterBlackMarketScreen()
         copyImageToBuffer((int)((char *)contaniBpk + v47), (int)dword_461EA4);
         drawImageWithPosition2((int)dword_461EA4, 96, 64, (int)((char *)screenBuffer + 172592));
         drawKeyCursor(172592, (char *)screenBuffer + 172592, 0x60u, 64);
-		continueAnimCurrentFrame_4611D0 = continueAnimCurrentFrame_4611D0 % 64;
+		continueAnimCurrentFrame_4611D0 = continueAnimCurrentFrame_4611D0 % 24;
       }
       else if ( v62 != -1 )
       {
@@ -1396,5 +1386,4 @@ LABEL_124:
     while ( v46 >= 0 );
   }
 }
-
 

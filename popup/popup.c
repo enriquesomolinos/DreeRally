@@ -1,6 +1,5 @@
 
 
-
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -15,7 +14,6 @@
 #include "../config.h"
 #include "../variables.h"
 
-
 char aASlickSteroidR[30] = "[A slick steroid run, anyone?"; // weak
 _UNKNOWN unk_452DE8; // weak
 char byte_452E38[] = { '[' }; // weak
@@ -26,7 +24,6 @@ char byte_452CD0[] = { '[' }; // weak
 char byte_452CF8[] = { '[' }; // weak
 char aDown_ThatSDoug[34] = "down. That's dough baked luck for"; // weak
 char aYou_AndLuckShe[34] = "you. And luck, she ain't no lady."; // weak
-
 
 char aWannaBeMyHitma[29] = "[Wanna be my hitman, driver?"; // weak
 _UNKNOWN unk_453108; // weak
@@ -96,7 +93,6 @@ char aLineBeforeThin[37] = "[line before things get crowded{, be"; // weak
 char aFirstLikeFloor[29] = "first, like, floor it, like."; // weak
 _UNKNOWN unk_453018; // weak
 _UNKNOWN unk_453068; // weak
-
 
 char aWelcomeToDea_0[25] = "[Welcome to Death Rally."; // weak
 _UNKNOWN unk_44C248; // weak
@@ -390,7 +386,7 @@ int sabotageScreen()
       v23 = v21 % 25 + 25;//calculo del sabotage aleatorio
       //dword_46084C[v22 / 4] = v23;
 	  drivers[v22 / 4].damage = v23;
-      itoa(v23, &DstBuf, 10);
+      _itoa(v23, &DstBuf, 10);
       v24 =(char*) drivers[v22].damage;
       do
       {
@@ -900,7 +896,6 @@ unsigned int noPaintJobPopUp()
   return drawTextWithFont((int)graphicsGeneral.fbig3aBpk, (int)&bigLetterSpacing_445848, "CONTINUE", 202432);
 }
 
-
 //----- (0041B850) --------------------------------------------------------
 unsigned int allCarsCrashPopUp()
 {
@@ -958,7 +953,6 @@ unsigned int allCarsCrashPopUp()
   return drawTextWithFont((int)graphicsGeneral.fbig3aBpk, (int)&bigLetterSpacing_445848, "CONTINUE", 202432);
 }
 
-
 //----- (0041BA00) --------------------------------------------------------
 int steriodsNotFoundPopup()
 {
@@ -980,7 +974,7 @@ int steriodsNotFoundPopup()
   int v15; // eax@34
   int v16; // eax@35
   int v17; // eax@36
-  signed int v19; // [sp+4h] [bp-44h]@0
+  signed int v19=0; // [sp+4h] [bp-44h]@0
   int v20; // [sp+8h] [bp-40h]@3
   __int16 v21; // [sp+Ch] [bp-3Ch]@3
   char v22; // [sp+13h] [bp-35h]@17
@@ -1161,7 +1155,7 @@ int killOnePopup()
   int v23; // eax@40
   int v24; // eax@41
   int v25; // eax@42
-  signed int v27; // [sp+4h] [bp-44h]@0
+  signed int v27=0; // [sp+4h] [bp-44h]@0
   int v28; // [sp+8h] [bp-40h]@3
   char v29; // [sp+Ch] [bp-3Ch]@3
   char v30; // [sp+13h] [bp-35h]@17
@@ -1333,7 +1327,6 @@ LABEL_46:
   return 0;
 }
 
-
 //----- (0041C230) --------------------------------------------------------
 unsigned int welcomeShopPopup()
 {
@@ -1484,7 +1477,6 @@ int payBackTimePopup()
   return 0;
 }
 
-
 //----- (0041C770) --------------------------------------------------------
 unsigned int undergroundMarketPopup()
 {
@@ -1502,7 +1494,6 @@ unsigned int undergroundMarketPopup()
   return drawTextWithFont((int)graphicsGeneral.fbig3aBpk, (int)&bigLetterSpacing_445848, "CONTINUE", 202432);
 }
 
-
 unsigned int welcomePopup()
 {
   createPopup(45, 131, 458, 230, 1);
@@ -1518,8 +1509,6 @@ unsigned int welcomePopup()
   writeTextInScreen((const char *)&unk_44C478, 182460);
   return drawTextWithFont((int)graphicsGeneral.fbig3aBpk, (int)&bigLetterSpacing_445848, "CONTINUE", 202432);
 }
-
-
 
 //----- (0041A530) esto pinta el recuadro parece que es x , offset x , y , offset y --------------------------------------------------------
 signed int   createPopup(int x, int xLenght, int y, int yLenght, int cornerType)

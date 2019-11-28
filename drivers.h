@@ -4,8 +4,6 @@
 
 #define TOTAL_DRIVERS = 20;
 
-
-
 typedef enum {
 	EASY_DIFFICULTY = 0,
 	MEDIUM_DIFFICULTY = 1,
@@ -52,7 +50,6 @@ typedef struct Driver {
 	
 } Driver;
 
-
 extern Driver drivers[20];
 
 extern int driverId; // weak
@@ -89,8 +86,6 @@ int getMaxDriverPoints(int userDriverId);
 4608a0 spikes
 4608a4 rocket
 4608a8 sabotage
-
-
 
 */
 

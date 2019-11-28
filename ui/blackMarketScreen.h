@@ -28,9 +28,7 @@ int loadAcceptedText();
 void  underGroundMenuEnter(void *);
 signed int setUndergroundMarketPrices();
 
-
 void enterBlackMarketScreen();
-
 
 extern int minesAvailable_45EFF0; // weak
 extern int spikesAvailable_45EFF4; // weak

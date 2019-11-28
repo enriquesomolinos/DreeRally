@@ -1,5 +1,5 @@
 
-signed int   createPopup(int a1, int a2, int a3, int a4, int a5);
+signed int   createPopup(int x, int xLenght, int y, int yLenght, int cornerType);
 unsigned int welcomePopup();
 unsigned int undergroundMarketPopup();
 int payBackTimePopup();

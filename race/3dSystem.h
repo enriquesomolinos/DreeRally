@@ -1,7 +1,5 @@
 
 
-
-
 typedef struct Sce4Texture{
 	int tetureWidth_50A180; // weak parece ancho de sce5
 	int textureHeight_50A184; // weak parece alto de sce5 y tamaño total
@@ -19,7 +17,6 @@ typedef struct Sce4Texture{
 extern Sce4Texture sce4Texture[100];
 
 typedef struct Sce3DObject{
-
 
 	int trxSCE2Bpk_4B4320; // weak  //estructura de 788 *100*4
 	int numberTriangles_4B4324; // weak  determina el tamaño del array de 12

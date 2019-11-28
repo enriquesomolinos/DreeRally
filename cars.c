@@ -1,24 +1,26 @@
 
 #include "cars.h"
+#include <stdlib.h>
+ Car cars[7];
 
- Car cars[6];
-
- char* carName[6];
+ char* carName[7];
 
 void initCars() {
-	carName[0] = malloc(14);
-	carName[1] = malloc(14);
-	carName[2] = malloc(14);
-	carName[3] = malloc(14);
-	carName[4] = malloc(14);
-	carName[5] = malloc(14);
-	carName[6] = malloc(14);
+	carName[0] =(char *) malloc(14);
+	carName[1] =(char *) malloc(14);
+	carName[2] =(char *) malloc(14);
+	carName[3] =(char *) malloc(14);
+	carName[4] =(char *) malloc(14);
+	carName[5] =(char *) malloc(14);
+	carName[6] =(char *) malloc(14);
+	
 	strcpy(carName[0],"KUPLA");
 	strcpy(carName[1], "PICKUP");
 	strcpy(carName[2], "SEDAN");
 	strcpy(carName[3], "CAMARO");
 	strcpy(carName[4], "PORCHE");
 	strcpy(carName[5], "LOTUS");
+	strcpy(carName[6], "SPECIAL");
 
 	
 	initCar0();
@@ -27,7 +29,8 @@ void initCars() {
 	initCar3();
 	initCar4();
 	initCar5();
-
+	
+	initCar6();
 	
 }
 
@@ -35,17 +38,18 @@ char * getCarName(int carType) {
 	if (carType == 0) {
 		return "VAGABOND";
 	}
-	if (carType == 1) {
+	else if (carType == 1) {
 		return "DERVISH";
-	}if (carType == 2) {
+	}else if (carType == 2) {
 		return "SENTINEL";
-	}if (carType == 3) {
+	}else if (carType == 3) {
 		return "SHRIEKER";
-	}if (carType == 4) {
+	}else if (carType == 4) {
 		return "WRAITH";
-	}if (carType == 5) {
+	}else if (carType == 5) {
 		return "DELIVERATOR";
 	}
+	return "ADVERSARYCAR";
 }
 void initCar0() {
 	cars[0].name = "Vagabond";
@@ -168,4 +172,25 @@ void initCar5() {
 	cars[5].armourUpgradeCosts[2] = 12525;
 	cars[5].armourUpgradeCosts[3] = 15505;
 	cars[5].repairCost = 1625;
+}
+
+void initCar6() {
+	cars[6].name = "AdversaryCar";
+	cars[6].cost = 45000;
+	cars[6].engineUpgrades = 4;
+	cars[6].tireUpgrades = 4;
+	cars[6].armourUpgrades = 4;
+	cars[6].engineUpgradeCosts[0] = 7550;
+	cars[6].engineUpgradeCosts[1] = 11750;
+	cars[6].engineUpgradeCosts[2] = 15800;
+	cars[6].engineUpgradeCosts[3] = 22450;
+	cars[6].tireUpgradeCosts[0] = 6000;
+	cars[6].tireUpgradeCosts[1] = 8500;
+	cars[6].tireUpgradeCosts[2] = 9750;
+	cars[6].tireUpgradeCosts[3] = 12500;
+	cars[6].armourUpgradeCosts[0] = 5525;
+	cars[6].armourUpgradeCosts[1] = 7250;
+	cars[6].armourUpgradeCosts[2] = 12525;
+	cars[6].armourUpgradeCosts[3] = 15505;
+	cars[6].repairCost = 1625;
 }

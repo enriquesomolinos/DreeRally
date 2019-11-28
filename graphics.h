@@ -1,4 +1,7 @@
 
+#ifndef GRAPHICS_H
+#define GRAPHICS_H
+
 typedef struct Graphics4 {
 	void *badtitBpk;
 	void *badsnapBpk;
@@ -8,7 +11,6 @@ typedef struct Graphics4 {
 	void *tsahpeBpk_45EB5C;
 	void *prepw1Bpk;
 } Graphics4;
-
 
 typedef struct GraphicsGeneral {
 	void *corn3bBpk; // idb
@@ -63,6 +65,30 @@ typedef struct GraphicsGeneral {
 	void *facexxBpk; // idb
 } GraphicsGeneral;
 
+typedef struct Graphics2 {
+
+	void *fbig3bBpk; // idb
+
+	int* trsnap2m1Bpk[20]; // idb
+	void *chattextBpk; // idb
+	void *fasesel1Bpk; // idb
+	void *facearr1Bpk; // idb
+	void *shoptxt1Bpk; // idb
+	void *fametxtBpk; // idb
+	void *shoptxt2Bpk; // idb
+	void *recobarBpk; // idb
+	void *recotxtBpk; // idb
+	void *linlin1Bpk; // idb
+	void *chatlin1Bpk; // idb
+	void *cursorBpk; // idb
+	void *fbig3dBpk; // idb
+	void *mseletx1Bpk; // idb
+	void *trarr1Bpk; // idb
+    void *enterx2Bpk;
+} Graphics2;
+
+extern Graphics2 graphics2;
+
 extern GraphicsGeneral graphicsGeneral;
 
 extern Graphics4 graphics4;
@@ -71,11 +97,13 @@ extern int textureTemp[0xFFFFFu]; // weak
 
 extern void *screenBuffer;
 
-
 void loadGraphics1();
 
-
+void loadGraphics2();
 void loadGraphics4();
 
 void freeMemoryGraphics1();
+void freeMemoryGraphics2();
 void freeMemoryGraphics4();
+
+#endif

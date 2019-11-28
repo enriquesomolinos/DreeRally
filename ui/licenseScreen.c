@@ -3,12 +3,16 @@
 #include "../defs.h"
 #include "../menus.h"
 #include "../dr.h"
+#include "../asset/bpaUtil.h"
+
 #include "licenseScreen.h"
 
 #include "../imageUtil.h"
 #include "../drivers.h"
 #include "../config.h"
+#include "../cars.h"
 #include "../i18n/i18n.h"
+#include <stdlib.h>
 
 char aSpeedMakesMeDi[21] = "speed makes me dizzy"; // weak
 char aILiveToRide[15] = "i live to ride"; // weak
@@ -51,7 +55,7 @@ int   licenseScreen(int useWeapons_mal)
   signed int v30; // edx@49
   char *v31; // edi@50
   int v32; // ebp@74
-  char v33; // al@74
+  char *v33; // al@74
   char *v34; // ecx@74
   int v35; // ebx@77
   char *v36; // eax@77
@@ -81,7 +85,7 @@ int   licenseScreen(int useWeapons_mal)
   
   char v61[120]; // [sp+3Ch] [bp-Ch]@16
   char* DstBuf; // [sp+30h] [bp-18h]@9
-  DstBuf = malloc(0x1000);
+  DstBuf = (char*)malloc(0x1000);
   extractFromBpa("MENU.BPA", tsahpeBpk_45EB5C, (int)"licence3.bpk");
   copyImageToBuffer((int)tsahpeBpk_45EB5C, (int)textureTemp);
   carAnimCurrentFrame_45FBA0 = 0;
@@ -101,12 +105,12 @@ int   licenseScreen(int useWeapons_mal)
     drawImageWithPosition((int)textureTemp, 530, 249, (int)((char *)screenBuffer + 71743));
   else
     drawImageWithPosition((int)textureTemp, 530, 178, (int)((char *)screenBuffer + 71743));
-  drawImageWithPosition2((int)fasesel1Bpk, 68, 102, (int)((char *)screenBuffer + 110168));
+  drawImageWithPosition2((int)graphics2.fasesel1Bpk, 68, 102, (int)((char *)screenBuffer + 110168));
   drawImageWithPosition2((int)graphicsGeneral.face01Bpk, 64, 64, (int)((char *)screenBuffer + 122330));
   if (useWeapons_mal)
   {
-    drawTextWithFont((int)fbig3bBpk, (int)&bigLetterSpacing_445848, getLanguageEntry("yes"), 202463);
-    drawTextWithFont((int)fbig3bBpk, (int)&bigLetterSpacing_445848, getLanguageEntry("no"), 202633);
+    drawTextWithFont((int)graphics2.fbig3bBpk, (int)&bigLetterSpacing_445848, getLanguageEntry("yes"), 202463);
+    drawTextWithFont((int)graphics2.fbig3bBpk, (int)&bigLetterSpacing_445848, getLanguageEntry("no"), 202633);
     v5 = 0;
     v6 = 186240;
     do
@@ -120,15 +124,13 @@ int   licenseScreen(int useWeapons_mal)
   }
   drawImageWithPosition2((int)carbas2Bpk, 96, 96, (int)((char *)screenBuffer + 113119));
   drawImageWithPosition2((int)carnameBpk, 96, 16, (int)((char *)screenBuffer + 113119));
-  itoa(dword_44DF5C, &DstBuf, 10);
-
+  _itoa(cars[0].cost, &DstBuf, 10);
 
    v8 = strlen(&DstBuf) + 1;
 
 	v9 = malloc(v3); //coste + el $
 	strcpy(v9,"$"); /* copy name into the new var */
 	strcat(v9, &DstBuf);
-
 
   v11 = getBoxTextOffset(v9);
   drawInGamePrices(v9, v11 + 165599);
@@ -146,8 +148,8 @@ int   licenseScreen(int useWeapons_mal)
   sub_418090();
   //v17 = &byte_460840[108 * driverId];
   //v18 = &byte_460840[108 * driverId];
-  v17 = &drivers[driverId];
-  v18 = &drivers[driverId];
+  v17 = (char *)&drivers[driverId];
+  v18 = (char *)&drivers[driverId];
 
  
   do
@@ -162,7 +164,7 @@ int   licenseScreen(int useWeapons_mal)
   {
     loadMenuSoundEffect(1u, 25, 0, configuration.effectsVolume, dword_445194);
     v47 = v61;
-    v48 = &drivers[driverId - (signed int)v61];
+    v48 = (char *)&drivers[driverId - (signed int)v61];
     do
     {
       v49 = *v47;
@@ -185,13 +187,13 @@ int   licenseScreen(int useWeapons_mal)
   if ( !useWeapons_mal)
     goto LABEL_74;
   drawImageWithPosition((int)textureTemp, 530, 249, (int)((char *)screenBuffer + 71743));
-  drawTextWithFont((int)graphicsGeneral.fbig3aBpk, (int)&bigLetterSpacing_445848,&drivers[driverId], 133293);
+  drawTextWithFont((int)graphicsGeneral.fbig3aBpk, (int)&bigLetterSpacing_445848,(char *)&drivers[driverId], 133293);
   //drawTextWithFont((int)graphicsGeneral.fbig3aBpk, (int)&bigLetterSpacing_445848, &byte_460840[108 * driverId], 133293);
-  drawImageWithPosition2((int)fasesel1Bpk, 68, 102, (int)((char *)screenBuffer + 110168));
+  drawImageWithPosition2((int)graphics2.fasesel1Bpk, 68, 102, (int)((char *)screenBuffer + 110168));
   drawImageWithPosition2((int)*(&graphicsGeneral.face01Bpk + drivers[driverId].face), 64, 64, (int)((char *)screenBuffer + 122330));
   drawImageWithPosition2((int)carbas2Bpk, 96, 96, (int)((char *)screenBuffer + 113119));
   drawImageWithPosition2((int)carnameBpk, 96, 16, (int)((char *)screenBuffer + 113119));
-  itoa(dword_44DF5C, &DstBuf, 10);
+  _itoa(cars[0].cost, &DstBuf, 10);
   v59 = 36;
   v21 = strlen(&DstBuf) + 1;
   v22 = (char *)&v58 + 3;
@@ -233,7 +235,7 @@ int   licenseScreen(int useWeapons_mal)
   v28 = configuration.difficulty;
   if (configuration.difficulty )
   {
-    drawTextWithFont((int)fbig3bBpk, (int)&bigLetterSpacing_445848, getLanguageEntry(aSpeedMakesMeDi), 138379);
+    drawTextWithFont((int)graphics2.fbig3bBpk, (int)&bigLetterSpacing_445848, getLanguageEntry(aSpeedMakesMeDi), 138379);
     if ( v28 == 1 )
     {
       drawTextWithFont((int)graphicsGeneral.fbig3aBpk, (int)&bigLetterSpacing_445848, getLanguageEntry(aILiveToRide), 156299);
@@ -244,7 +246,7 @@ int   licenseScreen(int useWeapons_mal)
   {
     drawTextWithFont((int)graphicsGeneral.fbig3aBpk, (int)&bigLetterSpacing_445848, getLanguageEntry(aSpeedMakesMeDi), 138379);
   }
-  drawTextWithFont((int)fbig3bBpk, (int)&bigLetterSpacing_445848, aILiveToRide, 156299);
+  drawTextWithFont((int)graphics2.fbig3bBpk, (int)&bigLetterSpacing_445848, aILiveToRide, 156299);
   if ( v28 != 2 )
   {
 LABEL_37:
@@ -252,7 +254,7 @@ LABEL_37:
 	  //v55 = COERCE_FLOAT(aPetrolInMyVein);
    // v55 =  *((float*)aPetrolInMyVein);
     v53 = (int)&bigLetterSpacing_445848;
-    v51 = fbig3bBpk;
+    v51 = graphics2.fbig3bBpk;
     goto LABEL_38;
   }
   //v55 = COERCE_FLOAT(aPetrolInMyVein);
@@ -293,7 +295,7 @@ LABEL_49:
             while ( v30 < 144640 );
             if ( v28 )
             {
-              drawTextWithFont((int)fbig3bBpk, (int)&bigLetterSpacing_445848, getLanguageEntry(aSpeedMakesMeDi), 138379);
+              drawTextWithFont((int)graphics2.fbig3bBpk, (int)&bigLetterSpacing_445848, getLanguageEntry(aSpeedMakesMeDi), 138379);
               if ( v28 == 1 )
               {
                 drawTextWithFont((int)graphicsGeneral.fbig3aBpk, (int)&bigLetterSpacing_445848, getLanguageEntry(aILiveToRide), 156299);
@@ -304,7 +306,7 @@ LABEL_49:
             {
               drawTextWithFont((int)graphicsGeneral.fbig3aBpk, (int)&bigLetterSpacing_445848,getLanguageEntry( aSpeedMakesMeDi), 138379);
             }
-            drawTextWithFont((int)fbig3bBpk, (int)&bigLetterSpacing_445848, getLanguageEntry(aILiveToRide), 156299);
+            drawTextWithFont((int)graphics2.fbig3bBpk, (int)&bigLetterSpacing_445848, getLanguageEntry(aILiveToRide), 156299);
             if ( v28 == 2 )
             {
 				// v56 =  *((float*)aPetrolInMyVein);
@@ -321,7 +323,7 @@ LABEL_57:
 			// v56 =  *((float*)aPetrolInMyVein);
             //v56 = COERCE_FLOAT(aPetrolInMyVein);
             v54 = (int)&bigLetterSpacing_445848;
-            v52 = fbig3bBpk;
+            v52 = graphics2.fbig3bBpk;
             goto LABEL_58;
           }
         }
@@ -364,7 +366,7 @@ LABEL_73:
   v20 = driverId;
 LABEL_74:
   strcpy(drivers[v20].name ,v17);
-  strlwr(drivers[v20].name);
+  _strlwr(drivers[v20].name);
   //strlwr(&byte_460840[108 * v20]);
   v32 = 27 * driverId;
   //v33 = byte_460840[108 * driverId];

@@ -7,10 +7,8 @@
 #include "dr.h"
 #include "cars.h"
 
-
  Driver drivers[20];
  int driverId; // weak
-
 
  char driverNames[20][20] = { "SAM SPEED",
 "JANE HONDA",
@@ -33,7 +31,6 @@
 "BOGUS BILL",
 "FARMER TED" };
 
-
 char * getDifficultyText(int difficulty) {
 	char * EASY_DIFFICULTY_TEXT = "SPEED MAKES ME DIZZY";
 	char * MEDIUM_DIFFICULTY_TEXT = "I LIVE TO RIDE";
@@ -41,14 +38,16 @@ char * getDifficultyText(int difficulty) {
 	if (difficulty == 0) {
 		return EASY_DIFFICULTY_TEXT;
 	}
-	if (difficulty == 1) {
+	else if (difficulty == 1) {
 		return MEDIUM_DIFFICULTY_TEXT;
 	}
-	if (difficulty == 2) {
+	else if (difficulty == 2) {
 		return HARD_DIFFICULTY_TEXT;
 	}
+	else{
+		return EASY_DIFFICULTY_TEXT;
+	}
 }
-
 
 int getMaxDriverPoints(int userDriverId) {
 	int maxDriverPoints = 0;
@@ -339,7 +338,6 @@ int initDrivers()
   dword_460F88 = 0;
   dword_460FF4 = 0;
   dword_461060 = 0;*/
-
 
   
   /*v1 = 18;

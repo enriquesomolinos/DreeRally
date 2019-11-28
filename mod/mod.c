@@ -7,7 +7,6 @@
 
 #include "../util/hash.h"
 
-
 hash_t *modEntries;
 
 char * readlineConfig(FILE *fp, char *buffer)
@@ -58,7 +57,7 @@ int initMod() {
 	   strcat(completeFile,"/config.txt");
 		fp = fopen(completeFile, "r");
 	}else
-		return;
+		return 0;
 	while ((s = readlineConfig(fp, 0)) != NULL)
 	{
 		
@@ -72,6 +71,7 @@ int initMod() {
 		//free(s);		
 	}
 	fclose(fp);
+	return 1;
 }
 
 char * getModCharEntry(char * modEntryKey, char * fallbackValue) {
@@ -89,7 +89,6 @@ int getModIntEntry(char * modEntryKey, int fallbackValue) {
 	char * result;
 	if(!mainArgs.mod)
 		return fallbackValue ;
-
 
 	result = (char *)hash_lookup(modEntries, (modEntryKey));
 	if(result == NULL)

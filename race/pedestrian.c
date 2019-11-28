@@ -45,7 +45,6 @@ char   drawPedestrian_43AF30(int screenOffset, int pedestrianbpkOffset, int size
   return result;
 }
 
-
 //----- (004111F0) --------------------------------------------------------
 char drawShotPedestrian_4111F0()
 {

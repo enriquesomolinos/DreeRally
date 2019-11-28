@@ -7,13 +7,10 @@
 #include "../dr.h"
 #include "../config.h"
 
-
-
-
 void * unk_463E20; // weak
 
 //----- (004027B0) --------------------------------------------------------
-int   extractFromBpa(char *bpaFilename, void *dest, char * filename)
+int   extractFromBpa(char* bpaFilename, void *dest, char* filename)
 {
   int v3; // ebx@1
   FILE *bpafile; // esi@1
@@ -55,7 +52,7 @@ int   extractFromBpa(char *bpaFilename, void *dest, char * filename)
 	  strcat(completeFile, mainArgs.mod);
 	   strcat(completeFile,"/files/");
 	   strcpy(Str, filename);
-	   strupr(Str);
+	   _strupr(Str);
 	   strcat(completeFile,Str);
 	  if (	extractedFile=fopen(completeFile, "rb") ) { // file does not exist
 
@@ -65,7 +62,6 @@ int   extractFromBpa(char *bpaFilename, void *dest, char * filename)
 					destStream = malloc(fileSize * sizeof(char));
 					//extractedFile=fopen(filename, "rb");
 				  fseek(extractedFile, 0, SEEK_SET);
-
 
 				  fread(dest, 1u,fileSize, extractedFile);
 				//  dest = destStream;
@@ -80,7 +76,7 @@ int   extractFromBpa(char *bpaFilename, void *dest, char * filename)
   fread(buffer, 4, 1, bpafile);
   fread(fat, 0x10EF, 1, bpafile);
   fclose(bpafile);
-  strupr(Str);
+  _strupr(Str);
   v5 = Str;
   v6 = 0;
   do
@@ -236,7 +232,7 @@ int   getFileSizeFromBpa(char *bpaFile, char * filename)
   unk_463E20 =malloc(0x10EFu);
   fread(unk_463E20, 0x10EFu, 1u, v3);
   fclose(v3);
-  strupr(fileNameUpper);
+  _strupr(fileNameUpper);
   //aqui se codifica para leer la cabecera
   for ( i = 0; i < (signed int)strlen(fileNameUpper); ++i )
 	  fileNameUpper[i] += 3 * (39 - i);
@@ -342,5 +338,4 @@ int   openPalFromBpa(char * filename)
   
   return result;
 }
-
 

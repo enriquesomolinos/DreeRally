@@ -1,0 +1,2 @@
+int apogeeScreen();
+int showStartScreen();

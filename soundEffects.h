@@ -54,7 +54,6 @@ typedef enum {
 
 }GeneralEffects;
 
-
 typedef enum {
 	ENDANI_E_VICTORY = 0x1,
 	ENDANI_E_DRIVEBY2 = 0x2,
