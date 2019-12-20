@@ -1,5 +1,5 @@
 
-#include <windows.h>
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -10,8 +10,8 @@
 #include "graphics.h"
 #include "imageUtil.h"
 #include "drivers.h"
-
-
+#include "mod/mod.h"
+#include "i18n/i18n.h"
 
 const  int EASY_RACE=0;
  const int MEDIUM_RACE=1;
@@ -21,7 +21,7 @@ extern const int NUM_RACES = 3;
 int racePositions[3][4];//para cada carrera 4 participantes ordenados por posicion 
 
 //----- (00429280) --------------------------------------------------------
-void __fastcall easyRaceResults(int ecx0, int a2, int a1)
+void   easyRaceResults(int ecx0, int a2, int a1)
 {
   signed int v3; // edi@37
   int v4; // eax@39
@@ -33,7 +33,7 @@ void __fastcall easyRaceResults(int ecx0, int a2, int a1)
   int v10; // ecx@54
   int v11; // ST24_4@57
   int v12; // [sp+0h] [bp-4h]@1
-
+  char res[10] = "";
   v12 = ecx0;
   
   if ( selectedRace_462CE8 )
@@ -119,7 +119,7 @@ void __fastcall easyRaceResults(int ecx0, int a2, int a1)
   {
     sub_424420();
     drawImageWithPosition((int)graphicsGeneral.raceeasBpk, 272, 20, (int)((char *)screenBuffer + 54114));
-    drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&letterSpacing_4458B0, "Easy Race Results", 55440);
+    drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&letterSpacing_4458B0, getLanguageEntry("Easy Race Results"), 55440);
     drawRightPositions(4, (int)&v12);
   }
   v3 = 0;
@@ -127,7 +127,7 @@ void __fastcall easyRaceResults(int ecx0, int a2, int a1)
   {
     if ( !a1 )
     {
-      v4 = *((byte *)&v12 + v3);
+      v4 = *((BYTE *)&v12 + v3);
       if (drivers[v4].damage != 100 )
 		  //if (dword_46084C[27 * v4] != 100)
       {
@@ -147,9 +147,12 @@ void __fastcall easyRaceResults(int ecx0, int a2, int a1)
         {
           v8 = 12160 * BYTE1(v12) + 57190;
           v9 = (int)graphicsGeneral.fmed1aBpk;
-          drivers[v7].points += 2;
+		  drivers[v7].points += getModIntEntry("RACE_EASY_SECOND_POSITION_POINTS", 2);
 		  //dword_460884[v7] += 2;
-          drawTextWithFont(v9, (int)&unk_445928, "+2", v8);
+		  memset(res,0,strlen(res));
+		  strcat(res,"+");
+		  strcat(res, getModCharEntry("RACE_EASY_SECOND_POSITION_POINTS", "2"));
+          drawTextWithFont(v9, (int)&unk_445928, res, v8);
         }
       }
       else if ( v3 == 2 )
@@ -160,9 +163,12 @@ void __fastcall easyRaceResults(int ecx0, int a2, int a1)
 	//if ( dword_46084C[v5] != 100 && (BYTE2(v12) != driverId || lapped_456BC0 != 1) )
         {
           v6 = 12160 * BYTE2(v12) + 57190;
-          ++drivers[v5].points;
+          drivers[v5].points+=getModIntEntry("RACE_EASY_THIRD_POSITION_POINTS", 1);
 		  // ++dword_460884[v5];
-          drawTextWithFont((int)graphicsGeneral.fmed1aBpk, (int)&unk_445928, "+1", v6);
+		  memset(res,0,strlen(res));
+		  strcat(res,"+");
+		  strcat(res,  getModCharEntry("RACE_EASY_THIRD_POSITION_POINTS", "1"));
+          drawTextWithFont((int)graphicsGeneral.fmed1aBpk, (int)&unk_445928, res, v6);
         }
       }
     }
@@ -174,9 +180,12 @@ void __fastcall easyRaceResults(int ecx0, int a2, int a1)
 		  //if (dword_46084C[v10] != 100 && ((unsigned __int8)v12 != driverId || lapped_456BC0 != 1))
       {
         v11 = 12160 * (unsigned __int8)v12 + 57190;
-       drivers[v10].points += 3;
+       drivers[v10].points += getModIntEntry("RACE_EASY_FIRST_POSITION_POINTS", 3);
 		//dword_460884[v10] += 3;
-        drawTextWithFont((int)graphicsGeneral.fmed1aBpk, (int)&unk_445928, "+3", v11);
+	    memset(res,0,strlen(res));
+		  strcat(res,"+");
+		strcat(res, getModCharEntry("RACE_EASY_FIRST_POSITION_POINTS", "3"));
+        drawTextWithFont((int)graphicsGeneral.fmed1aBpk, (int)&unk_445928, res, v11);
       }
     }
     ++v3;
@@ -185,12 +194,12 @@ void __fastcall easyRaceResults(int ecx0, int a2, int a1)
   if ( a1 )
     return;
 LABEL_60:
-  drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&letterSpacing_4458B0, "Press any key to continue...", 289646);
+  drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&letterSpacing_4458B0, getLanguageEntry("Press any key to continue..."), 289646);
   refreshAllScreen();
 }
 
 //----- (004295E0) --------------------------------------------------------
-void __fastcall mediumRaceResults(int ecx0, int a2, int a1)
+void   mediumRaceResults(int ecx0, int a2, int a1)
 {
   signed int v3; // edi@37
   int v4; // eax@39
@@ -207,7 +216,7 @@ void __fastcall mediumRaceResults(int ecx0, int a2, int a1)
   int v15; // ST20_4@61
   int v16; // eax@61
   int v17; // [sp+0h] [bp-4h]@1
-
+  char res[10]="";
   v17 = ecx0;
   if ( selectedRace_462CE8 == 1 )
   {
@@ -290,7 +299,7 @@ void __fastcall mediumRaceResults(int ecx0, int a2, int a1)
   {
     sub_424420();
     drawImageWithPosition((int)graphicsGeneral.racemedBpk, 272, 20, (int)((char *)screenBuffer + 54114));
-    drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&letterSpacing_4458B0, "Medium Race Results", 55440);
+    drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&letterSpacing_4458B0, getLanguageEntry("Medium Race Results"), 55440);
     drawRightPositions(4, (int)&v17);
   }
   v3 = 0;
@@ -298,7 +307,7 @@ void __fastcall mediumRaceResults(int ecx0, int a2, int a1)
   {
     if ( !a1 )
 	{
-      v4 = *((byte *)&v17 + v3);
+      v4 = *((BYTE *)&v17 + v3);
       if (drivers[v4].damage != 100 )
       {
         if ( v4 == driverId && lapped_456BC0 == 1 )
@@ -315,8 +324,11 @@ void __fastcall mediumRaceResults(int ecx0, int a2, int a1)
         {
           v8 = 12160 * BYTE1(v17) + 57190;
           v9 = (int)graphicsGeneral.fmed1aBpk;
-		  drivers[v7].points += 3;
-          drawTextWithFont(v9, (int)&unk_445928, "+3", v8);
+		  drivers[v7].points += getModIntEntry("RACE_MEDIUM_SECOND_POSITION_POINTS", 3);
+		  memset(res,0,strlen(res));
+		  strcat(res,"+");
+		  strcat(res,  getModCharEntry("RACE_MEDIUM_SECOND_POSITION_POINTS", "3"));
+          drawTextWithFont(v9, (int)&unk_445928,res, v8);
         }
       }
       else if ( v3 == 2 )
@@ -325,8 +337,11 @@ void __fastcall mediumRaceResults(int ecx0, int a2, int a1)
         if (drivers[v5].damage != 100 && (BYTE2(v17) != driverId || lapped_456BC0 != 1) )
         {
           v6 = 12160 * BYTE2(v17) + 57190;
-          ++drivers[v5].points;
-          drawTextWithFont((int)graphicsGeneral.fmed1aBpk, (int)&unk_445928, "+1", v6);
+          drivers[v5].points+=getModIntEntry("RACE_MEDIUM_THIRD_POSITION_POINTS", 1);
+		  memset(res,0,strlen(res));
+		  strcat(res,"+");
+		  strcat(res,  getModCharEntry("RACE_MEDIUM_THIRD_POSITION_POINTS", "1"));
+          drawTextWithFont((int)graphicsGeneral.fmed1aBpk, (int)&unk_445928,res , v6);
         }
       }
     }
@@ -336,8 +351,11 @@ void __fastcall mediumRaceResults(int ecx0, int a2, int a1)
       if (drivers[v10].damage != 100 && ((unsigned __int8)v17 != driverId || lapped_456BC0 != 1) )
       {
         v11 = 12160 * (unsigned __int8)v17 + 57190;
-		drivers[v10].points += 5;
-        drawTextWithFont((int)graphicsGeneral.fmed1aBpk, (int)&unk_445928, "+5", v11);
+		drivers[v10].points += getModIntEntry("RACE_MEDIUM_FIRST_POSITION_POINTS", 5);
+		memset(res,0,strlen(res));
+		  strcat(res,"+");
+		strcat(res,  getModCharEntry("RACE_MEDIUM_FIRST_POSITION_POINTS", "5"));
+        drawTextWithFont((int)graphicsGeneral.fmed1aBpk, (int)&unk_445928, res, v11);
       }
     }
     ++v3;
@@ -362,9 +380,8 @@ LABEL_60:
   refreshAllScreen();
 }
 
-
 //----- (00429990) --------------------------------------------------------
-void __fastcall hardRaceResults(int ecx0, int a2, int a1)
+void   hardRaceResults(int ecx0, int a2, int a1)
 {
   signed int v3; // edi@37
   int v4; // eax@39
@@ -381,7 +398,7 @@ void __fastcall hardRaceResults(int ecx0, int a2, int a1)
   int v15; // ST18_4@61
   int v16; // eax@61
   int v17; // [sp+0h] [bp-4h]@1
-
+  char res[10]="";
   v17 = ecx0;
   if ( selectedRace_462CE8 == 2 )
   {
@@ -465,7 +482,7 @@ void __fastcall hardRaceResults(int ecx0, int a2, int a1)
   {
     sub_424420();
     drawImageWithPosition((int)graphicsGeneral.raceharBpk, 272, 20, (int)((char *)screenBuffer + 54114));
-    drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&letterSpacing_4458B0, "Hard Race Results", 55440);
+    drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&letterSpacing_4458B0, getLanguageEntry("Hard Race Results"), 55440);
     drawRightPositions(4, (int)&v17);
   }
   v3 = 0;
@@ -473,7 +490,7 @@ void __fastcall hardRaceResults(int ecx0, int a2, int a1)
   {
     if ( !a1 )
     {
-      v4 = *((byte *)&v17 + v3);
+      v4 = *((BYTE *)&v17 + v3);
       if (drivers[v4].damage != 100 )
       {
         if ( v4 == driverId && lapped_456BC0 == 1 )
@@ -490,8 +507,11 @@ void __fastcall hardRaceResults(int ecx0, int a2, int a1)
         {
           v8 = 12160 * BYTE1(v17) + 57190;
           v9 = (int)graphicsGeneral.fmed1aBpk;
-		  drivers[v7].points += 7;
-          drawTextWithFont(v9, (int)&unk_445928, "+7", v8);
+		  drivers[v7].points += getModIntEntry("RACE_HARD_SECOND_POSITION_POINTS", 7);
+		  memset(res,0,strlen(res));
+		  strcat(res,"+");
+		  strcat(res, getModCharEntry("RACE_HARD_SECOND_POSITION_POINTS", "7"));
+          drawTextWithFont(v9, (int)&unk_445928,res, v8);
         }
       }
       else if ( v3 == 2 )
@@ -500,8 +520,11 @@ void __fastcall hardRaceResults(int ecx0, int a2, int a1)
         if (drivers[v5].damage != 100 && (BYTE2(v17) != driverId || lapped_456BC0 != 1) )
         {
           v6 = 12160 * BYTE2(v17) + 57190;
-		  drivers[v5].points += 4;
-          drawTextWithFont((int)graphicsGeneral.fmed1aBpk, (int)&unk_445928, "+4", v6);
+		  drivers[v5].points += getModIntEntry("RACE_HARD_THIRD_POSITION_POINTS", 4);
+		  memset(res,0,strlen(res));
+		  strcat(res,"+");
+		  strcat(res, getModCharEntry("RACE_HARD_THIRD_POSITION_POINTS", "4"));
+          drawTextWithFont((int)graphicsGeneral.fmed1aBpk, (int)&unk_445928, res, v6);
         }
       }
     }
@@ -511,8 +534,11 @@ void __fastcall hardRaceResults(int ecx0, int a2, int a1)
       if (drivers[v10].damage != 100 && ((unsigned __int8)v17 != driverId || lapped_456BC0 != 1) )
       {
         v11 = 12160 * (unsigned __int8)v17 + 57190;
-		drivers[v10].points += 10;
-        drawTextWithFont((int)graphicsGeneral.fmed1aBpk, (int)&unk_445928, "+10", v11);
+		drivers[v10].points += getModIntEntry("RACE_HARD_FIRST_POSITION_POINTS", 10);
+		memset(res,0,strlen(res));
+		  strcat(res,"+");
+		strcat(res, getModCharEntry("RACE_HARD_FIRST_POSITION_POINTS", "10"));
+        drawTextWithFont((int)graphicsGeneral.fmed1aBpk, (int)&unk_445928, res, v11);
       }
     }
     ++v3;
@@ -537,3 +563,51 @@ LABEL_60:
   refreshAllScreen();
 }
 
+//----- (00424420) --------------------------------------------------------
+int sub_424420()
+{
+  signed int v0; // ecx@1
+  int v1; // eax@3
+  int v2; // edi@3
+  int v3; // ebp@3
+  int result; // eax@3
+  int v5; // esi@6
+  int v6; // ebx@6
+  char *DstBuf=malloc(100); // [sp+0h] [bp-Ch]@6
+  int v8; // [sp+4h] [bp-8h]@1
+  int v9; // [sp+8h] [bp-4h]@3
+
+  v0 = 4;
+  v8 = 4;
+  if ( isMultiplayerGame )
+  {
+    v8 = raceDrivers_456758;
+    v0 = raceDrivers_456758;
+  }
+  v1 = (350 - 79 * v0) / (v0 + 1);
+  v2 = 0;
+  v3 = v1 + 108;
+  result = v1 + 79;
+  v9 = result;
+  if ( v0 > 0 )
+  {
+    while ( 1 )
+    {
+      v5 = 640 * (v3 + v2 * result);
+      drawImageWithPosition((int)graphicsGeneral.placingBpk, 202, 74, (int)((char *)screenBuffer + v5 + 389));
+      v6 = v2 + 1;
+      _itoa(v2 + 1, DstBuf, 10);
+      if ( v2 )
+        drawTextWithFont((int)graphicsGeneral.fbig3aBpk, (int)&bigLetterSpacing_445848, DstBuf, v5 + 4876);
+      else
+        drawTextWithFont((int)graphicsGeneral.fbig3aBpk, (int)&bigLetterSpacing_445848, DstBuf, 640 * v3 + 4881);
+      result = v8;
+      ++v2;
+      if ( v6 >= v8 )
+        break;
+      result = v9;
+    }
+  }
+  return result;
+}
+// 45EA04: using guessed type int isMultiplayerGame;

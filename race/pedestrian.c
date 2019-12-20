@@ -1,7 +1,7 @@
 #include "pedestrian.h"
 #include "../defs.h"
 #include "../dr.h"
-#include <windows.h>
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -10,7 +10,7 @@
 Pedestrian pedestrian_479AA4[20];
 
 //----- (0043AF30) --------------------------------------------------------
-char __cdecl drawPedestrian_43AF30(int screenOffset, int pedestrianbpkOffset, int sizeToPaint)
+char   drawPedestrian_43AF30(int screenOffset, int pedestrianbpkOffset, int sizeToPaint)
 {
   char result; // al@1
   int v4; // edx@2
@@ -29,9 +29,9 @@ char __cdecl drawPedestrian_43AF30(int screenOffset, int pedestrianbpkOffset, in
       v7 = 16;
       do
       {
-        result = *(byte *)v4;
-        if ( *(byte *)v4 )
-          *(byte *)v5 = result;
+        result = *(BYTE *)v4;
+        if ( *(BYTE *)v4 )
+          *(BYTE *)v5 = result;
         ++v4;
         ++v5;
         --v7;
@@ -44,7 +44,6 @@ char __cdecl drawPedestrian_43AF30(int screenOffset, int pedestrianbpkOffset, in
   }
   return result;
 }
-
 
 //----- (004111F0) --------------------------------------------------------
 char drawShotPedestrian_4111F0()

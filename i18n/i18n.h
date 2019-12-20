@@ -1,9 +1,6 @@
-typedef enum  {
-	 LANGUAGE_ENGLISH = 0,
-	 LANGUAGE_SPANISH = 1
-
-}Languages;
+#include <stdio.h>
 
 
-int initI18n(int language);
+int initI18n();
 char * getLanguageEntry(char* languageEntry);
+char * readline(FILE *fp, char *buffer);

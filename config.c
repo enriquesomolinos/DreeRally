@@ -1,63 +1,56 @@
 
-#define _CRT_NONSTDC_NO_WARNINGS
-#define  _CRT_SECURE_NO_WARNINGS
-
-
-#pragma warning(push)
-#pragma warning(disable: warning-code) //4996 for _CRT_SECURE_NO_WARNINGS equivalent
-// deprecated code here
 #include <stdio.h>
-#pragma warning(pop)
-
+#include <stdlib.h>
 #include "config.h"
 #include "defs.h"
 #include <string.h>
-#include "hof/hallOfFame.h"
+#include "ui/hallOfFame.h"
 #include "i18n/i18n.h"
 
-
-
-
-MainArgs mainArgs = { 0,1,1,1,1,NULL };
+MainArgs mainArgs = { 0,1,1,1,1,NULL,NULL };
 
 Configuration configuration;
-
 
 int checkArgs(char * args)
 {
 	int result = 0;
 	char delim[] = "=";
 	char *s;
-	
-	if (strstr(args, "-nosound"))
-		mainArgs.configNoSound = 0;
-	if (strstr(args, "-noeffect"))
-		mainArgs.configNoSoundEffect = 0;
-	if (strstr(args, "-gl"))
-		mainArgs.configGL = 0;
-	if (strstr(args, "-smooth"))
-		mainArgs.configSmooth = 0;
-	if (strstr(args, "-lang=")){
-		s = strstr(args, "-lang=");
-		s = strstr(args, "=");
-		mainArgs.language = &s[1];
+	char * pch;
 
-	}
-	result = strstr(args, "-window");
-	if (result)
-		
-	return result;
+	if(args !=NULL){
+		if (strstr(args, "-nosound"))
+			mainArgs.configNoSound = 0;
+		if (strstr(args, "-noeffect"))
+			mainArgs.configNoSoundEffect = 0;
+		if (strstr(args, "-gl"))
+			mainArgs.configGL = 0;
+		if (strstr(args, "-smooth"))
+			mainArgs.configSmooth = 0;
+		if (strstr(args, "-lang=")){
+			s = strstr(args, "-lang=");
+			pch = strtok (s," ");
+			mainArgs.language = &pch[6];
+			pch=NULL;
 
+		}
+		if (strstr(args, "-mod=")){
+			s = strstr(args, "-mod=");
+			pch = strtok (s," ");
+			mainArgs.mod = &pch[5];
+			pch=NULL;
+		}
+		result = strstr(args, "-window");
+		if (result)
+			return result;
+	}	
+	return 1;
 }
 
 char byte_45FB6C; // weak
 char byte_45FBF0; // weak
 char byte_463D9C; // weak
 __int16 word_462D54; // weak
-
-
-
-
 
 char loadConfig()
 {
@@ -106,9 +99,9 @@ char loadConfig()
 		configuration.dword_45FB68 = *(_DWORD *)(v4 + 66);
 		configuration.dword_45DC40 = *(_DWORD *)(v4 + 70);
 		configuration.dword_45DC1C = *(_DWORD *)(v4 + 74);
-		configuration.circuitRecords= malloc(0xA20u);
+		configuration.circuitRecords= (CircuitRecords *) malloc(0xA20u);
 		memcpy(configuration.circuitRecords, (const void *)(v4 + 78), 0xA20u);		
-		configuration.hallOfFameEntries = malloc(0xC8u);
+		configuration.hallOfFameEntries =(HallOfFameEntry *) malloc(0xC8u);
 		memcpy(configuration.hallOfFameEntries, (const void *)(v4 + 2670), 0xC8u);
 		configuration.accelerateKey = *(_DWORD *)(v4 + 2870);
 		configuration.brakeKey = *(_DWORD *)(v4 + 2874);
@@ -158,7 +151,6 @@ char loadConfig()
 	}
 	return 0;
 }
-
 
 //----- (004264E0) --------------------------------------------------------
 int saveConfiguration()
@@ -230,7 +222,6 @@ void *dword_45FA70; // idb
 //esto son records
 /*int dword_45F050; // idb
 int dword_45F054; // idb
-
 
 int dword_45F714; // weak
 int dword_45F740; // weak
@@ -512,14 +503,6 @@ int dword_461FA8; // weak
 int dword_461FBC; // weak
 int dword_461FD0; // weak
 int dword_461FE4; // weak*/
-
-
-
-
-
-
-
-
 
 int defaultConfig()
 {

@@ -1,4 +1,4 @@
-#pragma once
+
 
 extern int savegames_unk_446DC2;
 char  decryptByteSavegame(int a1, char a2);

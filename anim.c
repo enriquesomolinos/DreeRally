@@ -1,17 +1,15 @@
 
 
-
-#include <windows.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include "race/anim.h"
-#include "defs.h"
 #include "dr.h"
 #include "drivers.h"
 #include "cars.h"
 #include "graphics.h"
-
+#include "defs.h"
+#include "anim.h"
 
 //esto es la duracion de los frames para los coches!!!!!
 
@@ -35,7 +33,7 @@ int carAnimCurrentFrame_45FBA0; // weak
 int continueAnimCurrentFrame_4611D0; // weak
 int armourAnimCurrentFrame_461288; // weak
 int armourAnimFrameDirection_45F034; // weak
-void *anim_currentFrameData; // idb
+
 int engineAnimCurrentFrame_462D80; // weak
 //datos de los coches
 
@@ -52,7 +50,6 @@ char aASingleRevolve[33] = "A single revolver. Only [2{ tire"; // weak
 char aAnd1ArmorUpgra[24] = "and [1{ armor upgrades."; // weak
 _UNKNOWN unk_44E118; // weak
 
-
 char aNoMoreEngineUp[25] = "[NO MORE ENGINE UPGRADES"; // weak
 _UNKNOWN unk_450B10; // weak
 char aYouVeGotTheMos[34] = "You've got the most beastly motor"; // weak
@@ -60,40 +57,24 @@ char aMonsterThisVeh[32] = "monster this vehicle can carry."; // weak
 char aHearItsPowerfu[35] = "Hear its powerful & sublime sound."; // weak
 _UNKNOWN unk_450BB0; // weak
 
-char a4CylinderMotor[35] = "[4 cylinder motor - Speed: [60 mph"; // weak
+char a4CylinderMotor[35] = "[4 cylinder motor - Speed: [60 mph"; // weak    //ENGINE1
 _UNKNOWN unk_44E258; // weak
-char aSickOfHearingY[33] = "Sick of hearing your old spirit-"; // weak
+char aSickOfHearingY[33] = "Sick of hearing your old spirit-"; // weak   
 char aBurnerMoanInCo[34] = "burner moan in constant over-rev?"; // weak
 char aThisMotorIsThe[34] = "This motor is the sweet solution."; // weak
 _UNKNOWN unk_44E2F8; // weak
 
-char aNoMoreTireUpgr[23] = "[NO MORE TIRE UPGRADES"; // weak
 _UNKNOWN unk_450C00; // weak
-char aYouVeGotTheBes[32] = "You've got the best fat, sticky"; // weak
-char aTiresThisVehic[34] = "tires this vehicle can boast. You"; // weak
-char aAreInCloseTouc[34] = "are in close touch with the road."; // weak
 _UNKNOWN unk_450CA0; // weak
-char aTrackmaster155[17] = "[Trackmaster 155"; // weak
 _UNKNOWN unk_4511A0; // weak
-char aTheseWheelsWil[34] = "These wheels will let you do some"; // weak
-char aRapidFireCorne[30] = "rapid fire cornerings on that"; // weak
-char aShimmeringSilv[26] = "shimmering silver street."; // weak
 char byte_451240[720] =
 {
   '\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','[','R','o','a','d','r','u','n','n','e','r',' ','N','S',' ','1','7','5','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','W','i','t','h',' ','t','h','e','s','e',' ','f','a','t',' ','t','i','r','e','s',',',' ','y','o','u','\'','l','l',' ','s','h','o','o','t','\0','\0','\0','\0','\0','\0','f','r','o','m',' ','t','h','e',' ','s','t','a','r','t','i','n','g','-','l','i','n','e',' ','l','i','k','e',' ','a','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','b','l','o','o','d',' ','l','u','s','t','i','n','g',' ','b','u','l','l','e','t','.','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','[','S','l','i','d','e','s','t','o','p',' ','2','0','0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','T','h','e','s','e',' ','f','a','t',' ','b','o','t','t','o','m','e','d',' ','t','i','r','e','s','\'','l','l',' ','k','i','s','s','\0','\0','\0','\0','\0','\0','\0','\0','t','h','e',' ','r','o','a','d',' ','l','i','k','e',' ','c','r','a','z','y',',',' ','t','h','e','y',' ','j','u','s','t','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','c','a','n','\'','t',' ','g','e','t',' ','e','n','o','u','g','h','.',' ','T','h','e','y','\'','r','e',' ','h','o','t','.','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','[','R','a','c','e','r','-','X','2','3','0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','Z','o','r','r','o','\'','s',' ','Z','s',' ','w','e','r','e',' ','n','o','t','h','i','n','g','.',' ','C','a','r','v','e','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','y','o','u','r',' ','w','h','o','l','e',' ','s','i','g','n','a','t','u','r','e',',',' ','t','o',' ','t','h','e','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','r','a','i','n','b','o','w','-','o','i','l','e','d',' ','r','o','a','d',',',' ','d','o','i','n','g',' ','1','6','0','.','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0'
 }; // idb
-char aNoMoreArmorUpg[24] = "[NO MORE ARMOR UPGRADES"; // weak
 _UNKNOWN unk_450CF0; // weak
-char aYouGotTheBestS[34] = "You got the best shining knight's"; // weak
-char aArmorThisWarho[33] = "armor this warhorsepower chariot"; // weak
-char aCanCarryToAnyR[30] = "can carry to any road battle."; // weak
 _UNKNOWN unk_450D90; // weak
 
-char aSteelTriumphPl[23] = "[Steel Triumph Plating"; // weak
 _UNKNOWN unk_451920; // weak
-char aSteelTriumphWo[35] = "Steel Triumph won't stop the hurt,"; // weak
-char aButItJustMight[34] = "but it just might keep you in one"; // weak
-char aPieceToTheFini[26] = "piece to the finish line."; // weak
 char byte_4519C0[720] =
 {
   '\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','[','F','e','r','r','o','C','h','r','o','m','i','u','m',' ','A','r','m','o','r','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','W','h','a','t',' ','t','h','e',' ','r','i','v','a','l',' ','g','u','n','s',' ','g','i','v','e',',',' ','t','h','i','s','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','a','r','m','o','r',' ','c','a','n',' ','t','a','k','e',',',' ','b','u','t',' ','y','o','u','\'','d',' ','b','e','t','t','e','r','\0','\0','\0','\0','\0','\0','\0','\0','s','h','o','o','t',' ','b','a','c','k',',',' ','t','h','e','r','e','\'','s',' ','a',' ','l','i','m','i','t','.','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','[','T','i','t','a','n','i','u','m',' ','P','l','a','t','i','n','g','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','S','e','e',' ','t','h','i','s',' ','b','i','g',' ','g','u','n',';',' ','s','e','e',' ','t','h','i','s',' ','a','r','m','o','r','.','\0','\0','\0','\0','\0','\0','\0','[','B','A','N','G','!','{',' ','N','o','w',' ','s','e','e',' ','t','h','e',' ','a','r','m','o','r','.',' ','S','m','i','l','e',' ','t','o','\0','\0','\0','\0','\0','y','o','u','r',' ','r','e','f','l','e','c','t','i','o','n','.',' ','L','o','o','k','i','n','g',' ','g','o','o','d','.','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','[','A','c','c','e','s','t','e','e','l',' ','A','r','m','o','r','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','A','l','l',' ','b','u','t',' ','t','h','e',' ','m','o','s','t',' ','e','x','t','r','e','m','e',' ','s','h','o','t','s','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','b','o','u','n','c','e',' ','o','f','f',' ','l','i','k','e',' ','h','a','i','l',' ','o','n',' ','h','a','r','d','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','c','o','n','c','r','e','t','e','.','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0'
@@ -132,28 +113,369 @@ char byte_450E80[720] =
 {
   '\0',  '\0',  '\0',  '\0',  '\0',  '\0',  '\0',  '\0',  '\0',  '\0',  '\0',  '\0',  '\0',  '\0',  '\0',  '\0',  '\0',  '\0',  '\0',  '\0',  '\0',  '\0',  '\0',  '\0',  '\0',  '\0',  '\0',  '\0','\0',  '\0',  '\0',  '\0',  '\0',  '\0',  '\0',  '\0',  '\0',  '\0',  '\0',  '\0',  '[',  'E',  'n',  'h',  'a',  'n',  'c',  'e',  'd',  ' ',  '4',  ' ',  'c',  'y',  'l',  'i',  'n',  'd','e',  'r',  ' ',  'i',  'n',  's',  't',  'a',  'l',  'l',  'e',  'd',  '\0',  '\0',  '\0',  '\0',  '\0',  '\0',  '\0',  '\0',  '\0',  '\0',  '\0',  '\0',  '\0',  '\0',  '\0',  '\0',  '\0','\0',  '\0',  '\0',  '\0',  '\0',  '\0',  '\0',  '\0',  '\0',  '\0',  '\0',  '\0',  '\0',  '\0',  '\0',  '\0',  '\0',  '\0',  '\0',  '\0',  '\0',  '\0',  '\0',  '\0',  '\0',  '\0',  '\0','\0',  '\0',  '\0',  '\0',  '\0',  '\0',  'N',  'o',  'w',  ' ',  'a',  'n',  'y',  ' ',  'b',  'i',  't',  't',  'e',  'r',  ' ',  'r',  'e',  'g',  'r',  'e',  't',  's',  ' ',  'a',  'r','e',  ' ',  'i',  'n',  ' ',  't',  'h',  'e',  '\0',  '\0',  '\0',  '\0',  '\0',  '\0',  '\0',  'p',  'a',  's',  't',  ',',  ' ',  'j',  'u',  's',  't',  ' ',  'b',  'l',  'u',  'r','r',  'e',  'd',  ',',  ' ',  's',  'w',  'e',  'e',  't',  ' ',  's',  't',  'r',  'e',  'e',  't',  '-',  '\0',  '\0',  '\0',  '\0',  '\0',  '\0',  '\0',  'l',  'i',  'g',  'h',  't','s',  ' ',  's',  'p',  'e',  'e',  'd',  'i',  'n',  'g',  ' ',  'p',  'a',  's',  't',  ' ',  'f',  'a',  's',  't',  '.',  '\0',  '\0',  '\0',  '\0',  '\0',  '\0',  '\0',  '\0',  '\0','\0',  '\0',  '\0',  '\0',  '\0',  '\0',  '\0',  '\0',  '\0',  '\0',  '\0',  '\0',  '\0',  '\0',  '\0',  '\0',  '\0',  '\0',  '\0',  '\0',  '\0',  '\0',  '\0',  '\0',  '\0',  '\0',  '\0','\0',  '\0',  '\0',  '\0',  '\0',  '\0',  '\0',  '\0',  '\0',  '\0',  '\0',  '\0',  '\0',  '\0',  '\0',  '\0',  '\0',  '\0',  '[',  'V',  '6',  ' ',  'I',  'n',  'j',  'e',  'c',  't','i',  'o',  'n',  ' ',  'm',  'o',  't',  'o',  'r',  ' ',  'i',  'n',  's',  't',  'a',  'l',  'l',  'e',  'd',  '\0',  '\0',  '\0',  '\0',  '\0',  '\0',  '\0',  '\0',  '\0',  '\0',  '\0','\0',  '\0',  '\0',  '\0',  '\0',  '\0',  '\0',  '\0',  '\0',  '\0',  '\0',  '\0',  '\0',  '\0',  '\0',  '\0',  '\0',  '\0',  '\0',  '\0',  '\0',  '\0',  '\0',  '\0',  '\0',  '\0',  '\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','I','f',' ','s','p','e','e','d','i','n','g',' ','i','s',' ','t','h','e',' ','8','t','h',' ','d','e','a','d','l','y',' ','s','i','n',',','\0','\0','\0','\0','\0','\0','w','i','t','h',' ','t','h','i','s',' ','b','a','b','e',' ','u','n','d','e','r',' ','y','o','u','r',' ','h','o','o','d',',','\0','\0','\0','\0','\0','\0','\0','\0','\0','y','o','u',' ','a','r','e',' ','n','o','w',' ','p','a','s','t',' ','r','e','d','e','m','p','t','i','o','n','.','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','[','V','8',' ','T','u','r','b','o',' ','I','n','j','e','c','t','i','o','n','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','G','l','e','a','m','i','n','g',' ','p','i','s','t','o','n','s',' ','p','u','m','p','i','n','g',' ','i','n',' ','c','h','o','r','u','s','\0','\0','\0','\0','\0','\0','w','i','t','h',' ','y','o','u','r',' ','h','u','n','g','r','y',' ','h','e','a','r','t','.',' ','T','h','i','s',' ','s','w','e','e','t','\0','\0','\0','\0','\0','\0','s','y','m','b','i','o','s','i','s',' ','c','a','n',' ','c','a','u','s','e',' ','a','d','d','i','c','t','i','o','n','.','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0'
 }; // idb
-char aTrackmaster1_0[24] = "[Trackmaster 155 bought"; // weak
 _UNKNOWN unk_451560; // weak
-char aWarp9Captain_N[34] = "Warp 9, Captain. No problems with"; // weak
-char aTractionNow_Th[31] = "traction now. The finish line,"; // weak
-char aSheSClosingFas[20] = "she's closing fast."; // weak
 char byte_451600[720] =
 {
   '\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','[','R','o','a','d','r','u','n','n','e','r',' ','N','S',' ','1','7','5',' ','b','o','u','g','h','t','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','O','n',' ','t','h','e','s','e',' ','w','h','e','e','l','s',',',' ','y','o','u','r',' ','v','e','h','i','c','l','e','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','s','t','a','r','t','s',' ','l','i','k','e',' ','a',' ','n','u','c','l','e','a','r',' ','b','l','a','s','t',',',' ','a','n','d','\0','\0','\0','\0','\0','\0','\0','\0','s','t','o','p','s',' ','y','o','u',' ','l','i','k','e',' ','a',' ','c','a','r','d','i','a','c',' ','a','r','r','e','s','t','.','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','[','S','l','i','d','e','s','t','o','p',' ','2','0','0',' ','b','o','u','g','h','t','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','N','o','w',' ','f','a','s','t',' ','t','a','l','k',' ','t','o',' ','t','h','a','t',' ','a','s','p','h','a','l','t',',','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','m','o','t','o','r','m','o','u','t','h','.',' ','T','i','m','e',' ','t','o',' ','m','a','k','e',' ','s','o','m','e','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','b','e','a','u','t','i','f','u','l',' ','a','u','t','o','m','o','b','i','l','e',' ','p','o','e','t','r','y','.','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','[','R','a','c','e','r','-','X','2','3','0',' ','b','o','u','g','h','t','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','S','m','a','r','t',' ','m','o','v','e',',',' ','m','o','t','o','r','m','a','n','.',' ','N','o','w',' ','g','e','t',' ','o','u','t','\0','\0','\0','\0','\0','\0','\0','t','h','e','r','e',',',' ','a','n','d',' ','d','o',' ','s','o','m','e',' ','d','a','s','h','i','n','g',',',' ','d','a','r','e','-','\0','\0','\0','\0','\0','\0','\0','d','e','v','i','l','i','s','h',' ','d','a','m','a','g','e','.','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0'
 }; // idb
-char aSteelTriumphBo[22] = "[Steel Triumph bought"; // weak
 _UNKNOWN unk_451CE0; // weak
-char aStraightFromTh[33] = "Straight from the best R&D Labs,"; // weak
-char aShieldingSteel[34] = "shielding Steel Triumph gives you"; // weak
-char aThatExtraEdgeY[27] = "that extra edge you crave."; // weak
 char byte_451D80[720] =
 {
   '\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','[','F','e','r','r','o','C','h','r','o','m','i','u','m',' ','A','r','m','o','r','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','D','e','f','l','e','c','t','s',' ','b','u','l','l','e','t','s',',',' ','a','n','d',' ','m','o','s','t',' ','o','t','h','e','r','\0','\0','\0','\0','\0','\0','\0','\0','b','a','d',' ','s','t','u','f','f',' ','t','h','a','t',' ','g','o','e','s',' ','b','a','n','g',' ','i','n',' ','t','h','e','\0','\0','\0','\0','\0','\0','\0','\0','\0','n','i','g','h','t',',',' ','t','o','o','.','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','[','T','i','t','a','n','i','u','m',' ','P','l','a','t','e','s',' ','i','n','s','t','a','l','l','e','d','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','S','h','i','n','y',' ','h','a','r','d',' ','s','t','u','f','f','.',' ','N','o',' ','e','x','p','l','o','s','i','v','e',' ','c','a','n','\0','\0','\0','\0','\0','\0','s','h','a','d','o','w',' ','i','t','s',' ','t','a','n','n','i','n','g',' ','r','a','d','i','a','n','c','e','.',' ','D','o','n','\'','t','\0','\0','\0','\0','\0','\0','f','o','r','g','e','t',' ','y','o','u','r',' ','s','h','a','d','e','s','!','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','[','A','c','c','e','s','t','e','e','l',' ','A','r','m','o','r',' ','i','n','s','t','a','l','l','e','d','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','N','o','t',' ','e','v','e','n',' ','a',' ','s','h','e','l','l','-','s','h','o','c','k',' ','s','e','r','i','o','u','s','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','b','a','z','o','o','k','a',' ','c','a','n',' ','f','a','z','e',' ','t','h','e',' ','c','o','o','l',' ','m','i','r','r','o','r','\0','\0','\0','\0','\0','\0','\0','\0','b','e','a','u','t','y',' ','o','f',' ','A','c','c','e','s','t','e','e','l','.','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0'
 }; // idb
 _UNKNOWN unk_4433D4; // weak
 _UNKNOWN unk_445928;
+
+ShopMessages shopMessages;
+
+ShopMessages initShopMessages(){
+	shopMessages.carMessage[0].infoMessage.title="[Vagabond - Speed 55 mph";
+	shopMessages.carMessage[0].infoMessage.line1="Speed can be boosted to [60{ mph,";
+	shopMessages.carMessage[0].infoMessage.line2="A single revolver. Only [2{ tire";
+	shopMessages.carMessage[0].infoMessage.line3="and [1{ armor upgrades.";
+
+	shopMessages.carMessage[0].boughMessage.title="[Vagabound bought";
+	shopMessages.carMessage[0].boughMessage.line1="Face it, not the hottest thing";
+	shopMessages.carMessage[0].boughMessage.line2="around, but she'll get you there";
+	shopMessages.carMessage[0].boughMessage.line3="- on her own sweet time, is all.";
+
+
+	shopMessages.carMessage[1].infoMessage.title="[Dervish - Speed 65 mph";
+	shopMessages.carMessage[1].infoMessage.line1="Can dance. Speed can be boosted";
+	shopMessages.carMessage[1].infoMessage.line2="to [75{ mph, small guns. Only [2{";
+	shopMessages.carMessage[1].infoMessage.line3="tire and armor upgrades.";
+
+	shopMessages.carMessage[1].boughMessage.title="[Dervish bought";
+	shopMessages.carMessage[1].boughMessage.line1="Cybernetic readwarrior, your car";
+	shopMessages.carMessage[1].boughMessage.line2="is your body. This here is not";
+	shopMessages.carMessage[1].boughMessage.line3="just any body; it is some body.";
+
+	shopMessages.carMessage[2].infoMessage.title="[Sentinel - Speed 80 mph";
+	shopMessages.carMessage[2].infoMessage.line1="Vigilant. Speed can be boosted to";
+	shopMessages.carMessage[2].infoMessage.line2="[90{ mph. Medium guns. Just [3{ tire";
+	shopMessages.carMessage[2].infoMessage.line3="and [2{ armor upgrades.";
+
+	shopMessages.carMessage[2].boughMessage.title="[Sentinel bought";
+	shopMessages.carMessage[2].boughMessage.line1="This is just waht you need to rise";
+	shopMessages.carMessage[2].boughMessage.line2="in the octane octave of this gas-";
+	shopMessages.carMessage[2].boughMessage.line3="pedal gospel.";
+
+	shopMessages.carMessage[3].infoMessage.title="[Shrieker - Speed 90 mph";
+	shopMessages.carMessage[3].infoMessage.line1="Roaring. Speed can be boosted to";
+	shopMessages.carMessage[3].infoMessage.line2="[110{ mph. Heavy duty guns. up to";
+	shopMessages.carMessage[3].infoMessage.line3="[3{ tire & armor upgrades.";
+
+	shopMessages.carMessage[3].boughMessage.title="[Shrieker bought";
+	shopMessages.carMessage[3].boughMessage.line1="A racing-car body that matches your";
+	shopMessages.carMessage[3].boughMessage.line2="hardened petrolhead soul in this";
+	shopMessages.carMessage[3].boughMessage.line3="exponentially accelerating equation.";
+
+	shopMessages.carMessage[4].infoMessage.title="[Wraith - Speed 115 mph";
+	shopMessages.carMessage[4].infoMessage.line1="Supernatural. Speed can be boosted";
+	shopMessages.carMessage[4].infoMessage.line2="to [130{ mph. Serious arsenal. Every";
+	shopMessages.carMessage[4].infoMessage.line3="tire fits. [3{ armour upgrades.";
+
+	shopMessages.carMessage[4].boughMessage.title="[Wraigth bought";
+	shopMessages.carMessage[4].boughMessage.line1="This, sweet driver, is the cherubim";
+	shopMessages.carMessage[4].boughMessage.line2="of cars. Only the archangel-";
+	shopMessages.carMessage[4].boughMessage.line3="automobile Deliverator shines above.";
+
+	shopMessages.carMessage[5].infoMessage.title="[Deliverator - Speed 140 mph";
+	shopMessages.carMessage[5].infoMessage.line1="Supreme. Speed can be boosted to";
+	shopMessages.carMessage[5].infoMessage.line2="[160{ mph. Armageddon's armament.";
+	shopMessages.carMessage[5].infoMessage.line3="Every tire & all armor fit.";
+
+	shopMessages.carMessage[5].boughMessage.title="[Deliverator bought";
+	shopMessages.carMessage[5].boughMessage.line1="Prince of the race! This is the";
+	shopMessages.carMessage[5].boughMessage.line2="best there is, the dream machine,";
+	shopMessages.carMessage[5].boughMessage.line3="the gold-honey chariot.";
+
+
+	shopMessages.carMessageNoWeapons[0].infoMessage.title="[Vagabond - Speed 55 mph";
+	shopMessages.carMessageNoWeapons[0].infoMessage.line1="Speed can be boosted to [60{ mph.";
+	shopMessages.carMessageNoWeapons[0].infoMessage.line2="Only [2{ tire and [1{ armor ";
+	shopMessages.carMessageNoWeapons[0].infoMessage.line3="upgrades.";
+
+	shopMessages.carMessageNoWeapons[0].boughMessage.title="[Vagabound bought";
+	shopMessages.carMessageNoWeapons[0].boughMessage.line1="Face it, not the hottest thing";
+	shopMessages.carMessageNoWeapons[0].boughMessage.line2="around, but she'll get you there";
+	shopMessages.carMessageNoWeapons[0].boughMessage.line3="- on her own sweet time, is all.";
+
+
+	shopMessages.carMessageNoWeapons[1].infoMessage.title="[Dervish - Speed 65 mph";
+	shopMessages.carMessageNoWeapons[1].infoMessage.line1="Can dance. Speed can be boosted";
+	shopMessages.carMessageNoWeapons[1].infoMessage.line2="to [75{ mph. Only [2{ tire and";
+	shopMessages.carMessageNoWeapons[1].infoMessage.line3="armor upgrades.";
+
+	shopMessages.carMessageNoWeapons[1].boughMessage.title="[Dervish bought";
+	shopMessages.carMessageNoWeapons[1].boughMessage.line1="Cybernetic readwarrior, your car";
+	shopMessages.carMessageNoWeapons[1].boughMessage.line2="is your body. This here is not";
+	shopMessages.carMessageNoWeapons[1].boughMessage.line3="just any body; it is some body.";
+
+	shopMessages.carMessageNoWeapons[2].infoMessage.title="[Sentinel - Speed 80 mph";
+	shopMessages.carMessageNoWeapons[2].infoMessage.line1="Vigilant. Speed can be boosted to";
+	shopMessages.carMessageNoWeapons[2].infoMessage.line2="[90{ mph. Just [3{ tire and [2{ armor";
+	shopMessages.carMessageNoWeapons[2].infoMessage.line3="upgrades.";
+
+	shopMessages.carMessageNoWeapons[2].boughMessage.title="[Sentinel bought";
+	shopMessages.carMessageNoWeapons[2].boughMessage.line1="This is just waht you need to rise";
+	shopMessages.carMessageNoWeapons[2].boughMessage.line2="in the octane octave of this gas-";
+	shopMessages.carMessageNoWeapons[2].boughMessage.line3="pedal gospel.";
+
+	shopMessages.carMessageNoWeapons[3].infoMessage.title="[Shrieker - Speed 90 mph";
+	shopMessages.carMessageNoWeapons[3].infoMessage.line1="Roaring. Speed can be boosted to";
+	shopMessages.carMessageNoWeapons[3].infoMessage.line2="[110{ mph. Up to [3{ tire & armor";
+	shopMessages.carMessageNoWeapons[3].infoMessage.line3="upgrades.";
+
+	shopMessages.carMessageNoWeapons[3].boughMessage.title="[Shrieker bought";
+	shopMessages.carMessageNoWeapons[3].boughMessage.line1="A racing-car body that matches your";
+	shopMessages.carMessageNoWeapons[3].boughMessage.line2="hardened petrolhead soul in this";
+	shopMessages.carMessageNoWeapons[3].boughMessage.line3="exponentially accelerating equation.";
+
+	shopMessages.carMessageNoWeapons[4].infoMessage.title="[Wraith - Speed 115 mph";
+	shopMessages.carMessageNoWeapons[4].infoMessage.line1="Supernatural. Speed can be boosted";
+	shopMessages.carMessageNoWeapons[4].infoMessage.line2="to [130{ mph. Every tire fits.";
+	shopMessages.carMessageNoWeapons[4].infoMessage.line3="[3{ armour upgrades.";
+
+	shopMessages.carMessageNoWeapons[4].boughMessage.title="[Wraigth bought";
+	shopMessages.carMessageNoWeapons[4].boughMessage.line1="This, sweet driver, is the cherubim";
+	shopMessages.carMessageNoWeapons[4].boughMessage.line2="of cars. Only the archangel-";
+	shopMessages.carMessageNoWeapons[4].boughMessage.line3="automobile Deliverator shines above.";
+
+	shopMessages.carMessageNoWeapons[5].infoMessage.title="[Deliverator - Speed 140 mph";
+	shopMessages.carMessageNoWeapons[5].infoMessage.line1="Supreme. Speed can be boosted to";
+	shopMessages.carMessageNoWeapons[5].infoMessage.line2="[160{ mph. Every tire & all armor";
+	shopMessages.carMessageNoWeapons[5].infoMessage.line3="fit.";
+
+	shopMessages.carMessageNoWeapons[5].boughMessage.title="[Deliverator bought";
+	shopMessages.carMessageNoWeapons[5].boughMessage.line1="Prince of the race! This is the";
+	shopMessages.carMessageNoWeapons[5].boughMessage.line2="best there is, the dream machine,";
+	shopMessages.carMessageNoWeapons[5].boughMessage.line3="the gold-honey chariot.";
+
+	shopMessages.armorMessage[0].infoMessage.title="[Steel Triumph Plating";
+	shopMessages.armorMessage[0].infoMessage.line1="Steel Triumph won't stop the hurt,";
+	shopMessages.armorMessage[0].infoMessage.line2="but it just might keep you in one";
+	shopMessages.armorMessage[0].infoMessage.line3="piece to the finish line.";
+
+	shopMessages.armorMessage[0].boughMessage.title="[Steel Triumph bought";
+	shopMessages.armorMessage[0].boughMessage.line1="Straight from the best R&D Labs,";
+	shopMessages.armorMessage[0].boughMessage.line2="shielding Steel Triumph gives you";
+	shopMessages.armorMessage[0].boughMessage.line3="that extra edge you crave.";
+
+	shopMessages.armorMessage[1].infoMessage.title="[FerroChromium Armor";
+	shopMessages.armorMessage[1].infoMessage.line1="What the rival guns give, this";
+	shopMessages.armorMessage[1].infoMessage.line2="armor can take, but you'd better";
+	shopMessages.armorMessage[1].infoMessage.line3="shoot back, there's a limit";
+
+	shopMessages.armorMessage[1].boughMessage.title="[FerroChromium Armor";
+	shopMessages.armorMessage[1].boughMessage.line1="Deflect bullets, and more other";
+	shopMessages.armorMessage[1].boughMessage.line2="bad stuff that goes bang in the";
+	shopMessages.armorMessage[1].boughMessage.line3="night, too.";
+
+	shopMessages.armorMessage[2].infoMessage.title="[Titanium Plating";
+	shopMessages.armorMessage[2].infoMessage.line1="See this big gun; see this armor.";
+	shopMessages.armorMessage[2].infoMessage.line2="[BANG!{ Now see the armor. Smile to";
+	shopMessages.armorMessage[2].infoMessage.line3="your reflection. Looking good.";
+
+	shopMessages.armorMessage[2].boughMessage.title="[Titanium Plates Installed";
+	shopMessages.armorMessage[2].boughMessage.line1="Shiny hard stuff. No explisve can";
+	shopMessages.armorMessage[2].boughMessage.line2="shadow its tanning radiance. Don't";
+	shopMessages.armorMessage[2].boughMessage.line3="forget your shades!";
+
+	
+	shopMessages.armorMessage[3].infoMessage.title="[Accesteel Armor";
+	shopMessages.armorMessage[3].infoMessage.line1="All but the most extrem shots";
+	shopMessages.armorMessage[3].infoMessage.line2="bounce off like hail on hard";
+	shopMessages.armorMessage[3].infoMessage.line3="concrete.";
+
+	shopMessages.armorMessage[3].boughMessage.title="[Accesteel Armor installed";
+	shopMessages.armorMessage[3].boughMessage.line1="Not even a shell-shock serious";
+	shopMessages.armorMessage[3].boughMessage.line2="bazooka can faze the cool mirror";
+	shopMessages.armorMessage[3].boughMessage.line3="beauty of Accesteel.";
+
+
+	shopMessages.armorMessageNoMoreUpgrades.title="[NO MORE ARMOR UPGRADES";
+	shopMessages.armorMessageNoMoreUpgrades.line1="You got the best shining knight's";
+	shopMessages.armorMessageNoMoreUpgrades.line2="armor this warhorsepower chariot";
+	shopMessages.armorMessageNoMoreUpgrades.line3="can carry to any road battle."; 
+
+
+	shopMessages.engineMessage[0].infoMessage.title="[Trackmaster 155";
+	shopMessages.engineMessage[0].infoMessage.line1="These wheels will let you do some";
+	shopMessages.engineMessage[0].infoMessage.line2="rapid fire cornerings on that";
+	shopMessages.engineMessage[0].infoMessage.line3="shimmering silver street.";
+
+	shopMessages.engineMessage[0].boughMessage.title="[Trackmaster 155 bought";
+	shopMessages.engineMessage[0].boughMessage.line1="Warp 9, Captain. No problems with"; // weak
+	shopMessages.engineMessage[0].boughMessage.line2="traction now. The finish line,"; // weak
+	shopMessages.engineMessage[0].boughMessage.line3="that extra edge you crave.";
+
+	shopMessages.engineMessage[1].infoMessage.title="[Roadrunner NS 175";
+	shopMessages.engineMessage[1].infoMessage.line1="With these fat tires, you'll shoot";
+	shopMessages.engineMessage[1].infoMessage.line2="from the starting-line like a";
+	shopMessages.engineMessage[1].infoMessage.line3="blood lusting bullets";
+
+	shopMessages.engineMessage[1].boughMessage.title="[Roadrunner NS 175 bought";
+	shopMessages.engineMessage[1].boughMessage.line1="On these wheels, your vehice";
+	shopMessages.engineMessage[1].boughMessage.line2="starts like a nuclear blast, and";
+	shopMessages.engineMessage[1].boughMessage.line3="stops you like a cardiac arrest.";
+
+	shopMessages.engineMessage[2].infoMessage.title="[Slidestop 200";
+	shopMessages.engineMessage[2].infoMessage.line1="These fat bottomed tires'll kiss";
+	shopMessages.engineMessage[2].infoMessage.line2="the rad like crazy, they just";
+	shopMessages.engineMessage[2].infoMessage.line3="can't get enoguht.They're hot.";
+
+	shopMessages.engineMessage[2].boughMessage.title="[Slidestop 200 bought";
+	shopMessages.engineMessage[2].boughMessage.line1="Now fast talk to that asphalt.";
+	shopMessages.engineMessage[2].boughMessage.line2="motormouth. Time to make some";
+	shopMessages.engineMessage[2].boughMessage.line3="beautiful automobile poetry.";
+
+	
+	shopMessages.engineMessage[3].infoMessage.title="[Race-X230";
+	shopMessages.engineMessage[3].infoMessage.line1="Zorro's Zs were nothing. Carve";
+	shopMessages.engineMessage[3].infoMessage.line2="your whole signature, to the";
+	shopMessages.engineMessage[3].infoMessage.line3="rainbow-oiled road, doing 160.";
+
+	shopMessages.engineMessage[3].boughMessage.title="[Racer-X230 bought";
+	shopMessages.engineMessage[3].boughMessage.line1="Smart move, motorman. Now get out";
+	shopMessages.engineMessage[3].boughMessage.line2="there, and do soma dashing, dare-";
+	shopMessages.engineMessage[3].boughMessage.line3="devilish damage.";
+	/*
+[Enhanced 4 cylinder - Speed: 150 mph
+Feeding the beast with speed, got
+an unbearable need for speed? This
+is the remedy
+
+[Enhanced 4 cylinder installed
+Now any bitter regrets are in the
+past, just blurred, sweet street-
+lights speeding past fast.
+
+[V6 Injection - Speed 155 mph
+With this babe installed, be your
+destination hell or hallelujah,
+you'll get there so fast, so fast.
+
+[V6 Injection motor installed
+If speeding is the 8th deadly sin,
+with this babe under your hood,
+you are now past redemption.
+
+[V8 Turbo Injection - Speed: 160 mph
+Definition of nirvana: riding that
+race with V8 TI. Next stop: no
+stop, never stop.
+
+[V8 Turbo Injection
+Gleaming pistons pumping in chorus
+with your hungry heart. This sweet
+symbiosis can cause addiction.*/
+
+	
+	shopMessages.tireMessage[0].infoMessage.title="[Trackmaster 155";
+	shopMessages.tireMessage[0].infoMessage.line1="These wheels will let you do some";
+	shopMessages.tireMessage[0].infoMessage.line2="rapid fire cornerings on that";
+	shopMessages.tireMessage[0].infoMessage.line3="shimmering silver street.";
+
+	shopMessages.tireMessage[0].boughMessage.title="[Trackmaster 155 bought";
+	shopMessages.tireMessage[0].boughMessage.line1="Warp 9, Captain. No problems with"; // weak
+	shopMessages.tireMessage[0].boughMessage.line2="traction now. The finish line,"; // weak
+	shopMessages.tireMessage[0].boughMessage.line3="that extra edge you crave.";
+
+	shopMessages.tireMessage[1].infoMessage.title="[Roadrunner NS 175";
+	shopMessages.tireMessage[1].infoMessage.line1="With these fat tires, you'll shoot";
+	shopMessages.tireMessage[1].infoMessage.line2="from the starting-line like a";
+	shopMessages.tireMessage[1].infoMessage.line3="blood lusting bullets";
+
+	shopMessages.tireMessage[1].boughMessage.title="[Roadrunner NS 175 bought";
+	shopMessages.tireMessage[1].boughMessage.line1="On these wheels, your vehice";
+	shopMessages.tireMessage[1].boughMessage.line2="starts like a nuclear blast, and";
+	shopMessages.tireMessage[1].boughMessage.line3="stops you like a cardiac arrest.";
+
+	shopMessages.tireMessage[2].infoMessage.title="[Slidestop 200";
+	shopMessages.tireMessage[2].infoMessage.line1="These fat bottomed tires'll kiss";
+	shopMessages.tireMessage[2].infoMessage.line2="the rad like crazy, they just";
+	shopMessages.tireMessage[2].infoMessage.line3="can't get enoguht.They're hot.";
+
+	shopMessages.tireMessage[2].boughMessage.title="[Slidestop 200 bought";
+	shopMessages.tireMessage[2].boughMessage.line1="Now fast talk to that asphalt.";
+	shopMessages.tireMessage[2].boughMessage.line2="motormouth. Time to make some";
+	shopMessages.tireMessage[2].boughMessage.line3="beautiful automobile poetry.";
+
+	
+	shopMessages.tireMessage[3].infoMessage.title="[Race-X230";
+	shopMessages.tireMessage[3].infoMessage.line1="Zorro's Zs were nothing. Carve";
+	shopMessages.tireMessage[3].infoMessage.line2="your whole signature, to the";
+	shopMessages.tireMessage[3].infoMessage.line3="rainbow-oiled road, doing 160.";
+
+	shopMessages.tireMessage[3].boughMessage.title="[Racer-X230 bought";
+	shopMessages.tireMessage[3].boughMessage.line1="Smart move, motorman. Now get out";
+	shopMessages.tireMessage[3].boughMessage.line2="there, and do soma dashing, dare-";
+	shopMessages.tireMessage[3].boughMessage.line3="devilish damage.";
+
+
+	shopMessages.tireMessageNoMoreUpgrades.title="[NO MORE TIRE UPGRADES";
+	shopMessages.tireMessageNoMoreUpgrades.line1="You've got the best fat, sticky";
+	shopMessages.tireMessageNoMoreUpgrades.line2="tires this vehicle can boast. You";
+	shopMessages.tireMessageNoMoreUpgrades.line3="are in close touch with the road."; 
+	
+	shopMessages.repairMessage[0].title = "[Repair";
+	shopMessages.repairMessage[0].line1 = "This is used to be a car, huh? Carry";
+	shopMessages.repairMessage[0].line2 = "the rest of it in here & we'll see";
+	shopMessages.repairMessage[0].line3 = "what can be done";
+
+	shopMessages.repairMessage[1].title = "[Repair";
+	shopMessages.repairMessage[1].line1 = "Sorry, this vehicle is gone for";
+	shopMessages.repairMessage[1].line2 = "good... Just kidding. Medic, fast!";
+	shopMessages.repairMessage[1].line3 = "We've got a driver in shock";
+
+	shopMessages.repairMessage[2].title = "[Repair";
+	shopMessages.repairMessage[2].line1 = "Don't tell me. You parked your car";
+	shopMessages.repairMessage[2].line2 = "in a nuclear test zone? These";
+	shopMessages.repairMessage[2].line3 = "holes need some gum, start chewing";
+
+	shopMessages.repairMessage[3].title = "[Repair";
+	shopMessages.repairMessage[3].line1 = "Who helped you tow this piece of";
+	shopMessages.repairMessage[3].line2 = "junk over the finish line? No";
+	shopMessages.repairMessage[3].line3 = "sweat, this can be fixed";
+
+	shopMessages.repairMessage[4].title = "[Repair";
+	shopMessages.repairMessage[4].line1 = "So. Your car's sorry ass got blown";
+	shopMessages.repairMessage[4].line2 = "clean off. Acme glue will fix your";
+	shopMessages.repairMessage[4].line3 = "mishap-ridden day at the races.";
+
+	shopMessages.repairMessage[5].title = "[Repair";
+	shopMessages.repairMessage[5].line1 = "As Mr. Nukem sometimes puts it:";
+	shopMessages.repairMessage[5].line2 = "`Uh-oh, that's gotta hurt.` This";
+	shopMessages.repairMessage[5].line3 = "calls for a screwdriver & aspirin.";
+
+	shopMessages.repairMessage[6].title = "[Repair";
+	shopMessages.repairMessage[6].line1 = "Your conveyance's methylated";
+	shopMessages.repairMessage[6].line2 = "spirit receptacle has developed a";
+	shopMessages.repairMessage[6].line3 = "chronic hernia, or something...";
+
+	shopMessages.repairMessage[7].title = "[Repair";
+	shopMessages.repairMessage[7].line1 = "This is no time to rest in pieces";
+	shopMessages.repairMessage[7].line2 = "the race awaits! She'll be back on";
+	shopMessages.repairMessage[7].line3 = "her wheels in no time.";
+
+	shopMessages.repairMessage[8].title = "[Repair";
+	shopMessages.repairMessage[8].line1 = "Take five, driver. A straight &";
+	shopMessages.repairMessage[8].line2 = "simple sledgehammer job here.";
+	shopMessages.repairMessage[8].line3 = "These percussions, gotta love 'em";
+
+	shopMessages.repairMessage[9].title = "[Repair";
+	shopMessages.repairMessage[9].line1 = "Nothing a fresh paint-job can't";
+	shopMessages.repairMessage[9].line2 = "fix. You'll be back on the track";
+	shopMessages.repairMessage[9].line3 = "in a pit-stop minute.";
+
+	shopMessages.repairMessage[10].title = "[Repair";
+	shopMessages.repairMessage[10].line1 = "Perfect is perfect. What ain't";
+	shopMessages.repairMessage[10].line2 = "broken, can't be fixed. Come back";
+	shopMessages.repairMessage[10].line3 = "after you've taken in some.";
+}
 //----- (004201F0) --------------------------------------------------------
-int __cdecl drawMenuAnimation(int x, int y, int frame, int animation, int frameSizes[])
+int   drawMenuAnimation(int x, int y, int frame, int animation, int frameSizes[])
 {
   int v5; // ecx@1
   int i; // eax@1
@@ -182,7 +504,7 @@ int reloadCarAnimation2()
   drawImageWithPosition2((int)carbas2Bpk, 96, 96, (int)((char *)screenBuffer + 80016));
   drawImageWithPosition2((int)((char *)carnameBpk + 1536 * actualCarSelected), 96, 16, (int)((char *)screenBuffer + 80016));
   drawMenuAnimation(16, 141, carAnimCurrentFrame_45FBA0, getCarBpkById(actualCarSelected), (int)&carAnimFrameSize_45FBA0[64 * actualCarSelected]);
-  itoa(*(&dword_44DF5C + 440 * actualCarSelected), DstBuf, 10);
+  _itoa(cars[actualCarSelected].cost, DstBuf, 10);
   
   v0 = strlen(DstBuf) + 1;
 
@@ -197,20 +519,20 @@ strcpy(v1,"$"); /* copy name into the new var */
   if ( useWeapons )
   {
 	  //todo fix
-    writeTextInScreen(&aVagabondSpeed5[1760 * actualCarSelected], 89770-(100010- 89770));
+	  writeTextInScreen(shopMessages.carMessage[actualCarSelected].infoMessage.title, 89770-(100010- 89770));
     writeTextInScreen((const char *)&unk_44E078 + 1760 * actualCarSelected, 89770);
-    writeTextInScreen(&aSpeedCanBeBoos[1760 * actualCarSelected], 100010);
-    writeTextInScreen(&aASingleRevolve[1760 * actualCarSelected], 110250);
-    writeTextInScreen(&aAnd1ArmorUpgra[1760 * actualCarSelected], 120490);
+    writeTextInScreen(shopMessages.carMessage[actualCarSelected].infoMessage.line1, 100010);
+    writeTextInScreen(shopMessages.carMessage[actualCarSelected].infoMessage.line2, 110250);
+    writeTextInScreen(shopMessages.carMessage[actualCarSelected].infoMessage.line3, 120490);
     v4 = (char *)&unk_44E118 + 1760 * actualCarSelected;
   }
   else
   {
-    writeTextInScreen(&aVagabondSpee_0[1760 * actualCarSelected], 89770 - (100010 - 89770));
+	  writeTextInScreen(shopMessages.carMessageNoWeapons[actualCarSelected].infoMessage.title, 89770 - (100010 - 89770));
     writeTextInScreen((const char *)&unk_44DF88 + 1760 * actualCarSelected, 89770);
-    writeTextInScreen(&aSpeedCanBeBo_0[1760 * actualCarSelected], 100010);
-    writeTextInScreen(&aOnly2TireAnd1A[1760 * actualCarSelected], 110250);
-    writeTextInScreen(&aUpgrades_[1760 * actualCarSelected], 120490);
+    writeTextInScreen(shopMessages.carMessageNoWeapons[actualCarSelected].infoMessage.line1, 100010);
+    writeTextInScreen(shopMessages.carMessageNoWeapons[actualCarSelected].infoMessage.line2, 110250);
+    writeTextInScreen(shopMessages.carMessageNoWeapons[actualCarSelected].infoMessage.line3, 120490);
     v4 = (char *)&unk_44E028 + 1760 * actualCarSelected;
   }
   writeTextInScreen(v4, 130730);
@@ -258,7 +580,7 @@ int reloadEngineAnimation2()
       engineAnimCurrentFrame_462D80,
 		getEngineBpkById(v1),
       (int)((char *)&engineAnimFrameSize_445F68 + 96 * drivers[driverId].engine));
-    itoa(cars[drivers[driverId].carType].tireUpgradeCosts[drivers[driverId].engine], DstBuf, 10);
+    _itoa(cars[drivers[driverId].carType].engineUpgradeCosts[drivers[driverId].engine], DstBuf, 10);
 
 	
   v0 = strlen(DstBuf) + 1;
@@ -287,7 +609,6 @@ strcpy(v3,"$"); /* copy name into the new var */
   return result;
 }
 
-
 //----- (004207E0) --------------------------------------------------------
 int reloadTireAnimation2()
 {
@@ -309,11 +630,11 @@ int reloadTireAnimation2()
   {
     drawImageWithPosition2((int)((char *)maxi1fBpk + 2048 * (3 * v0 + 9)), 96, 64, (int)((char *)screenBuffer + 172280));
     createPopup(144, 114, 384, 119, 1);
-    writeTextInScreen(aNoMoreTireUpgr, 79530);
+	writeTextInScreen(shopMessages.tireMessageNoMoreUpgrades.title, 79530);
     writeTextInScreen((const char *)&unk_450C00, 89770);
-    writeTextInScreen(aYouVeGotTheBes, 100010);
-    writeTextInScreen(aTiresThisVehic, 110250);
-    writeTextInScreen(aAreInCloseTouc, 120490);
+    writeTextInScreen(shopMessages.tireMessageNoMoreUpgrades.line1, 100010);
+    writeTextInScreen(shopMessages.tireMessageNoMoreUpgrades.line2, 110250);
+    writeTextInScreen(shopMessages.tireMessageNoMoreUpgrades.line3, 120490);
     result = writeTextInScreen((const char *)&unk_450CA0, 130730);
   }
   else
@@ -324,7 +645,7 @@ int reloadTireAnimation2()
       tireAnimCurrentFrame_45F034,
 		getTireBpkById(v1),
       (int)((char *)&tireAnimFrameSize_4460E8 + 48 * drivers[driverId].tire));
-    itoa(cars[drivers[driverId].carType].tireUpgradeCosts[drivers[driverId].tire], DstBuf, 10);
+    _itoa(cars[drivers[driverId].carType].tireUpgradeCosts[drivers[driverId].tire], DstBuf, 10);
      
   v0 = strlen(DstBuf) + 1;
 
@@ -336,16 +657,15 @@ strcpy(v3,"$"); /* copy name into the new var */
   
     drawInGamePrices(v3, v5 + 214520);
     createPopup(144, 114, 384, 119, 1);
-    writeTextInScreen(&aTrackmaster155[240 * drivers[driverId].tire], 79530);
+	writeTextInScreen(shopMessages.tireMessage[drivers[driverId].tire].infoMessage.title, 79530);
     writeTextInScreen((const char *)&unk_4511A0 + 240 * drivers[driverId].tire, 89770);
-    writeTextInScreen(&aTheseWheelsWil[240 * drivers[driverId].tire], 100010);
-    writeTextInScreen(&aRapidFireCorne[240 * drivers[driverId].tire], 110250);
-    writeTextInScreen(&aShimmeringSilv[240 * drivers[driverId].tire], 120490);
+    writeTextInScreen(shopMessages.tireMessage[drivers[driverId].tire].infoMessage.line1, 100010);
+    writeTextInScreen(shopMessages.tireMessage[drivers[driverId].tire].infoMessage.line2, 110250);
+    writeTextInScreen(shopMessages.tireMessage[drivers[driverId].tire].infoMessage.line3, 120490);
     result = writeTextInScreen(&byte_451240[240 * drivers[driverId].tire], 130730);
   }
   return result;
 }
-
 
 //----- (00420A80) --------------------------------------------------------
 int reloadArmourAnimation2()
@@ -368,11 +688,11 @@ int reloadArmourAnimation2()
   {
     drawImageWithPosition2((int)((char *)maxi1fBpk + 2048 * (3 * v0 + 21)), 96, 64, (int)((char *)screenBuffer + 172384));
     createPopup(144, 114, 384, 119, 1);
-    writeTextInScreen(aNoMoreArmorUpg, 79530);
+	writeTextInScreen(shopMessages.armorMessageNoMoreUpgrades.title, 79530);
     writeTextInScreen((const char *)&unk_450CF0, 89770);
-    writeTextInScreen(aYouGotTheBestS, 100010);
-    writeTextInScreen(aArmorThisWarho, 110250);
-    writeTextInScreen(aCanCarryToAnyR, 120490);
+	writeTextInScreen(shopMessages.armorMessageNoMoreUpgrades.line1, 100010);
+    writeTextInScreen(shopMessages.armorMessageNoMoreUpgrades.line2, 110250);
+    writeTextInScreen(shopMessages.armorMessageNoMoreUpgrades.line3, 120490);
     result = writeTextInScreen((const char *)&unk_450D90, 130730);
   }
   else
@@ -383,7 +703,7 @@ int reloadArmourAnimation2()
       armourAnimCurrentFrame_461288,
       getArmourBpkById(v1),
       (int)((char *)&armourAnimFrameSize_4461A8 + 16 * drivers[driverId].armour));
-    itoa(cars[drivers[driverId].carType].armourUpgradeCosts[drivers[driverId].armour], DstBuf, 10);//esto son textos
+    _itoa(cars[drivers[driverId].carType].armourUpgradeCosts[drivers[driverId].armour], DstBuf, 10);//esto son textos
      
   v0 = strlen(DstBuf) + 1;
 
@@ -395,16 +715,15 @@ strcpy(v3,"$"); /* copy name into the new var */
   	//aui genera el texto a pintar con el coste de la armadura
     drawInGamePrices(v3, v5 + 214624);
     createPopup(144, 114, 384, 119, 1);
-    writeTextInScreen(&aSteelTriumphPl[240 * drivers[ driverId].armour], 79530);
+    writeTextInScreen(shopMessages.armorMessage[drivers[ driverId].armour].infoMessage.title, 79530);
     writeTextInScreen((const char *)&unk_451920 + 240 * drivers[driverId].armour, 89770);
-    writeTextInScreen(&aSteelTriumphWo[240 * drivers[driverId].armour], 100010);
-    writeTextInScreen(&aButItJustMight[240 * drivers[driverId].armour], 110250);
-    writeTextInScreen(&aPieceToTheFini[240 * drivers[driverId].armour], 120490);
+    writeTextInScreen(shopMessages.armorMessage[drivers[ driverId].armour].infoMessage.line1, 100010);
+    writeTextInScreen(shopMessages.armorMessage[drivers[ driverId].armour].infoMessage.line2, 110250);
+    writeTextInScreen(shopMessages.armorMessage[drivers[ driverId].armour].infoMessage.line3, 120490);
     result = writeTextInScreen(&byte_4519C0[240 * drivers[driverId].armour], 130730);
   }
   return result;
 }
-
 
 //----- (00420D20) --------------------------------------------------------
 int reloadRepairAnimation()
@@ -441,21 +760,21 @@ int reloadRepairAnimation()
     v10 = cars[drivers[driverId].carType].repairCost;
     if ( useWeapons )
       v10 /= 2;
-    itoa(v10, DstBuf, 10);
+    _itoa(v10, DstBuf, 10);
     v21 = 36;
     v6 = DstBuf;
     v5 = strlen(DstBuf) + 1;
     v7 = &v20;
     do
     {
-      v11 = *((byte *)v7 + 1);
+      v11 = *((BYTE *)v7 + 1);
       v7 = (char *)v7 + 1;
     }
     while ( v11 );
   }
   else
   {
-    itoa(v0, DstBuf, 10);
+    _itoa(v0, DstBuf, 10);
     v1 = getBoxTextSize(DstBuf);
     drawTextWithFont((int)graphicsGeneral.fmed1aBpk, (int)&unk_445928, DstBuf, 163610 - v1);
     v2 = drivers[driverId].carType;
@@ -468,21 +787,14 @@ int reloadRepairAnimation()
     {
       v4 = cars[v2].repairCost / 10;
     }
-    itoa(drivers[driverId].damage * v4, DstBuf, 10);
-    v21 = 36;
-    v6 = DstBuf;
-    v5 = strlen(DstBuf) + 1;
-    v7 = &v20;
-    do
-    {
-      v8 = *((byte *)v7 + 1);
-      v7 = (char *)v7 + 1;
-    }
-    while ( v8 );
+    _itoa(drivers[driverId].damage * v4, DstBuf, 10);
+	v6= "";
+	strcpy(v6,"$"); /* copy name into the new var */
+	strcat(v6, DstBuf);
   }
-  memcpy(v7, v6, v5);
-  v12 = getBoxTextOffset((const char *)&v21);
-  drawInGamePrices((const char *)&v21, v12 + 214728);
+//  memcpy(v7, v6, v5);
+  v12 = getBoxTextOffset(v6);
+  drawInGamePrices(v6, v12 + 214728);
   v13 = drivers[driverId].damage;
   v14 = 0;
   v16 = __OFSUB__(v13, 100);
@@ -516,14 +828,13 @@ int reloadRepairAnimation()
     v14 = 11;
   createPopup(144, 114, 384, 119, 1);
   v17 = 240 * v14;
-  writeTextInScreen(&aRepair[v17], 79530);
+  writeTextInScreen(shopMessages.repairMessage[v14-1].title, 79530);
   writeTextInScreen(&byte_453E50[v17], 89770);
-  writeTextInScreen(&aThisUsedToBeAC[v17], 100010);
-  writeTextInScreen(&aTheRestOfItInH[v17], 110250);
-  writeTextInScreen(&aWhatCanBeDone_[v17], 120490);
+  writeTextInScreen(shopMessages.repairMessage[v14-1].line1, 100010);
+  writeTextInScreen(shopMessages.repairMessage[v14-1].line2, 110250);
+  writeTextInScreen(shopMessages.repairMessage[v14-1].line3, 120490);
   return writeTextInScreen(&byte_453EF0[v17], 130730);
 }
-
 
 //----- (00428FD0) --------------------------------------------------------
 int reloadContinueAnimation()
@@ -565,9 +876,9 @@ int reloadEngineAnimation()
   void *v2; // edi@3
   char v3; // cl@4
   int v4; // eax@5
-  char v6; // [sp+3h] [bp-29h]@3
+  char * v6 = malloc(10); // [sp+3h] [bp-29h]@3
   __int16 v7; // [sp+4h] [bp-28h]@3
-  char DstBuf; // [sp+18h] [bp-14h]@3
+  char DstBuf[100]; // [sp+18h] [bp-14h]@3
 
   drawImageWithPosition2((int)bases41Bpk, 96, 96, (int)((char *)screenBuffer + 161936));
   v0 = cars[drivers[driverId].carType].engineUpgrades;
@@ -583,19 +894,11 @@ int reloadEngineAnimation()
       engineAnimCurrentFrame_462D80,
 		getEngineBpkById(drivers[driverId].engine),
       (int)((char *)&engineAnimFrameSize_445F68 + 96 * drivers[driverId].engine));
-    itoa(cars[drivers[driverId].carType].engineUpgradeCosts[drivers[driverId].engine], &DstBuf, 10);
-    v7 = 36;
-    v1 = strlen(&DstBuf) + 1;
-    v2 = &v6;
-    do
-    {
-      v3 = *((byte *)v2 + 1);
-      v2 = (char *)v2 + 1;
-    }
-    while ( v3 );
-    memcpy(v2, &DstBuf, v1);
-    v4 = getBoxTextOffset((const char *)&v7);
-    drawInGamePrices((const char *)&v7, v4 + 214416);
+    _itoa(cars[drivers[driverId].carType].engineUpgradeCosts[drivers[driverId].engine+1], &DstBuf, 10);
+    strcpy(v6,"$"); /* copy name into the new var */
+	strcat(v6, DstBuf);
+	v4 = getBoxTextOffset(v6);//get small text size
+	drawInGamePrices(v6, v4 + 214416);
   }
   createPopup(144, 114, 384, 119, 1);
   writeTextInScreen(&a4CylinderMot_0[240 * drivers[driverId].engine], 79530);
@@ -606,7 +909,6 @@ int reloadEngineAnimation()
   return writeTextInScreen(&byte_450E80[240 * drivers[driverId].engine], 130730);
 }
 
-
 //----- (00421520) --------------------------------------------------------
 int reloadTireAnimation()
 {
@@ -615,7 +917,7 @@ int reloadTireAnimation()
   void *v2; // edi@3
   char v3; // cl@4
   int v4; // eax@5
-  char v6; // [sp+3h] [bp-29h]@3
+  char *v6 =malloc(10); // [sp+3h] [bp-29h]@3
   __int16 v7; // [sp+4h] [bp-28h]@3
   char DstBuf[100]; // [sp+18h] [bp-14h]@3
 
@@ -633,26 +935,19 @@ int reloadTireAnimation()
       tireAnimCurrentFrame_45F034,
 		getTireBpkById(drivers[driverId].tire),
       (int)((char *)&tireAnimFrameSize_4460E8 + 48 * drivers[driverId].tire));
-    itoa(cars[drivers[driverId].carType].tireUpgradeCosts[drivers[driverId].tire], &DstBuf, 10);
-    v7 = 36;
-    v1 = strlen(&DstBuf) + 1;
-    v2 = &v6;
-    do
-    {
-      v3 = *((byte *)v2 + 1);
-      v2 = (char *)v2 + 1;
-    }
-    while ( v3 );
-    memcpy(v2, &DstBuf, v1);
-    v4 = getBoxTextOffset((const char *)&v7);
-    drawInGamePrices((const char *)&v7, v4 + 214520);
+    _itoa(cars[drivers[driverId].carType].tireUpgradeCosts[drivers[driverId].tire+1], &DstBuf, 10);
+    strcpy(v6,"$"); /* copy name into the new var */
+	strcat(v6, DstBuf);
+
+	v4 = getBoxTextOffset(v6);//get small text size
+	drawInGamePrices(v6, v4 + 214520);
   }
   createPopup(144, 114, 384, 119, 1);
-  writeTextInScreen(&aTrackmaster1_0[240 * drivers[driverId].tire], 79530);
-  writeTextInScreen((const char *)&unk_451560 + 240 * drivers[driverId].tire, 89770);
-  writeTextInScreen(&aWarp9Captain_N[240 * drivers[driverId].tire], 100010);
-  writeTextInScreen(&aTractionNow_Th[240 * drivers[driverId].tire], 110250);
-  writeTextInScreen(&aSheSClosingFas[240 * drivers[driverId].tire], 120490);
+  writeTextInScreen(shopMessages.tireMessage[drivers[driverId].tire].boughMessage.title, 79530);
+  writeTextInScreen((const char *)&unk_451560 + 240 * drivers[driverId].tire+1, 89770);
+  writeTextInScreen(shopMessages.tireMessage[drivers[driverId].tire].boughMessage.line1, 100010);
+  writeTextInScreen(shopMessages.tireMessage[drivers[driverId].tire].boughMessage.line2, 110250);
+  writeTextInScreen(shopMessages.tireMessage[drivers[driverId].tire].boughMessage.line3, 120490);
   return writeTextInScreen(&byte_451600[240 * drivers[driverId].tire], 130730);
 }
 
@@ -664,9 +959,9 @@ int reloadArmourAnimation()
   void *v2; // edi@3
   char v3; // cl@4
   int v4; // eax@5
-  char v6; // [sp+3h] [bp-29h]@3
+  char *v6 = malloc(10); // [sp+3h] [bp-29h]@3
   __int16 v7; // [sp+4h] [bp-28h]@3
-  char DstBuf; // [sp+18h] [bp-14h]@3
+  char DstBuf[100]; // [sp+18h] [bp-14h]@3
 
   drawImageWithPosition2((int)bases43Bpk, 96, 96, (int)((char *)screenBuffer + 162144));
   v0 = cars[drivers[driverId].carType].armourUpgrades;
@@ -683,26 +978,19 @@ int reloadArmourAnimation()
 		getArmourBpkById(drivers[driverId].armour),
 		
       (int)((char *)&armourAnimFrameSize_4461A8 + 64 * drivers[driverId].armour));
-    itoa(cars[drivers[driverId].carType].armourUpgradeCosts[drivers[driverId].armour], &DstBuf, 10);
-    v7 = 36;
-    v1 = strlen(&DstBuf) + 1;
-    v2 = &v6;
-    do
-    {
-      v3 = *((byte *)v2 + 1);
-      v2 = (char *)v2 + 1;
-    }
-    while ( v3 );
-    memcpy(v2, &DstBuf, v1);
-    v4 = getBoxTextOffset((const char *)&v7);
-    drawInGamePrices((const char *)&v7, v4 + 214624);
+    _itoa(cars[drivers[driverId].carType].armourUpgradeCosts[drivers[driverId].armour+1], &DstBuf, 10);
+    
+	strcpy(v6,"$"); /* copy name into the new var */
+	strcat(v6, DstBuf);
+	v4 = getBoxTextOffset(v6);//get small text size
+	drawInGamePrices(v6, v4 + 214624);
   }
   createPopup(144, 114, 384, 119, 1);
-  writeTextInScreen(&aSteelTriumphBo[240 * drivers[driverId].armour], 79530);
+  writeTextInScreen(shopMessages.armorMessage[drivers[ driverId].armour].boughMessage.title, 79530);
   writeTextInScreen((const char *)&unk_451CE0 + 240 * drivers[driverId].armour, 89770);
-  writeTextInScreen(&aStraightFromTh[240 * drivers[driverId].armour], 100010);
-  writeTextInScreen(&aShieldingSteel[240 * drivers[driverId].armour], 110250);
-  writeTextInScreen(&aThatExtraEdgeY[240 * drivers[driverId].armour], 120490);
+  writeTextInScreen(shopMessages.armorMessage[drivers[ driverId].armour].boughMessage.line1, 100010);
+  writeTextInScreen(shopMessages.armorMessage[drivers[ driverId].armour].boughMessage.line2, 110250);
+  writeTextInScreen(shopMessages.armorMessage[drivers[ driverId].armour].boughMessage.line3, 120490);
   return writeTextInScreen(&byte_451D80[240 * drivers[driverId].armour], 130730);
 }
 

@@ -1,6 +1,5 @@
 
 
-
 typedef enum  {
 	 VAGABOND = 0,
 	 DERVISH = 1,
@@ -10,9 +9,6 @@ typedef enum  {
 	 DELIVERATOR =5
 
 }CarType;
-
-
-
 
 typedef struct Car {
 	char* name;
@@ -28,9 +24,9 @@ typedef struct Car {
 
 } Car;
 
-extern Car cars[6];
+extern Car cars[7];
 
-extern char* carName[6];
+extern char* carName[7];
 void initCars();
 
 void initCar0();
@@ -39,6 +35,7 @@ void initCar2();
 void initCar3();
 void initCar4();
 void initCar5();
+void initCar6();
 char * getCarName(int carType);
 
 /*empieza en 44df50 tamaaño 440 *4 int por coche =1760 bytes en total
@@ -67,9 +64,6 @@ char * getCarName(int carType);
 0044E624 coste armadura mejora 3
 0044E628 coste armadura mejora 4
 
-
 0044E62c coste de reparacions
-
-
 
 */

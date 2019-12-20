@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
       <Configuration>Debug</Configuration>
@@ -28,26 +28,22 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
@@ -95,17 +91,19 @@
     <ClCompile>
       <PrecompiledHeader>
       </PrecompiledHeader>
-      <WarningLevel>TurnOffAllWarnings</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BufferSecurityCheck>false</BufferSecurityCheck>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>opengl32.lib;SDL.lib;SDLmain.lib;fmodvc.lib;minifmod.lib;Winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
+      <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
+      <ShowProgress>NotSet</ShowProgress>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -126,7 +124,7 @@
       <AdditionalDependencies>opengl32.lib;SDL.lib;SDLmain.lib;fmodvc.lib;minifmod.lib;Winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <IgnoreAllDefaultLibraries>true</IgnoreAllDefaultLibraries>
       <TargetMachine>MachineX86</TargetMachine>
-	        <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
+      <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -145,7 +143,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>opengl32.lib;SDL.lib;SDLmain.lib;fmodvc.lib;minifmod.lib;Winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
-	        <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
+      <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -164,23 +162,32 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>opengl32.lib;SDL.lib;SDLmain.lib;fmodvc.lib;minifmod.lib;Winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
-	        <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
+      <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="asset\bpaUtil.c" />
+    <ClCompile Include="asset\haf.c" />
+    <ClCompile Include="mod\mod.c" />
     <ClCompile Include="race\3dSystem.c" />
     <ClCompile Include="anim.c" />
-    <ClCompile Include="blackmarket\blackMarket.c" />
-    <ClCompile Include="bpa\bpaUtil.c" />
     <ClCompile Include="cars.c" />
     <ClCompile Include="circuit.c" />
     <ClCompile Include="config.c" />
-    <ClCompile Include="dr.c" />
+    <ClCompile Include="dr.c">
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Disabled</Optimization>
+      <IntrinsicFunctions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</IntrinsicFunctions>
+      <WholeProgramOptimization Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</WholeProgramOptimization>
+      <MinimalRebuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</MinimalRebuild>
+      <MinimalRebuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</MinimalRebuild>
+      <BasicRuntimeChecks Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">MultiThreadedDebugDLL</RuntimeLibrary>
+      <BufferSecurityCheck Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</BufferSecurityCheck>
+      <FunctionLevelLinking Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</FunctionLevelLinking>
+    </ClCompile>
     <ClCompile Include="drivers.c" />
     <ClCompile Include="graphics.c" />
-    <ClCompile Include="hof\hallOfFame.c" />
     <ClCompile Include="imageUtil.c" />
-    <ClCompile Include="license\licenseScreen.c" />
     <ClCompile Include="menus.c" />
     <ClCompile Include="multiplayer\multiplayer.c" />
     <ClCompile Include="race\pedestrian.c" />
@@ -189,16 +196,34 @@
     <ClCompile Include="raceParticipant.c" />
     <ClCompile Include="raceResults.c" />
     <ClCompile Include="savegame.c" />
-    <ClCompile Include="minifmod_modified\soundSystem.c" />
     <ClCompile Include="i18n\i18n.c" />
+    <ClCompile Include="sfx\minifmod\soundSystem.c" />
+    <ClCompile Include="sfx\sound.c" />
+    <ClCompile Include="ui\blackMarketScreen.c" />
+    <ClCompile Include="ui\creditsScreen.c" />
+    <ClCompile Include="ui\endGameScreen.c" />
+    <ClCompile Include="ui\hallOfFame.c" />
+    <ClCompile Include="ui\licenseScreen.c" />
+    <ClCompile Include="ui\loadSaveGameScreen.c" />
+    <ClCompile Include="ui\menu.c" />
+    <ClCompile Include="ui\prevRaceScreen.c" />
+    <ClCompile Include="ui\selectRaceScreen.c" />
+    <ClCompile Include="ui\raceResultsScreen.c" />
+    <ClCompile Include="ui\shopScreen.c" />
+    <ClCompile Include="ui\startGameScreen.c" />
     <ClCompile Include="util.c" />
     <ClCompile Include="util\hash.c" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="anim.h" />
+    <ClInclude Include="asset\bpaUtil.h" />
+    <ClInclude Include="asset\haf.h" />
+    <ClInclude Include="input\input.c" />
+    <ClInclude Include="input\input.h" />
+    <ClInclude Include="mod\mod.h" />
+    <ClInclude Include="portability\portability.h" />
     <ClInclude Include="race\3dSystem.h" />
     <ClInclude Include="race\anim.h" />
-    <ClInclude Include="blackmarket\blackMarket.h" />
-    <ClInclude Include="bpa\bpaUtil.h" />
     <ClInclude Include="cars.h" />
     <ClInclude Include="circuit.h" />
     <ClInclude Include="config.h" />
@@ -206,27 +231,40 @@
     <ClInclude Include="doc.h" />
     <ClInclude Include="dr.h" />
     <ClInclude Include="drivers.h" />
-    <ClInclude Include="minifmod_modified\fmod.h" />
     <ClInclude Include="graphics.h" />
-    <ClInclude Include="hof\hallOfFame.h" />
     <ClInclude Include="imageUtil.h" />
-    <ClInclude Include="license\licenseScreen.h" />
     <ClInclude Include="menus.h" />
     <ClInclude Include="race\pedestrian.h" />
     <ClInclude Include="popup\popup.h" />
     <ClInclude Include="race\powerup.h" />
     <ClInclude Include="raceParticipant.h" />
     <ClInclude Include="savegame.h" />
+    <ClInclude Include="sfx\minifmod\fmod.h" />
+    <ClInclude Include="sfx\minifmod\soundSystem.h" />
+    <ClInclude Include="sfx\minifmod\system_memory.h" />
+    <ClInclude Include="sfx\minifmod\xmeffects.h" />
+    <ClInclude Include="sfx\sound.h" />
     <ClInclude Include="soundEffects.h" />
-    <ClInclude Include="minifmod_modified\soundSystem.h" />
-    <ClInclude Include="minifmod_modified\system_memory.h" />
     <ClInclude Include="race\terrain.h" />
     <ClInclude Include="i18n\i18n.h" />
+    <ClInclude Include="ui\blackMarketScreen.h" />
+    <ClInclude Include="ui\creditsScreen.h" />
+    <ClInclude Include="ui\endGameScreen.h" />
+    <ClInclude Include="ui\hallOfFame.h" />
+    <ClInclude Include="ui\licenseScreen.h" />
+    <ClInclude Include="ui\loadSaveGameScreen.h" />
+    <ClInclude Include="ui\mainScreen.c" />
+    <ClInclude Include="ui\mainScreen.h" />
+    <ClInclude Include="ui\menu.h" />
+    <ClInclude Include="ui\prevRaceScreen.h" />
+    <ClInclude Include="ui\selectRaceScreen.h" />
+    <ClInclude Include="ui\raceResultsScreen.h" />
+    <ClInclude Include="ui\shopScreen.h" />
+    <ClInclude Include="ui\startGameScreen.h" />
     <ClInclude Include="util.h" />
     <ClInclude Include="util\hash.h" />
     <ClInclude Include="variables.h" />
     <ClInclude Include="raceResults.h" />
-    <ClInclude Include="minifmod_modified\xmeffects.h" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />

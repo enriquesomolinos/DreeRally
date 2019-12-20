@@ -1,4 +1,3 @@
-#pragma once
 
 typedef enum {
 	RACE_EASY =0,
@@ -27,7 +26,6 @@ int unk_481C0C; // weak
 
 extern Mines raceMines[32];
 
-
 typedef struct RaceParticipant {
 	char name[12];
 	int moneyPicked;
@@ -50,9 +48,7 @@ typedef struct RaceParticipant {
 	int unk_4A7AB0;
 	
 
-
 } RaceParticipant;
-
 
 typedef struct RaceParticipant2 {
 	int carType;
@@ -109,7 +105,6 @@ typedef struct RaceParticipant2 {
 	//int unk_4A6904;
 	//int unk_4A6908;
 
-
 	int unk_4A690C;
 
 } RaceParticipant2;
@@ -138,13 +133,7 @@ extern RaceParticipant2 raceParticipant2[4];
 4A7AB0 -> ? es la variable val que no se usa que yo sepa
 4A7AB4 -> ya es el siguiente
 
-
 dword_4A7A60  tamaño 84*4 hasta 4a7bb0
-
-
-
-
-
 
 /*RaceParticipant2 dword_4A6880  estreuctura de 37 *4 bytes  para cada tipo de coche 4 en total hasta 4A6AD0
 1 dword_4A6880 -> carType
@@ -185,14 +174,8 @@ dword_4A6900
 dword_4A6908
 dword_4A690C
 
-
-
-
 otra estructura que no se qu ees 
 _4A7EA0   ->216 *4 bytes hasta unk_4A7BC4 864 de tamaño y son 4 participantes
-
-
-
 
 int dword_4A6880[256]; // weak
 int dword_4A6884[256]; // weak
@@ -253,7 +236,6 @@ int dword_4A7B98; // weak
 int dword_4A7B9C; // weak
 
 */
-
 
 typedef struct RaceParticipantIngame {
 	int actualVaiZone_4A7D00; // weak
@@ -348,7 +330,6 @@ typedef struct RaceParticipantIngame {
 	int dword_4A7ED8[256]; // weak
 	int spriteBurnOffset_4A7EDC; // weak
 
-
 	///ticks desde que se inicializa la libreria sdl
 	int dword_4A7EE0; // weak
 	int dword_4A7EE4[16]; // array de 16 posiciones weak  relacionado con smoke para habilitarlo patinaje izquierdo
@@ -367,7 +348,6 @@ typedef struct RaceParticipantIngame {
 
 extern RaceParticipantIngame raceParticipantIngame[4];
 
-
 /*raceparticipant3 son los datos en pantalla de carrera de los participantes
 int dword_4A7D00[256]; // weak
 int inScreenPositionX_4A7D04[256]; // weak
@@ -377,7 +357,7 @@ int participantBpkOffser_4A7D10[256]; // weak
 int dword_4A7D14[256]; // weak
 int dword_4A7D18[256]; // weak
 int dword_4A7D1C[256]; // weak
-byte dword_4A7D20[64]; // idb
+BYTE dword_4A7D20[64]; // idb
 int dword_4A7D60[256]; // weak
 int lastKeysReadIndex_4A7DA0[256]; // weak
 int lastKeysReadPreviousIndex_4A7DA4[256]; // weak
@@ -454,7 +434,6 @@ int dword_4A8054[256]; // weak
 int dword_4A8058[256]; // weak
 int hornPlayed_4A805C[256]; // weak
 //primer raceparticiant3
-
 
 int directionRotation_4A7D0C[1]; // weak
 int dword_4A8070; // weak

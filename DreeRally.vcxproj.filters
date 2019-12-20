@@ -19,44 +19,71 @@
     <Filter Include="Source Files\race">
       <UniqueIdentifier>{d5dfe669-2afa-49b8-82a0-6ca8266489c4}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\minifmod_modified">
-      <UniqueIdentifier>{d3aa23ea-299b-4e18-b1ad-964fa2c51e0f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\minifmod_modified">
-      <UniqueIdentifier>{8e0c7a6a-98f7-401e-87be-50bc25716020}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\multiplayer">
       <UniqueIdentifier>{3b9f0da2-ecf3-425f-b894-aa91422ea544}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\hof">
-      <UniqueIdentifier>{14ceb84c-c8e8-4b75-a1ae-8a59b86e97fa}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\blackmarket">
-      <UniqueIdentifier>{001c63dc-a1e8-46dd-a04f-15da029b1671}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\bpa">
-      <UniqueIdentifier>{9856ffd6-1ae0-4b48-b16a-0bef09914d2d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\license">
-      <UniqueIdentifier>{3317a9c3-b775-4445-8851-5e9ea53d818a}</UniqueIdentifier>
     </Filter>
     <Filter Include="Header Files\popup">
       <UniqueIdentifier>{319cf5aa-8220-4981-9e0f-729b94fe3d63}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\bpa">
-      <UniqueIdentifier>{6aeeab3f-2995-4588-af86-1cfa4dd589cd}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\blackmarket">
-      <UniqueIdentifier>{a6217c00-7189-4331-a87b-094206db4ae9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\license">
-      <UniqueIdentifier>{fdae3f94-225b-4845-96a9-ab11f441df74}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\hof">
-      <UniqueIdentifier>{06ba32cb-c8ce-42b3-9903-8da4abc75571}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\popup">
       <UniqueIdentifier>{05c38d85-362d-47aa-b0fc-9f32074b7d2e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\i18n">
+      <UniqueIdentifier>{4f0a99e6-3999-4119-baba-06eba08d0381}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\i18n">
+      <UniqueIdentifier>{c197791c-9c41-43c1-a016-2e5899a8317b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\util">
+      <UniqueIdentifier>{46c7b985-1419-4744-b2e6-9dcd3c08789d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\util">
+      <UniqueIdentifier>{6fe8fa32-7524-4db3-b6db-3284b19f5dce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\lang">
+      <UniqueIdentifier>{de194950-f540-4591-a1a2-4d3cc1d493cd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\mod">
+      <UniqueIdentifier>{52342efa-7240-446b-a512-2ee8d621972e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\mod">
+      <UniqueIdentifier>{d781cd8a-db7f-47b8-b5f6-a26b1065b7b3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\portability">
+      <UniqueIdentifier>{33fd0f68-8de9-4253-b4bb-6946ef586c2b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\portability">
+      <UniqueIdentifier>{fd378526-af3b-4304-a106-b789de6f9af8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\input">
+      <UniqueIdentifier>{ca7749f8-620d-4662-b54f-6f80d67d57d6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\input">
+      <UniqueIdentifier>{b2bda5fb-d2b6-440d-8ae7-f6aa1b1469f5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\ui">
+      <UniqueIdentifier>{8faf9789-5ce8-4272-b375-5452037fefe0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\ui">
+      <UniqueIdentifier>{35f65eb6-6f70-4df1-aec3-0d8357b1e4fe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\asset">
+      <UniqueIdentifier>{1f7d525a-1b96-481f-a32e-090bb1a5cb7c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\asset">
+      <UniqueIdentifier>{044714e6-5c18-437c-b1be-513b646d92ea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\sfx">
+      <UniqueIdentifier>{29b2d3cf-e31a-405d-9329-444ab41a09ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\sfx">
+      <UniqueIdentifier>{e969cd74-d67f-46cd-9e96-720702dedc80}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\sfx\minifmod">
+      <UniqueIdentifier>{f796ebb1-36a4-43d0-a6a9-346b8b00c8cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\sfx\minifmod">
+      <UniqueIdentifier>{78741661-9755-45b5-be5c-18d45b3a9d0e}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\i18n">
       <UniqueIdentifier>{4f0a99e6-3999-4119-baba-06eba08d0381}</UniqueIdentifier>
@@ -129,20 +156,62 @@
     <ClCompile Include="multiplayer\multiplayer.c">
       <Filter>Source Files\multiplayer</Filter>
     </ClCompile>
-    <ClCompile Include="minifmod_modified\soundSystem.c">
-      <Filter>Source Files\minifmod_modified</Filter>
+    <ClCompile Include="i18n\i18n.c">
+      <Filter>Source Files\i18n</Filter>
     </ClCompile>
-    <ClCompile Include="license\licenseScreen.c">
-      <Filter>Source Files\license</Filter>
+    <ClCompile Include="util\hash.c">
+      <Filter>Source Files\util</Filter>
     </ClCompile>
-    <ClCompile Include="hof\hallOfFame.c">
-      <Filter>Source Files\hof</Filter>
+    <ClCompile Include="mod\mod.c">
+      <Filter>Source Files\mod</Filter>
     </ClCompile>
-    <ClCompile Include="bpa\bpaUtil.c">
-      <Filter>Source Files\bpa</Filter>
+    <ClCompile Include="ui\startGameScreen.c">
+      <Filter>Source Files\ui</Filter>
     </ClCompile>
-    <ClCompile Include="blackmarket\blackMarket.c">
-      <Filter>Source Files\blackmarket</Filter>
+    <ClCompile Include="ui\endGameScreen.c">
+      <Filter>Source Files\ui</Filter>
+    </ClCompile>
+    <ClCompile Include="ui\creditsScreen.c">
+      <Filter>Source Files\ui</Filter>
+    </ClCompile>
+    <ClCompile Include="ui\blackMarketScreen.c">
+      <Filter>Source Files\ui</Filter>
+    </ClCompile>
+    <ClCompile Include="ui\licenseScreen.c">
+      <Filter>Source Files\ui</Filter>
+    </ClCompile>
+    <ClCompile Include="asset\bpaUtil.c">
+      <Filter>Source Files\asset</Filter>
+    </ClCompile>
+    <ClCompile Include="asset\haf.c">
+      <Filter>Source Files\asset</Filter>
+    </ClCompile>
+    <ClCompile Include="ui\hallOfFame.c">
+      <Filter>Source Files\ui</Filter>
+    </ClCompile>
+    <ClCompile Include="sfx\sound.c">
+      <Filter>Source Files\sfx</Filter>
+    </ClCompile>
+    <ClCompile Include="sfx\minifmod\soundSystem.c">
+      <Filter>Source Files\sfx\minifmod</Filter>
+    </ClCompile>
+    <ClCompile Include="ui\prevRaceScreen.c">
+      <Filter>Source Files\ui</Filter>
+    </ClCompile>
+    <ClCompile Include="ui\loadSaveGameScreen.c">
+      <Filter>Source Files\ui</Filter>
+    </ClCompile>
+    <ClCompile Include="ui\selectRaceScreen.c">
+      <Filter>Source Files\ui</Filter>
+    </ClCompile>
+    <ClCompile Include="ui\raceResultsScreen.c">
+      <Filter>Source Files\ui</Filter>
+    </ClCompile>
+    <ClCompile Include="ui\shopScreen.c">
+      <Filter>Source Files\ui</Filter>
+    </ClCompile>
+    <ClCompile Include="ui\menu.c">
+      <Filter>Source Files\ui</Filter>
     </ClCompile>
     <ClCompile Include="i18n\i18n.c">
       <Filter>Source Files\i18n</Filter>
@@ -218,35 +287,89 @@
     <ClInclude Include="popup\popup.h">
       <Filter>Header Files\popup</Filter>
     </ClInclude>
-    <ClInclude Include="minifmod_modified\xmeffects.h">
-      <Filter>Header Files\minifmod_modified</Filter>
-    </ClInclude>
-    <ClInclude Include="minifmod_modified\system_memory.h">
-      <Filter>Header Files\minifmod_modified</Filter>
-    </ClInclude>
-    <ClInclude Include="minifmod_modified\soundSystem.h">
-      <Filter>Header Files\minifmod_modified</Filter>
-    </ClInclude>
-    <ClInclude Include="minifmod_modified\fmod.h">
-      <Filter>Header Files\minifmod_modified</Filter>
-    </ClInclude>
-    <ClInclude Include="license\licenseScreen.h">
-      <Filter>Header Files\license</Filter>
-    </ClInclude>
-    <ClInclude Include="hof\hallOfFame.h">
-      <Filter>Header Files\hof</Filter>
-    </ClInclude>
-    <ClInclude Include="bpa\bpaUtil.h">
-      <Filter>Header Files\bpa</Filter>
-    </ClInclude>
-    <ClInclude Include="blackmarket\blackMarket.h">
-      <Filter>Header Files\blackmarket</Filter>
-    </ClInclude>
     <ClInclude Include="i18n\i18n.h">
       <Filter>Header Files\i18n</Filter>
     </ClInclude>
     <ClInclude Include="util\hash.h">
       <Filter>Header Files\util</Filter>
+    </ClInclude>
+    <ClInclude Include="mod\mod.h">
+      <Filter>Header Files\mod</Filter>
+    </ClInclude>
+    <ClInclude Include="portability\portability.h">
+      <Filter>Header Files\portability</Filter>
+    </ClInclude>
+    <ClInclude Include="input\input.c">
+      <Filter>Source Files\input</Filter>
+    </ClInclude>
+    <ClInclude Include="input\input.h">
+      <Filter>Header Files\input</Filter>
+    </ClInclude>
+    <ClInclude Include="ui\startGameScreen.h">
+      <Filter>Header Files\ui</Filter>
+    </ClInclude>
+    <ClInclude Include="ui\endGameScreen.h">
+      <Filter>Header Files\ui</Filter>
+    </ClInclude>
+    <ClInclude Include="ui\creditsScreen.h">
+      <Filter>Header Files\ui</Filter>
+    </ClInclude>
+    <ClInclude Include="ui\licenseScreen.h">
+      <Filter>Header Files\ui</Filter>
+    </ClInclude>
+    <ClInclude Include="ui\blackMarketScreen.h">
+      <Filter>Header Files\ui</Filter>
+    </ClInclude>
+    <ClInclude Include="asset\bpaUtil.h">
+      <Filter>Header Files\asset</Filter>
+    </ClInclude>
+    <ClInclude Include="asset\haf.h">
+      <Filter>Header Files\asset</Filter>
+    </ClInclude>
+    <ClInclude Include="ui\hallOfFame.h">
+      <Filter>Header Files\ui</Filter>
+    </ClInclude>
+    <ClInclude Include="sfx\sound.h">
+      <Filter>Header Files\sfx</Filter>
+    </ClInclude>
+    <ClInclude Include="sfx\minifmod\fmod.h">
+      <Filter>Header Files\sfx\minifmod</Filter>
+    </ClInclude>
+    <ClInclude Include="sfx\minifmod\soundSystem.h">
+      <Filter>Header Files\sfx\minifmod</Filter>
+    </ClInclude>
+    <ClInclude Include="sfx\minifmod\system_memory.h">
+      <Filter>Header Files\sfx\minifmod</Filter>
+    </ClInclude>
+    <ClInclude Include="sfx\minifmod\xmeffects.h">
+      <Filter>Header Files\sfx\minifmod</Filter>
+    </ClInclude>
+    <ClInclude Include="ui\prevRaceScreen.h">
+      <Filter>Header Files\ui</Filter>
+    </ClInclude>
+    <ClInclude Include="ui\loadSaveGameScreen.h">
+      <Filter>Header Files\ui</Filter>
+    </ClInclude>
+    <ClInclude Include="ui\selectRaceScreen.h">
+      <Filter>Header Files\ui</Filter>
+    </ClInclude>
+    <ClInclude Include="ui\raceResultsScreen.h">
+      <Filter>Header Files\ui</Filter>
+    </ClInclude>
+    <ClInclude Include="ui\shopScreen.h">
+      <Filter>Header Files\ui</Filter>
+    </ClInclude>
+    <ClInclude Include="ui\menu.h">
+      <Filter>Header Files\ui</Filter>
+    </ClInclude>
+    <ClInclude Include="ui\mainScreen.c">
+      <Filter>Source Files\ui</Filter>
+    </ClInclude>
+    <ClInclude Include="ui\mainScreen.h">
+      <Filter>Header Files\ui</Filter>
+    </ClInclude>
+    <ClInclude Include="anim.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

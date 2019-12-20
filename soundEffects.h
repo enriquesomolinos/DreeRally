@@ -1,4 +1,4 @@
-#pragma once
+
 //loadMenuSoundEffect
 // loadMenuSoundEffect(1u coge de SANIM_E.CMF.s3m
 // loadMenuSoundEffect(2u coge de GEN_EFE.CMF.xm o de  MEN_SAM.CMF
@@ -53,7 +53,6 @@ typedef enum {
 	GEN_EFE_BEEP3 = 0x2C
 
 }GeneralEffects;
-
 
 typedef enum {
 	ENDANI_E_VICTORY = 0x1,

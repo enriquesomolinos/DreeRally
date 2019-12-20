@@ -23,7 +23,7 @@ int hash_index (hash_t *h, char *key) {
 		orig = malloc(strlen(h->keys[i]));
 		strcpy(orig,h->keys[i]);
 		
-		if(strcmp(strupr(orig),strupr(dest))==0){
+		if(strcmp(_strupr(orig),_strupr(dest))==0){
 			return i;
 		}
 	}
@@ -44,5 +44,7 @@ void *hash_lookup (hash_t *h, char *key) {
     signed int i = hash_index(h, key);
     if(i==-1)
 		return NULL;
+	h->filled = h->filled +1;
+
 	return h->values[i];
 }

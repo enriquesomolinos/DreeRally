@@ -1,6 +1,5 @@
-#pragma once
 
-int __cdecl drawMenuAnimation(int a1, int a2, int a3, int a4, int a5);
+int   drawMenuAnimation(int x, int y, int frame, int animation, int frameSizes[]);
 int reloadContinueAnimation();
 int reloadEngineAnimation();
 int reloadTireAnimation();
@@ -18,13 +17,12 @@ extern int armourAnimFrameSize_4461A8[];
 extern int continueAnimFramesSize_4611D0[];
 extern int repairAnimFrameSize_446308[];
 
-
 extern int repairAnimCurrentFrame_45EEAC; // weak
 
 extern int tireAnimCurrentFrame_45F034; // weak
 extern int carAnimCurrentFrame_45FBA0; // weak
 extern int continueAnimCurrentFrame_4611D0; // weak
 extern int armourAnimCurrentFrame_461288; // weak
-extern void *anim_currentFrameData; // idb
+
 extern int engineAnimCurrentFrame_462D80; // weak
 extern int armourAnimFrameDirection_45F034;

@@ -1,14 +1,5 @@
-#pragma warning ( disable: 4146  4700 4703 4005)
-
-#define _DEPRECATION_DISABLE
-#pragma warning(push)
-#pragma warning(disable:  _CRT_NONSTDC_NO_WARNINGS)
-#pragma warning(disable: _CRT_SECURE_NO_WARNINGS) //4996 for _CRT_SECURE_NO_WARNINGS equivalent
-// deprecated code here
-#pragma warning(pop)// _ATL_SECURE_NO_DEPRECATE._CRT_SECURE_NO_DEPRECATE
 
 
-#include <windows.h>
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -23,7 +14,6 @@
 #include "../config.h"
 #include "../variables.h"
 
-
 char aASlickSteroidR[30] = "[A slick steroid run, anyone?"; // weak
 _UNKNOWN unk_452DE8; // weak
 char byte_452E38[] = { '[' }; // weak
@@ -34,7 +24,6 @@ char byte_452CD0[] = { '[' }; // weak
 char byte_452CF8[] = { '[' }; // weak
 char aDown_ThatSDoug[34] = "down. That's dough baked luck for"; // weak
 char aYou_AndLuckShe[34] = "you. And luck, she ain't no lady."; // weak
-
 
 char aWannaBeMyHitma[29] = "[Wanna be my hitman, driver?"; // weak
 _UNKNOWN unk_453108; // weak
@@ -104,7 +93,6 @@ char aLineBeforeThin[37] = "[line before things get crowded{, be"; // weak
 char aFirstLikeFloor[29] = "first, like, floor it, like."; // weak
 _UNKNOWN unk_453018; // weak
 _UNKNOWN unk_453068; // weak
-
 
 char aWelcomeToDea_0[25] = "[Welcome to Death Rally."; // weak
 _UNKNOWN unk_44C248; // weak
@@ -366,8 +354,8 @@ int sabotageScreen()
       v12 = (unsigned __int8)v1;
       v13 = LOBYTE(drivers[v41].rank);
       v12 *= 108;
-	  //LOBYTE(v17) = *((byte *)dword_460888 + v12);
-	  LOBYTE(v17) = *((byte *)drivers[v12].rank);
+	  //LOBYTE(v17) = *((BYTE *)dword_460888 + v12);
+	  LOBYTE(v17) = *((BYTE *)drivers[v12].rank);
       v14 = drivers[v12].rank;
       v48 = LOBYTE(drivers[v42].rank);
       v15 = (char *)drivers[v12].rank;
@@ -398,7 +386,7 @@ int sabotageScreen()
       v23 = v21 % 25 + 25;//calculo del sabotage aleatorio
       //dword_46084C[v22 / 4] = v23;
 	  drivers[v22 / 4].damage = v23;
-      itoa(v23, &DstBuf, 10);
+      _itoa(v23, &DstBuf, 10);
       v24 =(char*) drivers[v22].damage;
       do
       {
@@ -569,7 +557,7 @@ int showHitmanScreen()
         v14 = rand() % 4;
         v15 = selectedRace_462CE8;
       }
-      while ( *((byte *)&dword_45EB50[selectedRace_462CE8] + v14) == driverId );
+      while ( *((BYTE *)&dword_45EB50[selectedRace_462CE8] + v14) == driverId );
       v16 = 0;
       do
       {
@@ -578,8 +566,8 @@ int showHitmanScreen()
       }
       while ( v17 );
 	  //todo structura drivers
-      v18 = &drivers[*((byte *)&dword_45EB50[v15] + v14)];
-      v19 = &drivers[*((byte *)&dword_45EB50[v15] + v14)];
+      v18 = &drivers[*((BYTE *)&dword_45EB50[v15] + v14)];
+      v19 = &drivers[*((BYTE *)&dword_45EB50[v15] + v14)];
       do
         v20 = *v18++;
       while ( v20 );
@@ -587,7 +575,7 @@ int showHitmanScreen()
       v22 = &v43;
       do
       {
-        v23 = *((byte *)v22 + 1);
+        v23 = *((BYTE *)v22 + 1);
         v22 = (char *)v22 + 1;
       }
       while ( v23 );
@@ -614,7 +602,7 @@ int showHitmanScreen()
       v29 = &v43;
       do
       {
-        v30 = *((byte *)v29 + 1);
+        v30 = *((BYTE *)v29 + 1);
         v29 = (char *)v29 + 1;
       }
       while ( v30 );
@@ -647,7 +635,7 @@ int showHitmanScreen()
       drawYesNoMenu(161, 321, 0, &v39);
       if ( v39 == 1 )
       {
-        v35 = *((byte *)&dword_45EB50[selectedRace_462CE8] + v14);
+        v35 = *((BYTE *)&dword_45EB50[selectedRace_462CE8] + v14);
         killQuestDriverId_456BBC = v35;
 		v36 = drivers[v35].name;
 		// v36 = &byte_460840[108 * v35];
@@ -720,7 +708,7 @@ int showHitmanScreen()
       v6 = &v43;
       do
       {
-        v7 = *((byte *)v6 + 1);
+        v7 = *((BYTE *)v6 + 1);
         v6 = (char *)v6 + 1;
       }
       while ( v7 );
@@ -908,7 +896,6 @@ unsigned int noPaintJobPopUp()
   return drawTextWithFont((int)graphicsGeneral.fbig3aBpk, (int)&bigLetterSpacing_445848, "CONTINUE", 202432);
 }
 
-
 //----- (0041B850) --------------------------------------------------------
 unsigned int allCarsCrashPopUp()
 {
@@ -966,7 +953,6 @@ unsigned int allCarsCrashPopUp()
   return drawTextWithFont((int)graphicsGeneral.fbig3aBpk, (int)&bigLetterSpacing_445848, "CONTINUE", 202432);
 }
 
-
 //----- (0041BA00) --------------------------------------------------------
 int steriodsNotFoundPopup()
 {
@@ -988,7 +974,7 @@ int steriodsNotFoundPopup()
   int v15; // eax@34
   int v16; // eax@35
   int v17; // eax@36
-  signed int v19; // [sp+4h] [bp-44h]@0
+  signed int v19=0; // [sp+4h] [bp-44h]@0
   int v20; // [sp+8h] [bp-40h]@3
   __int16 v21; // [sp+Ch] [bp-3Ch]@3
   char v22; // [sp+13h] [bp-35h]@17
@@ -1115,7 +1101,7 @@ LABEL_15:
   v9 = &v22;
   do
   {
-    v10 = *((byte *)v9 + 1);
+    v10 = *((BYTE *)v9 + 1);
     v9 = (char *)v9 + 1;
   }
   while ( v10 );
@@ -1169,7 +1155,7 @@ int killOnePopup()
   int v23; // eax@40
   int v24; // eax@41
   int v25; // eax@42
-  signed int v27; // [sp+4h] [bp-44h]@0
+  signed int v27=0; // [sp+4h] [bp-44h]@0
   int v28; // [sp+8h] [bp-40h]@3
   char v29; // [sp+Ch] [bp-3Ch]@3
   char v30; // [sp+13h] [bp-35h]@17
@@ -1295,7 +1281,7 @@ LABEL_15:
   v10 = &v30;
   do
   {
-    v11 = *((byte *)v10 + 1);
+    v11 = *((BYTE *)v10 + 1);
     v10 = (char *)v10 + 1;
   }
   while ( v11 );
@@ -1320,7 +1306,7 @@ LABEL_15:
   v17 = &v30;
   do
   {
-    v18 = *((byte *)v17 + 1);
+    v18 = *((BYTE *)v17 + 1);
     v17 = (char *)v17 + 1;
   }
   while ( v18 );
@@ -1340,7 +1326,6 @@ LABEL_46:
   drawTextWithFont((int)graphicsGeneral.fbig3aBpk, (int)&bigLetterSpacing_445848, "CONTINUE", 202432);
   return 0;
 }
-
 
 //----- (0041C230) --------------------------------------------------------
 unsigned int welcomeShopPopup()
@@ -1398,7 +1383,7 @@ unsigned int endGamePopup()
   return result;
 }
 //----- (0042DC70) --------------------------------------------------------
-char __cdecl confirmationPopup(const char *a1)
+char   confirmationPopup(const char *a1)
 {
   int v1; // eax@1
 
@@ -1492,7 +1477,6 @@ int payBackTimePopup()
   return 0;
 }
 
-
 //----- (0041C770) --------------------------------------------------------
 unsigned int undergroundMarketPopup()
 {
@@ -1510,7 +1494,6 @@ unsigned int undergroundMarketPopup()
   return drawTextWithFont((int)graphicsGeneral.fbig3aBpk, (int)&bigLetterSpacing_445848, "CONTINUE", 202432);
 }
 
-
 unsigned int welcomePopup()
 {
   createPopup(45, 131, 458, 230, 1);
@@ -1527,10 +1510,8 @@ unsigned int welcomePopup()
   return drawTextWithFont((int)graphicsGeneral.fbig3aBpk, (int)&bigLetterSpacing_445848, "CONTINUE", 202432);
 }
 
-
-
 //----- (0041A530) esto pinta el recuadro parece que es x , offset x , y , offset y --------------------------------------------------------
-signed int __cdecl createPopup(int x, int xLenght, int y, int yLenght, int cornerType)
+signed int   createPopup(int x, int xLenght, int y, int yLenght, int cornerType)
 {
   int v5; // ebp@1
   int v6; // edx@2
@@ -1600,7 +1581,7 @@ signed int __cdecl createPopup(int x, int xLenght, int y, int yLenght, int corne
   }
   v13 = v5 - 64;
   for ( i = 0; i < v5 - 64; v13 = v5 - 64 )
-    *((byte *)screenBuffer + v10 + i++ + x + 672) = result;
+    *((BYTE *)screenBuffer + v10 + i++ + x + 672) = result;
   v15 = 0;
   if ( v13 > 0 )
   {

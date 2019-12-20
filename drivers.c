@@ -1,5 +1,5 @@
 #include "drivers.h"
-#include <windows.h>
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -7,10 +7,8 @@
 #include "dr.h"
 #include "cars.h"
 
-
  Driver drivers[20];
  int driverId; // weak
-
 
  char driverNames[20][20] = { "SAM SPEED",
 "JANE HONDA",
@@ -33,7 +31,6 @@
 "BOGUS BILL",
 "FARMER TED" };
 
-
 char * getDifficultyText(int difficulty) {
 	char * EASY_DIFFICULTY_TEXT = "SPEED MAKES ME DIZZY";
 	char * MEDIUM_DIFFICULTY_TEXT = "I LIVE TO RIDE";
@@ -41,14 +38,16 @@ char * getDifficultyText(int difficulty) {
 	if (difficulty == 0) {
 		return EASY_DIFFICULTY_TEXT;
 	}
-	if (difficulty == 1) {
+	else if (difficulty == 1) {
 		return MEDIUM_DIFFICULTY_TEXT;
 	}
-	if (difficulty == 2) {
+	else if (difficulty == 2) {
 		return HARD_DIFFICULTY_TEXT;
 	}
+	else{
+		return EASY_DIFFICULTY_TEXT;
+	}
 }
-
 
 int getMaxDriverPoints(int userDriverId) {
 	int maxDriverPoints = 0;
@@ -340,7 +339,6 @@ int initDrivers()
   dword_460FF4 = 0;
   dword_461060 = 0;*/
 
-
   
   /*v1 = 18;
   v2 = 0;
@@ -449,11 +447,11 @@ int initDrivers()
     *(_DWORD *)(v5 - 8) = v4 + 1; ///esta es la posicion
 
 	//esto setea el nombre
-    while ( *((byte *)&v103 + v14) || v14 == dword_460880[27 * driverId] )
+    while ( *((BYTE *)&v103 + v14) || v14 == dword_460880[27 * driverId] )
       ++v14;
 	  //esto devuelve el nombre del piloto
     v15 = (char *)&v23 + 11 * v14;
-    *((byte *)&v103 + v14) = 1;
+    *((BYTE *)&v103 + v14) = 1;
     v16 = v5 - (_DWORD)v15 - 80;
     do
     {

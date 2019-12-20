@@ -1,3 +1,4 @@
+[![Gitter](https://img.shields.io/gitter/room/DAVFoundation/DAV-Contributors.svg?style=flat-square)](https://gitter.im/DreeRally-deathrally/community#)
 [![Build status](https://ci.appveyor.com/api/projects/status/u7idbsek3njnh648/branch/master?svg=true&passingText=master%20-%20OK&failingText=master%20-%20Fails)](https://ci.appveyor.com/project/enriquesomolinos/dreerally/branch/master)
 [![Build status](https://ci.appveyor.com/api/projects/status/u7idbsek3njnh648/branch/0.2.x?svg=true&passingText=0.2.x%20-%20OK&failingText=0.2.x%20-%20Fails)](https://ci.appveyor.com/project/enriquesomolinos/dreerally/branch/0.2.x)
 
@@ -33,8 +34,22 @@ Follow us on [Dreerally](http://www.dreerally.com)
 # Building with Visual Studio 2010-2017
 - Open the project solution `DreeRally.sln`, choose `Debug` or `Release`, and then `Build Solution`.
 
+# Building under Linux
+- Run make -f Makefile.linux
+
+
 # Installing
 Once compiled, the DreeRally binary will serve as a replacement for `DeathRally.exe`. The following files from the original game need to be present: `ENDANI.haf`, `ENGINE.BPA`, `fmod.dll`, `IBFILES.BPA`,  `MENU.BPA`, `msvcr71.dll`, `MUSICS.BPA`, `SANIM.haf`, `SDL.dll`, and `TRX.BPA`.
+
+In this version you can add a few parameters when you launch dreerally:
+
+- -nosound: run with no music 
+- -noeffect: run with no sound effects 
+- -gl: run with opengl render. 
+- -smooth
+- -lang=lang(locale): run with a specific locale
+- -mod={modName: run with a specific mod.
+- -window: run in window mode
 
 # Multiplayer
 At this moment multiplayer is not implemented.
@@ -42,7 +57,25 @@ At this moment multiplayer is not implemented.
 # Contributing
 [Guidelines](docs/CONTRIBUTING.md)
 
+# Translations
+Here is the way to add a new language:
+
+-Create a new file under lang directory, for example langBr.txt. Please, follow this name lang%locale%.txt
+-Add your entries to this file. You can copy from langEs.txt
+-Launch dreerally.exe with the parameter -lang=langBr to use your translation.
+-If everything goes well, please, do a merge request to the project 
+
 # Modding
+
+Now, you can create mods. Mods are very simple and you need to follow this instructions
+- Create a folder called mods
+- Inside this directory create another one with the name of your mod. I uploaded a mod called 'sample'
+- Create inside 'your mod name' folder a file called config.txt. THe config.txt file contains all thing that can be modded. You need to write the key-value pair that you want.
+- Create a folder files inside 'your mod name' folder.
+- Put your customized Death Rally files in uppercase. Simply name this files equals than the name of the file in Death Rally (for example FACE01.bpk or TR0-ima.bpk).
+- Launch dreerally with -mod='your mod name' parameter.
+- Enjoy dreerally with your custom options and files! 
+
 At this moment you can only put your custom files in the root directory of the game. For example if you put MENU.PAL in the root directory, the game will use your custom file and not the original file!.
 
 

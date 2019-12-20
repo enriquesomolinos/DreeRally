@@ -1,10 +1,8 @@
-#pragma once
+
 
 //el tamaño de los corredores es 108
 
 #define TOTAL_DRIVERS = 20;
-
-
 
 typedef enum {
 	EASY_DIFFICULTY = 0,
@@ -52,7 +50,6 @@ typedef struct Driver {
 	
 } Driver;
 
-
 extern Driver drivers[20];
 
 extern int driverId; // weak
@@ -89,8 +86,6 @@ int getMaxDriverPoints(int userDriverId);
 4608a0 spikes
 4608a4 rocket
 4608a8 sabotage
-
-
 
 */
 
@@ -141,6 +136,6 @@ int dword_461060; // weak
 _UNKNOWN unk_461094; // weak*/
 
 /*
-dword_45EB50				participantes carrera 0 cada uno un byte
+dword_45EB50				participantes carrera 0 cada uno un BYTE
 dword_45EB54				1
 dword_45EB58				2*/

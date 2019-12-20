@@ -1,17 +1,9 @@
-#define _CRT_NONSTDC_NO_WARNINGS
-#define  _CRT_SECURE_NO_WARNINGS
-#pragma warning ( disable: 4146  4700 4703 4005)
 
-#pragma warning(push)
-#pragma warning(disable: warning-code) //4996 for _CRT_SECURE_NO_WARNINGS equivalent
-
-#pragma warning(pop)
 
 #include "graphics.h"
 #include "defs.h"
 #include "menus.h"
 #include "dr.h"
-#include <windows.h>
 
 const int DEFAULT_BIGLETTER_SPACING_OFFSET = -23;
 
@@ -35,16 +27,16 @@ const int DEFAULT_BIGLETTER_SPACING_OFFSET = -23;
 //ver porque byte_445892
  char letterSpacing_4458B0[] = { '\x10', '\x10', '\x0A', '\x5', '\x8', '\x0B', '\x0B', '\x0D', '\x0B', '\x5',
 					   '\x6',  '\x6',  '\x9',  '\x0B', '\xB', '\x5', '\x4', '\x0A', '\x0B', '\x5', //20
-						'\x5', '\x0A', '\x5', '\x0A', '\x0A', '\x0A', '\x0A', '\x0A', '\x4', '\x5',
-						'\x9', '\x0B', '\x8', '\x8', '\x5', '\x0B', '\x0B', '\x0A', '\x0B', '\x0A', //40
-						'\x0A', '\x0C', '\x0B', '\x5', '\x0B', '\x0B', '\x0A', '\x0E', '\x0B', '\x0B', 
-						'\x0A', '\x0B', '\x0B', '\x0A', '\x0A', '\x0B', '\x0C', '\x0F', '\x0B', '\x0B',//60
+						'\x5', '\x0A', '\x5', '\x0A', '\x0A', '\x4', '\x09', '\x9', '\x9', '\x9',//ultimo es el numero 5
+						'\x9', '\x9', '\x8', '\x8', '\x5', '\x0B', '\x0B', '\x0A', '\x0B', '\x0A', //40
+						'\x0A', '\x0C', '\x0B', '\xA', '\x0B', '\x0B', '\x0A', '\x0E', '\x0B', '\x0B', 
+						'\x0A', '\x0B', '\x0B', '\x0C', '\x0A', '\x0B', '\x0C', '\x0F', '\x0B', '\x0B',//60
 						'\x0A', '\x7',  '\x0A', '\x0F',  '\x0A', '\x0A', '\x5', '\x0B', '\x0A', '\x9', 
 						'\x0A', '\x9',  '\x9',  '\x0A', '\x0A', '\x0A', '\x0A',  '\x0A', '\x9', '\x0C', //80
 						'\x0A', '\x4', '\x9', '\x0A', '\x0A', '\x0A', '\x9', '\x0A', '\x0A', '\x0E', 
-						'\x0A', '\x0A', '\x9', '\x9', '\x4', '\x0C', '\x9', '\x0B', '\x10', '\x0D', //100
+						'\x0A', '\x0A', '\x9', '\x9', '\xA', '\x0C', '\x9', '\x0B', '\x10', '\x0D', //100
 						'\x0E', '\x0D', '\x9', '\x0D', '\x0D', '\x0D', '\x0D', '\x0D', '\x0C', '\x0D', 
-						'\x0D', '\x0',  '\x0', '\x0',  '\x0',  '\x0',  '\x0',  '\x0',  '\x9',  '\x0C',//120
+						'\x0D', '\x0D',  '\x0D', '\x0D',  '\x0D',  '\x0D',  '\x0D',  '\x0D',  '\x9',  '\x0C',//120
 						'\x9', '\x9', '\x9', '\x9', '\x9', '\x9', '\x9', '\x9', '\x9', '\x9',
 						'\x9', '\x9', '\x9', '\x9', '\x9', '\x9', '\x9', '\x9', '\x9', '\x9', //140
 						'\x9', '\x9', '\x9', '\x9', '\x9', '\x9', '\x9', '\x9', '\x9', '\x9', 
@@ -72,7 +64,7 @@ const int DEFAULT_BIGLETTER_SPACING_OFFSET = -23;
 	  
 	  drawImageWithPosition2((int)fsma3fBpk+16*13*v5, 16, 13,(int)((char *)screenBuffer+v5*16));
   }*/
-unsigned int __cdecl drawInGamePrices(const char *text, int position)
+unsigned int   drawInGamePrices(const char *text, int position)
 
 {
   int height; // ebx@1
@@ -118,7 +110,7 @@ unsigned int __cdecl drawInGamePrices(const char *text, int position)
 // 445916: using guessed type char byte_445916;
 
 //----- (0041A430) --------------------------------------------------------
-int __cdecl writeTextInScreen(const char *text, int screenOffset)
+int   writeTextInScreen(const char *text, int screenOffset)
 {
   int v2; // esi@1
   unsigned int v3; // ebp@1
@@ -201,9 +193,8 @@ LABEL_17:
 // 4458B0: using guessed type char letterSpacing_4458B0;
 // 4458B1: using guessed type char byte_4458B1;
 
-
 //----- (0041C9F0) --------------------------------------------------------
-int __cdecl getBoxBigTextOffset(const char *a1)
+int   getBoxBigTextOffset(const char *a1)
 {
   const char *v1; // ecx@1
   int result; // eax@1
@@ -230,7 +221,7 @@ int __cdecl getBoxBigTextOffset(const char *a1)
  
  
  //----- (0041FA50) --------------------------------------------------------
-int __cdecl sub_41FA50(const char *a1)
+int   sub_41FA50(const char *a1)
 {
   const char *v1; // eax@1
   int v2; // ebx@1
@@ -254,7 +245,7 @@ int __cdecl sub_41FA50(const char *a1)
 
 //----- (0041FAB0) --------------------------------------------------------
 //offset para los textos en los recuadros de las pantallas para que quede centrado el texto
-int __cdecl getBoxTextOffset(const char *a1)
+int   getBoxTextOffset(const char *a1)
 {
   const char *v1; // eax@1
   int v2; // ebp@1
@@ -288,7 +279,7 @@ int __cdecl getBoxTextOffset(const char *a1)
 // 445916: using guessed type char byte_445916;
 
 //----- (0041FB20) --------------------------------------------------------
-int __cdecl getBoxTextSize(const char *a1)
+int   getBoxTextSize(const char *a1)
 {
   const char *v1; // ecx@1
   int result; // eax@1
@@ -313,7 +304,7 @@ int __cdecl getBoxTextSize(const char *a1)
 
 //----- (0041FB70) --------------------------------------------------------
 /*esto creo que no es necesario*/
-int __cdecl getNameOffsetPositionRight(const char *a1)
+int   getNameOffsetPositionRight(const char *a1)
 {
   const char *v1; // eax@1
   int v2; // ebx@1
@@ -332,7 +323,6 @@ int __cdecl getNameOffsetPositionRight(const char *a1)
       v2 += (unsigned __int8)letterSpacing_4458B0[90+a1[v3++]];
 	//v2 += (unsigned __int8)byte_44590A[a1[v3++]];
 
-
 	
     while ( v3 < strlen(a1) );
   }
@@ -340,7 +330,7 @@ int __cdecl getNameOffsetPositionRight(const char *a1)
 }
 
 //----- (0041FBD0) --------------------------------------------------------
-int __cdecl getBigTextMidSize(const char *a1)
+int   getBigTextMidSize(const char *a1)
 {
   const char *v1; // ecx@1
   signed int v2; // eax@1
@@ -366,10 +356,8 @@ int __cdecl getBigTextMidSize(const char *a1)
 // 41FBD0: could not find valid save-restore pair for edi
 // 41FBD0: could not find valid save-restore pair for esi
 
-
-
 //----- (00421AE0) --------------------------------------------------------
-int __cdecl drawBorder(int a1, int a2, int a3, int a4)
+int   drawBorder(int a1, int a2, int a3, int a4)
 {
   int v4; // edi@1
   int v5; // ebx@1
@@ -422,7 +410,7 @@ int __cdecl drawBorder(int a1, int a2, int a3, int a4)
 }
 
 //----- (00421C40) --------------------------------------------------------
-int __cdecl drawBorder2(int a1, int a2, unsigned int a3, int a4)
+int   drawBorder2(int a1, int a2, unsigned int a3, int a4)
 {
   int result; // eax@1
   int v5; // edx@1
@@ -491,7 +479,7 @@ int __cdecl drawBorder2(int a1, int a2, unsigned int a3, int a4)
 }
 
 //----- (0043BF50) --------------------------------------------------------
-int __cdecl drawImageWithPosition2(int texture, int height, int width, int screenBufferPtr)
+int   drawImageWithPosition2(int texture, int height, int width, int screenBufferPtr)
 {
   int v4; // ecx@1
   int result; // eax@1
@@ -511,8 +499,8 @@ int __cdecl drawImageWithPosition2(int texture, int height, int width, int scree
         v7 = height;
         do
         {
-          v8 = *(byte *)v4++;
-          *(byte *)result++ = v8;
+          v8 = *(BYTE *)v4++;
+          *(BYTE *)result++ = v8;
           --v7;
         }
         while ( v7 );
@@ -526,7 +514,7 @@ int __cdecl drawImageWithPosition2(int texture, int height, int width, int scree
 }
 
 //----- (0043BF90) --------------------------------------------------------
-int __cdecl drawImageWithPosition(int icon, int width, int height, int pscreenBufferPos)
+int   drawImageWithPosition(int icon, int width, int height, int pscreenBufferPos)
 {
   int result; // eax@1
   int screenIcon; // edx@1
@@ -547,8 +535,8 @@ int __cdecl drawImageWithPosition(int icon, int width, int height, int pscreenBu
         v8 = width;
         do
         {
-          if ( *(byte *)screenIcon)
-            *(byte *)screenPos = *(byte *)screenIcon;
+          if ( *(BYTE *)screenIcon)
+            *(BYTE *)screenPos = *(BYTE *)screenIcon;
           ++screenIcon;
           ++screenPos;
           --v8;
@@ -564,7 +552,7 @@ int __cdecl drawImageWithPosition(int icon, int width, int height, int pscreenBu
   return result;
 }
 
-unsigned int __cdecl drawTextWithFont(int font, int a2, const char *text, int screenPosition)
+unsigned int   drawTextWithFont(int font, int a2, const char *text, int screenPosition)
 {
   int height; // edx@1
   int width; // ebp@1
@@ -574,9 +562,9 @@ unsigned int __cdecl drawTextWithFont(int font, int a2, const char *text, int sc
   char v9; // al@3
   int v10; // [sp+10h] [bp-8h]@1
 
-  height = *(byte *)(a2 + 1); 
-  width = *(byte *)a2;
-  v10 = *(byte *)(a2 + 1);
+  height = *(BYTE *)(a2 + 1); 
+  width = *(BYTE *)a2;
+  v10 = *(BYTE *)(a2 + 1);
   /*height = 32;
   width = 32;
   v10 = 32;*/
@@ -602,11 +590,11 @@ unsigned int __cdecl drawTextWithFont(int font, int a2, const char *text, int sc
         drawImageWithPosition(font + width * height * ((unsigned __int8)v9 - 32), width, height, (int)((char *)screenBuffer + screenPositionOffset));
 		height = v10;
 		//aqui era -24 pero se ve mal!
-		if(*(byte *)a2== *(byte *)bigLetterSpacing_445848){
+		if(*(BYTE *)a2== *(BYTE *)bigLetterSpacing_445848){
 			
-			screenPositionOffset += *(byte *)(text[v6] + a2 - 30);
+			screenPositionOffset += *(BYTE *)(text[v6] + a2 - 30);
 		}else{
-			screenPositionOffset += *(byte *)(text[v6] + a2 - 24);
+			screenPositionOffset += *(BYTE *)(text[v6] + a2 - 24);
 		}
 		
       }

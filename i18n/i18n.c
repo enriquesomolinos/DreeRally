@@ -6,7 +6,6 @@
 #include "i18n.h"
 #include "../util/hash.h"
 
-
 hash_t *languageEntries;
 
 char * readline(FILE *fp, char *buffer)
@@ -43,7 +42,7 @@ char * readline(FILE *fp, char *buffer)
     return buffer;
 }
 
-int initI18n(int language) {
+int initI18n() {
 
 	FILE * fp;
     char *s;
@@ -54,7 +53,7 @@ int initI18n(int language) {
 	if(mainArgs.language)
 		fp = fopen(strcat(strcat("lang/",mainArgs.language),".txt"), "r");
 	else
-		return;
+		return -1;
 	while ((s = readline(fp, 0)) != NULL)
 	{
 		
@@ -67,6 +66,8 @@ int initI18n(int language) {
 		}
 		//free(s);		
 	}
+	fclose(fp);
+	return 1;
 }
 
 char * getLanguageEntry(char * languageEntry) {

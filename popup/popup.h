@@ -1,6 +1,5 @@
-#pragma once
 
-signed int __cdecl createPopup(int a1, int a2, int a3, int a4, int a5);
+signed int   createPopup(int x, int xLenght, int y, int yLenght, int cornerType);
 unsigned int welcomePopup();
 unsigned int undergroundMarketPopup();
 int payBackTimePopup();
@@ -15,4 +14,4 @@ unsigned int lappedPopUp();
 char noCollectPopup_42E6F0();
 int showHitmanScreen();
 int sabotageScreen();
-char __cdecl confirmationPopup(const char *a1);
+char   confirmationPopup(const char *a1);
