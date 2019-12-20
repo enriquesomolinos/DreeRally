@@ -1,6 +1,6 @@
 [![Gitter](https://img.shields.io/gitter/room/DAVFoundation/DAV-Contributors.svg?style=flat-square)](https://gitter.im/DreeRally-deathrally/community#)
 [![Build status](https://ci.appveyor.com/api/projects/status/u7idbsek3njnh648/branch/master?svg=true&passingText=master%20-%20OK&failingText=master%20-%20Fails)](https://ci.appveyor.com/project/enriquesomolinos/dreerally/branch/master)
-[![Build status](https://ci.appveyor.com/api/projects/status/u7idbsek3njnh648/branch/0.2.x?svg=true&passingText=0.2.x%20-%20OK&failingText=0.2.x%20-%20Fails)](https://ci.appveyor.com/project/enriquesomolinos/dreerally/branch/0.2.x)
+[![Build status](https://ci.appveyor.com/api/projects/status/u7idbsek3njnh648/branch/0.3.x?svg=true&passingText=0.3.x%20-%20OK&failingText=0.3.x%20-%20Fails)](https://ci.appveyor.com/project/enriquesomolinos/dreerally/branch/0.3.x)
 
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md#pull-requests)
 [![Build status](https://img.shields.io/github/downloads/enriquesomolinos/dreerally/total.svg)](https://github.com/enriquesomolinos/dreerally/releases)
