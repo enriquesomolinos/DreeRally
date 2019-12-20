@@ -1,6 +1,6 @@
 
 #include <stdio.h>
-
+#include <stdlib.h>
 #include "../defs.h"
 
 #include "../graphics.h"
@@ -18,24 +18,21 @@
 	#include "../portability/portability.h"
 #endif
 
+
+int dword_461FD4; // weak
+int dword_461F30[256]; //weak
+
+int dword_461F2C[256]; // weak
+
 extern char  unk_445928[];
 extern int dword_45FC00; // wea
 extern  int dword_461250; // weak
 extern  int dword_462D7C; // weak
-extern void *recobarBpk; // idb
-
 
 extern _UNKNOWN unk_45F8B0; // weak
 extern _UNKNOWN unk_45F8BC; // weak
 
-
-
-extern void *fametxtBpk; // idb
-
-
-
 extern char aDeliverator[12] = "Deliverator"; // weak
-
 
 //----- (00431510) --------------------------------------------------------
 int seeHallOfFame()
@@ -67,12 +64,12 @@ int seeHallOfFame()
   memcpy((void *)dword_45FC00, screenBuffer, 0x4B000u);
   screenBuffer = (void *)dword_45FC00;
   memcpy((void *)(dword_45FC00 + 67200), (char *)graphicsGeneral.menubg5Bpk + 67200, 0x28F00u);
-  drawImageWithPosition((int)fametxtBpk, 640, 54, (int)((char *)screenBuffer + 53760));
+  drawImageWithPosition((int)graphics2.fametxtBpk, 640, 54, (int)((char *)screenBuffer + 53760));
   v0 = 0;
   do
   {
     v1 = v0 + 1;
-    itoa(v0 + 1, DstBuf, 10);
+    _itoa(v0 + 1, DstBuf, 10);
     v2 = &v21;
     do
       v3 = (v2++)[1];
@@ -97,8 +94,8 @@ int seeHallOfFame()
     strupr(DstBuf);*/
     v9 = 14080 * v0;
 	//driver
-    drawTextWithFont((int)graphicsGeneral.fmed1aBpk, (int)&unk_445928, strupr(configuration.hallOfFameEntries[v0].name), v9 + 92297);
-    itoa(configuration.hallOfFameEntries[v0].races, DstBuf, 10);
+    drawTextWithFont((int)graphicsGeneral.fmed1aBpk, (int)&unk_445928, _strupr(configuration.hallOfFameEntries[v0].name), v9 + 92297);
+    _itoa(configuration.hallOfFameEntries[v0].races, DstBuf, 10);
     v10 = configuration.hallOfFameEntries[v0].races;
 	//races
     if ( v10 >= 0 && v10 < 10 )
@@ -158,12 +155,12 @@ LABEL_25:
   screenBuffer = (void *)dword_45FC00;
   memcpy((void *)(dword_45FC00 + 53760), (char *)graphicsGeneral.menubg5Bpk + 53760, 0x2C380u);
   v17 = 0;
-  drawImageWithPosition((int)recotxtBpk, 640, 16, (int)((char *)screenBuffer + 58880));
+  drawImageWithPosition((int)graphics2.recotxtBpk, 640, 16, (int)((char *)screenBuffer + 58880));
   drawRecordByCircuit((unsigned __int8)circuitOrder_45673C[0]);
-  drawImageWithPosition2(trsnap2m1Bpk[circuitOrder_45673C[0]], 128, 98, (int)((char *)screenBuffer + 137000));
+  drawImageWithPosition2(graphics2.trsnap2m1Bpk[circuitOrder_45673C[0]], 128, 98, (int)((char *)screenBuffer + 137000));
   //drawImageWithPosition2((int)*(&trsnap2m1Bpk + (unsigned __int8)circuitOrder_45673C[0]), 128, 98, (int)((char *)screenBuffer + 137000));
-  drawImageWithPosition2((int)trarr1Bpk, 16, 84, (int)((char *)screenBuffer + 145944));
-  drawImageWithPosition2((int)((char *)trarr1Bpk + 1344), 16, 84, (int)((char *)screenBuffer + 146088));
+  drawImageWithPosition2((int)graphics2.trarr1Bpk, 16, 84, (int)((char *)screenBuffer + 145944));
+  drawImageWithPosition2((int)((char *)graphics2.trarr1Bpk + 1344), 16, 84, (int)((char *)screenBuffer + 146088));
   drawBorder(15, 204, 178, 117);
   screenBuffer = (void *)dword_461250;
   sub_42C4A0();
@@ -186,9 +183,9 @@ LABEL_25:
         else
           --v17;
         loadMenuSoundEffect(1u, 26, 0, configuration.effectsVolume, dword_445198);
-        drawImageWithPosition2((int)((char *)trarr1Bpk + 2688), 16, 84, (int)((char *)screenBuffer + 145944));
+        drawImageWithPosition2((int)((char *)graphics2.trarr1Bpk + 2688), 16, 84, (int)((char *)screenBuffer + 145944));
         drawImageWithPosition2(
-          trsnap2m1Bpk[circuitOrder_45673C[v17]],
+          graphics2.trsnap2m1Bpk[circuitOrder_45673C[v17]],
           128,
           98,
           (int)((char *)screenBuffer + 137000));
@@ -206,7 +203,7 @@ LABEL_25:
           --v19;
         }
         while ( v19 );
-        drawImageWithPosition2((int)trarr1Bpk, 16, 84, (int)((char *)screenBuffer + 145944));
+        drawImageWithPosition2((int)graphics2.trarr1Bpk, 16, 84, (int)((char *)screenBuffer + 145944));
         refreshAllScreen();
         break;
       case 76://left
@@ -216,9 +213,9 @@ LABEL_25:
         else
           ++v17;
         loadMenuSoundEffect(1u, 26, 0, configuration.effectsVolume, dword_445198);
-        drawImageWithPosition2((int)((char *)trarr1Bpk + 4032), 16, 84, (int)((char *)screenBuffer + 146088));
+        drawImageWithPosition2((int)((char *)graphics2.trarr1Bpk + 4032), 16, 84, (int)((char *)screenBuffer + 146088));
         drawImageWithPosition2(
-          trsnap2m1Bpk[circuitOrder_45673C[v17]],
+          (int)graphics2.trsnap2m1Bpk[circuitOrder_45673C[v17]],
           128,
           98,
           (int)((char *)screenBuffer + 137000));
@@ -236,7 +233,7 @@ LABEL_25:
           --v20;
         }
         while ( v20 );
-        drawImageWithPosition2((int)((char *)trarr1Bpk + 1344), 16, 84, (int)((char *)screenBuffer + 146088));
+        drawImageWithPosition2((int)((char *)graphics2.trarr1Bpk + 1344), 16, 84, (int)((char *)screenBuffer + 146088));
         refreshAllScreen();
         break;
       case 0://enter esc
@@ -248,8 +245,6 @@ LABEL_25:
     }
   }
 }
-
-
 
 CircuitRecords* getDefaulRecords() {
 
@@ -495,7 +490,6 @@ CircuitRecords* getDefaulRecords() {
 	circuitRecords[BORNEO_CIRCUIT + DELIVERATOR * 18].sec = 12;
 	circuitRecords[BORNEO_CIRCUIT + DELIVERATOR * 18].cen = 94;
 
-
 	return circuitRecords;
 }
 
@@ -537,8 +531,6 @@ HallOfFameEntry* getDefaultHallOfFame() {
 
 	return hallOfFameEntry;
 }
-
-
 
 //----- (0041E490) --------------------------------------------------------
 int   drawRecordByCircuit(int a1)
@@ -614,7 +606,7 @@ int   drawRecordByCircuit(int a1)
     memcpy(v6, v5, 0x170u);
   }
   while ( v4 < 83200 );
-  drawImageWithPosition((int)recobarBpk, 640, 68, (int)((char *)screenBuffer + 84480));
+  drawImageWithPosition((int)graphics2.recobarBpk, 640, 68, (int)((char *)screenBuffer + 84480));
   strcpy(Str, circuits[a1]);
   /*v8 = (char *)(Str - v7);
   do
@@ -674,9 +666,9 @@ int   drawRecordByCircuit(int a1)
 	memset(name, "\0",strlen(name));
 	strcpy(name, configuration.circuitRecords[a1  + index*18].name);
     drawTextWithFont((int)graphicsGeneral.fmed1aBpk, (int)&unk_445928, name, v16);
-    itoa(configuration.circuitRecords[a1  + index*18].min, DstBuf, 10);
-    itoa(configuration.circuitRecords[a1  + index*18].sec, v44, 10);
-    itoa(configuration.circuitRecords[a1  + index*18].cen, v47, 10);
+    _itoa(configuration.circuitRecords[a1  + index*18].min, DstBuf, 10);
+    _itoa(configuration.circuitRecords[a1  + index*18].sec, v44, 10);
+    _itoa(configuration.circuitRecords[a1  + index*18].cen, v47, 10);
     /*if ( strlen(DstBuf) == 1 )
     {
       v42 = DstBuf;
@@ -748,5 +740,259 @@ int   drawRecordByCircuit(int a1)
     v14 = v50;
 	index--;
   }
+  return result;
+}
+
+//----- (00430FA0) --------------------------------------------------------
+char showHallOfFameEndGame_430FA0()//muestra hall of fame
+{
+  int v0; // edi@1
+  signed int v1; // esi@1
+  signed int v2; // eax@1
+  int *v3; // eax@7
+  int v4; // edx@7
+  int v5; // ebx@8
+  char *v6; // eax@9
+  int v7; // edi@9
+  char *v8; // edx@9
+  char v9; // cl@10
+  int v10; // ecx@11
+  int v11; // esi@12
+  int v12; // ebx@13
+  char *v13; // edi@13
+  char v14; // al@14
+  int v15; // edx@15
+  int v16; // edi@18
+  int *v17; // eax@18
+  char *v18; // edx@18
+  char v19; // cl@19
+  int v20; // esi@20
+  int v21; // eax@20
+  int v22; // eax@23
+  int v23; // eax@28
+  char *v24; // edx@28
+  char v25; // cl@29
+  char *v26; // eax@30
+  char v27; // al@32
+  char v29; // [sp-1h] [bp-29h]@13
+  char DstBuf[40]; // [sp+0h] [bp-28h]@13
+
+  memcpy(screenBuffer, graphicsGeneral.menubg5Bpk, 0x4B000u);
+  drawTransparentBlock(0, 371, 639, 109);
+  sub_427BC0();
+  drawBottomMenuText();
+  drawImageWithPosition((int)graphics2.fametxtBpk, 640, 54, (int)((char *)screenBuffer + 53760));
+  v0 = driverId;
+  v1 = 0;
+  v2 = (signed int)dword_461F2C;
+  while ( drivers[driverId].totalRaces >= configuration.hallOfFameEntries[0].races )
+  {
+    v2 += 20;
+    ++v1;
+    if ( v2 >= (signed int)&event2Bpk )
+      goto LABEL_12;
+  }
+  if ( v1 >= 0 )
+  {
+    if ( v1 < 9 )
+    {
+
+      v3 = &dword_461FD4;
+      v4 = 9 - v1;
+      do
+      {
+        --v4;
+        *v3 = *(v3 - 5);
+        v3[1] = *(v3 - 4);
+        v3[2] = *(v3 - 3);
+        v5 = *(v3 - 1);
+        v3[3] = *(v3 - 2);
+        v3[4] = v5;
+        v3 -= 5;
+      }
+      while ( v4 );
+    }
+    v6 = &byte_460840[v0];
+    v7 = 5 * v1;
+   //TODO FIX halloffame v8 = (char *)((char *)&configuration.dword_461F20[5 * v1] - v6);
+    do
+    {
+      v9 = *v6;
+      v6[(_DWORD)v8] = *v6;
+      ++v6;
+    }
+    while ( v9 );
+	//TODO FIX halloffame strupr((char *)&configuration.dword_461F20[5 * v1]);
+    v10 = configuration.difficulty;
+    dword_461F2C[v7] = drivers[driverId].totalRaces;
+    dword_461F30[v7] = v10;
+    sub_421980(17, 22 * v1 + 138, 603, 24);
+    saveConfiguration();
+  }
+LABEL_12:
+  v11 = 0;
+  do
+  {
+    v12 = v11 + 1;
+    _itoa(v11 + 1, DstBuf, 10);
+    v13 = &v29;
+    do
+      v14 = (v13++)[1];
+    while ( v14 );
+    v15 = (int)graphicsGeneral.fmed1aBpk;
+    *(_WORD *)v13 = 46;
+    if ( v11 == 9 )
+      drawTextWithFont(v15, (int)&unk_445928, DstBuf, 218908);
+    else
+      drawTextWithFont(v15, (int)&unk_445928, DstBuf, 14080 * v11 + 92196);
+    v16 = 5 * v11;
+	//TODO FIX  v17 = &configuration.dword_461F20[5 * v11];
+    v18 = (char *)(DstBuf - (char *)v17);
+    do
+    {
+      v19 = *(BYTE *)v17;
+      *((BYTE *)v17 + (_DWORD)v18) = *(BYTE *)v17;
+      v17 = (int *)((char *)v17 + 1);
+    }
+    while ( v19 );
+    _strupr(DstBuf);
+    v20 = 14080 * v11;
+    drawTextWithFont((int)graphicsGeneral.fmed1aBpk, (int)&unk_445928, DstBuf, v20 + 92297);
+    _itoa(dword_461F2C[v16], DstBuf, 10);
+    v21 = dword_461F2C[v16];
+    if ( v21 >= 0 && v21 < 10 )
+      drawTextWithFont((int)graphicsGeneral.fmed1aBpk, (int)&unk_445928, DstBuf, v20 + 92504);
+    v22 = dword_461F2C[v16];
+    if ( v22 >= 10 && v22 < 100 )
+      drawTextWithFont((int)graphicsGeneral.fmed1aBpk, (int)&unk_445928, DstBuf, v20 + 92496);
+    if ( dword_461F2C[v16] >= 100 )
+      drawTextWithFont((int)graphicsGeneral.fmed1aBpk, (int)&unk_445928, DstBuf, v20 + 92488);
+    v23 = 24 * dword_461F30[v16] + 4485952;
+    v24 = &DstBuf[-v23];
+    do
+    {
+      v25 = *(BYTE *)v23;
+      v24[v23] = *(BYTE *)v23;
+      ++v23;
+    }
+    while ( v25 );
+    v26 = _strupr(DstBuf);
+    drawTextWithFont((int)graphicsGeneral.fmed1aBpk, (int)&unk_445928, v26, v20 + 92589);
+    v11 = v12;
+  }
+  while ( v12 < 10 );
+  refreshAllScreen();
+  sub_4224E0();
+  transitionToCurrentImage();
+  eventDetected();
+  sub_418090();
+  do
+  {
+    while ( 1 )
+    {
+      refreshAndCheckConnection_42A570();
+      v27 = eventDetected();
+      if ( v27 != 59 )
+        break;
+      if ( !isMultiplayerGame )
+        goto LABEL_36;
+      //multiplayer_sub_42CCF0();
+    }
+  }
+  while ( !v27 );
+LABEL_36:
+  eventDetected();
+  return sub_418090();
+}
+
+//----- (00427BC0) --------------------------------------------------------
+int sub_427BC0()
+{
+  char v0; // bl@1
+  signed int v1; // edi@1
+  char v2; // al@2
+  signed int v3; // edx@2
+  signed int v4; // eax@3
+  char v5; // cl@4
+  int v6; // eax@7
+  char v7; // cl@8
+  int v8; // eax@9
+  char v9; // cl@10
+  int v10; // eax@11
+  char v11; // cl@12
+  int result; // eax@13
+  char v13; // cl@14
+
+  v0 = unk_461EC1;
+  v1 = 6;
+  do
+  {
+    v2 = unk_461EC3;
+    unk_461EC3 = word_461EC4;
+    unk_461EC0[0] = v0;
+    v0 = unk_461EC2;
+    unk_461EC2 = v2;
+    HIBYTE(word_461EC4) = unk_461EC6;
+    unk_461EC6 = unk_461EC7;
+    unk_461EC7 = word_461EC8;
+    HIBYTE(word_461EC8) = unk_461ECA;
+    unk_461ECA = unk_461ECB;
+    unk_461ECB = word_461ECC;
+    HIBYTE(word_461ECC) = unk_461ECE;
+    unk_461ECE = unk_461ECF;
+    unk_461ECF = word_461ED0;
+    HIBYTE(word_461ED0) = unk_461ED2;
+    unk_461ED2 = unk_461ED3;
+    v3 = (signed int)&unk_462096;
+    unk_461ED3 = word_461ED4;
+    do
+    {
+      v4 = v3;
+      do
+      {
+        v5 = *(BYTE *)v4;
+        *(BYTE *)(v4 - 150) = *(BYTE *)v4;
+        ++v4;
+      }
+      while ( v5 );
+      v3 += 150;
+    }
+    while ( v3 < (signed int)&blacktx1Bpk );
+    --v1;
+  }
+  while ( v1 );
+  unk_461EC1 = v0;
+  v6 = 0;
+  do
+  {
+    v7 = byte_456618[v6];
+    byte_4629F6[v6++] = v7;
+  }
+  while ( v7 );
+  HIBYTE(word_461ED0) = 1;
+  v8 = 0;
+  do
+  {
+    v9 = byte_45665E[v8];
+    byte_462A8C[v8++] = v9;
+  }
+  while ( v9 );
+  unk_461ED2 = 1;
+  v10 = 0;
+  do
+  {
+    v11 = byte_4566A4[v10];
+    byte_462B22[v10++] = v11;
+  }
+  while ( v11 );
+  unk_461ED3 = 1;
+  result = 0;
+  do
+  {
+    v13 = byte_4566EA[result];
+    byte_462BB8[result++] = v13;
+  }
+  while ( v13 );
+  LOBYTE(word_461ED4) = 1;
   return result;
 }

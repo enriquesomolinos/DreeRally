@@ -92,7 +92,6 @@
 	#define __noreturn  __declspec(noreturn)
 	#endif
 
-
 	#ifndef NULL
 	#define NULL 0
 	#endif
@@ -161,7 +160,6 @@
 	#define SWORD5(x)   SWORDn(x,  5)
 	#define SWORD6(x)   SWORDn(x,  6)
 	#define SWORD7(x)   SWORDn(x,  7)
-
 
 	// Helper functions to represent some assembly instructions.
 

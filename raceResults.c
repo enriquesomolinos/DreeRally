@@ -13,7 +13,6 @@
 #include "mod/mod.h"
 #include "i18n/i18n.h"
 
-
 const  int EASY_RACE=0;
  const int MEDIUM_RACE=1;
  const int HARD_RACE=2;
@@ -381,7 +380,6 @@ LABEL_60:
   refreshAllScreen();
 }
 
-
 //----- (00429990) --------------------------------------------------------
 void   hardRaceResults(int ecx0, int a2, int a1)
 {
@@ -565,3 +563,51 @@ LABEL_60:
   refreshAllScreen();
 }
 
+//----- (00424420) --------------------------------------------------------
+int sub_424420()
+{
+  signed int v0; // ecx@1
+  int v1; // eax@3
+  int v2; // edi@3
+  int v3; // ebp@3
+  int result; // eax@3
+  int v5; // esi@6
+  int v6; // ebx@6
+  char *DstBuf=malloc(100); // [sp+0h] [bp-Ch]@6
+  int v8; // [sp+4h] [bp-8h]@1
+  int v9; // [sp+8h] [bp-4h]@3
+
+  v0 = 4;
+  v8 = 4;
+  if ( isMultiplayerGame )
+  {
+    v8 = raceDrivers_456758;
+    v0 = raceDrivers_456758;
+  }
+  v1 = (350 - 79 * v0) / (v0 + 1);
+  v2 = 0;
+  v3 = v1 + 108;
+  result = v1 + 79;
+  v9 = result;
+  if ( v0 > 0 )
+  {
+    while ( 1 )
+    {
+      v5 = 640 * (v3 + v2 * result);
+      drawImageWithPosition((int)graphicsGeneral.placingBpk, 202, 74, (int)((char *)screenBuffer + v5 + 389));
+      v6 = v2 + 1;
+      _itoa(v2 + 1, DstBuf, 10);
+      if ( v2 )
+        drawTextWithFont((int)graphicsGeneral.fbig3aBpk, (int)&bigLetterSpacing_445848, DstBuf, v5 + 4876);
+      else
+        drawTextWithFont((int)graphicsGeneral.fbig3aBpk, (int)&bigLetterSpacing_445848, DstBuf, 640 * v3 + 4881);
+      result = v8;
+      ++v2;
+      if ( v6 >= v8 )
+        break;
+      result = v9;
+    }
+  }
+  return result;
+}
+// 45EA04: using guessed type int isMultiplayerGame;

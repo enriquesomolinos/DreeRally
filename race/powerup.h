@@ -1,7 +1,6 @@
 
 //el tamaño de los corredores es 108
 
-
 typedef enum
 {
 	POWERUP_SHOTS = 1,
@@ -14,7 +13,6 @@ typedef enum
 	POWERUP_BIG_REPAIR = 8
 	
 }PowerUpEnum;
-
 
 typedef struct Powerup {
 	int posX_501BA0;
@@ -32,7 +30,6 @@ typedef struct Powerup {
 /* *(_DWORD *)(v1 + 20) = 140; // + 20 sobre powerups[v1].
                 *(_DWORD *)(v1 + 24) = v26; //+24 sobre powerups[v1].
 				*(_DWORD *)(v1 + 28) = 20; //+28 sobre powerups[v1].    parece el porcentaje de raparacion
-
 
 				parece q unk_501BCC es donde estsa el fondo de la imagen
 				*/

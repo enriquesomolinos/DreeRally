@@ -12,7 +12,6 @@ typedef enum
 	DEFINE_GAMEPAD_MENU = 8,
 }Menus;
 
-
 typedef enum
 {
 	START_CONTINUE_GAME = 0,
@@ -33,10 +32,6 @@ typedef enum
 	CONTINUE = 5,
 	
 }ShopMenu;
-
-
-
-
 
 extern char menuActive_4457F0[];
 char* getMenuText(int menu, int position);

@@ -8,16 +8,13 @@
 char * menu0[] = { "Start Racing", "Multiplayer Race", "Configure","See hall of fame","Credits","Exit to os" };
 char * menu1[] = { "Start a new game", "End current Game", "See current Stadistics","Load game","save game","Previous menu" };
 
-
 char * menu3[] = { "Music volume", "Effect volume", "define Keyboard","Define Gamepad/Joystick","Gamepad/Joystick Disabled","Previous menu" };
-
 
 char * menu5[] = { "Empty slot", "Empty slot", "Empty slot","Empty slot","Empty slot","Empty slot","Empty slot","Quicksave slot" };
 
 char * menu6[] = { "Accelerate", "Brake", "Steer Left","Steer right","Turbo boost","Machine Gun","Drop Mine","Horn","Previous menu" };
 
 char * menu8[] = { "Accelerate", "Brake", "Steer Left","Steer right","Turbo boost","Machine Gun","Drop Mine","Previous menu" };
-
 
 char menuActive_4457F0[] = { '\x01','\x0','\x01','\x01','\x01','\x01','\x01','\x0','\x0',
 						'\x01','\x0','\x0','\x01','\x0','\x01','\x0','\x0','\x0',
@@ -64,9 +61,8 @@ char* getMenuText(int menu, int position) {
 	case DEFINE_GAMEPAD_MENU://
 		return getLanguageEntry(menu8[position]);
 		break;
-		
-
-		
 	}
+	return "";
+	
 
 }

@@ -5,7 +5,6 @@
 #include "menus.h"
 #include "dr.h"
 
-
 const int DEFAULT_BIGLETTER_SPACING_OFFSET = -23;
 
  void *choo2Bpk; // idb
@@ -28,16 +27,16 @@ const int DEFAULT_BIGLETTER_SPACING_OFFSET = -23;
 //ver porque byte_445892
  char letterSpacing_4458B0[] = { '\x10', '\x10', '\x0A', '\x5', '\x8', '\x0B', '\x0B', '\x0D', '\x0B', '\x5',
 					   '\x6',  '\x6',  '\x9',  '\x0B', '\xB', '\x5', '\x4', '\x0A', '\x0B', '\x5', //20
-						'\x5', '\x0A', '\x5', '\x0A', '\x0A', '\x0A', '\x0A', '\x0A', '\x4', '\x5',
-						'\x9', '\x0B', '\x8', '\x8', '\x5', '\x0B', '\x0B', '\x0A', '\x0B', '\x0A', //40
-						'\x0A', '\x0C', '\x0B', '\x5', '\x0B', '\x0B', '\x0A', '\x0E', '\x0B', '\x0B', 
-						'\x0A', '\x0B', '\x0B', '\x0A', '\x0A', '\x0B', '\x0C', '\x0F', '\x0B', '\x0B',//60
+						'\x5', '\x0A', '\x5', '\x0A', '\x0A', '\x4', '\x09', '\x9', '\x9', '\x9',//ultimo es el numero 5
+						'\x9', '\x9', '\x8', '\x8', '\x5', '\x0B', '\x0B', '\x0A', '\x0B', '\x0A', //40
+						'\x0A', '\x0C', '\x0B', '\xA', '\x0B', '\x0B', '\x0A', '\x0E', '\x0B', '\x0B', 
+						'\x0A', '\x0B', '\x0B', '\x0C', '\x0A', '\x0B', '\x0C', '\x0F', '\x0B', '\x0B',//60
 						'\x0A', '\x7',  '\x0A', '\x0F',  '\x0A', '\x0A', '\x5', '\x0B', '\x0A', '\x9', 
 						'\x0A', '\x9',  '\x9',  '\x0A', '\x0A', '\x0A', '\x0A',  '\x0A', '\x9', '\x0C', //80
 						'\x0A', '\x4', '\x9', '\x0A', '\x0A', '\x0A', '\x9', '\x0A', '\x0A', '\x0E', 
-						'\x0A', '\x0A', '\x9', '\x9', '\x4', '\x0C', '\x9', '\x0B', '\x10', '\x0D', //100
+						'\x0A', '\x0A', '\x9', '\x9', '\xA', '\x0C', '\x9', '\x0B', '\x10', '\x0D', //100
 						'\x0E', '\x0D', '\x9', '\x0D', '\x0D', '\x0D', '\x0D', '\x0D', '\x0C', '\x0D', 
-						'\x0D', '\x0',  '\x0', '\x0',  '\x0',  '\x0',  '\x0',  '\x0',  '\x9',  '\x0C',//120
+						'\x0D', '\x0D',  '\x0D', '\x0D',  '\x0D',  '\x0D',  '\x0D',  '\x0D',  '\x9',  '\x0C',//120
 						'\x9', '\x9', '\x9', '\x9', '\x9', '\x9', '\x9', '\x9', '\x9', '\x9',
 						'\x9', '\x9', '\x9', '\x9', '\x9', '\x9', '\x9', '\x9', '\x9', '\x9', //140
 						'\x9', '\x9', '\x9', '\x9', '\x9', '\x9', '\x9', '\x9', '\x9', '\x9', 
@@ -194,7 +193,6 @@ LABEL_17:
 // 4458B0: using guessed type char letterSpacing_4458B0;
 // 4458B1: using guessed type char byte_4458B1;
 
-
 //----- (0041C9F0) --------------------------------------------------------
 int   getBoxBigTextOffset(const char *a1)
 {
@@ -325,7 +323,6 @@ int   getNameOffsetPositionRight(const char *a1)
       v2 += (unsigned __int8)letterSpacing_4458B0[90+a1[v3++]];
 	//v2 += (unsigned __int8)byte_44590A[a1[v3++]];
 
-
 	
     while ( v3 < strlen(a1) );
   }
@@ -358,8 +355,6 @@ int   getBigTextMidSize(const char *a1)
 }
 // 41FBD0: could not find valid save-restore pair for edi
 // 41FBD0: could not find valid save-restore pair for esi
-
-
 
 //----- (00421AE0) --------------------------------------------------------
 int   drawBorder(int a1, int a2, int a3, int a4)

@@ -4,7 +4,7 @@
 
 
 /* -------------------------------------------------------------------- */
-char *strupr(char s[])
+char *_strupr(char s[])
 {
   char	*p;
 
@@ -16,7 +16,7 @@ char *strupr(char s[])
 }	/* END STRUPR */
 
 /* -------------------------------------------------------------------- */
-char *strlwr(char s[])
+char *_strlwr(char s[])
 {
   char	*p;
 
@@ -31,7 +31,7 @@ char *strlwr(char s[])
 
 
 /* The Itoa code is in the puiblic domain */
-char* itoa(int value, char* str, int radix) {
+char* _itoa(int value, char* str, int radix) {
     static char dig[] =
         "0123456789"
         "abcdefghijklmnopqrstuvwxyz";

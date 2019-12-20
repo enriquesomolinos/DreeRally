@@ -406,8 +406,8 @@ LABEL_76:
   result = eventDetected();
   dword_456730 = 1;
   return result;*/
+return 0 ;
 }
-
 
 void   sub_428070(int a1)
 {
@@ -600,6 +600,7 @@ char sub_41E9A0()
   }
   while ( v5 < 287372 );
   return result;*/
+	return 0;
 }
 
 signed int   sub_41EB80(int a1, int a2)
@@ -659,6 +660,7 @@ LABEL_8:
   for ( j = 0; j < v7; *(BYTE *)(v12 + dword_45DC24 + 4) = 0 )
     v12 = (*(_WORD *)dword_45DC24 - v7 - v5 + j++ - 3) & 0xFFF;
   return 1;*/
+	return 0;
 }
 
 int multiplayer_sub_42CCF0()
@@ -1117,6 +1119,7 @@ LABEL_34:
     dword_456B90 = v77;
   }
   return result;*/
+return 0;
 }
 
 void multiplayer_42A300()
@@ -1316,7 +1319,6 @@ signed int   multiplayer_4069D0(char a1)
   }
   return 0;
 }
-
 
 int multiplayer_403E30()
 {
@@ -1720,7 +1722,6 @@ int multiplayer_403BB0()
   return result;
 }
 
-
 int multiplayer_403B30()
 {
   int v0; // ecx@1
@@ -1818,7 +1819,6 @@ int multiplayer_403D50()
   memset((void *)(dword_45E064 + 4), 0, 0x1000u);
   return result;
 }
-
 
 void multiplayer_403960()
 {
@@ -2102,7 +2102,6 @@ LABEL_33:
   return result;
 }
 
-
 int multiplayer_415280()
 {
   int result; // eax@1
@@ -2166,3 +2165,75 @@ int multiplayer_415280()
   return result;*/
 }
 
+//----- (00426280) --------------------------------------------------------
+/*int sub_426280()
+{
+  int v0; // eax@1
+  int v1; // esi@1
+  int v2; // ebp@1
+  int result; // eax@1
+  int v4; // ebp@2
+  char *v5; // eax@6
+  char *v6; // edx@6
+  char v7; // cl@7
+  char *v8; // eax@8
+  int v9; // ebx@8
+  unsigned int v10; // ecx@8
+  char v11; // dl@9
+  int v12; // [sp+Ch] [bp-18h]@2
+  char DstBuf[20]; // [sp+10h] [bp-14h]@3
+
+  v0 = (350 - (raceDrivers_456758 << 6)) / (raceDrivers_456758 + 1);
+  v1 = 0;
+  v2 = v0 + 108;
+  result = v0 + 64;
+  if ( raceDrivers_456758 > 0 )
+  {
+    v12 = 640 * result;
+    v4 = 640 * v2 + 10306;
+    do
+    {
+      drawImageWithPosition2((int)graphicsGeneral.mulsbg2Bpk, 184, 64, (int)((char *)screenBuffer + v4 - 10252));
+      _itoa(drivers[ (raceDrivers_456758 - v1 - 1)].rank, DstBuf, 10);
+      if ( drivers[(raceDrivers_456758 - v1 - 1)].rank == 1 )
+        drawTextWithFont((int)graphicsGeneral.fbig3aBpk, (int)&bigLetterSpacing_445848, DstBuf, v4 + 4);
+      else
+        drawTextWithFont((int)graphicsGeneral.fbig3aBpk, (int)&bigLetterSpacing_445848, DstBuf, v4);
+      v5 = &byte_460840[108 * (raceDrivers_456758 - v1 - 1)];
+      v6 = (char *)(DstBuf - v5);
+      do
+      {
+        v7 = *v5;
+        v5[(_DWORD)v6] = *v5;
+        ++v5;
+      }
+      while ( v7 );
+      _strupr(DstBuf);
+      drawTextWithFont((int)graphicsGeneral.fmed1aBpk, (int)&unk_445928, DstBuf, v4 + 5790);
+      _itoa(drivers[(raceDrivers_456758 - v1 - 1)].points, DstBuf, 10);
+      v8 = DstBuf;
+      v9 = 0;
+      v10 = 0;
+      do
+        v11 = *v8++;
+      while ( v11 );
+      if ( v8 != &DstBuf[1] )
+      {
+        do
+          v9 += (unsigned __int8)letterSpacing_4458B0[90+(unsigned __int8)DstBuf[v10++]];
+        while ( v10 < strlen(DstBuf) );
+      }
+      drawTextWithFont((int)graphicsGeneral.fmed1aBpk, (int)&unk_445928, DstBuf, v4 - 10306 - v9 + 16226);
+      result = raceDrivers_456758;
+      ++v1;
+      v4 += v12;
+    }
+    while ( v1 < raceDrivers_456758 );
+  }
+  return result;
+}
+// 456754: using guessed type int dword_456754;
+// 460884: using guessed type int dword_460884[];
+// 460888: using guessed type int dword_460888[];
+// 426280: using guessed type char DstBuf[20];
+*/

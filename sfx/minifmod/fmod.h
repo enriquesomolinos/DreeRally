@@ -67,7 +67,6 @@ typedef signed char (F_CALLBACKAPI *FSOUND_STREAMCALLBACK)  (FSOUND_STREAM *stre
 typedef signed char (F_CALLBACKAPI *FSOUND_METADATACALLBACK)(char *name, char *value, void *userdata);
 //typedef void        (F_CALLBACKAPI *FMUSIC_CALLBACK)        (FMUSIC_MODULE *mod, unsigned char param);
 
-
 /*
 [ENUM]
 [
@@ -101,7 +100,6 @@ enum FMOD_ERRORS
     FMOD_ERR_MEDIAPLAYER,      /* Windows Media Player not installed so cannot play wma or use internet streaming. */
     FMOD_ERR_CDDEVICE          /* An error occured trying to open the specified CD device */
 };
-
 
 /*
 [ENUM]
@@ -140,7 +138,6 @@ enum FSOUND_OUTPUTTYPES
     FSOUND_OUTPUT_NOSOUND_NONREALTIME   /* This is the same as nosound, but the sound generation is driven by FSOUND_Update */
 };
 
-
 /*
 [ENUM]
 [
@@ -172,7 +169,6 @@ enum FSOUND_MIXERTYPES
     FSOUND_MIXER_MAX
 };
 
-
 /*
 [ENUM]
 [
@@ -193,7 +189,6 @@ enum FMUSIC_TYPES
     FMUSIC_TYPE_MIDI,       /* MIDI file */
     FMUSIC_TYPE_FSB         /* FMOD Sample Bank file */
 };
-
 
 /*
 [DEFINE_START] 
@@ -221,7 +216,6 @@ enum FMUSIC_TYPES
 #define FSOUND_DSP_DEFAULTPRIORITY_CLIPANDCOPYUNIT  1000    /* DSP CLIP AND COPY unit - last */
 /* [DEFINE_END] */
 
-
 /*
 [DEFINE_START] 
 [
@@ -242,7 +236,6 @@ enum FMUSIC_TYPES
 #define FSOUND_CAPS_EAX2                    0x2     /* This driver supports EAX 2 reverb */
 #define FSOUND_CAPS_EAX3                    0x10    /* This driver supports EAX 3 reverb */
 /* [DEFINE_END] */
-
 
 /*
 [DEFINE_START] 
@@ -267,18 +260,7 @@ enum FMUSIC_TYPES
     See flag descriptions for what these do.
 ]
 */
-#define FSOUND_LOOP_OFF      0x00000001  /* For non looping samples. */
-#define FSOUND_LOOP_NORMAL   0x00000002  /* For forward looping samples. */
-#define FSOUND_LOOP_BIDI     0x00000004  /* For bidirectional looping samples.  (no effect if in hardware). */
-#define FSOUND_8BITS         0x00000008  /* For 8 bit samples. */
-#define FSOUND_16BITS        0x00000010  /* For 16 bit samples. */
-#define FSOUND_MONO          0x00000020  /* For mono samples. */
-#define FSOUND_STEREO        0x00000040  /* For stereo samples. */
-#define FSOUND_UNSIGNED      0x00000080  /* For user created source data containing unsigned samples. */
-#define FSOUND_SIGNED        0x00000100  /* For user created source data containing signed data. */
-#define FSOUND_DELTA         0x00000200  /* For user created source data stored as delta values. */
-#define FSOUND_IT214         0x00000400  /* For user created source data stored using IT214 compression. */
-#define FSOUND_IT215         0x00000800  /* For user created source data stored using IT215 compression. */
+
 #define FSOUND_HW3D          0x00001000  /* Attempts to make samples use 3d hardware acceleration. (if the card supports it) */
 #define FSOUND_2D            0x00002000  /* Tells software (not hardware) based sample not to be included in 3d processing. */
 #define FSOUND_STREAMABLE    0x00004000  /* For a streamimg sound where you feed the data to it. */
@@ -300,10 +282,7 @@ enum FMUSIC_TYPES
 #define FSOUND_IGNORETAGS    0x40000000  /* Skips id3v2 etc tag checks when opening a stream, to reduce seek/read overhead when opening files (helps with CD performance) */
 #define FSOUND_STREAM_NET    0x80000000  /* Specifies an internet stream */
 
-#define FSOUND_NORMAL       (FSOUND_16BITS | FSOUND_SIGNED | FSOUND_MONO)      
 /* [DEFINE_END] */
-
-
 
 /*
 [DEFINE_START] 
@@ -324,7 +303,6 @@ enum FMUSIC_TYPES
 #define FSOUND_CD_PLAYLOOPED        2   /* Plays the specified track looped, forever until stopped manually. */
 #define FSOUND_CD_PLAYRANDOM        3   /* Plays tracks in random order */
 /* [DEFINE_END] */
-
 
 /*
 [DEFINE_START] 
@@ -351,7 +329,6 @@ enum FMUSIC_TYPES
 #define FSOUND_SYSTEMSAMPLE     -1000   /* special 'sample' ID for all sample based functions that want to alter the global FSOUND software mixing output sample */
 
 /* [DEFINE_END] */
-
 
 /*
 [STRUCTURE] 
@@ -406,7 +383,6 @@ typedef struct _FSOUND_REVERB_PROPERTIES /* MIN     MAX    DEFAULT   DESCRIPTION
     unsigned int Flags;                  /* FSOUND_REVERB_FLAGS - modifies the behavior of above properties (WIN32/PS2 only) */
 } FSOUND_REVERB_PROPERTIES;
 
-
 /*
 [DEFINE_START] 
 [
@@ -439,9 +415,6 @@ typedef struct _FSOUND_REVERB_PROPERTIES /* MIN     MAX    DEFAULT   DESCRIPTION
                                                   FSOUND_REVERB_FLAGS_CORE0 |                 \
                                                   FSOUND_REVERB_FLAGS_CORE1 )
 /* [DEFINE_END] */
-
-
-
 
 /*
 [DEFINE_START] 
@@ -505,7 +478,6 @@ typedef struct _FSOUND_REVERB_PROPERTIES /* MIN     MAX    DEFAULT   DESCRIPTION
 
 /* [DEFINE_END] */
 
-
 /*
 [STRUCTURE] 
 [
@@ -555,7 +527,6 @@ typedef struct _FSOUND_REVERB_CHANNELPROPERTIES /* MIN     MAX    DEFAULT */
     int    Flags;                               /* FSOUND_REVERB_CHANNELFLAGS - modifies the behavior of properties (WIN32) */
 } FSOUND_REVERB_CHANNELPROPERTIES;
 
-
 /*
 [DEFINE_START] 
 [
@@ -576,7 +547,6 @@ typedef struct _FSOUND_REVERB_CHANNELPROPERTIES /* MIN     MAX    DEFAULT */
                                                   FSOUND_REVERB_CHANNELFLAGS_ROOMAUTO|        \
                                                   FSOUND_REVERB_CHANNELFLAGS_ROOMHFAUTO)
 /* [DEFINE_END] */
-
 
 /*
 [ENUM] 
@@ -641,7 +611,6 @@ enum FSOUND_SPEAKERMODES
     FSOUND_SPEAKERMODE_PROLOGIC2_INTERIOR   /* Dolby Prologic 2.  Playstation 2 and Gamecube only.  PlayStation 2 does support interior panning, but only supports 24 voices simultaneously. */
 };
 
-
 /*
 [DEFINE_START] 
 [
@@ -678,7 +647,6 @@ enum FSOUND_SPEAKERMODES
 #define FSOUND_INIT_PSP_SILENCEONUNDERRUN   0x8000    /* PSP only - If streams skip / stutter when device is powered on, either increase stream buffersize, or use this flag instead to play silence while the UMD is recovering. */
 /* [DEFINE_END] */
 
-
 /*
 [ENUM]
 [
@@ -697,7 +665,6 @@ enum FSOUND_STREAM_NET_STATUS
     FSOUND_STREAM_NET_READY,                /* Stream is ready to play */
     FSOUND_STREAM_NET_ERROR                 /* Stream has suffered a fatal error */
 };
-
 
 /*
 [ENUM]
@@ -721,7 +688,6 @@ enum FSOUND_TAGFIELD_TYPE
     FSOUND_TAGFIELD_ASF                     /* An Advanced Streaming Format header line */
 };
 
-
 /*
 [DEFINE_START] 
 [
@@ -741,7 +707,6 @@ enum FSOUND_TAGFIELD_TYPE
 #define FSOUND_FORMAT_MPEG          0x00010000
 #define FSOUND_FORMAT_OGGVORBIS     0x00020000
 /* [DEFINE_END] */
-
 
 /*
 [STRUCTURE] 
@@ -765,7 +730,6 @@ typedef struct _FSOUND_TOC_TAG
     int  frame[100];                        /* The start offset of each track in frames */
 
 } FSOUND_TOC_TAG;
-
 
 /* ========================================================================================== */
 /* FUNCTION PROTOTYPES                                                                        */

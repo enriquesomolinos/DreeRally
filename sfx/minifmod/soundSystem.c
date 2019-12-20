@@ -2,7 +2,6 @@
 #include "../defs.h"
 #include <math.h>
 
-
 int (  *FSOUND_File_OpenCallback_456C9C)(_DWORD) = NULL; // weak
 int (  *FSOUND_File_CloseCallback_456CA0)(_DWORD) = NULL; // weak
 int (  *FSOUND_File_ReadCallback_456CA4)(_DWORD, _DWORD, _DWORD) = NULL; // weak
@@ -30,12 +29,11 @@ float mix_1overvolumerampsteps_456C98 =  0.0; // weak
 signed char		* FSOUND_MixBuffer_45DA60; // weak
 signed char		* FSOUND_MixBufferMem_45DA64; // idb
 int FSOUND_BlockSize_45DA68; // weak
-int FMUSIC_DummySample_45DA80; // weak
+FSOUND_SAMPLE FMUSIC_DummySample_45DA80; // weak
 FMUSIC_TIMMEINFO *FMUSIC_TimeInfo_45DAB0; // idb
 float FSOUND_OOMixRate_45DAB4; // weak
 
 void *Memory; // idb
-
 
 static unsigned int mix_numsamples	= 0;	// number of samples to mix 
 static unsigned int mix_mixptr		= 0;
@@ -358,9 +356,8 @@ char   FMUSIC_PlaySong_43DA40(FMUSIC_MODULE *mod_456C24) //a1
   return result;
 }
 
-
 //----- (0043DC50) --------------------------------------------------------
-int   FMUSIC_LoadSong_43DC50(int size,  char *data, SAMPLELOADCALLBACK sampleloadcallback)
+FMUSIC_MODULE *   FMUSIC_LoadSong_43DC50(int size,  char *data, SAMPLELOADCALLBACK sampleloadcallback)
 {
   FMUSIC_MODULE		*mod;
   signed char			retcode=FALSE;
@@ -369,8 +366,7 @@ int   FMUSIC_LoadSong_43DC50(int size,  char *data, SAMPLELOADCALLBACK sampleloa
   int effectStruct; // edi@1
   int v3; // eax@1
   void *v4; // esi@1
-  char v5; // bl@2
-
+  
   mod = FSOUND_Memory_Calloc(sizeof(FMUSIC_MODULE));
    
 	fp = FSOUND_File_Open_43F720(size,data, 0, 0);
@@ -386,7 +382,6 @@ int   FMUSIC_LoadSong_43DC50(int size,  char *data, SAMPLELOADCALLBACK sampleloa
 	// try opening all as all formats until correct loader is found
 	retcode = FMUSIC_LoadXM_43EF60(mod, fp);
 
-
 	FSOUND_File_Close_43F770(fp);
 
 	/*comentadpif (!retcode)
@@ -394,7 +389,6 @@ int   FMUSIC_LoadSong_43DC50(int size,  char *data, SAMPLELOADCALLBACK sampleloa
 		FMUSIC_FreeSong_43D940(mod);
 		return NULL;
 	}*/
-
 
 	return mod;
 
@@ -408,7 +402,6 @@ int    FSOUND_Software_Fill_43DCB0(signed int a1, int a2)
 	void  *	mixbuffer; 
 	int		mixpos		= FSOUND_Software_FillBlock_456C3C * mi_FSOUND_BlockSize;
 	int		totalblocks = FSOUND_BufferSize_45C4C4 / mi_FSOUND_BlockSize; 
-
 
 	mixbuffer = (char *)FSOUND_MixBuffer_45DA60 + (mixpos << 3);
 
@@ -465,7 +458,6 @@ int    FSOUND_Software_Fill_43DCB0(signed int a1, int a2)
 		FMUSIC_PlayingSong_456C30->mixer_samplesleft = MixedLeft;
 	}
 
-
 	// ====================================================================================
 	// CLIP AND COPY BLOCK TO OUTPUT BUFFER
 	// ====================================================================================
@@ -487,6 +479,7 @@ int    FSOUND_Software_Fill_43DCB0(signed int a1, int a2)
     {
 		FSOUND_Software_FillBlock_456C3C = 0;
     }
+	return 0;
 }
 
 //----- (0043DE30) --------------------------------------------------------
@@ -497,7 +490,7 @@ int   FSOUND_MixerClipCopy_Float32_43DE30(void *dest, void *src, long len)
 	float *srcptr = (float *)src;
 
 	if (len <=0 || !dest || !src) 
-		return;
+		return 0;
 
 	for (count=0; count<len<<1; count++)
 	{
@@ -522,12 +515,11 @@ int    FSOUND_Mixer_FPU_Ramp_43DEA0(void *mixptr, int len)
 	// IMPORTANT no local variables on stack.. we are trashing EBP.  static puts values on heap.
 
 	if (len <=0) 
-		return;
+		return 0;
 
 	mix_numsamples	= len;
 	mix_mixptr		= (unsigned int)mixptr;
 	mix_mixbuffend	= (unsigned int)mix_mixptr + (mix_numsamples << 3);
-
 
 	//==============================================================================================
 	// LOOP THROUGH CHANNELS
@@ -702,7 +694,6 @@ int    FSOUND_Mixer_FPU_Ramp_43DEA0(void *mixptr, int len)
 		mov		eax, mix_volumerampsteps_456C94
 		mov		mix_rampcount, eax
 
-
 	novolumerampL:
 		mov		eax, [ecx].rightvolume
 		mov		edx, [ecx].ramp_rightvolume 
@@ -721,7 +712,6 @@ int    FSOUND_Mixer_FPU_Ramp_43DEA0(void *mixptr, int len)
 		mov		[ecx].ramp_rightspeed, eax
 		mov		eax, mix_volumerampsteps_456C94
 		mov		mix_rampcount, eax
-
 
 	novolumerampR:
 		mov		eax, mix_rampcount
@@ -770,7 +760,6 @@ int    FSOUND_Mixer_FPU_Ramp_43DEA0(void *mixptr, int len)
 		fmul	mix_1over255			// now make 0-1.0f
 		fstp	mix_rampleftvol
 
-
 		//= SET UP ALL OF THE REGISTERS HERE FOR THE INNER LOOP ====================================
 		// eax = ---
 		// ebx = speed low
@@ -795,7 +784,6 @@ int    FSOUND_Mixer_FPU_Ramp_43DEA0(void *mixptr, int len)
 		add		ebx, 1
 		adc		ecx, 0
 	NoChangeSpeed:
-
 
 		//======================================================================================
 		// ** 16 BIT NORMAL FUNCTIONS **********************************************************
@@ -1021,8 +1009,6 @@ MixLoopStart16:
 		dec		edx						// 1
 		jnz		MixLoop16				// 
 
-
-
 		fxch	st(2)					// [0]rampspeedR [1]lvol [2]rvol [3]rampspeedL
 		fstp	mix_rampspeedright		// [0]lvol [1]rvol [2]rampspeedL
 		fxch	st(2)					// [0]rampspeedL [1]rvol [2]lvol
@@ -1102,7 +1088,6 @@ MixLoopStart16:
 			jne		CalculateLoopCount
 
 		DoOutputbuffEnd:  
-
 
 		 
 			cmp		mix_endflag, FSOUND_OUTPUTBUFF_END
@@ -1226,7 +1211,6 @@ MixLoopStart16:
 	}
 } 
 
-
 //----- (0043E550) --------------------------------------------------------
 char   FMUSIC_XM_InstrumentVibrato_43E550(FMUSIC_CHANNEL *cptr, FMUSIC_INSTRUMENT *iptr)
 {
@@ -1285,8 +1269,6 @@ char   FMUSIC_XM_InstrumentVibrato_43E550(FMUSIC_CHANNEL *cptr, FMUSIC_INSTRUMEN
   
 }
 
-
-
 //----- (0043E670) --------------------------------------------------------
 char   FMUSIC_XM_ProcessEnvelope_43E670(FMUSIC_CHANNEL *cptr, int *pos, int *tick, unsigned char type, int numpoints, unsigned short *points, unsigned char loopend, unsigned char loopstart, unsigned char sustain, int *value, int *valfrac, signed char *envstopped, int *envdelta, unsigned char control)
 //parece que es FMUSIC_XM_ProcessEnvelope
@@ -1321,14 +1303,14 @@ char   FMUSIC_XM_ProcessEnvelope_43E670(FMUSIC_CHANNEL *cptr, int *pos, int *tic
 				*value = points[(currpos<<1)+1];
 				*envstopped = TRUE;
 				cptr->notectrl |= control;
-				return;
+				return 0;
 			}
 			// sustain
 			if ((type & FMUSIC_ENVELOPE_SUSTAIN) && currpos == sustain && !cptr->keyoff)
 			{
 				*value = points[(currpos<<1)+1];
 				cptr->notectrl |= control;
-				return;
+				return 0;
 			}
 			// interpolate 2 points to find delta step
 			tickdiff = nexttick - currtick;
@@ -1349,7 +1331,7 @@ char   FMUSIC_XM_ProcessEnvelope_43E670(FMUSIC_CHANNEL *cptr, int *pos, int *tic
 	(*tick)++;
 
 	cptr->notectrl |= control;
-
+	return 0;
 }
 
 //----- (0043E7A0) --------------------------------------------------------
@@ -1444,7 +1426,7 @@ char   FMUSIC_XM_ProcessVolumeByte_43E7A0(FMUSIC_CHANNEL *cptr, unsigned char vo
 	return cptr;
   
   }
-  //return v2;
+  return 0;
 }
 
 //----- (0043E8C0) --------------------------------------------------------
@@ -1654,6 +1636,7 @@ double temp;
   }
   //return 1000000;
   //return v6;
+  return v6;
 }
 // 456A40: using guessed type int FSOUND_MixRate_456A40_456A40;
 
@@ -1694,15 +1677,14 @@ int   FMUSIC_XM_Resetcptr_43EB10(FMUSIC_CHANNEL *cptr, FSOUND_SAMPLE	*sptr)
   cptr->notectrl |= FMUSIC_VOLUME;
   cptr->notectrl |= FMUSIC_PAN;//*(BYTE *)(a1 + 2) |= 6u;
   //return result;
-
+  return 0;
 }
-
 
 //----- (0043EBB0) --------------------------------------------------------
 char   sub_43EBB0(int channelId, unsigned __int8 volume)
 {
 	//el primer parametro que se pasa es FMUSIC_CHANNEL *cptr
-  return FMUSIC_XM_ProcessVolumeByte_43E7A0((int)&FMUSIC_Channel[channelId],volume);
+  return FMUSIC_XM_ProcessVolumeByte_43E7A0(&FMUSIC_Channel[channelId],volume);
 }
 
 //----- (0043EBD0) --------------------------------------------------------
@@ -1839,7 +1821,6 @@ int   FMUSIC_UpdateXMEffects_43EDC0(FMUSIC_MODULE *mod)
   	FMUSIC_NOTE	*current;
 	int		count;
 
-
 	for (count=0; count<mod->numchannels; count++)
 	{
 
@@ -1899,7 +1880,6 @@ int   FMUSIC_UpdateXMEffects_43EDC0(FMUSIC_MODULE *mod)
 			FMUSIC_XM_ProcessEnvelope_43E670(cptr, &cptr->envpanpos, &cptr->envpantick, iptr->PANtype, iptr->PANnumpoints, &iptr->PANPoints[0], iptr->PANLoopEnd, iptr->PANLoopStart, iptr->PANsustain, &cptr->envpan, &cptr->envpanfrac, &cptr->envpanstopped, &cptr->envpandelta, FMUSIC_PAN);
         }
 
-
 		//= PROCESS VOLUME FADEOUT =====================================================================
 		if (cptr->keyoff) 
 		{
@@ -1911,10 +1891,10 @@ int   FMUSIC_UpdateXMEffects_43EDC0(FMUSIC_MODULE *mod)
 			cptr->notectrl |= FMUSIC_VOLUME;
 		}
 
-
 		FMUSIC_XM_InstrumentVibrato_43E550(cptr, iptr);
 		FMUSIC_XM_UpdateFlags_43E8C0(cptr, sptr,mod);
 	}
+	return 0;
 }
 // 45DA80: using guessed type int dword_45DA80;
 
@@ -2005,7 +1985,7 @@ char   FMUSIC_LoadXM_43EF60(FMUSIC_MODULE *mod, FSOUND_FILE_HANDLE *fp)
 
   FSOUND_File_SeekCallback_43AE30(fp->userhandle, 60, 0);
  
-  FSOUND_File_Read_43F790((int)&mainHDRsize_v56, 4, fp);
+  FSOUND_File_Read_43F790((void *)&mainHDRsize_v56, 4, fp);
   FSOUND_File_Read_43F790(&mod->numorders, 6, fp); //+16
 
  // cambiadoS
@@ -2055,11 +2035,11 @@ char   FMUSIC_LoadXM_43EF60(FMUSIC_MODULE *mod, FSOUND_FILE_HANDLE *fp)
   //		pptr = &mod->pattern[count];
 
 	  pptr_v10 = &mod->pattern[v52];
-      FSOUND_File_Read_43F790((int)&patternHDRsize_v55, 4, fp);
-      FSOUND_File_Read_43F790((int)&tempchar_v48, 1, fp);
-      FSOUND_File_Read_43F790((int)&rows_v49, 2, fp);
+      FSOUND_File_Read_43F790((void *)&patternHDRsize_v55, 4, fp);
+      FSOUND_File_Read_43F790((void *)&tempchar_v48, 1, fp);
+      FSOUND_File_Read_43F790((void *)&rows_v49, 2, fp);
       pptr_v10->rows = rows_v49;
-      FSOUND_File_Read_43F790((int)&patternsize_v51, 2, fp);
+      FSOUND_File_Read_43F790((void *)&patternsize_v51, 2, fp);
       //		// allocate memory for pattern buffer
 //		pptr->data = (FMUSIC_NOTE *)FSOUND_Memory_Calloc(mod->numchannels * pptr->rows * sizeof(FMUSIC_NOTE));	//FIXME:MEMLEAK
 
@@ -2195,7 +2175,6 @@ LABEL_90:
           iptr_v20->PANtype = FMUSIC_ENVELOPE_OFF;
 		FSOUND_File_SeekCallback_43AE30(fp->userhandle, firstsampleoffset, SEEK_SET);///esto esta puesto a fueguisimo TODO FIX
         //FSOUND_File_Seek_43F7B0(fp);
-
 
         v51 = 0;
         if ( !numsamples_v49 )
@@ -2380,7 +2359,6 @@ LABEL_94:
               //v42 = *(BYTE *)(v30 + 29);
               /*buff_v43 = *(void **)v30;
 
-
 			  //esto se usa en carrera
               if (  sptr_v48->loopmode == FSOUND_LOOP_BIDI )
               {
@@ -2528,7 +2506,7 @@ int   FSOUND_File_Read_43F790(void *buffer, int size, FSOUND_FILE_HANDLE *handle
 
   result = handle;
   if ( handle )
-	  return FSOUND_File_ReadCallback_456CA4(buffer, size, handle->userhandle);
+	  return FSOUND_File_ReadCallback_456CA4((int)buffer, size, handle->userhandle);
 	 // result = sub_43ADF0(a1, a2, *(_DWORD *)(a3 + 16));
 	  
    // result = FSOUND_File_ReadCallback_456CA4(a1, a2, *(_DWORD *)(a3 + 16));

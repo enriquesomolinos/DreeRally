@@ -23,7 +23,7 @@ int hash_index (hash_t *h, char *key) {
 		orig = malloc(strlen(h->keys[i]));
 		strcpy(orig,h->keys[i]);
 		
-		if(strcmp(strupr(orig),strupr(dest))==0){
+		if(strcmp(_strupr(orig),_strupr(dest))==0){
 			return i;
 		}
 	}
