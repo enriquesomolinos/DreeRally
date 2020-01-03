@@ -1,7 +1,7 @@
 #include "menus.h"
-#include "util.h"
-#include "savegame.h"
-#include "i18n/i18n.h"
+#include "../../util.h"
+#include "../../savegame.h"
+#include "../../i18n/i18n.h"
 
 #include <stdio.h>
 

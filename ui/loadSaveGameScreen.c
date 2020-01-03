@@ -2,13 +2,14 @@
 
 #include "../savegame.h"
 #include "blackMarketScreen.h"
-#include "../menus.h"
+#include "util/menus.h"
 #include "../imageUtil.h"
 #include "../config.h"
 #include "../defs.h"
 #include "../drivers.h"
 #include "../dr.h"
 #include "../graphics.h"
+#include "../input/input.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>

@@ -170,7 +170,6 @@
     <ClCompile Include="asset\haf.c" />
     <ClCompile Include="mod\mod.c" />
     <ClCompile Include="race\3dSystem.c" />
-    <ClCompile Include="anim.c" />
     <ClCompile Include="cars.c" />
     <ClCompile Include="circuit.c" />
     <ClCompile Include="config.c" />
@@ -188,13 +187,10 @@
     <ClCompile Include="drivers.c" />
     <ClCompile Include="graphics.c" />
     <ClCompile Include="imageUtil.c" />
-    <ClCompile Include="menus.c" />
     <ClCompile Include="multiplayer\multiplayer.c" />
     <ClCompile Include="race\pedestrian.c" />
-    <ClCompile Include="popup\popup.c" />
     <ClCompile Include="race\powerup.c" />
     <ClCompile Include="raceParticipant.c" />
-    <ClCompile Include="raceResults.c" />
     <ClCompile Include="savegame.c" />
     <ClCompile Include="i18n\i18n.c" />
     <ClCompile Include="sfx\minifmod\soundSystem.c" />
@@ -211,15 +207,17 @@
     <ClCompile Include="ui\raceResultsScreen.c" />
     <ClCompile Include="ui\shopScreen.c" />
     <ClCompile Include="ui\startGameScreen.c" />
+    <ClCompile Include="ui\util\anim.c" />
+    <ClCompile Include="ui\util\input.c" />
+    <ClCompile Include="ui\util\menus.c" />
+    <ClCompile Include="ui\util\popup.c" />
+    <ClCompile Include="ui\util\raceResults.c" />
     <ClCompile Include="util.c" />
     <ClCompile Include="util\hash.c" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="anim.h" />
     <ClInclude Include="asset\bpaUtil.h" />
     <ClInclude Include="asset\haf.h" />
-    <ClInclude Include="input\input.c" />
-    <ClInclude Include="input\input.h" />
     <ClInclude Include="mod\mod.h" />
     <ClInclude Include="portability\portability.h" />
     <ClInclude Include="race\3dSystem.h" />
@@ -233,9 +231,7 @@
     <ClInclude Include="drivers.h" />
     <ClInclude Include="graphics.h" />
     <ClInclude Include="imageUtil.h" />
-    <ClInclude Include="menus.h" />
     <ClInclude Include="race\pedestrian.h" />
-    <ClInclude Include="popup\popup.h" />
     <ClInclude Include="race\powerup.h" />
     <ClInclude Include="raceParticipant.h" />
     <ClInclude Include="savegame.h" />
@@ -244,9 +240,9 @@
     <ClInclude Include="sfx\minifmod\system_memory.h" />
     <ClInclude Include="sfx\minifmod\xmeffects.h" />
     <ClInclude Include="sfx\sound.h" />
-    <ClInclude Include="soundEffects.h" />
     <ClInclude Include="race\terrain.h" />
     <ClInclude Include="i18n\i18n.h" />
+    <ClInclude Include="sfx\soundEffects.h" />
     <ClInclude Include="ui\blackMarketScreen.h" />
     <ClInclude Include="ui\creditsScreen.h" />
     <ClInclude Include="ui\endGameScreen.h" />
@@ -261,10 +257,14 @@
     <ClInclude Include="ui\raceResultsScreen.h" />
     <ClInclude Include="ui\shopScreen.h" />
     <ClInclude Include="ui\startGameScreen.h" />
+    <ClInclude Include="ui\util\anim.h" />
+    <ClInclude Include="ui\util\input.h" />
+    <ClInclude Include="ui\util\menus.h" />
+    <ClInclude Include="ui\util\popup.h" />
+    <ClInclude Include="ui\util\raceResults.h" />
     <ClInclude Include="util.h" />
     <ClInclude Include="util\hash.h" />
     <ClInclude Include="variables.h" />
-    <ClInclude Include="raceResults.h" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />

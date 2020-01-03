@@ -8,7 +8,7 @@
 #include "../drivers.h"
 #include "../cars.h"
 #include "../imageUtil.h"
-#include "../menus.h"
+#include "util/menus.h"
 
 #include "../config.h"
 #include "../dr.h"

@@ -3,12 +3,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "race/anim.h"
-#include "dr.h"
-#include "drivers.h"
-#include "cars.h"
-#include "graphics.h"
-#include "defs.h"
+#include "../../race/anim.h"
+#include "../../dr.h"
+#include "../../drivers.h"
+#include "../../cars.h"
+#include "../../graphics.h"
+#include "../../defs.h"
 #include "anim.h"
 
 //esto es la duracion de los frames para los coches!!!!!

@@ -2,7 +2,7 @@
 
 #include "graphics.h"
 #include "defs.h"
-#include "menus.h"
+#include "ui/util/menus.h"
 #include "dr.h"
 
 const int DEFAULT_BIGLETTER_SPACING_OFFSET = -23;

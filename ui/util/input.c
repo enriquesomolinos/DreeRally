@@ -6,12 +6,14 @@
 
 #include <string.h>
 #include "input.h"
-#include "../defs.h"
-#include "../config.h"
-#include "../imageUtil.h"
-#include "../drivers.h"
-#include "../graphics.h"
-#include "../menus.h"
+#include "../../variables.h"
+#include "../../defs.h"
+#include "../../config.h"
+#include "../../imageUtil.h"
+#include "../../drivers.h"
+#include "../../graphics.h"
+#include "menus.h"
+#include "../../dr.h"
 
 
 char byte_45EEE0[256]; // weak

@@ -1,8 +1,8 @@
 #include "menu.h"
 
-#include "../menus.h"
+#include "util/menus.h"
 
-#include "../anim.h"
+#include "util/anim.h"
 #include "../imageUtil.h"
 #include "../config.h"
 #include "../defs.h"

@@ -13,8 +13,8 @@
 #include "blackMarketScreen.h"
 #include "../variables.h"
 #include "../imageUtil.h"
-#include "../menus.h"
-#include "../popup/popup.h"
+#include "util/menus.h"
+#include "util/popup.h"
 
 _UNKNOWN unk_444160;
  _UNKNOWN unk_45FDC4; // weak;

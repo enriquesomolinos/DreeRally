@@ -1,12 +1,11 @@
-
+#include "../input/input.h"
 #include "../graphics.h"
 #include "../defs.h"
-#include "../menus.h"
+#include "util/menus.h"
 #include "../dr.h"
 #include "../asset/bpaUtil.h"
 
 #include "licenseScreen.h"
-
 #include "../imageUtil.h"
 #include "../drivers.h"
 #include "../config.h"
