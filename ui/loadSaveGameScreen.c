@@ -9,7 +9,7 @@
 #include "../drivers.h"
 #include "../dr.h"
 #include "../graphics.h"
-#include "../input/input.h"
+#include "util/input.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>

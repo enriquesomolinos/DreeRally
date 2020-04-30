@@ -596,6 +596,7 @@ int sub_424420()
       v5 = 640 * (v3 + v2 * result);
       drawImageWithPosition((int)graphicsGeneral.placingBpk, 202, 74, (int)((char *)screenBuffer + v5 + 389));
       v6 = v2 + 1;
+      if(DstBuf !=NULL)
       _itoa(v2 + 1, DstBuf, 10);
       if ( v2 )
         drawTextWithFont((int)graphicsGeneral.fbig3aBpk, (int)&bigLetterSpacing_445848, DstBuf, v5 + 4876);

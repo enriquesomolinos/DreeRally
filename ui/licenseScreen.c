@@ -1,4 +1,4 @@
-#include "../input/input.h"
+#include "util/input.h"
 #include "../graphics.h"
 #include "../defs.h"
 #include "util/menus.h"
@@ -388,7 +388,7 @@ LABEL_74:
     while ( v37 < strlen(v34) );
     dword_45FA78 = v35;
   }
-  v39 = drivers[v32].colour; //era dword_46086C
+  v39 = drivers[driverId].colour; //era dword_46086C
   v40 = (char *)graphicsGeneral.copperPal + 2 * v39;
   v41 = (unsigned __int8)v40[v39 + 2];
   v42 = (int)&v40[v39];

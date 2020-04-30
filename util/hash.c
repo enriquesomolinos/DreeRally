@@ -8,8 +8,10 @@ hash_t *hash_new (int size) {
     hash_t *h = malloc(sizeof (hash_t));
    // h->keys = malloc(size* sizeof (void *));
    // h->values = malloc(size* sizeof (void *));
-    h->size = size;
-	h->filled = 0;
+	if (h != NULL) {
+		h->size = size;
+		h->filled = 0;
+	}
     return h;
 }
  
@@ -18,10 +20,14 @@ int hash_index (hash_t *h, char *key) {
 	char *orig ="";
 	char * dest="";
 	dest =malloc(strlen(key));
-	strcpy(dest,key);
+	if (dest != NULL) {
+		strcpy(dest, key);
+	}
 	for(i=0;i<h->filled;i++){
 		orig = malloc(strlen(h->keys[i]));
-		strcpy(orig,h->keys[i]);
+		if (orig != NULL) {
+			strcpy(orig, h->keys[i]);
+		}
 		
 		if(strcmp(_strupr(orig),_strupr(dest))==0){
 			return i;

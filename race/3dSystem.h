@@ -1,5 +1,9 @@
 
 
+#ifndef THREE_D_SYSTEM_H
+#define THREE_D_SYSTEM_H
+
+#include "../defs.h"
 typedef struct Sce4Texture{
 	int tetureWidth_50A180; // weak parece ancho de sce5
 	int textureHeight_50A184; // weak parece alto de sce5 y tamaño total
@@ -40,3 +44,30 @@ typedef struct Sce3DObject{
 	int dword_4B4F6C; // weak
 } Sce3DObject;
 extern Sce3DObject sce2Texture[100];
+
+extern int trxSCE1Number3DObjects_479D20;
+extern int trxSCE3Bpk_464F10;
+extern void* trxSCE5Bpk_4A7A28;
+
+
+extern int dword_4AA928; // weak
+extern int dword_467020[7504]; // weak
+extern float flt_4A8AC0[256]; // weak
+extern float flt_4A8C00[256]; // weak
+extern float flt_4A9A60[256]; // weak
+extern int dword_46F220[1000][100]; // weak
+extern int dword_4A6AFC; // weak
+extern _UNKNOWN unk_46ED00; // weak
+extern _UNKNOWN unk_4A7BC0; // weak
+extern _UNKNOWN unk_4AA400; // weak
+
+
+int processSceFile_40A360();
+int calculateSceTextureStructure_40A880();
+void recalculatePolygonsInScreeenPosition_40D6B0();
+int sub_411530();
+void draw3dElements_4116D0();
+int sub_4156B0();
+void parseCircuitSceFile_403190();
+int   draw3dTexture_43B2F0(int a1, int a2, int a3, int textureId);
+#endif // 3DSYSTEM_H

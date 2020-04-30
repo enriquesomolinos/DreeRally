@@ -721,14 +721,14 @@ void   previewRaceScreen(signed int participants)
 		strcpy(raceFilePrefix_45EA50, "TR");
 		_itoa((circuitsToSelect_46126C[0]%9)+1, &DstBuf, 10);
 		strcat(raceFilePrefix_45EA50, &DstBuf);
-        v30 = (char *)&raceFilePrefix_45EA50[-(unsigned __int8)circuitsToSelect_46126C[0]] - (char *)&v251;
+        /*v30 = (char *)&raceFilePrefix_45EA50[-(unsigned __int8)circuitsToSelect_46126C[0]] - (char *)&v251;
         do
         {
           v31 = *(BYTE *)v29;
           *((BYTE *)v29 + v30) = *(BYTE *)v29;
           v29 = (int *)((char *)v29 + 1);
         }
-        while ( v31 );
+        while ( v31 );*/
         numberOfLaps = getModIntEntry("RACE_EASY_LAPS", 4);
 		
 		goto LABEL_44;
@@ -1346,7 +1346,9 @@ LABEL_534:
     if ( dword_45E0A8 == 2 )
       removeBackgroundRefreshFunction_43C730();
   }
-
+  
+  if (userRaceOrder_45FC20 < 0) //TODO remove this condition
+      userRaceOrder_45FC20 = 1;
   startRace(userRaceOrder_45FC20, numberOfParticipants);
   if ( isMultiplayerGame && dword_45E0A8 == 2 )
     //setBackgroundRefreshFunction_43C7B0((int (*)(void))multiplayer_4181B0);
