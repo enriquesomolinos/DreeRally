@@ -2,7 +2,7 @@
 
 #include "../cars.h"
 #include "../variables.h"
-#include "../race/anim.h"
+#include "util/anim.h"
 #include "util/menus.h"
 #include "../imageUtil.h"
 #include "../config.h"

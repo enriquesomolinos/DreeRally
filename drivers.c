@@ -6,6 +6,7 @@
 #include "defs.h"
 #include "dr.h"
 #include "cars.h"
+#include "ui/util/anim.h"
 
  Driver drivers[20];
  int driverId; // weak
@@ -275,7 +276,7 @@ int initDrivers()
   isDemo_456B10 = 0;
   dword_456B68 = 0;
 
-  //108 es el tamñao de cada estructura de piloto esta seteando a cero cosas
+  //108 es el tamï¿½ao de cada estructura de piloto esta seteando a cero cosas
   
   do {
 	  drivers[index].mines = 0;

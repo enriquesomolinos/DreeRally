@@ -1,5 +1,7 @@
 {
     "files.associations": {
-        "anim.h": "c"
+        "anim.h": "c",
+        "variables.h": "c",
+        "config.h": "c"
     }
 }

@@ -8,7 +8,7 @@
 
 #include <math.h>
 
-#include "race/anim.h"
+#include "ui/util/anim.h"
 
 #include "ui/mainScreen.h"
 #include "ui/startGameScreen.h"

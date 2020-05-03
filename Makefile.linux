@@ -12,7 +12,7 @@ CFLAGS   = $(INCS) -g3 -D_WINDOWS_TYPES1 -D__WIN32__2 -DPORTABILITY -D_NO_MINIFM
 LDFLAGS  = -m32
 RM       = rm
 
-CFILES =$(wildcard *.c) $(wildcard */*.c)
+CFILES =$(wildcard *.c) $(wildcard */*.c) $(wildcard */*/*.c)
 OBJFILES = $(CFILES:.c=.o)
 .PHONY: all all-before all-after clean clean-custom
 

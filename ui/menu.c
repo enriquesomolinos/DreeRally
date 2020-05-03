@@ -1,3 +1,4 @@
+#include <SDL_keysym.h>
 #include "menu.h"
 
 #include "util/menus.h"
@@ -580,6 +581,9 @@ signed int   readEventInMenu(int menuType)
     switch (key)
     {
       default:
+        if(key != 0){
+          key =1;
+        }
         continue;
       case KEY_ESCAPE :
         if ( !menuType)
@@ -602,6 +606,7 @@ LABEL_14:
         return result;
       case KEY_ENTER:
       case KEY_ESPACE:
+      case SDLK_KP_ENTER:
       case 0x9C:
 
 		  v1 = dword_445708[menuType];
@@ -621,6 +626,7 @@ LABEL_14:
         loadMenuSoundEffect(1u, 25, 0, configuration.effectsVolume, dword_445194);
         continue;
       case KEY_DOWN:
+      case SDLK_DOWN:
       case 0xD0:
         refreshMenuDown(menuType);
 	    loadMenuSoundEffect(1u, 25, 0, configuration.effectsVolume, dword_445194);

@@ -3,7 +3,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "../../race/anim.h"
 #include "../../dr.h"
 #include "../../drivers.h"
 #include "../../cars.h"

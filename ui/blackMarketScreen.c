@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "../race/anim.h"
+#include "util/anim.h"
 #include "../defs.h"
 #include "../dr.h"
 #include "../drivers.h"

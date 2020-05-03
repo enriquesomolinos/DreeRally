@@ -5,14 +5,14 @@
 #include <stdlib.h>
 
 #include <string.h>
-#include "../imageUtil.h"
-#include "../graphics.h"
-#include "../defs.h"
-#include "../dr.h"
-#include "../drivers.h"
-#include "../cars.h"
-#include "../config.h"
-#include "../variables.h"
+#include "../../imageUtil.h"
+#include "../../graphics.h"
+#include "../../defs.h"
+#include "../../dr.h"
+#include "../../drivers.h"
+#include "../../cars.h"
+#include "../../config.h"
+#include "../../variables.h"
 
 char aASlickSteroidR[30] = "[A slick steroid run, anyone?"; // weak
 _UNKNOWN unk_452DE8; // weak
