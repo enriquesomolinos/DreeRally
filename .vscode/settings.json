@@ -2,6 +2,7 @@
     "files.associations": {
         "anim.h": "c",
         "variables.h": "c",
-        "config.h": "c"
+        "config.h": "c",
+        "menus.h": "c"
     }
 }

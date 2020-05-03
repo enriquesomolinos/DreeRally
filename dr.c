@@ -1,10 +1,10 @@
 
 #include <SDL.h>
 #include <SDL_joystick.h>
-#ifndef PORTABILITY
+//#ifndef PORTABILITY
   #include "portability/portability.h"
 	#include <SDL_opengl.h>
-#endif
+//#endif
 
 #include <math.h>
 
@@ -508,18 +508,9 @@ _UNKNOWN unk_4568D8; // weak
 char aSanim_haf[10] = "SANIM.HAF"; // weak
 _UNKNOWN unk_4569F0; // weak
 
-#ifndef PORTABILITY
-
 GLfloat x =  1.0; // idb
 GLfloat y =  1.0; // idb
 
-#endif
-#ifdef PORTABILITY
-
-float x =  1.0; // idb
-float y =  1.0; // idb
-
-#endif
 
 char aWinmainError[16] = "WinMain() error"; // weak
 char aSS[] = "%s: %s\n"; // idb
@@ -607,13 +598,11 @@ int dword_456BF8 = 0; // weak
 int dword_456BFC = 0; // weak
 int (*dword_456C00)(void) = NULL; // weak
 
-int dword_456C14 = 0; // weak
+int glResolution_456C14 = 0; // weak
 int dword_456C18 = 0; // weak
 
-#ifndef PORTABILITY
 GLvoid *pixels = NULL; // idb
 
-#endif
 
 SDL_Joystick *sldJoystick_456C20; // weak
 
@@ -19314,12 +19303,10 @@ void   SetVideoMode(int fullScreen)
   
   unsigned int flagsNoGL; // esi@1
   signed int v3; // ebp@4
-#ifndef PORTABILITY
   GLsizei glWidth; // esi@4
   GLsizei glHeight; // ebx@4
   GLvoid *v6; // edi@5
 
-#endif
 
   int flags; // [sp+0h] [bp-4h]@4
 
@@ -19328,12 +19315,11 @@ void   SetVideoMode(int fullScreen)
 	  flagsNoGL = SDL_FULLSCREEN;
   SDL_ShowCursor(fullScreen == 0);
 
-#ifndef PORTABILITY
 
   if ( mainArgs.configGL )
   {
     v3 = 32;
-	flags = 2;
+	flags = SDL_OPENGL;
 	glWidth = 640;
 	glHeight = 480;
     if ( pixels )
@@ -19360,26 +19346,23 @@ void   SetVideoMode(int fullScreen)
     SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 16);
     SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
     screenSurface = SDL_SetVideoMode(glWidth, glHeight, v3, flags);
-    glMatrixMode(0x1701u);
+    glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    glMatrixMode(0x1700u);
+    glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
     glViewport(0, 0, glWidth, glHeight);
-    glBindTexture(0xDE1u, 1u);
-    glTexImage2D(0xDE1u, 0, 6407, 512, 256, 0, 0x1907u, 0x1401u, 0);
-    glBindTexture(0xDE1u, 2u);
-    glTexImage2D(0xDE1u, 0, 6407, 1024, 512, 0, 0x1907u, 0x1401u, 0);
+    glBindTexture(GL_TEXTURE_2D, 1u);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, 512, 256, 0, GL_RGB, GL_UNSIGNED_BYTE, 0);
+    glBindTexture(GL_TEXTURE_2D, 2u);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, 1024, 512, 0, GL_RGB, GL_UNSIGNED_BYTE, 0);
   }
   else
   {
-#endif
 
     //screenSurface = SDL_SetVideoMode(640, 480, 32, v2);
 	screenSurface = SDL_SetVideoMode(640, 480, 32, flagsNoGL);
-#ifndef PORTABILITY
 
   }
-#endif
 
 }
 
@@ -19466,55 +19449,46 @@ SDL_Color* color;
     return result;
   dword_456C18 = a1;
   SDL_Delay(1);
-
-#ifndef PORTABILITY
+//
   
   if ( mainArgs.configGL )
   {
     v3 = 0;
-    if ( dword_456C14 == 19 )
+    if ( glResolution_456C14 == 19 )
     {
       do
       {
         v4 = (char *)pixels + v3;
-        v5 = 64;
+        v5 = 320;
         do
         {
           *(_DWORD *)v4 = palette[*(BYTE *)v2] | 0xFF000000;
-          v6 = palette[*(BYTE *)(v2 + 1)];
-          v7 = v2 + 1;
-          *((_DWORD *)v4 + 1) = v6 | 0xFF000000;
-          v8 = palette[*(BYTE *)(v7++ + 1)];
-          *((_DWORD *)v4 + 2) = v8 | 0xFF000000;
-          v9 = palette[*(BYTE *)(v7 + 1)];
-          v7 += 2;
-          *((_DWORD *)v4 + 3) = v9 | 0xFF000000;
-          *((_DWORD *)v4 + 4) = palette[*(BYTE *)v7] | 0xFF000000;
-          v2 = v7 + 1;
-          v4 += 20;
+        
+          v2=v2+1;
+          v4=v4+4;
           --v5;
         }
         while ( v5 );
         v3 += 1280;
       }
       while ( v3 < 256000 );
-      glEnable(0xDE1u);
-      glBindTexture(0xDE1u, 1u);
-      glTexSubImage2D(0xDE1u, 0, 0, 0, 320, 200, 0x1908u, 0x1401u, pixels);
+      glEnable(GL_TEXTURE_2D);
+      glBindTexture(GL_TEXTURE_2D, 1u);
+      glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, 320, 200, GL_RGBA, GL_UNSIGNED_BYTE, pixels);
       if ( mainArgs.configSmooth )
       {
-        glTexParameteri(0xDE1u, 0x2801u, 9728);
-        glTexParameteri(0xDE1u, 0x2800u, 9728);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, 9728);
+        glTexParameteri(GL_TEXTURE_2D,  GL_TEXTURE_MAG_FILTER, 9728);
       }
       else
       {
-        glTexParameteri(0xDE1u, 0x2801u, 9729);
-        glTexParameteri(0xDE1u, 0x2800u, 9729);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, 9729);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, 9729);
       }
       glClear(0x4000u);
       if (screenSurface ==NULL )
       {
-        glBegin(7u);
+        glBegin(GL_QUADS);
         v10 = glTexCoord2f;
         glTexCoord2f(0.0, 0.78125);
         v11 = glVertex2f;
@@ -19534,7 +19508,7 @@ LABEL_20:
         SDL_GL_SwapBuffers();
         goto LABEL_49;
       }
-      glBegin(7u);
+      glBegin(GL_QUADS);
       v14 = glTexCoord2f;
       glTexCoord2f(0.0, 0.78125);
       v15 = glVertex2f;
@@ -19546,36 +19520,28 @@ LABEL_20:
       do
       {
         v16 = (char *)pixels + v3;
-        v17 = 128;
-        do
+        v17 = 640;
+        do 
         {
-          *(_DWORD *)v16 = palette[*(BYTE *)v2] | 0xFF000000;
-          v18 = palette[*(BYTE *)(v2 + 1)];
-          v19 = v2 + 1;
-          *((_DWORD *)v16 + 1) = v18 | 0xFF000000;
-          v20 = palette[*(BYTE *)(v19++ + 1)];
-          *((_DWORD *)v16 + 2) = v20 | 0xFF000000;
-          v21 = palette[*(BYTE *)(v19 + 1)];
-          v19 += 2;
-          *((_DWORD *)v16 + 3) = v21 | 0xFF000000;
-          *((_DWORD *)v16 + 4) = palette[*(BYTE *)v19] | 0xFF000000;
-          v2 = v19 + 1;
-          v16 += 20;
+          *(int *)v16 = palette[*(BYTE *)v2] | 0xFF000000;
+          v2 = v2 + 1;
+         
+          v16=v16+4;
           --v17;
         }
         while ( v17 );
         v3 += 2560;
       }
       while ( v3 < 1228800 );
-      glEnable(0xDE1u);
-      glBindTexture(0xDE1u, 2u);
-      glTexSubImage2D(0xDE1u, 0, 0, 0, 640, 480, 0x1908u, 0x1401u, pixels);
-      glTexParameteri(0xDE1u, 0x2801u, 9729);
-      glTexParameteri(0xDE1u, 0x2800u, 9729);
+      glEnable(GL_TEXTURE_2D);
+      glBindTexture(GL_TEXTURE_2D, 2u);
+      glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, 640, 480, GL_RGBA, GL_UNSIGNED_BYTE, pixels);
+      glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, 9729);
+      glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, 9729);
       glClear(0x4000u);
       if ( *(_DWORD *)screenSurface < 0 )
       {
-        glBegin(7u);
+        glBegin(GL_QUADS);
         v10 = glTexCoord2f;
         glTexCoord2f(0.0, 0.9375);
         v11 = glVertex2f;
@@ -19601,13 +19567,12 @@ LABEL_20:
     SDL_GL_SwapBuffers();
     goto LABEL_49;
   }
-#endif
 
   screenSurfaceTemp = screenSurface;
   v27 = screenSurface->pitch >> 2;
   //v27 = (unsigned int)*(_WORD *)(screenSurface + 16) >> 2;
 
-  if ( dword_456C14 == 19 )
+  if ( glResolution_456C14 == 19 )
   {
     if ( mainArgs.configSmooth )
     {
@@ -19848,7 +19813,7 @@ int   setWindowCaption3(int a1)
 
   memset((void *)screenPtr_456BF4, 0, 0x4B000u);
   result = a1;
-  if ( dword_456C14 != a1 )
+  if ( glResolution_456C14 != a1 )
   {
     if ( a1 == 19 )
     {
@@ -19878,7 +19843,7 @@ int   setWindowCaption3(int a1)
         }
       }
       screenPtr = screenPtr_456BF4;
-      dword_456C14 = 19;
+      glResolution_456C14 = 19;
       //TODO fix
       SDL_WM_SetCaption("DreeRally RACE", 0);
       //result = SDL_WM_SetCaption("DreeRally", 0);
@@ -19888,7 +19853,7 @@ int   setWindowCaption3(int a1)
       if ( a1 == 257 )
       {
         screenPtr = screenPtr_456BF4;
-        dword_456C14 = 257;
+        glResolution_456C14 = 257;
       }
       //TODO fix
       SDL_WM_SetCaption("DreeRally RACE", 0);
@@ -19905,10 +19870,10 @@ int setWindowCaption2()
 
   memset((void *)screenPtr_456BF4, 0, 0x4B000u);
   result = 257;
-  if ( dword_456C14 != 257 )
+  if ( glResolution_456C14 != 257 )
   {
     screenPtr = screenPtr_456BF4;
-    dword_456C14 = 257;
+    glResolution_456C14 = 257;
     //TODO fix
       SDL_WM_SetCaption("DreeRally", 0);
       //result = SDL_WM_SetCaption("DreeRally", 0);
@@ -19923,7 +19888,7 @@ int setWindowCaption()
 
   result = 0;
   memset((void *)screenPtr_456BF4, 0, 0x4B000u);
-  if ( dword_456C14 != 3 )
+  if ( glResolution_456C14 != 3 )
     //TODO fix
       SDL_WM_SetCaption("DreeRally", 0);
       //result = SDL_WM_SetCaption("DreeRally", 0);
