@@ -270,7 +270,7 @@ void decryptAnimFrame()
         for ( ; v13 > (unsigned int)dword_45FB9C ; ++dword_456B44 )
         {
           v17 = *(BYTE *)(v13-- - 1);
-          *((BYTE *)anim_currentFrameData + dword_456B44) = v17+10;
+          *((BYTE *)anim_currentFrameData + dword_456B44) = v17;
            //printf("\data %d..\n",v17);
         }
       }
