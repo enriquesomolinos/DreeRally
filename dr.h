@@ -92,7 +92,7 @@ extern int dword_445724;
 extern int dword_4456E8;
 extern int dword_45FA74; // weak
 extern int dword_45FC00;
-extern char byte_460840[256];
+extern char byte_460840[2160];
 extern char circuitsToSelect_46126C[3];
 extern char byte_462D50;
 extern char byte_45FAA0[256];

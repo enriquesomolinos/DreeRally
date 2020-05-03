@@ -2520,7 +2520,7 @@ int   FSOUND_File_Read_43F790(void *buffer, int size, FSOUND_FILE_HANDLE *handle
 //----- (0043F7B0) --------------------------------------------------------
 int   FSOUND_File_Seek_43F7B0(FSOUND_FILE_HANDLE *handle)
 {
-  int result; // eax@1
+  int result =0; // eax@1
 
   //result =handle;
   if ( handle )
@@ -2533,7 +2533,7 @@ int   FSOUND_File_Seek_43F7B0(FSOUND_FILE_HANDLE *handle)
 //----- (0043F7D0) --------------------------------------------------------
 int   FSOUND_File_Tell_43F7D0(FSOUND_FILE_HANDLE *handle)
 {
-  int result; // eax@1
+  int result = 0; // eax@1
 
   //result = handle;
   if ( handle )

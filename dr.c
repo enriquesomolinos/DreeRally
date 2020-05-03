@@ -827,7 +827,7 @@ _UNKNOWN unk_4606C4; // weak
 
 int maxPaletteEntries=768; // weak
 
-char byte_460840[256]; // weak
+char byte_460840[2160]; // weak
 //int dword_46084C[256]; // weak
 //int dword_460850[256]; // weak
 //int dword_460854[256]; // weak
@@ -4895,7 +4895,7 @@ signed int   racePauseMenu_4064A0(int a1)
   //}
   stopSoundChannel_43C3E0(5u);
   //copyBuffer2Screen((void *)screenPtr, dword_47926C, 16000);
-  free(Memory);
+ /// free(Memory);
  // free(dword_47926C);
   dword_4A9EAC = 0;
   dword_503510 = 0;
@@ -8237,29 +8237,29 @@ LABEL_64:
 	   raceParticipantIngame[ currentDriverSelectedIndex_503518].advanceYAxis_4A7E60=raceParticipantIngame[ currentDriverSelectedIndex_503518].advanceYAxis_4A7E60;
   raceParticipantIngame[ currentDriverSelectedIndex_503518].dword_4A7DC4 = sin(( raceParticipantIngame[v0].carAngle_4A7DAC + 206.0) * 0.01745329251994444) * 18.0
                            +  raceParticipantIngame[ currentDriverSelectedIndex_503518].advanceXAxis_4A7E5C;
-  raceParticipantIngame[ currentDriverSelectedIndex_503518].dword_4A7DC8 = cos(( raceParticipantIngame[v0].carAngle_4A7DAC + 206.0) * 0.01745329251994444) * 14.999994
+  raceParticipantIngame[ currentDriverSelectedIndex_503518].dword_4A7DC8 = (float)cos(( raceParticipantIngame[v0].carAngle_4A7DAC + 206.0) * 0.01745329251994444) * 14.999994
                            + raceParticipantIngame[ currentDriverSelectedIndex_503518].advanceYAxis_4A7E60;
-  raceParticipantIngame[ currentDriverSelectedIndex_503518].dword_4A7DCC = sin(( raceParticipantIngame[v0].carAngle_4A7DAC + 180.0 - 26.0) * 0.01745329251994444) * 18.0
+  raceParticipantIngame[ currentDriverSelectedIndex_503518].dword_4A7DCC = (float)sin(( raceParticipantIngame[v0].carAngle_4A7DAC + 180.0 - 26.0) * 0.01745329251994444) * 18.0
                            + raceParticipantIngame[ currentDriverSelectedIndex_503518].advanceXAxis_4A7E5C;
-  raceParticipantIngame[ currentDriverSelectedIndex_503518].dword_4A7DD0 = cos(( raceParticipantIngame[v0].carAngle_4A7DAC + 180.0 - 26.0) * 0.01745329251994444) * 14.999994
+  raceParticipantIngame[ currentDriverSelectedIndex_503518].dword_4A7DD0 = (float)cos(( raceParticipantIngame[v0].carAngle_4A7DAC + 180.0 - 26.0) * 0.01745329251994444) * 14.999994
                            + raceParticipantIngame[ currentDriverSelectedIndex_503518].advanceYAxis_4A7E60;
-  raceParticipantIngame[ currentDriverSelectedIndex_503518].dword_4A7DD4 = sin(( raceParticipantIngame[v0].carAngle_4A7DAC+ 334.0) * 0.01745329251994444) * 18.0
+  raceParticipantIngame[ currentDriverSelectedIndex_503518].dword_4A7DD4 = (float)sin(( raceParticipantIngame[v0].carAngle_4A7DAC+ 334.0) * 0.01745329251994444) * 18.0
                            + raceParticipantIngame[ currentDriverSelectedIndex_503518].advanceXAxis_4A7E5C;
-  raceParticipantIngame[ currentDriverSelectedIndex_503518].dword_4A7DD8 = cos(( raceParticipantIngame[v0].carAngle_4A7DAC + 334.0) * 0.01745329251994444) * 14.999994
+  raceParticipantIngame[ currentDriverSelectedIndex_503518].dword_4A7DD8 = (float)cos(( raceParticipantIngame[v0].carAngle_4A7DAC + 334.0) * 0.01745329251994444) * 14.999994
                            + raceParticipantIngame[ currentDriverSelectedIndex_503518].advanceYAxis_4A7E60;
-  raceParticipantIngame[ currentDriverSelectedIndex_503518].dword_4A7DDC = sin(( raceParticipantIngame[v0].carAngle_4A7DAC + 180.0 - 154.0) * 0.01745329251994444) * 18.0
+  raceParticipantIngame[ currentDriverSelectedIndex_503518].dword_4A7DDC = (float)sin(( raceParticipantIngame[v0].carAngle_4A7DAC + 180.0 - 154.0) * 0.01745329251994444) * 18.0
                            + raceParticipantIngame[ currentDriverSelectedIndex_503518].advanceXAxis_4A7E5C;
-  raceParticipantIngame[ currentDriverSelectedIndex_503518].dword_4A7DE0 = cos(( raceParticipantIngame[v0].carAngle_4A7DAC + 180.0 - 154.0) * 0.01745329251994444) * 14.999994
+  raceParticipantIngame[ currentDriverSelectedIndex_503518].dword_4A7DE0 = (float)cos(( raceParticipantIngame[v0].carAngle_4A7DAC + 180.0 - 154.0) * 0.01745329251994444) * 14.999994
                            + raceParticipantIngame[ currentDriverSelectedIndex_503518].advanceYAxis_4A7E60;
-  raceParticipantIngame[ currentDriverSelectedIndex_503518].dword_4A7DE4 = sin(( raceParticipantIngame[v0].carAngle_4A7DAC + 270.0) * 0.01745329251994444) * 8.0
+  raceParticipantIngame[ currentDriverSelectedIndex_503518].dword_4A7DE4 = (float)sin(( raceParticipantIngame[v0].carAngle_4A7DAC + 270.0) * 0.01745329251994444) * 8.0
                            + raceParticipantIngame[ currentDriverSelectedIndex_503518].advanceXAxis_4A7E5C;
-  raceParticipantIngame[ currentDriverSelectedIndex_503518].dword_4A7DE8 = cos(( raceParticipantIngame[v0].carAngle_4A7DAC + 270.0) * 0.01745329251994444) * 6.666664
+  raceParticipantIngame[ currentDriverSelectedIndex_503518].dword_4A7DE8 = (float)cos(( raceParticipantIngame[v0].carAngle_4A7DAC + 270.0) * 0.01745329251994444) * 6.666664
                            + raceParticipantIngame[ currentDriverSelectedIndex_503518].advanceYAxis_4A7E60;
-  raceParticipantIngame[ currentDriverSelectedIndex_503518].dword_4A7DEC = sin(( raceParticipantIngame[v0].carAngle_4A7DAC + 180.0 - 90.0) * 0.01745329251994444) * 8.0
+  raceParticipantIngame[ currentDriverSelectedIndex_503518].dword_4A7DEC = (float)sin(( raceParticipantIngame[v0].carAngle_4A7DAC + 180.0 - 90.0) * 0.01745329251994444) * 8.0
                            + raceParticipantIngame[ currentDriverSelectedIndex_503518].advanceXAxis_4A7E5C;
-  raceParticipantIngame[ currentDriverSelectedIndex_503518].dword_4A7DF0 = cos(( raceParticipantIngame[v0].carAngle_4A7DAC + 180.0 - 90.0) * 0.01745329251994444) * 6.666664
+  raceParticipantIngame[ currentDriverSelectedIndex_503518].dword_4A7DF0 = (float)cos(( raceParticipantIngame[v0].carAngle_4A7DAC + 180.0 - 90.0) * 0.01745329251994444) * 6.666664
                            + raceParticipantIngame[ currentDriverSelectedIndex_503518].advanceYAxis_4A7E60;
-  raceParticipantIngame[ currentDriverSelectedIndex_503518].dword_4A7DF4 = sin(( raceParticipantIngame[v0].carAngle_4A7DAC + 180.0) * 0.01745329251994444) * 22.0
+  raceParticipantIngame[ currentDriverSelectedIndex_503518].dword_4A7DF4 = (float)sin(( raceParticipantIngame[v0].carAngle_4A7DAC + 180.0) * 0.01745329251994444) * 22.0
                            + raceParticipantIngame[ currentDriverSelectedIndex_503518].advanceXAxis_4A7E5C;
   
   v36 = cos(( raceParticipantIngame[v0].carAngle_4A7DAC + 180.0) * 0.01745329251994444) * 18.333326 +  raceParticipantIngame[ v0].advanceYAxis_4A7E60;
