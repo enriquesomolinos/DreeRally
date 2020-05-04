@@ -216,6 +216,9 @@
     <ClCompile Include="ui\util\menus.c">
       <Filter>Source Files\ui\util</Filter>
     </ClCompile>
+    <ClCompile Include="race\lightSystem.c">
+      <Filter>Source Files\race</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="cars.h">
@@ -364,6 +367,9 @@
     </ClInclude>
     <ClInclude Include="sfx\soundEffects.h">
       <Filter>Header Files\sfx</Filter>
+    </ClInclude>
+    <ClInclude Include="race\lightSystem.h">
+      <Filter>Header Files\race</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -188,6 +188,7 @@
     <ClCompile Include="graphics.c" />
     <ClCompile Include="imageUtil.c" />
     <ClCompile Include="multiplayer\multiplayer.c" />
+    <ClCompile Include="race\lightSystem.c" />
     <ClCompile Include="race\pedestrian.c" />
     <ClCompile Include="race\powerup.c" />
     <ClCompile Include="raceParticipant.c" />
@@ -231,6 +232,7 @@
     <ClInclude Include="drivers.h" />
     <ClInclude Include="graphics.h" />
     <ClInclude Include="imageUtil.h" />
+    <ClInclude Include="race\lightSystem.h" />
     <ClInclude Include="race\pedestrian.h" />
     <ClInclude Include="race\powerup.h" />
     <ClInclude Include="raceParticipant.h" />
