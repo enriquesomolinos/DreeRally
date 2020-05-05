@@ -1,3 +1,6 @@
+#ifndef CONFIG_H
+#define CONFIG_H
+
 #include "ui/hallOfFame.h"
 
 
@@ -77,3 +80,5 @@ int saveConfiguration();
 char loadConfig();
 
 //dword_461F20 es la estructura halloffame
+
+#endif

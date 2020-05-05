@@ -557,3 +557,150 @@ FILE *checkAndOpenAnimation()
   }
   return result;
 }
+
+//----- (00427D60) --------------------------------------------------------
+/*int checkIntro()
+{
+  int v0; // ebx@1
+  signed int v1; // ebp@1
+  FILE *v2; // eax@2
+  FILE *v3; // esi@2
+  __int32 v4; // edi@3
+  int v5; // eax@6
+  char v6; // cl@7
+  unsigned int v7; // eax@8
+  char *v8; // edi@8
+  char v9; // cl@9
+  FILE *v10; // eax@10
+  FILE *v11; // esi@10
+  __int32 (  *v12)(FILE *); // ebp@11
+  __int32 v13; // edi@11
+  unsigned int v14; // eax@20
+  char *v15; // edi@20
+  char v16; // cl@21
+  int v17; // eax@23
+  const void *v18; // esi@23
+  char v19; // cl@24
+  unsigned int v20; // eax@25
+  char *v21; // edi@25
+  char v22; // cl@26
+  FILE *v23; // eax@27
+  FILE *v24; // esi@27
+  __int32 v25; // edi@28
+  int result; // eax@30
+  bool v27; // sf@30
+  unsigned __int8 v28; // of@30
+  const char *v29; // [sp-8h] [bp-120h]@13
+  int v30; // [sp-4h] [bp-11Ch]@13
+  _UNKNOWN *v31; // [sp+10h] [bp-108h]@18
+  int v32; // [sp+14h] [bp-104h]@8
+  char Filename[256]; // [sp+18h] [bp-100h]@7
+
+  v0 = 0;
+  v1 = (signed int)&unk_4568D8;
+  do
+  {
+    v2 = fopen((const char *)(v1 - 16), "rb");
+    v3 = v2;
+    if ( !v2 || (fseek(v2, 0, 2), v4 = ftell(v3), fclose(v3), v4 < 1) )
+    {
+      v30 = 20 * v0 + 4548808;
+      v29 = "\nDEATH RALLY ERROR: File %s is not found!\n";
+LABEL_33:
+      printf(v29, v30);
+      printf("Please consult DRHELP.EXE for more information on how to resolve this problem.\n");
+      nullsub_1();
+      freeMusic();
+      exit(112);
+    }
+    if ( v4 != *(_DWORD *)v1 )
+    {
+      printf("\nDEATH RALLY ERROR: File %s is not in original form!\n", 20 * v0 + 4548808);
+      printf("Please consult DRHELP.EXE for more information on how to resolve this problem.\n");
+      nullsub_1();
+      freeMusic();
+      exit(112);
+    }
+    v1 += 20;
+    ++v0;
+  }
+  while ( v1 < (signed int)&unk_4569F0 );
+  byte_462D50 = 2;
+  v5 = 0;
+  do
+  {
+    v6 = byte_45FAA0[v5];
+    Filename[v5++] = v6;
+  }
+  while ( v6 );
+  v7 = strlen(aSanim_haf) + 1;
+  v8 = (char *)&v32 + 3;
+  do
+    v9 = (v8++)[1];
+  while ( v9 );
+  memcpy(v8, aSanim_haf, v7);
+  v10 = fopen(Filename, "rb");
+
+  v11 = v10;
+  if ( !v10 )
+  {
+    v12 = ftell;
+    goto LABEL_17;
+  }
+  fseek(v10, 0, 2);
+  v12 = ftell;
+  v13 = ftell(v11);
+  fclose(v11);
+  if ( v13 < 1 )
+LABEL_17:
+    byte_462D50 = 1;
+  v32 = 0;
+  v31 = &unk_4569F0;
+  while ( 2 )
+  {
+    Filename[0] = 0;
+    if ( byte_462D50 == 2 )
+    {
+      v14 = strlen(byte_45FAA0) + 1;
+      v15 = (char *)&v32 + 3;
+      do
+        v16 = (v15++)[1];
+      while ( v16 );
+      memcpy(v15, byte_45FAA0, v14);
+    }
+    v17 = (int)((char *)v31 - 16);
+    v18 = (char *)v31 - 16;
+    do
+      v19 = *(BYTE *)v17++;
+    while ( v19 );
+    v20 = v17 - (_DWORD)v18;
+    v21 = (char *)&v32 + 3;
+    do
+      v22 = (v21++)[1];
+    while ( v22 );
+    memcpy(v21, v18, v20);
+    v23 = fopen(aSanim_haf, "rb");
+    //v23 = fopen(Filename, "rb");
+    v24 = v23;
+    if ( v23 )
+    {
+      fseek(v23, 0, 2);
+      v25 = v12(v24);
+      fclose(v24);
+     if ( v25 > 0 && v25 != *(_DWORD *)v31 )
+      {
+        v30 = 20 * v32 + 4549088;
+        v29 = "\nDEATH RALLY ERROR: File %s is not in original form!\n";
+        goto LABEL_33;
+      }
+    }
+    result = (int)((char *)v31 + 20);
+    v28 = __OFSUB__((char *)v31 + 20, &effectVolume_456A2C);
+    v27 = (_UNKNOWN *)((char *)v31 + 20) - (_UNKNOWN *)&effectVolume_456A2C < 0;
+    ++v32;
+    v31 = (char *)v31 + 20;
+    if ( v27 ^ v28 )
+      continue;
+    return result;
+  }
+}*/

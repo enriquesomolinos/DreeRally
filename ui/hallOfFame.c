@@ -1,6 +1,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "../defs.h"
 
 #include "../graphics.h"
@@ -33,6 +34,12 @@ extern _UNKNOWN unk_45F8B0; // weak
 extern _UNKNOWN unk_45F8BC; // weak
 
 extern char aDeliverator[12] = "Deliverator"; // weak
+
+char byte_456618[] = { 'A' }; // weak
+char byte_45665E[] = { 'S' }; // weak
+char byte_4566A4[] = { 'f' }; // weak
+char byte_4566EA[] = { 'k' }; // weak
+
 
 //----- (00431510) --------------------------------------------------------
 int seeHallOfFame()

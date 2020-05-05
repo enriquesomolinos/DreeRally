@@ -10,6 +10,8 @@
 #include "../asset/bpaUtil.h"
 #include "../drivers.h"
 #include "../raceParticipant.h"
+#include "../i18n/i18n.h"
+#include "../mod/mod.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>

@@ -878,3 +878,264 @@ int   draw3dTexture_43B2F0(int a1, int a2, int a3, int textureId)//offsetx, offs
     }
     return result;
 }
+
+//----- (0043CD50) --------------------------------------------------------
+int   setTriangleValue_43CD50(int pos1x, int pos1y, int pos2x, int pos2y, int pos3x, int pos3y, char value)
+{
+    int v7; // ecx@1
+    signed int v8; // ecx@2
+    int v9; // edx@4
+    signed int v10; // edx@5
+    signed int v11; // esi@7
+    signed int v12; // edi@7
+    int result; // eax@7
+    signed int v14; // ebx@8
+    int v15; // edx@8
+    int v16; // eax@8
+    int v17; // eax@8
+    double v18; // st7@8
+    int v19; // ebx@8
+    int v20; // ecx@8
+    double v21; // st7@12
+    signed int v22; // edi@14
+    unsigned __int64 v23; // rax@14
+    signed int v24; // ecx@18
+    double v25; // st7@29
+    signed int v26; // edi@31
+    unsigned __int64 v27; // rax@31
+    signed int i; // ecx@35
+    float v29; // [sp+18h] [bp-40h]@9
+    float v30; // [sp+1Ch] [bp-3Ch]@9
+    float v31; // [sp+20h] [bp-38h]@8
+    float v32; // [sp+20h] [bp-38h]@26
+    int v33; // [sp+24h] [bp-34h]@7
+    float v34; // [sp+28h] [bp-30h]@12
+    signed int v35; // [sp+2Ch] [bp-2Ch]@8
+    int v36; // [sp+30h] [bp-28h]@8
+    float v37; // [sp+30h] [bp-28h]@29
+    float v38; // [sp+34h] [bp-24h]@8
+    int v39; // [sp+38h] [bp-20h]@8
+    int v40; // [sp+3Ch] [bp-1Ch]@9
+    int v41; // [sp+40h] [bp-18h]@1
+    int v42; // [sp+44h] [bp-14h]@1
+    int v43; // [sp+48h] [bp-10h]@1
+    int v44; // [sp+4Ch] [bp-Ch]@1
+    int v45; // [sp+50h] [bp-8h]@1
+    int v46; // [sp+54h] [bp-4h]@1
+    int positions[6];
+    positions[0] = pos1x;
+    positions[1] = pos1y;
+    positions[2] = pos2x;
+    positions[3] = pos2y;
+    positions[4] = pos3x;
+    positions[5] = pos3y;
+    //v41 = a1;
+    //v43 = a3;
+    v7 = 0;
+    //v42 = a2;
+    //v44 = a4;
+    //v45 = a5;
+    //v46 = a6;
+    if (pos1y >= pos2y)
+    {
+        LOBYTE(v7) = pos2y >= pos3y;
+        v8 = 2 * v7 + 2;
+    }
+    else
+    {
+        v8 = pos1y < pos3y ? 0 : 4;
+    }
+    v9 = 0;
+    if (pos1y <= pos2y)
+    {
+        LOBYTE(v9) = pos2y <= pos3y;
+        v10 = 2 * v9 + 2;
+    }
+    else
+    {
+        v10 = pos1y > pos3y ? 0 : 4;
+    }
+    v11 = positions[1 + v8];
+    //v11 = *(&v42 + v8);
+    v12 = v10;
+    result = 6 - v10 - v8;
+    v33 = positions[1 + v10];
+    //v33 = *(&v42 + v10);
+    if (v33 == v11)
+        return result;
+    v14 = positions[0 + result];
+    //v14 = *(&v41 + result);
+    v15 = positions[0 + v8];
+    //v15 = &v41 + v8;
+    v35 = v14;
+    v16 = positions[1 + result];
+    //v16 = &v42 + result;
+    v36 = v16;
+    v17 = v16;
+    v18 = (double)(v14 - v15) / (double)(v17 - v11);
+    v19 = positions[0 + v12];
+
+    //v18 = (double)(v14 - *v15) / (double)(v17 - v11);
+    //v19 = *(&v41 + v12);
+    v20 = v33;
+    v39 = positions[0 + v12];
+    //v39 = *(&v41 + v12);
+    v31 = v18;
+    v38 = (double)(positions[0 + v12] - v15) / (double)(v33 - v11);
+    // v38 = (double)(*(&v41 + v12) - *v15) / (double)(v33 - v11);
+
+    if (v17 == v11)
+    {
+        v30 = (double)v35;
+        v29 = (double)v15;
+    LABEL_26:
+        result = v20 - v36;
+        v32 = (double)(v19 - v35) / (double)(v20 - v36);
+        if (v11 < v20)
+        {
+            do
+            {
+                if (v11 > 0 && v11 < 200)
+                {
+                    v25 = v30;
+                    v37 = v29;
+                    if (v30 > (double)v29)
+                    {
+                        v25 = v29;
+                        v37 = v30;
+                    }
+                    v26 = (unsigned __int64)floor(v25 + 0.40000001);
+                    v27 = (unsigned __int64)floor(v37 + 0.60000002);
+                    if (v26 < 0)
+                        v26 = 0;
+                    if ((signed int)v27 > 512)
+                        LODWORD(v27) = 512;
+                    for (i = v26; i < (signed int)v27; ++i)
+                        *(BYTE*)((v11 << 9) + dword_464F14 + i + 96) = value;
+                }
+                result = v33;
+                ++v11;
+                v30 = v30 + v32;
+                v29 = v29 + v38;
+            } while (v11 < v33);
+        }
+        return result;
+    }
+    v29 = (double)v15;
+    v30 = v29;
+    result = v36;
+    v40 = v36;
+    if (v11 < v36)
+    {
+        do
+        {
+            if (v11 > 0 && v11 < 200)
+            {
+                v21 = v30;
+                v34 = v29;
+                if (v30 > (double)v29)
+                {
+                    v21 = v29;
+                    v34 = v30;
+                }
+                v22 = (unsigned __int64)floor(v21 + 0.40000001);
+                v23 = (unsigned __int64)floor(v34 + 0.60000002);
+                if (v22 < 0)
+                    v22 = 0;
+                if ((signed int)v23 > 512)
+                    LODWORD(v23) = 512;
+                v24 = v22;
+                if (v22 < (signed int)v23)
+                {
+                    do
+                        *(BYTE*)((v11 << 9) + dword_464F14 + v24++ + 96) = value;
+                    while (v24 < (signed int)v23);
+                    v19 = v39;
+                }
+            }
+            result = v40;
+            ++v11;
+            v30 = v30 + v31;
+            v29 = v29 + v38;
+        } while (v11 < v40);
+        v20 = v33;
+    }
+    if (result != v20)
+        goto LABEL_26;
+    return result;
+}
+// 464F14: using guessed type int dword_464F14;
+
+//----- (004115C0) --------------------------------------------------------
+int   sub_4115C0(int a1, int a2)
+{
+    int v2; // ecx@1
+    int v3; // ebx@1
+    int v4; // edx@2
+    int v5; // edi@2
+    int v6; // esi@2
+    int* v7; // eax@3
+    int v8; // ebp@4
+    int result; // eax@5
+    int v10; // ebp@6
+    int v11; // ecx@8
+    int v12; // ebx@8
+    int v13; // ebp@8
+    int v14; // ebx@8
+
+    v2 = a1;
+    v3 = a2;
+    while (1)
+    {
+        v4 = sce2Texture[((v2 + v3) / 2)].dword_4B4F68;
+        v5 = v2;
+        v6 = v3;
+        do
+        {
+            v7 = sce2Texture[v5].dword_4B4F68;
+            if (sce2Texture[v5].dword_4B4F68 < v4)
+            {
+                do
+                {
+                    v8 = sce2Texture[v5 + 1].dword_4B4F68;//v7[788];
+                    v7 += 788;
+                    ++v5;
+                } while (v8 < v4);
+            }
+            result = sce2Texture[v6].dword_4B4F68;
+            if (v4 < sce2Texture[v6].dword_4B4F68)
+            {
+                do
+                {
+                    v10 = sce2Texture[v6 - 1].dword_4B4F68;
+                    result -= 3152;
+                    --v6;
+                } while (v4 < v10);
+            }
+            if (v5 > v6)
+                break;
+            v11 = v6;
+            result = v5;
+            v12 = sce2Texture[v5].dword_4B4F68;
+            sce2Texture[result].dword_4B4F68 = sce2Texture[v6].dword_4B4F68;
+            v13 = sce2Texture[v6].dword_4B4F6C;
+            //TODO FIX se pasa de tama\F1o
+            sce2Texture[v11].dword_4B4F68 = v12;
+            v14 = sce2Texture[v5++].dword_4B4F6C;
+            --v6;
+            sce2Texture[result].dword_4B4F6C = v13;
+            sce2Texture[v11].dword_4B4F6C = v14;
+            v2 = a1;
+            v3 = a2;
+        } while (v5 < v6);
+        if (v2 < v6)
+            result = sub_4115C0(v2, v6);
+        if (v5 >= v3)
+            break;
+        v2 = v5;
+        a1 = v5;
+    }
+    return result;
+}
+// 4B4F68: using guessed type int dword_4B4F68[];
+// 4B4F6C: using guessed type int dword_4B4F6C[];

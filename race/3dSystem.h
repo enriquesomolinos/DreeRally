@@ -61,7 +61,7 @@ extern _UNKNOWN unk_46ED00; // weak
 extern _UNKNOWN unk_4A7BC0; // weak
 extern _UNKNOWN unk_4AA400; // weak
 
-
+int   sub_4115C0(int a1, int a2);
 int processSceFile_40A360();
 int calculateSceTextureStructure_40A880();
 void recalculatePolygonsInScreeenPosition_40D6B0();
@@ -70,4 +70,5 @@ void draw3dElements_4116D0();
 int sub_4156B0();
 void parseCircuitSceFile_403190();
 int   draw3dTexture_43B2F0(int a1, int a2, int a3, int textureId);
+int   setTriangleValue_43CD50(int a1, int a2, int a3, int a4, int a5, int a6, char a7);
 #endif // 3DSYSTEM_H

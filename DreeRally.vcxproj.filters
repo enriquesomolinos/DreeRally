@@ -219,6 +219,18 @@
     <ClCompile Include="race\lightSystem.c">
       <Filter>Source Files\race</Filter>
     </ClCompile>
+    <ClCompile Include="ui\util\carRightSide.c">
+      <Filter>Source Files\ui\util</Filter>
+    </ClCompile>
+    <ClCompile Include="ui\util\bottomText.c">
+      <Filter>Source Files\ui\util</Filter>
+    </ClCompile>
+    <ClCompile Include="race\endFlag.c">
+      <Filter>Source Files\race</Filter>
+    </ClCompile>
+    <ClCompile Include="race\leftBar.c">
+      <Filter>Source Files\race</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="cars.h">
@@ -369,6 +381,18 @@
       <Filter>Header Files\sfx</Filter>
     </ClInclude>
     <ClInclude Include="race\lightSystem.h">
+      <Filter>Header Files\race</Filter>
+    </ClInclude>
+    <ClInclude Include="ui\util\carRightSide.h">
+      <Filter>Header Files\ui\util</Filter>
+    </ClInclude>
+    <ClInclude Include="ui\util\bottomText.h">
+      <Filter>Header Files\ui\util</Filter>
+    </ClInclude>
+    <ClInclude Include="race\endFlag.h">
+      <Filter>Header Files\race</Filter>
+    </ClInclude>
+    <ClInclude Include="race\leftBar.h">
       <Filter>Header Files\race</Filter>
     </ClInclude>
   </ItemGroup>

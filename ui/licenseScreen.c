@@ -10,8 +10,12 @@
 #include "../drivers.h"
 #include "../config.h"
 #include "../cars.h"
+#include "util/popup.h"
 #include "../i18n/i18n.h"
+
+#include "../sfx/sound.h"
 #include <stdlib.h>
+#include <string.h>
 
 char aSpeedMakesMeDi[21] = "speed makes me dizzy"; // weak
 char aILiveToRide[15] = "i live to ride"; // weak

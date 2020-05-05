@@ -1,4 +1,5 @@
-
+#ifndef POWER_UP_H
+#define POWER_UP_H
 //el tamaño de los corredores es 108
 
 typedef enum
@@ -35,3 +36,14 @@ typedef struct Powerup {
 				*/
 
 extern Powerup powerups[16]; //creo que son 20 pero hay qu erevisarlo
+
+//----- (00410050) --------------------------------------------------------
+void powerUpTaken_410050();
+//----- (00410220) --------------------------------------------------------
+int generatePowerUps();
+//----- (00410B90) --------------------------------------------------------
+char getRacePowerUps_410B90();
+//----- (00409460) --------------------------------------------------------
+int generateBigPowerUps();
+
+#endif

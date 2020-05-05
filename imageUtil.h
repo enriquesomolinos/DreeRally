@@ -1,4 +1,5 @@
-
+#ifndef IMAGE_UTIL_H
+#define IMAGE_UTIL_H
 
 int   drawImageWithPosition2(int a1, int a2, int a3, int a4);
 int   drawImageWithPosition(int a1, int a2, int a3, int a4);
@@ -20,3 +21,5 @@ extern char byte_445892[];
 extern char letterSpacing_4458B0[];
 extern char bigLetterSpacing_445848[];
 extern  char  unk_445928[] ;
+
+#endif

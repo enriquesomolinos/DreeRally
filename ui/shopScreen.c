@@ -10,6 +10,9 @@
 #include "../drivers.h"
 #include "../dr.h"
 #include "../graphics.h"
+#include "../i18n/i18n.h"
+#include "util/popup.h"
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>

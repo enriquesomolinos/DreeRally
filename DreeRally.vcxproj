@@ -188,6 +188,8 @@
     <ClCompile Include="graphics.c" />
     <ClCompile Include="imageUtil.c" />
     <ClCompile Include="multiplayer\multiplayer.c" />
+    <ClCompile Include="race\endFlag.c" />
+    <ClCompile Include="race\leftBar.c" />
     <ClCompile Include="race\lightSystem.c" />
     <ClCompile Include="race\pedestrian.c" />
     <ClCompile Include="race\powerup.c" />
@@ -209,6 +211,8 @@
     <ClCompile Include="ui\shopScreen.c" />
     <ClCompile Include="ui\startGameScreen.c" />
     <ClCompile Include="ui\util\anim.c" />
+    <ClCompile Include="ui\util\bottomText.c" />
+    <ClCompile Include="ui\util\carRightSide.c" />
     <ClCompile Include="ui\util\input.c" />
     <ClCompile Include="ui\util\menus.c" />
     <ClCompile Include="ui\util\popup.c" />
@@ -232,6 +236,8 @@
     <ClInclude Include="drivers.h" />
     <ClInclude Include="graphics.h" />
     <ClInclude Include="imageUtil.h" />
+    <ClInclude Include="race\endFlag.h" />
+    <ClInclude Include="race\leftBar.h" />
     <ClInclude Include="race\lightSystem.h" />
     <ClInclude Include="race\pedestrian.h" />
     <ClInclude Include="race\powerup.h" />
@@ -260,6 +266,8 @@
     <ClInclude Include="ui\shopScreen.h" />
     <ClInclude Include="ui\startGameScreen.h" />
     <ClInclude Include="ui\util\anim.h" />
+    <ClInclude Include="ui\util\bottomText.h" />
+    <ClInclude Include="ui\util\carRightSide.h" />
     <ClInclude Include="ui\util\input.h" />
     <ClInclude Include="ui\util\menus.h" />
     <ClInclude Include="ui\util\popup.h" />

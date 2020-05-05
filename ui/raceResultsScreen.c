@@ -9,6 +9,7 @@
 #include "../dr.h"
 #include "../graphics.h"
 #include "../raceParticipant.h"
+#include "../i18n/i18n.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>

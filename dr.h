@@ -2,6 +2,13 @@
 #define DR_H
 
 #include "defs.h"
+#include <stdio.h>
+#include <stdlib.h>
+
+
+int __SETS__(int x);
+int __OFSUB__(int x, int y);
+
 extern char byte_463E00[256]; // weak
 extern _UNKNOWN unk_462096; // weak
 
@@ -36,12 +43,9 @@ extern char byte_4629F6[256]; // weak
 extern char byte_462A8C[256]; // weak
 extern char byte_462B22[256]; // weak
 extern char byte_462BB8[256]; // weak
-extern char byte_456618[] ;
-extern char byte_45665E[] ;
-extern char byte_4566A4[] ;
-extern char byte_4566EA[];
+
 extern __int16 word_45F010; // weak
-extern int dword_4A9140; // weak
+
 extern int dword_45F000; // weak
 extern int dword_45F004; // weak
 extern int dword_45F008; // weak
@@ -132,7 +136,7 @@ extern int killQuestDriverId_456BBC; // weak
 
 extern int useWeapons;
 
-extern int dword_45678C ; // weak
+
 extern int dword_45FA78; // weak
 extern int dword_445194;
 extern int dword_4451A0;
@@ -167,7 +171,7 @@ extern int noPaintJob_456BAC; // weak
 extern int allCarsCrash_456BB0 ;
 extern int selectedRaceId ;
 extern int isDemo_456B10;
-extern int dword_456B68;
+
 extern const int INITIAL_MONEY;
 extern int continueAnimCurrentFrame_4611D0; // weak;
 extern int armourAnimFrameDirection_45F034; // weak
@@ -214,6 +218,41 @@ extern int dword_4A6AD0;
 extern int raceShowTextures_44502C;
 extern int raceEffectiveWidth_445010;
 extern char circuitSelectedTR_464F50[8];
+extern void* statpop4Bpk;
+extern int initialVelocity;
+extern void* statbas7Bpk;
+
+extern void* circuitMatrixHxW_5034F8; 
+extern int circuitWidth_464F40; // weak
+extern int currentDriverSelectedIndex_503518; // weak
+extern void* obstacleBpk; // idb;
+void* participantCarBpk_5034FC; // idb
+extern int isRaceFinish_456AC8;
+extern int dword_4A9EA4; // weak;
+
+
+extern int dword_4AA500; // weak
+extern void* genflaBpk; // idb
+extern int numberOfParticipants_508D24; // weak
+extern int participantRaceOrderUserFirst_508D44[4];
+extern int dukeNukemEndRaceSoundPlayed_456AE8; // weak
+extern char dukeNukemName[12];
+extern int dword_4A7CFC; // weak
+extern int dword_4A8A90[4]; // weak
+extern int dword_4AA3F0[4]; // weak
+extern int dword_4A7CC0[4]; // weak
+extern int currentLapTime_481E0C; // weak
+extern int ticksToPauseLapTimeInHud_4A9EB0; // weak
+extern char smalfo4aBpk_4A9160[924]; // weak
+extern int racePositionUserFirst_46E8D0[4]; // weak
+extern int criticalDamageSoundPlayed_456ADC; // weak
+extern int criticalDamage2SoundPlayed_456AE0; // weak
+
+extern int lastCompletedLapTime_503224; // weak
+extern int dword_503500; // weak
+extern int dword_4B3160[256]; // weak
+extern int dword_503240[256]; // weak
+extern int raceFrame_481E14; // weak
 
 typedef struct RacePopupMemory
 {

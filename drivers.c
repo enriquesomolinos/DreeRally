@@ -11,6 +11,8 @@
  Driver drivers[20];
  int driverId; // weak
 
+ int dword_456B68 = 0; // weak
+
  char driverNames[20][20] = { "SAM SPEED",
 "JANE HONDA",
 "DUKE NUKEM",

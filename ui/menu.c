@@ -12,6 +12,9 @@
 #include "../graphics.h"
 #include "../circuit.h"
 #include "../variables.h"
+#include "../i18n/i18n.h"
+#include "util/popup.h"
+#include "../sfx/sound.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>

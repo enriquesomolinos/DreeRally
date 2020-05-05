@@ -1,4 +1,5 @@
-
+#ifndef RACE_PARTICIPANT_H
+#define RACE_PARTICIPANT_H
 typedef enum {
 	RACE_EASY =0,
 	RACE_MEDIUM=1,
@@ -303,13 +304,13 @@ typedef struct RaceParticipantIngame {
 	int dword_4A7E68;//este no venia
 	int dword_4A7E6C; // weak
 	int dword_4A7E70; // weak
-	int dword_4A7E74[256]; // weak
-	int dword_4A7E78[256]; // weak
+	int dword_4A7E74; // weak
+	int dword_4A7E78; // weak
 	int dword_4A7E80; // weak
 	int dword_4A7E84; // weak
 	int dword_4A7E88; // weak parece que es solo par la ia, como si pudiera mover. operaciones de movimiento que le quedan parece
 	int dword_4A7E8C;
-	int dword_4A7E90[256]; // weak
+	int dword_4A7E90; // weak
 	int dword_4A7E94; // weak
 	int dword_4A7E98; // weak
 	int dword_4A7E9C; // weak
@@ -470,3 +471,5 @@ float flt_4A8878; // weak
 int dword_4A8A6C; // weak
 
 */
+
+#endif

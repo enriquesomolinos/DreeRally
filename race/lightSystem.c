@@ -4,6 +4,14 @@
 #include "../dr.h"
 
 
+int trxSHA8Bpk_46E8E0[1024]; // weak
+int trxSHA6Bpk_4AA520[1024]; // weak
+int trxSHA7Bpk_4A8D40[1024]; // weak
+int trxSHA4Bpk_4A9FE0[1024]; // weak
+int trxSHA3Bpk_479280[4096]; // weak
+int trxSHA2Bpk_501A80; // weak
+//_UNKNOWN unk_4669C0; // weak
+int trxVARJOTab_466F00[257]; // weak
 
 //----- (0043D530) --------------------------------------------------------
 int   iluminateTriangle_43D530(int pos1x, int pos1y, int pos2x, int pos2y, int pos3x, int pos3y, int a7)
@@ -230,3 +238,60 @@ int   iluminateTriangle_43D530(int pos1x, int pos1y, int pos2x, int pos2y, int p
 }
 // 464F14: using guessed type int dword_464F14;
 
+//----- (0040D7B0) --------------------------------------------------------
+int drawShadows_40D7B0()
+{
+    int result; // eax@1
+    int v1; // edx@1
+    int v2; // ecx@4 sha7
+    int v3; // eax@4 sha6
+    int v4; // edx@4  sha4
+    int v5; // esi@4 es sha3 -offx
+    int v6; // edi@4 sha3 +sha7 -offx
+    int v7; // ebx@4 sha3 -off y
+    int v8; // ebp@4 sha4 -offy
+    int v9; // ecx@4 sha4 +sha7 -off y
+    int counter;
+    result = trxSHA2Bpk_501A80;
+    v1 = 0;
+    dword_481BE8 = 0;
+    if (trxSHA2Bpk_501A80 > 0)
+    {
+        counter = 0;
+        while (1)//esto era un while 1
+        {
+            v2 = trxSHA7Bpk_4A8D40[v1];
+            v3 = trxSHA6Bpk_4AA520[v1];
+            v4 = trxSHA8Bpk_46E8E0[v1];
+            //v2 *= 4;
+
+            //TODO FIX 
+            if (v2 > 200) v2 = 0;
+            v5 = trxSHA3Bpk_479280[v3] - circuitImageOffsetX_456ABC;
+            v6 = trxSHA3Bpk_479280[v2] - circuitImageOffsetX_456ABC;
+            v7 = trxSHA3Bpk_479280[v4] - circuitImageOffsetX_456ABC;
+            v8 = trxSHA4Bpk_4A9FE0[v3] - circuitImageOffsetY_456AC0;
+            v9 = trxSHA4Bpk_4A9FE0[v2] - circuitImageOffsetY_456AC0;
+            dword_46ECE4 = trxSHA4Bpk_4A9FE0[v4] - circuitImageOffsetY_456AC0;
+            dword_50EF20 = v5;
+            dword_50351C = v6;
+            dword_4A8A80 = v7;
+
+            dword_4A6AD0 = v8;
+            dword_4A7A4C = v9;
+            if ((abs(v5 - raceEffectiveHalfWidth_445014) < raceEffectiveHalfWidth_445014
+                || abs(v6 - raceEffectiveHalfWidth_445014) < raceEffectiveHalfWidth_445014
+                || abs(v7 - raceEffectiveHalfWidth_445014) < raceEffectiveHalfWidth_445014)
+                && (abs(v8 - raceEffectiveHalfHeight_44501C) < raceEffectiveHalfHeight_44501C
+                    || abs(v9 - raceEffectiveHalfHeight_44501C) < raceEffectiveHalfHeight_44501C
+                    || abs(dword_46ECE4 - raceEffectiveHalfHeight_44501C) < raceEffectiveHalfHeight_44501C))
+                iluminateTriangle_43D530(v5 + leftMenuInRaceWidth_456AA0, v8, leftMenuInRaceWidth_456AA0 + v6, v9, leftMenuInRaceWidth_456AA0 + v7, dword_46ECE4, (int)&trxVARJOTab_466F00);
+
+            result = dword_481BE8++ + 1;
+            if (dword_481BE8 >= trxSHA2Bpk_501A80)
+                break;
+            v1 = dword_481BE8;
+        }
+    }
+    return result;
+}

@@ -8,7 +8,10 @@
 #include "../defs.h"
 #include "../drivers.h"
 #include "../dr.h"
+#include "../i18n/i18n.h"
 #include "../graphics.h"
+#include "util/popup.h"
+
 
 #include <stdio.h>
 #include <stdlib.h>

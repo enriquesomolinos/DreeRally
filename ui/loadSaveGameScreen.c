@@ -10,6 +10,7 @@
 #include "../dr.h"
 #include "../graphics.h"
 #include "util/input.h"
+#include "util/popup.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>

@@ -13,6 +13,7 @@
 #include "../../cars.h"
 #include "../../config.h"
 #include "../../variables.h"
+#include "popup.h"
 
 char aASlickSteroidR[30] = "[A slick steroid run, anyone?"; // weak
 _UNKNOWN unk_452DE8; // weak
@@ -240,6 +241,8 @@ _UNKNOWN unk_454F08; // weak
 
  // weak
 char bigLetterSpacing_445848[] ;
+
+int dword_45678C = 5; // weak
 
 //----- (0042E6F0) --------------------------------------------------------
 char noCollectPopup_42E6F0()
@@ -766,6 +769,7 @@ int showHitmanScreen()
     result = 0;
   }
   return result;
+
 }
 
 //----- (0041B400) --------------------------------------------------------

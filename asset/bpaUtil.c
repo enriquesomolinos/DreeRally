@@ -44,7 +44,7 @@ int   extractFromBpa(char* bpaFilename, void *dest, char* filename)
   int v31; // [sp+34h] [bp-44h]@11
   char fat[0x10EF];//cabecera del fichero
   char *destStream;
-  int debug=1;
+ 
   char completeFile[300] = "";//"C:/proyectos/Drwin/Debug/";
   FILE *extractedFile;
   if(mainArgs.mod){
