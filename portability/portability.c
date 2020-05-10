@@ -32,6 +32,7 @@ char *_strlwr(char s[])
 
 /* The Itoa code is in the puiblic domain */
 char* _itoa(int value, char* str, int radix) {
+  radix = 10;
     static char dig[] =
         "0123456789"
         "abcdefghijklmnopqrstuvwxyz";

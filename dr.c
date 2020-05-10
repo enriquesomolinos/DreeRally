@@ -62,6 +62,9 @@
 
 int debug=1;
 void *Memory;
+
+int dword_456B9C;
+int dword_456730;
 const int INITIAL_MONEY=495; ///cambiar a 495
 
 //char letterSpacing_4458B0 = '\x10'; // weak
@@ -429,7 +432,7 @@ char aStartRacing[13] = "Start Racing"; // weak
 char aStartANewGam_0[17] = "Start A New Game"; // weak
 
 
-char aGamepadDisable[17] = "Gamepad Disabled"; // weak
+char aGamepadDisable[50] = "Gamepad Disabled"; // weak
 
 //int dword_4A7DC0;//este no venia
 //int dword_4A7DBC;//este no venia
@@ -15488,6 +15491,7 @@ LABEL_20:
       {
         v16 = (char *)pixels + v3;
         v17 = 640;
+        
         do 
         {
           *(int *)v16 = palette[*(BYTE *)v2] | 0xFF000000;

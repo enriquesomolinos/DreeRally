@@ -587,7 +587,7 @@ signed int   readEventInMenu(int menuType)
         if(key != 0){
           key =1;
         }
-        continue;
+        continue; 
       case KEY_ESCAPE :
         if ( !menuType)
         {
@@ -609,8 +609,10 @@ LABEL_14:
         return result;
       case KEY_ENTER:
       case KEY_ESPACE:
+      case 0x41:
       case SDLK_KP_ENTER:
       case 0x9C:
+
 
 		  v1 = dword_445708[menuType];
 		///v1 = dword_445708[7 * a1];
@@ -619,6 +621,7 @@ LABEL_14:
           goto LABEL_13;
         continue;
       case KEY_F1:
+      
         //if ( isMultiplayerGame )
          // multiplayer_sub_42CCF0();
         continue;
@@ -635,6 +638,7 @@ LABEL_14:
 	    loadMenuSoundEffect(1u, 25, 0, configuration.effectsVolume, dword_445194);
 
         continue;
+     
     }
   }
 }
@@ -2457,6 +2461,8 @@ LABEL_2:
           drawImageWithPosition((int)slidmus2Bpk, 172, 24, (int)((char *)screenBuffer + 160314));
           drawImageWithPosition((int)volcur2Bpk, 10, 24, (int)((char *)screenBuffer + v18 + 160329));
           drawKeyCursor(v18 + 160327, (char *)screenBuffer + v18 + 160327, 0xEu, 24);
+
+          
           _itoa((unsigned __int64)((double)v18 * 0.78125), DstBuf, 10);
           v6 = (char *)&v19 + 3;
           do

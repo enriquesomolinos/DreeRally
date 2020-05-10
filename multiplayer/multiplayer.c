@@ -1,4 +1,4 @@
-int multiplayer_415280();
+/*int multiplayer_415280();
 int   multiplayer_406D30(int a1);
 void   multiplayer_406BE0(char a1);
 void multiplayer_403960();
@@ -502,7 +502,7 @@ LABEL_76:
   }
   result = eventDetected();
   dword_456730 = 1;
-  return result;*/
+  return result;
 return 0 ;
 }
 
@@ -657,7 +657,7 @@ void   sub_428070(int a1)
     drawTransparentBlock(0, 371, 639, 109);
     drawBottomMenuText();
     refreshAllScreen();
-  }*/
+  }
 }
 char sub_41E9A0()
 {
@@ -696,7 +696,7 @@ char sub_41E9A0()
     v4 += 150;
   }
   while ( v5 < 287372 );
-  return result;*/
+  return result;
 	return 0;
 }
 
@@ -756,7 +756,7 @@ LABEL_8:
   *(BYTE *)(((*(_WORD *)dword_45DC24 - (_WORD)v7 - (_WORD)v5 - 5) & 0xFFF) + dword_45DC24 + 4) = 0;
   for ( j = 0; j < v7; *(BYTE *)(v12 + dword_45DC24 + 4) = 0 )
     v12 = (*(_WORD *)dword_45DC24 - v7 - v5 + j++ - 3) & 0xFFF;
-  return 1;*/
+  return 1;
 	return 0;
 }
 
@@ -1215,7 +1215,7 @@ LABEL_34:
   {
     dword_456B90 = v77;
   }
-  return result;*/
+  return result;
 return 0;
 }
 
@@ -2259,7 +2259,7 @@ int multiplayer_415280()
         break;
     }
   }
-  return result;*/
+  return result;
 }
 
 //----- (00426280) --------------------------------------------------------

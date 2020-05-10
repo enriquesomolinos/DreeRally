@@ -3,6 +3,7 @@
         "anim.h": "c",
         "variables.h": "c",
         "config.h": "c",
-        "menus.h": "c"
+        "menus.h": "c",
+        "creditsscreen.h": "c"
     }
 }

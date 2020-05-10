@@ -8,6 +8,31 @@
   }
 }*/
 
+#ifdef PORTABILITY
+typedef enum
+{
+
+	KEY_ESCAPE = 0x9,
+	KEY_TAB = 23,
+	KEY_Y = 29,
+	KEY_P = 33,
+	KEY_ENTER = 0x24,
+	KEY_N = 57,
+	KEY_F1 = 0x43,
+	KEY_F2 = 0x44,
+	KEY_F3 = 0x45,
+	KEY_F4 = 0x46,
+	KEY_F5 = 0x47,
+	KEY_UP = 0x6f,
+	KEY_LEFT= 113,	
+	KEY_RIGHT= 114,
+	KEY_DOWN = 0x74,
+	KEY_F6 = 0x48,
+	KEY_F12= 0xff,	//SDLK_F12 cambiar a esto
+	KEY_ESPACE = 0xff
+}Keys;	
+
+#else
 typedef enum
 {
 	KEY_ESCAPE = 0x1,
@@ -31,7 +56,7 @@ typedef enum
 	
 	
 }Keys;
-
+#endif
 typedef enum
 {
 	IN_RACE_ACELERATE = 0x1,

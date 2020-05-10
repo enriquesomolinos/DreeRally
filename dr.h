@@ -52,7 +52,7 @@ extern int dword_45F008; // weak
 extern int dword_45F00C; // weak
 extern char byte_45FB84; // weak
 extern char byte_45F012; // weak
-extern char aGamepadDisable[17];
+extern char aGamepadDisable[50];
 extern int menuOptionSelected_463DF0; // weak
 extern int debug;
 extern int cursorBpkFrame; 
