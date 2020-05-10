@@ -4,7 +4,7 @@
 #include "../../imageUtil.h"
 #include "../../drivers.h"
 #include "../../dr.h"
-
+#include <SDL_stdinc.h>
 
 //----- (0041FC20) --------------------------------------------------------
 int drawCarRightSide()
@@ -86,7 +86,7 @@ int drawCarRightSide()
     if (drivers[driverId].money > 9999999)
         //if (dword_460870[27 * driverId] > 9999999)
         drivers[driverId].money = 9999999;
-    _itoa(v4, DstBuf, 10);
+    SDL_itoa(v4, DstBuf, 10);
     strcpy(moneyCount, "$");
     memcpy(&moneyCount[1], DstBuf, strlen(DstBuf));
     memset(&moneyCount[strlen(DstBuf) + 1], '\0', 1);
@@ -101,7 +101,7 @@ int drawCarRightSide()
     drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&letterSpacing_4458B0, moneyCount, money + 131744);
 
     ///calculo de la velocidad a partir de la velocidad inicial que es  initialVelocity (55)
-    _itoa(initialVelocity + drivers[driverId].engine * 5 + 5 * drivers[driverId].carType, DstBuf, 10);
+    SDL_itoa(initialVelocity + drivers[driverId].engine * 5 + 5 * drivers[driverId].carType, DstBuf, 10);
     //itoa(*(&initialVelocity + dword_460850[27 * driverId] + 5 * dword_46085C[27 * driverId]), DstBuf, 10);
     Str[0] = 0;
     Str[1] = 0;
@@ -116,7 +116,7 @@ int drawCarRightSide()
 
     //pinta la velocidad de motor
     drawTextWithFont(v12, (int)&unk_445928, Str, 204768);
-    _itoa(drivers[driverId].rank, DstBuf, 10);
+    SDL_itoa(drivers[driverId].rank, DstBuf, 10);
     //itoa(dword_460888[27 * driverId], DstBuf, 10);
     Str[0] = 0;
     Str[1] = "#";
@@ -143,7 +143,7 @@ int drawCarRightSide()
         v19 += 640;
         memset(&v21[4 * ((unsigned int)v20 >> 2)], 63, v20 & 3);
     } while (v19 < 3200);
-    _itoa(drivers[driverId].damage, DstBuf, 10);
+    SDL_itoa(drivers[driverId].damage, DstBuf, 10);
     v22 = 0;
     do
     {

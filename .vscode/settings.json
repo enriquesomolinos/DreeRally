@@ -4,6 +4,7 @@
         "variables.h": "c",
         "config.h": "c",
         "menus.h": "c",
-        "creditsscreen.h": "c"
+        "creditsscreen.h": "c",
+        "graphics.h": "c"
     }
 }

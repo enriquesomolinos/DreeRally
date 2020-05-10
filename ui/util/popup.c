@@ -1,4 +1,4 @@
-
+#include <SDL_stdinc.h>
 
 #include <math.h>
 #include <stdio.h>
@@ -389,7 +389,7 @@ int sabotageScreen()
       v23 = v21 % 25 + 25;//calculo del sabotage aleatorio
       //dword_46084C[v22 / 4] = v23;
 	  drivers[v22 / 4].damage = v23;
-      _itoa(v23, &DstBuf, 10);
+      SDL_itoa(v23, &DstBuf, 10);
       v24 =(char*) drivers[v22].damage;
       do
       {

@@ -4,7 +4,7 @@
 #include "util/menus.h"
 #include "../dr.h"
 #include "../asset/bpaUtil.h"
-
+#include <SDL_stdinc.h>
 #include "licenseScreen.h"
 #include "../imageUtil.h"
 #include "../drivers.h"
@@ -127,7 +127,7 @@ int   licenseScreen(int useWeapons_mal)
   }
   drawImageWithPosition2((int)carbas2Bpk, 96, 96, (int)((char *)screenBuffer + 113119));
   drawImageWithPosition2((int)carnameBpk, 96, 16, (int)((char *)screenBuffer + 113119));
-  _itoa(cars[0].cost, &DstBuf, 10);
+  SDL_itoa(cars[0].cost, &DstBuf, 10);
 
    v8 = strlen(&DstBuf) + 1;
 
@@ -196,7 +196,7 @@ int   licenseScreen(int useWeapons_mal)
   drawImageWithPosition2((int)*(&graphicsGeneral.face01Bpk + drivers[driverId].face), 64, 64, (int)((char *)screenBuffer + 122330));
   drawImageWithPosition2((int)carbas2Bpk, 96, 96, (int)((char *)screenBuffer + 113119));
   drawImageWithPosition2((int)carnameBpk, 96, 16, (int)((char *)screenBuffer + 113119));
-  _itoa(cars[0].cost, &DstBuf, 10);
+  SDL_itoa(cars[0].cost, &DstBuf, 10);
   v59 = 36;
   v21 = strlen(&DstBuf) + 1;
   v22 = (char *)&v58 + 3;

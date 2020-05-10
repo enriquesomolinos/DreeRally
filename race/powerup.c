@@ -2,7 +2,7 @@
 #include "../dr.h"
 #include "../raceParticipant.h"
 #include "../defs.h"
-
+#include <SDL_stdinc.h>
 
 Powerup powerups[16];
 int dword_456AC4 = 0; // weak
@@ -41,7 +41,7 @@ void powerUpTaken_410050()
                 switch (powerups[index].lastPowerUp_ID_501BB8)
                 {
                 case POWERUP_SMALL_MONEY:
-                    _itoa(v0, &DstBuf, 10);
+                    SDL_itoa(v0, &DstBuf, 10);
                     strcat(&DstBuf, "$");
                     v6 = DstBuf;
                     v5 = &DstBuf;
@@ -49,7 +49,7 @@ void powerUpTaken_410050()
                     goto LABEL_17;
                 case POWERUP_SMALL_REPAIR:
                 case POWERUP_BIG_REPAIR:
-                    _itoa(powerups[index].repairpercentage_501BBC, &DstBuf, 10);
+                    SDL_itoa(powerups[index].repairpercentage_501BBC, &DstBuf, 10);
                     strcat(&DstBuf, "%");
                     v6 = DstBuf;
                     v5 = &DstBuf;
@@ -57,7 +57,7 @@ void powerUpTaken_410050()
                     goto LABEL_17;
 
                 case POWERUP_BIG_MONEY:
-                    _itoa(10 * v0, &DstBuf, 10);
+                    SDL_itoa(10 * v0, &DstBuf, 10);
                     strcat(&DstBuf, "$");
                     v6 = DstBuf;
                     v5 = &DstBuf;

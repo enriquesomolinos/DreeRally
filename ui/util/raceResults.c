@@ -1,5 +1,5 @@
 
-
+#include <SDL_stdinc.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -597,7 +597,7 @@ int sub_424420()
       drawImageWithPosition((int)graphicsGeneral.placingBpk, 202, 74, (int)((char *)screenBuffer + v5 + 389));
       v6 = v2 + 1;
       if(DstBuf !=NULL)
-      _itoa(v2 + 1, DstBuf, 10);
+      SDL_itoa(v2 + 1, DstBuf, 10);
       if ( v2 )
         drawTextWithFont((int)graphicsGeneral.fbig3aBpk, (int)&bigLetterSpacing_445848, DstBuf, v5 + 4876);
       else

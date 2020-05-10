@@ -12,6 +12,7 @@
 #include "../i18n/i18n.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <SDL_stdinc.h>
 #include <string.h>
 
 char showEndAnim_463DF8; // weak
@@ -78,7 +79,7 @@ int v14 = 0;
 		 
 
 		  memset(DstBuf, 0, 20);
-		  _itoa(drivers[indexDriver].rank, DstBuf, 10);
+		  SDL_itoa(drivers[indexDriver].rank, DstBuf, 10);
 		  strcat(DstBuf, ".");
 		  v8 = 0;
 		  v9=0;
@@ -96,7 +97,7 @@ int v14 = 0;
 		 
 		  memset(DstBuf, 0, 20);
 		  
-		  _itoa(drivers[indexDriver].points, DstBuf, 10);
+		  SDL_itoa(drivers[indexDriver].points, DstBuf, 10);
 		  v14 = 0;
 		  v15=0;
 		  do
@@ -866,7 +867,7 @@ unsigned int drawStadistics()
     v173 = 1952543827;
     v174 = 1629516661;
     LOWORD(v176) = 32;
-    _itoa(drivers[driverId].totalRaces, DstBuf, 10);
+    SDL_itoa(drivers[driverId].totalRaces, DstBuf, 10);
     v0 = strlen(DstBuf) + 1;
     v1 = &DstBuf[19];
     do
@@ -902,7 +903,7 @@ unsigned int drawStadistics()
   memset(tmp, 0, 15);
 
   strcat(DstBuf, ":  ");
-  _itoa(drivers[driverId].rank, tmp, 10);
+  SDL_itoa(drivers[driverId].rank, tmp, 10);
   strcat(DstBuf, tmp);
   strcat(DstBuf, ".");
 
@@ -922,7 +923,7 @@ unsigned int drawStadistics()
   memset(tmp, 0, 15);
   strcpy(DstBuf, ":  ");
   
-  _itoa(drivers[driverId].racesWon, tmp, 10);
+  SDL_itoa(drivers[driverId].racesWon, tmp, 10);
   strcat(DstBuf, tmp);
   
   
@@ -944,7 +945,7 @@ unsigned int drawStadistics()
   memset(tmp, 0, 15);
   strcpy(DstBuf, ":  ");
   
-  _itoa(drivers[driverId].totalRaces, tmp, 10);
+  SDL_itoa(drivers[driverId].totalRaces, tmp, 10);
   strcat(DstBuf, tmp);
 
  
@@ -981,7 +982,7 @@ unsigned int drawStadistics()
   memset(tmp, 0, 15);
   strcpy(DstBuf, ":  $");
  
-  _itoa(drivers[driverId].totalIncome, tmp, 10);
+  SDL_itoa(drivers[driverId].totalIncome, tmp, 10);
   strcat(DstBuf, tmp);
 
   //v175 = 1701670755;
@@ -1000,7 +1001,7 @@ unsigned int drawStadistics()
   memset(tmp, 0, 15);
   strcpy(DstBuf, ":  $");
   
-  _itoa(drivers[driverId].money, tmp, 10);
+  SDL_itoa(drivers[driverId].money, tmp, 10);
   strcat(DstBuf, tmp);
   
   //v174 = 1869422700;
@@ -1045,7 +1046,7 @@ unsigned int drawStadistics()
 			v41[v42] = *v41;
 			++v41;
 		} while (v43);
-		_itoa(raceDrivers_456758, DstBuf, 10);
+		SDL_itoa(raceDrivers_456758, DstBuf, 10);
 		v44 = &DstBuf[19];
 		do
 			v45 = (v44++)[1];
@@ -1111,7 +1112,7 @@ unsigned int drawStadistics()
       *((_DWORD *)v109 + 2) = 3827043;*/
     }
     drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&letterSpacing_4458B0, (const char *)&v173, 158440);
-    _itoa(dword_456BD8, DstBuf, 10);
+    SDL_itoa(dword_456BD8, DstBuf, 10);
     v51 = &v171;
     do
       v52 = (v51++)[1];
@@ -1129,7 +1130,7 @@ unsigned int drawStadistics()
     while ( v55 );
     memcpy(v54, DstBuf, v53);
     drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&letterSpacing_4458B0, (const char *)&v173, 173326);
-    _itoa(userLasRacePriceIncome_456BDC, DstBuf, 10);
+    SDL_itoa(userLasRacePriceIncome_456BDC, DstBuf, 10);
     v173 = 1701011794;//Race
     v174 = 1668180256;//inc
     v175 = 6647151;//ome
@@ -1142,7 +1143,7 @@ unsigned int drawStadistics()
     while ( v58 );
     memcpy(v57, DstBuf, v56);
     drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&letterSpacing_4458B0, (const char *)&v173, 188046);
-    _itoa(userLastRaceIncomeNoPrice_456BE0, DstBuf, 10);
+    SDL_itoa(userLastRaceIncomeNoPrice_456BE0, DstBuf, 10);
     v174 = 1852383347; //s in
     v175 = 1701670755;//come
     v173 = 1970171714;//Bonu
@@ -1157,7 +1158,7 @@ unsigned int drawStadistics()
     v62 = (int)graphicsGeneral.fsma3aBpk;
     memcpy(v60, DstBuf, v59);
     drawTextWithFont(v62, (int)&letterSpacing_4458B0, (const char *)&v173, 202766);
-    _itoa(userLasRacePriceIncome_456BDC + userLastRaceIncomeNoPrice_456BE0, DstBuf, 10);
+    SDL_itoa(userLasRacePriceIncome_456BDC + userLastRaceIncomeNoPrice_456BE0, DstBuf, 10);
     v173 = 1635020628;//Total
     v175 = 1763730787;//ce i
     v176 = 1836016494;//ncom
@@ -1173,7 +1174,7 @@ unsigned int drawStadistics()
     v66 = (int)graphicsGeneral.fsma3aBpk;
     memcpy(v64, DstBuf, v63);
     drawTextWithFont(v66, (int)&letterSpacing_4458B0, (const char *)&v173, 217486);
-    _itoa(numberOfLaps, DstBuf, 10);
+    SDL_itoa(numberOfLaps, DstBuf, 10);
     v173 = 1651340622;//Numb
     v175 = 1634476134;//f la
     LOWORD(v176) = 29552;//ps
@@ -1191,9 +1192,9 @@ unsigned int drawStadistics()
     v70 = (int)graphicsGeneral.fsma3aBpk;
     memcpy(&v68[4 * (v67 >> 2)], &DstBuf[4 * (v67 >> 2)], v67 & 3);
     drawTextWithFont(v70, (int)&letterSpacing_4458B0, (const char *)&v173, 232206);
-    _itoa(totalRaceMinutes_45EEC0, &v184, 10);
-    _itoa(totalRaceSeconds_45EEBC, &v178, 10);
-    _itoa(totalRaceMilliseconds_462D74, &v181, 10);
+    SDL_itoa(totalRaceMinutes_45EEC0, &v184, 10);
+    SDL_itoa(totalRaceSeconds_45EEBC, &v178, 10);
+    SDL_itoa(totalRaceMilliseconds_462D74, &v181, 10);
     if ( strlen(&v184) == 1 )
     {
       v185 = v184;
@@ -1327,9 +1328,9 @@ unsigned int drawStadistics()
       *(int *)((char *)&dword_45F050 + v108) = v107;
       *(int *)((char *)&dword_45F054 + v108) = v106;
     }
-    _itoa(v91, &v184, 10);
-    _itoa(currentRaceBestLapSeconds_45EB48, &v178, 10);
-    _itoa(currentRaceBestLapMilliseconds_461FEC, &v181, 10);
+    SDL_itoa(v91, &v184, 10);
+    SDL_itoa(currentRaceBestLapSeconds_45EB48, &v178, 10);
+    SDL_itoa(currentRaceBestLapMilliseconds_461FEC, &v181, 10);
     v115 = &v184;
     do
       v116 = *v115++;
@@ -1422,15 +1423,15 @@ unsigned int drawStadistics()
     v142 = (int)graphicsGeneral.fsma3aBpk;
     memcpy(&v140[4 * (v139 >> 2)], &DstBuf[4 * (v139 >> 2)], v139 & 3);
     drawTextWithFont(v142, (int)&letterSpacing_4458B0, (const char *)&v173, 261646);
-    _itoa(
+    SDL_itoa(
       *(&dword_45F04C + 6 * ((unsigned __int8)circuitsToSelect_46126C[selectedRace_462CE8] + 18 * drivers[driverId].carType)),
       &v184,
       10);
-    _itoa(
+    SDL_itoa(
       *(&dword_45F050 + 6 * ((unsigned __int8)circuitsToSelect_46126C[selectedRace_462CE8] + 18 * drivers[driverId].carType)),
       &v178,
       10);
-    _itoa(
+    SDL_itoa(
       *(&dword_45F054 + 6 * ((unsigned __int8)circuitsToSelect_46126C[selectedRace_462CE8] + 18 * drivers[driverId].carType)),
       &v181,
       10);
@@ -1627,7 +1628,7 @@ int   drawRightPositions(int numDrivers, int a2)
 	  memset(DstBuf, 0, 20);
 	  
 	  memset(tmp, 0, 20);
-      _itoa(drivers[v7].rank, tmp, 10);
+      SDL_itoa(drivers[v7].rank, tmp, 10);
 	  strcpy(DstBuf, tmp);
 	  strcat(DstBuf, ".");
 	  //itoa(dword_460888[27 * v7], DstBuf, 10);

@@ -11,6 +11,7 @@
 #include "../i18n/i18n.h"
 #include "../graphics.h"
 #include "util/popup.h"
+#include <SDL_stdinc.h>
 
 
 #include <stdio.h>
@@ -469,7 +470,7 @@ void selectRaceScreen()
           136,
           2,
           (int)((char *)screenBuffer + 160 * (selectedRaceId + 72 * participantsRace[selectedRaceId]) + 179227));
-        _itoa(drivers[driverId].rank, name, 10);
+        SDL_itoa(drivers[driverId].rank, name, 10);
 		/*drawImageWithPosition(
 			(int)graphics4.signlineBpk,
 			136,
@@ -794,7 +795,7 @@ void   addParticipantToRace(signed int a1)
 	 
 	 //* ((BYTE *)&word_461EB4 + race) = v14 + 1;
 	  participantsRace[race ] = v14 + 1;
-      _itoa(drivers[v3].rank, &DstBuf, 10);
+      SDL_itoa(drivers[v3].rank, &DstBuf, 10);
 	  //itoa(dword_460888[27 * v3], &DstBuf, 10);
       v35 = 0;
       if ( strlen(&DstBuf) < 2 )
@@ -823,7 +824,7 @@ void   addParticipantToRace(signed int a1)
      // *(_WORD *)v21 = 46;
 	  v24 = malloc(24);
 	  
-	  _itoa(drivers[v3].rank, buffer, 10);
+	  SDL_itoa(drivers[v3].rank, buffer, 10);
 	  strcpy(v24, buffer);
 	  strcat(v24, ".");
 	  strcat(v24, drivers[v3].name);

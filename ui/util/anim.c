@@ -1,5 +1,5 @@
 
-
+#include <SDL_stdinc.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -505,7 +505,7 @@ int reloadCarAnimation2()
   drawImageWithPosition2((int)carbas2Bpk, 96, 96, (int)((char *)screenBuffer + 80016));
   drawImageWithPosition2((int)((char *)carnameBpk + 1536 * actualCarSelected), 96, 16, (int)((char *)screenBuffer + 80016));
   drawMenuAnimation(16, 141, carAnimCurrentFrame_45FBA0, getCarBpkById(actualCarSelected), (int)&carAnimFrameSize_45FBA0[64 * actualCarSelected]);
-  _itoa(cars[actualCarSelected].cost, DstBuf, 10);
+  SDL_itoa(cars[actualCarSelected].cost, DstBuf, 10);
   
   v0 = strlen(DstBuf) + 1;
 
@@ -581,7 +581,7 @@ int reloadEngineAnimation2()
       engineAnimCurrentFrame_462D80,
 		getEngineBpkById(v1),
       (int)((char *)&engineAnimFrameSize_445F68 + 96 * drivers[driverId].engine));
-    _itoa(cars[drivers[driverId].carType].engineUpgradeCosts[drivers[driverId].engine], DstBuf, 10);
+    SDL_itoa(cars[drivers[driverId].carType].engineUpgradeCosts[drivers[driverId].engine], DstBuf, 10);
 
 	
   v0 = strlen(DstBuf) + 1;
@@ -646,7 +646,7 @@ int reloadTireAnimation2()
       tireAnimCurrentFrame_45F034,
 		getTireBpkById(v1),
       (int)((char *)&tireAnimFrameSize_4460E8 + 48 * drivers[driverId].tire));
-    _itoa(cars[drivers[driverId].carType].tireUpgradeCosts[drivers[driverId].tire], DstBuf, 10);
+    SDL_itoa(cars[drivers[driverId].carType].tireUpgradeCosts[drivers[driverId].tire], DstBuf, 10);
      
   v0 = strlen(DstBuf) + 1;
 
@@ -704,7 +704,7 @@ int reloadArmourAnimation2()
       armourAnimCurrentFrame_461288,
       getArmourBpkById(v1),
       (int)((char *)&armourAnimFrameSize_4461A8 + 16 * drivers[driverId].armour));
-    _itoa(cars[drivers[driverId].carType].armourUpgradeCosts[drivers[driverId].armour], DstBuf, 10);//esto son textos
+    SDL_itoa(cars[drivers[driverId].carType].armourUpgradeCosts[drivers[driverId].armour], DstBuf, 10);//esto son textos
      
   v0 = strlen(DstBuf) + 1;
 
@@ -761,7 +761,7 @@ int reloadRepairAnimation()
     v10 = cars[drivers[driverId].carType].repairCost;
     if ( useWeapons )
       v10 /= 2;
-    _itoa(v10, DstBuf, 10);
+    SDL_itoa(v10, DstBuf, 10);
     v21 = 36;
     v6 = DstBuf;
     v5 = strlen(DstBuf) + 1;
@@ -775,7 +775,7 @@ int reloadRepairAnimation()
   }
   else
   {
-    _itoa(v0, DstBuf, 10);
+    SDL_itoa(v0, DstBuf, 10);
     v1 = getBoxTextSize(DstBuf);
     drawTextWithFont((int)graphicsGeneral.fmed1aBpk, (int)&unk_445928, DstBuf, 163610 - v1);
     v2 = drivers[driverId].carType;
@@ -788,7 +788,7 @@ int reloadRepairAnimation()
     {
       v4 = cars[v2].repairCost / 10;
     }
-    _itoa(drivers[driverId].damage * v4, DstBuf, 10);
+    SDL_itoa(drivers[driverId].damage * v4, DstBuf, 10);
 	v6= "";
 	strcpy(v6,"$"); /* copy name into the new var */
 	strcat(v6, DstBuf);
@@ -895,7 +895,7 @@ int reloadEngineAnimation()
       engineAnimCurrentFrame_462D80,
 		getEngineBpkById(drivers[driverId].engine),
       (int)((char *)&engineAnimFrameSize_445F68 + 96 * drivers[driverId].engine));
-    _itoa(cars[drivers[driverId].carType].engineUpgradeCosts[drivers[driverId].engine+1], &DstBuf, 10);
+    SDL_itoa(cars[drivers[driverId].carType].engineUpgradeCosts[drivers[driverId].engine+1], &DstBuf, 10);
     strcpy(v6,"$"); /* copy name into the new var */
 	strcat(v6, DstBuf);
 	v4 = getBoxTextOffset(v6);//get small text size
@@ -936,7 +936,7 @@ int reloadTireAnimation()
       tireAnimCurrentFrame_45F034,
 		getTireBpkById(drivers[driverId].tire),
       (int)((char *)&tireAnimFrameSize_4460E8 + 48 * drivers[driverId].tire));
-    _itoa(cars[drivers[driverId].carType].tireUpgradeCosts[drivers[driverId].tire+1], &DstBuf, 10);
+    SDL_itoa(cars[drivers[driverId].carType].tireUpgradeCosts[drivers[driverId].tire+1], &DstBuf, 10);
     strcpy(v6,"$"); /* copy name into the new var */
 	strcat(v6, DstBuf);
 
@@ -979,7 +979,7 @@ int reloadArmourAnimation()
 		getArmourBpkById(drivers[driverId].armour),
 		
       (int)((char *)&armourAnimFrameSize_4461A8 + 64 * drivers[driverId].armour));
-    _itoa(cars[drivers[driverId].carType].armourUpgradeCosts[drivers[driverId].armour+1], &DstBuf, 10);
+    SDL_itoa(cars[drivers[driverId].carType].armourUpgradeCosts[drivers[driverId].armour+1], &DstBuf, 10);
     
 	strcpy(v6,"$"); /* copy name into the new var */
 	strcat(v6, DstBuf);

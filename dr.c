@@ -1,8 +1,8 @@
 
 #include <SDL.h>
 #include <SDL_joystick.h>
-
-  #include "portability/portability.h"
+#include <SDL_stdinc.h>
+  
 	#include <SDL_opengl.h>
 
 #include <math.h>
@@ -4837,7 +4837,7 @@ int makeSnapshot_4092B0()
   Val2 = 0;
   do
   {
-    _itoa(Val2, &DstBuf, 10);
+    SDL_itoa(Val2, &DstBuf, 10);
     if ( strlen(&DstBuf) != 2 )
     {
       v13 = DstBuf;
@@ -13044,7 +13044,7 @@ signed int   hasInsuficientMoneyToBuy(int a1)
       v2[2] = -60;
     }
     while ( v1 < 51200 );
-    _itoa(a1 - drivers[driverId].money, DstBuf, 10);
+    SDL_itoa(a1 - drivers[driverId].money, DstBuf, 10);
     v11 = 1701736296;
     v12 = 1528835705;
     v14 = 543519329;
@@ -14112,7 +14112,7 @@ int makeSnapshot_429DC0()
   Val = 0;
   do
   {
-    _itoa(Val, &DstBuf, 10);
+    SDL_itoa(Val, &DstBuf, 10);
     if ( strlen(&DstBuf) != 2 )
     {
       v13 = DstBuf;

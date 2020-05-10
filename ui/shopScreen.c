@@ -12,6 +12,7 @@
 #include "../graphics.h"
 #include "../i18n/i18n.h"
 #include "util/popup.h"
+#include <SDL_stdinc.h>
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -273,7 +274,7 @@ void enterShop()
   v4 = v0 - v3;
   if ( v4 < 0 )
     v4 = 0;
-  _itoa(v4, DstBuf, 10);
+  SDL_itoa(v4, DstBuf, 10);
   //todo comentado porque falla
   //*((BYTE *)&v97 + strlen(DstBuf) + 3) = 48;
   v5 = atoi(DstBuf);
@@ -292,7 +293,7 @@ void enterShop()
         v100 = 1819635575;//woul
         v102 = 543236212;//t a
         v103 = 36;
-        _itoa(v5, DstBuf, 10);
+        SDL_itoa(v5, DstBuf, 10);
         v27 = strlen(DstBuf) + 1;
         v28 = &DstBuf[19];
         do
@@ -327,7 +328,7 @@ void enterShop()
         *((_DWORD *)v37 + 1) = 1663067244;
         *((_DWORD *)v37 + 2) = 544502639;
         v37[12] = 0;
-        _itoa((cars[actualCarSelected].cost) - v5, DstBuf, 10);
+        SDL_itoa((cars[actualCarSelected].cost) - v5, DstBuf, 10);
         v39 = &DstBuf[19];
         do
           v40 = (v39++)[1];
@@ -359,7 +360,7 @@ void enterShop()
         v100 = 1819635575;
         v102 = 543236212;
         v103 = 36;
-        _itoa(v5, DstBuf, 10);
+        SDL_itoa(v5, DstBuf, 10);
         v6 = strlen(DstBuf) + 1;
         v7 = &DstBuf[19];
         do
@@ -382,7 +383,7 @@ void enterShop()
         v101 = 1852994932;
         v100 = 1701978233;
         LOBYTE(v103) = 0;
-        _itoa(abs(v12 - v5), DstBuf, 10);
+        SDL_itoa(abs(v12 - v5), DstBuf, 10);
         v13 = &DstBuf[19];
         do
           v14 = (v13++)[1];
@@ -1691,7 +1692,7 @@ int showCarBought()
   drawImageWithPosition2((int)carbas2Bpk, 96, 96, (int)((char *)screenBuffer + 80016));
   drawImageWithPosition2((int)((char *)carnameBpk + 1536 * actualCarSelected), 96, 16, (int)((char *)screenBuffer + 80016));
   drawMenuAnimation(16, 141, carAnimCurrentFrame_45FBA0, getCarBpkById(actualCarSelected), (int)&carAnimFrameSize_45FBA0[64 * actualCarSelected]);
-  _itoa(cars[actualCarSelected].cost, &DstBuf, 10);
+  SDL_itoa(cars[actualCarSelected].cost, &DstBuf, 10);
   /*v6 = 36;
   v0 = strlen(&DstBuf) + 1;
   v1 = &v5;

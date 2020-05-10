@@ -721,7 +721,7 @@ void   previewRaceScreen(signed int participants)
 		//en funcion del circuito seleccionado saca el TRx
 		v29 = &v251 + (unsigned __int8)circuitsToSelect_46126C[0];
 		strcpy(raceFilePrefix_45EA50, "TR");
-		_itoa((circuitsToSelect_46126C[0]%9)+1, &DstBuf, 10);
+		SDL_itoa((circuitsToSelect_46126C[0]%9)+1, &DstBuf, 10);
 		strcat(raceFilePrefix_45EA50, &DstBuf);
         /*v30 = (char *)&raceFilePrefix_45EA50[-(unsigned __int8)circuitsToSelect_46126C[0]] - (char *)&v251;
         do
@@ -762,7 +762,7 @@ void   previewRaceScreen(signed int participants)
         v37 = &v251 + (unsigned __int8)circuitsToSelect_46126C[1];
 		//v37 = &v251 + (unsigned __int8)byte_46126D;
 		strcpy(raceFilePrefix_45EA50, "TR");
-		_itoa((circuitsToSelect_46126C[1] % 9) + 1, &DstBuf, 10);
+		SDL_itoa((circuitsToSelect_46126C[1] % 9) + 1, &DstBuf, 10);
 		strcat(raceFilePrefix_45EA50, &DstBuf);
         v38 = (char *)&raceFilePrefix_45EA50[-(unsigned __int8)circuitsToSelect_46126C[1]] - (char *)&v251;
 		//v38 = (char *)&raceFilePrefix_45EA50[-(unsigned __int8)byte_46126D] - (char *)&v251;
@@ -801,7 +801,7 @@ void   previewRaceScreen(signed int participants)
         drawImageWithPosition((int)tsahpeBpk_45EB5C, 360, 274, (int)((char *)screenBuffer + 64264));
         v45 = &v251 + (unsigned __int8)circuitsToSelect_46126C[2];
 		strcpy(raceFilePrefix_45EA50, "TR");
-		_itoa((circuitsToSelect_46126C[2] % 9) + 1, &DstBuf, 10);
+		SDL_itoa((circuitsToSelect_46126C[2] % 9) + 1, &DstBuf, 10);
 		strcat(raceFilePrefix_45EA50, &DstBuf);
         v46 = (char *)&raceFilePrefix_45EA50[-(unsigned __int8)circuitsToSelect_46126C[2]] - (char *)&v251;
 		//v45 = &v251 + (unsigned __int8)byte_46126E;
@@ -858,7 +858,7 @@ LABEL_44:
     }
   }
   strcpy(Str, getLanguageEntry("NUMBER OF LAPS: "));
-  _itoa(numberOfLaps, &DstBuf, 10);
+  SDL_itoa(numberOfLaps, &DstBuf, 10);
   strcat(Str, &DstBuf);
   /*v51 = strlen(&DstBuf) + 1;
   v52 = (char *)&v246 + 3;
@@ -879,7 +879,7 @@ LABEL_44:
     while ( v55 );
     v56 = (double)dword_4456E8 * 0.3;
     *(_WORD *)v54 = 36;
-    _itoa((unsigned __int64)v56, &DstBuf, 10);
+    SDL_itoa((unsigned __int64)v56, &DstBuf, 10);
     v57 = strlen(&DstBuf) + 1;
     v58 = (char *)&v246 + 3;
     do
@@ -959,7 +959,7 @@ LABEL_44:
     drawImageWithPosition2((int)graphicsGeneral.facexxBpk, 64, 64, (int)((char *)screenBuffer + 82613));
     v72 = raceIdParticipants[0];
 	v73 = raceIdParticipants[0];
-    _itoa(drivers[v73].rank, Str, 10);
+    SDL_itoa(drivers[v73].rank, Str, 10);
     v74 = (char *)&v246 + 3;
     do
       v75 = (v74++)[1];
@@ -1019,7 +1019,7 @@ LABEL_44:
 		v87 = 0;
 		v245 = 0;
 		memset(Str, "\0", strlen(Str));
-		_itoa(drivers[currentDriverId].rank, &DstBuf, 10);
+		SDL_itoa(drivers[currentDriverId].rank, &DstBuf, 10);
 		strcpy(Str, &DstBuf);
 		strcat(Str, ".\0");
         do

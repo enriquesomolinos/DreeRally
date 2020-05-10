@@ -14,10 +14,8 @@
 #include "../config.h"
 #include "../dr.h"
 #include "../circuit.h"
+#include <SDL_stdinc.h>
 
-#ifdef PORTABILITY
-	#include "../portability/portability.h"
-#endif
 
 
 int dword_461FD4; // weak
@@ -76,7 +74,7 @@ int seeHallOfFame()
   do
   {
     v1 = v0 + 1;
-    _itoa(v0 + 1, DstBuf, 10);
+    SDL_itoa(v0 + 1, DstBuf, 10);
     v2 = &v21;
     do
       v3 = (v2++)[1];
@@ -102,7 +100,7 @@ int seeHallOfFame()
     v9 = 14080 * v0;
 	//driver
     drawTextWithFont((int)graphicsGeneral.fmed1aBpk, (int)&unk_445928, _strupr(configuration.hallOfFameEntries[v0].name), v9 + 92297);
-    _itoa(configuration.hallOfFameEntries[v0].races, DstBuf, 10);
+    SDL_itoa(configuration.hallOfFameEntries[v0].races, DstBuf, 10);
     v10 = configuration.hallOfFameEntries[v0].races;
 	//races
     if ( v10 >= 0 && v10 < 10 )
@@ -673,9 +671,9 @@ int   drawRecordByCircuit(int a1)
 	memset(name, "\0",strlen(name));
 	strcpy(name, configuration.circuitRecords[a1  + index*18].name);
     drawTextWithFont((int)graphicsGeneral.fmed1aBpk, (int)&unk_445928, name, v16);
-    _itoa(configuration.circuitRecords[a1  + index*18].min, DstBuf, 10);
-    _itoa(configuration.circuitRecords[a1  + index*18].sec, v44, 10);
-    _itoa(configuration.circuitRecords[a1  + index*18].cen, v47, 10);
+    SDL_itoa(configuration.circuitRecords[a1  + index*18].min, DstBuf, 10);
+    SDL_itoa(configuration.circuitRecords[a1  + index*18].sec, v44, 10);
+    SDL_itoa(configuration.circuitRecords[a1  + index*18].cen, v47, 10);
     /*if ( strlen(DstBuf) == 1 )
     {
       v42 = DstBuf;
@@ -841,7 +839,7 @@ LABEL_12:
   do
   {
     v12 = v11 + 1;
-    _itoa(v11 + 1, DstBuf, 10);
+    SDL_itoa(v11 + 1, DstBuf, 10);
     v13 = &v29;
     do
       v14 = (v13++)[1];
@@ -865,7 +863,7 @@ LABEL_12:
     _strupr(DstBuf);
     v20 = 14080 * v11;
     drawTextWithFont((int)graphicsGeneral.fmed1aBpk, (int)&unk_445928, DstBuf, v20 + 92297);
-    _itoa(dword_461F2C[v16], DstBuf, 10);
+    SDL_itoa(dword_461F2C[v16], DstBuf, 10);
     v21 = dword_461F2C[v16];
     if ( v21 >= 0 && v21 < 10 )
       drawTextWithFont((int)graphicsGeneral.fmed1aBpk, (int)&unk_445928, DstBuf, v20 + 92504);

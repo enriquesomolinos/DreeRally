@@ -4,6 +4,7 @@
 #include <string.h>
 #include "savegame.h"
 #include "defs.h"
+#include <SDL_stdinc.h>
 
 void *Str; // idb
 int savegames_unk_446DC2 =10;
@@ -71,7 +72,7 @@ char* getSaveGameName(int savegame) {
 	char *saveGameName= (char *) malloc(20);
 	
 	strcpy(Filename, "DR.SG");
-	_itoa(savegame, saveNumber, 10);
+	SDL_itoa(savegame, saveNumber, 10);
 	strcat(Filename, saveNumber);
 	if ((signed int)fileExists(Filename) > 0) {
 		

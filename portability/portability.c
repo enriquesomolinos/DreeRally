@@ -31,7 +31,7 @@ char *_strlwr(char s[])
 
 
 /* The Itoa code is in the puiblic domain */
-char* _itoa(int value, char* str, int radix) {
+/*char* _itoa(int value, char* str, int radix) {
   radix = 10;
     static char dig[] =
         "0123456789"
@@ -55,4 +55,4 @@ char* _itoa(int value, char* str, int radix) {
     for (p = str, q = p + n/2; p != q; ++p, --q)
         c = *p, *p = *q, *q = c;
     return str;
-}
+}*/

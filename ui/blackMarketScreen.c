@@ -1,4 +1,4 @@
-
+#include <SDL_stdinc.h>
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -283,24 +283,24 @@ int drawLoanShark()
     }
     while ( v6 );
     if ( drivers[driverId].loanType == LOAN_DELIVERATOR)
-      _itoa((unsigned __int64)((double)(drivers[driverId].loanRaces - 1) * 0.3333333333333333 * 6000.0 + 12000.0), DstBuf, 10);
+      SDL_itoa((unsigned __int64)((double)(drivers[driverId].loanRaces - 1) * 0.3333333333333333 * 6000.0 + 12000.0), DstBuf, 10);
     if (drivers[driverId].loanType == LOAN_WRAIGHT )
-      _itoa(
+      SDL_itoa(
         (unsigned __int64)((double)(drivers[driverId].loanRaces - 1) * 0.3333333333333333 * 4500.0 + 9000.0),
         DstBuf,
         10);
     if (drivers[driverId].loanType == LOAN_SHRIEKER )
-      _itoa(
+      SDL_itoa(
         (unsigned __int64)((double)(drivers[driverId].loanRaces - 1) * 0.3333333333333333 * 3000.0 + 6000.0),
         DstBuf,
         10);
     if (drivers[driverId].loanType == LOAN_SENTINEL )
-      _itoa(
+      SDL_itoa(
         (unsigned __int64)((double)(drivers[driverId].loanRaces - 1) * 0.3333333333333333 * 1500.0 + 3000.0),
         DstBuf,
         10);
     if (drivers[driverId].loanType == LOAN_DERVISH )
-      _itoa(
+      SDL_itoa(
         (unsigned __int64)((double)(drivers[driverId].loanRaces - 1) * 0.3333333333333333 * 750.0 + 1500.0),
         DstBuf,
         10);
@@ -368,7 +368,7 @@ int drawBlackMarketElement0()
   {
     drawImageWithPosition2((int)maret1eBpk, 96, 96, (int)((char *)screenBuffer + 161936));
     getBlackMarketElementText(0);
-    _itoa(minesCost_462D40, DstBuf, 10);
+    SDL_itoa(minesCost_462D40, DstBuf, 10);
     v6 = 36;
     v0 = strlen(DstBuf) + 1;
     v1 = &v5;
@@ -413,7 +413,7 @@ if (spikesAvailable_45EFF4 == 1)
 {
 	drawImageWithPosition2((int)((char *)maret1eBpk + 9216), 96, 96, (int)((char *)screenBuffer + 162040));
 	getBlackMarketElementText(1);
-	_itoa(spikesCost_dword_462D44, DstBuf, 10);
+	SDL_itoa(spikesCost_dword_462D44, DstBuf, 10);
 	v6 = 36;
 	v0 = strlen(DstBuf) + 1;
 	v1 = &v5;
@@ -457,7 +457,7 @@ int drawBlackMarketElement2()
 	{
 		drawImageWithPosition2((int)((char *)maret1eBpk + 18432), 96, 96, (int)((char *)screenBuffer + 162144));
 		getBlackMarketElementText(2);
-		_itoa(rocketCost_462D48, DstBuf, 10);
+		SDL_itoa(rocketCost_462D48, DstBuf, 10);
 		//v6 = 36; // es el dolar $
 		v0 = strlen(DstBuf) + 1;
 
@@ -516,7 +516,7 @@ int drawBlackMarketElement3()
   {
     drawImageWithPosition2((int)((char *)maret1eBpk + 27648), 96, 96, (int)((char *)screenBuffer + 162248));
     getBlackMarketElementText(3);
-    _itoa(sabotageCost_462D4C, DstBuf, 10);
+    SDL_itoa(sabotageCost_462D4C, DstBuf, 10);
     v3 = strlen(DstBuf) + 1;
 
 	v4 = malloc(v3); //coste + el $
