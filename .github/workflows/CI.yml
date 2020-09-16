@@ -1,0 +1,40 @@
+name: CI
+
+on:
+  push:
+    paths-ignore:
+      - '.github/*'
+      - '.github/*_TEMPLATE/**'
+      - '*.md'
+      - '*.yml'
+  pull_request:
+    paths-ignore:
+      - '.github/*'
+      - '.github/*_TEMPLATE/**'
+      - '*.md'
+      - '*.yml'
+
+jobs:
+  build-windows:
+    runs-on: windows-latest
+    env:
+      POWERSHELL_TELEMETRY_OPTOUT: 1
+    strategy:
+      fail-fast: false
+      matrix:
+        configuration: [Release, Debug]
+    steps:
+      - uses: actions/checkout@v2
+      - uses: microsoft/setup-msbuild@v1.0.1
+      - name: Upgrade project(s)
+        run: |
+          Start-Process "${env:PROGRAMFILES(X86)}\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\devenv.com" "DreeRally.sln /upgrade" -nnw -Wait
+          ((gc -path DreeRally.vcxproj) -replace '8.1','10.0') | Set-Content DreeRally.vcxproj
+      - name: Build
+        run: msbuild /m /nologo /v:m /p:Configuration=${{ matrix.configuration }} DreeRally.sln
+      - uses: actions/upload-artifact@v2
+        if: matrix.configuration == 'Release'
+        with:
+          name: DreeRally
+          path: ${{ matrix.configuration }}\DreeRally.exe
+          if-no-files-found: error
