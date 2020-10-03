@@ -1,0 +1,51 @@
+#menus
+Start Racing=Começar Corrida
+Multiplayer Race=Corrida Multiplayer
+Configure=Configuração
+See hall of fame=Ver Hall da Fama
+Credits=Créditos
+Exit to os=Sair para o Windows
+yes=sim
+no=não
+Are you sure?=¿Tem certeza?
+
+Start a new game=Começar um novo jogo
+End current Game=Finalizar jogo atual
+See current Stadistics=Ver estatísticas
+Load game=Carregar jogo
+save game=Salvar partida
+Previous menu=Voltar
+
+Music volume=Volume da música
+Effect volume=Volume dos efeitos
+define Keyboard=Configuração do telcado
+Define Gamepad/Joystick=Configuração de gamepad/joystick
+Gamepad/Joystick Disabled=gamepad/joystick Desativados
+
+Empty slot=Slot vazio
+Quicksave slot=Save rápido
+
+Accelerate=Acelerar
+Brake=Frear
+Steer Left=Virar para esquerda
+Steer right=Viara para direita
+Turbo boost=Turbo Boost
+Machine Gun=Metralhadora
+Drop Mine=Jogar Mina
+Horn=Buzina
+Select difficulty:=Dificuldade:
+speed makes me dizzy=Velocidade me deixa tonto
+i live to ride=Eu vivo pra dirigir
+petrol in my veins=Gasolina em minhas veias
+
+PRIZE: =PRÊMIO: 
+GLORY=GLÓRIA
+NUMBER OF LAPS: =NÚMERO DE VOLTAS: 
+
+Hard Race Results=Resultados da corrida difícil
+Medium Race Results=Resultados da corrida média
+Easy Race Results=Resultados da corrida fácil
+Press any key to continue...=Pressione uma tecla para continuar...
+Press any key to continue.=Pressione uma tecla para continuar.
+Please wait while loading...=Por favor, aguarde o carregamento
+You did not sign up in any race.=Você não se inscreveu em nenhuma corrida.
