@@ -129,7 +129,7 @@ int   licenseScreen(int useWeapons_mal)
   drawImageWithPosition2((int)carnameBpk, 96, 16, (int)((char *)screenBuffer + 113119));
   SDL_itoa(cars[0].cost, &DstBuf, 10);
 
-   v8 = strlen(&DstBuf) + 1;
+   //v8 = strlen(&DstBuf) + 1;
 
 	v9 = malloc(v3); //coste + el $
 	strcpy(v9,"$"); /* copy name into the new var */
@@ -138,6 +138,7 @@ int   licenseScreen(int useWeapons_mal)
   v11 = getBoxTextOffset(v9);
   drawInGamePrices(v9, v11 + 165599);
   v12 = 0;
+  free(v9);
   for ( j = 0; j < carAnimCurrentFrame_45FBA0; ++j )
     v12 += carAnimFrameSize_45FBA0[j];
   copyImageToBuffer((int)((char *)kuplaBpk + v12), (int)dword_461EA4);
@@ -371,7 +372,7 @@ LABEL_74:
   strcpy(drivers[v20].name ,v17);
   _strlwr(drivers[v20].name);
   //strlwr(&byte_460840[108 * v20]);
-  v32 = 27 * driverId;
+  //v32 = 27 * driverId;
   //v33 = byte_460840[108 * driverId];
   v33 = drivers[driverId].name;
   v34 = drivers[driverId].name;

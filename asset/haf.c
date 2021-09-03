@@ -297,7 +297,7 @@ void   openAnimation(const char *animFile, int a2, char * music, int a4, char * 
   unsigned int v10; // eax@5
   char *v11; // edi@5
   char v12; // cl@6
-  void *v13 =malloc(0xFA00u); // eax@7
+//  void *v13 =malloc(0xFA00u); // eax@7
   void *v14 = malloc(0xFA00u); // eax@7
   int (  *v15)(FILE *); // ebx@11
   FILE *fAnimFile; // ebp@11
@@ -335,6 +335,11 @@ void   openAnimation(const char *animFile, int a2, char * music, int a4, char * 
   int currentFrame;
   void *framesDelay; // idb
  
+
+
+  if (getModIntEntry("FEATURE_SKIP_VIDEO", 0) == 1) {
+      return;
+  }
   v43 = 1;
   Filename = 0;
   if ( byte_462D50 == 2 )

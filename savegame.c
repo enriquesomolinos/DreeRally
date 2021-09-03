@@ -68,7 +68,7 @@ int  decryptEntireSavegame(int a1, char *Filename)
 char* getSaveGameName(int savegame) {
 	char Filename[20];
 	char *saveNumber = (char *) malloc(1);
-	FILE * fp;
+//	FILE * fp;
 	char *saveGameName= (char *) malloc(20);
 	
 	strcpy(Filename, "DR.SG");

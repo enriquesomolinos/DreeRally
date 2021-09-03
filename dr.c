@@ -1,4 +1,3 @@
-
 #include <SDL.h>
 #include <SDL_joystick.h>
 #include <SDL_stdinc.h>
@@ -178,7 +177,7 @@ char eventDetected();
 char sub_418090();
 int transformJoystickReadValue_418150();
 
-int   setPaletteValueWithFloats(float, float, float); // idb
+int   setPaletteValueWithFloats(double, double, double); // idb
 int   sub_418B00(float, float, float); // idb
 
 int   loadPaletteMenu();
@@ -192,7 +191,7 @@ int   sub_41ED20(float, float, float); // idb
 void loadGraphics3();
 void freeMemoryGraphics3();
 
-int   sub_421980(int a1, int a2, int a3, int a4);
+int   drawBorder_421980(int a1, int a2, int a3, int a4);
 
 signed int   hasInsuficientMoneyToBuy(int a1);
 
@@ -1307,7 +1306,7 @@ int dword_4A8D2C; // weak
 
 
 int dword_4A9140; // weak
-char smalfo4aBpk_4A9160[924]; // weak
+char smalfo4aBpk_4A9160[924*8];// [924] ; // weak
 //float flt_4A9A60[256]; // weak
 int circuitRecordMilliseconds_4A9B8C; // weak
 int circuitLR1Bpk_width_4A9B90; // weak
@@ -1597,9 +1596,9 @@ int initParticipantValues_401060()
       
       v8 = arrayv103[5 * v6 + raceParticipant[indexRaceParticipantt].engine];//23*5 + 4 posiciones =119
    //   if(debug==1) v8=2.5;
-	  raceParticipant2[indexRaceParticipantt].efectiveEngine_4A6884 = v8;
+	  raceParticipant2[indexRaceParticipantt].efectiveEngine_4A6884 = (float)v8;
       v10 = 5 * v6 + raceParticipant[indexRaceParticipantt].tire;
-	  raceParticipant2[indexRaceParticipantt].efectiveEngineBackup_4A6888 = v8;
+	  raceParticipant2[indexRaceParticipantt].efectiveEngineBackup_4A6888 = (float)v8;
 	  
       v11 = arrayv79[v6];//24 posiciones
 	 // if(debug==1) v11=1.75;
@@ -7483,8 +7482,9 @@ int drawCarInRace_40D920()
   if ( v5 +  raceParticipantIngame[userRaceOrder_4A9EA8].absolutePositionY_4A7DB8 > v45 )
     raceParticipantIngame[v2].inScreenPositionY_4A7D08 = (unsigned __int64)( raceParticipantIngame[userRaceOrder_4A9EA8].absolutePositionY_4A7DB8 - (double)(circuitHeight_4A7CF8 - raceEffectiveHeight_445018));
   v8 = v5 +  raceParticipantIngame[userRaceOrder_4A9EA8].absolutePositionY_4A7DB8;
-  if ( v8 >= v47 && v8 <= v45 )
-    raceParticipantIngame[v2].inScreenPositionY_4A7D08 = v7 - dword_503504;
+  if (v8 >= v47 && v8 <= v45)
+      raceParticipantIngame[v2].inScreenPositionY_4A7D08 = v7 - dword_503504;
+    
   if ( raceParticipant2[v1].damageBar_4A6898 > 0 && !raceParticipantIngame[v2].hasFinishedTheRace_4A7E0C )
   {
 
@@ -11312,7 +11312,7 @@ LABEL_195:
           }
           if (raceParticipantIngame[v59].dword_4A7D1C ==1)// *(_DWORD *)(v58 - 376) == 1 ) ////dword_4A7D1c
           {
-           raceParticipantIngame[v59].absolutePositionY_4A7DB8 == raceParticipantIngame[v59].dword_4A7E54;// *(_DWORD *)(v58 - 220) = *(_DWORD *)(v58 - 64); // --220   absolutePositiony_4A7DB8 -64 es dword_4A7E54
+           raceParticipantIngame[v59].absolutePositionY_4A7DB8 = raceParticipantIngame[v59].dword_4A7E54;// *(_DWORD *)(v58 - 220) = *(_DWORD *)(v58 - 64); // --220   absolutePositiony_4A7DB8 -64 es dword_4A7E54
             raceParticipantIngame[v59].dword_4A7E98 += 2;
           }
           v58 += 864;
@@ -12128,7 +12128,7 @@ int transformJoystickReadValue_418150()
 //void   openAnimation(const char *animFile, int a2, char * music, int a4, char * effect, char onKeyPressExit, char screenResolution)
 
 //----- (004189C0) --------------------------------------------------------
-int   setPaletteValueWithFloats(float a1, float a2, float a3)
+int   setPaletteValueWithFloats(double a1, double a2, double a3)
 {
   signed int v3; // edi@1
   char v4; // si@1
@@ -12186,7 +12186,7 @@ int   setPaletteValueWithFloats(float a1, float a2, float a3)
 }
 
 //----- (00418B00) --------------------------------------------------------
-int   sub_418B00(float a1, float a2, float a3)
+int   sub_418B00(double a1, double a2, double a3)
 {
   signed int v3; // edi@1
 //  _UNKNOWN *v4; // esi@1
@@ -12231,7 +12231,7 @@ int   sub_418B00(float a1, float a2, float a3)
 	palette1[index] = colorToPaletteEntry((unsigned int)(unsigned __int64)(v8 * v5 + v18) << 16, 6553600);
  	palette1[index +1] = colorToPaletteEntry((unsigned int)(unsigned __int64)(v8 * v6 + v19) << 16, 6553600);
 	palette1[index +2] = colorToPaletteEntry((unsigned int)(unsigned __int64)(v8 * v7 + v20) << 16, 6553600);
-	
+   
     ++v3;
     v16 = v3;
   }
@@ -12940,7 +12940,7 @@ void freeMemoryGraphics3()
 //int reloadArmourAnimation()
 
 //----- (00421980) --------------------------------------------------------
-int   sub_421980(int a1, int a2, int a3, int a4)
+int   drawBorder_421980(int a1, int a2, int a3, int a4)
 {
   int v4; // edi@1
   int v5; // ebx@1
@@ -12996,7 +12996,7 @@ int   sub_421980(int a1, int a2, int a3, int a4)
 //int   drawBorder(int a1, int a2, int a3, int a4)
 
 //----- (00421C40) --------------------------------------------------------
-//int   drawBorder2(int a1, int a2, unsigned int a3, int a4)
+//int   removeBorder(int a1, int a2, unsigned int a3, int a4)
 
 //----- (00421D90) --------------------------------------------------------
 //void shopScreenMoveUp_421D90()
@@ -13020,6 +13020,7 @@ signed int   hasInsuficientMoneyToBuy(int a1)
   char v7; // al@7
   signed int result; // eax@8
   char *DstBuf = malloc(100); // [sp+4h] [bp-34h]@4
+  char *money = malloc(100); // [sp+4h] [bp-34h]@4
   char v10; // [sp+17h] [bp-21h]@4
   int v11; // [sp+18h] [bp-20h]@4
   int v12; // [sp+1Ch] [bp-1Ch]@4
@@ -13044,7 +13045,7 @@ signed int   hasInsuficientMoneyToBuy(int a1)
       v2[2] = -60;
     }
     while ( v1 < 51200 );
-    SDL_itoa(a1 - drivers[driverId].money, DstBuf, 10);
+    /*_itoa(a1 - drivers[driverId].money, DstBuf, 10);
     v11 = 1701736296;
     v12 = 1528835705;
     v14 = 543519329;
@@ -13062,12 +13063,17 @@ signed int   hasInsuficientMoneyToBuy(int a1)
     v6 = &v10;
     do
       v7 = (v6++)[1];
-    while ( v7 );
+    while ( v7 );*/
+    DstBuf = "Honey. [You are ";
+    _itoa(a1 - drivers[driverId].money, money, 10);
+    strcat(DstBuf, money);
+    strcat(DstBuf, "$ short.");
+
    // *(_DWORD *)v6 = 1752390432; //hs[
    // *((_DWORD *)v6 + 1) = 779383407; //.tro
     //v6[8] = 0;
     writeTextInScreen("No dough, no go, bro. No money,", 100010);
-    writeTextInScreen((const char *)&v11, 110250);
+    writeTextInScreen(DstBuf, 110250);
     writeTextInScreen("Gotta earn it. Go do it already.", 120490);
     refreshAllScreen();
     loadMenuSoundEffect(2u, 23, 0, configuration.effectsVolume, dword_44518C);
@@ -13391,7 +13397,6 @@ int sub_4224E0()
 	//while (v14 < (signed int)&unk_4606C4);
   }
   v20 = 0;
- 
   do
   {
     v21 = convertColorToPaletteColor(palette2[palette2Index], dword_45EAA4 << 16);
@@ -13400,16 +13405,16 @@ int sub_4224E0()
     v23 = palette2[palette2Index +1];
 	//v23 = dword_461364[v20];
 //    dword_45FD00[v20] = v22;
-	palette1[palette1Index + 16] = v22;
+	palette1[palette1Index ] = v22;
     v24 = convertColorToPaletteColor(v23, dword_45EAA4 << 16);
     v25 = colorToPaletteEntry((v24 + 0x8000) >> 16 << 16, 6553600);
     v26 = dword_45EAA4 << 16;
-	palette1[palette1Index +16] = v25;
+	palette1[palette1Index +1] = v25;
     ///dword_45FD04[v20] = v25;
     v27 = convertColorToPaletteColor(palette2[palette2Index +2], v26);
 	//v27 = convertColorToPaletteColor(dword_461368[v20], v26);
     result = colorToPaletteEntry((v27 + 0x8000) >> 16 << 16, 6553600);
-	palette1[palette1Index +16] = result;
+	palette1[palette1Index +2] = result;
 	
     //dword_45FD08[v20] = result;
     v20 += 3;
@@ -15936,8 +15941,10 @@ SDL_Color* color ;
 	color.g = g;
 	color.b = b;
 	
-	SDL_SetColors(screenSurface, &color, pos, 1);
-	SDL_Palette *sdl_palette = screenSurface->format->palette;*/
+	SDL_SetColors(screenSurface->format->palette, &color, pos, 1);
+    
+    //SDL_SetPaletteColors(screenSurface->format->palette, &color, pos, 1);
+    SDL_Palette *sdl_palette = screenSurface->format->palette;*/
     
 	 palette[pos] = result;
   }
@@ -15945,7 +15952,7 @@ SDL_Color* color ;
   {
     result = pos;
     palette[pos] = 4* (b | ((g | (r << 8)) << 8)); //esta variable contiene paletas
-	 color = (SDL_Color *)&palette[pos];
+	// color = (SDL_Color *)&palette[pos];
 	/*SDL_Color color;
 	color.r = r;
 	color.g = g;
@@ -15965,9 +15972,10 @@ int   setPaletteAndGetValue(unsigned __int8 pos, unsigned __int8 r, char g, unsi
   int result; // eax@
   unsigned __int16 v6; // ax@3
   SDL_Color* color;
-
+  int a = 0;
   if ( mainArgs.configGL )
   {
+
     HIBYTE(v4) = b;
     LOBYTE(v4) = g;
     result = 4 * (r | (v4 << 8));
@@ -15976,10 +15984,13 @@ int   setPaletteAndGetValue(unsigned __int8 pos, unsigned __int8 r, char g, unsi
 	color.g = g;
 	color.b = b;
 	
-	SDL_SetColors(screenSurface, &color, pos, 1);
+    
+	a =SDL_SetColors(screenSurface, &color, pos, 1);
+    a= SDL_SetPalette(screenSurface, SDL_LOGPAL | SDL_PHYSPAL ,&color, pos, 1);
+    //SDL_SetPaletteColors(screenSurface->format->palette, &color, pos, 1);
+    SDL_SetPalette(screenSurface, SDL_LOGPAL | SDL_PHYSPAL, &color, pos, 1);
 	SDL_Palette *sdl_palette = screenSurface->format->palette;*/
     palette[pos] = result;
-
   }
   else
   {

@@ -201,7 +201,7 @@ LABEL_11:
   }
   while (participantsRace[0] < 4u || participantsRace[2] < 4u );
   //while (HIBYTE(word_461EB4) < 4u || (unsigned __int8)byte_461EB6 < 4u);
-  v29 = 0;
+  //v29 = 0;
   indexRaceParticipant = 0;
  // v17 = (signed int)dword_4A7AA0;
   do
@@ -222,7 +222,7 @@ LABEL_11:
   while (indexRaceParticipant < 4 );
   //while (v17 < (signed int)&unk_4A7BF0);
   postRaceMain(1, v26, v27);
-  result = 0;
+  //result = 0;
   result = getMaxDriverPoints(driverId);
   if ( isMultiplayerGame
     || (v25 = __OFSUB__(drivers[driverId].points, result),
@@ -248,7 +248,7 @@ void   previewRaceScreen(signed int participants)
   int v8; // ecx@9
   int v9; // edx@10
   unsigned int v10; // eax@10
-  void *v11 = malloc(4u); // eax@14
+//  void *v11 = malloc(4u); // eax@14
   int v12; // eax@14
   char *v13; // ecx@14
   signed int v14; // eax@14
@@ -299,11 +299,11 @@ void   previewRaceScreen(signed int participants)
   char v59; // cl@53
   char *v60=malloc(10); // edi@56
 //  char v61; // al@57
-  char *v62 = malloc(10); // edi@60
+//  char *v62 = malloc(10); // edi@60
 //  char v63; // al@61
-  char *v64 = malloc(10); // edi@64
+//  char *v64 = malloc(10); // edi@64
 //  char v65; // al@65
-  char *v66 = malloc(10); // edi@68
+//  char *v66 = malloc(10); // edi@68
 //  char v67; // al@69
   char *v68; // eax@71
   int v69; // edi@71
@@ -535,6 +535,10 @@ void   previewRaceScreen(signed int participants)
   int namePosition[4] = {128664,153736,190744,215816};
   int numberPosition[4] = {113331,138403,175411,200483};
 
+
+  if (getModIntEntry("FEATURE_SKIP_PREV_RACE_SCREEN", 0) == 1) {
+      goto LABEL_110;
+  } 
   /* 82613=129 con resto 53
  107685=168 con resto 165
  144693=226 con resto 53
@@ -549,46 +553,46 @@ void   previewRaceScreen(signed int participants)
  190744=298 con resto 24
  215816= 337 con resto 136*/
 
-   v258 = 3691092;//TR8
-  v267 = 3691092;//TR8
-  v255 = 3494484;//TR5
-  v256 = 3560020;//TR6
-  v264 = 3494484;//TR5
-  v265 = 3560020;//TR6
+   //v258 = 3691092;//TR8
+  //v267 = 3691092;//TR8
+  //v255 = 3494484;//TR5
+  //v256 = 3560020;//TR6
+  //v264 = 3494484;//TR5
+  //v265 = 3560020;//TR6
   dword_456730 = 0;
   memcpy((void *)dword_45FC00, screenBuffer, 0x4B000u);
   screenBuffer = (void *)dword_45FC00;
-  v259 = 3756628;//TR9
-  v268 = 3756628;//TR9
+  //v259 = 3756628;//TR9
+  //v268 = 3756628;//TR9
   memcpy((void *)dword_45FC00, graphicsGeneral.menubg5Bpk, 0x4B000u);
-  v253 = 3363412;//TR3
-  v262 = 3363412;//TR3
-  v251 = 3232340; //TR1
-  v252 = 3297876; //TR2
-  v254 = 3428948; //TR4
-  v257 = 3625556; //TR7
-  v260 = 3232340; //TR1
-  v261 = 3297876;//TR2
-  v263 = 3428948;//TR4
-  v266 = 3625556;//TR7
-  v269 = 3166804;//TR0
+  //v253 = 3363412;//TR3
+  //v262 = 3363412;//TR3
+  //v251 = 3232340; //TR1
+  //v252 = 3297876; //TR2
+  //v254 = 3428948; //TR4
+  //v257 = 3625556; //TR7
+  //v260 = 3232340; //TR1
+  //v261 = 3297876;//TR2
+  //v263 = 3428948;//TR4
+  //v266 = 3625556;//TR7
+  //v269 = 3166804;//TR0
   
   
   //posiciones de textos
   
  
-  v282 = 113331;
-  v283 = 138403;
-  v284 = 175411;
-  v285 = 200483;
-  v270 = 128664;
-  v271 = 153736;
-  v272 = 190744;
-  v273 = 215816;
-  v278 = 82613;
-  v279 = 107685;
-  v280 = 144693;
-  v281 = 169765;
+  //v282 = 113331;
+  //v283 = 138403;
+  //v284 = 175411;
+  //v285 = 200483;
+  //v270 = 128664;
+  //v271 = 153736;
+  //v272 = 190744;
+  //v273 = 215816;
+  //v278 = 82613;
+  //v279 = 107685;
+  //v280 = 144693;
+  //v281 = 169765;
   drawImageWithPosition((int)graphics4.prep4Bpk, 640, 54, (int)((char *)screenBuffer + 272640));
   drawImageWithPosition((int)graphics4.prepw1Bpk, 225, 274, (int)((char *)screenBuffer + 64013));
   if (participants < 4 )
@@ -719,7 +723,7 @@ void   previewRaceScreen(signed int participants)
         
 
 		//en funcion del circuito seleccionado saca el TRx
-		v29 = &v251 + (unsigned __int8)circuitsToSelect_46126C[0];
+		//v29 = &v251 + (unsigned __int8)circuitsToSelect_46126C[0];
 		strcpy(raceFilePrefix_45EA50, "TR");
 		SDL_itoa((circuitsToSelect_46126C[0]%9)+1, &DstBuf, 10);
 		strcat(raceFilePrefix_45EA50, &DstBuf);
@@ -867,9 +871,9 @@ LABEL_44:
   while ( v53 );
   memcpy(v52, &DstBuf, v51);*/
   drawTextWithFont((int)graphicsGeneral.fmed1aBpk, (int)&unk_445928, Str, 229389);
-  v248 = 1330454597; //duke
+  //v248 = 1330454597; //duke
   *(_DWORD *)Str = 1514754640;//nukem
-  v249 = 978928974;
+  //v249 = 978928974;
   LOWORD(v250) = 32;
   if ( isMultiplayerGame )
   {
@@ -971,7 +975,7 @@ LABEL_44:
     do
       v79 = *v76++;
     while ( v79 );
-    v244 = v76 - &Str[1];
+    //v244 = v76 - &Str[1];
     if ( v76 != &Str[1] )
     {
       do
@@ -1080,10 +1084,10 @@ LABEL_110:
   v92 = dword_456B9C;
   if ( !dword_456B9C )
   {
-    v274 = &byte_460840[108 * (unsigned __int8)dword_45FA74];
-    v275 = &byte_460840[108 * BYTE1(dword_45FA74)];
-    v276 = &byte_460840[108 * BYTE2(dword_45FA74)];
-    v277 = &byte_460840[108 * BYTE3(dword_45FA74)];
+    //v274 = &byte_460840[108 * (unsigned __int8)dword_45FA74];
+    //v275 = &byte_460840[108 * BYTE1(dword_45FA74)];
+    //v276 = &byte_460840[108 * BYTE2(dword_45FA74)];
+    //v277 = &byte_460840[108 * BYTE3(dword_45FA74)];
     //allocateMemory(4u);
     //TODO fix
    // Str = v93;
@@ -1457,10 +1461,10 @@ LABEL_534:
   } while (iDriver < 20);
 
   reInitUnderGroundMarketStock();
-  v137 = raceIdParticipants[2];
-  v138 = raceIdParticipants[1];
+  //v137 = raceIdParticipants[2];
+  //v138 = raceIdParticipants[1];
   drivers[raceIdParticipants[0]].lastRaceIncome = 0;
-  v139 = raceIdParticipants[3];
+  //v139 = raceIdParticipants[3];
   drivers[raceIdParticipants[1]].lastRaceIncome = 0;
   drivers[raceIdParticipants[2]].lastRaceIncome = 0;
   v140 = 0;

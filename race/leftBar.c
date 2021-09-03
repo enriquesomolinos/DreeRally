@@ -127,7 +127,7 @@ int  drawSmallLeftBar_413C90(int a1)
             ticksToPauseLapTimeInHud_4A9EB0 = 0;
     }
     v19 = 100.0 - ceil((double)raceParticipant2[userRaceOrder_4A9EA8].damageBar_4A6898 * 0.0009765625);
-    v20 = drawSprite_402590((int)&bugnum6Bpk_46E560, 8, 10, (unsigned __int64)v19, 0, 11408, -8, -16);
+    drawSprite_402590((int)&bugnum6Bpk_46E560, 8, 10, (unsigned __int64)v19, 0, 11408, -8, -16);
     //TODO FIX drawImageInRace_43B240((int)&unk_46E880, 8, 10, v20 + dword_464F14);
     v21 = userRaceOrder_4A9EA8;
     if (raceParticipant2[userRaceOrder_4A9EA8].damageBar_4A6898 < 20480)

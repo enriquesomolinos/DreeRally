@@ -243,7 +243,7 @@ extern int dword_4AA3F0[4]; // weak
 extern int dword_4A7CC0[4]; // weak
 extern int currentLapTime_481E0C; // weak
 extern int ticksToPauseLapTimeInHud_4A9EB0; // weak
-extern char smalfo4aBpk_4A9160[924]; // weak
+extern char smalfo4aBpk_4A9160[924*8]; // weak
 extern int racePositionUserFirst_46E8D0[4]; // weak
 extern int criticalDamageSoundPlayed_456ADC; // weak
 extern int criticalDamage2SoundPlayed_456AE0; // weak

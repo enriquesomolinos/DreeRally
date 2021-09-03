@@ -3,8 +3,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "util/anim.h"
 #include "../defs.h"
+#include "util/anim.h"
+
 #include "../dr.h"
 #include "../drivers.h"
 #include "../cars.h"
@@ -28,6 +29,8 @@ int rocketCost_462D48; // idb
 int sabotageCost_462D4C; // idb
 
 int undergroundOptionSelected_dword_461278; // weak
+
+BlackMarketMessages blackMarketMessages;
 
 char aBorrow12000Pay[30] = "[Borrow $12,000 - Pay $18,000"; // weak
 char byte_4520A0[40] =
@@ -116,8 +119,76 @@ char aEnterTheRaceSi[24] = "enter the Race Sign-Up."; // weak
 _UNKNOWN unk_454BE8; // weak
 char aPressEscForP_1[30] = "Press [Esc{ for previous menu"; // weak
 
+
+int initBlackMarketMessages()
+{
+    blackMarketMessages.outOfStockMessage.title = "[OUT OF STOCK";
+    blackMarketMessages.outOfStockMessage.line1 = "Sorry, no can do. That's out of";
+    blackMarketMessages.outOfStockMessage.line2 = "stock. Hold your horse(power)s";
+    blackMarketMessages.outOfStockMessage.line3 = "till after the next race";
+
+    blackMarketMessages.continueMessage.title = "[Continue";
+    blackMarketMessages.continueMessage.line1 = "Exit the the Underground Market and";
+    blackMarketMessages.continueMessage.line2 = "enter the Race Sign-Up.";
+    blackMarketMessages.continueMessage.line3 = "Press [Esc{ for previous menu";
+
+    blackMarketMessages.sabotageMessage[0].infoMessage.title = "[Sabotage";
+    blackMarketMessages.sabotageMessage[0].infoMessage.line1 = "Do you have bad luck always riding";
+    blackMarketMessages.sabotageMessage[0].infoMessage.line2 = "shotgun? Time for that golden";
+    blackMarketMessages.sabotageMessage[0].infoMessage.line3 = "racer boy to get some. Right?";
+
+    blackMarketMessages.sabotageMessage[0].boughMessage.title = "[Sabotage in progress";
+    blackMarketMessages.sabotageMessage[0].boughMessage.line1 = "Sweet del. Now your arch-racing-";
+    blackMarketMessages.sabotageMessage[0].boughMessage.line2 = "rival will tailslide down that";
+    blackMarketMessages.sabotageMessage[0].boughMessage.line3 = "vile road to wreckhood oblivion.";
+
+    blackMarketMessages.rocketMessage[0].infoMessage.title = "[Rocket Fuel";
+    blackMarketMessages.rocketMessage[0].infoMessage.line1 = "This nectar in the veins of your";
+    blackMarketMessages.rocketMessage[0].infoMessage.line2 = "vehicle takes you right into";
+    blackMarketMessages.rocketMessage[0].infoMessage.line3 = "orbit, real speedy like.";
+
+    blackMarketMessages.rocketMessage[0].boughMessage.title = "[Rocket Fuel Bought";
+    blackMarketMessages.rocketMessage[0].boughMessage.line1 = "Warning! We're talking 'bout a";
+    blackMarketMessages.rocketMessage[0].boughMessage.line2 = "backdraft barbecue party here.";
+    blackMarketMessages.rocketMessage[0].boughMessage.line3 = "[Using the fuel causes damage!";
+
+    blackMarketMessages.spikesMessage[0].infoMessage.title = "[Spiked Bumpers";
+    blackMarketMessages.spikesMessage[0].infoMessage.line1 = "Nothing wakes you up like an enemy";
+    blackMarketMessages.spikesMessage[0].infoMessage.line2 = "car, closing in to give you";
+    blackMarketMessages.spikesMessage[0].infoMessage.line3 = "a sharp kiss with spiked bumpers.";
+
+    blackMarketMessages.spikesMessage[0].boughMessage.title = "[Spiked bumpers installed";
+    blackMarketMessages.spikesMessage[0].boughMessage.line1 = "Now you are sayiing: 'Stay back or";
+    blackMarketMessages.spikesMessage[0].boughMessage.line2 = "you sorry, you dead.' Now that's.";
+    blackMarketMessages.spikesMessage[0].boughMessage.line3 = "the attitude.";
+
+    blackMarketMessages.minesMessage[0].infoMessage.title = "[Mines";
+    blackMarketMessages.minesMessage[0].infoMessage.line1 = "Sow these seeds of destruction";
+    blackMarketMessages.minesMessage[0].infoMessage.line2 = "after a blind bend where headlight";
+    blackMarketMessages.minesMessage[0].infoMessage.line3 = "eyes are tire-smoke tired.";
+
+    blackMarketMessages.minesMessage[0].boughMessage.title = "[8 Mines loaded into your car";
+    blackMarketMessages.minesMessage[0].boughMessage.line1 = "Now those rival wheels will reap";
+    blackMarketMessages.minesMessage[0].boughMessage.line2 = "only burning engine death, and";
+    blackMarketMessages.minesMessage[0].boughMessage.line3 = "that road will be all yours.";
+
+
+    blackMarketMessages.sharewareMessage.title = "[HELD FROM THIS RACE";
+    blackMarketMessages.sharewareMessage.line1 = "This item is always available in the";
+    blackMarketMessages.sharewareMessage.line2 = "full version. Register now to get all";
+    blackMarketMessages.sharewareMessage.line3 = "the dirty stuff in every race.";
+
+    blackMarketMessages.noSabotageMessage.title = "[No sabotage. No way.";
+    blackMarketMessages.noSabotageMessage.line1 = "What? You crazy, man? Nobody";
+    blackMarketMessages.noSabotageMessage.line2 = "touches the Adversary's auto-";
+    blackMarketMessages.noSabotageMessage.line3 = "mobile and lives, nobody.";
+
+    
+}
+
 //----- (00421FB0) --------------------------------------------------------
 signed int setUndergroundMarketPrices()
+
 {
   int v0; // eax@1
   bool v1; // zf@11
@@ -195,11 +266,36 @@ int loadAcceptedText()
 int   getBlackMarketElementText(int a1)
 {
   createPopup(144, 114, 384, 119, 1);
-  writeTextInScreen(&aMines[240 * a1], 79530);
-  writeTextInScreen((const char *)&unk_453400 + 240 * a1, 89770);
-  writeTextInScreen(&aSowTheseSeedsO[240 * a1], 100010);
-  writeTextInScreen(&aAfterABlindBen[240 * a1], 110250);
-  writeTextInScreen(&aEyesAreTireSmo[240 * a1], 120490);
+
+  if (a1+1 == MINES) {
+      writeTextInScreen(blackMarketMessages.minesMessage[0].infoMessage.title, 79530);
+      writeTextInScreen((const char*)&unk_453400 + 240 * a1, 89770);
+      writeTextInScreen(blackMarketMessages.minesMessage[0].infoMessage.line1, 100010);
+      writeTextInScreen(blackMarketMessages.minesMessage[0].infoMessage.line2, 110250);
+      writeTextInScreen(blackMarketMessages.minesMessage[0].infoMessage.line3, 120490);
+  }
+  else if (a1 + 1 == SPIKES) {
+      writeTextInScreen(blackMarketMessages.spikesMessage[0].infoMessage.title, 79530);
+      writeTextInScreen((const char*)&unk_453400 + 240 * a1, 89770);
+      writeTextInScreen(blackMarketMessages.spikesMessage[0].infoMessage.line1, 100010);
+      writeTextInScreen(blackMarketMessages.spikesMessage[0].infoMessage.line2, 110250);
+      writeTextInScreen(blackMarketMessages.spikesMessage[0].infoMessage.line3, 120490);
+  }
+  else if (a1 + 1 == ROCKET) {
+      writeTextInScreen(blackMarketMessages.rocketMessage[0].infoMessage.title, 79530);
+      writeTextInScreen((const char*)&unk_453400 + 240 * a1, 89770);
+      writeTextInScreen(blackMarketMessages.rocketMessage[0].infoMessage.line1, 100010);
+      writeTextInScreen(blackMarketMessages.rocketMessage[0].infoMessage.line2, 110250);
+      writeTextInScreen(blackMarketMessages.rocketMessage[0].infoMessage.line3, 120490);
+  }
+  else if (a1 + 1 == SABOTAGE) {
+      writeTextInScreen(blackMarketMessages.sabotageMessage[0].infoMessage.title, 79530);
+      writeTextInScreen((const char*)&unk_453400 + 240 * a1, 89770);
+      writeTextInScreen(blackMarketMessages.sabotageMessage[0].infoMessage.line1, 100010);
+      writeTextInScreen(blackMarketMessages.sabotageMessage[0].infoMessage.line2, 110250);
+      writeTextInScreen(blackMarketMessages.sabotageMessage[0].infoMessage.line3, 120490);
+  }
+  
   return writeTextInScreen(&byte_4534A0[240 * a1], 130730);
 }
 
@@ -207,11 +303,37 @@ int   getBlackMarketElementText(int a1)
 int   getBlackMarketElementPurchasedText(int a1)
 {
   createPopup(144, 114, 384, 119, 1);
-  writeTextInScreen(&a8MinesLoadedIn[240 * a1], 79530);
-  writeTextInScreen((const char *)&unk_453A90 + 240 * a1, 89770);
-  writeTextInScreen(&aNowThoseRivalW[240 * a1], 100010);
-  writeTextInScreen(&aOnlyBurningEng[240 * a1], 110250);
-  writeTextInScreen(&aThatRoadWillBe[240 * a1], 120490);
+  if (a1 + 1 == MINES) {
+      writeTextInScreen(blackMarketMessages.minesMessage[0].boughMessage.title, 79530);
+      writeTextInScreen((const char*)&unk_453A90 + 240 * a1, 89770);
+      writeTextInScreen(blackMarketMessages.minesMessage[0].boughMessage.line1, 100010);
+      writeTextInScreen(blackMarketMessages.minesMessage[0].boughMessage.line2, 110250);
+      writeTextInScreen(blackMarketMessages.minesMessage[0].boughMessage.line3, 120490);
+      
+  }
+  else if (a1 + 1 == SPIKES) {
+      writeTextInScreen(blackMarketMessages.spikesMessage[0].boughMessage.title, 79530);
+      writeTextInScreen((const char*)&unk_453A90 + 240 * a1, 89770);
+      writeTextInScreen(blackMarketMessages.spikesMessage[0].boughMessage.line1, 100010);
+      writeTextInScreen(blackMarketMessages.spikesMessage[0].boughMessage.line2, 110250);
+      writeTextInScreen(blackMarketMessages.spikesMessage[0].boughMessage.line3, 120490);
+  }
+  else if (a1 + 1 == ROCKET) {
+      writeTextInScreen(blackMarketMessages.rocketMessage[0].boughMessage.title, 79530);
+      writeTextInScreen((const char*)&unk_453A90 + 240 * a1, 89770);
+      writeTextInScreen(blackMarketMessages.rocketMessage[0].boughMessage.line1, 100010);
+      writeTextInScreen(blackMarketMessages.rocketMessage[0].boughMessage.line2, 110250);
+      writeTextInScreen(blackMarketMessages.rocketMessage[0].boughMessage.line3, 120490);
+  }
+  else if (a1 + 1 == SABOTAGE) {
+      writeTextInScreen(blackMarketMessages.sabotageMessage[0].boughMessage.title, 79530);
+      writeTextInScreen((const char*)&unk_453A90 + 240 * a1, 89770);
+      writeTextInScreen(blackMarketMessages.sabotageMessage[0].boughMessage.line1, 100010);
+      writeTextInScreen(blackMarketMessages.sabotageMessage[0].boughMessage.line2, 110250);
+      writeTextInScreen(blackMarketMessages.sabotageMessage[0].boughMessage.line3, 120490);
+  }
+
+  
   return writeTextInScreen(&byte_453B30[240 * a1], 130730);
 }
 
@@ -219,11 +341,11 @@ int   getBlackMarketElementPurchasedText(int a1)
 int outOfStockPopup_422930()
 {
   createPopup(144, 114, 384, 119, 1);
-  writeTextInScreen(aOutOfStock, 79530);
+  writeTextInScreen(blackMarketMessages.outOfStockMessage.title, 79530);
   writeTextInScreen((const char *)&unk_4538B0, 89770);
-  writeTextInScreen(aSorryNoCanDo_T, 100010);
-  writeTextInScreen(aStock_HoldYour, 110250);
-  writeTextInScreen(aTillAfterTheNe, 120490);
+  writeTextInScreen(blackMarketMessages.outOfStockMessage.line1, 100010);
+  writeTextInScreen(blackMarketMessages.outOfStockMessage.line2, 110250);
+  writeTextInScreen(blackMarketMessages.outOfStockMessage.line3, 120490);
   return writeTextInScreen((const char *)&unk_453950, 130730);
 }
 
@@ -231,11 +353,11 @@ int outOfStockPopup_422930()
 int blackMarketSharewarePopup_4229B0()
 {
   createPopup(144, 114, 384, 119, 1);
-  writeTextInScreen(aHeldFromThisRa, 79530);
+  writeTextInScreen(blackMarketMessages.sharewareMessage.title, 79530);
   writeTextInScreen((const char *)&unk_4539A0, 89770);
-  writeTextInScreen(aThisItemIsAlwa, 100010);
-  writeTextInScreen(aFullVersion_Re, 110250);
-  writeTextInScreen(aTheDirtyStuffI, 120490);
+  writeTextInScreen(blackMarketMessages.sharewareMessage.line1, 100010);
+  writeTextInScreen(blackMarketMessages.sharewareMessage.line2, 110250);
+  writeTextInScreen(blackMarketMessages.sharewareMessage.line3, 120490);
   return writeTextInScreen((const char *)&unk_453A40, 130730);
 }
 
@@ -308,7 +430,7 @@ int drawLoanShark()
     v8 = &v13;
     do
     {
-      v9 = *((BYTE *)v8 + 1);
+      v9 = *((int8*)v8 + 1);
       v8 = (char *)v8 + 1;
     }
     while ( v9 );
@@ -368,19 +490,31 @@ int drawBlackMarketElement0()
   {
     drawImageWithPosition2((int)maret1eBpk, 96, 96, (int)((char *)screenBuffer + 161936));
     getBlackMarketElementText(0);
-    SDL_itoa(minesCost_462D40, DstBuf, 10);
-    v6 = 36;
+    _itoa(minesCost_462D40, DstBuf, 10);
+    v0 = strlen(DstBuf) + 1;
+
+    v1 = malloc(v0); //coste + el $
+//	v1 = &v5;
+    strcpy(v1, "$"); /* copy name into the new var */
+    strcat(v1, DstBuf);
+   
+    v3 = getBoxTextOffset(v1);//get small text size
+
+
+ //drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&letterSpacing_4458B0, v1, v3 + 214624);
+    drawInGamePrices(v1, v3 + 214416);//write small text
+    /*v6 = 36;
     v0 = strlen(DstBuf) + 1;
     v1 = &v5;
     do
     {
-      v2 = *((BYTE *)v1 + 1);
+      v2 = *((int8*)v1 + 1);
       v1 = (char *)v1 + 1;
     }
     while ( v2 );
     memcpy(v1, DstBuf, v0);
     v3 = getBoxTextOffset((const char *)&v6);
-    drawInGamePrices((const char *)&v6, v3 + 214416);
+    drawInGamePrices((const char *)&v6, v3 + 214416);*/
   }
   result = minesAvailable_45EFF0;
   if ( !minesAvailable_45EFF0 )
@@ -413,18 +547,29 @@ if (spikesAvailable_45EFF4 == 1)
 {
 	drawImageWithPosition2((int)((char *)maret1eBpk + 9216), 96, 96, (int)((char *)screenBuffer + 162040));
 	getBlackMarketElementText(1);
-	SDL_itoa(spikesCost_dword_462D44, DstBuf, 10);
-	v6 = 36;
+	_itoa(spikesCost_dword_462D44, DstBuf, 10);
+    v0 = strlen(DstBuf) + 1;
+
+    v1 = malloc(v0); //coste + el $
+//	v1 = &v5;
+    strcpy(v1, "$"); /* copy name into the new var */
+    strcat(v1, DstBuf);
+	/*v6 = 36;
 	v0 = strlen(DstBuf) + 1;
 	v1 = &v5;
 	do
 	{
-		v2 = *((BYTE *)v1 + 1);
+		v2 = *((int8*)v1 + 1);
 		v1 = (char *)v1 + 1;
 	} while (v2);
 	memcpy(v1, DstBuf, v0);
 	v3 = getBoxTextOffset((const char *)&v6);
-	drawInGamePrices((const char *)&v6, v3 + 214520);
+	drawInGamePrices((const char *)&v6, v3 + 214520);*/
+    v3 = getBoxTextOffset(v1);//get small text size
+
+
+ //drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&letterSpacing_4458B0, v1, v3 + 214624);
+    drawInGamePrices(v1, v3 + 214520);//write small text
 }
 result = spikesAvailable_45EFF4;
 if (!spikesAvailable_45EFF4)
@@ -446,18 +591,18 @@ int drawBlackMarketElement2()
 {
 	unsigned int v0; // eax@2
 	char *v1; // edi@2
-	char v2; // cl@3
+	//char v2; // cl@3
 	int v3; // eax@4
 	int result; // eax@5
-	char v5; // [sp-1h] [bp-29h]@2
-	__int16 v6; // [sp+0h] [bp-28h]@2
+	//char v5; // [sp-1h] [bp-29h]@2
+	//__int16 v6; // [sp+0h] [bp-28h]@2
 	char *DstBuf = malloc(100); // [sp+14h] [bp-14h]@2
 
 	if (rocketAvailable_45EFF8 == 1)
 	{
 		drawImageWithPosition2((int)((char *)maret1eBpk + 18432), 96, 96, (int)((char *)screenBuffer + 162144));
 		getBlackMarketElementText(2);
-		SDL_itoa(rocketCost_462D48, DstBuf, 10);
+		_itoa(rocketCost_462D48, DstBuf, 10);
 		//v6 = 36; // es el dolar $
 		v0 = strlen(DstBuf) + 1;
 
@@ -503,11 +648,11 @@ int drawBlackMarketElement3()
 //	int v2; // eax@1
 	unsigned int v3; // eax@19
 	char *v4; // edi@19
-	char v5; // cl@20
+//	char v5; // cl@20
 	int v6; // eax@21
 	int result; // eax@22
-	char v8; // [sp+Bh] [bp-29h]@19
-	__int16 v9; // [sp+Ch] [bp-28h]@19
+//	char v8; // [sp+Bh] [bp-29h]@19
+	//__int16 v9; // [sp+Ch] [bp-28h]@19
 	char *DstBuf = malloc(100); // [sp+14h] [bp-14h]@2
 
 	int maxDriverPoints = getMaxDriverPoints(driverId);
@@ -516,7 +661,7 @@ int drawBlackMarketElement3()
   {
     drawImageWithPosition2((int)((char *)maret1eBpk + 27648), 96, 96, (int)((char *)screenBuffer + 162248));
     getBlackMarketElementText(3);
-    SDL_itoa(sabotageCost_462D4C, DstBuf, 10);
+    _itoa(sabotageCost_462D4C, DstBuf, 10);
     v3 = strlen(DstBuf) + 1;
 
 	v4 = malloc(v3); //coste + el $
@@ -537,11 +682,11 @@ int drawBlackMarketElement3()
     else
     {
       createPopup(144, 114, 384, 119, 1);
-      writeTextInScreen(aNoSabotage_NoW, 79530);
+      writeTextInScreen(blackMarketMessages.noSabotageMessage.title, 79530);
       writeTextInScreen((const char *)&unk_4537C0, 89770);
-      writeTextInScreen(aWhat_YouCrazyM, 100010);
-      writeTextInScreen(aTouchesTheAdve, 110250);
-      writeTextInScreen(aMobileAndLives, 120490);
+      writeTextInScreen(blackMarketMessages.noSabotageMessage.line1, 100010);
+      writeTextInScreen(blackMarketMessages.noSabotageMessage.line2, 110250);
+      writeTextInScreen(blackMarketMessages.noSabotageMessage.line3, 120490);
       result = writeTextInScreen((const char *)&unk_453860, 130730);
     }
   }
@@ -554,17 +699,17 @@ int drawBlackMarketElement3()
 }
 
 //----- (00423350) --------------------------------------------------------
-int drawBlackMarketContinue()
+void drawBlackMarketContinue()
 {
   drawImageWithPosition2((int)bases45Bpk, 96, 96, (int)((char *)screenBuffer + 162352));
   createPopup(144, 114, 384, 119, 1);
-  writeTextInScreen(aContinue_2, 79530);
+  writeTextInScreen(blackMarketMessages.continueMessage.title, 79530);
   writeTextInScreen((const char *)&unk_454B70, 89770);
-  writeTextInScreen(aExitTheUndergr, 100010);
-  writeTextInScreen(aEnterTheRaceSi, 110250);
+  writeTextInScreen(blackMarketMessages.continueMessage.line1, 100010);
+  writeTextInScreen(blackMarketMessages.continueMessage.line2, 110250);
   writeTextInScreen((const char *)&unk_454BE8, 120490);
-  writeTextInScreen(aPressEscForP_1, 130730);
-  return drawMenuAnimation(432, 269, continueAnimCurrentFrame_4611D0, (int)contaniBpk, continueAnimFramesSize_4611D0);
+  writeTextInScreen(blackMarketMessages.continueMessage.line3, 130730);
+  drawMenuAnimation(432, 269, continueAnimCurrentFrame_4611D0, (int)contaniBpk, continueAnimFramesSize_4611D0);
 }
 // 4462A8: using guessed type int continueAnimFramesSize_4611D0[];
 // 4611D0: using guessed type int continueAnimCurrentFrame_4611D0;
@@ -579,35 +724,35 @@ void underGroundMenuLeft()
     case MINES:
       undergroundOptionSelected_dword_461278 = LOANSHARK;
       drawLoanShark();
-      drawBorder2(10, 243, 0x6Cu, 114);
+      removeBorder(10, 243, 0x6Cu, 114);
       drawBorder(10, 115, 108, 114);
       refreshAllScreen();
       break;
     case SPIKES:
       undergroundOptionSelected_dword_461278 = MINES;
       drawBlackMarketElement0();
-      drawBorder2(114, 243, 0x6Cu, 114);
+      removeBorder(114, 243, 0x6Cu, 114);
       drawBorder(10, 243, 108, 114);
       refreshAllScreen();
       break;
     case ROCKET:
       undergroundOptionSelected_dword_461278 = SPIKES;
       drawBlackMarketElement1();
-      drawBorder2(218, 243, 0x6Cu, 114);
+      removeBorder(218, 243, 0x6Cu, 114);
       drawBorder(114, 243, 108, 114);
       refreshAllScreen();
       break;
     case SABOTAGE:
       undergroundOptionSelected_dword_461278 = ROCKET;
       drawBlackMarketElement2();
-      drawBorder2(322, 243, 0x6Cu, 114);
+      removeBorder(322, 243, 0x6Cu, 114);
       drawBorder(218, 243, 108, 114);
       refreshAllScreen();
       break;
     case CONTINUE:
       undergroundOptionSelected_dword_461278 = SABOTAGE;
       drawBlackMarketElement3();
-      drawBorder2(426, 243, 0x6Cu, 114);
+      removeBorder(426, 243, 0x6Cu, 114);
       drawBorder(322, 243, 108, 114);
       refreshAllScreen();
       break;
@@ -629,28 +774,28 @@ void underGroundMenuRight()
     case MINES:
       undergroundOptionSelected_dword_461278 = SPIKES;
       drawBlackMarketElement1();
-      drawBorder2(10, 243, 0x6Cu, 114);
+      removeBorder(10, 243, 0x6Cu, 114);
       drawBorder(114, 243, 108, 114);
       refreshAllScreen();
       break;
     case SPIKES:
       undergroundOptionSelected_dword_461278 = ROCKET;
       drawBlackMarketElement2();
-      drawBorder2(114, 243, 0x6Cu, 114);
+      removeBorder(114, 243, 0x6Cu, 114);
       drawBorder(218, 243, 108, 114);
       refreshAllScreen();
       break;
     case ROCKET:
       undergroundOptionSelected_dword_461278 = SABOTAGE;
       drawBlackMarketElement3();
-      drawBorder2(218, 243, 0x6Cu, 114);
+      removeBorder(218, 243, 0x6Cu, 114);
       drawBorder(322, 243, 108, 114);
       refreshAllScreen();
       break;
     case SABOTAGE:
-      undergroundOptionSelected_dword_461278 = SABOTAGE;
+      undergroundOptionSelected_dword_461278 = CONTINUE;
       drawBlackMarketContinue();
-      drawBorder2(322, 243, 0x6Cu, 114);
+      removeBorder(322, 243, 0x6Cu, 114);
       drawBorder(426, 243, 108, 114);
       refreshAllScreen();
       break;
@@ -683,10 +828,11 @@ int reInitUnderGroundMarketStock()
 }
 
 //----- (004237A0) --------------------------------------------------------
-int drawBlackMarketScreen()
+void drawBlackMarketScreen()
 {
   void *v1; // [sp-8h] [bp-10h]@2
   int v2; // [sp+4h] [bp-4h]@2
+
 
   memcpy((char *)screenBuffer + 58880, (char *)graphicsGeneral.menubg5Bpk + 58880, 0x2A580u);
   if ( isMultiplayerGame )
@@ -707,7 +853,7 @@ int drawBlackMarketScreen()
   drawBlackMarketElement1();
   drawBlackMarketElement2();
   drawBlackMarketElement3();
-  return drawBlackMarketContinue();
+  drawBlackMarketContinue();
 }
 
 //----- (004360B0) --------------------------------------------------------
@@ -730,8 +876,8 @@ void  underGroundMenuEnter(void *this)
   void *v15; // [sp+0h] [bp-4h]@1
 
   v15 = this;
-  v1 = driverId;
-  v2 = 0;
+  //v1 = driverId;
+  //v2 = 0;
   v3 = 5 - drivers[driverId].carType;
   if ( !drivers[driverId].carType)
     v3 = 4;
@@ -784,7 +930,7 @@ void  underGroundMenuEnter(void *this)
           refreshAllScreen();
         }
       }
-      v5 =  driverId;
+      //v5 =  driverId;
       v6 = drivers[driverId].loanRaces;
       if ( v6 != -1 )
       {
@@ -809,7 +955,7 @@ void  underGroundMenuEnter(void *this)
         else
         {
           loadMenuSoundEffect(1u, 29, 0, configuration.effectsVolume, dword_4451A4);
-          v9 = driverId;
+          //v9 = driverId;
 		  drivers[driverId].money -= v8;
 		  drivers[driverId].loanRaces = -1;
 		  drivers[driverId].loanType = NO_LOAN;
@@ -929,7 +1075,7 @@ void enterBlackMarketScreen()
 {
 //  int v0; // eax@1
 //  signed int v1; // edx@1
-  int v2; // ecx@1
+//  int v2; // ecx@1
   int v3; // edi@21
   signed int v4; // ebp@21
   int v5; // eax@23
@@ -948,6 +1094,7 @@ void enterBlackMarketScreen()
   int v18; // ST38_4@30
   int v19; // eax@30
   signed int v20; // ebp@32
+  signed int v20bis; // ebp@32
   int v21; // edi@35
   int v22; // eax@38
   int j; // ecx@38
@@ -990,9 +1137,17 @@ void enterBlackMarketScreen()
   signed int v60; // [sp+10h] [bp-8h]@35
   signed int v61; // [sp+10h] [bp-8h]@114
   signed int v62; // [sp+14h] [bp-4h]@52
-
- 
   int maxDriverPoints = getMaxDriverPoints(driverId);
+ 
+  initBlackMarketMessages();
+  if (getModIntEntry("FEATURE_SKIP_BLACK_MARKET_SCREEN", 0) == 1) {
+      if (drivers[driverId].rank > 1)
+          selectRaceScreen();
+      else
+          adversaryPreviewScreen((const char**)(108 * driverId));
+  }
+
+  
   if ( !isMultiplayerGame && drivers[driverId].points > maxDriverPoints )
     sabotageAvailable_45EFFC = 0;
   sub_4224E0();
@@ -1063,6 +1218,7 @@ void enterBlackMarketScreen()
   sub_4224E0();
   v60 = 0;
   v21 = 0;
+  v20bis = 50;
   do
   {
     waitWithRefresh();
@@ -1081,7 +1237,7 @@ void enterBlackMarketScreen()
       drawCursor(164, 321);
     v24 = 0;
     //v25 = (signed int)dword_45FC44;
-	v25 = 0;
+    v25 = 0;
     do
     {
       v26 = (convertColorToPaletteColor((palette1[v25+2]), v21) + 0x8000) >> 16;
@@ -1113,10 +1269,11 @@ void enterBlackMarketScreen()
     }
     while ( v30 < maxPaletteEntries );
     v20 += 1310;
+    v20bis--;
     v21 += 0x20000;
     ++v60;
   }
-  while ( v20 < 65500 );
+  while (v20bis >=0);
   if ( showUndergroundPopup_456B78 )
   {
     drawPopupCursor_42C780 ();
@@ -1196,7 +1353,7 @@ void enterBlackMarketScreen()
           loadMenuSoundEffect(v34, 26, 0, configuration.effectsVolume, dword_445198);
           undergroundOptionSelected_dword_461278 = LOANSHARK;
           drawLoanShark();
-          drawBorder2(10, 243, 0x6Cu, 114);
+          removeBorder(10, 243, 0x6Cu, 114);
           drawBorder(10, 115, 108, 114);
           refreshAllScreen();
         }
@@ -1208,7 +1365,7 @@ void enterBlackMarketScreen()
           loadMenuSoundEffect(v34, 26, 0, configuration.effectsVolume, dword_445198);
           undergroundOptionSelected_dword_461278 = MINES;
           drawBlackMarketElement0();
-          drawBorder2(10, 115, 0x6Cu, 114);
+          removeBorder(10, 115, 0x6Cu, 114);
           drawBorder(10, 243, 108, 114);
           refreshAllScreen();
         }
@@ -1250,13 +1407,13 @@ void enterBlackMarketScreen()
         ++v40;
       }
       while ( v41 < maxPaletteEntries );
-      drawBorder2(426, 243, 0x6Cu, 114);
-      drawBorder2(10, 115, 0x6Cu, 114);
-      drawBorder2(10, 243, 0x6Cu, 114);
-      drawBorder2(114, 243, 0x6Cu, 114);
-      drawBorder2(218, 243, 0x6Cu, 114);
-      drawBorder2(322, 243, 0x6Cu, 114);
-      if ( undergroundOptionSelected_dword_461278 = LOANSHARK )
+      removeBorder(426, 243, 0x6Cu, 114);
+      removeBorder(10, 115, 0x6Cu, 114);
+      removeBorder(10, 243, 0x6Cu, 114);
+      removeBorder(114, 243, 0x6Cu, 114);
+      removeBorder(218, 243, 0x6Cu, 114);
+      removeBorder(322, 243, 0x6Cu, 114);
+      if ( undergroundOptionSelected_dword_461278 == LOANSHARK )
       {
         drawBorder(10, 115, 108, 114);
         drawLoanShark();

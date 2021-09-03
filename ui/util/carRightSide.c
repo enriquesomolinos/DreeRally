@@ -59,6 +59,22 @@ int drawCarRightSide()
     char* DstBuf = malloc(20); // [sp+34h] [bp-14h]@
     char* Str = malloc(20); // [sp+20h] [bp-28h]@1
     char* moneyCount = malloc(20);
+    int v444; // eax@9
+    char* v544; // ecx@9
+    signed int v644; // edx@9
+    int v744; // eax@9
+    float v844; // ST3C_4@9
+    float v944; // ST38_4@9
+    float v1044; // ST34_4@9
+    v444 = drivers[driverId].colour;
+    //v4 = dword_46086C[27 * driverId];
+    v544 = (char*)graphicsGeneral.copperPal + 2 * v444;
+    v644 = (unsigned __int8)v544[v444 + 2];
+    v744 = (int)&v544[v444];
+    v844 = (double)v644;
+    v944 = (double)*(BYTE*)(v744 + 1);
+    v1044 = (double)*(BYTE*)v744;
+    setPaletteValueWithFloats(v1044, v944, v844);
     drawImageWithPosition2((int)statbas7Bpk, 96, 224, (int)((char*)screenBuffer + 80544));
     drawImageWithPosition2(getSceneCarBpkById(drivers[driverId].carType), 96, 64, (int)((char*)screenBuffer + 90784));
     //drawImageWithPosition2((int)*(&scenecar1Bpk + dword_46085C[27 * driverId]), 96, 64, (int)((char *)screenBuffer + 90784));

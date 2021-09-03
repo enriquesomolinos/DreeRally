@@ -83,7 +83,9 @@ void   selectRaceWarningPopup(int a1)
   refreshAllScreen();
 }
 // 44518C: using guessed type int dword_44518C;
-// 4458B0: using guessed type char letterSpacing_4458B0;
+// 4458B0: using guessed type char 
+// 
+// ;
 // 45DC18: using guessed type int configuration.effectsVolume;
 
 //----- (00423F40) --------------------------------------------------------
@@ -369,7 +371,7 @@ void selectRaceScreen()
         if ( selectedRaceId > 0 )
         {
           loadMenuSoundEffect(1u, 25, 0, configuration.effectsVolume, dword_445194);
-          drawBorder2(160 * selectedRaceId + 22, 118, 0x94u, 132);
+          removeBorder(160 * selectedRaceId + 22, 118, 0x94u, 132);
           v5 = 160 * (selectedRaceId-- - 1) + 22;
           drawBorder(v5, 118, 148, 132);
           refreshAllScreen();
@@ -380,7 +382,7 @@ void selectRaceScreen()
         if ( selectedRaceId < 2 )
         {
           loadMenuSoundEffect(1u, 25, 0, configuration.effectsVolume, dword_445194);
-          drawBorder2(160 * selectedRaceId + 22, 118, 0x94u, 132);
+          removeBorder(160 * selectedRaceId + 22, 118, 0x94u, 132);
           v6 = 160 * (selectedRaceId++ + 1) + 22;
           drawBorder(v6, 118, 148, 132);
           refreshAllScreen();
@@ -795,7 +797,7 @@ void   addParticipantToRace(signed int a1)
 	 
 	 //* ((BYTE *)&word_461EB4 + race) = v14 + 1;
 	  participantsRace[race ] = v14 + 1;
-      SDL_itoa(drivers[v3].rank, &DstBuf, 10);
+      _itoa(drivers[v3].rank, &DstBuf, 10);
 	  //itoa(dword_460888[27 * v3], &DstBuf, 10);
       v35 = 0;
       if ( strlen(&DstBuf) < 2 )
@@ -824,7 +826,7 @@ void   addParticipantToRace(signed int a1)
      // *(_WORD *)v21 = 46;
 	  v24 = malloc(24);
 	  
-	  SDL_itoa(drivers[v3].rank, buffer, 10);
+      _itoa(drivers[v3].rank, buffer, 10);
 	  strcpy(v24, buffer);
 	  strcat(v24, ".");
 	  strcat(v24, drivers[v3].name);

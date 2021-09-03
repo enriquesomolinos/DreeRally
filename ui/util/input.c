@@ -125,7 +125,7 @@ signed int   readKeyboard(const char *a1, int a2, int a3, int a4, unsigned int a
   int v69; // [sp+38h] [bp-40h]@1
   int v70; // [sp+3Ch] [bp-3Ch]@5
   int v71; // [sp+40h] [bp-38h]@3
-  char v72[52]; // [sp+44h] [bp-34h]@1
+  char v72[100]; // [sp+44h] [bp-34h]@1
    int  a = 0;
   //aqui se definen las teclas validas
   memset(byte_45EEE0, 0, 0x100u);
@@ -402,6 +402,7 @@ signed int   readKeyboard(const char *a1, int a2, int a3, int a4, unsigned int a
         goto LABEL_66;
       case 0xE:                 //borrar
         v46 = v72;
+        v72[strlen(v72)  - 1] = '\0';
         do
           v47 = *v46++;
         while ( v47 );
@@ -488,6 +489,7 @@ LABEL_65:
           continue;
         if ( v16 != 1 )
           strcpy((char *)a1, v72);
+        
         return 1;
     }
   }

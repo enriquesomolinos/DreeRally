@@ -1,3 +1,15 @@
+#include "../ui/util/anim.h"
+typedef struct BlackMarketMessages {
+	ElementMessage sabotageMessage[1];
+	ElementMessage rocketMessage[1];
+	ElementMessage spikesMessage[1];
+	ElementMessage minesMessage[1];
+	Message outOfStockMessage;
+	Message continueMessage;
+	Message sharewareMessage;
+	Message noSabotageMessage;
+} BlackMarketMessages;
+
 typedef enum
 {
 	LOANSHARK = 0,
@@ -19,11 +31,11 @@ int drawBlackMarketElement0();
 int drawBlackMarketElement1();
 int drawBlackMarketElement2();
 int drawBlackMarketElement3();
-int drawBlackMarketContinue();
+void drawBlackMarketContinue();
 void underGroundMenuLeft();
 void underGroundMenuRight();
 int reInitUnderGroundMarketStock(void); // weak
-int drawBlackMarketScreen();
+void drawBlackMarketScreen();
 int loadAcceptedText();
 void  underGroundMenuEnter(void *);
 signed int setUndergroundMarketPrices();

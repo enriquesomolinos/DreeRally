@@ -21,9 +21,24 @@ int carAnimFrameSize_45FBA0[6*64] = { 0x6A7,0x6B5,0x6D3,0x6E1,0x6DE,0x6CA,0x6D6,
 									  0x6CC,0x6E0,0x70A,0x731,0x743,0x747,0x736,0x71F,0x722,0x6E7,0x6D9,0x679,0x64A,0x62D,0x61E,0x622,0x604,0x608,0x61B,0x629,0x647,0x651,0x660,0x672,0x673,0x673,0x66F,0x66B,0x655,0x623,0x606,0x604,0x622,0x621,0x62D,0x652,0x664,0x659,0x65E,0x653,0x65D,0x63B,0x653,0x63F,0x63D,0x63D,0x627,0x61A,0x60C,0x616,0x613,0x63C,0x658,0x6A9,0x6D1,0x701,0x71B,0x72A,0x720,0x71B,0x709,0x6F3,0x6DC,0x6C7,
 									  0x76B,0x757,0x76B,0x76C,0x77E,0x777,0x76B,0x77A,0x74F,0x756,0x760,0x72D,0x73A,0x722,0x710,0x708,0x703,0x6FA,0x6FA,0x6EF,0x6F8,0x6D9,0x6CE,0x6C8,0x6A5,0x6B1,0x68A,0x67E,0x64E,0x63D,0x61E,0x634,0x648,0x627,0x652,0x63C,0x64D,0x64A,0x65C,0x679,0x69B,0x6A5,0x6C1,0x6BD,0x6AA,0x6C7,0x6E8,0x701,0x702,0x715,0x710,0x743,0x74E,0x77C,0x770,0x781,0x798,0x7BA,0x7BA,0x7A4,0x792,0x75B,0x761,0x75D };
 //= { 0x6A7,0x6B5,0x6D3,0x6E1,0x6DE,0x6CA,0x6D6,0x6B5,0x6C6,0x6AD,0x6AA,0x6BB,0x6AB,0x6C0,0x6A5,0x6B6,0x6A2,0x6AD,0x6B1,0x6C3,0x6C3,0x6D1,0x6C1,0x6B8,0x6BC,0x6BB,0x6BD,0x6C3,0x6B8,0x6B0,0x695,0x668,0x694,0x697,0x6A7,0x6C6,0x6D5,0x6C1,0x6AD,0x686,0x697,0x681,0x689,0x68C,0x676,0x684,0x69F,0x69C,0x69E,0x6D7,0x6D2,0x6F8,0x702,0x6FF,0x701,0x70D,0x70D,0x6FE,0x710,0x6FE,0x6E4,0x6CC,0x690,0x689,0x676,0x694,0x6C0,0x71F,0x73C,0x759,0x76D,0x771,0x777,0x744,0x70D,0x705,0x709,0x6CA,0x681,0x65C,0x65C,0x676,0x695,0x68C,0x6A2,0x6B8,0x6AA,0x6AB,0x694,0x67B,0x66F,0x659,0x621,0x5E3,0x5A5,0x53F,0x51A,0x54D,0x579,0x5C4,0x5EF,0x616,0x617,0x63B,0x653,0x665,0x672,0x65D,0x670,0x658,0x65A,0x64D,0x65A,0x674,0x688,0x6C3,0x710,0x720,0x734,0x75D,0x7C4,0x7B8,0x7A8,0x787,0x765,0x736,0x6B5,0x67B,0x611,0x61E,0x642,0x690,0x6AD,0x6C3,0x6BB,0x6CB,0x6AB,0x6B5,0x693,0x67B,0x65D,0x65A,0x66B,0x664,0x64D,0x63F,0x63F,0x643,0x648,0x663,0x664,0x65C,0x651,0x639,0x61B,0x5E5,0x5E1,0x5CE,0x59A,0x566,0x580,0x5B4,0x5CA,0x5D8,0x5E3,0x5D6,0x5C2,0x5BE,0x5E1,0x5DF,0x5F2,0x5F5,0x5E4,0x61A,0x631,0x621,0x63D,0x660,0x673,0x66B,0x66E,0x6A2,0x6B1,0x6A6,0x69E,0x68A,0x6A7,0x697,0x6A0,0x660,0x632,0x5F7,0x660,0x64A,0x673,0x697,0x6D9,0x715,0x726,0x710,0x701,0x6D7,0x6B6,0x66F,0x64D,0x634,0x63C,0x629,0x62D,0x637,0x644,0x63D,0x642,0x64F,0x63B,0x623,0x61E,0x5FA,0x5C9,0x5A9,0x598,0x566,0x530,0x4F2,0x4ED,0x505,0x545,0x55D,0x59A,0x5BB,0x5D8,0x5DA,0x5F5,0x610,0x623,0x630,0x626,0x616,0x629,0x629,0x62E,0x62E,0x658,0x63F,0x676,0x690,0x6D6,0x6E9,0x705,0x702,0x715,0x717,0x6FA,0x6C3,0x67F,0x670,0x6CC,0x6E0,0x70A,0x731,0x743,0x747,0x736,0x71F,0x722,0x6E7,0x6D9,0x679,0x64A,0x62D,0x61E,0x622,0x604,0x608,0x61B,0x629,0x647,0x651,0x660,0x672,0x673,0x673,0x66F,0x66B,0x655,0x623,0x606,0x604,0x622,0x621,0x62D,0x652,0x664,0x659,0x65E,0x653,0x65D,0x63B,0x653,0x63F,0x63D,0x63D,0x627,0x61A,0x60C,0x616,0x613,0x63C,0x658,0x6A9,0x6D1,0x701,0x71B,0x72A,0x720,0x71B,0x709,0x6F3,0x6DC,0x6C7,0x76B,0x757,0x76B,0x76C,0x77E,0x777,0x76B,0x77A,0x74F,0x756,0x760,0x72D,0x73A,0x722,0x710,0x708,0x703,0x6FA,0x6FA,0x6EF,0x6F8,0x6D9,0x6CE,0x6C8,0x6A5,0x6B1,0x68A,0x67E,0x64E,0x63D,0x61E,0x634,0x648,0x627,0x652,0x63C,0x64D,0x64A,0x65C,0x679,0x69B,0x6A5,0x6C1,0x6BD,0x6AA,0x6C7,0x6E8,0x701,0x702,0x715,0x710,0x743,0x74E,0x77C,0x770,0x781,0x798,0x7BA,0x7BA,0x7A4,0x792,0x75B,0x761,0x75D };
-int engineAnimFrameSize_445F68[] = {0x6b4,0x6b1,0x6bc,0x6b2,0x6a5,0x6bf,0x6a6,0x6b2,0x6b2,0x6c8,0x6cb,0x6e0,0x6d9,0x6ef,0x6cc,0x6c3,0x6c1,0x6d2,0x6ce,0x6de,0x6d1,0x6b2,0x6b2,0x6b6,0x75d,0x76d,0x76d,0x771,0x76d,0x77b,0x76c,0x764,0x74e,0x73c,0x731,0x739,0x71b,0x701,0x710,0x709,0x70c,0x71b,0x71e,0x72a,0x740,0x756,0x73f,0x760,0x800,0x7e8,0x7c7,0x7b5,0x79f,0x7a3,0x768,0x76b,0x764,0x752,0x755,0x74f,0x74c,0x74a,0x747,0x752,0x747,0x747,0x759,0x762,0x785,0x7a3,0x7bc,0x7e4,0x93e,0x92c,0x92c,0x923,0x93b,0x91e,0x915,0x902,0x8fc,0x8e9,0x8e1,0x8cb,0x8c5,0x8c0,0x8bd,0x8d0,0x8d6,0x8cc,0x8d8,0x8e9,0x908,0x90a,0x91e,0x929 }; // weak
+int engineAnimFrameSize_445F68[] = {0x6b4,0x6b1,0x6bc,0x6b2,0x6a5,0x6bf,0x6a6,0x6b2,0x6b2,0x6c8,
+	0x6cb,0x6e0,0x6d9,0x6ef,0x6cc,0x6c3,0x6c1,0x6d2,0x6ce,0x6de,
+	0x6d1,0x6b2,0x6b2,0x6b6,0x75d,0x76d,0x76d,0x771,0x76d,0x77b,
+	0x76c,0x764,0x74e,0x73c,0x731,0x739,0x71b,0x701,0x710,0x709,
+	0x70c,0x71b,0x71e,0x72a,0x740,0x756,0x73f,0x760,0x800,0x7e8,
+	0x7c7,0x7b5,0x79f,0x7a3,0x768,0x76b,0x764,0x752,0x755,0x74f,
+	0x74c,0x74a,0x747,0x752,0x747,0x747,0x759,0x762,0x785,0x7a3,
+	0x7bc,0x7e4,0x93e,0x92c,0x92c,0x923,0x93b,0x91e,0x915,0x902,
+	0x8fc,0x8e9,0x8e1,0x8cb,0x8c5,0x8c0,0x8bd,0x8d0,0x8d6,0x8cc,
+	0x8d8,0x8e9,0x908,0x90a,0x91e,0x929 }; // weak
 int tireAnimFrameSize_4460E8[] = {0x6c3,0x6c1,0x6c3,0x6c1,0x6c3,0x6bd,0x6bc,0x6ce,0x6bc,0x6d2,0x6c0,0x6bc,0x6e4,0x6e9,0x6e2,0x6ed,0x6e9,0x6eb,0x6ef,0x6dd,0x6d3,0x6e1,0x6e4,0x6e4,0x72e,0x750,0x734,0x74f,0x73c,0x747,0x74b,0x745,0x738,0x741,0x74c,0x74b,0x7df,0x7df,0x7f1,0x7f7,0x7e9,0x7f3,0x7ea,0x7ec,0x7f3,0x802,0x7f0,0x7e1 }; // weak
-int armourAnimFrameSize_4461A8[] = {0x64e,0x637,0x629,0x62e,0x61c,0x60f,0x604,0x5e0,0x5ef,0x5f2,0x5e4,0x5ee,0x5e0,0x5e3,0x5cf,0x5cb,0x705,0x713,0x718,0x705,0x701,0x6ec,0x6ec,0x6ec,0x6f3,0x6f8,0x6d3,0x6ce,0x6d3,0x6ad,0x681,0x652,0x77e,0x7ad,0x7c4,0x7c7,0x7ce,0x7e1,0x7cb,0x7c8,0x7c3,0x7c8,0x7a4,0x786,0x75b,0x747,0x6e7,0x6ec,0x7d2,0xcf,0x7e9,0x7d9,0x7d9,0x7d0,0x799,0x787,0x75b,0x782,0x768,0x74a,0x717,0x72f,0x715,0x6eb }; // weak
+int armourAnimFrameSize_4461A8[] = {0x64e,0x637,0x629,0x62e,0x61c,0x60f,0x604,0x5e0,0x5ef,0x5f2,
+	0x5e4,0x5ee,0x5e0,0x5e3,0x5cf,0x5cb,0x705,0x713,0x718,0x705,
+	0x701,0x6ec,0x6ec,0x6ec,0x6f3,0x6f8,0x6d3,0x6ce,0x6d3,0x6ad,
+	0x681,0x652,0x77e,0x7ad,0x7c4,0x7c7,0x7ce,0x7e1,0x7cb,0x7c8,
+	0x7c3,0x7c8,0x7a4,0x786,0x75b,0x747,0x6e7,0x6ec,0x7d2,0x7cf,
+	0x7e9,0x7d9,0x7d9,0x7d0,0x799,0x787,0x75b,0x782,0x768,0x74a,
+	0x717,0x72f,0x715,0x6eb }; // weak
 int continueAnimFramesSize_4611D0[] = { 0x602,0x577,0x622,0x613,0x608,0x601,0x5ee,0x5dc,0x5d5,0x5dc,0x5da,0x5ec,0x5f7,0x5fd,0x60c,0x651,0x639,0x62e,0x61e,0x630,0x627,0x629,0x61b }; // weak
 int repairAnimFrameSize_446308[] =    {0x5b3,0x5bb,0x5aa,0x5ad,0x598,0x597,0x5a9,0x593,0x5a5,0x5b0,0x5aa,0x593,0x597,0x580,0x580,0x5a9,0x5bb,0x5b8,0x5b3,0x5bf,0x5bb,0x5a9,0x9d,0x5a3}; // weak
 
@@ -130,6 +145,17 @@ char unk_445928[10];
 ShopMessages shopMessages;
 
 ShopMessages initShopMessages(){
+	shopMessages.continueMessage.title = "[Continue";
+	shopMessages.continueMessage.line1 = "Exit the Shop and enter the";
+	shopMessages.continueMessage.line2 = "Underground Market.";
+	shopMessages.continueMessage.line3 = "Press [Esc{ for previous menu";
+
+	shopMessages.continueMessageNoWeapons.title = "[Continue";
+	shopMessages.continueMessageNoWeapons.line1 = "Exit the Shop and enter the Race";
+	shopMessages.continueMessageNoWeapons.line2 = "Sign-Up.";
+	shopMessages.continueMessageNoWeapons.line3 = "Press [Esc{ for previous menu";
+
+	
 	shopMessages.carMessage[0].infoMessage.title="[Vagabond - Speed 55 mph";
 	shopMessages.carMessage[0].infoMessage.line1="Speed can be boosted to [60{ mph,";
 	shopMessages.carMessage[0].infoMessage.line2="A single revolver. Only [2{ tire";
@@ -143,7 +169,7 @@ ShopMessages initShopMessages(){
 
 	shopMessages.carMessage[1].infoMessage.title="[Dervish - Speed 65 mph";
 	shopMessages.carMessage[1].infoMessage.line1="Can dance. Speed can be boosted";
-	shopMessages.carMessage[1].infoMessage.line2="to [75{ mph, small guns. Only [2{";
+	shopMessages.carMessage[1].infoMessage.line2="to [75{ mph. Small guns. Only [2{";
 	shopMessages.carMessage[1].infoMessage.line3="tire and armor upgrades.";
 
 	shopMessages.carMessage[1].boughMessage.title="[Dervish bought";
@@ -301,77 +327,51 @@ ShopMessages initShopMessages(){
 	shopMessages.armorMessageNoMoreUpgrades.line3="can carry to any road battle."; 
 
 
-	shopMessages.engineMessage[0].infoMessage.title="[Trackmaster 155";
-	shopMessages.engineMessage[0].infoMessage.line1="These wheels will let you do some";
-	shopMessages.engineMessage[0].infoMessage.line2="rapid fire cornerings on that";
-	shopMessages.engineMessage[0].infoMessage.line3="shimmering silver street.";
+	shopMessages.engineMessage[0].infoMessage.title="[4 cylinder motor - Speed: 145 mph";
+	shopMessages.engineMessage[0].infoMessage.line1="Sick of hearing your old spirit-";
+	shopMessages.engineMessage[0].infoMessage.line2="burner moan in constant over-rev?";
+	shopMessages.engineMessage[0].infoMessage.line3="This motor is the sweet solution.";
 
-	shopMessages.engineMessage[0].boughMessage.title="[Trackmaster 155 bought";
-	shopMessages.engineMessage[0].boughMessage.line1="Warp 9, Captain. No problems with"; // weak
-	shopMessages.engineMessage[0].boughMessage.line2="traction now. The finish line,"; // weak
-	shopMessages.engineMessage[0].boughMessage.line3="that extra edge you crave.";
+	shopMessages.engineMessage[0].boughMessage.title="[4 cylinder motor installed";
+	shopMessages.engineMessage[0].boughMessage.line1="This engine genie will let you"; // weak
+	shopMessages.engineMessage[0].boughMessage.line2="win. It will grant your boy racer"; // weak
+	shopMessages.engineMessage[0].boughMessage.line3="wishes.";
 
-	shopMessages.engineMessage[1].infoMessage.title="[Roadrunner NS 175";
-	shopMessages.engineMessage[1].infoMessage.line1="With these fat tires, you'll shoot";
-	shopMessages.engineMessage[1].infoMessage.line2="from the starting-line like a";
-	shopMessages.engineMessage[1].infoMessage.line3="blood lusting bullets";
+	shopMessages.engineMessage[1].infoMessage.title="[Enhanced 4 cylinder - speed: 150 mph";
+	shopMessages.engineMessage[1].infoMessage.line1="Feeding the beast with speed. Got";
+	shopMessages.engineMessage[1].infoMessage.line2="an unbearable need for speed? This";
+	shopMessages.engineMessage[1].infoMessage.line3="is the remedy.";
 
-	shopMessages.engineMessage[1].boughMessage.title="[Roadrunner NS 175 bought";
-	shopMessages.engineMessage[1].boughMessage.line1="On these wheels, your vehice";
-	shopMessages.engineMessage[1].boughMessage.line2="starts like a nuclear blast, and";
-	shopMessages.engineMessage[1].boughMessage.line3="stops you like a cardiac arrest.";
+	shopMessages.engineMessage[1].boughMessage.title="[Enhanced 4 cylinder installed";
+	shopMessages.engineMessage[1].boughMessage.line1="Now any bitter regrets are in the";
+	shopMessages.engineMessage[1].boughMessage.line2="plast, just blurred, sweet street-";
+	shopMessages.engineMessage[1].boughMessage.line3="lights speeding past fast.";
 
-	shopMessages.engineMessage[2].infoMessage.title="[Slidestop 200";
-	shopMessages.engineMessage[2].infoMessage.line1="These fat bottomed tires'll kiss";
-	shopMessages.engineMessage[2].infoMessage.line2="the rad like crazy, they just";
-	shopMessages.engineMessage[2].infoMessage.line3="can't get enoguht.They're hot.";
+	shopMessages.engineMessage[2].infoMessage.title="[V6 Injection - Speed: 155 mph";
+	shopMessages.engineMessage[2].infoMessage.line1="With this babe installed, be your";
+	shopMessages.engineMessage[2].infoMessage.line2="destination hell or hallelujah,";
+	shopMessages.engineMessage[2].infoMessage.line3="you'll get there so fast, so fast.";
 
-	shopMessages.engineMessage[2].boughMessage.title="[Slidestop 200 bought";
-	shopMessages.engineMessage[2].boughMessage.line1="Now fast talk to that asphalt.";
-	shopMessages.engineMessage[2].boughMessage.line2="motormouth. Time to make some";
-	shopMessages.engineMessage[2].boughMessage.line3="beautiful automobile poetry.";
+	shopMessages.engineMessage[2].boughMessage.title="[V6 Injection motor installed";
+	shopMessages.engineMessage[2].boughMessage.line1="If speeding is the 8th deadly sin,";
+	shopMessages.engineMessage[2].boughMessage.line2="with this babe under your hood,";
+	shopMessages.engineMessage[2].boughMessage.line3="your are now past redemption.";
 
 	
-	shopMessages.engineMessage[3].infoMessage.title="[Race-X230";
-	shopMessages.engineMessage[3].infoMessage.line1="Zorro's Zs were nothing. Carve";
-	shopMessages.engineMessage[3].infoMessage.line2="your whole signature, to the";
-	shopMessages.engineMessage[3].infoMessage.line3="rainbow-oiled road, doing 160.";
+	shopMessages.engineMessage[3].infoMessage.title="[V8 Turbo Injection - Speed 160 mph";
+	shopMessages.engineMessage[3].infoMessage.line1="Definition of nirvana: riding that";
+	shopMessages.engineMessage[3].infoMessage.line2="race with V8 TI. Next stop: no";
+	shopMessages.engineMessage[3].infoMessage.line3="stop, never stop.";
 
-	shopMessages.engineMessage[3].boughMessage.title="[Racer-X230 bought";
-	shopMessages.engineMessage[3].boughMessage.line1="Smart move, motorman. Now get out";
-	shopMessages.engineMessage[3].boughMessage.line2="there, and do soma dashing, dare-";
-	shopMessages.engineMessage[3].boughMessage.line3="devilish damage.";
-	/*
-[Enhanced 4 cylinder - Speed: 150 mph
-Feeding the beast with speed, got
-an unbearable need for speed? This
-is the remedy
+	shopMessages.engineMessage[3].boughMessage.title="[V8 Turbo Injection";
+	shopMessages.engineMessage[3].boughMessage.line1="Gleaming pistons pumping in chorus";
+	shopMessages.engineMessage[3].boughMessage.line2="with your hungry heart. This sweet";
+	shopMessages.engineMessage[3].boughMessage.line3="symbiosis can cause addiction";
 
-[Enhanced 4 cylinder installed
-Now any bitter regrets are in the
-past, just blurred, sweet street-
-lights speeding past fast.
-
-[V6 Injection - Speed 155 mph
-With this babe installed, be your
-destination hell or hallelujah,
-you'll get there so fast, so fast.
-
-[V6 Injection motor installed
-If speeding is the 8th deadly sin,
-with this babe under your hood,
-you are now past redemption.
-
-[V8 Turbo Injection - Speed: 160 mph
-Definition of nirvana: riding that
-race with V8 TI. Next stop: no
-stop, never stop.
-
-[V8 Turbo Injection
-Gleaming pistons pumping in chorus
-with your hungry heart. This sweet
-symbiosis can cause addiction.*/
-
+	shopMessages.engineMessageNoMoreUpgrades.title = "[NO MORE ENGINE UPGRADES";
+	shopMessages.engineMessageNoMoreUpgrades.line1 = "You got the most beastly motor";
+	shopMessages.engineMessageNoMoreUpgrades.line2 = "monster this vehicle can carry.";
+	shopMessages.engineMessageNoMoreUpgrades.line3 = "Hear its powerfull & sublime sound.";
 	
 	shopMessages.tireMessage[0].infoMessage.title="[Trackmaster 155";
 	shopMessages.tireMessage[0].infoMessage.line1="These wheels will let you do some";
@@ -493,13 +493,13 @@ int reloadCarAnimation2()
 {
   unsigned int v0; // eax@1
   char *v1; // edi@1
-  char v2; // cl@2
-  int v3; // eax@3
+//  char v2; // cl@2
+//  int v3; // eax@3
   const char *v4; // edx@4
   signed int v6; // [sp-4h] [bp-2Ch]@3
 //  int v7; // [sp-4h] [bp-2Ch]@4
 //  int v8; // [sp-4h] [bp-2Ch]@5
-  __int16 v9; // [sp+0h] [bp-28h]@1
+//  __int16 v9; // [sp+0h] [bp-28h]@1
   char *DstBuf=malloc(100); // [sp+14h] [bp-14h]@1
 
   drawImageWithPosition2((int)carbas2Bpk, 96, 96, (int)((char *)screenBuffer + 80016));
@@ -550,13 +550,13 @@ int reloadEngineAnimation2()
 {
   int v0; // ecx@1
   int v1; // edx@1
-  unsigned int v2; // eax@2
+//  unsigned int v2; // eax@2
   char *v3; // edi@2
-  char v4; // cl@3
+//  char v4; // cl@3
   int v5; // eax@4
   int result; // eax@4
-  char v7; // [sp-1h] [bp-29h]@2
-  __int16 v8; // [sp+0h] [bp-28h]@2
+//  char v7; // [sp-1h] [bp-29h]@2
+//  __int16 v8; // [sp+0h] [bp-28h]@2
   char *DstBuf =malloc(100); // [sp+14h] [bp-14h]@2
 
   drawImageWithPosition2((int)bases41Bpk, 96, 96, (int)((char *)screenBuffer + 161936));
@@ -566,11 +566,11 @@ int reloadEngineAnimation2()
   {
     drawImageWithPosition2((int)((char *)maxi1fBpk + 6144 * v0 - 6144), 96, 64, (int)((char *)screenBuffer + 172176));
     createPopup(144, 114, 384, 119, 1);
-    writeTextInScreen(aNoMoreEngineUp, 79530);
+    writeTextInScreen(shopMessages.engineMessageNoMoreUpgrades.title, 79530);
     writeTextInScreen((const char *)&unk_450B10, 89770);
-    writeTextInScreen(aYouVeGotTheMos, 100010);
-    writeTextInScreen(aMonsterThisVeh, 110250);
-    writeTextInScreen(aHearItsPowerfu, 120490);
+    writeTextInScreen(shopMessages.engineMessageNoMoreUpgrades.line1, 100010);
+    writeTextInScreen(shopMessages.engineMessageNoMoreUpgrades.line2, 110250);
+    writeTextInScreen(shopMessages.engineMessageNoMoreUpgrades.line3, 120490);
     result = writeTextInScreen((const char *)&unk_450BB0, 130730);
   }
   else
@@ -594,13 +594,13 @@ strcpy(v3,"$"); /* copy name into the new var */
   
     drawInGamePrices(v3, v5 + 214416);
     createPopup(144, 114, 384, 119, 1);
-    writeTextInScreen(&a4CylinderMotor[1760 * drivers[driverId].carType + 240 * drivers[driverId].engine], 79530);
+    writeTextInScreen(shopMessages.engineMessage[drivers[driverId].engine].infoMessage.title, 79530);
     writeTextInScreen(
       (const char *)&unk_44E258 + 1760 * drivers[driverId].carType + 240 * drivers[driverId].engine,
       89770);
-    writeTextInScreen(&aSickOfHearingY[1760 * drivers[driverId].carType + 240 * drivers[driverId].engine], 100010);
-    writeTextInScreen(&aBurnerMoanInCo[1760 * drivers[driverId].carType + 240 * drivers[driverId].engine], 110250);
-    writeTextInScreen(&aThisMotorIsThe[1760 * drivers[driverId].carType + 240 * drivers[driverId].engine], 120490);
+    writeTextInScreen(shopMessages.engineMessage[drivers[driverId].engine].infoMessage.line1, 100010);
+    writeTextInScreen(shopMessages.engineMessage[drivers[driverId].engine].infoMessage.line2, 110250);
+    writeTextInScreen(shopMessages.engineMessage[drivers[driverId].engine].infoMessage.line3, 120490);
     result = writeTextInScreen(
                (const char *)&unk_44E2F8
              + 1760 * drivers[driverId].carType
@@ -617,11 +617,11 @@ int reloadTireAnimation2()
   int v1; // edx@1
   unsigned int v2; // eax@2
   char *v3; // edi@2
-  char v4; // cl@3
+//  char v4; // cl@3
   int v5; // eax@4
   int result; // eax@4
-  char v7; // [sp-1h] [bp-29h]@2
-  __int16 v8; // [sp+0h] [bp-28h]@2
+//  char v7; // [sp-1h] [bp-29h]@2
+//  __int16 v8; // [sp+0h] [bp-28h]@2
   char *DstBuf=malloc(100); // [sp+14h] [bp-14h]@2
 
   drawImageWithPosition2((int)bases42Bpk, 96, 96, (int)((char *)screenBuffer + 162040));
@@ -673,13 +673,13 @@ int reloadArmourAnimation2()
 {
   int v0; // ecx@1
   int v1; // edx@1
-  unsigned int v2; // eax@2
+//  unsigned int v2; // eax@2
   char *v3; // edi@2
-  char v4; // cl@3
+//  char v4; // cl@3
   int v5; // eax@4
   int result; // eax@4
-  char v7; // [sp-1h] [bp-29h]@2
-  __int16 v8; // [sp+0h] [bp-28h]@2
+//  char v7; // [sp-1h] [bp-29h]@2
+//  __int16 v8; // [sp+0h] [bp-28h]@2
   char *DstBuf=malloc(100); // [sp+14h] [bp-14h]@2
 
   drawImageWithPosition2((int)bases43Bpk, 96, 96, (int)((char *)screenBuffer + 162144));
@@ -737,7 +737,7 @@ int reloadRepairAnimation()
   unsigned int v5; // eax@5
   char *v6; // edx@5
   void *v7; // edi@5
-  char v8; // cl@6
+//  char v8; // cl@6
   int v9; // eax@8
   int v10; // eax@8
   char v11; // cl@11
@@ -768,7 +768,7 @@ int reloadRepairAnimation()
     v7 = &v20;
     do
     {
-      v11 = *((BYTE *)v7 + 1);
+      v11 = *((int8*)v7 + 1);
       v7 = (char *)v7 + 1;
     }
     while ( v11 );
@@ -849,21 +849,21 @@ int reloadContinueAnimation()
   undergroundPricesSet_456B84 = v0;
   if ( useWeapons && v0 )
   {
-    writeTextInScreen(aContinue, 79530);
+    writeTextInScreen(shopMessages.continueMessage.title, 79530);
     writeTextInScreen((const char *)&unk_454A80, 89770);
-    writeTextInScreen(aExitTheShopAnd, 100010);
-    writeTextInScreen(aUndergroundMar, 110250);
+	writeTextInScreen(shopMessages.continueMessage.line1, 100010);
+    writeTextInScreen(shopMessages.continueMessage.line2, 110250);
     writeTextInScreen((const char *)&unk_454AF8, 120490);
-    v2 = aPressEscForPre;
+    v2 = shopMessages.continueMessage.line3;
   }
   else
   {
-    writeTextInScreen(aContinue_0, 79530);
+    writeTextInScreen(shopMessages.continueMessageNoWeapons.title, 79530);
     writeTextInScreen((const char *)&unk_454990, 89770);
-    writeTextInScreen(aExitTheShopA_0, 100010);
-    writeTextInScreen(aSignUp_, 110250);
+    writeTextInScreen(shopMessages.continueMessageNoWeapons.line1, 100010);
+    writeTextInScreen(shopMessages.continueMessageNoWeapons.line2, 110250);
     writeTextInScreen((const char *)&unk_454A08, 120490);
-    v2 = aPressEscForP_0;
+    v2 = shopMessages.continueMessageNoWeapons.line3;
   }
   writeTextInScreen(v2, 130730);
   return drawMenuAnimation(432, 269, continueAnimCurrentFrame_4611D0, (int)contaniBpk, (int)continueAnimFramesSize_4611D0);
@@ -873,12 +873,12 @@ int reloadContinueAnimation()
 int reloadEngineAnimation()
 {
   int v0; // ecx@1
-  unsigned int v1; // eax@3
-  void *v2; // edi@3
-  char v3; // cl@4
+//  unsigned int v1; // eax@3
+//  void *v2; // edi@3
+//  char v3; // cl@4
   int v4; // eax@5
   char * v6 = malloc(10); // [sp+3h] [bp-29h]@3
-  __int16 v7; // [sp+4h] [bp-28h]@3
+//  __int16 v7; // [sp+4h] [bp-28h]@3
   char DstBuf[100]; // [sp+18h] [bp-14h]@3
 
   drawImageWithPosition2((int)bases41Bpk, 96, 96, (int)((char *)screenBuffer + 161936));
@@ -902,11 +902,11 @@ int reloadEngineAnimation()
 	drawInGamePrices(v6, v4 + 214416);
   }
   createPopup(144, 114, 384, 119, 1);
-  writeTextInScreen(&a4CylinderMot_0[240 * drivers[driverId].engine], 79530);
+  writeTextInScreen(shopMessages.engineMessage[drivers[driverId].engine].boughMessage.title, 79530);
   writeTextInScreen((const char *)&unk_450DE0 + 240 * drivers[driverId].engine, 89770);
-  writeTextInScreen(&aThisEngineGeni[240 * drivers[driverId].engine], 100010);
-  writeTextInScreen(&aWin_ItWillGran[240 * drivers[driverId].engine], 110250);
-  writeTextInScreen(&aWishes_[240 * drivers[driverId].engine], 120490);
+  writeTextInScreen(shopMessages.engineMessage[drivers[driverId].engine].boughMessage.line1, 100010);
+  writeTextInScreen(shopMessages.engineMessage[drivers[driverId].engine].boughMessage.line2, 110250);
+  writeTextInScreen(shopMessages.engineMessage[drivers[driverId].engine].boughMessage.line3, 120490);
   return writeTextInScreen(&byte_450E80[240 * drivers[driverId].engine], 130730);
 }
 
@@ -914,12 +914,12 @@ int reloadEngineAnimation()
 int reloadTireAnimation()
 {
   int v0; // ecx@1
-  unsigned int v1; // eax@3
-  void *v2; // edi@3
-  char v3; // cl@4
+//  unsigned int v1; // eax@3
+//  void *v2; // edi@3
+//  char v3; // cl@4
   int v4; // eax@5
   char *v6 =malloc(10); // [sp+3h] [bp-29h]@3
-  __int16 v7; // [sp+4h] [bp-28h]@3
+//  __int16 v7; // [sp+4h] [bp-28h]@3
   char DstBuf[100]; // [sp+18h] [bp-14h]@3
 
   drawImageWithPosition2((int)bases42Bpk, 96, 96, (int)((char *)screenBuffer + 162040));
@@ -956,12 +956,12 @@ int reloadTireAnimation()
 int reloadArmourAnimation()
 {
   int v0; // ecx@1
-  unsigned int v1; // eax@3
+//  unsigned int v1; // eax@3
   void *v2; // edi@3
-  char v3; // cl@4
+//  char v3; // cl@4
   int v4; // eax@5
   char *v6 = malloc(10); // [sp+3h] [bp-29h]@3
-  __int16 v7; // [sp+4h] [bp-28h]@3
+//  __int16 v7; // [sp+4h] [bp-28h]@3
   char DstBuf[100]; // [sp+18h] [bp-14h]@3
 
   drawImageWithPosition2((int)bases43Bpk, 96, 96, (int)((char *)screenBuffer + 162144));

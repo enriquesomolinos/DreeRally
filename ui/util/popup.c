@@ -358,7 +358,7 @@ int sabotageScreen()
       v13 = LOBYTE(drivers[v41].rank);
       v12 *= 108;
 	  //LOBYTE(v17) = *((BYTE *)dword_460888 + v12);
-	  LOBYTE(v17) = *((BYTE *)drivers[v12].rank);
+	  LOBYTE(v17) = *((int8*)drivers[v12].rank);
       v14 = drivers[v12].rank;
       v48 = LOBYTE(drivers[v42].rank);
       v15 = (char *)drivers[v12].rank;
@@ -560,7 +560,7 @@ int showHitmanScreen()
         v14 = rand() % 4;
         v15 = selectedRace_462CE8;
       }
-      while ( *((BYTE *)&dword_45EB50[selectedRace_462CE8] + v14) == driverId );
+      while ( *((int8*)&dword_45EB50[selectedRace_462CE8] + v14) == driverId );
       v16 = 0;
       do
       {
@@ -569,8 +569,8 @@ int showHitmanScreen()
       }
       while ( v17 );
 	  //todo structura drivers
-      v18 = &drivers[*((BYTE *)&dword_45EB50[v15] + v14)];
-      v19 = &drivers[*((BYTE *)&dword_45EB50[v15] + v14)];
+      v18 = &drivers[*((int8*)&dword_45EB50[v15] + v14)];
+      v19 = &drivers[*((int8*)&dword_45EB50[v15] + v14)];
       do
         v20 = *v18++;
       while ( v20 );
@@ -578,7 +578,7 @@ int showHitmanScreen()
       v22 = &v43;
       do
       {
-        v23 = *((BYTE *)v22 + 1);
+        v23 = *((int8*)v22 + 1);
         v22 = (char *)v22 + 1;
       }
       while ( v23 );
@@ -605,7 +605,7 @@ int showHitmanScreen()
       v29 = &v43;
       do
       {
-        v30 = *((BYTE *)v29 + 1);
+        v30 = *((int8*)v29 + 1);
         v29 = (char *)v29 + 1;
       }
       while ( v30 );
@@ -638,7 +638,7 @@ int showHitmanScreen()
       drawYesNoMenu(161, 321, 0, &v39);
       if ( v39 == 1 )
       {
-        v35 = *((BYTE *)&dword_45EB50[selectedRace_462CE8] + v14);
+        v35 = *((int8*)&dword_45EB50[selectedRace_462CE8] + v14);
         killQuestDriverId_456BBC = v35;
 		v36 = drivers[v35].name;
 		// v36 = &byte_460840[108 * v35];
@@ -711,7 +711,7 @@ int showHitmanScreen()
       v6 = &v43;
       do
       {
-        v7 = *((BYTE *)v6 + 1);
+        v7 = *((int8*)v6 + 1);
         v6 = (char *)v6 + 1;
       }
       while ( v7 );
@@ -1105,7 +1105,7 @@ LABEL_15:
   v9 = &v22;
   do
   {
-    v10 = *((BYTE *)v9 + 1);
+    v10 = *((int8*)v9 + 1);
     v9 = (char *)v9 + 1;
   }
   while ( v10 );
@@ -1285,7 +1285,7 @@ LABEL_15:
   v10 = &v30;
   do
   {
-    v11 = *((BYTE *)v10 + 1);
+    v11 = *((int8*)v10 + 1);
     v10 = (char *)v10 + 1;
   }
   while ( v11 );
@@ -1310,7 +1310,7 @@ LABEL_15:
   v17 = &v30;
   do
   {
-    v18 = *((BYTE *)v17 + 1);
+    v18 = *((int8*)v17 + 1);
     v17 = (char *)v17 + 1;
   }
   while ( v18 );
@@ -1585,7 +1585,7 @@ signed int   createPopup(int x, int xLenght, int y, int yLenght, int cornerType)
   }
   v13 = v5 - 64;
   for ( i = 0; i < v5 - 64; v13 = v5 - 64 )
-    *((BYTE *)screenBuffer + v10 + i++ + x + 672) = result;
+    *((int8*)screenBuffer + v10 + i++ + x + 672) = result;
   v15 = 0;
   if ( v13 > 0 )
   {

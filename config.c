@@ -11,10 +11,10 @@ MainArgs mainArgs = { 0,1,1,1,1,NULL,NULL };
 
 Configuration configuration;
 
-int checkArgs(char * args)
+int checkArgs(char* args)
 {
 	int result = 0;
-	char delim[] = "=";
+//	char delim[] = "=";
 	char *s;
 	char * pch;
 

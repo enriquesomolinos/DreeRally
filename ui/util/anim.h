@@ -1,3 +1,6 @@
+#ifndef ANIM_H
+#define ANIM_H
+
 typedef struct Message {
 	char* title;
 	char* line1;
@@ -23,8 +26,18 @@ typedef struct ShopMessages{
 	ElementMessage armorMessage[4];
 	Message armorMessageNoMoreUpgrades;
 	Message repairMessage[11];
+	Message continueMessage;
+	Message continueMessageNoWeapons;
+	ElementMessage sabotageMessage[1];
+	ElementMessage rocketMessage[1];
+	ElementMessage spikesMessage[1];
+	ElementMessage minesMessage[1];
+	Message outOfStockMessage;
+
 	
 } ShopMessages;
+
+
 
 
 ShopMessages initShopMessages();
@@ -57,3 +70,5 @@ extern int armourAnimCurrentFrame_461288; // weak
 
 extern int engineAnimCurrentFrame_462D80; // weak
 extern int armourAnimFrameDirection_45F034;
+
+#endif

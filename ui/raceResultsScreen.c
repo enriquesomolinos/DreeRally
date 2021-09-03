@@ -85,6 +85,8 @@ int v14 = 0;
 		  v9=0;
 		  do
 			  v8 += (unsigned __int8)letterSpacing_4458B0[90 + (unsigned __int8)DstBuf[v9++]];
+
+
 		  while (v9 < strlen(DstBuf));
 
 		  drawTextWithFont((int)graphicsGeneral.fmed1aBpk, (int)&unk_445928, DstBuf, v2 -v8 + 57662);
@@ -1546,12 +1548,12 @@ int   drawRightPositions(int numDrivers, int a2)
   int v6; // esi@2
   int v7; // ebx@3
   int v8; // ebp@3
-  char *v9=malloc(100); // edi@3
+//  char *v9=malloc(100); // edi@3
 //  char v10; // al@4
   unsigned int v11; // edx@5
-  char *v12 = malloc(100); // eax@5
+//  char *v12 = malloc(100); // eax@5
 //  char v13; // cl@6
-  char *v14 = malloc(100); // ecx@9
+//  char *v14 = malloc(100); // ecx@9
 //  char v15; // dl@10
   int v16; // eax@15
   char *v17 = malloc(100); // edx@15
@@ -1812,13 +1814,13 @@ int drawPressAnyKeyToContinue()
   result = waitCounter2_456BE4++ + 1;
   if ( waitCounter2_456BE4 == 30 )
   {
-    sub_426080();
+   // sub_426080();
     drawTextWithFont((int)graphicsGeneral.fsma3bBpk, (int)&letterSpacing_4458B0, getLanguageEntry("Press any key to continue..."), 289646);
     result = drawKeyCursor(289634, (char *)screenBuffer + 289634, 0x10Eu, 16);
   }
   if ( waitCounter2_456BE4 == 60 )
   {
-    sub_426080();
+   // sub_426080();
     drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&letterSpacing_4458B0, getLanguageEntry("Press any key to continue..."), 289646);
     result = drawKeyCursor(289634, (char *)screenBuffer + 289634, 0x10Eu, 16);
     waitCounter2_456BE4 = 0;
@@ -1829,7 +1831,7 @@ int drawPressAnyKeyToContinue()
 // 456BE4: using guessed type int waitCounter2_456BE4;
 
 //----- (00424240) --------------------------------------------------------
-int   sub_424240(int a1, float a2, float a3, float a4)
+int   sub_424240(int a1, double a2, double a3, double a4)
 {
   signed int v4; // edi@1
   int v5; // esi@1
@@ -1849,7 +1851,7 @@ int   sub_424240(int a1, float a2, float a3, float a4)
   double v19; // [sp+14h] [bp-18h]@1
   double v20; // [sp+1Ch] [bp-10h]@1
   double v21; // [sp+24h] [bp-8h]@1
-   int index = 0;
+//   int index = 0;
   v4 = 0;
   v19 = 0.1 * a2;
   v17 = 0;

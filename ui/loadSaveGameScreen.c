@@ -61,7 +61,7 @@ signed int loadGame()
     menuActive_4457F0[45+v0] = 1;
     strcpy(Filename, "DR.SG");
     SDL_itoa(v0, DstBuf, 10);
-	v2 = strlen(DstBuf) + 1;
+	//v2 = strlen(DstBuf) + 1;
    /* v3 = &v20;
     do
     {
@@ -290,7 +290,7 @@ __int16 savegameWithName()
     do
       v16 = *v15++;
     while ( v16 );
-    v25 = v15 - &v27[1];
+   // v25 = v15 - &v27[1];
     if ( v15 != &v27[1] )
     {
       do

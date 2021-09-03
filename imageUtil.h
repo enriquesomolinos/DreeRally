@@ -5,7 +5,7 @@ int   drawImageWithPosition2(int a1, int a2, int a3, int a4);
 int   drawImageWithPosition(int a1, int a2, int a3, int a4);
 unsigned int   drawTextWithFont(int a1, int a2, const char *a3, int a4);
 int   drawBorder(int a1, int a2, int a3, int a4);
-int   drawBorder2(int a1, int a2, unsigned int a3, int a4);
+int   removeBorder(int a1, int a2, unsigned int a3, int a4);
 
 int   getBoxBigTextOffset(const char *a1);
 int   sub_41FA50(const char *a1);

@@ -127,7 +127,7 @@ void   easyRaceResults(int ecx0, int a2, int a1)
   {
     if ( !a1 )
     {
-      v4 = *((BYTE *)&v12 + v3);
+      v4 = *((int8*)&v12 + v3);
       if (drivers[v4].damage != 100 )
 		  //if (dword_46084C[27 * v4] != 100)
       {
@@ -307,7 +307,7 @@ void   mediumRaceResults(int ecx0, int a2, int a1)
   {
     if ( !a1 )
 	{
-      v4 = *((BYTE *)&v17 + v3);
+      v4 = *((int8 *)&v17 + v3);
       if (drivers[v4].damage != 100 )
       {
         if ( v4 == driverId && lapped_456BC0 == 1 )
@@ -490,7 +490,7 @@ void   hardRaceResults(int ecx0, int a2, int a1)
   {
     if ( !a1 )
     {
-      v4 = *((BYTE *)&v17 + v3);
+      v4 = *((int8 *)&v17 + v3);
       if (drivers[v4].damage != 100 )
       {
         if ( v4 == driverId && lapped_456BC0 == 1 )

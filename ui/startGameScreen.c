@@ -120,6 +120,9 @@ int showStartScreen()
 {
   signed int v0; // esi@1
 
+  if (getModIntEntry("FEATURE_SKIP_START_SCREEN", 0) == 1) {
+	  return 0;
+  }
   v0 = 0;
   do
     setPaletteAndGetValue(v0++, 0, 0, 0);
