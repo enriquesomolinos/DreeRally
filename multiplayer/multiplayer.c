@@ -1,4 +1,4 @@
-int multiplayer_415280();
+/*int multiplayer_415280();
 int   multiplayer_406D30(int a1);
 void   multiplayer_406BE0(char a1);
 void multiplayer_403960();
@@ -17,6 +17,103 @@ char sub_41E9A0();
 void   sub_428070(int a1);
 char multiplayer_42BD10();
 
+
+
+//multiplayer
+char byte_4A6820[20]; // weak
+char byte_4A6822; // weak
+char byte_4A6823; // weak
+char byte_4A6824; // weak
+char byte_4A6825; // weak
+char byte_4A6826; // weak
+char byte_4A6827; // weak
+char byte_4A6828; // weak
+char byte_4A6829; // weak
+char byte_4A682A; // weak
+char byte_4A682B; // weak
+char byte_4A682C; // weak
+char byte_4A682D; // weak
+char byte_4A682E; // weak
+char byte_4A682F; // weak
+char byte_4A6830; // weak
+char byte_4A6831; // weak
+char byte_4A6832; // weak
+
+char byte_4467BE = '\0'; // weak
+
+char byte_4467F2 = '\0'; // weak
+
+int dword_456730 = 1; // weak
+
+char byte_45E0C1[256]; // weak
+char byte_45E0C2[256]; // weak
+char byte_45E0C3[256]; // weak
+
+int dword_445740 = 2; // weak
+
+int dword_4466EC = 1953066569; // weak//Init
+int dword_4466F0 = 1768710505; // weak
+int dword_4466F4 = 1092642170; // weak
+int dword_4466F8 = 2003127840; // weak
+int dword_4466FC = 1835091744; // weak
+__int16 word_446700 = 101; // weak
+int dword_44671E = 1852403530; // weak
+int dword_446722 = 544096544; // weak
+int dword_446726 = 1936291909; // weak
+int dword_44672A = 1735289204; // weak
+int dword_44672E = 1835091744; // weak
+__int16 word_446732 = 101; // weak
+int dword_446782 = 1769104723; // weak
+int dword_446786 = 1126198369; // weak
+int dword_44678A = 1701736047; // weak
+int dword_44678E = 1869182051; // weak
+__int16 word_446792 = 110; // weak
+int dword_4467B4 = 1818323268; // weak
+int dword_4467B8 = 1685015840; // weak
+__int16 word_4467BC = 28005; // weak
+
+int dword_4467E6 = 2004053569; // weak
+int dword_4467EA = 1293972069; // weak
+int dword_4467EE = 1835361391; // weak
+int dword_456AEC = 0; // weak
+int dword_456AF0 = 0; // weak
+int dword_456B54 = 0; // weak
+
+int dword_456B8C = 0; // weak
+int dword_456B90 = 0; // weak
+int dword_456B94 = 0; // weak
+int dword_456B98 = 0; // weak
+int dword_456B9C = 0; // weak
+int dword_45DC20; // weak
+int dword_45DC24; // weak
+int dword_45DC30[256]; // weak
+int dword_45DC34; // weak
+int dword_45DC38; // weak
+int dword_45DC3C; // weak
+int dword_45E064; // weak
+
+
+int dword_45E080; // weak
+int dword_45E084; // weak
+__int16 word_45E088; // weak
+int dword_45E08A; // weak
+int dword_45E08E; // weak
+__int16 word_45E092; // weak
+int dword_45E094; // weak
+int dword_45E098; // weak
+__int16 word_45E09C; // weak
+int dword_45E09E; // weak
+int dword_45E0A2; // weak
+__int16 word_45E0A6; // weak
+int dword_462C4E; // weak
+int dword_462C52; // weak
+int dword_462C56; // weak
+int dword_462C5A; // weak
+int dword_462C5E; // weak
+__int16 word_462C62; // weak
+
+int dword_464F30[256]; // weak
+int dword_46F208; // weak
 char multiplayer_42BD10()
 {
 /*  int v0; // eax@1
@@ -405,7 +502,7 @@ LABEL_76:
   }
   result = eventDetected();
   dword_456730 = 1;
-  return result;*/
+  return result;
 return 0 ;
 }
 
@@ -560,7 +657,7 @@ void   sub_428070(int a1)
     drawTransparentBlock(0, 371, 639, 109);
     drawBottomMenuText();
     refreshAllScreen();
-  }*/
+  }
 }
 char sub_41E9A0()
 {
@@ -599,7 +696,7 @@ char sub_41E9A0()
     v4 += 150;
   }
   while ( v5 < 287372 );
-  return result;*/
+  return result;
 	return 0;
 }
 
@@ -659,7 +756,7 @@ LABEL_8:
   *(BYTE *)(((*(_WORD *)dword_45DC24 - (_WORD)v7 - (_WORD)v5 - 5) & 0xFFF) + dword_45DC24 + 4) = 0;
   for ( j = 0; j < v7; *(BYTE *)(v12 + dword_45DC24 + 4) = 0 )
     v12 = (*(_WORD *)dword_45DC24 - v7 - v5 + j++ - 3) & 0xFFF;
-  return 1;*/
+  return 1;
 	return 0;
 }
 
@@ -1118,7 +1215,7 @@ LABEL_34:
   {
     dword_456B90 = v77;
   }
-  return result;*/
+  return result;
 return 0;
 }
 
@@ -2162,7 +2259,7 @@ int multiplayer_415280()
         break;
     }
   }
-  return result;*/
+  return result;
 }
 
 //----- (00426280) --------------------------------------------------------
@@ -2237,3 +2334,384 @@ int multiplayer_415280()
 // 460888: using guessed type int dword_460888[];
 // 426280: using guessed type char DstBuf[20];
 */
+
+/*multiplayer_1()
+/*nullsub_1();
+    if ( sub_41EB80((int)v54, 1) )
+    {
+      unk_461EC0[0] = unk_461EC1;
+      unk_461EC1 = unk_461EC2;
+      unk_461EC2 = unk_461EC3;
+      unk_461EC3 = word_461EC4;
+      HIBYTE(word_461EC4) = unk_461EC6;
+      unk_461EC6 = unk_461EC7;
+      unk_461EC7 = word_461EC8;
+      HIBYTE(word_461EC8) = unk_461ECA;
+      unk_461ECA = unk_461ECB;
+      unk_461ECB = word_461ECC;
+      HIBYTE(word_461ECC) = unk_461ECE;
+      unk_461ECE = unk_461ECF;
+      unk_461ECF = word_461ED0;
+      HIBYTE(word_461ED0) = unk_461ED2;
+      v5 = (signed int)&unk_462096;
+      unk_461ED2 = unk_461ED3;
+      unk_461ED3 = word_461ED4;
+      do
+      {
+        v6 = v5;
+        do
+        {
+          v7 = *(BYTE *)v6;
+          *(BYTE *)(v6 - 150) = *(BYTE *)v6;
+          ++v6;
+        }
+        while ( v7 );
+        v5 += 150;
+      }
+      while ( v5 < (signed int)&blacktx1Bpk );
+      v8 = 0;
+      do
+      {
+        v9 = v54[v8];
+        *((BYTE *)&dword_462C4E + v8++) = v9;
+      }
+      while ( v9 );
+      HIBYTE(word_461ED4) = 1;
+      if ( dword_456B54 )
+      {
+        if ( dword_456730 == 1 )
+        {
+          sub_41E9A0();
+          refreshAllScreen();
+        }
+      }
+      else if ( dword_456730 == 1 )
+      {
+        drawBottomMenuText();
+        refreshBottomScreen();
+      }
+    }
+    if ( sub_41EB80((int)v54, 6) )
+    {
+      unk_461EC0[0] = unk_461EC1;
+      unk_461EC1 = unk_461EC2;
+      unk_461EC2 = unk_461EC3;
+      unk_461EC3 = word_461EC4;
+      HIBYTE(word_461EC4) = unk_461EC6;
+      unk_461EC6 = unk_461EC7;
+      unk_461EC7 = word_461EC8;
+      HIBYTE(word_461EC8) = unk_461ECA;
+      unk_461ECA = unk_461ECB;
+      unk_461ECB = word_461ECC;
+      HIBYTE(word_461ECC) = unk_461ECE;
+      unk_461ECE = unk_461ECF;
+      unk_461ECF = word_461ED0;
+      HIBYTE(word_461ED0) = unk_461ED2;
+      v10 = (signed int)&unk_462096;
+      unk_461ED2 = unk_461ED3;
+      unk_461ED3 = word_461ED4;
+      do
+      {
+        v11 = v10;
+        do
+        {
+          v12 = *(BYTE *)v11;
+          *(BYTE *)(v11 - 150) = *(BYTE *)v11;
+          ++v11;
+        }
+        while ( v12 );
+        v10 += 150;
+      }
+      while ( v10 < (signed int)&blacktx1Bpk );
+      v13 = 0;
+      do
+      {
+        v14 = v54[v13];
+        *((BYTE *)&dword_462C4E + v13++) = v14;
+      }
+      while ( v14 );
+      HIBYTE(word_461ED4) = 0;
+      if ( dword_456B54 )
+      {
+        if ( dword_456730 == 1 )
+        {
+          sub_41E9A0();
+          refreshAllScreen();
+        }
+      }
+      else if ( dword_456730 == 1 )
+      {
+        drawBottomMenuText();
+        updateScreenPtr(3);
+        copyBuffer2Screen((void *)screenPtr, (char *)screenBuffer + 196608, 0x4000);
+        updateScreenPtr(4);
+        copyBuffer2Screen((void *)screenPtr, (char *)screenBuffer + 0x40000, 11264);
+      }
+    }
+    if ( sub_41EB80((int)v54, 7) )
+    {
+     // allocateMemory(0x64u);
+      Str = v15;
+      *(_DWORD *)v15 = 2108717;
+      v16 = &byte_460840[108 * driverId];
+      do
+        v17 = *v16++;
+      while ( v17 );
+      v18 = v16 - &byte_460840[108 * driverId];
+      v19 = (char *)Str - 1;
+      do
+        v20 = (v19++)[1];
+      while ( v20 );
+      memcpy(v19, &byte_460840[108 * driverId], v18);
+      v21 = (char *)Str - 1;
+      do
+        v22 = (v21++)[1];
+      while ( v22 );
+      memcpy(v21, " is currently on Death Rally.", 0x1Eu);
+      //multiplayer_41EA70((int)Str, 100, 8);
+      free(Str);
+    }
+    if ( sub_41EB80((int)v54, 20) )
+    {
+      unk_461EC0[0] = unk_461EC1;
+      unk_461EC1 = unk_461EC2;
+      unk_461EC2 = unk_461EC3;
+      unk_461EC3 = word_461EC4;
+      HIBYTE(word_461EC4) = unk_461EC6;
+      unk_461EC6 = unk_461EC7;
+      unk_461EC7 = word_461EC8;
+      HIBYTE(word_461EC8) = unk_461ECA;
+      unk_461ECA = unk_461ECB;
+      unk_461ECB = word_461ECC;
+      HIBYTE(word_461ECC) = unk_461ECE;
+      unk_461ECE = unk_461ECF;
+      unk_461ECF = word_461ED0;
+      HIBYTE(word_461ED0) = unk_461ED2;
+      v23 = (signed int)&unk_462096;
+      unk_461ED2 = unk_461ED3;
+      unk_461ED3 = word_461ED4;
+      do
+      {
+        v24 = v23;
+        do
+        {
+          v25 = *(BYTE *)v24;
+          *(BYTE *)(v24 - 150) = *(BYTE *)v24;
+          ++v24;
+        }
+        while ( v25 );
+        v23 += 150;
+      }
+      while ( v23 < (signed int)&blacktx1Bpk );
+      v26 = 0;
+      do
+      {
+        v27 = v54[v26];
+        *((BYTE *)&dword_462C4E + v26++) = v27;
+      }
+      while ( v27 );
+      HIBYTE(word_461ED4) = 0;
+      if ( dword_456B54 )
+      {
+        if ( dword_456730 == 1 )
+        {
+          sub_41E9A0();
+          refreshAllScreen();
+        }
+      }
+      else if ( dword_456730 == 1 )
+      {
+        drawBottomMenuText();
+        updateScreenPtr(3);
+        copyBuffer2Screen((void *)screenPtr, (char *)screenBuffer + 196608, 0x4000);
+        updateScreenPtr(4);
+        copyBuffer2Screen((void *)screenPtr, (char *)screenBuffer + 0x40000, 11264);
+      }
+      multiplayer_42A300();
+      driverId = 19;
+    }
+    if ( sub_41EB80((int)v54, 9) )
+    {
+      unk_461EC0[0] = unk_461EC1;
+      unk_461EC1 = unk_461EC2;
+      unk_461EC2 = unk_461EC3;
+      unk_461EC3 = word_461EC4;
+      HIBYTE(word_461EC4) = unk_461EC6;
+      unk_461EC6 = unk_461EC7;
+      unk_461EC7 = word_461EC8;
+      HIBYTE(word_461EC8) = unk_461ECA;
+      unk_461ECA = unk_461ECB;
+      unk_461ECB = word_461ECC;
+      HIBYTE(word_461ECC) = unk_461ECE;
+      unk_461ECE = unk_461ECF;
+      unk_461ECF = word_461ED0;
+      HIBYTE(word_461ED0) = unk_461ED2;
+      v28 = (signed int)&unk_462096;
+      unk_461ED2 = unk_461ED3;
+      unk_461ED3 = word_461ED4;
+      do
+      {
+        v29 = v28;
+        do
+        {
+          v30 = *(BYTE *)v29;
+          *(BYTE *)(v29 - 150) = *(BYTE *)v29;
+          ++v29;
+        }
+        while ( v30 );
+        v28 += 150;
+      }
+      while ( v28 < (signed int)&blacktx1Bpk );
+      v31 = 0;
+      do
+      {
+        v32 = v54[v31];
+        *((BYTE *)&dword_462C4E + v31++) = v32;
+      }
+      while ( v32 );
+      HIBYTE(word_461ED4) = 0;
+      if ( dword_456B54 )
+      {
+        if ( dword_456730 == 1 )
+        {
+          sub_41E9A0();
+          refreshAllScreen();
+        }
+      }
+      else if ( dword_456730 == 1 )
+      {
+        drawBottomMenuText();
+        updateScreenPtr(3);
+        copyBuffer2Screen((void *)screenPtr, (char *)screenBuffer + 196608, 0x4000);
+        updateScreenPtr(4);
+        copyBuffer2Screen((void *)screenPtr, (char *)screenBuffer + 0x40000, 11264);
+      }
+      sub_428070(1);
+    }
+    if ( sub_41EB80((int)&v53, 19) )
+    {
+      unk_461EC0[0] = unk_461EC1;
+      unk_461EC1 = unk_461EC2;
+      unk_461EC2 = unk_461EC3;
+      unk_461EC3 = word_461EC4;
+      HIBYTE(word_461EC4) = unk_461EC6;
+      unk_461EC6 = unk_461EC7;
+      unk_461EC7 = word_461EC8;
+      HIBYTE(word_461EC8) = unk_461ECA;
+      unk_461ECA = unk_461ECB;
+      unk_461ECB = word_461ECC;
+      HIBYTE(word_461ECC) = unk_461ECE;
+      unk_461ECE = unk_461ECF;
+      unk_461ECF = word_461ED0;
+      HIBYTE(word_461ED0) = unk_461ED2;
+      unk_461ED2 = unk_461ED3;
+      v33 = (signed int)&unk_462096;
+      unk_461ED3 = word_461ED4;
+      do
+      {
+        v34 = v33;
+        do
+        {
+          v35 = *(BYTE *)v34;
+          *(BYTE *)(v34 - 150) = *(BYTE *)v34;
+          ++v34;
+        }
+        while ( v35 );
+        v33 += 150;
+      }
+      while (
+          v33 < (signed int)&blacktx1Bpk );
+      v36 = &byte_460840[108 * v53];
+      dword_462C4E = 2108717;
+      do
+        v37 = *v36++;
+      while ( v37 );
+      v38 = v36 - &byte_460840[108 * v53];
+      v39 = (char *)&dword_462C4E - 1;
+      do
+        v40 = (v39++)[1];
+      while ( v40 );
+      memcpy(v39, &byte_460840[108 * v53], v38);
+      v41 = (char *)&dword_462C4E - 1;
+      do
+        v42 = (v41++)[1];
+      while ( v42 );
+      memcpy(v41, " is waiting for you to join the next race.", 0x2Au);
+      HIBYTE(word_461ED4) = 0;
+      v43 = dword_456B54 == 0;
+      v44 = dword_456730;
+      v41[42] = aIswaitingForYo[42];
+      if ( v43 )
+      {
+        if ( v44 == 1 )
+        {
+          drawBottomMenuText();
+          updateScreenPtr(3);
+          copyBuffer2Screen((void *)screenPtr, (char *)screenBuffer + 196608, 0x4000);
+          updateScreenPtr(4);
+          copyBuffer2Screen((void *)screenPtr, (char *)screenBuffer + 0x40000, 11264);
+        }
+      }
+      else if ( v44 == 1 )
+      {
+        sub_41E9A0();
+        refreshAllScreen();
+      }
+    }
+    if ( (dword_45E0A8 == 3 || dword_45E0A8 == 4) && (dword_45E5E0 & 0x80) != -128 )
+    {
+      unk_461EC0[0] = unk_461EC1;
+      unk_461EC1 = unk_461EC2;
+      unk_461EC2 = unk_461EC3;
+      unk_461EC3 = word_461EC4;
+      HIBYTE(word_461EC4) = unk_461EC6;
+      unk_461EC6 = unk_461EC7;
+      unk_461EC7 = word_461EC8;
+      HIBYTE(word_461EC8) = unk_461ECA;
+      unk_461ECA = unk_461ECB;
+      unk_461ECB = word_461ECC;
+      HIBYTE(word_461ECC) = unk_461ECE;
+      unk_461ECE = unk_461ECF;
+      unk_461ECF = word_461ED0;
+      HIBYTE(word_461ED0) = unk_461ED2;
+      unk_461ED2 = unk_461ED3;
+      v45 = (signed int)&unk_462096;
+      unk_461ED3 = word_461ED4;
+      do
+      {
+        v46 = v45;
+        do
+        {
+          v47 = *(BYTE *)v46;
+          *(BYTE *)(v46 - 150) = *(BYTE *)v46;
+          ++v46;
+        }
+        while ( v47 );
+        v45 += 150;
+      }
+      while ( v45 < (signed int)&blacktx1Bpk );
+      memcpy(&dword_462C4E, "-- Modem connection lost!", 0x18u);
+      v43 = dword_456B54 == 0;
+      v48 = dword_456730;
+      *((_WORD *)&dword_462C4E + 12) = *(_WORD *)"!";
+      HIBYTE(word_461ED4) = 0;
+      if ( v43 )
+      {
+        if ( v48 == 1 )
+        {
+          drawBottomMenuText();
+          updateScreenPtr(3);
+          copyBuffer2Screen((void *)screenPtr, (char *)screenBuffer + 196608, 0x4000);
+          updateScreenPtr(4);
+          copyBuffer2Screen((void *)screenPtr, (char *)screenBuffer + 0x40000, 11264);
+          sub_428070(0);
+          return;
+        }
+      }
+      else if ( v48 == 1 )
+      {
+        sub_41E9A0();
+        refreshAllScreen();
+      }
+      sub_428070(0);
+    }*/

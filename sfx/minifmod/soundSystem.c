@@ -1,5 +1,7 @@
+#ifndef _NO_MINIFMOD
+
 #include "soundSystem.h"
-#include "../defs.h"
+#include "../../defs.h"
 #include <math.h>
 
 int (  *FSOUND_File_OpenCallback_456C9C)(_DWORD) = NULL; // weak
@@ -82,16 +84,16 @@ void *  FSOUND_File_OpenCallback_43AD80(int size,char *data)
  // v1 = data + 4;
   //v1 = &soundEffectSize + 4;
   //v1 = *(const void **)(a1 + 4);
-  v2 = size;//strlen(name); //es el tamaño del audio
-  //v2 = *(_DWORD *)soundEffectSize; //es el tamaño del audio
+  v2 = size;//strlen(name); //es el tamaï¿½o del audio
+  //v2 = *(_DWORD *)soundEffectSize; //es el tamaï¿½o del audio
  // v3 = calloc(0xCu, 1u);
   handle = v3;
   *(_DWORD *)v3 = v2;
   v5 = calloc(v2, 1u);
 
  // v1 = calloc(v2, 1u);//esto lo he puesto yo para que no falle
- // v6 = *(_DWORD *)handle; //v4 es el tamaño del audio
- v6 = handle->size; //v4 es el tamaño del audio
+ // v6 = *(_DWORD *)handle; //v4 es el tamaï¿½o del audio
+ v6 = handle->size; //v4 es el tamaï¿½o del audio
   //*((_DWORD *)handle + 2) = v5;//handle->data
   handle->data = v5;//handle->data
   //*((_DWORD *)handle + 1) = 0;//handle->pos
@@ -1748,7 +1750,7 @@ int   FMUSIC_UpdateXMNote_43EC40(FMUSIC_MODULE *mod, int channelId, unsigned __i
   if ( soundId < mod->numinsts )//a1+32
   {
 	current_instruent_v8 = *(_DWORD *)mod->instrument;//FMUSIC_INSTRUMENT *instrument;	
-    cprt_inst_v9 = soundId;//v9 = 340 * soundId; 340 es el tamaño de instrumet
+    cprt_inst_v9 = soundId;//v9 = 340 * soundId; 340 es el tamaï¿½o de instrumet
     iptr_v6 = &mod->instrument[soundId];//cprt_inst_v9];
 
     cptr_v10 = iptr_v6->keymap[cptr_v5->note];//*(BYTE *)(cprt_inst_v9 + current_instruent_v8 + 108);
@@ -2518,7 +2520,7 @@ int   FSOUND_File_Read_43F790(void *buffer, int size, FSOUND_FILE_HANDLE *handle
 //----- (0043F7B0) --------------------------------------------------------
 int   FSOUND_File_Seek_43F7B0(FSOUND_FILE_HANDLE *handle)
 {
-  int result; // eax@1
+  int result =0; // eax@1
 
   //result =handle;
   if ( handle )
@@ -2531,7 +2533,7 @@ int   FSOUND_File_Seek_43F7B0(FSOUND_FILE_HANDLE *handle)
 //----- (0043F7D0) --------------------------------------------------------
 int   FSOUND_File_Tell_43F7D0(FSOUND_FILE_HANDLE *handle)
 {
-  int result; // eax@1
+  int result = 0; // eax@1
 
   //result = handle;
   if ( handle )
@@ -2540,3 +2542,5 @@ int   FSOUND_File_Tell_43F7D0(FSOUND_FILE_HANDLE *handle)
   return result;
 }
 // 456CAC: using guessed type int (  *dword_456CAC)(_DWORD);
+
+ #endif

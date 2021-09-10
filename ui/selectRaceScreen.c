@@ -2,13 +2,17 @@
 #include "blackMarketScreen.h"
 #include "../variables.h"
 #include "../circuit.h"
-#include "../menus.h"
+#include "util/menus.h"
 #include "../imageUtil.h"
 #include "../config.h"
 #include "../defs.h"
 #include "../drivers.h"
 #include "../dr.h"
+#include "../i18n/i18n.h"
 #include "../graphics.h"
+#include "util/popup.h"
+#include <SDL_stdinc.h>
+
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -79,7 +83,9 @@ void   selectRaceWarningPopup(int a1)
   refreshAllScreen();
 }
 // 44518C: using guessed type int dword_44518C;
-// 4458B0: using guessed type char letterSpacing_4458B0;
+// 4458B0: using guessed type char 
+// 
+// ;
 // 45DC18: using guessed type int configuration.effectsVolume;
 
 //----- (00423F40) --------------------------------------------------------
@@ -365,7 +371,7 @@ void selectRaceScreen()
         if ( selectedRaceId > 0 )
         {
           loadMenuSoundEffect(1u, 25, 0, configuration.effectsVolume, dword_445194);
-          drawBorder2(160 * selectedRaceId + 22, 118, 0x94u, 132);
+          removeBorder(160 * selectedRaceId + 22, 118, 0x94u, 132);
           v5 = 160 * (selectedRaceId-- - 1) + 22;
           drawBorder(v5, 118, 148, 132);
           refreshAllScreen();
@@ -376,7 +382,7 @@ void selectRaceScreen()
         if ( selectedRaceId < 2 )
         {
           loadMenuSoundEffect(1u, 25, 0, configuration.effectsVolume, dword_445194);
-          drawBorder2(160 * selectedRaceId + 22, 118, 0x94u, 132);
+          removeBorder(160 * selectedRaceId + 22, 118, 0x94u, 132);
           v6 = 160 * (selectedRaceId++ + 1) + 22;
           drawBorder(v6, 118, 148, 132);
           refreshAllScreen();
@@ -466,7 +472,7 @@ void selectRaceScreen()
           136,
           2,
           (int)((char *)screenBuffer + 160 * (selectedRaceId + 72 * participantsRace[selectedRaceId]) + 179227));
-        _itoa(drivers[driverId].rank, name, 10);
+        SDL_itoa(drivers[driverId].rank, name, 10);
 		/*drawImageWithPosition(
 			(int)graphics4.signlineBpk,
 			136,
@@ -820,7 +826,7 @@ void   addParticipantToRace(signed int a1)
      // *(_WORD *)v21 = 46;
 	  v24 = malloc(24);
 	  
-	  _itoa(drivers[v3].rank, buffer, 10);
+      _itoa(drivers[v3].rank, buffer, 10);
 	  strcpy(v24, buffer);
 	  strcat(v24, ".");
 	  strcat(v24, drivers[v3].name);

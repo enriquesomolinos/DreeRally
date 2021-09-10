@@ -1,17 +1,17 @@
 
-
+#include <SDL_stdinc.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "defs.h"
-#include "dr.h"
-#include "raceParticipant.h"
+#include "../../defs.h"
+#include "../../dr.h"
+#include "../../raceParticipant.h"
 #include "raceResults.h"
-#include "graphics.h"
-#include "imageUtil.h"
-#include "drivers.h"
-#include "mod/mod.h"
-#include "i18n/i18n.h"
+#include "../../graphics.h"
+#include "../../imageUtil.h"
+#include "../../drivers.h"
+#include "../../mod/mod.h"
+#include "../../i18n/i18n.h"
 
 const  int EASY_RACE=0;
  const int MEDIUM_RACE=1;
@@ -127,7 +127,7 @@ void   easyRaceResults(int ecx0, int a2, int a1)
   {
     if ( !a1 )
     {
-      v4 = *((BYTE *)&v12 + v3);
+      v4 = *((int8*)&v12 + v3);
       if (drivers[v4].damage != 100 )
 		  //if (dword_46084C[27 * v4] != 100)
       {
@@ -307,7 +307,7 @@ void   mediumRaceResults(int ecx0, int a2, int a1)
   {
     if ( !a1 )
 	{
-      v4 = *((BYTE *)&v17 + v3);
+      v4 = *((int8 *)&v17 + v3);
       if (drivers[v4].damage != 100 )
       {
         if ( v4 == driverId && lapped_456BC0 == 1 )
@@ -490,7 +490,7 @@ void   hardRaceResults(int ecx0, int a2, int a1)
   {
     if ( !a1 )
     {
-      v4 = *((BYTE *)&v17 + v3);
+      v4 = *((int8 *)&v17 + v3);
       if (drivers[v4].damage != 100 )
       {
         if ( v4 == driverId && lapped_456BC0 == 1 )
@@ -596,7 +596,8 @@ int sub_424420()
       v5 = 640 * (v3 + v2 * result);
       drawImageWithPosition((int)graphicsGeneral.placingBpk, 202, 74, (int)((char *)screenBuffer + v5 + 389));
       v6 = v2 + 1;
-      _itoa(v2 + 1, DstBuf, 10);
+      if(DstBuf !=NULL)
+      SDL_itoa(v2 + 1, DstBuf, 10);
       if ( v2 )
         drawTextWithFont((int)graphicsGeneral.fbig3aBpk, (int)&bigLetterSpacing_445848, DstBuf, v5 + 4876);
       else

@@ -2,14 +2,18 @@
 
 #include "../cars.h"
 #include "../variables.h"
-#include "../race/anim.h"
-#include "../menus.h"
+#include "util/anim.h"
+#include "util/menus.h"
 #include "../imageUtil.h"
 #include "../config.h"
 #include "../defs.h"
 #include "../drivers.h"
 #include "../dr.h"
 #include "../graphics.h"
+#include "../i18n/i18n.h"
+#include "util/popup.h"
+#include <SDL_stdinc.h>
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -36,7 +40,7 @@ void shopScreenMoveLeft_421DF0()
   loadMenuSoundEffect(1u, 26, 0, configuration.effectsVolume, dword_445198);
   switch ( menuOptionSelected_463DF0 )
   {
-    case 0:
+    case BUY_CAR:
       if ( actualCarSelected <= 0 )
         actualCarSelected = 5;
       else
@@ -49,38 +53,38 @@ void shopScreenMoveLeft_421DF0()
       drawImageWithPosition((int)arrows1dBpk, 16, 64, (int)((char *)screenBuffer + 90240));
       refreshAllScreen();
       break;
-    case 1:
+    case BUY_ENGINE:
       menuOptionSelected_463DF0 = 0;
       reloadCarAnimation2();
-      drawBorder2(10, 243, 0x6Cu, 114);
+      removeBorder(10, 243, 0x6Cu, 114);
       drawBorder(0, 115, 128, 114);
       refreshAllScreen();
       break;
-    case 2:
+    case BUY_TIRE:
       menuOptionSelected_463DF0 = 1;
       reloadEngineAnimation2();
-      drawBorder2(114, 243, 0x6Cu, 114);
+      removeBorder(114, 243, 0x6Cu, 114);
       drawBorder(10, 243, 108, 114);
       refreshAllScreen();
       break;
-    case 3:
+    case BUY_ARMOUR:
       menuOptionSelected_463DF0 = 2;
       reloadTireAnimation2();
-      drawBorder2(218, 243, 0x6Cu, 114);
+      removeBorder(218, 243, 0x6Cu, 114);
       drawBorder(114, 243, 108, 114);
       refreshAllScreen();
       break;
-    case 4:
+    case REPAIR:
       menuOptionSelected_463DF0 = 3;
       reloadArmourAnimation2();
-      drawBorder2(322, 243, 0x6Cu, 114);
+      removeBorder(322, 243, 0x6Cu, 114);
       drawBorder(218, 243, 108, 114);
       refreshAllScreen();
       break;
-    case 5:
+    case CONTINUE:
       menuOptionSelected_463DF0 = 4;
       reloadRepairAnimation();
-      drawBorder2(426, 243, 0x6Cu, 114);
+      removeBorder(426, 243, 0x6Cu, 114);
       drawBorder(322, 243, 108, 114);
       refreshAllScreen();
       break;
@@ -102,7 +106,7 @@ void shopScreenMoveRight_42DAB0()
   }
   switch ( v0 )
   {
-    case 0:
+     case BUY_CAR:
       if ( actualCarSelected >= 5 )
         actualCarSelected = 0;
       else
@@ -114,31 +118,31 @@ void shopScreenMoveRight_42DAB0()
       drawImageWithPosition((int)((char *)arrows1dBpk + 1024), 16, 64, (int)((char *)screenBuffer + 90352));
       refreshAllScreen();
       break;
-    case 1:
+    case BUY_ENGINE:
       menuOptionSelected_463DF0 = 2;
       reloadTireAnimation2();
-      drawBorder2(10, 243, 0x6Cu, 114);
+      removeBorder(10, 243, 0x6Cu, 114);
       drawBorder(114, 243, 108, 114);
       refreshAllScreen();
       break;
-    case 2:
+    case BUY_TIRE:
       menuOptionSelected_463DF0 = 3;
       reloadArmourAnimation2();
-      drawBorder2(114, 243, 0x6Cu, 114);
+      removeBorder(114, 243, 0x6Cu, 114);
       drawBorder(218, 243, 108, 114);
       refreshAllScreen();
       break;
-    case 3:
+    case BUY_ARMOUR:
       menuOptionSelected_463DF0 = 4;
       reloadRepairAnimation();
-      drawBorder2(218, 243, 0x6Cu, 114);
+      removeBorder(218, 243, 0x6Cu, 114);
       drawBorder(322, 243, 108, 114);
       refreshAllScreen();
       break;
-    case 4:
+    case REPAIR:
       menuOptionSelected_463DF0 = 5;
       reloadContinueAnimation();
-      drawBorder2(322, 243, 0x6Cu, 114);
+      removeBorder(322, 243, 0x6Cu, 114);
       drawBorder(426, 243, 108, 114);
       refreshAllScreen();
       break;
@@ -246,6 +250,7 @@ void enterShop()
   int v93; // eax@132
   signed int v94; // edx@132
   int v95; // ecx@132
+  char* youcould = malloc(100);
   int v96; // [sp+8h] [bp-68h]@7
   int v99[50]; // [sp+34h] [bp-3Ch]@9   8//coger 100 101 102 103 y juntarlo
   char DstBuf[100]; // [sp+20h] [bp-50h]@6
@@ -255,8 +260,64 @@ void enterShop()
   int v101; // [sp+3Ch] [bp-34h]@9
   int v102; // [sp+40h] [bp-30h]@9
   __int16 v103; // [sp+44h] [bp-2Ch]@9
+  
+  DstBuf[0] = "\0";
+  if (getModIntEntry("FEATURE_SKIP_SHOP_SCREEN", 0) == 1) {
+      v92 = setUndergroundMarketPrices();
+      undergroundPricesSet_456B84 = v92;
+      if (useWeapons && v92)
+      {
+          enterBlackMarketScreen();
+      }
+      else
+      {
+          loadMenuSoundEffect(1u, 24, 0, configuration.effectsVolume, dword_445190);
+          v93 = 0;
+          v94 = 2;
+          v95 = (int)dword_4608F0;///bucle de puntos de puloto
+          do
+          {
+              if (*(_DWORD*)(v95 - 108) > v93)
+              {
+                  v5 = v94 - 2;
+                  if (v94 - 2 != driverId)
+                      v93 = *(_DWORD*)(v95 - 108);
+              }
+              if (*(_DWORD*)v95 > v93)
+              {
+                  v5 = v94 - 1;
+                  if (v94 - 1 != driverId)
+                      v93 = *(_DWORD*)v95;
+              }
+              if (*(_DWORD*)(v95 + 108) > v93 && v94 != driverId)
+                  v93 = *(_DWORD*)(v95 + 108);
+              if (*(_DWORD*)(v95 + 216) > v93)
+              {
+                  v5 = v94 + 1;
+                  if (v94 + 1 != driverId)
+                      v93 = *(_DWORD*)(v95 + 216);
+              }
+              if (*(_DWORD*)(v95 + 324) > v93)
+              {
+                  v5 = v94 + 2;
+                  if (v94 + 2 != driverId)
+                      v93 = *(_DWORD*)(v95 + 324);
+              }
+              v94 += 5;
+              v95 += 540;
+          }             while (v94 - 2 < 20);
 
-  v0 = (unsigned __int64)ceil((double)drivers[driverId].carMoneyCost  * 0.25);
+          if (drivers[driverId].points <= v93)
+              selectRaceScreen();
+          else
+              adversaryPreviewScreen((const char**)v5);
+      }
+  }
+
+
+
+
+  v0 = (unsigned __int64)((double)drivers[driverId].carMoneyCost  * 0.25)-5;
   v1 =  driverId;
   if ( useWeapons )
   {
@@ -284,7 +345,7 @@ void enterShop()
           return;
         loadMenuSoundEffect(1u, 28, 0, configuration.effectsVolume, dword_4451A0);
         createPopup(144, 114, 384, 119, 1);
-        v101 = 1701257316;//d eg	
+        ///v101 = 1701257316;//d eg	
         v99[0] = 544567129;//you
         v100 = 1819635575;//woul
         v102 = 543236212;//t a
@@ -303,10 +364,15 @@ void enterShop()
         *(_DWORD *)v30 = 1717924384;
         v32 = (int)graphicsGeneral.fsma3cBpk;
         *((_DWORD *)v30 + 1) = 6581877;
-        drawTextWithFont(v32, (int)&letterSpacing_4458B0, (const char *)&v99, 79530);
+        
+        youcould = "You could get a $";
+        _itoa(v5, DstBuf, 10);
+        strcat(youcould, DstBuf);
+        strcat(youcould, " refund");
+        drawTextWithFont(v32, (int)&letterSpacing_4458B0, youcould, 79530);
         memcpy(&v99, "from your old car and upgrades.", 0x20u);
         drawTextWithFont((int)graphicsGeneral.fsma3cBpk, (int)&letterSpacing_4458B0, (const char *)&v99, 89770);
-        v33 = 1760 * actualCarSelected;
+        //v33 = 1760 * actualCarSelected;
         v34 = &aVagabond[1760 * actualCarSelected];
         v35 = (char *)((char *)&v99 - v34);
         do
@@ -338,12 +404,17 @@ void enterShop()
         memcpy(v42, DstBuf, 4 * (v41 >> 2));
         v44 = (int)graphicsGeneral.fsma3cBpk;
         memcpy(&v42[4 * (v41 >> 2)], &DstBuf[4 * (v41 >> 2)], v41 & 3);
-        drawTextWithFont(v44, (int)&letterSpacing_4458B0, (const char *)&v99, 100010);
+
+        youcould = cars[actualCarSelected].name;
+        strcat(youcould, " would cost $\0");
+        _itoa((cars[actualCarSelected].cost) - v5, DstBuf, 10);
+        strcat(youcould, DstBuf);
+        drawTextWithFont(v44, (int)&letterSpacing_4458B0, youcould, 100010);
         v100 = 1702060392;
-        v101 = 544500000;
+        //v101 = 544500000;
         v99[0] = 1668445520;
         LOWORD(v102) = 63;
-        drawTextWithFont((int)graphicsGeneral.fsma3cBpk, (int)&letterSpacing_4458B0, (const char *)&v99, 110250);
+        drawTextWithFont((int)graphicsGeneral.fsma3cBpk, (int)&letterSpacing_4458B0, "purchase it ?", 110250);
       }
       else
       {
@@ -351,7 +422,7 @@ void enterShop()
           return;
         loadMenuSoundEffect(1u, 28, 0, configuration.effectsVolume, dword_4451A0);
         createPopup(144, 114, 384, 119, 1);
-        v101 = 1701257316;
+        //v101 = 1701257316;
         v99[0] = 544567129;
         v100 = 1819635575;
         v102 = 543236212;
@@ -376,7 +447,7 @@ void enterShop()
         v99[0] = 1701736269;
         v102 = 540697701;
         v12 = cars[actualCarSelected].cost;
-        v101 = 1852994932;
+        //v101 = 1852994932;
         v100 = 1701978233;
         LOBYTE(v103) = 0;
         _itoa(abs(v12 - v5), DstBuf, 10);
@@ -423,6 +494,7 @@ void enterShop()
       while ( 2 )
       {
         v46 = 170 * v45 + 123097;
+        updateCursor(0);//this is a menuType we dont have now
         refreshAndCheckConnection_42A570();
         refreshAndCheckConnection_42A570();
         drawMenuAnimation(16, 141, carAnimCurrentFrame_45FBA0, getCarBpkById(actualCarSelected), (int)&carAnimFrameSize_45FBA0[64 * actualCarSelected]);
@@ -456,7 +528,7 @@ void enterShop()
         {
           default:
             continue;
-          case KEY_F1:
+          //case KEY_F1:
             //if ( isMultiplayerGame )
             //  multiplayer_sub_42CCF0();
             continue;
@@ -504,8 +576,8 @@ void enterShop()
             if ( v45 )
               goto LABEL_90;
             loadMenuSoundEffect(5u, 4, 0, configuration.effectsVolume, 147456);
-            v57 = actualCarSelected;
-            v58 =  driverId;
+            //v57 = actualCarSelected;
+            //v58 =  driverId;
             drivers[driverId].carType = actualCarSelected;
 			drivers[driverId].money += v5 - cars[drivers[driverId].carType].cost;
 			drivers[driverId].carMoneyCost = cars[drivers[driverId].carType].cost;
@@ -527,7 +599,7 @@ void enterShop()
             drawTextWithFont((int)graphicsGeneral.fsma3cBpk, (int)&letterSpacing_4458B0, (const char *)&v99, 89770);
             v99[0] = 1852139639;
             v100 = 1852401184;
-            v101 = 1701344105;
+            //v101 = 1701344105;
             LOWORD(v102) = 11876;
             BYTE2(v102) = 0;
             drawTextWithFont((int)graphicsGeneral.fsma3cBpk, (int)&letterSpacing_4458B0, (const char *)&v99, 100010);
@@ -542,11 +614,11 @@ void enterShop()
               {
                 //if ( isMultiplayerGame )
                 //  multiplayer_sub_42CCF0();
-                v60 = driverId;
+                //v60 = driverId;
               }
               else
               {
-                v60 = driverId;
+                //v60 = driverId;
                 if ( v59 == -53 )
                 {
 					v72 = drivers[driverId].colour;
@@ -584,7 +656,7 @@ void enterShop()
               v97 = *(BYTE *)v64;
               v67 = (double)v65;
               v68 = (double)v97;
-			 // sub_424240(224,v4,v67,v66);
+			  sub_424240(224,v4,v67,v66);
 			  /*		  v1 = *((BYTE *)graphicsGeneral.copperPal + 1);
 					  v66 = (double)*((BYTE *)graphicsGeneral.copperPal + 2);
 					  v58 = *((BYTE *)graphicsGeneral.copperPal + 0);
@@ -660,7 +732,7 @@ LABEL_90:
       else if ( !hasInsuficientMoneyToBuy(cars[drivers[driverId].carType].engineUpgradeCosts[drivers[driverId].engine]) )
       {
         loadMenuSoundEffect(1u, 28, 0, configuration.effectsVolume, dword_4451A0);
-        v77 = 27 * driverId;
+        //v77 = 27 * driverId;
 		drivers[driverId].money = drivers[driverId].money - cars[drivers[driverId].carType].engineUpgradeCosts[drivers[driverId].engine];
 		drivers[driverId].carMoneyCost += cars[drivers[driverId].carType].engineUpgradeCosts[drivers[driverId].engine];
         reloadEngineAnimation();
@@ -681,7 +753,7 @@ LABEL_90:
       else if ( !hasInsuficientMoneyToBuy(cars[drivers[driverId].carType].tireUpgradeCosts[drivers[driverId].tire]) )
       {
         loadMenuSoundEffect(1u, 28, 0, configuration.effectsVolume, dword_4451A0);
-        v80 = 27 * driverId;
+        //v80 = 27 * driverId;
 		drivers[driverId].money = drivers[driverId].money- cars[drivers[driverId].carType].tireUpgradeCosts[drivers[driverId].tire];
 		drivers[driverId].carMoneyCost += cars[drivers[driverId].carType].tireUpgradeCosts[drivers[driverId].tire];
         reloadTireAnimation();
@@ -702,7 +774,7 @@ LABEL_90:
       else if ( !hasInsuficientMoneyToBuy(cars[drivers[driverId].carType].armourUpgradeCosts[drivers[driverId].armour]) )
       {
         loadMenuSoundEffect(1u, 28, 0, configuration.effectsVolume, dword_4451A0);
-        v83 = driverId;
+        //v83 = driverId;
 		drivers[driverId].money = drivers[driverId].money - cars[drivers[driverId].carType].armourUpgradeCosts[drivers[driverId].armour];
 			
 			
@@ -760,7 +832,7 @@ LABEL_154:
       }
       break;
     case CONTINUE:
-    
+        free(youcould);
       if ( drivers[driverId].damage != 100 || useWeapons )
       {
         if ( isMultiplayerGame )
@@ -847,6 +919,7 @@ LABEL_154:
       }
       break;
     default:
+        free(youcould);
       return;
   }
 }
@@ -872,7 +945,7 @@ char postLoadedOrLicense()
   int v16; // edi@60
 //  bool v17; // zf@63
   bool v18; // sf@63
-  unsigned __int8 v19; // of@63
+  unsigned __int8 v19 = 0; // of@63
   int v20; // esi@73
   int v21; // edi@74
   unsigned __int8 v22; // di@78
@@ -1221,6 +1294,8 @@ LABEL_44:
           v57 = 1;
         }
         break;
+      default:
+          break;
     }
     while ( 1 )
     {
@@ -1570,12 +1645,12 @@ LABEL_220:
         ++v50;
       }
       while ( v51 < maxPaletteEntries );
-      drawBorder2(426, 243, 0x6Cu, 114);
-      drawBorder2(0, 115, 0x80u, 114);
-      drawBorder2(10, 243, 0x6Cu, 114);
-      drawBorder2(114, 243, 0x6Cu, 114);
-      drawBorder2(218, 243, 0x6Cu, 114);
-      drawBorder2(322, 243, 0x6Cu, 114);
+      removeBorder(426, 243, 0x6Cu, 114);
+      removeBorder(0, 115, 0x80u, 114);
+      removeBorder(10, 243, 0x6Cu, 114);
+      removeBorder(114, 243, 0x6Cu, 114);
+      removeBorder(218, 243, 0x6Cu, 114);
+      removeBorder(322, 243, 0x6Cu, 114);
       if ( !menuOptionSelected_463DF0 )
       {
         drawBorder(0, 115, 128, 114);
@@ -1626,6 +1701,8 @@ LABEL_220:
         case 3:
           confirmationPopup("Game not found.");
           break;
+        default:
+            break;
       }
       memcpy(screenBuffer, dword_461ED8, 0x4B000u);
       refreshAllScreen();
@@ -1654,7 +1731,7 @@ void shopScreenMoveUp_421D90()
     loadMenuSoundEffect(1u, 26, 0, configuration.effectsVolume, dword_445198);
     menuOptionSelected_463DF0 = 0;
     reloadCarAnimation2();
-    drawBorder2(10, 243, 0x6Cu, 114);
+    removeBorder(10, 243, 0x6Cu, 114);
     drawBorder(0, 115, 128, 114);
     refreshAllScreen();
   }
@@ -1668,7 +1745,7 @@ void shopScreenMoveDown_421DF0()
     loadMenuSoundEffect(1u, 26, 0, configuration.effectsVolume, dword_445198);
     menuOptionSelected_463DF0 = 1;
     reloadEngineAnimation2();
-    drawBorder2(0, 115, 0x80u, 114);
+    removeBorder(0, 115, 0x80u, 114);
     drawBorder(10, 243, 108, 114);
     refreshAllScreen();
   }
@@ -1680,10 +1757,10 @@ int showCarBought()
   unsigned int v0; // eax@1
 //  void *v1; // edi@1
 //  char v2; // cl@2
-  int v3; // eax@3
+  //int v3; // eax@3
   char * v5; // [sp-1h] [bp-29h]@1
   __int16 v6; // [sp+0h] [bp-28h]@1
-  char DstBuf[100]; // [sp+14h] [bp-14h]@1
+  char DstBuf[100] = ""; // [sp+14h] [bp-14h]@1
 
   drawImageWithPosition2((int)carbas2Bpk, 96, 96, (int)((char *)screenBuffer + 80016));
   drawImageWithPosition2((int)((char *)carnameBpk + 1536 * actualCarSelected), 96, 16, (int)((char *)screenBuffer + 80016));
@@ -1709,6 +1786,7 @@ strcpy(v5,"$"); /* copy name into the new var */
 	v6 = getBoxTextOffset(v5);//get small text size
 
   drawInGamePrices(v5, v6 + 132496);
+  free(v5);
   createPopup(144, 114, 384, 119, 1);
   writeTextInScreen(&aVagabondBought[1760 * drivers[driverId].carType], 79530);
   writeTextInScreen((const char *)&unk_44E168 + 1760 * drivers[driverId].carType, 89770);

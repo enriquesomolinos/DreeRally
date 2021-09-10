@@ -4,6 +4,7 @@
 #include <string.h>
 #include "savegame.h"
 #include "defs.h"
+#include <SDL_stdinc.h>
 
 void *Str; // idb
 int savegames_unk_446DC2 =10;
@@ -67,11 +68,11 @@ int  decryptEntireSavegame(int a1, char *Filename)
 char* getSaveGameName(int savegame) {
 	char Filename[20];
 	char *saveNumber = (char *) malloc(1);
-	FILE * fp;
+//	FILE * fp;
 	char *saveGameName= (char *) malloc(20);
 	
 	strcpy(Filename, "DR.SG");
-	_itoa(savegame, saveNumber, 10);
+	SDL_itoa(savegame, saveNumber, 10);
 	strcat(Filename, saveNumber);
 	if ((signed int)fileExists(Filename) > 0) {
 		

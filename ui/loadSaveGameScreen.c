@@ -1,14 +1,16 @@
 #include "loadSaveGameScreen.h"
-
+#include <SDL_stdinc.h>
 #include "../savegame.h"
 #include "blackMarketScreen.h"
-#include "../menus.h"
+#include "util/menus.h"
 #include "../imageUtil.h"
 #include "../config.h"
 #include "../defs.h"
 #include "../drivers.h"
 #include "../dr.h"
 #include "../graphics.h"
+#include "util/input.h"
+#include "util/popup.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -58,8 +60,8 @@ signed int loadGame()
     *(BYTE *)(v1 + 10) = 0;
     menuActive_4457F0[45+v0] = 1;
     strcpy(Filename, "DR.SG");
-    _itoa(v0, DstBuf, 10);
-	v2 = strlen(DstBuf) + 1;
+    SDL_itoa(v0, DstBuf, 10);
+	//v2 = strlen(DstBuf) + 1;
    /* v3 = &v20;
     do
     {
@@ -131,7 +133,7 @@ signed int loadGame()
   *(_WORD *)v10 = 0;
   *(BYTE *)(v10 + 2) = 0;
   strcpy(Filename, "DR.SG");
-  _itoa(v6, DstBuf, 10);
+  SDL_itoa(v6, DstBuf, 10);
   /*v11 = strlen(&DstBuf) + 1;
   v12 = &v20;
   do
@@ -214,7 +216,7 @@ __int16 savegameWithName()
     *(BYTE *)(v1 + 10) = 0;
 	menuActive_4457F0[45+v0] = 1;
     strcpy(Filename, "DR.SG");
-    _itoa(v0, DstBuf, 10);
+    SDL_itoa(v0, DstBuf, 10);
    /* v2 = strlen(&DstBuf) + 1;
     v3 = (char *)&v25 + 3;
     do
@@ -288,7 +290,7 @@ __int16 savegameWithName()
     do
       v16 = *v15++;
     while ( v16 );
-    v25 = v15 - &v27[1];
+   // v25 = v15 - &v27[1];
     if ( v15 != &v27[1] )
     {
       do
@@ -312,7 +314,7 @@ __int16 savegameWithName()
       LOBYTE(v13) = v24;
     }
     strcpy(Filename, "DR.SG");
-    _itoa(v6, DstBuf, 10);
+    SDL_itoa(v6, DstBuf, 10);
     /*v18 = strlen(&DstBuf) + 1;
     v19 = (char *)&v25 + 3;
     do

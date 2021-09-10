@@ -1,8 +1,9 @@
+#include <SDL_keysym.h>
 #include "menu.h"
 
-#include "../menus.h"
-
-#include "../anim.h"
+#include "util/menus.h"
+#include <SDL_stdinc.h>
+#include "util/anim.h"
 #include "../imageUtil.h"
 #include "../config.h"
 #include "../defs.h"
@@ -11,6 +12,9 @@
 #include "../graphics.h"
 #include "../circuit.h"
 #include "../variables.h"
+#include "../i18n/i18n.h"
+#include "util/popup.h"
+#include "../sfx/sound.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -580,7 +584,10 @@ signed int   readEventInMenu(int menuType)
     switch (key)
     {
       default:
-        continue;
+        if(key != 0){
+          key =1;
+        }
+        continue; 
       case KEY_ESCAPE :
         if ( !menuType)
         {
@@ -602,7 +609,10 @@ LABEL_14:
         return result;
       case KEY_ENTER:
       case KEY_ESPACE:
+      case 0x41:
+      case SDLK_KP_ENTER:
       case 0x9C:
+
 
 		  v1 = dword_445708[menuType];
 		///v1 = dword_445708[7 * a1];
@@ -611,6 +621,7 @@ LABEL_14:
           goto LABEL_13;
         continue;
       case KEY_F1:
+      
         //if ( isMultiplayerGame )
          // multiplayer_sub_42CCF0();
         continue;
@@ -621,11 +632,13 @@ LABEL_14:
         loadMenuSoundEffect(1u, 25, 0, configuration.effectsVolume, dword_445194);
         continue;
       case KEY_DOWN:
+      case SDLK_DOWN:
       case 0xD0:
         refreshMenuDown(menuType);
 	    loadMenuSoundEffect(1u, 25, 0, configuration.effectsVolume, dword_445194);
 
         continue;
+     
     }
   }
 }
@@ -2448,7 +2461,9 @@ LABEL_2:
           drawImageWithPosition((int)slidmus2Bpk, 172, 24, (int)((char *)screenBuffer + 160314));
           drawImageWithPosition((int)volcur2Bpk, 10, 24, (int)((char *)screenBuffer + v18 + 160329));
           drawKeyCursor(v18 + 160327, (char *)screenBuffer + v18 + 160327, 0xEu, 24);
-          _itoa((unsigned __int64)((double)v18 * 0.78125), DstBuf, 10);
+
+          
+          SDL_itoa((unsigned __int64)((double)v18 * 0.78125), DstBuf, 10);
           v6 = (char *)&v19 + 3;
           do
             v7 = (v6++)[1];
@@ -2517,7 +2532,7 @@ LABEL_2:
           drawImageWithPosition((int)slidmus2Bpk, 172, 24, (int)((char *)screenBuffer + 160314));
           drawImageWithPosition((int)volcur2Bpk, 10, 24, (int)((char *)screenBuffer + v0 + 160329));
           drawKeyCursor(v0 + 160327, (char *)screenBuffer + v0 + 160327, 0xEu, 24);
-          _itoa((unsigned __int64)((double)v19 * 0.78125),DstBuf, 10);
+          SDL_itoa((unsigned __int64)((double)v19 * 0.78125),DstBuf, 10);
           v13 = (char *)&v19 + 3;
           do
             v14 = (v13++)[1];

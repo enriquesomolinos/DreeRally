@@ -1,6 +1,7 @@
 
 #include "cars.h"
 #include <stdlib.h>
+#include <string.h>
  Car cars[7];
 
  char* carName[7];

@@ -1,3 +1,6 @@
+#ifndef PEDESTRIAN_H
+#define PEDESTRIAN_H
+
 typedef struct Pedestrian {
 	int positionX; // weak   479AA4
 	int positionY; // weak 479AA8
@@ -14,3 +17,5 @@ extern Pedestrian pedestrian_479AA4[20];
 
 char   drawPedestrian_43AF30(int screenOffset, int pedestrianbpkOffset, int sizeToPaint);
 char drawShotPedestrian_4111F0();
+
+#endif

@@ -44,7 +44,7 @@ int   extractFromBpa(char* bpaFilename, void *dest, char* filename)
   int v31; // [sp+34h] [bp-44h]@11
   char fat[0x10EF];//cabecera del fichero
   char *destStream;
-  int debug=1;
+ 
   char completeFile[300] = "";//"C:/proyectos/Drwin/Debug/";
   FILE *extractedFile;
   if(mainArgs.mod){
@@ -213,7 +213,7 @@ int   getFileSizeFromBpa(char *bpaFile, char * filename)
   char v16; // al@16
   FILE *bpa; // esi@18
   __int32 fileHeaderStart; // eax@18
-  int *v19; // ecx@19
+//  int *v19; // ecx@19
   int v20; // edx@19
   int filseSize; // edi@21
   int DstBuf; // [sp+14h] [bp-64h]@1

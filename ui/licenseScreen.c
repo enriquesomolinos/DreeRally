@@ -1,18 +1,21 @@
-
+#include "util/input.h"
 #include "../graphics.h"
 #include "../defs.h"
-#include "../menus.h"
+#include "util/menus.h"
 #include "../dr.h"
 #include "../asset/bpaUtil.h"
-
+#include <SDL_stdinc.h>
 #include "licenseScreen.h"
-
 #include "../imageUtil.h"
 #include "../drivers.h"
 #include "../config.h"
 #include "../cars.h"
+#include "util/popup.h"
 #include "../i18n/i18n.h"
+
+#include "../sfx/sound.h"
 #include <stdlib.h>
+#include <string.h>
 
 char aSpeedMakesMeDi[21] = "speed makes me dizzy"; // weak
 char aILiveToRide[15] = "i live to ride"; // weak
@@ -124,9 +127,9 @@ int   licenseScreen(int useWeapons_mal)
   }
   drawImageWithPosition2((int)carbas2Bpk, 96, 96, (int)((char *)screenBuffer + 113119));
   drawImageWithPosition2((int)carnameBpk, 96, 16, (int)((char *)screenBuffer + 113119));
-  _itoa(cars[0].cost, &DstBuf, 10);
+  SDL_itoa(cars[0].cost, &DstBuf, 10);
 
-   v8 = strlen(&DstBuf) + 1;
+   //v8 = strlen(&DstBuf) + 1;
 
 	v9 = malloc(v3); //coste + el $
 	strcpy(v9,"$"); /* copy name into the new var */
@@ -135,6 +138,7 @@ int   licenseScreen(int useWeapons_mal)
   v11 = getBoxTextOffset(v9);
   drawInGamePrices(v9, v11 + 165599);
   v12 = 0;
+  free(v9);
   for ( j = 0; j < carAnimCurrentFrame_45FBA0; ++j )
     v12 += carAnimFrameSize_45FBA0[j];
   copyImageToBuffer((int)((char *)kuplaBpk + v12), (int)dword_461EA4);
@@ -193,7 +197,7 @@ int   licenseScreen(int useWeapons_mal)
   drawImageWithPosition2((int)*(&graphicsGeneral.face01Bpk + drivers[driverId].face), 64, 64, (int)((char *)screenBuffer + 122330));
   drawImageWithPosition2((int)carbas2Bpk, 96, 96, (int)((char *)screenBuffer + 113119));
   drawImageWithPosition2((int)carnameBpk, 96, 16, (int)((char *)screenBuffer + 113119));
-  _itoa(cars[0].cost, &DstBuf, 10);
+  SDL_itoa(cars[0].cost, &DstBuf, 10);
   v59 = 36;
   v21 = strlen(&DstBuf) + 1;
   v22 = (char *)&v58 + 3;
@@ -368,7 +372,7 @@ LABEL_74:
   strcpy(drivers[v20].name ,v17);
   _strlwr(drivers[v20].name);
   //strlwr(&byte_460840[108 * v20]);
-  v32 = 27 * driverId;
+  //v32 = 27 * driverId;
   //v33 = byte_460840[108 * driverId];
   v33 = drivers[driverId].name;
   v34 = drivers[driverId].name;
@@ -389,7 +393,7 @@ LABEL_74:
     while ( v37 < strlen(v34) );
     dword_45FA78 = v35;
   }
-  v39 = drivers[v32].colour; //era dword_46086C
+  v39 = drivers[driverId].colour; //era dword_46086C
   v40 = (char *)graphicsGeneral.copperPal + 2 * v39;
   v41 = (unsigned __int8)v40[v39 + 2];
   v42 = (int)&v40[v39];

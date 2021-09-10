@@ -22,12 +22,6 @@
     <Filter Include="Source Files\multiplayer">
       <UniqueIdentifier>{3b9f0da2-ecf3-425f-b894-aa91422ea544}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\popup">
-      <UniqueIdentifier>{319cf5aa-8220-4981-9e0f-729b94fe3d63}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\popup">
-      <UniqueIdentifier>{05c38d85-362d-47aa-b0fc-9f32074b7d2e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\i18n">
       <UniqueIdentifier>{4f0a99e6-3999-4119-baba-06eba08d0381}</UniqueIdentifier>
     </Filter>
@@ -54,12 +48,6 @@
     </Filter>
     <Filter Include="Source Files\portability">
       <UniqueIdentifier>{fd378526-af3b-4304-a106-b789de6f9af8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\input">
-      <UniqueIdentifier>{ca7749f8-620d-4662-b54f-6f80d67d57d6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\input">
-      <UniqueIdentifier>{b2bda5fb-d2b6-440d-8ae7-f6aa1b1469f5}</UniqueIdentifier>
     </Filter>
     <Filter Include="Header Files\ui">
       <UniqueIdentifier>{8faf9789-5ce8-4272-b375-5452037fefe0}</UniqueIdentifier>
@@ -100,11 +88,14 @@
     <Filter Include="Resource Files\lang">
       <UniqueIdentifier>{de194950-f540-4591-a1a2-4d3cc1d493cd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\ui\util">
+      <UniqueIdentifier>{653c580d-7f4e-424a-b233-679997d6eff5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\ui\util">
+      <UniqueIdentifier>{79d2236c-a473-44a2-b6c1-122693524a84}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="anim.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="cars.c">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -118,9 +109,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="graphics.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="menus.c">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="raceParticipant.c">
@@ -138,9 +126,6 @@
     <ClCompile Include="circuit.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="raceResults.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="race\powerup.c">
       <Filter>Source Files\race</Filter>
     </ClCompile>
@@ -149,9 +134,6 @@
     </ClCompile>
     <ClCompile Include="race\3dSystem.c">
       <Filter>Source Files\race</Filter>
-    </ClCompile>
-    <ClCompile Include="popup\popup.c">
-      <Filter>Source Files\popup</Filter>
     </ClCompile>
     <ClCompile Include="multiplayer\multiplayer.c">
       <Filter>Source Files\multiplayer</Filter>
@@ -219,6 +201,36 @@
     <ClCompile Include="util\hash.c">
       <Filter>Source Files\util</Filter>
     </ClCompile>
+    <ClCompile Include="ui\util\input.c">
+      <Filter>Source Files\ui\util</Filter>
+    </ClCompile>
+    <ClCompile Include="ui\util\popup.c">
+      <Filter>Source Files\ui\util</Filter>
+    </ClCompile>
+    <ClCompile Include="ui\util\anim.c">
+      <Filter>Source Files\ui\util</Filter>
+    </ClCompile>
+    <ClCompile Include="ui\util\raceResults.c">
+      <Filter>Source Files\ui\util</Filter>
+    </ClCompile>
+    <ClCompile Include="ui\util\menus.c">
+      <Filter>Source Files\ui\util</Filter>
+    </ClCompile>
+    <ClCompile Include="race\lightSystem.c">
+      <Filter>Source Files\race</Filter>
+    </ClCompile>
+    <ClCompile Include="ui\util\carRightSide.c">
+      <Filter>Source Files\ui\util</Filter>
+    </ClCompile>
+    <ClCompile Include="ui\util\bottomText.c">
+      <Filter>Source Files\ui\util</Filter>
+    </ClCompile>
+    <ClCompile Include="race\endFlag.c">
+      <Filter>Source Files\race</Filter>
+    </ClCompile>
+    <ClCompile Include="race\leftBar.c">
+      <Filter>Source Files\race</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="cars.h">
@@ -242,13 +254,7 @@
     <ClInclude Include="graphics.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="menus.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="savegame.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="soundEffects.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="util.h">
@@ -266,9 +272,6 @@
     <ClInclude Include="raceParticipant.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="raceResults.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="race\terrain.h">
       <Filter>Header Files\race</Filter>
     </ClInclude>
@@ -284,9 +287,6 @@
     <ClInclude Include="race\3dSystem.h">
       <Filter>Header Files\race</Filter>
     </ClInclude>
-    <ClInclude Include="popup\popup.h">
-      <Filter>Header Files\popup</Filter>
-    </ClInclude>
     <ClInclude Include="i18n\i18n.h">
       <Filter>Header Files\i18n</Filter>
     </ClInclude>
@@ -298,12 +298,6 @@
     </ClInclude>
     <ClInclude Include="portability\portability.h">
       <Filter>Header Files\portability</Filter>
-    </ClInclude>
-    <ClInclude Include="input\input.c">
-      <Filter>Source Files\input</Filter>
-    </ClInclude>
-    <ClInclude Include="input\input.h">
-      <Filter>Header Files\input</Filter>
     </ClInclude>
     <ClInclude Include="ui\startGameScreen.h">
       <Filter>Header Files\ui</Filter>
@@ -368,8 +362,38 @@
     <ClInclude Include="ui\mainScreen.h">
       <Filter>Header Files\ui</Filter>
     </ClInclude>
-    <ClInclude Include="anim.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="ui\util\input.h">
+      <Filter>Header Files\ui\util</Filter>
+    </ClInclude>
+    <ClInclude Include="ui\util\popup.h">
+      <Filter>Header Files\ui\util</Filter>
+    </ClInclude>
+    <ClInclude Include="ui\util\anim.h">
+      <Filter>Header Files\ui\util</Filter>
+    </ClInclude>
+    <ClInclude Include="ui\util\raceResults.h">
+      <Filter>Header Files\ui\util</Filter>
+    </ClInclude>
+    <ClInclude Include="ui\util\menus.h">
+      <Filter>Header Files\ui\util</Filter>
+    </ClInclude>
+    <ClInclude Include="sfx\soundEffects.h">
+      <Filter>Header Files\sfx</Filter>
+    </ClInclude>
+    <ClInclude Include="race\lightSystem.h">
+      <Filter>Header Files\race</Filter>
+    </ClInclude>
+    <ClInclude Include="ui\util\carRightSide.h">
+      <Filter>Header Files\ui\util</Filter>
+    </ClInclude>
+    <ClInclude Include="ui\util\bottomText.h">
+      <Filter>Header Files\ui\util</Filter>
+    </ClInclude>
+    <ClInclude Include="race\endFlag.h">
+      <Filter>Header Files\race</Filter>
+    </ClInclude>
+    <ClInclude Include="race\leftBar.h">
+      <Filter>Header Files\race</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

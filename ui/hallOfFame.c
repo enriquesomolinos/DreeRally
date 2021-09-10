@@ -1,6 +1,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "../defs.h"
 
 #include "../graphics.h"
@@ -8,15 +9,13 @@
 #include "../drivers.h"
 #include "../cars.h"
 #include "../imageUtil.h"
-#include "../menus.h"
+#include "util/menus.h"
 
 #include "../config.h"
 #include "../dr.h"
 #include "../circuit.h"
+#include <SDL_stdinc.h>
 
-#ifdef PORTABILITY
-	#include "../portability/portability.h"
-#endif
 
 
 int dword_461FD4; // weak
@@ -34,6 +33,12 @@ extern _UNKNOWN unk_45F8BC; // weak
 
 extern char aDeliverator[12] = "Deliverator"; // weak
 
+char byte_456618[] = { 'A' }; // weak
+char byte_45665E[] = { 'S' }; // weak
+char byte_4566A4[] = { 'f' }; // weak
+char byte_4566EA[] = { 'k' }; // weak
+
+
 //----- (00431510) --------------------------------------------------------
 int seeHallOfFame()
 {
@@ -43,7 +48,7 @@ int seeHallOfFame()
   char v3; // al@3
   int v4; // edx@4
   int v5; // edi@7
-  int *v6; // eax@7
+//  int *v6; // eax@7
 //  char *v7; // edx@7
 //  char v8; // cl@8
   int v9; // esi@9
@@ -69,7 +74,7 @@ int seeHallOfFame()
   do
   {
     v1 = v0 + 1;
-    _itoa(v0 + 1, DstBuf, 10);
+    SDL_itoa(v0 + 1, DstBuf, 10);
     v2 = &v21;
     do
       v3 = (v2++)[1];
@@ -81,7 +86,7 @@ int seeHallOfFame()
       drawTextWithFont(v4, (int)&unk_445928, DstBuf, 218908);
     else
       drawTextWithFont(v4, (int)&unk_445928, DstBuf, 14080 * v0 + 92196);
-    v5 = 5 * v0;
+    //v5 = 5 * v0;
     /*v6 = &configuration.hallOfFameEntries[v0];
     v7 = (char *)(DstBuf - (char *)v6);
     do
@@ -95,7 +100,7 @@ int seeHallOfFame()
     v9 = 14080 * v0;
 	//driver
     drawTextWithFont((int)graphicsGeneral.fmed1aBpk, (int)&unk_445928, _strupr(configuration.hallOfFameEntries[v0].name), v9 + 92297);
-    _itoa(configuration.hallOfFameEntries[v0].races, DstBuf, 10);
+    SDL_itoa(configuration.hallOfFameEntries[v0].races, DstBuf, 10);
     v10 = configuration.hallOfFameEntries[v0].races;
 	//races
     if ( v10 >= 0 && v10 < 10 )
@@ -155,6 +160,7 @@ LABEL_25:
   screenBuffer = (void *)dword_45FC00;
   memcpy((void *)(dword_45FC00 + 53760), (char *)graphicsGeneral.menubg5Bpk + 53760, 0x2C380u);
   v17 = 0;
+
   drawImageWithPosition((int)graphics2.recotxtBpk, 640, 16, (int)((char *)screenBuffer + 58880));
   drawRecordByCircuit((unsigned __int8)circuitOrder_45673C[0]);
   drawImageWithPosition2(graphics2.trsnap2m1Bpk[circuitOrder_45673C[0]], 128, 98, (int)((char *)screenBuffer + 137000));
@@ -632,7 +638,7 @@ int   drawRecordByCircuit(int a1)
   //}
 	//escribe el circuito
   drawTextWithFont((int)graphicsGeneral.fbig3aBpk, (int)&bigLetterSpacing_445848, Str, 87453 - (v11 >> 1));
-  v14 = Str - aDeliverator;
+  //v14 = Str - aDeliverator;
   v15 = &Str[-24 * a1] - (char *)&unk_45F8B0;
   v16 = 133480;
   v37 = (int)aDeliverator;
@@ -665,10 +671,11 @@ int   drawRecordByCircuit(int a1)
     strupr(Str);*/
 	memset(name, "\0",strlen(name));
 	strcpy(name, configuration.circuitRecords[a1  + index*18].name);
-    drawTextWithFont((int)graphicsGeneral.fmed1aBpk, (int)&unk_445928, name, v16);
+    drawTextWithFont((int)graphicsGeneral.fmed1aBpk, (int)&unk_445928, _strupr(name), v16);
     _itoa(configuration.circuitRecords[a1  + index*18].min, DstBuf, 10);
     _itoa(configuration.circuitRecords[a1  + index*18].sec, v44, 10);
     _itoa(configuration.circuitRecords[a1  + index*18].cen, v47, 10);
+
     /*if ( strlen(DstBuf) == 1 )
     {
       v42 = DstBuf;
@@ -720,10 +727,17 @@ int   drawRecordByCircuit(int a1)
     
 	
 	memset(Str, "\0" ,strlen(Str));
-	strcpy(Str, DstBuf);
+    strcat(DstBuf, "0");
+    strcpy(Str, DstBuf);
 	strcat(Str, ":");
+    if (strlen(v44) == 1) {
+        strcat(Str, "0");
+    }
 	strcat(Str, v44);
 	strcat(Str, ".");
+    if (strlen(v47) == 1) {
+        strcat(Str, "0");
+    }
 	strcat(Str, v47);
     drawTextWithFont(v34, (int)&unk_445928, Str, v16 + 154);
     v17 -= 432;
@@ -736,8 +750,8 @@ int   drawRecordByCircuit(int a1)
     --v39;
     if ( v35 )
       break;
-    v15 = v38;
-    v14 = v50;
+    //v15 = v38;
+    //v14 = v50;
 	index--;
   }
   return result;
@@ -826,7 +840,7 @@ char showHallOfFameEndGame_430FA0()//muestra hall of fame
     v10 = configuration.difficulty;
     dword_461F2C[v7] = drivers[driverId].totalRaces;
     dword_461F30[v7] = v10;
-    sub_421980(17, 22 * v1 + 138, 603, 24);
+    drawBorder_421980(17, 22 * v1 + 138, 603, 24);
     saveConfiguration();
   }
 LABEL_12:
@@ -834,7 +848,7 @@ LABEL_12:
   do
   {
     v12 = v11 + 1;
-    _itoa(v11 + 1, DstBuf, 10);
+    SDL_itoa(v11 + 1, DstBuf, 10);
     v13 = &v29;
     do
       v14 = (v13++)[1];
@@ -858,7 +872,7 @@ LABEL_12:
     _strupr(DstBuf);
     v20 = 14080 * v11;
     drawTextWithFont((int)graphicsGeneral.fmed1aBpk, (int)&unk_445928, DstBuf, v20 + 92297);
-    _itoa(dword_461F2C[v16], DstBuf, 10);
+    SDL_itoa(dword_461F2C[v16], DstBuf, 10);
     v21 = dword_461F2C[v16];
     if ( v21 >= 0 && v21 < 10 )
       drawTextWithFont((int)graphicsGeneral.fmed1aBpk, (int)&unk_445928, DstBuf, v20 + 92504);
