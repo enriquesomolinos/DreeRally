@@ -9,7 +9,13 @@
 
 MainArgs mainArgs = { 0,1,1,1,1,NULL,NULL };
 
-Configuration configuration;
+//Los botones por defecto del joystick son constantes en el .data del original (0x445128..0x44512F:
+//izquierda 1, derecha 2, arriba 3, freno 4, acelerar 5, turbo 6, metralleta 7, mina 8); defaultConfig
+//solo corre sin dr.cfg y con ellos a 0 todos los botones se cruzaban en el codigo 0.
+Configuration configuration = {
+	.defaultAccelerateGamepad = 5, .defaultBrakeGamepad = 4, .defaultLeftSteeringGamepad = 1,
+	.defaultRightSteeringGamepad = 2, .defaultTurboGamepad = 6, .defaultGunGamepad = 7, .defaultMineGamepad = 8
+};
 
 int checkArgs(char* args)
 {

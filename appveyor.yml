@@ -3,11 +3,10 @@ pull_requests:
   do_not_increment_build_number: true
 clone_depth: 1
 configuration: Release
-image: Visual Studio 2013
+image: Visual Studio 2022
 platform: Win32
-build:
-  project: DreeRally.sln
-  verbosity: minimal
+build_script:
+  - msbuild DreeRally.sln /m /nologo /v:minimal /p:Configuration=%CONFIGURATION% /p:Platform=%PLATFORM% /p:PlatformToolset=v143 /p:WindowsTargetPlatformVersion=10.0 /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
 artifacts:
   - path: Release/DreeRally.exe
     name: DreeRally.exe

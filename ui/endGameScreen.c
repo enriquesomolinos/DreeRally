@@ -7,6 +7,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <SDL.h>
+#include "../diagnostics.h"
 
 //----- (00427700) --------------------------------------------------------
 int showEndScreen()
@@ -29,6 +30,12 @@ int showEndScreen()
   transitionToBlack();
   v0 = SDL_RWFromFile("end.bmp", "rb");
   v1 = SDL_LoadBMP_RW(v0, 1);
+  //end.bmp no viene con los datos de la version Windows: sin esto se cerraba al salir.
+  if ( !v1 )
+  {
+    diagnosticLog("showEndScreen: no se pudo cargar end.bmp, se omite la pantalla final");
+    return 0;
+  }
   v2 = 0;
   v3 = 0;
   //v3 = (signed int)dword_45FC44;

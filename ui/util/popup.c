@@ -14,15 +14,17 @@
 #include "../../config.h"
 #include "../../variables.h"
 #include "popup.h"
+#include "originalTexts.h"
+#include "../../diagnostics.h"
 
 char aASlickSteroidR[30] = "[A slick steroid run, anyone?"; // weak
 _UNKNOWN unk_452DE8; // weak
-char byte_452E38[] = { '[' }; // weak
+char byte_452E38[] = "[Extra $"; // texto completo del dr.exe original (antes solo el primer caracter)
 _UNKNOWN unk_452D70; // weak
 
 char aMoneyTalksAndT[32] = "Money talks, and [the damage is"; // weak
-char byte_452CD0[] = { '[' }; // weak
-char byte_452CF8[] = { '[' }; // weak
+char byte_452CD0[] = "[done, "; // texto completo del dr.exe original (antes solo el primer caracter)
+char byte_452CF8[] = "["; // texto completo del dr.exe original (antes solo el primer caracter)
 char aDown_ThatSDoug[34] = "down. That's dough baked luck for"; // weak
 char aYou_AndLuckShe[34] = "you. And luck, she ain't no lady."; // weak
 
@@ -31,9 +33,9 @@ _UNKNOWN unk_453108; // weak
 char aWannaGetRichTo[31] = "Wanna get rich, tough guy? OK."; // weak
 char aHereSTheDeal_I[35] = "[Here's the deal{. I have put some"; // weak
 char aMajorFundsOnTh[34] = "major funds on this race, betting"; // weak
-char byte_453248[] = { 't' }; // weak
+char byte_453248[] = "that ["; // texto completo del dr.exe original (antes solo el primer caracter)
 char aFinishLine_Mak[34] = "[finish line{. Make me right, and"; // weak
-char byte_4532E8[] = { '[' }; // weak
+char byte_4532E8[] = "[it'll pay you $"; // texto completo del dr.exe original (antes solo el primer caracter)
 _UNKNOWN unk_453338; // weak
 _UNKNOWN unk_453388; // weak
 char byte_447388[80] =
@@ -117,7 +119,7 @@ char aThereWasThatMu[33] = "there was that much smoke in the"; // weak
 char aWholeBurningHe[32] = "whole burning hell, and through"; // weak
 char aItAllBearingGi[32] = "it all, bearing gifts like some"; // weak
 char aBlessedBeastYo[35] = "blessed beast, you came. And [this"; // weak
-char byte_44ADF8[] = { '[' }; // weak
+char byte_44ADF8[] = "[here is prime stuff! $"; // texto completo del dr.exe original (antes solo el primer caracter)
 _UNKNOWN unk_44AE48; // weak
 _UNKNOWN unk_44AE98; // weak
 char aWhereReMyStero[23] = "[Where're my steroids?"; // weak
@@ -136,8 +138,8 @@ char aAKillerRaceThe[36] = "A killer race! The bullets took the"; // weak
 char aSkyLikeCloudsO[32] = "sky like clouds of locusts, and"; // weak
 char aTheScreamsOfMo[29] = "the screams of motors were a"; // weak
 char aBansheeWail_De[32] = "banshee wail. [Death!{ You were"; // weak
-char byte_44B3E8[] = { 'b' }; // weak
-char byte_44B438[] = { '[' }; // weak
+char byte_44B3E8[] = "beautiful, ["; // texto completo del dr.exe original (antes solo el primer caracter)
+char byte_44B438[] = "[coffin grave. $"; // texto completo del dr.exe original (antes solo el primer caracter)
 _UNKNOWN unk_44B488; // weak
 _UNKNOWN unk_44B4D8; // weak
 char aYourHitMissed[18] = "[Your hit missed!"; // weak
@@ -226,7 +228,7 @@ _UNKNOWN unk_44C1A8; // weak
 _UNKNOWN unk_44C478; // weak
 _UNKNOWN unk_44CB08; // weak
 _UNKNOWN unk_44CB58; // weak
-_UNKNOWN unk_45FBE0; // weak
+char killQuestDriverName[12]; //unk_45FBE0 en dr.exe: nombre del objetivo del hitman
 
 _UNKNOWN unk_454C38; // weak
 char aEndOfTheRoadDr[26] = "[End of the road, driver."; // weak
@@ -240,7 +242,6 @@ char aSideAtLeastYou[43] = "side, at least you lived to tell the tale."; // weak
 _UNKNOWN unk_454F08; // weak
 
  // weak
-char bigLetterSpacing_445848[] ;
 
 int dword_45678C = 5; // weak
 
@@ -249,10 +250,10 @@ char noCollectPopup_42E6F0()
 {
   createPopup(33, 131, 497, 230, 1);
   drawImageWithPosition((int)spons1bBpk, 104, 128, (int)((char *)screenBuffer + 107565));
-  writeTextInScreen((const char *)&unk_44CE28, 87201);
-  writeTextInScreen((const char *)&unk_44CE78, 97441);
+  writeTextInScreen("", 87201);
+  writeTextInScreen("", 97441);
   writeTextInScreen(aTooSlowNoDough, 107681);
-  writeTextInScreen((const char *)&unk_44CF18, 117921);
+  writeTextInScreen("", 117921);
   writeTextInScreen(aDeathRallyIsFo, 128161);
   writeTextInScreen(aTotallyLostThi, 138401);
   writeTextInScreen(aBonusYouCollec, 148641);
@@ -265,511 +266,189 @@ char noCollectPopup_42E6F0()
   return drawPopupCursor_42C780 ();
 }
 
+//Prueba: con DREERALLY_FORCE_EVENTS=1 sale un cartel por carrera, rotando hitman, drogas y
+//sabotaje (0, 1, 2), sin la probabilidad ni los requisitos de compra o de puntos.
+static int forcedEventCounter = 0;
+
+//Premios de los encargos por tipo de coche (0 Vagabond .. 5 Dervish). La oferta y el pago leen de
+//aqui; el quest guarda 6 - tipo, como el original. Cifras de dr.exe (cadenas en 0x442944..0x44296C):
+//la traduccion habia leido mal la del Dervish y la oferta decia $10000 en lugar de $12000.
+static const int hitmanRewardByCar[6] = { 500, 1000, 2000, 3000, 4000, 6000 };
+static const int drugRewardByCar[6] = { 1000, 2000, 4000, 6000, 8000, 12000 };
+
+static int questReward(const int *table, int quest)
+{
+  return quest >= 1 && quest <= 6 ? table[6 - quest] : 0;
+}
+static int forcedEvent = -1;
+
+static int nextForcedEvent(void)
+{
+  const char *value = getenv("DREERALLY_FORCE_EVENTS");
+  if ( !value || !*value || *value == '0' )
+    return -1;
+  return forcedEventCounter++ % 3;
+}
+
 //----- (0042DD10) --------------------------------------------------------
+//Reescrita contra dr.exe. La traduccion leia la parrilla de dword_45EB50 (ya no se llena),
+//indexaba drivers[108 * id] y armaba las lineas sobre locales supuestamente contiguos.
 int sabotageScreen()
 {
-  unsigned __int8 v0; // dl@1
-  char v1; // bl@1
-  unsigned __int8 v2; // al@1
-  int v3; // esi@1
-  int v4; // edx@1
-  int v5; // ecx@1
-//  signed int v6; // eax@1
-  int result; // eax@7
-  
-//  signed int v9; // esi@8
-//  int v10; // ecx@8
-  int v11; // edx@26
-  int v12; // edi@29
-  unsigned __int8 v13; // bl@29
-  int v14; // edx@29
-  char *v15; // edi@29
-  signed int v16; // ecx@29
-  signed int v17; // eax@29
-  int v18; // esi@43
-  int v19; // edx@44
-  unsigned int v20; // eax@45
-  int v21; // eax@45
-  unsigned int v22; // edi@45
-  int v23; // ST20_4@45
-  char *v24; // ecx@45
-  char v25; // dl@46
-  int v26; // eax@47
-  char v27; // cl@48
-  unsigned int v28; // eax@49
-  char *v29; // edi@49
-  char v30; // cl@50
-  char *v31; // edi@51
-  char v32; // al@52
-  int v33; // eax@53
-  char v34; // cl@54
-  unsigned int v35; // eax@55
-  char *v36; // edi@55
-  char v37; // cl@56
-  char *v38; // edi@57
-  char v39; // al@58
-  char v40; // [sp+8h] [bp-58h]@1
-  unsigned __int8 v41; // [sp+9h] [bp-57h]@1
-  unsigned __int8 v42; // [sp+Ah] [bp-56h]@1
-  unsigned __int8 v43; // [sp+Bh] [bp-55h]@1
-  int v44; // [sp+Ch] [bp-54h]@8
-  char DstBuf; // [sp+10h] [bp-50h]@45
-  char v46[16]; // [sp+1Ch] [bp-44h]@46
-  char v47[2]; // [sp+2Ch] [bp-34h]@48
-  unsigned __int8 v48; // [sp+2Eh] [bp-32h]@29
-  unsigned __int8 v49; // [sp+2Fh] [bp-31h]@29
+  int *grid = racePositions[selectedRace_462CE8];
   int maxDriverPoints;
+  int playerRank;
+  int bestRank;
+  int target;
+  int damage;
+  int i;
+  char line[80];
 
-  //cambiar a racePositions[0][0];
-  v0 = BYTE2(dword_45EB50[selectedRace_462CE8]);
-  v1 = LOBYTE(dword_45EB50[selectedRace_462CE8]);
-  v2 = BYTE3(dword_45EB50[selectedRace_462CE8]);
-  v3 = isMultiplayerGame;
-  v41 = BYTE1(dword_45EB50[selectedRace_462CE8]);
-  v42 = v0;
-  v4 = driverId;
-  v43 = v2;
-  v40 = v1;
-  v5 = 0;
- // v6 = (signed int)dword_46084C;
-  do
+  //Los demas pilotos arrancan cada carrera sin dano.
+  for ( i = 0; i < 20; ++i )
   {
-    if ( v5 != v4 && !v3 )
-      drivers[v5].damage = 0;
-    //v6 += 108;
-    ++v5;
+    if ( i != driverId && !isMultiplayerGame )
+      drivers[i].damage = 0;
   }
-  while ( v5 < 20 );
   if ( isDemo_456B10 )
+    return 0;
+  forcedEvent = nextForcedEvent();
+  maxDriverPoints = getMaxDriverPoints(driverId);
+  if ( isMultiplayerGame )
+    return 0;
+  if ( forcedEvent != 2 && (drivers[driverId].points > maxDriverPoints || !useWeapons || drivers[driverId].sabotage != 1) )
+    return 0;
+
+  //El rival mejor clasificado de la parrilla (menor puesto, sin contar al jugador).
+  playerRank = drivers[driverId].rank;
+  bestRank = drivers[grid[0]].rank;
+  if ( bestRank == playerRank )
+    bestRank = drivers[grid[1]].rank;
+  for ( i = 0; i < 4; ++i )
   {
-    result = 0;
+    if ( drivers[grid[i]].rank < bestRank && drivers[grid[i]].rank != playerRank )
+      bestRank = drivers[grid[i]].rank;
   }
-  else
-  {
-    v44 = 1;
-	maxDriverPoints = getMaxDriverPoints(driverId);
-    if ( isMultiplayerGame || (v11 = 27 * v4, drivers[v11].points > maxDriverPoints) || !useWeapons || drivers[v11].sabotage != 1 )
-    {
-      result = 0;
-    }
-    else
-    {
-      v12 = (unsigned __int8)v1;
-      v13 = LOBYTE(drivers[v41].rank);
-      v12 *= 108;
-	  //LOBYTE(v17) = *((BYTE *)dword_460888 + v12);
-	  LOBYTE(v17) = *((int8*)drivers[v12].rank);
-      v14 = drivers[v12].rank;
-      v48 = LOBYTE(drivers[v42].rank);
-      v15 = (char *)drivers[v12].rank;
-      v49 = LOBYTE(drivers[v43].rank);
-      v16 = (unsigned __int8)v17;
-      v17 = (unsigned __int8)v17;
-      if ( (unsigned __int8)v17 == v14 )
-        v17 = v13;
-      if ( v16 < v17 && v16 != v14 )
-        v17 = v16;
-      if ( v13 < v17 && v13 != v14 )
-        v17 = v13;
-      if ( v48 < v17 && v48 != v14 )
-        v17 = v48;
-      if ( v49 < v17 && v49 != v14 )
-        v17 = v49;
-      v18 = 0;
-      if ( *(_DWORD *)v15 != v17 )
-      {
-        do
-          v19 = *(&v41 + v18++);
-        while (drivers[v19].rank != v17 );
-      }
-      v20 = SDL_GetTicks();
-      srand(v20);
-      v21 = rand();
-      v22 = 108 * (unsigned __int8)*(&v40 + v18);
-      v23 = v21 % 25 + 25;//calculo del sabotage aleatorio
-      //dword_46084C[v22 / 4] = v23;
-	  drivers[v22 / 4].damage = v23;
-      SDL_itoa(v23, &DstBuf, 10);
-      v24 =(char*) drivers[v22].damage;
-      do
-      {
-        v25 = *v24;
-		//v24[&v46[-v22] - byte_460840] = *v24;
-		//esto ni idea de lo que hace TODO
-      //  v24[&v46[-v22] - byte_460840] = *v24;
-        ++v24;
-      }
-      while ( v25 );
-      createPopup(45, 165, 458, 195, 1);
-      writeTextInScreen(aMoneyTalksAndT, 131301);
-      v26 = 0;
-      do
-      {
-        v27 = byte_452CD0[v26];
-        v47[v26++] = v27;
-      }
-      while ( v27 );
-      v28 = strlen(&DstBuf) + 1;
-      v29 = &v46[15];
-      do
-        v30 = (v29++)[1];
-      while ( v30 );
-      memcpy(v29, &DstBuf, v28);
-      v31 = &v46[15];
-      do
-        v32 = (v31++)[1];
-      while ( v32 );
-      memcpy(v31, "% worth! Sabotage says that", 0x1Cu);
-      writeTextInScreen(v47, 141541);
-      v33 = 0;
-      do
-      {
-        v34 = byte_452CF8[v33];
-        v47[v33++] = v34;
-      }
-      while ( v34 );
-      v35 = strlen(v46) + 1;
-      v36 = &v46[15];
-      do
-        v37 = (v36++)[1];
-      while ( v37 );
-      memcpy(v36, v46, v35);
-      v38 = &v46[15];
-      do
-        v39 = (v38++)[1];
-      while ( v39 );
-      memcpy(v38, " is going down{ and staying", 0x1Cu);
-      writeTextInScreen(v47, 151781);
-      writeTextInScreen(aDown_ThatSDoug, 162021);
-      writeTextInScreen(aYou_AndLuckShe, 172261);
-      writeTextInScreen((const char *)&unk_452D70, 179301);
-      drawTextWithFont((int)graphicsGeneral.fbig3aBpk, (int)&bigLetterSpacing_445848, "CONTINUE", 201792);
-      refreshAllScreen();
-      drawPopupCursor_42C780 ();
-      result = v44;
-    }
-  }
-  return result;
+  for ( i = 0; i < 3 && drivers[grid[i]].rank != bestRank; ++i )
+    ;
+  target = grid[i];
+
+  srand(SDL_GetTicks());
+  damage = rand() % 25 + 25;
+  drivers[target].damage = damage;
+  diagnosticLog("evento: sabotaje objetivo=%d (%s) dano=%d", target, drivers[target].name, damage);
+
+  createPopup(45, 165, 458, 195, 1);
+  writeTextInScreen(aMoneyTalksAndT, 131301);
+  sprintf(line, "%s%d%% worth! Sabotage says that", byte_452CD0, damage);
+  writeTextInScreen(line, 141541);
+  sprintf(line, "%s%s is going down{ and staying", byte_452CF8, drivers[target].name);
+  writeTextInScreen(line, 151781);
+  writeTextInScreen(aDown_ThatSDoug, 162021);
+  writeTextInScreen(aYou_AndLuckShe, 172261);
+  writeTextInScreen("", 179301);
+  drawTextWithFont((int)graphicsGeneral.fbig3aBpk, (int)&bigLetterSpacing_445848, "CONTINUE", 201792);
+  refreshAllScreen();
+  drawPopupCursor_42C780 ();
+  return 1;
 }
 //----- (00431B30) --------------------------------------------------------
+//Reescrita contra dr.exe. El objetivo salia de dword_45EB50 (ya no se llena), el nombre se
+//copiaba sobre unk_45FBE0 (un solo byte) y las lineas y los importes se armaban sobre locales
+//supuestamente contiguos en la pila: el cartel quedaba sin nombre y sin importe.
 int showHitmanScreen()
 {
-  int result; // eax@2
-  int v1; // eax@6
-  signed int v2; // ebx@7
-  int v3; // eax@19
-  char v4; // cl@20
-  unsigned int v5; // eax@21
-  void *v6; // edi@21
-  char v7; // cl@22
-  char *v8; // edi@23
-  char v9; // al@24
-  signed int v10; // esi@25
-  signed int v11; // esi@27
-  int v12; // eax@31
-  signed int v13; // ebp@32
-  int v14; // ebx@45
-  int v15; // edx@45
-  int v16; // eax@46
-  char v17; // cl@47
-  char *v18; // eax@48
-  char *v19; // edx@48
-  char v20; // cl@49
-  unsigned int v21; // eax@50
-  void *v22; // edi@50
-  char v23; // cl@51
-  char *v24; // edi@52
-  char v25; // al@53
-  int v26; // eax@54
-  char v27; // cl@55
-  unsigned int v28; // eax@56
-  void *v29; // edi@56
-  char v30; // cl@57
-  char *v31; // edi@58
-  char v32; // al@59
-  signed int v33; // esi@60
-  signed int v34; // esi@62
-  int v35; // eax@65
-  char *v36; // eax@65
-  char *v37; // edx@65
-  char v38; // cl@66
-  int v39; // [sp+0h] [bp-48h]@29
-  int v40; // [sp+4h] [bp-44h]@3
-  int v41; // [sp+8h] [bp-40h]@7
-  __int16 v42; // [sp+Ch] [bp-3Ch]@7
-  char v43; // [sp+13h] [bp-35h]@21
-  char v44[52]; // [sp+14h] [bp-34h]@20
+  //Indice por tipo de coche: 5 (Dervish) paga mas. El quest guarda 1..6, como el original.
+  int *grid;
+  int carType;
+  int quest;
+  int target;
+  int answer;
+  int i;
+  char line[80];
 
   if ( isDemo_456B10 )
     return 0;
-  v40 = 1;
-  if ( rand() % 100 < dword_45678C && useWeapons )
-  {
-    dword_45678C = 5;
-    if ( rand() % 100 >= 50 )
-    {
-		v12 = drivers[driverId].carType;
-      if ( v12 == 5 )
-      {
-        v41 = 808464438;//6000
-        LOBYTE(v42) = 0;
-        v13 = 1;
-      }
-      else
-      {
-        v13 = v40;
-      }
-      if ( v12 == 4 )
-      {
-        v41 = 808464436;//4000
-        LOBYTE(v42) = 0;
-        v13 = 2;
-      }
-      if ( v12 == 3 )
-      {
-        v41 = 808464435; //3000
-        LOBYTE(v42) = 0;
-        v13 = 3;
-      }
-      if ( v12 == 2 )
-      {
-        v41 = 808464434; //2000
-        LOBYTE(v42) = 0;
-        v13 = 4;
-      }
-      if ( v12 == 1 )
-      {
-        v41 = 808464433;//1000
-        LOBYTE(v42) = 0;
-        v13 = 5;
-      }
-      if ( !v12 )
-      {
-        v41 = 3158069;
-        v13 = 6;
-      }
-      createPopup(33, 131, 482, 230, 1);
-      drawImageWithPosition((int)event2Bpk, 104, 128, (int)((char *)screenBuffer + 107565));
-      writeTextInScreen(aWannaBeMyHitma, 107681);
-      writeTextInScreen((const char *)&unk_453108, 117921);
-      writeTextInScreen(aWannaGetRichTo, 128161);
-      writeTextInScreen(aHereSTheDeal_I, 138401);
-      writeTextInScreen(aMajorFundsOnTh, 148641);
-      do
-      {
-        v14 = rand() % 4;
-        v15 = selectedRace_462CE8;
-      }
-      while ( *((int8*)&dword_45EB50[selectedRace_462CE8] + v14) == driverId );
-      v16 = 0;
-      do
-      {
-        v17 = byte_453248[v16];
-        v44[v16++] = v17;
-      }
-      while ( v17 );
-	  //todo structura drivers
-      v18 = &drivers[*((int8*)&dword_45EB50[v15] + v14)];
-      v19 = &drivers[*((int8*)&dword_45EB50[v15] + v14)];
-      do
-        v20 = *v18++;
-      while ( v20 );
-      v21 = v18 - v19;
-      v22 = &v43;
-      do
-      {
-        v23 = *((int8*)v22 + 1);
-        v22 = (char *)v22 + 1;
-      }
-      while ( v23 );
-      memcpy(v22, v19, v21);
-      v24 = &v43;
-      do
-        v25 = (v24++)[1];
-      while ( v25 );
-      *(_DWORD *)v24 = 1852798752;
-      *((_DWORD *)v24 + 1) = 1914729511;
-      *((_DWORD *)v24 + 2) = 1751343461;
-      *((_DWORD *)v24 + 3) = 1701344288;
-      v24[16] = 0;
-      writeTextInScreen(v44, 158881);
-      writeTextInScreen(aFinishLine_Mak, 169121);
-      v26 = 0;
-      do
-      {
-        v27 = byte_4532E8[v26];
-        v44[v26++] = v27;
-      }
-      while ( v27 );
-      v28 = strlen((const char *)&v41) + 1;
-      v29 = &v43;
-      do
-      {
-        v30 = *((int8*)v29 + 1);
-        v29 = (char *)v29 + 1;
-      }
-      while ( v30 );
-      memcpy(v29, &v41, v28);
-      v31 = &v43;
-      do
-        v32 = (v31++)[1];
-      while ( v32 );
-      *(_WORD *)v31 = 46;
-      writeTextInScreen(v44, 179361);
-      writeTextInScreen((const char *)&unk_453338, 189601);
-      writeTextInScreen((const char *)&unk_453388, 199841);
-      refreshAllScreen();
-      v33 = 50;
-      do
-      {
-        refreshAndCheckConnection_42A570();
-        --v33;
-      }
-      while ( v33 );
-      loadMenuSoundEffect(5u, 5, 0, configuration.effectsVolume, 147456);
-      v34 = 20;
-      do
-      {
-        refreshAndCheckConnection_42A570();
-        --v34;
-      }
-      while ( v34 );
-      v39 = 1;
-      drawYesNoMenu(161, 321, 0, &v39);
-      if ( v39 == 1 )
-      {
-        v35 = *((int8*)&dword_45EB50[selectedRace_462CE8] + v14);
-        killQuestDriverId_456BBC = v35;
-		v36 = drivers[v35].name;
-		// v36 = &byte_460840[108 * v35];
-        killOneQuest_456BB8 = v13;
-        v37 = (char *)(&unk_45FBE0 - (_UNKNOWN *)v36);
-        do
-        {
-          v38 = *v36;
-          v36[(_DWORD)v37] = *v36;
-          ++v36;
-        }
-        while ( v38 );
-      }
-    }
-    else
-    {
-		v1 = drivers[driverId].carType;
-      if ( v1 == 5 )
-      {
-        v41 = 808464945;
-        v42 = 48;
-        v2 = 1;
-      }
-      else
-      {
-        v2 = v40;
-      }
-      if ( v1 == 4 )
-      {
-        v41 = 808464440;
-        LOBYTE(v42) = 0;
-        v2 = 2;
-      }
-      if ( v1 == 3 )
-      {
-        v41 = 808464438;
-        LOBYTE(v42) = 0;
-        v2 = 3;
-      }
-      if ( v1 == 2 )
-      {
-        v41 = 808464436;
-        LOBYTE(v42) = 0;
-        v2 = 4;
-      }
-      if ( v1 == 1 )
-      {
-        v41 = 808464434;
-        LOBYTE(v42) = 0;
-        v2 = 5;
-      }
-      if ( !v1 )
-      {
-        v41 = 808464433;
-        LOBYTE(v42) = 0;
-        v2 = 6;
-      }
-      createPopup(33, 131, 482, 230, 1);
-      drawImageWithPosition((int)drugdealBpk, 104, 128, (int)((char *)screenBuffer + 107565));
-      writeTextInScreen(aASlickSteroidR, 107681);
-      writeTextInScreen((const char *)&unk_452DE8, 117921);
-      v3 = 0;
-      do
-      {
-        v4 = byte_452E38[v3];
-        v44[v3++] = v4;
-      }
-      while ( v4 );
-      v5 = strlen((const char *)&v41) + 1;
-      v6 = &v43;
-      do
-      {
-        v7 = *((int8*)v6 + 1);
-        v6 = (char *)v6 + 1;
-      }
-      while ( v7 );
-      memcpy(v6, &v41, v5);
-      v8 = &v43;
-      do
-        v9 = (v8++)[1];
-      while ( v9 );
-      *(_DWORD *)v8 = 1629498491;
-      *((_DWORD *)v8 + 1) = 1852799342;
-      *((_DWORD *)v8 + 2) = 1495285605;
-      *((_DWORD *)v8 + 3) = 541029743;
-      *((_DWORD *)v8 + 4) = 1936287828;
-      *((_DWORD *)v8 + 5) = 7563552;
-      writeTextInScreen(v44, 128161);
-      writeTextInScreen(aEasyAsShifting, 138401);
-      writeTextInScreen(aJustPickUpSome, 148641);
-      writeTextInScreen(aWayAndGetThemT, 158881);
-      writeTextInScreen(aLineBeforeThin, 169121);
-      writeTextInScreen(aFirstLikeFloor, 179361);
-      writeTextInScreen((const char *)&unk_453018, 189601);
-      writeTextInScreen((const char *)&unk_453068, 199841);
-      refreshAllScreen();
-      v10 = 50;
-      do
-      {
-        refreshAndCheckConnection_42A570();
-        --v10;
-      }
-      while ( v10 );
-      loadMenuSoundEffect(5u, 5, 0, configuration.effectsVolume, 147456);
-      v11 = 20;
-      do
-      {
-        refreshAndCheckConnection_42A570();
-        --v11;
-      }
-      while ( v11 );
-      v39 = 1;
-      drawYesNoMenu(161, 321, 0, &v39);
-      if ( v39 == 1 )
-      {
-        drugQuest_456BB4 = v2;
-        stopSoundChannel_43C3E0(5u);
-        return v40;
-      }
-    }
-    stopSoundChannel_43C3E0(5u);
-    result = v40;
-  }
-  else
+  if ( forcedEvent < 0 && (rand() % 100 >= dword_45678C || !useWeapons) )
   {
     if ( dword_45678C < 97 )
       dword_45678C += 2;
-    result = 0;
+    return 0;
   }
-  return result;
-
+  dword_45678C = 5;
+  carType = drivers[driverId].carType;
+  if ( carType < 0 || carType > 5 )
+    carType = 0;
+  quest = 6 - carType;
+  if ( forcedEvent == 0 || (forcedEvent < 0 && rand() % 100 >= 50) )
+  {
+    grid = racePositions[selectedRace_462CE8];
+    do
+      target = grid[rand() % 4];
+    while ( target == driverId );
+    createPopup(33, 131, 482, 230, 1);
+    drawImageWithPosition((int)event2Bpk, 104, 128, (int)((char *)screenBuffer + 107565));
+    writeTextInScreen(aWannaBeMyHitma, 107681);
+    writeTextInScreen("", 117921);
+    writeTextInScreen(aWannaGetRichTo, 128161);
+    writeTextInScreen(aHereSTheDeal_I, 138401);
+    writeTextInScreen(aMajorFundsOnTh, 148641);
+    diagnosticLog("evento: hitman objetivo=%d (%s) premio=%d", target, drivers[target].name, hitmanRewardByCar[carType]);
+    sprintf(line, "%s%s{ won't reach the", byte_453248, drivers[target].name);
+    writeTextInScreen(line, 158881);
+    writeTextInScreen(aFinishLine_Mak, 169121);
+    sprintf(line, "%s%d.", byte_4532E8, hitmanRewardByCar[carType]);
+    writeTextInScreen(line, 179361);
+    writeTextInScreen("", 189601);
+    writeTextInScreen("", 199841);
+    refreshAllScreen();
+    for ( i = 0; i < 50; ++i )
+      refreshAndCheckConnection_42A570();
+    loadMenuSoundEffect(5u, 5, 0, configuration.effectsVolume, 147456);
+    for ( i = 0; i < 20; ++i )
+      refreshAndCheckConnection_42A570();
+    answer = 1;
+    drawYesNoMenu(161, 321, 0, &answer);
+    if ( answer == 1 )
+    {
+      killQuestDriverId_456BBC = target;
+      killOneQuest_456BB8 = quest;
+      strcpy(killQuestDriverName, drivers[target].name);
+    }
+  }
+  else
+  {
+    createPopup(33, 131, 482, 230, 1);
+    drawImageWithPosition((int)drugdealBpk, 104, 128, (int)((char *)screenBuffer + 107565));
+    writeTextInScreen(aASlickSteroidR, 107681);
+    writeTextInScreen("", 117921);
+    diagnosticLog("evento: drogas premio=%d", drugRewardByCar[carType]);
+    sprintf(line, "%s%d{, anyone? You? This is", byte_452E38, drugRewardByCar[carType]);
+    writeTextInScreen(line, 128161);
+    writeTextInScreen(aEasyAsShifting, 138401);
+    writeTextInScreen(aJustPickUpSome, 148641);
+    writeTextInScreen(aWayAndGetThemT, 158881);
+    writeTextInScreen(aLineBeforeThin, 169121);
+    writeTextInScreen(aFirstLikeFloor, 179361);
+    writeTextInScreen("", 189601);
+    writeTextInScreen("", 199841);
+    refreshAllScreen();
+    for ( i = 0; i < 50; ++i )
+      refreshAndCheckConnection_42A570();
+    loadMenuSoundEffect(5u, 5, 0, configuration.effectsVolume, 147456);
+    for ( i = 0; i < 20; ++i )
+      refreshAndCheckConnection_42A570();
+    answer = 1;
+    drawYesNoMenu(161, 321, 0, &answer);
+    if ( answer == 1 )
+    {
+      drugQuest_456BB4 = quest;
+      stopSoundChannel_43C3E0(5u);
+      return 1;
+    }
+  }
+  stopSoundChannel_43C3E0(5u);
+  return 1;
 }
 
 //----- (0041B400) --------------------------------------------------------
@@ -777,10 +456,10 @@ unsigned int lappedPopUp()
 {
   createPopup(33, 131, 482, 230, 1);
   drawImageWithPosition((int)spons1bBpk, 104, 128, (int)((char *)screenBuffer + 107565));
-  writeTextInScreen((const char *)&unk_44CB08, 87201);
-  writeTextInScreen((const char *)&unk_44CB58, 97441);
+  writeTextInScreen("", 87201);
+  writeTextInScreen("", 97441);
   writeTextInScreen(aYouWereLappedY, 107681);
-  writeTextInScreen((const char *)&unk_44CBF8, 117921);
+  writeTextInScreen("", 117921);
   writeTextInScreen(aThePainTheHumi, 128161);
   writeTextInScreen(aMadeMeTheLaugh, 138401);
   writeTextInScreen(aRaces_WhatWere, 148641);
@@ -831,17 +510,10 @@ unsigned int winStreakPopUp()
 	  drivers[driverId].money += 600;
     v0 = 0;
   }
-  v2 = 800 * v0;
-  writeTextInScreen(&byte_447388[v2], 87201);
-  writeTextInScreen(&byte_4473D8[v2], 97441);
-  writeTextInScreen(&aNotTooShabbyDr[v2], 107681);
-  writeTextInScreen(&byte_447478[v2], 117921);
-  writeTextInScreen(&aYourWildWinnin[v2], 128161);
-  writeTextInScreen(&aYouAnExtra600B[v2], 138401);
-  writeTextInScreen(&aGetCockyThoseO[v2], 148641);
-  writeTextInScreen(&aVictoryHoundsA[v2], 158881);
-  writeTextInScreen(&aRightIntoYourB[v2], 169121);
-  writeTextInScreen(&aAndTheyWantToG[v2], 179361);
+  //Texto de la variante del coche, de la tabla del original: v2 = 800 * v0 indexaba
+  //cadenas sueltas y salia texto de otros recuadros (el de bienvenida, el de los jinetes).
+  for ( v2 = 0; v2 < 10; ++v2 )
+    writeTextInScreen(sponsorWinStreakTexts[v0][v2], 87201 + 10240 * v2);
   return drawTextWithFont((int)graphicsGeneral.fbig3aBpk, (int)&bigLetterSpacing_445848, "CONTINUE", 202432);
 }
 
@@ -886,17 +558,10 @@ unsigned int noPaintJobPopUp()
 	  drivers[driverId].money += 350;
     v0 = 0;
   }
-  v2 = 800 * v0;
-  writeTextInScreen(&byte_448648[v2], 87201);
-  writeTextInScreen(&byte_448698[v2], 97441);
-  writeTextInScreen(&aInconceivableD[v2], 107681);
-  writeTextInScreen(&byte_448738[v2], 117921);
-  writeTextInScreen(&aItWasASnowball[v2], 128161);
-  writeTextInScreen(&aThroughThatBli[v2], 138401);
-  writeTextInScreen(&aNotAShadowOfAS[v2], 148641);
-  writeTextInScreen(&aPaintJob_MyBet[v2], 158881);
-  writeTextInScreen(&aItPaidMeBackBi[v2], 169121);
-  writeTextInScreen(&aShare350_GoKno[v2], 179361);
+  //Texto de la variante del coche, de la tabla del original: v2 = 800 * v0 indexaba
+  //cadenas sueltas y salia texto de otros recuadros (el de bienvenida, el de los jinetes).
+  for ( v2 = 0; v2 < 10; ++v2 )
+    writeTextInScreen(sponsorNoPaintJobTexts[v0][v2], 87201 + 10240 * v2);
   return drawTextWithFont((int)graphicsGeneral.fbig3aBpk, (int)&bigLetterSpacing_445848, "CONTINUE", 202432);
 }
 
@@ -943,45 +608,22 @@ unsigned int allCarsCrashPopUp()
 	  drivers[driverId].money += 600;
     v0 = 0;
   }
-  v2 = 800 * v0;
-  writeTextInScreen(&byte_449908[v2], 87201);
-  writeTextInScreen(&byte_449958[v2], 97441);
-  writeTextInScreen(&aIAmOneGrateful[v2], 107681);
-  writeTextInScreen(&byte_4499F8[v2], 117921);
-  writeTextInScreen(&aMoreCarCorpses[v2], 128161);
-  writeTextInScreen(&aAreMySweetestM[v2], 138401);
-  writeTextInScreen(&aSeriousDedicat[v2], 148641);
-  writeTextInScreen(&aAParkingSpaceA[v2], 158881);
-  writeTextInScreen(&aABonusOf600ToY[v2], 169121);
-  writeTextInScreen(&aPoweredSerialA[v2], 179361);
+  //Texto de la variante del coche, de la tabla del original: v2 = 800 * v0 indexaba
+  //cadenas sueltas y salia texto de otros recuadros (el de bienvenida, el de los jinetes).
+  for ( v2 = 0; v2 < 10; ++v2 )
+    writeTextInScreen(sponsorAllCarsCrashTexts[v0][v2], 87201 + 10240 * v2);
   return drawTextWithFont((int)graphicsGeneral.fbig3aBpk, (int)&bigLetterSpacing_445848, "CONTINUE", 202432);
 }
 
 //----- (0041BA00) --------------------------------------------------------
 int steriodsNotFoundPopup()
 {
-  int v0; // ecx@3
-  int *v1; // eax@3
-  int v2; // ecx@3
-  int v3; // ecx@5
-  int v4; // ecx@9
-  int v5; // ecx@11
-  int v6; // eax@15
-  char v7; // cl@16
-  unsigned int v8; // eax@17
-  void *v9; // edi@17
-  char v10; // cl@18
-  char *v11; // edi@19
-  char v12; // al@20
   signed int v13; // esi@23
 //  int v14; // ecx@34
   int v15; // eax@34
   int v16; // eax@35
   int v17; // eax@36
   signed int v19=0; // [sp+4h] [bp-44h]@0
-  int v20; // [sp+8h] [bp-40h]@3
-  __int16 v21; // [sp+Ch] [bp-3Ch]@3
-  char v22; // [sp+13h] [bp-35h]@17
   char v23[52]; // [sp+14h] [bp-34h]@16
 
   createPopup(33, 131, 482, 230, 1);
@@ -1012,15 +654,15 @@ int steriodsNotFoundPopup()
         break;
     }
     writeTextInScreen(aWhereReMyStero, 107681);
-    writeTextInScreen((const char *)&unk_44AF38, 117921);
+    writeTextInScreen("", 117921);
     writeTextInScreen(aTheWholeDealWe, 128161);
     writeTextInScreen(aOfYourIncompet, 138401);
     writeTextInScreen(aTurnsOfTheWhee, 148641);
     writeTextInScreen(aIMNotHappyAndW, 158881);
     writeTextInScreen(aHappyIAmMadAnd, 169121);
     writeTextInScreen(aMadBadThingsHa, 179361);
-    writeTextInScreen((const char *)&unk_44B168, 189601);
-    writeTextInScreen((const char *)&unk_44B1B8, 199841);
+    writeTextInScreen("", 189601);
+    writeTextInScreen("", 199841);
     
     v15 = drivers[driverId].money;
     if ( v15 < v13 )
@@ -1040,86 +682,20 @@ int steriodsNotFoundPopup()
 	drivers[driverId].money = v16;
     goto LABEL_40;
   }
-  switch ( drugQuest_456BB4 )
-  {
-    case 1:
-      v21 = 48;
-      v0 = drivers[driverId].money;
-      v1 = &drivers[driverId].money;
-      v20 = 808464945;
-      v2 = v0 + 12000;
-      break;
-    case 2:
-      v20 = 808464440;
-      v3 = drivers[driverId].money;
-      v1 = &drivers[driverId].money;
-      LOBYTE(v21) = 0;
-      v2 = v3 + 8000;
-      break;
-    case 3:
-      v20 = 808464438;
-      LOBYTE(v21) = 0;
-      v1 = &drivers[driverId].money;
-      v2 = drivers[driverId].money + 6000;
-      break;
-    case 4:
-      LOBYTE(v21) = 0;
-      v4 = drivers[driverId].money;
-      v1 = &drivers[driverId].money;
-      v20 = 808464436;
-      v2 = v4 + 4000;
-      break;
-    case 5:
-      v20 = 808464434;
-      v5 = drivers[driverId].money;
-      v1 = &drivers[driverId].money;
-      LOBYTE(v21) = 0;
-      v2 = v5 + 2000;
-      break;
-    default:
-      if ( drugQuest_456BB4 != 6 )
-        goto LABEL_15;
-      v20 = 808464433;
-      LOBYTE(v21) = 0;
-      v1 = &drivers[driverId].money;
-      v2 = drivers[driverId].money + 1000;
-      break;
-  }
-  *v1 = v2;
-LABEL_15:
+  drivers[driverId].money += questReward(drugRewardByCar, drugQuest_456BB4);
   writeTextInScreen(aWhatMotorizedS, 107681);
-  writeTextInScreen((const char *)&unk_44AC18, 117921);
+  writeTextInScreen("", 117921);
   writeTextInScreen(aWowMyMainMan_I, 128161);
   writeTextInScreen(aThereWasThatMu, 138401);
   writeTextInScreen(aWholeBurningHe, 148641);
   writeTextInScreen(aItAllBearingGi, 158881);
   writeTextInScreen(aBlessedBeastYo, 169121);
-  v6 = 0;
-  do
-  {
-    v7 = byte_44ADF8[v6];
-    v23[v6++] = v7;
-  }
-  while ( v7 );
-  v8 = strlen((const char *)&v20) + 1;
-  v9 = &v22;
-  do
-  {
-    v10 = *((int8*)v9 + 1);
-    v9 = (char *)v9 + 1;
-  }
-  while ( v10 );
-  memcpy(v9, &v20, v8);
-  v11 = &v22;
-  do
-    v12 = (v11++)[1];
-  while ( v12 );
-  *(_DWORD *)v11 = 1869881388;
-  *((_DWORD *)v11 + 1) = 1970239776;
-  *((_WORD *)v11 + 4) = 46;
+  //Igual que en el hitman: el importe estaba escrito como texto en v20/v21 y la linea se armaba
+  //sobre v22/v23, contiguos en la pila del original.
+  sprintf(v23, "%s%d, to you.", byte_44ADF8, questReward(drugRewardByCar, drugQuest_456BB4));
   writeTextInScreen(v23, 179361);
-  writeTextInScreen((const char *)&unk_44AE48, 189601);
-  writeTextInScreen((const char *)&unk_44AE98, 199841);
+  writeTextInScreen("", 189601);
+  writeTextInScreen("", 199841);
 LABEL_40:
   drawTextWithFont((int)graphicsGeneral.fbig3aBpk, (int)&bigLetterSpacing_445848, "CONTINUE", 202432);
   return 0;
@@ -1133,38 +709,15 @@ LABEL_40:
 //----- (0041BDE0) --------------------------------------------------------
 int killOnePopup()
 {
-  int v0; // ecx@3
-  int *v1; // eax@3
-  int v2; // ecx@3
-  int v3; // ecx@5
-  int v4; // ecx@9
-  int v5; // ecx@11
-  int v6; // ecx@13
-  int v7; // eax@15
-  char v8; // cl@16
-  unsigned int v9; // eax@17
-  void *v10; // edi@17
-  char v11; // cl@18
-  char *v12; // edi@19
-  char v13; // al@20
-  int v14; // eax@21
-  char v15; // cl@22
-  unsigned int v16; // eax@23
-  void *v17; // edi@23
-  char v18; // cl@24
-  char *v19; // edi@25
-  char v20; // al@26
   signed int v21; // esi@29
 //  int v22; // ecx@40
   int v23; // eax@40
   int v24; // eax@41
   int v25; // eax@42
   signed int v27=0; // [sp+4h] [bp-44h]@0
-  int v28; // [sp+8h] [bp-40h]@3
-  char v29; // [sp+Ch] [bp-3Ch]@3
-  char v30; // [sp+13h] [bp-35h]@17
   char v31[52]; // [sp+14h] [bp-34h]@16
 
+  diagnosticLog("evento: resultado hitman quest=%d objetivo=%s", killOneQuest_456BB8, killQuestDriverName);
   createPopup(33, 131, 482, 230, 1);
   drawImageWithPosition((int)event2Bpk, 104, 128, (int)((char *)screenBuffer + 107565));
   if ( killOneQuest_456BB8 <= 0 )
@@ -1193,15 +746,15 @@ int killOnePopup()
         break;
     }
     writeTextInScreen(aYourHitMissed, 107681);
-    writeTextInScreen((const char *)&unk_44B578, 117921);
+    writeTextInScreen("", 117921);
     writeTextInScreen(aYouSissySunday, 128161);
     writeTextInScreen(aSimplestJobAnd, 138401);
     writeTextInScreen(aIBetYouAreAfra, 148641);
     writeTextInScreen(aWell_ILlShowYo, 158881);
     writeTextInScreen(aWhenYouBreakYo, 169121);
     writeTextInScreen(aIMGonnaMakeYou, 179361);
-    writeTextInScreen((const char *)&unk_44B7A8, 189601);
-    writeTextInScreen((const char *)&unk_44B7F8, 199841);
+    writeTextInScreen("", 189601);
+    writeTextInScreen("", 199841);
    
     v23 = drivers[driverId].money;
     if ( v23 < v21 )
@@ -1221,111 +774,21 @@ int killOnePopup()
 	drivers[driverId].money = v24;
     goto LABEL_46;
   }
-  switch ( killOneQuest_456BB8 )
-  {
-    case 1:
-      v29 = 0;
-      v0 = drivers[driverId].money;
-      v1 = &drivers[driverId].money;
-      v28 = 808464438;
-      v2 = v0 + 6000;
-      break;
-    case 2:
-      v28 = 808464436;
-      v3 = drivers[driverId].money;
-      v1 = &drivers[driverId].money;
-      v29 = 0;
-      v2 = v3 + 4000;
-      break;
-    case 3:
-      v28 = 808464435;
-      v29 = 0;
-      v1 = &drivers[driverId].money;
-      v2 = drivers[driverId].money + 3000;
-      break;
-    case 4:
-      v29 = 0;
-      v4 = drivers[driverId].money;
-      v1 = &drivers[driverId].money;
-      v28 = 808464434;
-      v2 = v4 + 2000;
-      break;
-    case 5:
-      v28 = 808464433;
-      v5 = drivers[driverId].money;
-      v1 = &drivers[driverId].money;
-      v29 = 0;
-      v2 = v5 + 1000;
-      break;
-    default:
-      if ( killOneQuest_456BB8 != 6 )
-        goto LABEL_15;
-      v6 = drivers[driverId].money;
-      v1 = &drivers[driverId].money;
-      v28 = 3158069;
-      v2 = v6 + 500;
-      break;
-  }
-  *v1 = v2;
-LABEL_15:
+  drivers[driverId].money += questReward(hitmanRewardByCar, killOneQuest_456BB8);
   writeTextInScreen(aYouTotallySlew, 107681);
-  writeTextInScreen((const char *)&unk_44B258, 117921);
+  writeTextInScreen("", 117921);
   writeTextInScreen(aAKillerRaceThe, 128161);
   writeTextInScreen(aSkyLikeCloudsO, 138401);
   writeTextInScreen(aTheScreamsOfMo, 148641);
   writeTextInScreen(aBansheeWail_De, 158881);
-  v7 = 0;
-  do
-  {
-    v8 = byte_44B3E8[v7];
-    v31[v7++] = v8;
-  }
-  while ( v8 );
-  v9 = strlen((const char *)&unk_45FBE0) + 1;
-  v10 = &v30;
-  do
-  {
-    v11 = *((int8*)v10 + 1);
-    v10 = (char *)v10 + 1;
-  }
-  while ( v11 );
-  memcpy(v10, &unk_45FBE0, v9);
-  v12 = &v30;
-  do
-    v13 = (v12++)[1];
-  while ( v13 );
-  *(_DWORD *)v12 = 544434464;
-  *((_DWORD *)v12 + 1) = 1629515369;
-  *((_DWORD *)v12 + 2) = 1918984992;
-  *((_WORD *)v12 + 6) = 45;
+  //El original armaba estas lineas sobre v30/v31, contiguos en su pila, con el nombre de
+  //unk_45FBE0 (un byte suelto aqui) y el importe escrito como texto en v28/v29.
+  sprintf(v31, "%s%s is in a car-", byte_44B3E8, killQuestDriverName);
   writeTextInScreen(v31, 169121);
-  v14 = 0;
-  do
-  {
-    v15 = byte_44B438[v14];
-    v31[v14++] = v15;
-  }
-  while ( v15 );
-  v16 = strlen((const char *)&v28) + 1;
-  v17 = &v30;
-  do
-  {
-    v18 = *((int8*)v17 + 1);
-    v17 = (char *)v17 + 1;
-  }
-  while ( v18 );
-  memcpy(v17, &v28, v16);
-  v19 = &v30;
-  do
-    v20 = (v19++)[1];
-  while ( v20 );
-  *(_DWORD *)v19 = 1870209068;
-  *((_DWORD *)v19 + 1) = 1830842997;
-  *((_DWORD *)v19 + 2) = 2036690543;
-  *((_WORD *)v19 + 6) = 46;
+  sprintf(v31, "%s%d, your money.", byte_44B438, questReward(hitmanRewardByCar, killOneQuest_456BB8));
   writeTextInScreen(v31, 179361);
-  writeTextInScreen((const char *)&unk_44B488, 189601);
-  writeTextInScreen((const char *)&unk_44B4D8, 199841);
+  writeTextInScreen("", 189601);
+  writeTextInScreen("", 199841);
 LABEL_46:
   drawTextWithFont((int)graphicsGeneral.fbig3aBpk, (int)&bigLetterSpacing_445848, "CONTINUE", 202432);
   return 0;
@@ -1335,16 +798,16 @@ LABEL_46:
 unsigned int welcomeShopPopup()
 {
   createPopup(45, 131, 458, 230, 1);
-  writeTextInScreen((const char *)&unk_44B848, 90300);
+  writeTextInScreen("", 90300);
   writeTextInScreen(aWelcomeToTheSh, 100540);
-  writeTextInScreen((const char *)&unk_44B8E8, 110780);
+  writeTextInScreen("", 110780);
   writeTextInScreen(aZillionsMoreMi, 121020);
   writeTextInScreen(aIsNoJuggernaut, 131260);
   writeTextInScreen(aTheWay_YouNeed, 141500);
   writeTextInScreen(aMakeHeadlongHe, 151740);
   writeTextInScreen(aStrideToStrive, 161980);
   writeTextInScreen(aBest_BuyBeOneS, 172220);
-  writeTextInScreen((const char *)&unk_44BB18, 182460);
+  writeTextInScreen("", 182460);
   return drawTextWithFont((int)graphicsGeneral.fbig3aBpk, (int)&bigLetterSpacing_445848, "CONTINUE", 202432);
 }
 
@@ -1357,10 +820,10 @@ unsigned int endGamePopup()
   if ( isMultiplayerGame )
   {
     drawImageWithPosition((int)event2Bpk, 104, 128, (int)((char *)screenBuffer + 107565));
-    writeTextInScreen((const char *)&unk_454F58, 87201);
-    writeTextInScreen((const char *)&unk_454F8A, 97441);
+    writeTextInScreen("", 87201);
+    writeTextInScreen("", 97441);
     writeTextInScreen(aItAinTOverTill, 107681);
-    writeTextInScreen((const char *)&unk_454FEE, 117921);
+    writeTextInScreen("", 117921);
     writeTextInScreen(aSoTheyThinkThe, 128161);
     writeTextInScreen(aEh_IThinkThatT, 138401);
     writeTextInScreen(aOnlyMadeYouStr, 148641);
@@ -1370,16 +833,16 @@ unsigned int endGamePopup()
   }
   else
   {
-    writeTextInScreen((const char *)&unk_454C38, 90300);
+    writeTextInScreen("", 90300);
     writeTextInScreen(aEndOfTheRoadDr, 100540);
-    writeTextInScreen((const char *)&unk_454CD8, 110780);
+    writeTextInScreen("", 110780);
     writeTextInScreen(aThisThenIsHowI, 121020);
     writeTextInScreen(aWithAWhimper_Y, 131260);
     writeTextInScreen(aRoadButYouBlew, 141500);
     writeTextInScreen(aThat_InDeathRa, 151740);
     writeTextInScreen(aTheBestCanMake, 161980);
     writeTextInScreen(aSideAtLeastYou, 172220);
-    writeTextInScreen((const char *)&unk_454F08, 182460);
+    writeTextInScreen("", 182460);
   }
   result = drawTextWithFont((int)graphicsGeneral.fbig3aBpk, (int)&bigLetterSpacing_445848, "CONTINUE", 202432);
   isDemo_456B10 = 0;
@@ -1436,16 +899,16 @@ int payBackTimePopup()
   drawImageWithPosition2((int)dealer2bBpk, 96, 96, (int)((char *)screenBuffer + 117805));
   if ( v2 )
   {
-    writeTextInScreen((const char *)&unk_44C7E8, 87168);
+    writeTextInScreen("", 87168);
     writeTextInScreen(aItSPayBackTi_0, 97408);
-    writeTextInScreen((const char *)&unk_44C888, 107648);
+    writeTextInScreen("", 107648);
     writeTextInScreen(aTutTutHotshotI, 117888);
     writeTextInScreen(aMoneyAnywhere_, 128128);
     writeTextInScreen(aJoker_ADealIsA, 138368);
     writeTextInScreen(aReputationToLo, 148608);
     writeTextInScreen(aNothingPersona, 158848);
     writeTextInScreen(aYouSomeNow_Hur, 169088);
-    writeTextInScreen((const char *)&unk_44CAB8, 179328);
+    writeTextInScreen("", 179328);
     v4 = driverId;
     v5 = drivers[driverId].engine;
     if ( v5 <= 0 )
@@ -1455,16 +918,16 @@ int payBackTimePopup()
   }
   else
   {
-    writeTextInScreen((const char *)&unk_44C4C8, 87168);
+    writeTextInScreen("", 87168);
     writeTextInScreen(aItSPayBackTime, 97408);
-    writeTextInScreen((const char *)&unk_44C568, 107648);
+    writeTextInScreen("", 107648);
     writeTextInScreen(aThisIsWhatILik, 117888);
     writeTextInScreen(aWhoKeepsHisPar, 128128);
     writeTextInScreen(aAhTheSweetSmel, 138368);
     writeTextInScreen(aToPapaMyBabies, 148608);
     writeTextInScreen(aBusinessWithYo, 158848);
     writeTextInScreen(aThanksAndGoodR, 169088);
-    writeTextInScreen((const char *)&unk_44C798, 179328);
+    writeTextInScreen("", 179328);
     v3 = 27 * driverId;
     if (drivers[driverId].loanType == LOAN_DELIVERATOR )
 		drivers[driverId].money -= 18000;
@@ -1485,32 +948,32 @@ int payBackTimePopup()
 unsigned int undergroundMarketPopup()
 {
   createPopup(45, 131, 458, 230, 1);
-  writeTextInScreen((const char *)&unk_44BE88, 90300);
+  writeTextInScreen("", 90300);
   writeTextInScreen(aPsst___yeahYou, 100540);
-  writeTextInScreen((const char *)&unk_44BF28, 110780);
+  writeTextInScreen("", 110780);
   writeTextInScreen(aJealousyBurnsY, 121020);
   writeTextInScreen(aWantThatRoadAl, 131260);
   writeTextInScreen(aThoseRivalSuck, 141500);
   writeTextInScreen(aBlazeYouTakeTh, 151740);
   writeTextInScreen(aUndergroundM_0, 161980);
   writeTextInScreen(aDigOutTheDough, 172220);
-  writeTextInScreen((const char *)&unk_44C158, 182460);
+  writeTextInScreen("", 182460);
   return drawTextWithFont((int)graphicsGeneral.fbig3aBpk, (int)&bigLetterSpacing_445848, "CONTINUE", 202432);
 }
 
 unsigned int welcomePopup()
 {
   createPopup(45, 131, 458, 230, 1);
-  writeTextInScreen((const char *)&unk_44C1A8, 90300);
+  writeTextInScreen("", 90300);
   writeTextInScreen(aWelcomeToDea_0, 100540);
-  writeTextInScreen((const char *)&unk_44C248, 110780);
+  writeTextInScreen("", 110780);
   writeTextInScreen(aTheRaceIsOnInD, 121020);
   writeTextInScreen(aShortHotFastDe, 131260);
   writeTextInScreen(aHearTheRumble_, 141500);
   writeTextInScreen(aFeelOfIt_ButRe, 151740);
   writeTextInScreen(aFryTheRulesPla, 161980);
   writeTextInScreen(aRideYourMachin, 172220);
-  writeTextInScreen((const char *)&unk_44C478, 182460);
+  writeTextInScreen("", 182460);
   return drawTextWithFont((int)graphicsGeneral.fbig3aBpk, (int)&bigLetterSpacing_445848, "CONTINUE", 202432);
 }
 

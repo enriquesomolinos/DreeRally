@@ -8,54 +8,64 @@
 #include <stdlib.h>
 #include <string.h>
 //----- (0041E810) --------------------------------------------------------
+//Las ultimas seis lineas de las noticias (16 a 21), cada una con el color de su bandera. Upstream
+//las habia reemplazado por tres lineas fijas de bienvenida; esos creditos ahora entran como
+//noticias al abrir el menu principal (initMenuNews).
 char drawBottomMenuText()
 {
-    //  signed int v0; // eax@1
-    //  char *v1; // esi@2
-    //  char *v2; // edi@2
-    //  int v3; // ebp@3
-    //  const char *v4; // edi@3
-    //  int v5; // esi@3
-    ///  char result; // al@4
+  int line;
+  int offset;
+  char flag;
 
+  for ( offset = 243200; offset < 300160; offset += 640 )
+    memcpy((char *)screenBuffer + offset, (char *)graphicsGeneral.menubg5Bpk + offset, 0x280u);
+  flag = 0;
+  for ( line = 16, offset = 241932; line < MENU_NEWS_LINES; ++line, offset += 9600 )
+  {
+    flag = unk_461EC0[line];
+    if ( !flag )
+      drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&letterSpacing_4458B0, MENU_NEWS_LINE(line), offset);
+    if ( flag == 1 )
+      drawTextWithFont((int)graphicsGeneral.fsma3bBpk, (int)&letterSpacing_4458B0, MENU_NEWS_LINE(line), offset);
+    if ( flag == 2 )
+      drawTextWithFont((int)graphicsGeneral.fsma3cBpk, (int)&letterSpacing_4458B0, MENU_NEWS_LINE(line), offset);
+  }
+  return flag;
+}
 
+//Sube las noticias una linea, con la bandera de color de cada una (0x461EC0, una por linea). Los
+//corrimientos del decompilado perdian las banderas 4, 8, 12, 16 y 20.
+void scrollMenuNews()
+{
+  memmove(unk_461EC0, unk_461EC0 + 1, MENU_NEWS_LINES - 1);
+  memmove(MENU_NEWS_LINE(0), MENU_NEWS_LINE(1), (MENU_NEWS_LINES - 1) * MENU_NEWS_LINE_SIZE);
+  // Mas alla del original: la ultima linea quedaba con su texto y se repetia arriba y abajo de
+  // cada noticia nueva (la version DOS las muestra con renglones vacios alrededor).
+  memset(MENU_NEWS_LINE(MENU_NEWS_LINES - 1), 0, MENU_NEWS_LINE_SIZE);
+  unk_461EC0[MENU_NEWS_LINES - 1] = 0;
+}
 
-    drawTextWithFont((int)graphicsGeneral.fsma3bBpk, (int)&letterSpacing_4458B0, "         Welcome to DreeRally - Windows Version 0.2", 640 * 395);
-    drawTextWithFont((int)graphicsGeneral.fsma3bBpk, (int)&letterSpacing_4458B0, "           Follow us on https://www.dreerally.com", 640 * 410);
-    //drawTextWithFont((int)graphicsGeneral.fsma3bBpk, (int)&letterSpacing_4458B0, "    See more developments at https://github.com/enriquesomolinos", 640 * 425);
-    //drawTextWithFont((int)graphicsGeneral.fsma3bBpk, (int)&letterSpacing_4458B0, "       (c)Remedy Entertainment - http://www.remedygames.com", 640 * 425);
-    drawTextWithFont((int)graphicsGeneral.fsma3bBpk, (int)&letterSpacing_4458B0, "  Use arrow keys to change selection and press enter to confirm.", 640 * 425);
+//Agrega una noticia abajo de todo (linea 21) con su color: 0 normal, 1 resaltada, 2 tercer color.
+void addMenuNews(const char *text, char colour)
+{
+  scrollMenuNews();
+  strncpy(MENU_NEWS_LINE(MENU_NEWS_LINES - 1), text, MENU_NEWS_LINE_SIZE - 1);
+  MENU_NEWS_LINE(MENU_NEWS_LINES - 1)[MENU_NEWS_LINE_SIZE - 1] = 0;
+  unk_461EC0[MENU_NEWS_LINES - 1] = colour;
+}
 
-    /*
-
-    v0 = 243200;
-    do
-    {
-      v1 = (char *)graphicsGeneral.menubg5Bpk + v0;
-      v2 = (char *)screenBuffer + v0;
-      v0 += 640;
-      memcpy(v2, v1, 0x280u);
-    }
-    while ( v0 < 300160 );
-    v3 = 0;
-    v4 = (const char *)&unk_462960;
-    v5 = 241932;
-    do
-    {
-      result = *((BYTE *)&word_461ED0 + v3);
-      if ( !result )
-        result = drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&letterSpacing_4458B0, v4, v5);
-      if ( *((BYTE *)&word_461ED0 + v3) == 1 )
-        result = drawTextWithFont((int)graphicsGeneral.fsma3bBpk, (int)&letterSpacing_4458B0, v4, v5);
-      if ( *((BYTE *)&word_461ED0 + v3) == 2 )
-        result = drawTextWithFont((int)graphicsGeneral.fsma3cBpk, (int)&letterSpacing_4458B0, v4, v5);
-      v5 += 9600;
-      ++v3;
-      v4 += 150;
-    }
-    while ( v5 < 299532 );
-    return result;*/
-    return 0;
+//0x43A298: al abrir el menu principal el original borra las noticias y pone su bienvenida. Se
+//agrega el credito de DreeRally, el port en el que se basa este.
+void initMenuNews()
+{
+  memset(unk_461EC0, 0, MENU_NEWS_LINES);
+  memset(MENU_NEWS_LINE(0), 0, MENU_NEWS_LINES * MENU_NEWS_LINE_SIZE);
+  addMenuNews("     Welcome to Death Rally(tm) - Windows Version 1.0", 1);
+  addMenuNews("         Port by Jari Komppa - http://iki.fi/sol/", 1);
+  addMenuNews("    (c)Remedy Entertainment - http://www.remedygames.com", 1);
+  addMenuNews("  DreeRally by Enrique Somolinos - github.com/enriquesomolinos", 1);
+  addMenuNews("", 1);
+  addMenuNews("Use arrow keys to change selection and press enter to confirm.", 1);
 }
 // 4458B0: using guessed type char letterSpacing_4458B0;
 // 461ED0: using guessed type __int16 word_461ED0;

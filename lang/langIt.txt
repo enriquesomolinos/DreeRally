@@ -1,5 +1,6 @@
 #menus
 Start Racing=Nuova Partita
+Continue Racing=Continua la Gara
 Multiplayer Race=Multigiocatore
 Configure=Configurazione
 See hall of fame=Record
@@ -10,6 +11,7 @@ no=no
 Are you sure?=Sei sicuro?
 
 Start a new game=Nuova Partita
+Enter The Shop=Entra nel Negozio
 End current Game=Chiudi Partita
 See current Stadistics=Classifica
 Load game=Carica Partita
@@ -21,6 +23,7 @@ Effect volume=Volume Effetti
 define Keyboard=Configura Tastiera
 Define Gamepad/Joystick=Configura gamepad/joystick
 Gamepad/Joystick Disabled=gamepad/joystick Disattivato
+Gamepad/Joystick Enabled=gamepad/joystick Attivato
 
 Empty slot=Slot Vuoto
 Quicksave slot=Salvataggio Rapido

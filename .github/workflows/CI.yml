@@ -16,7 +16,7 @@ on:
 
 jobs:
   build-windows:
-    runs-on: windows-latest
+    runs-on: windows-2022
     env:
       POWERSHELL_TELEMETRY_OPTOUT: 1
     strategy:
@@ -24,15 +24,11 @@ jobs:
       matrix:
         configuration: [Release, Debug]
     steps:
-      - uses: actions/checkout@v2
-      - uses: microsoft/setup-msbuild@v1.0.1
-      - name: Upgrade project(s)
-        run: |
-          Start-Process "${env:PROGRAMFILES(X86)}\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\devenv.com" "DreeRally.sln /upgrade" -nnw -Wait
-          ((gc -path DreeRally.vcxproj) -replace '8.1','10.0') | Set-Content DreeRally.vcxproj
+      - uses: actions/checkout@v4
+      - uses: microsoft/setup-msbuild@v2
       - name: Build
-        run: msbuild /m /nologo /v:m /p:Configuration=${{ matrix.configuration }} DreeRally.sln
-      - uses: actions/upload-artifact@v2
+        run: msbuild /m /nologo /v:m /p:Configuration=${{ matrix.configuration }} /p:Platform=Win32 /p:PlatformToolset=v143 /p:WindowsTargetPlatformVersion=10.0 DreeRally.sln
+      - uses: actions/upload-artifact@v4
         if: matrix.configuration == 'Release'
         with:
           name: DreeRally

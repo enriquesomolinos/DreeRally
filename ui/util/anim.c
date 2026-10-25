@@ -21,10 +21,12 @@ int carAnimFrameSize_45FBA0[6*64] = { 0x6A7,0x6B5,0x6D3,0x6E1,0x6DE,0x6CA,0x6D6,
 									  0x6CC,0x6E0,0x70A,0x731,0x743,0x747,0x736,0x71F,0x722,0x6E7,0x6D9,0x679,0x64A,0x62D,0x61E,0x622,0x604,0x608,0x61B,0x629,0x647,0x651,0x660,0x672,0x673,0x673,0x66F,0x66B,0x655,0x623,0x606,0x604,0x622,0x621,0x62D,0x652,0x664,0x659,0x65E,0x653,0x65D,0x63B,0x653,0x63F,0x63D,0x63D,0x627,0x61A,0x60C,0x616,0x613,0x63C,0x658,0x6A9,0x6D1,0x701,0x71B,0x72A,0x720,0x71B,0x709,0x6F3,0x6DC,0x6C7,
 									  0x76B,0x757,0x76B,0x76C,0x77E,0x777,0x76B,0x77A,0x74F,0x756,0x760,0x72D,0x73A,0x722,0x710,0x708,0x703,0x6FA,0x6FA,0x6EF,0x6F8,0x6D9,0x6CE,0x6C8,0x6A5,0x6B1,0x68A,0x67E,0x64E,0x63D,0x61E,0x634,0x648,0x627,0x652,0x63C,0x64D,0x64A,0x65C,0x679,0x69B,0x6A5,0x6C1,0x6BD,0x6AA,0x6C7,0x6E8,0x701,0x702,0x715,0x710,0x743,0x74E,0x77C,0x770,0x781,0x798,0x7BA,0x7BA,0x7A4,0x792,0x75B,0x761,0x75D };
 //= { 0x6A7,0x6B5,0x6D3,0x6E1,0x6DE,0x6CA,0x6D6,0x6B5,0x6C6,0x6AD,0x6AA,0x6BB,0x6AB,0x6C0,0x6A5,0x6B6,0x6A2,0x6AD,0x6B1,0x6C3,0x6C3,0x6D1,0x6C1,0x6B8,0x6BC,0x6BB,0x6BD,0x6C3,0x6B8,0x6B0,0x695,0x668,0x694,0x697,0x6A7,0x6C6,0x6D5,0x6C1,0x6AD,0x686,0x697,0x681,0x689,0x68C,0x676,0x684,0x69F,0x69C,0x69E,0x6D7,0x6D2,0x6F8,0x702,0x6FF,0x701,0x70D,0x70D,0x6FE,0x710,0x6FE,0x6E4,0x6CC,0x690,0x689,0x676,0x694,0x6C0,0x71F,0x73C,0x759,0x76D,0x771,0x777,0x744,0x70D,0x705,0x709,0x6CA,0x681,0x65C,0x65C,0x676,0x695,0x68C,0x6A2,0x6B8,0x6AA,0x6AB,0x694,0x67B,0x66F,0x659,0x621,0x5E3,0x5A5,0x53F,0x51A,0x54D,0x579,0x5C4,0x5EF,0x616,0x617,0x63B,0x653,0x665,0x672,0x65D,0x670,0x658,0x65A,0x64D,0x65A,0x674,0x688,0x6C3,0x710,0x720,0x734,0x75D,0x7C4,0x7B8,0x7A8,0x787,0x765,0x736,0x6B5,0x67B,0x611,0x61E,0x642,0x690,0x6AD,0x6C3,0x6BB,0x6CB,0x6AB,0x6B5,0x693,0x67B,0x65D,0x65A,0x66B,0x664,0x64D,0x63F,0x63F,0x643,0x648,0x663,0x664,0x65C,0x651,0x639,0x61B,0x5E5,0x5E1,0x5CE,0x59A,0x566,0x580,0x5B4,0x5CA,0x5D8,0x5E3,0x5D6,0x5C2,0x5BE,0x5E1,0x5DF,0x5F2,0x5F5,0x5E4,0x61A,0x631,0x621,0x63D,0x660,0x673,0x66B,0x66E,0x6A2,0x6B1,0x6A6,0x69E,0x68A,0x6A7,0x697,0x6A0,0x660,0x632,0x5F7,0x660,0x64A,0x673,0x697,0x6D9,0x715,0x726,0x710,0x701,0x6D7,0x6B6,0x66F,0x64D,0x634,0x63C,0x629,0x62D,0x637,0x644,0x63D,0x642,0x64F,0x63B,0x623,0x61E,0x5FA,0x5C9,0x5A9,0x598,0x566,0x530,0x4F2,0x4ED,0x505,0x545,0x55D,0x59A,0x5BB,0x5D8,0x5DA,0x5F5,0x610,0x623,0x630,0x626,0x616,0x629,0x629,0x62E,0x62E,0x658,0x63F,0x676,0x690,0x6D6,0x6E9,0x705,0x702,0x715,0x717,0x6FA,0x6C3,0x67F,0x670,0x6CC,0x6E0,0x70A,0x731,0x743,0x747,0x736,0x71F,0x722,0x6E7,0x6D9,0x679,0x64A,0x62D,0x61E,0x622,0x604,0x608,0x61B,0x629,0x647,0x651,0x660,0x672,0x673,0x673,0x66F,0x66B,0x655,0x623,0x606,0x604,0x622,0x621,0x62D,0x652,0x664,0x659,0x65E,0x653,0x65D,0x63B,0x653,0x63F,0x63D,0x63D,0x627,0x61A,0x60C,0x616,0x613,0x63C,0x658,0x6A9,0x6D1,0x701,0x71B,0x72A,0x720,0x71B,0x709,0x6F3,0x6DC,0x6C7,0x76B,0x757,0x76B,0x76C,0x77E,0x777,0x76B,0x77A,0x74F,0x756,0x760,0x72D,0x73A,0x722,0x710,0x708,0x703,0x6FA,0x6FA,0x6EF,0x6F8,0x6D9,0x6CE,0x6C8,0x6A5,0x6B1,0x68A,0x67E,0x64E,0x63D,0x61E,0x634,0x648,0x627,0x652,0x63C,0x64D,0x64A,0x65C,0x679,0x69B,0x6A5,0x6C1,0x6BD,0x6AA,0x6C7,0x6E8,0x701,0x702,0x715,0x710,0x743,0x74E,0x77C,0x770,0x781,0x798,0x7BA,0x7BA,0x7A4,0x792,0x75B,0x761,0x75D };
+//Tablas cotejadas con la .data de dr.exe: habia tres valores mal copiados (motor 37,
+//reparacion 22, continue 1) y desde ese cuadro la animacion se dibujaba corrida.
 int engineAnimFrameSize_445F68[] = {0x6b4,0x6b1,0x6bc,0x6b2,0x6a5,0x6bf,0x6a6,0x6b2,0x6b2,0x6c8,
 	0x6cb,0x6e0,0x6d9,0x6ef,0x6cc,0x6c3,0x6c1,0x6d2,0x6ce,0x6de,
 	0x6d1,0x6b2,0x6b2,0x6b6,0x75d,0x76d,0x76d,0x771,0x76d,0x77b,
-	0x76c,0x764,0x74e,0x73c,0x731,0x739,0x71b,0x701,0x710,0x709,
+	0x76c,0x764,0x74e,0x73c,0x731,0x739,0x71b,0x70a,0x710,0x709,
 	0x70c,0x71b,0x71e,0x72a,0x740,0x756,0x73f,0x760,0x800,0x7e8,
 	0x7c7,0x7b5,0x79f,0x7a3,0x768,0x76b,0x764,0x752,0x755,0x74f,
 	0x74c,0x74a,0x747,0x752,0x747,0x747,0x759,0x762,0x785,0x7a3,
@@ -39,8 +41,8 @@ int armourAnimFrameSize_4461A8[] = {0x64e,0x637,0x629,0x62e,0x61c,0x60f,0x604,0x
 	0x7c3,0x7c8,0x7a4,0x786,0x75b,0x747,0x6e7,0x6ec,0x7d2,0x7cf,
 	0x7e9,0x7d9,0x7d9,0x7d0,0x799,0x787,0x75b,0x782,0x768,0x74a,
 	0x717,0x72f,0x715,0x6eb }; // weak
-int continueAnimFramesSize_4611D0[] = { 0x602,0x577,0x622,0x613,0x608,0x601,0x5ee,0x5dc,0x5d5,0x5dc,0x5da,0x5ec,0x5f7,0x5fd,0x60c,0x651,0x639,0x62e,0x61e,0x630,0x627,0x629,0x61b }; // weak
-int repairAnimFrameSize_446308[] =    {0x5b3,0x5bb,0x5aa,0x5ad,0x598,0x597,0x5a9,0x593,0x5a5,0x5b0,0x5aa,0x593,0x597,0x580,0x580,0x5a9,0x5bb,0x5b8,0x5b3,0x5bf,0x5bb,0x5a9,0x9d,0x5a3}; // weak
+int continueAnimFramesSize_4611D0[] = { 0x602,0x5f7,0x622,0x613,0x608,0x601,0x5ee,0x5dc,0x5d5,0x5dc,0x5da,0x5ec,0x5f7,0x5fd,0x60c,0x651,0x639,0x62e,0x61e,0x630,0x627,0x629,0x61b }; // weak
+int repairAnimFrameSize_446308[] =    {0x5b3,0x5bb,0x5aa,0x5ad,0x598,0x597,0x5a9,0x593,0x5a5,0x5b0,0x5aa,0x593,0x597,0x580,0x580,0x5a9,0x5bb,0x5b8,0x5b3,0x5bf,0x5bb,0x5a9,0x59d,0x5a3}; // weak
 
 int repairAnimCurrentFrame_45EEAC=0; // weak
 
@@ -140,7 +142,6 @@ char byte_451D80[720] =
   '\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','[','F','e','r','r','o','C','h','r','o','m','i','u','m',' ','A','r','m','o','r','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','D','e','f','l','e','c','t','s',' ','b','u','l','l','e','t','s',',',' ','a','n','d',' ','m','o','s','t',' ','o','t','h','e','r','\0','\0','\0','\0','\0','\0','\0','\0','b','a','d',' ','s','t','u','f','f',' ','t','h','a','t',' ','g','o','e','s',' ','b','a','n','g',' ','i','n',' ','t','h','e','\0','\0','\0','\0','\0','\0','\0','\0','\0','n','i','g','h','t',',',' ','t','o','o','.','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','[','T','i','t','a','n','i','u','m',' ','P','l','a','t','e','s',' ','i','n','s','t','a','l','l','e','d','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','S','h','i','n','y',' ','h','a','r','d',' ','s','t','u','f','f','.',' ','N','o',' ','e','x','p','l','o','s','i','v','e',' ','c','a','n','\0','\0','\0','\0','\0','\0','s','h','a','d','o','w',' ','i','t','s',' ','t','a','n','n','i','n','g',' ','r','a','d','i','a','n','c','e','.',' ','D','o','n','\'','t','\0','\0','\0','\0','\0','\0','f','o','r','g','e','t',' ','y','o','u','r',' ','s','h','a','d','e','s','!','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','[','A','c','c','e','s','t','e','e','l',' ','A','r','m','o','r',' ','i','n','s','t','a','l','l','e','d','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','N','o','t',' ','e','v','e','n',' ','a',' ','s','h','e','l','l','-','s','h','o','c','k',' ','s','e','r','i','o','u','s','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','b','a','z','o','o','k','a',' ','c','a','n',' ','f','a','z','e',' ','t','h','e',' ','c','o','o','l',' ','m','i','r','r','o','r','\0','\0','\0','\0','\0','\0','\0','\0','b','e','a','u','t','y',' ','o','f',' ','A','c','c','e','s','t','e','e','l','.','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0'
 }; // idb
 _UNKNOWN unk_4433D4; // weak
-char unk_445928[10];
 
 ShopMessages shopMessages;
 
@@ -491,8 +492,6 @@ int   drawMenuAnimation(int x, int y, int frame, int animation, int frameSizes[]
 //----- (00420250) --------------------------------------------------------
 int reloadCarAnimation2()
 {
-  unsigned int v0; // eax@1
-  char *v1; // edi@1
 //  char v2; // cl@2
 //  int v3; // eax@3
   const char *v4; // edx@4
@@ -500,41 +499,41 @@ int reloadCarAnimation2()
 //  int v7; // [sp-4h] [bp-2Ch]@4
 //  int v8; // [sp-4h] [bp-2Ch]@5
 //  __int16 v9; // [sp+0h] [bp-28h]@1
-  char *DstBuf=malloc(100); // [sp+14h] [bp-14h]@1
+  char DstBuf[100]; // [sp+14h] [bp-14h]@1
+  char price[104];
 
   drawImageWithPosition2((int)carbas2Bpk, 96, 96, (int)((char *)screenBuffer + 80016));
   drawImageWithPosition2((int)((char *)carnameBpk + 1536 * actualCarSelected), 96, 16, (int)((char *)screenBuffer + 80016));
   drawMenuAnimation(16, 141, carAnimCurrentFrame_45FBA0, getCarBpkById(actualCarSelected), (int)&carAnimFrameSize_45FBA0[64 * actualCarSelected]);
   SDL_itoa(cars[actualCarSelected].cost, DstBuf, 10);
   
-  v0 = strlen(DstBuf) + 1;
+  //"$" + cifras: el malloc(strlen + 1) quedaba un byte corto y no se liberaba.
+  sprintf(price, "$%s", DstBuf);
+	v6 = getBoxTextOffset(price);//get small text size
 
-  v1 = malloc(v0); //coste + el $
-strcpy(v1,"$"); /* copy name into the new var */
-	strcat(v1, DstBuf);
-	v6 = getBoxTextOffset(v1);//get small text size
-
-  drawInGamePrices(v1, v6 + 132496);
+  drawInGamePrices(price, v6 + 132496);
   createPopup(144, 114, 384, 119, 1);
   v6 = 79530;
   if ( useWeapons )
   {
 	  //todo fix
 	  writeTextInScreen(shopMessages.carMessage[actualCarSelected].infoMessage.title, 89770-(100010- 89770));
-    writeTextInScreen((const char *)&unk_44E078 + 1760 * actualCarSelected, 89770);
+    //Las lineas en blanco de los recuadros se leian como &unk_XXXX + 240*n o &byte_XXXX[800*n]: en el
+    //original eran filas vacias de una tabla, aqui cadenas sueltas y el indice se salia (basura en pantalla).
+    writeTextInScreen("", 89770);
     writeTextInScreen(shopMessages.carMessage[actualCarSelected].infoMessage.line1, 100010);
     writeTextInScreen(shopMessages.carMessage[actualCarSelected].infoMessage.line2, 110250);
     writeTextInScreen(shopMessages.carMessage[actualCarSelected].infoMessage.line3, 120490);
-    v4 = (char *)&unk_44E118 + 1760 * actualCarSelected;
+    v4 = "";//&unk_44E118 + 1760 * n: en el original la quinta linea esta vacia en los seis autos
   }
   else
   {
 	  writeTextInScreen(shopMessages.carMessageNoWeapons[actualCarSelected].infoMessage.title, 89770 - (100010 - 89770));
-    writeTextInScreen((const char *)&unk_44DF88 + 1760 * actualCarSelected, 89770);
+    writeTextInScreen("", 89770);
     writeTextInScreen(shopMessages.carMessageNoWeapons[actualCarSelected].infoMessage.line1, 100010);
     writeTextInScreen(shopMessages.carMessageNoWeapons[actualCarSelected].infoMessage.line2, 110250);
     writeTextInScreen(shopMessages.carMessageNoWeapons[actualCarSelected].infoMessage.line3, 120490);
-    v4 = (char *)&unk_44E028 + 1760 * actualCarSelected;
+    v4 = "";//&unk_44E028 + 1760 * n, tambien vacia
   }
   writeTextInScreen(v4, 130730);
   drawImageWithPosition((int)((char *)arrows1dBpk ), 16, 64, (int)((char *)screenBuffer + 90240));
@@ -557,7 +556,7 @@ int reloadEngineAnimation2()
   int result; // eax@4
 //  char v7; // [sp-1h] [bp-29h]@2
 //  __int16 v8; // [sp+0h] [bp-28h]@2
-  char *DstBuf =malloc(100); // [sp+14h] [bp-14h]@2
+  char DstBuf[100]; // [sp+14h] [bp-14h]@2
 
   drawImageWithPosition2((int)bases41Bpk, 96, 96, (int)((char *)screenBuffer + 161936));
   v0 = cars[drivers[driverId].carType].engineUpgrades;
@@ -567,11 +566,11 @@ int reloadEngineAnimation2()
     drawImageWithPosition2((int)((char *)maxi1fBpk + 6144 * v0 - 6144), 96, 64, (int)((char *)screenBuffer + 172176));
     createPopup(144, 114, 384, 119, 1);
     writeTextInScreen(shopMessages.engineMessageNoMoreUpgrades.title, 79530);
-    writeTextInScreen((const char *)&unk_450B10, 89770);
+    writeTextInScreen("", 89770);
     writeTextInScreen(shopMessages.engineMessageNoMoreUpgrades.line1, 100010);
     writeTextInScreen(shopMessages.engineMessageNoMoreUpgrades.line2, 110250);
     writeTextInScreen(shopMessages.engineMessageNoMoreUpgrades.line3, 120490);
-    result = writeTextInScreen((const char *)&unk_450BB0, 130730);
+    result = writeTextInScreen("", 130730);
   }
   else
   {
@@ -595,16 +594,12 @@ strcpy(v3,"$"); /* copy name into the new var */
     drawInGamePrices(v3, v5 + 214416);
     createPopup(144, 114, 384, 119, 1);
     writeTextInScreen(shopMessages.engineMessage[drivers[driverId].engine].infoMessage.title, 79530);
-    writeTextInScreen(
-      (const char *)&unk_44E258 + 1760 * drivers[driverId].carType + 240 * drivers[driverId].engine,
+    writeTextInScreen("",
       89770);
     writeTextInScreen(shopMessages.engineMessage[drivers[driverId].engine].infoMessage.line1, 100010);
     writeTextInScreen(shopMessages.engineMessage[drivers[driverId].engine].infoMessage.line2, 110250);
     writeTextInScreen(shopMessages.engineMessage[drivers[driverId].engine].infoMessage.line3, 120490);
-    result = writeTextInScreen(
-               (const char *)&unk_44E2F8
-             + 1760 * drivers[driverId].carType
-             + 240 * drivers[driverId].engine,
+    result = writeTextInScreen("",
                130730);
   }
   return result;
@@ -622,7 +617,7 @@ int reloadTireAnimation2()
   int result; // eax@4
 //  char v7; // [sp-1h] [bp-29h]@2
 //  __int16 v8; // [sp+0h] [bp-28h]@2
-  char *DstBuf=malloc(100); // [sp+14h] [bp-14h]@2
+  char DstBuf[100]; // [sp+14h] [bp-14h]@2
 
   drawImageWithPosition2((int)bases42Bpk, 96, 96, (int)((char *)screenBuffer + 162040));
   v0 = cars[drivers[driverId].carType].tireUpgrades;
@@ -632,11 +627,11 @@ int reloadTireAnimation2()
     drawImageWithPosition2((int)((char *)maxi1fBpk + 2048 * (3 * v0 + 9)), 96, 64, (int)((char *)screenBuffer + 172280));
     createPopup(144, 114, 384, 119, 1);
 	writeTextInScreen(shopMessages.tireMessageNoMoreUpgrades.title, 79530);
-    writeTextInScreen((const char *)&unk_450C00, 89770);
+    writeTextInScreen("", 89770);
     writeTextInScreen(shopMessages.tireMessageNoMoreUpgrades.line1, 100010);
     writeTextInScreen(shopMessages.tireMessageNoMoreUpgrades.line2, 110250);
     writeTextInScreen(shopMessages.tireMessageNoMoreUpgrades.line3, 120490);
-    result = writeTextInScreen((const char *)&unk_450CA0, 130730);
+    result = writeTextInScreen("", 130730);
   }
   else
   {
@@ -659,11 +654,11 @@ strcpy(v3,"$"); /* copy name into the new var */
     drawInGamePrices(v3, v5 + 214520);
     createPopup(144, 114, 384, 119, 1);
 	writeTextInScreen(shopMessages.tireMessage[drivers[driverId].tire].infoMessage.title, 79530);
-    writeTextInScreen((const char *)&unk_4511A0 + 240 * drivers[driverId].tire, 89770);
+    writeTextInScreen("", 89770);
     writeTextInScreen(shopMessages.tireMessage[drivers[driverId].tire].infoMessage.line1, 100010);
     writeTextInScreen(shopMessages.tireMessage[drivers[driverId].tire].infoMessage.line2, 110250);
     writeTextInScreen(shopMessages.tireMessage[drivers[driverId].tire].infoMessage.line3, 120490);
-    result = writeTextInScreen(&byte_451240[240 * drivers[driverId].tire], 130730);
+    result = writeTextInScreen("", 130730);
   }
   return result;
 }
@@ -680,21 +675,21 @@ int reloadArmourAnimation2()
   int result; // eax@4
 //  char v7; // [sp-1h] [bp-29h]@2
 //  __int16 v8; // [sp+0h] [bp-28h]@2
-  char *DstBuf=malloc(100); // [sp+14h] [bp-14h]@2
+  char DstBuf[100]; // [sp+14h] [bp-14h]@2
 
   drawImageWithPosition2((int)bases43Bpk, 96, 96, (int)((char *)screenBuffer + 162144));
-  v0 = cars[drivers[driverId].carType].engineUpgrades;
+  v0 = cars[drivers[driverId].carType].armourUpgrades;//0x420AB2: tope de blindaje, no de motor
   v1 = drivers[driverId].armour;
   if ( v1 >= v0 )
   {
     drawImageWithPosition2((int)((char *)maxi1fBpk + 2048 * (3 * v0 + 21)), 96, 64, (int)((char *)screenBuffer + 172384));
     createPopup(144, 114, 384, 119, 1);
 	writeTextInScreen(shopMessages.armorMessageNoMoreUpgrades.title, 79530);
-    writeTextInScreen((const char *)&unk_450CF0, 89770);
+    writeTextInScreen("", 89770);
 	writeTextInScreen(shopMessages.armorMessageNoMoreUpgrades.line1, 100010);
     writeTextInScreen(shopMessages.armorMessageNoMoreUpgrades.line2, 110250);
     writeTextInScreen(shopMessages.armorMessageNoMoreUpgrades.line3, 120490);
-    result = writeTextInScreen((const char *)&unk_450D90, 130730);
+    result = writeTextInScreen("", 130730);
   }
   else
   {
@@ -703,7 +698,9 @@ int reloadArmourAnimation2()
       269,
       armourAnimCurrentFrame_461288,
       getArmourBpkById(v1),
-      (int)((char *)&armourAnimFrameSize_4461A8 + 16 * drivers[driverId].armour));
+      //16 tamanos de cuadro (64 bytes) por nivel, como en 0x420ADB (shl 6). Con 16 bytes el
+      //descompresor arrancaba a mitad de un cuadro y escribia fuera de dword_461EA4.
+      (int)((char *)&armourAnimFrameSize_4461A8 + 64 * drivers[driverId].armour));
     SDL_itoa(cars[drivers[driverId].carType].armourUpgradeCosts[drivers[driverId].armour], DstBuf, 10);//esto son textos
      
   v0 = strlen(DstBuf) + 1;
@@ -717,11 +714,11 @@ strcpy(v3,"$"); /* copy name into the new var */
     drawInGamePrices(v3, v5 + 214624);
     createPopup(144, 114, 384, 119, 1);
     writeTextInScreen(shopMessages.armorMessage[drivers[ driverId].armour].infoMessage.title, 79530);
-    writeTextInScreen((const char *)&unk_451920 + 240 * drivers[driverId].armour, 89770);
+    writeTextInScreen("", 89770);
     writeTextInScreen(shopMessages.armorMessage[drivers[ driverId].armour].infoMessage.line1, 100010);
     writeTextInScreen(shopMessages.armorMessage[drivers[ driverId].armour].infoMessage.line2, 110250);
     writeTextInScreen(shopMessages.armorMessage[drivers[ driverId].armour].infoMessage.line3, 120490);
-    result = writeTextInScreen(&byte_4519C0[240 * drivers[driverId].armour], 130730);
+    result = writeTextInScreen("", 130730);
   }
   return result;
 }
@@ -732,70 +729,43 @@ int reloadRepairAnimation()
   int v0; // eax@1
   int v1; // eax@2
   int v2; // eax@2
-  __int64 v3; // rax@3
   int v4; // eax@3
-  unsigned int v5; // eax@5
-  char *v6; // edx@5
-  void *v7; // edi@5
-//  char v8; // cl@6
-  int v9; // eax@8
-  int v10; // eax@8
-  char v11; // cl@11
   int v12; // eax@12
   int v13; // eax@12
   signed int v14; // esi@12
   bool v15; // sf@12
   unsigned __int8 v16; // of@12
-  int v17; // esi@36
-  char *DstBuf =malloc(100); // [sp+8h] [bp-28h]@2
-  char v20; // [sp+1Bh] [bp-15h]@5
-  __int16 v21; // [sp+1Ch] [bp-14h]@5
+  char DstBuf[16]; // [sp+8h] [bp-28h]@2
+  char percent[16];
+  char price[20];
 
   drawImageWithPosition2((int)bases44Bpk, 96, 96, (int)((char *)screenBuffer + 162248));
   drawMenuAnimation(328, 269, repairAnimCurrentFrame_45EEAC, (int)repaaniBpk, (int)&repairAnimFrameSize_446308);
+  //Cada reparacion quita un 10% (o lo que quede). El original tomaba "10" de unk_4433D4,
+  //que aqui es un byte suelto (no se veia), y con menos de un 10% armaba el precio con
+  //strcpy sobre un literal "" (memoria de solo lectura). Mismos importes que en REPAIR.
+  //El simbolo % ya esta en el grafico del recuadro: solo se escribe el numero.
   v0 = drivers[driverId].damage;
+  v2 = drivers[driverId].carType;
   if ( v0 >= 10 )
   {
-    v9 = getBoxTextSize((const char *)&unk_4433D4);
-    drawTextWithFont((int)graphicsGeneral.fmed1aBpk, (int)&unk_445928, (const char *)&unk_4433D4, 163610 - v9);
-    v10 = cars[drivers[driverId].carType].repairCost;
-    if ( useWeapons )
-      v10 /= 2;
-    SDL_itoa(v10, DstBuf, 10);
-    v21 = 36;
-    v6 = DstBuf;
-    v5 = strlen(DstBuf) + 1;
-    v7 = &v20;
-    do
-    {
-      v11 = *((int8*)v7 + 1);
-      v7 = (char *)v7 + 1;
-    }
-    while ( v11 );
+    strcpy(percent, "10");
+    v4 = cars[v2].repairCost;
   }
   else
   {
-    SDL_itoa(v0, DstBuf, 10);
-    v1 = getBoxTextSize(DstBuf);
-    drawTextWithFont((int)graphicsGeneral.fmed1aBpk, (int)&unk_445928, DstBuf, 163610 - v1);
-    v2 = drivers[driverId].carType;
-    if ( useWeapons )
-    {
-      v3 = cars[v2].repairCost / 10;
-      v4 = ((signed int)v3 - HIDWORD(v3)) >> 1;
-    }
-    else
-    {
-      v4 = cars[v2].repairCost / 10;
-    }
-    SDL_itoa(drivers[driverId].damage * v4, DstBuf, 10);
-	v6= "";
-	strcpy(v6,"$"); /* copy name into the new var */
-	strcat(v6, DstBuf);
+    SDL_itoa(v0, percent, 10);
+    v4 = v0 * (cars[v2].repairCost / 10);
   }
-//  memcpy(v7, v6, v5);
-  v12 = getBoxTextOffset(v6);
-  drawInGamePrices(v6, v12 + 214728);
+  if ( useWeapons )
+    v4 /= 2;
+  v1 = getBoxTextSize(percent);
+  drawTextWithFont((int)graphicsGeneral.fmed1aBpk, (int)&unk_445928, percent, 163610 - v1);
+  SDL_itoa(v4, DstBuf, 10);
+  strcpy(price, "$");
+  strcat(price, DstBuf);
+  v12 = getBoxTextOffset(price);
+  drawInGamePrices(price, v12 + 214728);
   v13 = drivers[driverId].damage;
   v14 = 0;
   v16 = __OFSUB__(v13, 100);
@@ -828,13 +798,14 @@ int reloadRepairAnimation()
   if ( !v13 )
     v14 = 11;
   createPopup(144, 114, 384, 119, 1);
-  v17 = 240 * v14;
+  //byte_453E50/byte_453EF0 + 240 * v14 eran las lineas en blanco de la tabla original;
+  //byte_453E50 tiene 40 bytes y el indice se salia (basura en la segunda linea).
   writeTextInScreen(shopMessages.repairMessage[v14-1].title, 79530);
-  writeTextInScreen(&byte_453E50[v17], 89770);
+  writeTextInScreen("", 89770);
   writeTextInScreen(shopMessages.repairMessage[v14-1].line1, 100010);
   writeTextInScreen(shopMessages.repairMessage[v14-1].line2, 110250);
   writeTextInScreen(shopMessages.repairMessage[v14-1].line3, 120490);
-  return writeTextInScreen(&byte_453EF0[v17], 130730);
+  return writeTextInScreen("", 130730);
 }
 
 //----- (00428FD0) --------------------------------------------------------
@@ -850,19 +821,19 @@ int reloadContinueAnimation()
   if ( useWeapons && v0 )
   {
     writeTextInScreen(shopMessages.continueMessage.title, 79530);
-    writeTextInScreen((const char *)&unk_454A80, 89770);
+    writeTextInScreen("", 89770);
 	writeTextInScreen(shopMessages.continueMessage.line1, 100010);
     writeTextInScreen(shopMessages.continueMessage.line2, 110250);
-    writeTextInScreen((const char *)&unk_454AF8, 120490);
+    writeTextInScreen("", 120490);
     v2 = shopMessages.continueMessage.line3;
   }
   else
   {
     writeTextInScreen(shopMessages.continueMessageNoWeapons.title, 79530);
-    writeTextInScreen((const char *)&unk_454990, 89770);
+    writeTextInScreen("", 89770);
     writeTextInScreen(shopMessages.continueMessageNoWeapons.line1, 100010);
     writeTextInScreen(shopMessages.continueMessageNoWeapons.line2, 110250);
-    writeTextInScreen((const char *)&unk_454A08, 120490);
+    writeTextInScreen("", 120490);
     v2 = shopMessages.continueMessageNoWeapons.line3;
   }
   writeTextInScreen(v2, 130730);
@@ -903,11 +874,11 @@ int reloadEngineAnimation()
   }
   createPopup(144, 114, 384, 119, 1);
   writeTextInScreen(shopMessages.engineMessage[drivers[driverId].engine].boughMessage.title, 79530);
-  writeTextInScreen((const char *)&unk_450DE0 + 240 * drivers[driverId].engine, 89770);
+  writeTextInScreen("", 89770);
   writeTextInScreen(shopMessages.engineMessage[drivers[driverId].engine].boughMessage.line1, 100010);
   writeTextInScreen(shopMessages.engineMessage[drivers[driverId].engine].boughMessage.line2, 110250);
   writeTextInScreen(shopMessages.engineMessage[drivers[driverId].engine].boughMessage.line3, 120490);
-  return writeTextInScreen(&byte_450E80[240 * drivers[driverId].engine], 130730);
+  return writeTextInScreen("", 130730);
 }
 
 //----- (00421520) --------------------------------------------------------
@@ -945,11 +916,11 @@ int reloadTireAnimation()
   }
   createPopup(144, 114, 384, 119, 1);
   writeTextInScreen(shopMessages.tireMessage[drivers[driverId].tire].boughMessage.title, 79530);
-  writeTextInScreen((const char *)&unk_451560 + 240 * drivers[driverId].tire+1, 89770);
+  writeTextInScreen("", 89770);
   writeTextInScreen(shopMessages.tireMessage[drivers[driverId].tire].boughMessage.line1, 100010);
   writeTextInScreen(shopMessages.tireMessage[drivers[driverId].tire].boughMessage.line2, 110250);
   writeTextInScreen(shopMessages.tireMessage[drivers[driverId].tire].boughMessage.line3, 120490);
-  return writeTextInScreen(&byte_451600[240 * drivers[driverId].tire], 130730);
+  return writeTextInScreen("", 130730);
 }
 
 //----- (00421750) --------------------------------------------------------
@@ -988,10 +959,10 @@ int reloadArmourAnimation()
   }
   createPopup(144, 114, 384, 119, 1);
   writeTextInScreen(shopMessages.armorMessage[drivers[ driverId].armour].boughMessage.title, 79530);
-  writeTextInScreen((const char *)&unk_451CE0 + 240 * drivers[driverId].armour, 89770);
+  writeTextInScreen("", 89770);
   writeTextInScreen(shopMessages.armorMessage[drivers[ driverId].armour].boughMessage.line1, 100010);
   writeTextInScreen(shopMessages.armorMessage[drivers[ driverId].armour].boughMessage.line2, 110250);
   writeTextInScreen(shopMessages.armorMessage[drivers[ driverId].armour].boughMessage.line3, 120490);
-  return writeTextInScreen(&byte_451D80[240 * drivers[driverId].armour], 130730);
+  return writeTextInScreen("", 130730);
 }
 

@@ -3,6 +3,11 @@
 #include "../raceParticipant.h"
 #include "../defs.h"
 #include <SDL_stdinc.h>
+#include <math.h>
+#include <string.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include "../diagnostics.h"
 
 Powerup powerups[16];
 int dword_456AC4 = 0; // weak
@@ -14,9 +19,6 @@ void powerUpTaken_410050()
     signed int* v1; // esi@1
     int v2; // ebp@4
     int v3; // ebx@4
-    unsigned int v4; // eax@9
-    char* v5; // esi@9
-    void* v6; // edi@9
     char v7; // cl@10
     char* v8; // edi@12
     char v9; // al@13
@@ -24,7 +26,6 @@ void powerUpTaken_410050()
     int v11; // [sp+14h] [bp-14h]@1
     char DstBuf[20]; // [sp+18h] [bp-10h]@9
     char v13; // [sp+1Fh] [bp-9h]@9
-    __int16 v14; // [sp+20h] [bp-8h]@9
     int index = 0;
     v0 = Val;
     //v1 = (signed int)&unk_501BB4;
@@ -40,32 +41,21 @@ void powerUpTaken_410050()
             {
                 switch (powerups[index].lastPowerUp_ID_501BB8)
                 {
+                //Como en dr.exe (0x410050): "$60" / "$600" con el simbolo delante y "30%" detras, en
+                //(y << 9) + x + 0x60. La traduccion ponia el $ detras, escribia desde &v14 (un local
+                //sin inicializar: fila de 0xCC en Debug) y habia perdido los 96 pixeles del final.
                 case POWERUP_SMALL_MONEY:
-                    SDL_itoa(v0, &DstBuf, 10);
-                    strcat(&DstBuf, "$");
-                    v6 = DstBuf;
-                    v5 = &DstBuf;
-                    v4 = strlen(&DstBuf);
+                    sprintf(DstBuf, "$%d", v0);
                     goto LABEL_17;
                 case POWERUP_SMALL_REPAIR:
                 case POWERUP_BIG_REPAIR:
-                    SDL_itoa(powerups[index].repairpercentage_501BBC, &DstBuf, 10);
-                    strcat(&DstBuf, "%");
-                    v6 = DstBuf;
-                    v5 = &DstBuf;
-                    v4 = strlen(&DstBuf);
+                    sprintf(DstBuf, "%d%%", powerups[index].repairpercentage_501BBC);
                     goto LABEL_17;
 
                 case POWERUP_BIG_MONEY:
-                    SDL_itoa(10 * v0, &DstBuf, 10);
-                    strcat(&DstBuf, "$");
-                    v6 = DstBuf;
-                    v5 = &DstBuf;
-                    v4 = strlen(&DstBuf);
+                    sprintf(DstBuf, "$%d", 10 * v0);
                 LABEL_17:
-                    //esta pintando en mal posicion
-                    memcpy(v6, v5, v4);
-                    writeTextInRace_402510((v3 << 9) + v2, (const char*)&v14);
+                    writeTextInRace_402510((v3 << 9) + v2 + 0x60, DstBuf);
                     //v1 = v11;
                 LABEL_18:
                     v0 = Val;
@@ -111,9 +101,7 @@ int generatePowerUps()
     int v21; // ecx@77
     int v22; // ecx@77
     int v23; // edx@77
-    int v24; // ecx@77
     int v25; // ecx@77
-    int v26; // edx@77
     signed int v27; // ecx@78
     signed int v28; // eax@79
     char v29; // dl@80
@@ -147,7 +135,6 @@ int generatePowerUps()
     int v57; // edx@125
     int v58; // eax@126
     signed __int64 v59; // rtt@126
-    char* v60 = malloc(100); // [sp+10h] [bp-18h]@76
     signed int v61; // [sp+14h] [bp-14h]@40
     int v62; // [sp+18h] [bp-10h]@40
     int v63[12]; // [sp+1Ch] [bp-Ch]@40
@@ -161,6 +148,8 @@ int generatePowerUps()
         v1 = dword_456AC4 - dword_4A9EA4;
     dword_456AC4 = v1;
     //v2 = (signed int)dword_501BB0;
+    //Solo los huecos 0..11 caducan (dr.exe recorre 501BB0..502930): 12..15 son los power-ups grandes
+    //y la droga, que se quedan hasta que alguien los recoge. Con 16 parpadeaban y se esfumaban.
     v2 = 0;
     do
     {
@@ -185,30 +174,23 @@ int generatePowerUps()
           *(_DWORD *)(v2 + 1440) = v0 + v7;
         v2 = v2+1;
         */
-    } while (v2 < 16);
+    } while (v2 < 12);
     v8 = rand;
     if (!v1 && !isRaceFinish_456AC8)
     {
         v9 = 0;
         // v10 = (signed int)&unk_501CC8;
-        v10 = 0;
-        do
+        //Cuantos power-ups hay en pista (se permiten 4). El bucle traducido miraba 6 por vuelta
+        //avanzando de 5 en 5 hasta 16: leia powerups[16..20], fuera del array, y con basura
+        //alli contaba 4 o mas y no volvia a generar ninguno. Son los huecos 0..11 (dr.exe recorre
+        //501CC8..502A48): la droga y los grandes de 12..15 no cuentan para el limite.
+        for (v10 = 0; v10 < 12; ++v10)
         {
             if (powerups[v10].powerUp_ID_501BA8 > 0)
                 ++v9;
-            if (powerups[v10 + 1].powerUp_ID_501BA8 > 0)
-                ++v9;
-            if (powerups[v10 + 2].powerUp_ID_501BA8 > 0)
-                ++v9;
-            if (powerups[v10 + 3].powerUp_ID_501BA8 > 0)
-                ++v9;
-            if (powerups[v10 + 4].powerUp_ID_501BA8 > 0)
-                ++v9;
-            if (powerups[v10 + 5].powerUp_ID_501BA8 > 0)
-                ++v9;
-            v10 += 5;
-        } while (v10 < 16);
-        v63[0] = 0;
+        }
+        //v63 marca los huecos ya probados; en el original eran 12 bytes a cero (v63..v65).
+        memset(v63, 0, sizeof(v63));
         v64 = 0;
         v61 = v9;
         v65 = 0;
@@ -290,8 +272,14 @@ int generatePowerUps()
                     if (v15 ^ v16)
                     {
                     LABEL_76:
+                        //Prueba: DREERALLY_FORCE_MUSHROOM=1 convierte en hongo cada power-up chico que aparece.
+                        if (getenv("DREERALLY_FORCE_MUSHROOM") && *getenv("DREERALLY_FORCE_MUSHROOM") == '1')
+                            powerups[v11].powerUp_ID_501BA8 = POWERUP_DRUNK;
                         v17 = circuitMatrixHxW_5034F8;
                         ++v61;
+                        diagnosticLog("powerup: aparece id=%d hueco=%d x=%d y=%d en pista=%d",
+                                      powerups[v11].powerUp_ID_501BA8, v11,
+                                      powerups[v11].posX_501BA0, powerups[v11].posY_501BA4, v61);
 
                         //esto lo he eliminado
                         //powerups[v11].posX_501BA0 = 0;
@@ -314,13 +302,11 @@ int generatePowerUps()
                             powerups[v11].screenBackup_501BC0[v21 + 6] = *(_DWORD*)(v22 + 8);
                             powerups[v11].screenBackup_501BC0[v21 + 7] = *(_DWORD*)(v22 + 12);
                             v23 = (int)((char*)v17 + powerups[v11].posX_501BA0 + v18 * (powerups[v11].posY_501BA4 + v19 - 6) - 8);
-                            v24 = (int)(v60 + 16);
                             powerups[v11].screenBackup_501BC0[v21 + 8] = *(_DWORD*)v23;
                             powerups[v11].screenBackup_501BC0[v21 + 9] = *(_DWORD*)(v23 + 4);
                             powerups[v11].screenBackup_501BC0[v21 + 10] = *(_DWORD*)(v23 + 8);
                             powerups[v11].screenBackup_501BC0[v21 + 11] = *(_DWORD*)(v23 + 12);
                             v25 = (int)((char*)v17 + powerups[v11].posX_501BA0 + v18 * (powerups[v11].posY_501BA4 + v19 - 5) - 8);
-                            v26 = (int)(v60 + 32);
                             powerups[v11].screenBackup_501BC0[v21 + 12] = *(_DWORD*)v25;
                             powerups[v11].screenBackup_501BC0[v21 + 13] = *(_DWORD*)(v25 + 4);
                             powerups[v11].screenBackup_501BC0[v21 + 14] = *(_DWORD*)(v25 + 8);
@@ -328,7 +314,6 @@ int generatePowerUps()
                             v20 += 4;
                             v21 += 16;
                             v19 += 4;
-                            v60 += 64;
                         } while (v19 < 16);
 
 
@@ -537,7 +522,7 @@ LABEL_95:
             powerups[v33].dword_501BAC = (unsigned __int64)(v59 % 200) + 300;
         }
         v33 += 1;
-    } while (v33 < 16);//864 );
+    } while (v33 < 12); //dr.exe 0x410B76: 12 huecos de 0x120, los grandes no parpadean ni caducan
     return result;
 }
 
@@ -871,7 +856,8 @@ int generateBigPowerUps()
     {
         //v8 = 72 * (rand() % 2 + 12);
         v8 = (rand() % 2 + 12);
-        result = powerups[v8].dword_501BAC;
+        //dr.exe mira la posicion del hueco (501BA0), no su tiempo.
+        result = powerups[v8].posX_501BA0;
         //result = dword_501BA0[v8];
         //if(debug)result=1;
         if (result > 0)
@@ -984,8 +970,8 @@ int generateBigPowerUps()
                 do
                 {
                     v28 = (int)((char*)v25
-                        + *(int*)((char*)powerups[result].posX_501BA0)
-                        + v26 * (*(int*)((char*)powerups[result].posY_501BA4) + v27 - 8)
+                        + powerups[result].posX_501BA0
+                        + v26 * (powerups[result].posY_501BA4 + v27 - 8)
                         - 8);
                     //v29 = (int)(v42 - 16);
 
@@ -994,16 +980,16 @@ int generateBigPowerUps()
                     powerups[result].screenBackup_501BC0[v29 + 2] = *(_DWORD*)(v28 + 8);
                     powerups[result].screenBackup_501BC0[v29 + 3] = *(_DWORD*)(v28 + 12);
                     v30 = (int)((char*)v25
-                        + *(int*)((char*)powerups[result].posX_501BA0)
-                        + v26 * (*(int*)((char*)powerups[result].posY_501BA4) + v27 - 7)
+                        + powerups[result].posX_501BA0
+                        + v26 * (powerups[result].posY_501BA4 + v27 - 7)
                         - 8);
                     powerups[result].screenBackup_501BC0[v29 + 4] = *(_DWORD*)v30;
                     powerups[result].screenBackup_501BC0[v29 + 5] = *(_DWORD*)(v30 + 4);
                     powerups[result].screenBackup_501BC0[v29 + 6] = *(_DWORD*)(v30 + 8);
                     powerups[result].screenBackup_501BC0[v29 + 7] = *(_DWORD*)(v30 + 12);
                     v31 = (int)((char*)v25
-                        + *(int*)((char*)powerups[result].posX_501BA0)
-                        + v26 * (*(int*)((char*)powerups[result].posY_501BA4) + v27 - 6)
+                        + powerups[result].posX_501BA0
+                        + v26 * (powerups[result].posY_501BA4 + v27 - 6)
                         - 8);
                     // v32 = (int)(v42 + 16);
                     powerups[result].screenBackup_501BC0[v29 + 8] = *(_DWORD*)v31;
@@ -1011,8 +997,8 @@ int generateBigPowerUps()
                     powerups[result].screenBackup_501BC0[v29 + 10] = *(_DWORD*)(v31 + 8);
                     powerups[result].screenBackup_501BC0[v29 + 11] = *(_DWORD*)(v31 + 12);
                     v33 = (int)((char*)v25
-                        + *(int*)((char*)powerups[result].posX_501BA0)
-                        + v26 * (*(int*)((char*)powerups[result].posY_501BA4) + v27 - 5)
+                        + powerups[result].posX_501BA0
+                        + v26 * (powerups[result].posY_501BA4 + v27 - 5)
                         - 8);
                     //v34 = (int)(v42 + 32);
                     powerups[result].screenBackup_501BC0[v29 + 12] = *(_DWORD*)v33;
@@ -1030,45 +1016,45 @@ int generateBigPowerUps()
                     v36 = 0;
                     do
                     {
-                        v37 = *((BYTE*)obstacleBpk + 16 * (16 * *(int*)((char*)powerups[result].powerUp_ID_501BA8) + v35 - 16) + v36);
+                        v37 = *((BYTE*)obstacleBpk + 16 * (16 * powerups[result].powerUp_ID_501BA8 + v35 - 16) + v36);
                         if (v37)
                         {
                             *((char*)v25
-                                + *(int*)((char*)powerups[result].posX_501BA0)
-                                + v26 * (*(int*)((char*)powerups[result].posY_501BA4) + v35 - 8)
+                                + powerups[result].posX_501BA0
+                                + v26 * (powerups[result].posY_501BA4 + v35 - 8)
                                 + v36
                                 - 8) = v37;
                             v25 = circuitMatrixHxW_5034F8;
                             v26 = circuitWidth_464F40;
                         }
-                        v38 = *((char*)obstacleBpk + 16 * (v35 + 16 * *(int*)((char*)powerups[result].powerUp_ID_501BA8)) + v36 - 255);
+                        v38 = *((char*)obstacleBpk + 16 * (v35 + 16 * powerups[result].powerUp_ID_501BA8) + v36 - 255);
                         if (v38)
                         {
                             *((char*)v25
-                                + *(int*)((char*)powerups[result].posX_501BA0)
-                                + v26 * (*(int*)((char*)powerups[result].posY_501BA4) + v35 - 8)
+                                + powerups[result].posX_501BA0
+                                + v26 * (powerups[result].posY_501BA4 + v35 - 8)
                                 + v36
                                 - 7) = v38;
                             v25 = circuitMatrixHxW_5034F8;
                             v26 = circuitWidth_464F40;
                         }
-                        v39 = *((char*)obstacleBpk + 16 * (v35 + 16 * *(int*)((char*)powerups[result].powerUp_ID_501BA8)) + v36 - 254);
+                        v39 = *((char*)obstacleBpk + 16 * (v35 + 16 * powerups[result].powerUp_ID_501BA8) + v36 - 254);
                         if (v39)
                         {
                             *((char*)v25
-                                + *(int*)((char*)powerups[result].posX_501BA0)
-                                + v26 * (*(int*)((char*)powerups[result].posY_501BA4) + v35 - 8)
+                                + powerups[result].posX_501BA0
+                                + v26 * (powerups[result].posY_501BA4 + v35 - 8)
                                 + v36
                                 - 6) = v39;
                             v25 = circuitMatrixHxW_5034F8;
                             v26 = circuitWidth_464F40;
                         }
-                        v40 = *((char*)obstacleBpk + 16 * (v35 + 16 * *(int*)((char*)powerups[result].powerUp_ID_501BA8)) + v36 - 253);
+                        v40 = *((char*)obstacleBpk + 16 * (v35 + 16 * powerups[result].powerUp_ID_501BA8) + v36 - 253);
                         if (v40)
                         {
                             *((char*)v25
-                                + *(int*)((char*)powerups[result].posX_501BA0)
-                                + v26 * (*(int*)((char*)powerups[result].posY_501BA4) + v35 - 8)
+                                + powerups[result].posX_501BA0
+                                + v26 * (powerups[result].posY_501BA4 + v35 - 8)
                                 + v36
                                 - 5) = v40;
                             v25 = circuitMatrixHxW_5034F8;

@@ -57,29 +57,48 @@ int  decryptEntireSavegame(int a1, char *Filename)
 		*((BYTE *)Str + v5++) += v7;
 	} while ((signed int)v5 < 2179);
 	result = 0;
-	/*do
+	//El original copia el nombre a la tabla de ranuras (0x41C9D0), que el prompt de guardar
+	//ofrece de nuevo. getSaveGameName pasa 0 porque lee el nombre por su cuenta.
+	if (a1)
 	{
-		*(BYTE *)(result + a1) = *((BYTE *)Str + result + 4);
-		++result;
-	} while (result < 15);*/
+		do
+		{
+			*(BYTE *)(result + a1) = *((BYTE *)Str + result + 4);
+			++result;
+		} while (result < 15);
+		*(BYTE *)(a1 + 15) = 0;
+		result = 0;
+	}
 	return result;
 }
 
 char* getSaveGameName(int savegame) {
+	//El menu de carga pide los nombres en cada dibujado: un buffer fijo por ranura y el
+	//savegame descifrado se libera aqui mismo (antes eran 2,2 KB perdidos por llamada).
+	static char saveGameNames[10][20];
 	char Filename[20];
-	char *saveNumber = (char *) malloc(1);
-//	FILE * fp;
-	char *saveGameName= (char *) malloc(20);
-	
+	char saveNumber[12];
+	char *saveGameName;
+	void *previousStr;
+
+	if (savegame < 0 || savegame >= 10)
+		return NULL;
+	saveGameName = saveGameNames[savegame];
 	strcpy(Filename, "DR.SG");
 	SDL_itoa(savegame, saveNumber, 10);
 	strcat(Filename, saveNumber);
 	if ((signed int)fileExists(Filename) > 0) {
-		
+
+		previousStr = Str;
 		decryptEntireSavegame(0, Filename);
 
-		memcpy(saveGameName, ((unsigned char *)Str + 4), 16);
-		
+		//El nombre ocupa los bytes 4 a 18; el 19 ya es la primera letra de drivers[0]. Con 16, un
+		//nombre de 15 letras mostraba una de mas. El original copia 15 (0x41C9D0).
+		memcpy(saveGameName, ((unsigned char *)Str + 4), 15);
+		saveGameName[15] = 0;
+		free(Str);
+		Str = previousStr;
+
 		return saveGameName;
 	}
 	else {

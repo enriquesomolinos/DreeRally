@@ -573,7 +573,7 @@ int sub_424420()
   int result; // eax@3
   int v5; // esi@6
   int v6; // ebx@6
-  char *DstBuf=malloc(100); // [sp+0h] [bp-Ch]@6
+  char DstBuf[100]; // [sp+0h] [bp-Ch]@6
   int v8; // [sp+4h] [bp-8h]@1
   int v9; // [sp+8h] [bp-4h]@3
 
@@ -596,7 +596,6 @@ int sub_424420()
       v5 = 640 * (v3 + v2 * result);
       drawImageWithPosition((int)graphicsGeneral.placingBpk, 202, 74, (int)((char *)screenBuffer + v5 + 389));
       v6 = v2 + 1;
-      if(DstBuf !=NULL)
       SDL_itoa(v2 + 1, DstBuf, 10);
       if ( v2 )
         drawTextWithFont((int)graphicsGeneral.fbig3aBpk, (int)&bigLetterSpacing_445848, DstBuf, v5 + 4876);

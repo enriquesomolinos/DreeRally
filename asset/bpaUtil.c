@@ -43,7 +43,6 @@ int   extractFromBpa(char* bpaFilename, void *dest, char* filename)
   int v30; // [sp+30h] [bp-48h]@11
   int v31; // [sp+34h] [bp-44h]@11
   char fat[0x10EF];//cabecera del fichero
-  char *destStream;
  
   char completeFile[300] = "";//"C:/proyectos/Drwin/Debug/";
   FILE *extractedFile;
@@ -59,7 +58,6 @@ int   extractFromBpa(char* bpaFilename, void *dest, char* filename)
 				 fseek(extractedFile, 0L, SEEK_END);
 
 				 fileSize = ftell(extractedFile);
-					destStream = malloc(fileSize * sizeof(char));
 					//extractedFile=fopen(filename, "rb");
 				  fseek(extractedFile, 0, SEEK_SET);
 
@@ -183,7 +181,6 @@ LABEL_11:
   }
 
 LABEL_12:
-  destStream = malloc(fileSize * sizeof(char));
   fseek(v20, fileDataPointer, SEEK_SET);
   
   fread(dest, fileSize, 1u, v20);
@@ -229,7 +226,9 @@ int   getFileSizeFromBpa(char *bpaFile, char * filename)
   v2=0;
   v3 = fopen(bpaFile, "rb");
   fread(&DstBuf, 4u, 1u, v3);
-  unk_463E20 =malloc(0x10EFu);
+  //En el original 0x463E20 es un buffer fijo; reservarlo en cada llamada perdia 4 KB por archivo.
+  if ( !unk_463E20 )
+    unk_463E20 = malloc(0x10EFu);
   fread(unk_463E20, 0x10EFu, 1u, v3);
   fclose(v3);
   _strupr(fileNameUpper);

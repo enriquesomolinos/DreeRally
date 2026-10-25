@@ -34,4 +34,6 @@ typedef enum
 }ShopMenu;
 
 extern char menuActive_4457F0[];
+extern char menuaStartANewGam_0[17];
+extern char menuaStartRacing[16];
 char* getMenuText(int menu, int position);

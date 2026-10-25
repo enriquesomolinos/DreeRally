@@ -98,7 +98,8 @@
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BufferSecurityCheck>false</BufferSecurityCheck>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
-      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+      <WarningLevel>Level3</WarningLevel>
+      <DisableSpecificWarnings>4244;4101;4996;4018;4391;4731;4142;4005;4305;4102;4267;4245;%(DisableSpecificWarnings)</DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -113,7 +114,8 @@
     <ClCompile>
       <PrecompiledHeader>
       </PrecompiledHeader>
-      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+      <WarningLevel>Level3</WarningLevel>
+      <DisableSpecificWarnings>4244;4101;4996;4018;4391;4731;4142;4005;4305;4102;4267;4245;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalOptions>-nosound -nogl %(AdditionalOptions)</AdditionalOptions>
@@ -132,13 +134,14 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
-      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+      <WarningLevel>Level3</WarningLevel>
+      <DisableSpecificWarnings>4244;4101;4996;4018;4391;4731;4142;4005;4305;4102;4267;4245;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <PrecompiledHeader>
       </PrecompiledHeader>
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -151,13 +154,14 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+      <WarningLevel>Level3</WarningLevel>
+      <DisableSpecificWarnings>4244;4101;4996;4018;4391;4731;4142;4005;4305;4102;4267;4245;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <PrecompiledHeader>
       </PrecompiledHeader>
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -183,10 +187,10 @@
       <MinimalRebuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</MinimalRebuild>
       <MinimalRebuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</MinimalRebuild>
       <BasicRuntimeChecks Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">EnableFastChecks</BasicRuntimeChecks>
-      <RuntimeLibrary Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">MultiThreadedDebugDLL</RuntimeLibrary>
       <BufferSecurityCheck Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</BufferSecurityCheck>
       <FunctionLevelLinking Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</FunctionLevelLinking>
     </ClCompile>
+    <ClCompile Include="diagnostics.c" />
     <ClCompile Include="drivers.c" />
     <ClCompile Include="graphics.c" />
     <ClCompile Include="imageUtil.c" />
@@ -218,6 +222,8 @@
     <ClCompile Include="ui\util\carRightSide.c" />
     <ClCompile Include="ui\util\input.c" />
     <ClCompile Include="ui\util\menus.c" />
+    <ClCompile Include="ui\util\keyNames.c" />
+    <ClCompile Include="ui\util\originalTexts.c" />
     <ClCompile Include="ui\util\popup.c" />
     <ClCompile Include="ui\util\raceResults.c" />
     <ClCompile Include="util.c" />
@@ -236,6 +242,7 @@
     <ClInclude Include="defs.h" />
     <ClInclude Include="doc.h" />
     <ClInclude Include="dr.h" />
+    <ClInclude Include="diagnostics.h" />
     <ClInclude Include="drivers.h" />
     <ClInclude Include="graphics.h" />
     <ClInclude Include="imageUtil.h" />
@@ -273,6 +280,8 @@
     <ClInclude Include="ui\util\carRightSide.h" />
     <ClInclude Include="ui\util\input.h" />
     <ClInclude Include="ui\util\menus.h" />
+    <ClInclude Include="ui\util\keyNames.h" />
+    <ClInclude Include="ui\util\originalTexts.h" />
     <ClInclude Include="ui\util\popup.h" />
     <ClInclude Include="ui\util\raceResults.h" />
     <ClInclude Include="util.h" />

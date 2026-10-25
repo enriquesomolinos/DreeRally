@@ -3,6 +3,11 @@
 #include "../dr.h"
 #include "../raceParticipant.h"
 #include "../sfx/soundEffects.h"
+#include <math.h>
+#include <string.h>
+
+//unk_46E880 en el binario: 0x46E880 - 0x46E560 = 800 = sprite 10 (8x10) de BIGNUM6, el '%'.
+#define BIGNUM6_PERCENT_SPRITE (10 * 8 * 10)
 
 char smallbarBpk_50E720[2048]; // weak
 int boardsBPK_4AA940[4][2048]; // weak
@@ -15,7 +20,6 @@ char othnum1Bpk_50B2C0[12672]; // weak
 void* goalnum2Bpk_4AA50C; // idb
 char damageBpk_464F80[8064]; // weak
 void* rast1Bpk_464F78; // idb
-_UNKNOWN unk_46E880; // weak
 void* sidebom1Bpk_481E04; // idb
 
 //----- (00413C90) --------------------------------------------------------
@@ -127,8 +131,8 @@ int  drawSmallLeftBar_413C90(int a1)
             ticksToPauseLapTimeInHud_4A9EB0 = 0;
     }
     v19 = 100.0 - ceil((double)raceParticipant2[userRaceOrder_4A9EA8].damageBar_4A6898 * 0.0009765625);
-    drawSprite_402590((int)&bugnum6Bpk_46E560, 8, 10, (unsigned __int64)v19, 0, 11408, -8, -16);
-    //TODO FIX drawImageInRace_43B240((int)&unk_46E880, 8, 10, v20 + dword_464F14);
+    v20 = drawSprite_402590((int)&bugnum6Bpk_46E560, 8, 10, (unsigned __int64)v19, 0, 11408, -8, -16);
+    drawImageInRace_43B240((int)(bugnum6Bpk_46E560 + BIGNUM6_PERCENT_SPRITE), 8, 10, v20 + dword_464F14);
     v21 = userRaceOrder_4A9EA8;
     if (raceParticipant2[userRaceOrder_4A9EA8].damageBar_4A6898 < 20480)
     {
@@ -585,8 +589,12 @@ int drawLeftRaceBar_414220()
     }
     else if (ticksToPauseLapTimeInHud_4A9EB0 <= 0)
     {
-        v57 = (signed int)(currentLapTime_481E0C / 70 + ((unsigned int)(-2004318071 * (currentLapTime_481E0C / 70)) >> 32)) >> 5;
-        drawSprite_402590((int)&smalfo4aBpk_4A9160, 6, 6, v57 + ((unsigned int)v57 >> 31), 16, leftMenuInRaceWidth_456AA0 + 22587, -6, 0);
+        // El original dividia por 60 con la multiplicacion magica 0x88888889. Al quedar en
+        // 32 bits, el ">> 32" desplaza mas que el ancho del tipo (C4293): en x86 el contador
+        // se enmascara a 5 bits, o sea ">> 0", y los minutos salian mal. La rama de abajo,
+        // con lastCompletedLapTime, ya hace la division directa.
+        v57 = currentLapTime_481E0C / 70 / 60;
+        drawSprite_402590((int)&smalfo4aBpk_4A9160, 6, 6, v57, 16, leftMenuInRaceWidth_456AA0 + 22587, -6, 0);
         drawSprite_402590((int)&smalfo4aBpk_4A9160, 6, 6, currentLapTime_481E0C / 70 % 60, 16, leftMenuInRaceWidth_456AA0 + 22601, 6, 0);
         drawSprite_402590((int)&smalfo4aBpk_4A9160, 6, 6, (unsigned __int64)((double)(currentLapTime_481E0C % 70) * 1.42), 16, leftMenuInRaceWidth_456AA0 + 22615, 6, 0);
     }
@@ -605,7 +613,7 @@ int drawLeftRaceBar_414220()
     drawTurboBar_43B3A0(dword_464F14 + (unsigned __int8)v58 + leftMenuInRaceWidth_456AA0 + 17444, 58 - (unsigned __int8)v58, 7, v1);
     v59 = (unsigned __int64)(100.0 - ceil((double)raceParticipant2[userRaceOrder_4A9EA8].damageBar_4A6898 * 0.0009765625));
     v60 = drawSprite_402590((int)&bugnum6Bpk_46E560, 8, 10, v59, 0, leftMenuInRaceWidth_456AA0 + 36398, -8, -16);
-    drawImageInRace_43B240((int)&unk_46E880, 8, 10, v60 + dword_464F14);
+    drawImageInRace_43B240((int)(bugnum6Bpk_46E560 + BIGNUM6_PERCENT_SPRITE), 8, 10, v60 + dword_464F14);
     v61 = userRaceOrder_4A9EA8;
     if (raceParticipant2[userRaceOrder_4A9EA8].damageBar_4A6898 < 20480)
     {

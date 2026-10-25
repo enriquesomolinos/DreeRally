@@ -399,7 +399,9 @@ int initDrivers()
 		  offset = 1;
 	  }
 	  drivers[index].face = index+ offset;
-	  memcpy(drivers[index].name, driverNames[index+ offset], strlen(driverNames[index+offset]));
+	  //0x428EF6: copia el nombre con su cero; con memcpy de strlen quedaba la cola de un nombre
+	  //anterior mas largo ("LEE VICEK").
+	  strcpy(drivers[index].name, driverNames[index + offset]);
 	  drivers[index].racesWon = 0;
 	  drivers[index].totalRaces = 0;
 	  drivers[index].lastRaceIncome = 0;
@@ -421,9 +423,14 @@ int initDrivers()
 	  drivers[index].carMoneyCost = cars[v9].cost;
 	  v21 = index + 1;
 	  drivers[index].rank = index + 1; ///esta es la posicion
-	  drivers[index].colour = index+1;
+	  //El color es el indice del nombre, como la cara (0x428F04, 0x428F07): con index + 1 los rivales que
+	  //quedan antes de la cara del jugador tomaban el color del siguiente en CARCOL.PAL.
+	  drivers[index].colour = index + offset;
 	  
-  } while (++index < 20);
+	  //Solo los 19 rivales: el original recorre 0x460890..0x461094 (19 * 108). Con 20 tambien pisaba al
+	  //jugador (drivers[19]): su nombre, su cara y su color, y leia un nombre 20 fuera de driverNames
+	  //(cierre en Release). Por eso estaba quitada la llamada que el original hace tras la licencia.
+  } while (++index < 19);
  /* v5 = (signed int)dword_460890;
   do
   {
@@ -481,6 +488,9 @@ int initDrivers()
   drivers[19].lastRaceIncome = 0;
   drivers[19].points = 0;
   drivers[19].totalIncome = 0;
+  drivers[19].carMoneyCost = cars[0].cost; //0x428F4F
+  drivers[19].rank = 20; //0x428F55
+  drivers[19].racesWon = 0;
   drivers[19].loanType = NO_LOAN;
   drivers[19].loanRaces = -1;
   
