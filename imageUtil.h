@@ -17,9 +17,10 @@ unsigned int   drawInGamePrices(const char *a1, int a2);
 int   writeTextInScreen(const char *a1, int a2);
 
 extern const int DEFAULT_BIGLETTER_SPACING_OFFSET;
-extern char byte_445892[];
-extern char letterSpacing_4458B0[];
-extern char bigLetterSpacing_445848[];
-extern  char  unk_445928[] ;
+extern unsigned char fontSpacing_445848[0x1C8];
+#define bigLetterSpacing_445848 (*(char (*)[0x68])(fontSpacing_445848 + 0x00))
+#define byte_445892 (*(char (*)[0x1C8 - 0x4A])(fontSpacing_445848 + 0x4A))
+#define letterSpacing_4458B0 (*(char (*)[0x1C8 - 0x68])(fontSpacing_445848 + 0x68))
+#define unk_445928 (*(char (*)[0x1C8 - 0xE0])(fontSpacing_445848 + 0xE0))
 
 #endif

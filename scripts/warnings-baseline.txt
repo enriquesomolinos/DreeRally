@@ -1,0 +1,791 @@
+﻿1	asset\bpaUtil.c: warning C4013: 'colorToPaletteEntry' sin definir; se supone que extern devuelve como resultado int
+1	asset\bpaUtil.c: warning C4013: 'errorExitScreen' sin definir; se supone que extern devuelve como resultado int
+2	asset\bpaUtil.c: warning C4047: '=': 'char' es distinto en los niveles de direccionamiento indirecto de 'char *'
+2	asset\bpaUtil.c: warning C4047: '=': 'int' es distinto en los niveles de direccionamiento indirecto de 'char *'
+1	asset\bpaUtil.c: warning C4047: '>=': 'int' es distinto en los niveles de direccionamiento indirecto de 'char [4]'
+1	asset\bpaUtil.c: warning C4102: 'LABEL_12': etiqueta sin referencia
+1	asset\haf.c: warning C4013: 'callRefreshOrExecuteBackgroundFunction_43C8F0' sin definir; se supone que extern devuelve como resultado int
+1	asset\haf.c: warning C4013: 'decryptTexture' sin definir; se supone que extern devuelve como resultado int
+1	asset\haf.c: warning C4013: 'eventDetected' sin definir; se supone que extern devuelve como resultado int
+1	asset\haf.c: warning C4013: 'getModIntEntry' sin definir; se supone que extern devuelve como resultado int
+1	asset\haf.c: warning C4013: 'loadMenuSoundEffect' sin definir; se supone que extern devuelve como resultado int
+1	asset\haf.c: warning C4013: 'loadMusic' sin definir; se supone que extern devuelve como resultado int
+1	asset\haf.c: warning C4013: 'musicPlayMusic' sin definir; se supone que extern devuelve como resultado int
+1	asset\haf.c: warning C4013: 'nullsub_1' sin definir; se supone que extern devuelve como resultado int
+1	asset\haf.c: warning C4013: 'recalculateSDLTicks_43C740' sin definir; se supone que extern devuelve como resultado int
+1	asset\haf.c: warning C4013: 'refreshScreenWithDelay' sin definir; se supone que extern devuelve como resultado int
+1	asset\haf.c: warning C4013: 'setPaletteValue' sin definir; se supone que extern devuelve como resultado int
+1	asset\haf.c: warning C4013: 'setWindowCaption3' sin definir; se supone que extern devuelve como resultado int
+1	asset\haf.c: warning C4013: 'stopAndOpenMusic' sin definir; se supone que extern devuelve como resultado int
+1	asset\haf.c: warning C4013: 'stopSong' sin definir; se supone que extern devuelve como resultado int
+1	asset\haf.c: warning C4013: 'stopSoundChannel_43C3E0' sin definir; se supone que extern devuelve como resultado int
+1	asset\haf.c: warning C4018: '<': no coinciden signed/unsigned
+2	asset\haf.c: warning C4047: '=': 'int' es distinto en los niveles de direccionamiento indirecto de 'BYTE *'
+1	config.c: warning C4013: 'defaultConfig' sin definir; se supone que extern devuelve como resultado int
+1	config.c: warning C4047: '=': 'int' es distinto en los niveles de direccionamiento indirecto de 'char *'
+2	config.c: warning C4047: '=': 'int' es distinto en los niveles de direccionamiento indirecto de 'void *'
+1	D:\Mis Docs\GitHub\DreeRally\defs.h: warning C4005: 'HIBYTE': redefinici├│n de macro
+1	D:\Mis Docs\GitHub\DreeRally\defs.h: warning C4005: 'HIWORD': redefinici├│n de macro
+1	D:\Mis Docs\GitHub\DreeRally\defs.h: warning C4005: 'LOBYTE': redefinici├│n de macro
+1	D:\Mis Docs\GitHub\DreeRally\defs.h: warning C4005: 'LOWORD': redefinici├│n de macro
+2	D:\Mis Docs\GitHub\DreeRally\sfx\minifmod\../../defs.h: warning C4005: 'HIBYTE': redefinici├│n de macro
+2	D:\Mis Docs\GitHub\DreeRally\sfx\minifmod\../../defs.h: warning C4005: 'HIWORD': redefinici├│n de macro
+2	D:\Mis Docs\GitHub\DreeRally\sfx\minifmod\../../defs.h: warning C4005: 'LOBYTE': redefinici├│n de macro
+2	D:\Mis Docs\GitHub\DreeRally\sfx\minifmod\../../defs.h: warning C4005: 'LOWORD': redefinici├│n de macro
+2	D:\Mis Docs\GitHub\DreeRally\sfx\minifmod\../../defs.h: warning C4142: 'BYTE': nueva definici├│n de tipo sin efecto
+2	D:\Mis Docs\GitHub\DreeRally\sfx\minifmod\../../defs.h: warning C4142: 'DWORD': nueva definici├│n de tipo sin efecto
+2	D:\Mis Docs\GitHub\DreeRally\sfx\minifmod\../../defs.h: warning C4142: 'LONG': nueva definici├│n de tipo sin efecto
+2	D:\Mis Docs\GitHub\DreeRally\sfx\minifmod\../../defs.h: warning C4142: 'WORD': nueva definici├│n de tipo sin efecto
+1	D:\Mis Docs\GitHub\DreeRally\sfx\minifmod\soundSystem.c : warning C4715: 'FSOUND_Mixer_FPU_Ramp_43DEA0': no todas las rutas de acceso de control devuelven un valor
+1	D:\Mis Docs\GitHub\DreeRally\sfx\minifmod\soundSystem.c : warning C4715: 'FSOUND_MixerClipCopy_Float32_43DE30': no todas las rutas de acceso de control devuelven un valor
+28	D:\Mis Docs\GitHub\DreeRally\sfx\minifmod\soundSystem.c : warning C4731: 'FSOUND_Mixer_FPU_Ramp_43DEA0': registro de puntero de marco 'ebp' modificado por c├│digo de ensamblado alineado
+1	D:\Mis Docs\GitHub\DreeRally\ui\blackMarketScreen.c : warning C4716: 'initBlackMarketMessages': debe devolver un valor
+1	D:\Mis Docs\GitHub\DreeRally\ui\util\anim.c : warning C4716: 'initShopMessages': debe devolver un valor
+1	dr.c: warning C4013: 'drawCursor' sin definir; se supone que extern devuelve como resultado int
+1	dr.c: warning C4013: 'drawKeyCursor' sin definir; se supone que extern devuelve como resultado int
+1	dr.c: warning C4013: 'drawSmallLeftBar_414110' sin definir; se supone que extern devuelve como resultado int
+1	dr.c: warning C4013: 'inicializeScreen' sin definir; se supone que extern devuelve como resultado int
+1	dr.c: warning C4013: 'mainMenu' sin definir; se supone que extern devuelve como resultado int
+1	dr.c: warning C4013: 'openAnimation' sin definir; se supone que extern devuelve como resultado int
+3	dr.c: warning C4018: '<': no coinciden signed/unsigned
+1	dr.c: warning C4018: '>': no coinciden signed/unsigned
+2	dr.c: warning C4018: '>=': no coinciden signed/unsigned
+9	dr.c: warning C4024: 'copyImageToBuffer': tipos distintos para el par├ímetro formal y el par├ímetro real 2
+1	dr.c: warning C4024: 'drawCharInRaceScreen': tipos distintos para el par├ímetro formal y el par├ímetro real 1
+1	dr.c: warning C4024: 'drawImageInRace_43B240': tipos distintos para el par├ímetro formal y el par├ímetro real 1
+5	dr.c: warning C4024: 'drawMenuAnimation': tipos distintos para el par├ímetro formal y el par├ímetro real 4
+5	dr.c: warning C4024: 'drawMenuAnimation': tipos distintos para el par├ímetro formal y el par├ímetro real 5
+1	dr.c: warning C4024: 'drawRaceCharInMenu_43B1A0': tipos distintos para el par├ímetro formal y el par├ímetro real 1
+1	dr.c: warning C4024: 'regenerateRacePalette': tipos distintos para el par├ímetro formal y el par├ímetro real 1
+3	dr.c: warning C4047: '=': 'char *' es distinto en los niveles de direccionamiento indirecto de 'int'
+1	dr.c: warning C4047: '=': 'int *' es distinto en los niveles de direccionamiento indirecto de 'int'
+1	dr.c: warning C4047: '=': 'int' es distinto en los niveles de direccionamiento indirecto de 'BYTE *'
+2	dr.c: warning C4047: '=': 'int' es distinto en los niveles de direccionamiento indirecto de 'char *'
+1	dr.c: warning C4047: '=': 'int' es distinto en los niveles de direccionamiento indirecto de 'int *'
+1	dr.c: warning C4047: '=': 'int' es distinto en los niveles de direccionamiento indirecto de 'SDL_Joystick *'
+5	dr.c: warning C4047: '=': 'int' es distinto en los niveles de direccionamiento indirecto de 'unsigned char *'
+3	dr.c: warning C4047: '=': 'int' es distinto en los niveles de direccionamiento indirecto de 'void *'
+1	dr.c: warning C4047: '=': 'SDL_Joystick *' es distinto en los niveles de direccionamiento indirecto de 'int'
+2	dr.c: warning C4047: '=': 'uint32' es distinto en los niveles de direccionamiento indirecto de 'int *'
+5	dr.c: warning C4047: 'funci├│n': 'int *' es distinto en los niveles de direccionamiento indirecto de 'int'
+1	dr.c: warning C4047: 'funci├│n': 'int' es distinto en los niveles de direccionamiento indirecto de 'BYTE [768]'
+3	dr.c: warning C4047: 'funci├│n': 'int' es distinto en los niveles de direccionamiento indirecto de 'char *'
+14	dr.c: warning C4047: 'funci├│n': 'int' es distinto en los niveles de direccionamiento indirecto de 'void *'
+1	dr.c: warning C4090: '=': calificadores 'const' diferentes
+1	dr.c: warning C4101: 'color': variable local sin referencia
+1	dr.c: warning C4101: 'error': variable local sin referencia
+1	dr.c: warning C4101: 'i': variable local sin referencia
+1	dr.c: warning C4101: 'paletteTmp': variable local sin referencia
+2	dr.c: warning C4101: 'v0': variable local sin referencia
+2	dr.c: warning C4101: 'v1': variable local sin referencia
+4	dr.c: warning C4101: 'v10': variable local sin referencia
+1	dr.c: warning C4101: 'v100': variable local sin referencia
+1	dr.c: warning C4101: 'v101': variable local sin referencia
+1	dr.c: warning C4101: 'v102': variable local sin referencia
+1	dr.c: warning C4101: 'v103': variable local sin referencia
+1	dr.c: warning C4101: 'v104': variable local sin referencia
+1	dr.c: warning C4101: 'v105': variable local sin referencia
+1	dr.c: warning C4101: 'v106': variable local sin referencia
+1	dr.c: warning C4101: 'v107': variable local sin referencia
+1	dr.c: warning C4101: 'v108': variable local sin referencia
+1	dr.c: warning C4101: 'v109': variable local sin referencia
+5	dr.c: warning C4101: 'v11': variable local sin referencia
+1	dr.c: warning C4101: 'v110': variable local sin referencia
+2	dr.c: warning C4101: 'v111': variable local sin referencia
+2	dr.c: warning C4101: 'v115': variable local sin referencia
+2	dr.c: warning C4101: 'v116': variable local sin referencia
+3	dr.c: warning C4101: 'v117': variable local sin referencia
+3	dr.c: warning C4101: 'v118': variable local sin referencia
+2	dr.c: warning C4101: 'v119': variable local sin referencia
+6	dr.c: warning C4101: 'v12': variable local sin referencia
+2	dr.c: warning C4101: 'v120': variable local sin referencia
+1	dr.c: warning C4101: 'v123': variable local sin referencia
+1	dr.c: warning C4101: 'v129': variable local sin referencia
+5	dr.c: warning C4101: 'v13': variable local sin referencia
+1	dr.c: warning C4101: 'v130': variable local sin referencia
+1	dr.c: warning C4101: 'v135': variable local sin referencia
+4	dr.c: warning C4101: 'v14': variable local sin referencia
+1	dr.c: warning C4101: 'v141': variable local sin referencia
+1	dr.c: warning C4101: 'v142': variable local sin referencia
+1	dr.c: warning C4101: 'v147': variable local sin referencia
+3	dr.c: warning C4101: 'v15': variable local sin referencia
+1	dr.c: warning C4101: 'v153': variable local sin referencia
+1	dr.c: warning C4101: 'v154': variable local sin referencia
+3	dr.c: warning C4101: 'v16': variable local sin referencia
+4	dr.c: warning C4101: 'v17': variable local sin referencia
+6	dr.c: warning C4101: 'v18': variable local sin referencia
+6	dr.c: warning C4101: 'v19': variable local sin referencia
+4	dr.c: warning C4101: 'v2': variable local sin referencia
+4	dr.c: warning C4101: 'v20': variable local sin referencia
+4	dr.c: warning C4101: 'v21': variable local sin referencia
+4	dr.c: warning C4101: 'v22': variable local sin referencia
+3	dr.c: warning C4101: 'v23': variable local sin referencia
+3	dr.c: warning C4101: 'v24': variable local sin referencia
+3	dr.c: warning C4101: 'v25': variable local sin referencia
+2	dr.c: warning C4101: 'v26': variable local sin referencia
+2	dr.c: warning C4101: 'v27': variable local sin referencia
+3	dr.c: warning C4101: 'v28': variable local sin referencia
+3	dr.c: warning C4101: 'v29': variable local sin referencia
+7	dr.c: warning C4101: 'v3': variable local sin referencia
+3	dr.c: warning C4101: 'v30': variable local sin referencia
+3	dr.c: warning C4101: 'v31': variable local sin referencia
+3	dr.c: warning C4101: 'v32': variable local sin referencia
+3	dr.c: warning C4101: 'v33': variable local sin referencia
+3	dr.c: warning C4101: 'v34': variable local sin referencia
+3	dr.c: warning C4101: 'v35': variable local sin referencia
+4	dr.c: warning C4101: 'v36': variable local sin referencia
+3	dr.c: warning C4101: 'v37': variable local sin referencia
+2	dr.c: warning C4101: 'v38': variable local sin referencia
+2	dr.c: warning C4101: 'v39': variable local sin referencia
+6	dr.c: warning C4101: 'v4': variable local sin referencia
+3	dr.c: warning C4101: 'v40': variable local sin referencia
+3	dr.c: warning C4101: 'v41': variable local sin referencia
+3	dr.c: warning C4101: 'v42': variable local sin referencia
+3	dr.c: warning C4101: 'v43': variable local sin referencia
+3	dr.c: warning C4101: 'v44': variable local sin referencia
+4	dr.c: warning C4101: 'v45': variable local sin referencia
+4	dr.c: warning C4101: 'v46': variable local sin referencia
+4	dr.c: warning C4101: 'v47': variable local sin referencia
+3	dr.c: warning C4101: 'v48': variable local sin referencia
+2	dr.c: warning C4101: 'v49': variable local sin referencia
+5	dr.c: warning C4101: 'v5': variable local sin referencia
+2	dr.c: warning C4101: 'v50': variable local sin referencia
+1	dr.c: warning C4101: 'v51': variable local sin referencia
+2	dr.c: warning C4101: 'v52': variable local sin referencia
+3	dr.c: warning C4101: 'v53': variable local sin referencia
+3	dr.c: warning C4101: 'v54': variable local sin referencia
+3	dr.c: warning C4101: 'v55': variable local sin referencia
+1	dr.c: warning C4101: 'v56': variable local sin referencia
+1	dr.c: warning C4101: 'v57': variable local sin referencia
+2	dr.c: warning C4101: 'v58': variable local sin referencia
+2	dr.c: warning C4101: 'v59': variable local sin referencia
+6	dr.c: warning C4101: 'v6': variable local sin referencia
+4	dr.c: warning C4101: 'v60': variable local sin referencia
+2	dr.c: warning C4101: 'v61': variable local sin referencia
+1	dr.c: warning C4101: 'v62': variable local sin referencia
+1	dr.c: warning C4101: 'v63': variable local sin referencia
+1	dr.c: warning C4101: 'v64': variable local sin referencia
+1	dr.c: warning C4101: 'v65': variable local sin referencia
+1	dr.c: warning C4101: 'v66': variable local sin referencia
+1	dr.c: warning C4101: 'v67': variable local sin referencia
+1	dr.c: warning C4101: 'v68': variable local sin referencia
+1	dr.c: warning C4101: 'v69': variable local sin referencia
+5	dr.c: warning C4101: 'v7': variable local sin referencia
+2	dr.c: warning C4101: 'v70': variable local sin referencia
+2	dr.c: warning C4101: 'v71': variable local sin referencia
+1	dr.c: warning C4101: 'v72': variable local sin referencia
+1	dr.c: warning C4101: 'v73': variable local sin referencia
+1	dr.c: warning C4101: 'v74': variable local sin referencia
+2	dr.c: warning C4101: 'v75': variable local sin referencia
+2	dr.c: warning C4101: 'v76': variable local sin referencia
+1	dr.c: warning C4101: 'v77': variable local sin referencia
+1	dr.c: warning C4101: 'v78': variable local sin referencia
+1	dr.c: warning C4101: 'v79': variable local sin referencia
+3	dr.c: warning C4101: 'v8': variable local sin referencia
+1	dr.c: warning C4101: 'v80': variable local sin referencia
+1	dr.c: warning C4101: 'v81': variable local sin referencia
+1	dr.c: warning C4101: 'v82': variable local sin referencia
+1	dr.c: warning C4101: 'v83': variable local sin referencia
+1	dr.c: warning C4101: 'v84': variable local sin referencia
+1	dr.c: warning C4101: 'v85': variable local sin referencia
+1	dr.c: warning C4101: 'v86': variable local sin referencia
+1	dr.c: warning C4101: 'v87': variable local sin referencia
+1	dr.c: warning C4101: 'v88': variable local sin referencia
+1	dr.c: warning C4101: 'v89': variable local sin referencia
+4	dr.c: warning C4101: 'v9': variable local sin referencia
+1	dr.c: warning C4101: 'v90': variable local sin referencia
+2	dr.c: warning C4101: 'v91': variable local sin referencia
+1	dr.c: warning C4101: 'v92': variable local sin referencia
+1	dr.c: warning C4101: 'v93': variable local sin referencia
+1	dr.c: warning C4101: 'v94': variable local sin referencia
+1	dr.c: warning C4101: 'v95': variable local sin referencia
+1	dr.c: warning C4101: 'v96': variable local sin referencia
+1	dr.c: warning C4101: 'v97': variable local sin referencia
+1	dr.c: warning C4101: 'v98': variable local sin referencia
+1	dr.c: warning C4101: 'v99': variable local sin referencia
+2	dr.c: warning C4113: 'void (__cdecl *)()' es distinto en las listas de par├ímetros de 'void (__cdecl *)(void)'
+1	dr.c: warning C4244: '+=': conversi├│n de '__int64' a 'uint32'; posible p├⌐rdida de datos
+243	dr.c: warning C4244: '=': conversi├│n de 'double' a 'float'; posible p├⌐rdida de datos
+2	dr.c: warning C4244: '=': conversi├│n de 'double' a 'GLfloat'; posible p├⌐rdida de datos
+15	dr.c: warning C4244: '=': conversi├│n de 'double' a 'int'; posible p├⌐rdida de datos
+1	dr.c: warning C4244: '=': conversi├│n de 'double' a 'unsigned __int64'; posible p├⌐rdida de datos
+60	dr.c: warning C4244: '=': conversi├│n de 'float' a 'int'; posible p├⌐rdida de datos
+5	dr.c: warning C4244: '=': conversi├│n de 'float' a 'unsigned __int64'; posible p├⌐rdida de datos
+9	dr.c: warning C4244: '=': conversi├│n de 'int' a 'float'; posible p├⌐rdida de datos
+4	dr.c: warning C4244: '=': conversi├│n de 'long double' a 'float'; posible p├⌐rdida de datos
+8	dr.c: warning C4244: '=': conversi├│n de 'unsigned __int64' a 'BYTE'; posible p├⌐rdida de datos
+85	dr.c: warning C4244: '=': conversi├│n de 'unsigned __int64' a 'int'; posible p├⌐rdida de datos
+1	dr.c: warning C4244: '-=': conversi├│n de 'unsigned __int64' a 'int'; posible p├⌐rdida de datos
+8	dr.c: warning C4244: '=': conversi├│n de 'unsigned __int64' a 'uint32'; posible p├⌐rdida de datos
+1	dr.c: warning C4244: '=': conversi├│n de 'unsigned __int64' a 'unsigned int'; posible p├⌐rdida de datos
+8	dr.c: warning C4244: 'funci├│n': conversi├│n de 'unsigned __int64' a 'char'; posible p├⌐rdida de datos
+2	dr.c: warning C4244: 'funci├│n': conversi├│n de 'unsigned __int64' a 'int'; posible p├⌐rdida de datos
+16	dr.c: warning C4244: 'funci├│n': conversi├│n de 'unsigned __int64' a 'unsigned char'; posible p├⌐rdida de datos
+2	dr.c: warning C4244: 'return': conversi├│n de '__int64' a 'int'; posible p├⌐rdida de datos
+3	dr.c: warning C4244: 'return': conversi├│n de 'unsigned __int64' a 'int'; posible p├⌐rdida de datos
+4	dr.c: warning C4305: '=': truncamiento de 'double' a 'float'
+6	dr.c: warning C4305: 'inicializando': truncamiento de 'double' a 'float'
+1	drivers.c: warning C4013: 'reInitUnderGroundMarketStock' sin definir; se supone que extern devuelve como resultado int
+1	drivers.c: warning C4013: 'sub_4224E0' sin definir; se supone que extern devuelve como resultado int
+1	graphics.c: warning C4013: 'copyImageToBuffer' sin definir; se supone que extern devuelve como resultado int
+1	graphics.c: warning C4013: 'decryptTexture' sin definir; se supone que extern devuelve como resultado int
+1	imageUtil.c: warning C4013: 'memcpy' sin definir; se supone que extern devuelve como resultado int
+1	imageUtil.c: warning C4013: 'strlen' sin definir; se supone que extern devuelve como resultado int
+7	imageUtil.c: warning C4018: '<': no coinciden signed/unsigned
+1	race\3dSystem.c: warning C4013: 'decryptTexture' sin definir; se supone que extern devuelve como resultado int
+1	race\3dSystem.c: warning C4013: 'extractFromBpa' sin definir; se supone que extern devuelve como resultado int
+1	race\3dSystem.c: warning C4013: 'iluminateTriangle_43D530' sin definir; se supone que extern devuelve como resultado int
+1	race\3dSystem.c: warning C4013: 'memset' sin definir; se supone que extern devuelve como resultado int
+1	race\3dSystem.c: warning C4013: 'strcat' sin definir; se supone que extern devuelve como resultado int
+1	race\3dSystem.c: warning C4013: 'strcpy' sin definir; se supone que extern devuelve como resultado int
+1	race\3dSystem.c: warning C4018: '<': no coinciden signed/unsigned
+1	race\3dSystem.c: warning C4018: '>=': no coinciden signed/unsigned
+1	race\3dSystem.c: warning C4047: '=': 'int *' es distinto en los niveles de direccionamiento indirecto de 'int'
+1	race\3dSystem.c: warning C4101: 'v15': variable local sin referencia
+3	race\3dSystem.c: warning C4101: 'v2': variable local sin referencia
+1	race\3dSystem.c: warning C4101: 'v21': variable local sin referencia
+1	race\3dSystem.c: warning C4101: 'v22': variable local sin referencia
+1	race\3dSystem.c: warning C4101: 'v23': variable local sin referencia
+1	race\3dSystem.c: warning C4101: 'v24': variable local sin referencia
+1	race\3dSystem.c: warning C4101: 'v25': variable local sin referencia
+1	race\3dSystem.c: warning C4101: 'v26': variable local sin referencia
+1	race\3dSystem.c: warning C4101: 'v27': variable local sin referencia
+1	race\3dSystem.c: warning C4101: 'v28': variable local sin referencia
+1	race\3dSystem.c: warning C4101: 'v29': variable local sin referencia
+1	race\3dSystem.c: warning C4101: 'v3': variable local sin referencia
+1	race\3dSystem.c: warning C4101: 'v30': variable local sin referencia
+1	race\3dSystem.c: warning C4101: 'v31': variable local sin referencia
+1	race\3dSystem.c: warning C4101: 'v32': variable local sin referencia
+1	race\3dSystem.c: warning C4101: 'v33': variable local sin referencia
+1	race\3dSystem.c: warning C4101: 'v34': variable local sin referencia
+1	race\3dSystem.c: warning C4101: 'v35': variable local sin referencia
+1	race\3dSystem.c: warning C4101: 'v36': variable local sin referencia
+1	race\3dSystem.c: warning C4101: 'v37': variable local sin referencia
+1	race\3dSystem.c: warning C4101: 'v38': variable local sin referencia
+1	race\3dSystem.c: warning C4101: 'v39': variable local sin referencia
+1	race\3dSystem.c: warning C4101: 'v41': variable local sin referencia
+1	race\3dSystem.c: warning C4101: 'v42': variable local sin referencia
+1	race\3dSystem.c: warning C4101: 'v43': variable local sin referencia
+1	race\3dSystem.c: warning C4101: 'v44': variable local sin referencia
+1	race\3dSystem.c: warning C4101: 'v45': variable local sin referencia
+1	race\3dSystem.c: warning C4101: 'v46': variable local sin referencia
+1	race\3dSystem.c: warning C4101: 'v47': variable local sin referencia
+1	race\3dSystem.c: warning C4101: 'v50': variable local sin referencia
+9	race\3dSystem.c: warning C4244: '+=': conversi├│n de 'long double' a 'float'; posible p├⌐rdida de datos
+10	race\3dSystem.c: warning C4244: '=': conversi├│n de 'double' a 'float'; posible p├⌐rdida de datos
+4	race\3dSystem.c: warning C4244: '=': conversi├│n de 'long double' a 'float'; posible p├⌐rdida de datos
+1	race\3dSystem.c: warning C4244: '=': conversi├│n de 'unsigned __int64' a 'uint32'; posible p├⌐rdida de datos
+1	race\leftBar.c: warning C4013: 'colorToPaletteEntry' sin definir; se supone que extern devuelve como resultado int
+1	race\leftBar.c: warning C4013: 'convertColorToPaletteColor' sin definir; se supone que extern devuelve como resultado int
+1	race\leftBar.c: warning C4013: 'copyBuffer2Screen' sin definir; se supone que extern devuelve como resultado int
+1	race\leftBar.c: warning C4013: 'loadMenuSoundEffect' sin definir; se supone que extern devuelve como resultado int
+1	race\leftBar.c: warning C4013: 'sub_43C7E0' sin definir; se supone que extern devuelve como resultado int
+1	race\leftBar.c: warning C4013: 'writeTextInRace_402510' sin definir; se supone que extern devuelve como resultado int
+5	race\leftBar.c: warning C4244: '=': conversi├│n de 'unsigned __int64' a 'int'; posible p├⌐rdida de datos
+6	race\leftBar.c: warning C4244: 'funci├│n': conversi├│n de 'unsigned __int64' a 'int'; posible p├⌐rdida de datos
+3	race\leftBar.c: warning C4244: 'funci├│n': conversi├│n de 'unsigned __int64' a 'size_t'; posible p├⌐rdida de datos
+1	race\lightSystem.c: warning C4101: 'v47': variable local sin referencia
+1	race\lightSystem.c: warning C4101: 'v48': variable local sin referencia
+1	race\lightSystem.c: warning C4101: 'v49': variable local sin referencia
+1	race\lightSystem.c: warning C4101: 'v50': variable local sin referencia
+1	race\lightSystem.c: warning C4101: 'v51': variable local sin referencia
+1	race\lightSystem.c: warning C4101: 'v52': variable local sin referencia
+6	race\lightSystem.c: warning C4244: '=': conversi├│n de 'double' a 'float'; posible p├⌐rdida de datos
+2	race\lightSystem.c: warning C4244: '=': conversi├│n de 'unsigned __int64' a 'int'; posible p├⌐rdida de datos
+1	race\pedestrian.c: warning C4013: 'refreshScreenWithDelay' sin definir; se supone que extern devuelve como resultado int
+2	race\pedestrian.c: warning C4018: '>=': no coinciden signed/unsigned
+2	race\pedestrian.c: warning C4244: '=': conversi├│n de 'unsigned __int64' a 'int'; posible p├⌐rdida de datos
+1	race\powerup.c: warning C4013: 'loadMenuSoundEffect' sin definir; se supone que extern devuelve como resultado int
+1	race\powerup.c: warning C4013: 'writeTextInRace_402510' sin definir; se supone que extern devuelve como resultado int
+2	race\powerup.c: warning C4101: 'v1': variable local sin referencia
+1	race\powerup.c: warning C4101: 'v10': variable local sin referencia
+1	race\powerup.c: warning C4101: 'v11': variable local sin referencia
+1	race\powerup.c: warning C4101: 'v13': variable local sin referencia
+1	race\powerup.c: warning C4101: 'v17': variable local sin referencia
+1	race\powerup.c: warning C4101: 'v19': variable local sin referencia
+1	race\powerup.c: warning C4101: 'v2': variable local sin referencia
+2	race\powerup.c: warning C4101: 'v3': variable local sin referencia
+1	race\powerup.c: warning C4101: 'v32': variable local sin referencia
+1	race\powerup.c: warning C4101: 'v34': variable local sin referencia
+1	race\powerup.c: warning C4101: 'v4': variable local sin referencia
+1	race\powerup.c: warning C4101: 'v41': variable local sin referencia
+1	race\powerup.c: warning C4101: 'v42': variable local sin referencia
+2	race\powerup.c: warning C4101: 'v5': variable local sin referencia
+2	race\powerup.c: warning C4101: 'v6': variable local sin referencia
+2	race\powerup.c: warning C4101: 'v7': variable local sin referencia
+1	race\powerup.c: warning C4101: 'v8': variable local sin referencia
+1	race\powerup.c: warning C4101: 'v9': variable local sin referencia
+1	race\powerup.c: warning C4102: 'LABEL_18': etiqueta sin referencia
+4	race\powerup.c: warning C4244: '=': conversi├│n de 'float' a 'int'; posible p├⌐rdida de datos
+1	race\powerup.c: warning C4244: '=': conversi├│n de 'unsigned __int64' a 'int'; posible p├⌐rdida de datos
+1	savegame.c: warning C4013: 'fileExists' sin definir; se supone que extern devuelve como resultado int
+1	savegame.c: warning C4996: 'itoa': The POSIX name for this item is deprecated. Instead, use the ISO C and C++ conformant name: _itoa. See online help for details.
+1	sfx\minifmod\soundSystem.c: warning C4013: 'FMUSIC_UpdateXMEffects_43EDC0' sin definir; se supone que extern devuelve como resultado int
+1	sfx\minifmod\soundSystem.c: warning C4013: 'FSOUND_Mixer_FPU_Ramp_43DEA0' sin definir; se supone que extern devuelve como resultado int
+1	sfx\minifmod\soundSystem.c: warning C4018: '<': no coinciden signed/unsigned
+1	sfx\minifmod\soundSystem.c: warning C4022: 'FSOUND_File_Read_43F790': no coincide el puntero para el par├ímetro real 1
+1	sfx\minifmod\soundSystem.c: warning C4022: 'FSOUND_MixerClipCopy_Float32_43DE30': no coincide el puntero para el par├ímetro real 1
+1	sfx\minifmod\soundSystem.c: warning C4024: 'FSOUND_File_Seek_43F7B0': tipos distintos para el par├ímetro formal y el par├ímetro real 1
+1	sfx\minifmod\soundSystem.c: warning C4028: par├ímetro formal 1 distinto de la declaraci├│n
+1	sfx\minifmod\soundSystem.c: warning C4047: '=': 'FMUSIC_CHANNEL *' es distinto en los niveles de direccionamiento indirecto de 'int'
+1	sfx\minifmod\soundSystem.c: warning C4047: '=': 'FMUSIC_CHANNEL *' es distinto en los niveles de direccionamiento indirecto de 'unsigned char'
+1	sfx\minifmod\soundSystem.c: warning C4047: '=': 'int' es distinto en los niveles de direccionamiento indirecto de 'FMUSIC_INSTRUMENT *'
+1	sfx\minifmod\soundSystem.c: warning C4047: '=': 'int' es distinto en los niveles de direccionamiento indirecto de 'FSOUND_FILE_HANDLE *'
+1	sfx\minifmod\soundSystem.c: warning C4047: '=': 'signed char *' es distinto en los niveles de direccionamiento indirecto de 'unsigned int'
+1	sfx\minifmod\soundSystem.c: warning C4047: '=': 'unsigned int' es distinto en los niveles de direccionamiento indirecto de 'void *'
+1	sfx\minifmod\soundSystem.c: warning C4047: 'funci├│n': 'int' es distinto en los niveles de direccionamiento indirecto de 'FSOUND_FILE_HANDLE *'
+1	sfx\minifmod\soundSystem.c: warning C4047: 'return': 'char' es distinto en los niveles de direccionamiento indirecto de 'FMUSIC_CHANNEL *'
+1	sfx\minifmod\soundSystem.c: warning C4101: 'buff_v43': variable local sin referencia
+1	sfx\minifmod\soundSystem.c: warning C4101: 'current': variable local sin referencia
+1	sfx\minifmod\soundSystem.c: warning C4101: 'deltaTemp': variable local sin referencia
+1	sfx\minifmod\soundSystem.c: warning C4101: 'effect': variable local sin referencia
+1	sfx\minifmod\soundSystem.c: warning C4101: 'effectStruct': variable local sin referencia
+1	sfx\minifmod\soundSystem.c: warning C4101: 'paramx': variable local sin referencia
+1	sfx\minifmod\soundSystem.c: warning C4101: 'paramy': variable local sin referencia
+2	sfx\minifmod\soundSystem.c: warning C4101: 'result': variable local sin referencia
+1	sfx\minifmod\soundSystem.c: warning C4101: 'v1': variable local sin referencia
+3	sfx\minifmod\soundSystem.c: warning C4101: 'v10': variable local sin referencia
+4	sfx\minifmod\soundSystem.c: warning C4101: 'v11': variable local sin referencia
+1	sfx\minifmod\soundSystem.c: warning C4101: 'v12': variable local sin referencia
+3	sfx\minifmod\soundSystem.c: warning C4101: 'v13': variable local sin referencia
+2	sfx\minifmod\soundSystem.c: warning C4101: 'v14': variable local sin referencia
+1	sfx\minifmod\soundSystem.c: warning C4101: 'v15': variable local sin referencia
+1	sfx\minifmod\soundSystem.c: warning C4101: 'v19': variable local sin referencia
+3	sfx\minifmod\soundSystem.c: warning C4101: 'v2': variable local sin referencia
+1	sfx\minifmod\soundSystem.c: warning C4101: 'v20': variable local sin referencia
+1	sfx\minifmod\soundSystem.c: warning C4101: 'v22': variable local sin referencia
+1	sfx\minifmod\soundSystem.c: warning C4101: 'v23': variable local sin referencia
+1	sfx\minifmod\soundSystem.c: warning C4101: 'v24': variable local sin referencia
+1	sfx\minifmod\soundSystem.c: warning C4101: 'v25': variable local sin referencia
+1	sfx\minifmod\soundSystem.c: warning C4101: 'v26': variable local sin referencia
+1	sfx\minifmod\soundSystem.c: warning C4101: 'v27': variable local sin referencia
+5	sfx\minifmod\soundSystem.c: warning C4101: 'v3': variable local sin referencia
+1	sfx\minifmod\soundSystem.c: warning C4101: 'v30': variable local sin referencia
+1	sfx\minifmod\soundSystem.c: warning C4101: 'v31': variable local sin referencia
+1	sfx\minifmod\soundSystem.c: warning C4101: 'v34': variable local sin referencia
+1	sfx\minifmod\soundSystem.c: warning C4101: 'v37': variable local sin referencia
+1	sfx\minifmod\soundSystem.c: warning C4101: 'v38': variable local sin referencia
+1	sfx\minifmod\soundSystem.c: warning C4101: 'v39': variable local sin referencia
+6	sfx\minifmod\soundSystem.c: warning C4101: 'v4': variable local sin referencia
+1	sfx\minifmod\soundSystem.c: warning C4101: 'v40': variable local sin referencia
+1	sfx\minifmod\soundSystem.c: warning C4101: 'v41': variable local sin referencia
+1	sfx\minifmod\soundSystem.c: warning C4101: 'v42': variable local sin referencia
+1	sfx\minifmod\soundSystem.c: warning C4101: 'v44': variable local sin referencia
+1	sfx\minifmod\soundSystem.c: warning C4101: 'v46': variable local sin referencia
+5	sfx\minifmod\soundSystem.c: warning C4101: 'v5': variable local sin referencia
+5	sfx\minifmod\soundSystem.c: warning C4101: 'v6': variable local sin referencia
+3	sfx\minifmod\soundSystem.c: warning C4101: 'v7': variable local sin referencia
+4	sfx\minifmod\soundSystem.c: warning C4101: 'v8': variable local sin referencia
+6	sfx\minifmod\soundSystem.c: warning C4101: 'v9': variable local sin referencia
+3	sfx\minifmod\soundSystem.c: warning C4244: '*=': conversi├│n de 'double' a 'float'; posible p├⌐rdida de datos
+3	sfx\minifmod\soundSystem.c: warning C4244: '=': conversi├│n de 'double' a 'float'; posible p├⌐rdida de datos
+1	sfx\minifmod\soundSystem.c: warning C4244: '=': conversi├│n de 'float' a 'unsigned __int64'; posible p├⌐rdida de datos
+3	sfx\minifmod\soundSystem.c: warning C4244: '=': conversi├│n de 'unsigned __int64' a 'int'; posible p├⌐rdida de datos
+2	sfx\minifmod\soundSystem.c: warning C4244: '=': conversi├│n de 'unsigned __int64' a 'unsigned int'; posible p├⌐rdida de datos
+1	sfx\minifmod\soundSystem.c: warning C4244: 'return': conversi├│n de 'unsigned __int64' a 'int'; posible p├⌐rdida de datos
+1	sfx\sound.c: warning C4005: 'FSOUND_LOOP_NORMAL': redefinici├│n de macro
+1	sfx\sound.c: warning C4047: 'return': 'int' es distinto en los niveles de direccionamiento indirecto de 'FSOUND_CHANNEL *'
+1	sfx\sound.c: warning C4113: 'char (__stdcall *)(int,int,int,int)' es distinto en las listas de par├ímetros de 'FSOUND_STREAMCALLBACK'
+1	sfx\sound.c: warning C4244: '=': conversi├│n de 'unsigned __int64' a 'int'; posible p├⌐rdida de datos
+1	ui\blackMarketScreen.c: warning C4013: 'adversaryPreviewScreen' sin definir; se supone que extern devuelve como resultado int
+1	ui\blackMarketScreen.c: warning C4013: 'autoLoadSave' sin definir; se supone que extern devuelve como resultado int
+1	ui\blackMarketScreen.c: warning C4013: 'convertColorToPaletteColor' sin definir; se supone que extern devuelve como resultado int
+1	ui\blackMarketScreen.c: warning C4013: 'copyImageToBuffer' sin definir; se supone que extern devuelve como resultado int
+1	ui\blackMarketScreen.c: warning C4013: 'drawBottomMenuText' sin definir; se supone que extern devuelve como resultado int
+1	ui\blackMarketScreen.c: warning C4013: 'drawCarRightSide' sin definir; se supone que extern devuelve como resultado int
+1	ui\blackMarketScreen.c: warning C4013: 'drawCursor' sin definir; se supone que extern devuelve como resultado int
+1	ui\blackMarketScreen.c: warning C4013: 'drawKeyCursor' sin definir; se supone que extern devuelve como resultado int
+1	ui\blackMarketScreen.c: warning C4013: 'drawPopupCursor_42C780' sin definir; se supone que extern devuelve como resultado int
+1	ui\blackMarketScreen.c: warning C4013: 'drawTransparentBlock' sin definir; se supone que extern devuelve como resultado int
+1	ui\blackMarketScreen.c: warning C4013: 'eventDetected' sin definir; se supone que extern devuelve como resultado int
+1	ui\blackMarketScreen.c: warning C4013: 'getModIntEntry' sin definir; se supone que extern devuelve como resultado int
+1	ui\blackMarketScreen.c: warning C4013: 'hasInsuficientMoneyToBuy' sin definir; se supone que extern devuelve como resultado int
+1	ui\blackMarketScreen.c: warning C4013: 'loadMenuSoundEffect' sin definir; se supone que extern devuelve como resultado int
+1	ui\blackMarketScreen.c: warning C4013: 'musicSetOrder' sin definir; se supone que extern devuelve como resultado int
+1	ui\blackMarketScreen.c: warning C4013: 'previewRaceScreen' sin definir; se supone que extern devuelve como resultado int
+1	ui\blackMarketScreen.c: warning C4013: 'refreshAllScreen' sin definir; se supone que extern devuelve como resultado int
+1	ui\blackMarketScreen.c: warning C4013: 'refreshAndCheckConnection_42A570' sin definir; se supone que extern devuelve como resultado int
+1	ui\blackMarketScreen.c: warning C4013: 'selectRaceScreen' sin definir; se supone que extern devuelve como resultado int
+1	ui\blackMarketScreen.c: warning C4013: 'setMusicVolume' sin definir; se supone que extern devuelve como resultado int
+1	ui\blackMarketScreen.c: warning C4013: 'setPaletteAndGetValue' sin definir; se supone que extern devuelve como resultado int
+1	ui\blackMarketScreen.c: warning C4013: 'sub_4224E0' sin definir; se supone que extern devuelve como resultado int
+1	ui\blackMarketScreen.c: warning C4013: 'sub_43C1F0' sin definir; se supone que extern devuelve como resultado int
+1	ui\blackMarketScreen.c: warning C4013: 'waitWithRefresh' sin definir; se supone que extern devuelve como resultado int
+1	ui\blackMarketScreen.c: warning C4101: 'v1': variable local sin referencia
+3	ui\blackMarketScreen.c: warning C4101: 'v2': variable local sin referencia
+3	ui\blackMarketScreen.c: warning C4101: 'v5': variable local sin referencia
+2	ui\blackMarketScreen.c: warning C4101: 'v6': variable local sin referencia
+1	ui\blackMarketScreen.c: warning C4101: 'v9': variable local sin referencia
+5	ui\blackMarketScreen.c: warning C4244: '=': conversi├│n de 'unsigned __int64' a 'int'; posible p├⌐rdida de datos
+5	ui\blackMarketScreen.c: warning C4244: 'funci├│n': conversi├│n de 'unsigned __int64' a 'int'; posible p├⌐rdida de datos
+5	ui\blackMarketScreen.c: warning C4996: 'itoa': The POSIX name for this item is deprecated. Instead, use the ISO C and C++ conformant name: _itoa. See online help for details.
+1	ui\creditsScreen.c: warning C4013: 'convertColorToPaletteColor' sin definir; se supone que extern devuelve como resultado int
+1	ui\creditsScreen.c: warning C4013: 'copyImageToBuffer' sin definir; se supone que extern devuelve como resultado int
+1	ui\creditsScreen.c: warning C4013: 'eventDetected' sin definir; se supone que extern devuelve como resultado int
+1	ui\creditsScreen.c: warning C4013: 'refreshAllScreen' sin definir; se supone que extern devuelve como resultado int
+1	ui\creditsScreen.c: warning C4013: 'setPaletteAndGetValue' sin definir; se supone que extern devuelve como resultado int
+1	ui\creditsScreen.c: warning C4013: 'sub_4224E0' sin definir; se supone que extern devuelve como resultado int
+1	ui\creditsScreen.c: warning C4013: 'transitionToBlack' sin definir; se supone que extern devuelve como resultado int
+1	ui\creditsScreen.c: warning C4013: 'transitionToCurrentImage' sin definir; se supone que extern devuelve como resultado int
+1	ui\creditsScreen.c: warning C4013: 'updateCursor' sin definir; se supone que extern devuelve como resultado int
+1	ui\creditsScreen.c: warning C4013: 'waitWithRefresh' sin definir; se supone que extern devuelve como resultado int
+1	ui\endGameScreen.c: warning C4013: 'colorToPaletteEntry' sin definir; se supone que extern devuelve como resultado int
+1	ui\endGameScreen.c: warning C4013: 'convertColorToPaletteColor' sin definir; se supone que extern devuelve como resultado int
+1	ui\endGameScreen.c: warning C4013: 'eventDetected' sin definir; se supone que extern devuelve como resultado int
+1	ui\endGameScreen.c: warning C4013: 'refreshAllScreen' sin definir; se supone que extern devuelve como resultado int
+1	ui\endGameScreen.c: warning C4013: 'setMusicVolume' sin definir; se supone que extern devuelve como resultado int
+1	ui\endGameScreen.c: warning C4013: 'setPaletteAndGetValue' sin definir; se supone que extern devuelve como resultado int
+1	ui\endGameScreen.c: warning C4013: 'sub_4224E0' sin definir; se supone que extern devuelve como resultado int
+1	ui\endGameScreen.c: warning C4013: 'transitionToBlack' sin definir; se supone que extern devuelve como resultado int
+1	ui\endGameScreen.c: warning C4013: 'transitionToCurrentImage' sin definir; se supone que extern devuelve como resultado int
+1	ui\endGameScreen.c: warning C4013: 'waitWithRefresh' sin definir; se supone que extern devuelve como resultado int
+1	ui\hallOfFame.c: warning C4013: 'drawBorder_421980' sin definir; se supone que extern devuelve como resultado int
+1	ui\hallOfFame.c: warning C4013: 'drawTransparentBlock' sin definir; se supone que extern devuelve como resultado int
+1	ui\hallOfFame.c: warning C4013: 'eventDetected' sin definir; se supone que extern devuelve como resultado int
+1	ui\hallOfFame.c: warning C4013: 'loadMenuSoundEffect' sin definir; se supone que extern devuelve como resultado int
+1	ui\hallOfFame.c: warning C4013: 'musicSetOrder' sin definir; se supone que extern devuelve como resultado int
+1	ui\hallOfFame.c: warning C4013: 'refreshAllScreen' sin definir; se supone que extern devuelve como resultado int
+1	ui\hallOfFame.c: warning C4013: 'refreshAndCheckConnection_42A570' sin definir; se supone que extern devuelve como resultado int
+1	ui\hallOfFame.c: warning C4013: 'setMusicVolume' sin definir; se supone que extern devuelve como resultado int
+1	ui\hallOfFame.c: warning C4013: 'sub_418090' sin definir; se supone que extern devuelve como resultado int
+1	ui\hallOfFame.c: warning C4013: 'sub_4224E0' sin definir; se supone que extern devuelve como resultado int
+1	ui\hallOfFame.c: warning C4013: 'sub_42C4A0' sin definir; se supone que extern devuelve como resultado int
+1	ui\hallOfFame.c: warning C4013: 'sub_42C560' sin definir; se supone que extern devuelve como resultado int
+1	ui\hallOfFame.c: warning C4013: 'transitionToCurrentImage' sin definir; se supone que extern devuelve como resultado int
+2	ui\hallOfFame.c: warning C4024: 'drawImageWithPosition2': tipos distintos para el par├ímetro formal y el par├ímetro real 1
+2	ui\hallOfFame.c: warning C4047: 'funci├│n': 'int' es distinto en los niveles de direccionamiento indirecto de 'int *'
+1	ui\hallOfFame.c: warning C4101: 'v5': variable local sin referencia
+2	ui\hallOfFame.c: warning C4996: 'itoa': The POSIX name for this item is deprecated. Instead, use the ISO C and C++ conformant name: _itoa. See online help for details.
+1	ui\licenseScreen.c: warning C4013: 'copyImageToBuffer' sin definir; se supone que extern devuelve como resultado int
+1	ui\licenseScreen.c: warning C4013: 'drawBottomMenuText' sin definir; se supone que extern devuelve como resultado int
+1	ui\licenseScreen.c: warning C4013: 'drawCursor' sin definir; se supone que extern devuelve como resultado int
+1	ui\licenseScreen.c: warning C4013: 'drawKeyCursor' sin definir; se supone que extern devuelve como resultado int
+1	ui\licenseScreen.c: warning C4013: 'drawMenu' sin definir; se supone que extern devuelve como resultado int
+1	ui\licenseScreen.c: warning C4013: 'drawMenuAnimation' sin definir; se supone que extern devuelve como resultado int
+1	ui\licenseScreen.c: warning C4013: 'drawTransparentBlock' sin definir; se supone que extern devuelve como resultado int
+1	ui\licenseScreen.c: warning C4013: 'drawYesNoMenu' sin definir; se supone que extern devuelve como resultado int
+1	ui\licenseScreen.c: warning C4013: 'eventDetected' sin definir; se supone que extern devuelve como resultado int
+1	ui\licenseScreen.c: warning C4013: 'refreshAllScreen' sin definir; se supone que extern devuelve como resultado int
+1	ui\licenseScreen.c: warning C4013: 'refreshAndCheckConnection_42A570' sin definir; se supone que extern devuelve como resultado int
+1	ui\licenseScreen.c: warning C4013: 'setPaletteValueWithFloats' sin definir; se supone que extern devuelve como resultado int
+1	ui\licenseScreen.c: warning C4013: 'sub_418090' sin definir; se supone que extern devuelve como resultado int
+1	ui\licenseScreen.c: warning C4024: 'extractFromBpa': tipos distintos para el par├ímetro formal y el par├ímetro real 3
+1	ui\licenseScreen.c: warning C4047: 'funci├│n': 'char *' es distinto en los niveles de direccionamiento indirecto de 'int'
+1	ui\licenseScreen.c: warning C4101: 'v10': variable local sin referencia
+1	ui\licenseScreen.c: warning C4101: 'v18': variable local sin referencia
+1	ui\licenseScreen.c: warning C4101: 'v19': variable local sin referencia
+1	ui\licenseScreen.c: warning C4101: 'v21': variable local sin referencia
+1	ui\licenseScreen.c: warning C4101: 'v22': variable local sin referencia
+1	ui\licenseScreen.c: warning C4101: 'v23': variable local sin referencia
+1	ui\licenseScreen.c: warning C4101: 'v32': variable local sin referencia
+1	ui\licenseScreen.c: warning C4101: 'v47': variable local sin referencia
+1	ui\licenseScreen.c: warning C4101: 'v48': variable local sin referencia
+1	ui\licenseScreen.c: warning C4101: 'v49': variable local sin referencia
+1	ui\licenseScreen.c: warning C4101: 'v59': variable local sin referencia
+1	ui\licenseScreen.c: warning C4101: 'v8': variable local sin referencia
+1	ui\licenseScreen.c: warning C4101: 'v9': variable local sin referencia
+6	ui\licenseScreen.c: warning C4244: '=': conversi├│n de 'double' a 'float'; posible p├⌐rdida de datos
+1	ui\loadSaveGameScreen.c: warning C4013: 'drawMenu' sin definir; se supone que extern devuelve como resultado int
+1	ui\loadSaveGameScreen.c: warning C4013: 'fileExists' sin definir; se supone que extern devuelve como resultado int
+1	ui\loadSaveGameScreen.c: warning C4013: 'loadMenuSoundEffect' sin definir; se supone que extern devuelve como resultado int
+1	ui\loadSaveGameScreen.c: warning C4013: 'readEventInMenu' sin definir; se supone que extern devuelve como resultado int
+1	ui\loadSaveGameScreen.c: warning C4013: 'refreshAllScreen' sin definir; se supone que extern devuelve como resultado int
+1	ui\loadSaveGameScreen.c: warning C4101: 'v2': variable local sin referencia
+1	ui\loadSaveGameScreen.c: warning C4101: 'v25': variable local sin referencia
+4	ui\loadSaveGameScreen.c: warning C4996: 'itoa': The POSIX name for this item is deprecated. Instead, use the ISO C and C++ conformant name: _itoa. See online help for details.
+1	ui\menu.c: warning C4013: 'checkAndOpenAnimation' sin definir; se supone que extern devuelve como resultado int
+1	ui\menu.c: warning C4013: 'configJoystick' sin definir; se supone que extern devuelve como resultado int
+1	ui\menu.c: warning C4013: 'convertColorToPaletteColor' sin definir; se supone que extern devuelve como resultado int
+1	ui\menu.c: warning C4013: 'copyPalette1toPalette' sin definir; se supone que extern devuelve como resultado int
+1	ui\menu.c: warning C4013: 'drawTransparentBlock' sin definir; se supone que extern devuelve como resultado int
+1	ui\menu.c: warning C4013: 'eventDetected' sin definir; se supone que extern devuelve como resultado int
+1	ui\menu.c: warning C4013: 'freeMemoryGraphics' sin definir; se supone que extern devuelve como resultado int
+1	ui\menu.c: warning C4013: 'freeMemoryGraphics3' sin definir; se supone que extern devuelve como resultado int
+1	ui\menu.c: warning C4013: 'inicializeGraphicVars' sin definir; se supone que extern devuelve como resultado int
+1	ui\menu.c: warning C4013: 'initCars' sin definir; se supone que extern devuelve como resultado int
+1	ui\menu.c: warning C4013: 'isVesaCompatible' sin definir; se supone que extern devuelve como resultado int
+1	ui\menu.c: warning C4013: 'licenseScreen' sin definir; se supone que extern devuelve como resultado int
+1	ui\menu.c: warning C4013: 'loadGame' sin definir; se supone que extern devuelve como resultado int
+1	ui\menu.c: warning C4013: 'loadGraphics3' sin definir; se supone que extern devuelve como resultado int
+1	ui\menu.c: warning C4013: 'loadPaletteMenu' sin definir; se supone que extern devuelve como resultado int
+1	ui\menu.c: warning C4013: 'nullsub_1' sin definir; se supone que extern devuelve como resultado int
+1	ui\menu.c: warning C4013: 'postLoadedOrLicense' sin definir; se supone que extern devuelve como resultado int
+1	ui\menu.c: warning C4013: 'postRaceMain' sin definir; se supone que extern devuelve como resultado int
+1	ui\menu.c: warning C4013: 'recalculateSDLTicks_43C740' sin definir; se supone que extern devuelve como resultado int
+1	ui\menu.c: warning C4013: 'refreshAllScreen' sin definir; se supone que extern devuelve como resultado int
+1	ui\menu.c: warning C4013: 'refreshAndCheckConnection_42A570' sin definir; se supone que extern devuelve como resultado int
+1	ui\menu.c: warning C4013: 'savegameWithName' sin definir; se supone que extern devuelve como resultado int
+1	ui\menu.c: warning C4013: 'SDL_GetTicks' sin definir; se supone que extern devuelve como resultado int
+1	ui\menu.c: warning C4013: 'SDLConfigureJoystick' sin definir; se supone que extern devuelve como resultado int
+1	ui\menu.c: warning C4013: 'setPaletteAndGetValue' sin definir; se supone que extern devuelve como resultado int
+1	ui\menu.c: warning C4013: 'setWindowCaption' sin definir; se supone que extern devuelve como resultado int
+1	ui\menu.c: warning C4013: 'setWindowCaption2' sin definir; se supone que extern devuelve como resultado int
+1	ui\menu.c: warning C4013: 'showCredits' sin definir; se supone que extern devuelve como resultado int
+1	ui\menu.c: warning C4013: 'showEndScreen' sin definir; se supone que extern devuelve como resultado int
+1	ui\menu.c: warning C4013: 'showStartScreen' sin definir; se supone que extern devuelve como resultado int
+1	ui\menu.c: warning C4013: 'sub_418090' sin definir; se supone que extern devuelve como resultado int
+1	ui\menu.c: warning C4013: 'sub_418B00' sin definir; se supone que extern devuelve como resultado int
+1	ui\menu.c: warning C4013: 'sub_4224E0' sin definir; se supone que extern devuelve como resultado int
+1	ui\menu.c: warning C4013: 'sub_42C4A0' sin definir; se supone que extern devuelve como resultado int
+1	ui\menu.c: warning C4013: 'sub_42C560' sin definir; se supone que extern devuelve como resultado int
+1	ui\menu.c: warning C4013: 'transitionToBlack' sin definir; se supone que extern devuelve como resultado int
+1	ui\menu.c: warning C4013: 'waitWithRefresh' sin definir; se supone que extern devuelve como resultado int
+1	ui\menu.c: warning C4047: '=': 'int' es distinto en los niveles de direccionamiento indirecto de 'void *'
+3	ui\menu.c: warning C4244: '=': conversi├│n de 'double' a 'float'; posible p├⌐rdida de datos
+2	ui\menu.c: warning C4244: 'funci├│n': conversi├│n de 'unsigned __int64' a 'int'; posible p├⌐rdida de datos
+2	ui\menu.c: warning C4996: 'itoa': The POSIX name for this item is deprecated. Instead, use the ISO C and C++ conformant name: _itoa. See online help for details.
+1	ui\prevRaceScreen.c: warning C4013: 'addParticipantToRace' sin definir; se supone que extern devuelve como resultado int
+1	ui\prevRaceScreen.c: warning C4013: 'calculateNextRaces' sin definir; se supone que extern devuelve como resultado int
+1	ui\prevRaceScreen.c: warning C4013: 'convertColorToPaletteColor' sin definir; se supone que extern devuelve como resultado int
+1	ui\prevRaceScreen.c: warning C4013: 'copyImageToBuffer' sin definir; se supone que extern devuelve como resultado int
+1	ui\prevRaceScreen.c: warning C4013: 'drawCarRightSide' sin definir; se supone que extern devuelve como resultado int
+1	ui\prevRaceScreen.c: warning C4013: 'drawCircuitPreviewImage' sin definir; se supone que extern devuelve como resultado int
+1	ui\prevRaceScreen.c: warning C4013: 'drawKeyCursor' sin definir; se supone que extern devuelve como resultado int
+1	ui\prevRaceScreen.c: warning C4013: 'drawTransparentBlock' sin definir; se supone que extern devuelve como resultado int
+1	ui\prevRaceScreen.c: warning C4013: 'eventDetected' sin definir; se supone que extern devuelve como resultado int
+1	ui\prevRaceScreen.c: warning C4013: 'freeMemoryGraphics' sin definir; se supone que extern devuelve como resultado int
+1	ui\prevRaceScreen.c: warning C4013: 'freeMemoryGraphics3' sin definir; se supone que extern devuelve como resultado int
+1	ui\prevRaceScreen.c: warning C4013: 'loadMenuSoundEffect' sin definir; se supone que extern devuelve como resultado int
+1	ui\prevRaceScreen.c: warning C4013: 'loadMusic' sin definir; se supone que extern devuelve como resultado int
+1	ui\prevRaceScreen.c: warning C4013: 'loadPaletteMenu' sin definir; se supone que extern devuelve como resultado int
+1	ui\prevRaceScreen.c: warning C4013: 'musicPlayMusic' sin definir; se supone que extern devuelve como resultado int
+1	ui\prevRaceScreen.c: warning C4013: 'musicSetmusicVolume' sin definir; se supone que extern devuelve como resultado int
+1	ui\prevRaceScreen.c: warning C4013: 'musicSetOrder' sin definir; se supone que extern devuelve como resultado int
+1	ui\prevRaceScreen.c: warning C4013: 'nullsub_1' sin definir; se supone que extern devuelve como resultado int
+1	ui\prevRaceScreen.c: warning C4013: 'postRaceMain' sin definir; se supone que extern devuelve como resultado int
+1	ui\prevRaceScreen.c: warning C4013: 'recalculateSDLTicks_43C740' sin definir; se supone que extern devuelve como resultado int
+1	ui\prevRaceScreen.c: warning C4013: 'refreshAllScreen' sin definir; se supone que extern devuelve como resultado int
+1	ui\prevRaceScreen.c: warning C4013: 'refreshAndCheckConnection_42A570' sin definir; se supone que extern devuelve como resultado int
+1	ui\prevRaceScreen.c: warning C4013: 'removeBackgroundRefreshFunction_43C730' sin definir; se supone que extern devuelve como resultado int
+1	ui\prevRaceScreen.c: warning C4013: 'setMusicVolume' sin definir; se supone que extern devuelve como resultado int
+1	ui\prevRaceScreen.c: warning C4013: 'setPaletteAndGetValue' sin definir; se supone que extern devuelve como resultado int
+1	ui\prevRaceScreen.c: warning C4013: 'setPaletteValueWithFloats' sin definir; se supone que extern devuelve como resultado int
+1	ui\prevRaceScreen.c: warning C4013: 'setWindowCaption2' sin definir; se supone que extern devuelve como resultado int
+1	ui\prevRaceScreen.c: warning C4013: 'showEndAnim_4312D0' sin definir; se supone que extern devuelve como resultado int
+1	ui\prevRaceScreen.c: warning C4013: 'startRace' sin definir; se supone que extern devuelve como resultado int
+1	ui\prevRaceScreen.c: warning C4013: 'stopSoundChannel_43C3E0' sin definir; se supone que extern devuelve como resultado int
+1	ui\prevRaceScreen.c: warning C4013: 'sub_418090' sin definir; se supone que extern devuelve como resultado int
+1	ui\prevRaceScreen.c: warning C4013: 'sub_4224E0' sin definir; se supone que extern devuelve como resultado int
+1	ui\prevRaceScreen.c: warning C4013: 'sub_42A480' sin definir; se supone que extern devuelve como resultado int
+1	ui\prevRaceScreen.c: warning C4013: 'sub_42C4A0' sin definir; se supone que extern devuelve como resultado int
+1	ui\prevRaceScreen.c: warning C4013: 'sub_43B080' sin definir; se supone que extern devuelve como resultado int
+1	ui\prevRaceScreen.c: warning C4013: 'sub_43C4B0' sin definir; se supone que extern devuelve como resultado int
+1	ui\prevRaceScreen.c: warning C4013: 'waitWithRefresh' sin definir; se supone que extern devuelve como resultado int
+1	ui\prevRaceScreen.c: warning C4024: 'drawImageWithPosition2': tipos distintos para el par├ímetro formal y el par├ímetro real 1
+2	ui\prevRaceScreen.c: warning C4024: 'memset': tipos distintos para el par├ímetro formal y el par├ímetro real 2
+2	ui\prevRaceScreen.c: warning C4047: 'funci├│n': 'int' es distinto en los niveles de direccionamiento indirecto de 'char [2]'
+1	ui\prevRaceScreen.c: warning C4047: 'funci├│n': 'int' es distinto en los niveles de direccionamiento indirecto de 'void *'
+1	ui\prevRaceScreen.c: warning C4101: 'v12': variable local sin referencia
+1	ui\prevRaceScreen.c: warning C4101: 'v13': variable local sin referencia
+1	ui\prevRaceScreen.c: warning C4101: 'v137': variable local sin referencia
+1	ui\prevRaceScreen.c: warning C4101: 'v138': variable local sin referencia
+1	ui\prevRaceScreen.c: warning C4101: 'v139': variable local sin referencia
+1	ui\prevRaceScreen.c: warning C4101: 'v14': variable local sin referencia
+1	ui\prevRaceScreen.c: warning C4101: 'v15': variable local sin referencia
+1	ui\prevRaceScreen.c: warning C4101: 'v16': variable local sin referencia
+1	ui\prevRaceScreen.c: warning C4101: 'v17': variable local sin referencia
+1	ui\prevRaceScreen.c: warning C4101: 'v18': variable local sin referencia
+2	ui\prevRaceScreen.c: warning C4101: 'v19': variable local sin referencia
+1	ui\prevRaceScreen.c: warning C4101: 'v20': variable local sin referencia
+1	ui\prevRaceScreen.c: warning C4101: 'v21': variable local sin referencia
+1	ui\prevRaceScreen.c: warning C4101: 'v22': variable local sin referencia
+1	ui\prevRaceScreen.c: warning C4101: 'v248': variable local sin referencia
+1	ui\prevRaceScreen.c: warning C4101: 'v249': variable local sin referencia
+1	ui\prevRaceScreen.c: warning C4101: 'v252': variable local sin referencia
+1	ui\prevRaceScreen.c: warning C4101: 'v253': variable local sin referencia
+1	ui\prevRaceScreen.c: warning C4101: 'v254': variable local sin referencia
+1	ui\prevRaceScreen.c: warning C4101: 'v255': variable local sin referencia
+1	ui\prevRaceScreen.c: warning C4101: 'v256': variable local sin referencia
+1	ui\prevRaceScreen.c: warning C4101: 'v257': variable local sin referencia
+1	ui\prevRaceScreen.c: warning C4101: 'v258': variable local sin referencia
+1	ui\prevRaceScreen.c: warning C4101: 'v259': variable local sin referencia
+1	ui\prevRaceScreen.c: warning C4101: 'v260': variable local sin referencia
+1	ui\prevRaceScreen.c: warning C4101: 'v261': variable local sin referencia
+1	ui\prevRaceScreen.c: warning C4101: 'v262': variable local sin referencia
+1	ui\prevRaceScreen.c: warning C4101: 'v263': variable local sin referencia
+1	ui\prevRaceScreen.c: warning C4101: 'v264': variable local sin referencia
+1	ui\prevRaceScreen.c: warning C4101: 'v265': variable local sin referencia
+1	ui\prevRaceScreen.c: warning C4101: 'v266': variable local sin referencia
+1	ui\prevRaceScreen.c: warning C4101: 'v267': variable local sin referencia
+1	ui\prevRaceScreen.c: warning C4101: 'v268': variable local sin referencia
+1	ui\prevRaceScreen.c: warning C4101: 'v269': variable local sin referencia
+1	ui\prevRaceScreen.c: warning C4101: 'v27': variable local sin referencia
+1	ui\prevRaceScreen.c: warning C4101: 'v270': variable local sin referencia
+1	ui\prevRaceScreen.c: warning C4101: 'v271': variable local sin referencia
+1	ui\prevRaceScreen.c: warning C4101: 'v272': variable local sin referencia
+1	ui\prevRaceScreen.c: warning C4101: 'v273': variable local sin referencia
+1	ui\prevRaceScreen.c: warning C4101: 'v274': variable local sin referencia
+1	ui\prevRaceScreen.c: warning C4101: 'v275': variable local sin referencia
+1	ui\prevRaceScreen.c: warning C4101: 'v276': variable local sin referencia
+1	ui\prevRaceScreen.c: warning C4101: 'v277': variable local sin referencia
+1	ui\prevRaceScreen.c: warning C4101: 'v278': variable local sin referencia
+1	ui\prevRaceScreen.c: warning C4101: 'v279': variable local sin referencia
+1	ui\prevRaceScreen.c: warning C4101: 'v28': variable local sin referencia
+1	ui\prevRaceScreen.c: warning C4101: 'v280': variable local sin referencia
+1	ui\prevRaceScreen.c: warning C4101: 'v281': variable local sin referencia
+1	ui\prevRaceScreen.c: warning C4101: 'v282': variable local sin referencia
+1	ui\prevRaceScreen.c: warning C4101: 'v283': variable local sin referencia
+1	ui\prevRaceScreen.c: warning C4101: 'v284': variable local sin referencia
+1	ui\prevRaceScreen.c: warning C4101: 'v285': variable local sin referencia
+2	ui\prevRaceScreen.c: warning C4101: 'v29': variable local sin referencia
+1	ui\prevRaceScreen.c: warning C4101: 'v30': variable local sin referencia
+1	ui\prevRaceScreen.c: warning C4101: 'v31': variable local sin referencia
+1	ui\prevRaceScreen.c: warning C4101: 'v68': variable local sin referencia
+1	ui\prevRaceScreen.c: warning C4101: 'v71': variable local sin referencia
+3	ui\prevRaceScreen.c: warning C4244: '=': conversi├│n de 'double' a 'float'; posible p├⌐rdida de datos
+1	ui\prevRaceScreen.c: warning C4244: '=': conversi├│n de 'unsigned __int64' a 'int'; posible p├⌐rdida de datos
+1	ui\prevRaceScreen.c: warning C4244: 'funci├│n': conversi├│n de 'unsigned __int64' a 'int'; posible p├⌐rdida de datos
+6	ui\prevRaceScreen.c: warning C4996: 'itoa': The POSIX name for this item is deprecated. Instead, use the ISO C and C++ conformant name: _itoa. See online help for details.
+1	ui\raceResultsScreen.c: warning C4013: 'colorToPaletteEntry' sin definir; se supone que extern devuelve como resultado int
+1	ui\raceResultsScreen.c: warning C4013: 'convertColorToPaletteColor' sin definir; se supone que extern devuelve como resultado int
+1	ui\raceResultsScreen.c: warning C4013: 'drawKeyCursor' sin definir; se supone que extern devuelve como resultado int
+1	ui\raceResultsScreen.c: warning C4013: 'easyRaceResults' sin definir; se supone que extern devuelve como resultado int
+1	ui\raceResultsScreen.c: warning C4013: 'eventDetected' sin definir; se supone que extern devuelve como resultado int
+1	ui\raceResultsScreen.c: warning C4013: 'hardRaceResults' sin definir; se supone que extern devuelve como resultado int
+1	ui\raceResultsScreen.c: warning C4013: 'loadGraphics3' sin definir; se supone que extern devuelve como resultado int
+1	ui\raceResultsScreen.c: warning C4013: 'loadMenuSoundEffect' sin definir; se supone que extern devuelve como resultado int
+1	ui\raceResultsScreen.c: warning C4013: 'loadMusic' sin definir; se supone que extern devuelve como resultado int
+1	ui\raceResultsScreen.c: warning C4013: 'mediumRaceResults' sin definir; se supone que extern devuelve como resultado int
+1	ui\raceResultsScreen.c: warning C4013: 'musicPlayMusic' sin definir; se supone que extern devuelve como resultado int
+1	ui\raceResultsScreen.c: warning C4013: 'musicSetmusicVolume' sin definir; se supone que extern devuelve como resultado int
+1	ui\raceResultsScreen.c: warning C4013: 'nullsub_1' sin definir; se supone que extern devuelve como resultado int
+1	ui\raceResultsScreen.c: warning C4013: 'openAnimation' sin definir; se supone que extern devuelve como resultado int
+1	ui\raceResultsScreen.c: warning C4013: 'recalculateSDLTicks_43C740' sin definir; se supone que extern devuelve como resultado int
+1	ui\raceResultsScreen.c: warning C4013: 'refreshAllScreen' sin definir; se supone que extern devuelve como resultado int
+1	ui\raceResultsScreen.c: warning C4013: 'refreshAndCheckConnection_42A570' sin definir; se supone que extern devuelve como resultado int
+1	ui\raceResultsScreen.c: warning C4013: 'setMusicVolume' sin definir; se supone que extern devuelve como resultado int
+1	ui\raceResultsScreen.c: warning C4013: 'setPaletteAndGetValue' sin definir; se supone que extern devuelve como resultado int
+1	ui\raceResultsScreen.c: warning C4013: 'setWindowCaption2' sin definir; se supone que extern devuelve como resultado int
+1	ui\raceResultsScreen.c: warning C4013: 'stopAndOpenMusic' sin definir; se supone que extern devuelve como resultado int
+1	ui\raceResultsScreen.c: warning C4013: 'stopSong' sin definir; se supone que extern devuelve como resultado int
+1	ui\raceResultsScreen.c: warning C4013: 'sub_4224E0' sin definir; se supone que extern devuelve como resultado int
+1	ui\raceResultsScreen.c: warning C4013: 'waitWithRefresh' sin definir; se supone que extern devuelve como resultado int
+2	ui\raceResultsScreen.c: warning C4018: '<': no coinciden signed/unsigned
+29	ui\raceResultsScreen.c: warning C4244: '=': conversi├│n de 'double' a 'float'; posible p├⌐rdida de datos
+9	ui\raceResultsScreen.c: warning C4996: 'itoa': The POSIX name for this item is deprecated. Instead, use the ISO C and C++ conformant name: _itoa. See online help for details.
+1	ui\selectRaceScreen.c: warning C4013: 'convertColorToPaletteColor' sin definir; se supone que extern devuelve como resultado int
+1	ui\selectRaceScreen.c: warning C4013: 'drawBottomMenuText' sin definir; se supone que extern devuelve como resultado int
+1	ui\selectRaceScreen.c: warning C4013: 'drawCarRightSide' sin definir; se supone que extern devuelve como resultado int
+1	ui\selectRaceScreen.c: warning C4013: 'drawPopupCursor_42C780' sin definir; se supone que extern devuelve como resultado int
+1	ui\selectRaceScreen.c: warning C4013: 'drawTransparentBlock' sin definir; se supone que extern devuelve como resultado int
+1	ui\selectRaceScreen.c: warning C4013: 'eventDetected' sin definir; se supone que extern devuelve como resultado int
+1	ui\selectRaceScreen.c: warning C4013: 'loadMenuSoundEffect' sin definir; se supone que extern devuelve como resultado int
+1	ui\selectRaceScreen.c: warning C4013: 'loadPaletteMenu' sin definir; se supone que extern devuelve como resultado int
+1	ui\selectRaceScreen.c: warning C4013: 'musicSetOrder' sin definir; se supone que extern devuelve como resultado int
+1	ui\selectRaceScreen.c: warning C4013: 'postRaceMain' sin definir; se supone que extern devuelve como resultado int
+1	ui\selectRaceScreen.c: warning C4013: 'previewRaceScreen' sin definir; se supone que extern devuelve como resultado int
+1	ui\selectRaceScreen.c: warning C4013: 'refreshAllScreen' sin definir; se supone que extern devuelve como resultado int
+1	ui\selectRaceScreen.c: warning C4013: 'refreshAndCheckConnection_42A570' sin definir; se supone que extern devuelve como resultado int
+1	ui\selectRaceScreen.c: warning C4013: 'setMusicVolume' sin definir; se supone que extern devuelve como resultado int
+1	ui\selectRaceScreen.c: warning C4013: 'setPaletteAndGetValue' sin definir; se supone que extern devuelve como resultado int
+1	ui\selectRaceScreen.c: warning C4013: 'stopSoundChannel_43C3E0' sin definir; se supone que extern devuelve como resultado int
+1	ui\selectRaceScreen.c: warning C4013: 'sub_4224E0' sin definir; se supone que extern devuelve como resultado int
+1	ui\selectRaceScreen.c: warning C4013: 'sub_42C4A0' sin definir; se supone que extern devuelve como resultado int
+1	ui\selectRaceScreen.c: warning C4013: 'waitWithRefresh' sin definir; se supone que extern devuelve como resultado int
+1	ui\selectRaceScreen.c: warning C4024: '_itoa': tipos distintos para el par├ímetro formal y el par├ímetro real 2
+3	ui\selectRaceScreen.c: warning C4024: 'drawImageWithPosition2': tipos distintos para el par├ímetro formal y el par├ímetro real 1
+2	ui\selectRaceScreen.c: warning C4024: 'strlen': tipos distintos para el par├ímetro formal y el par├ímetro real 1
+1	ui\selectRaceScreen.c: warning C4047: '==': 'char *' es distinto en los niveles de direccionamiento indirecto de 'int'
+1	ui\selectRaceScreen.c: warning C4047: 'funci├│n': 'char *' es distinto en los niveles de direccionamiento indirecto de 'char **'
+2	ui\selectRaceScreen.c: warning C4047: 'funci├│n': 'const char *' es distinto en los niveles de direccionamiento indirecto de 'char **'
+3	ui\selectRaceScreen.c: warning C4047: 'funci├│n': 'int' es distinto en los niveles de direccionamiento indirecto de 'int *'
+1	ui\selectRaceScreen.c: warning C4996: 'itoa': The POSIX name for this item is deprecated. Instead, use the ISO C and C++ conformant name: _itoa. See online help for details.
+1	ui\shopScreen.c: warning C4013: 'adversaryPreviewScreen' sin definir; se supone que extern devuelve como resultado int
+1	ui\shopScreen.c: warning C4013: 'autoLoadSave' sin definir; se supone que extern devuelve como resultado int
+1	ui\shopScreen.c: warning C4013: 'convertColorToPaletteColor' sin definir; se supone que extern devuelve como resultado int
+1	ui\shopScreen.c: warning C4013: 'drawBottomMenuText' sin definir; se supone que extern devuelve como resultado int
+1	ui\shopScreen.c: warning C4013: 'drawCarRightSide' sin definir; se supone que extern devuelve como resultado int
+1	ui\shopScreen.c: warning C4013: 'drawCursor' sin definir; se supone que extern devuelve como resultado int
+1	ui\shopScreen.c: warning C4013: 'drawKeyCursor' sin definir; se supone que extern devuelve como resultado int
+1	ui\shopScreen.c: warning C4013: 'drawPopupCursor_42C780' sin definir; se supone que extern devuelve como resultado int
+1	ui\shopScreen.c: warning C4013: 'drawTransparentBlock' sin definir; se supone que extern devuelve como resultado int
+1	ui\shopScreen.c: warning C4013: 'enterBlackMarketScreen' sin definir; se supone que extern devuelve como resultado int
+1	ui\shopScreen.c: warning C4013: 'eventDetected' sin definir; se supone que extern devuelve como resultado int
+1	ui\shopScreen.c: warning C4013: 'getArmourBpkById' sin definir; se supone que extern devuelve como resultado int
+1	ui\shopScreen.c: warning C4013: 'getCarBpkById' sin definir; se supone que extern devuelve como resultado int
+1	ui\shopScreen.c: warning C4013: 'getEngineBpkById' sin definir; se supone que extern devuelve como resultado int
+1	ui\shopScreen.c: warning C4013: 'getModIntEntry' sin definir; se supone que extern devuelve como resultado int
+1	ui\shopScreen.c: warning C4013: 'getTireBpkById' sin definir; se supone que extern devuelve como resultado int
+1	ui\shopScreen.c: warning C4013: 'hasInsuficientMoneyToBuy' sin definir; se supone que extern devuelve como resultado int
+1	ui\shopScreen.c: warning C4013: 'loadMenuSoundEffect' sin definir; se supone que extern devuelve como resultado int
+1	ui\shopScreen.c: warning C4013: 'musicSetOrder' sin definir; se supone que extern devuelve como resultado int
+1	ui\shopScreen.c: warning C4013: 'previewRaceScreen' sin definir; se supone que extern devuelve como resultado int
+1	ui\shopScreen.c: warning C4013: 'refreshAllScreen' sin definir; se supone que extern devuelve como resultado int
+1	ui\shopScreen.c: warning C4013: 'refreshAndCheckConnection_42A570' sin definir; se supone que extern devuelve como resultado int
+1	ui\shopScreen.c: warning C4013: 'selectRaceScreen' sin definir; se supone que extern devuelve como resultado int
+1	ui\shopScreen.c: warning C4013: 'setMusicVolume' sin definir; se supone que extern devuelve como resultado int
+1	ui\shopScreen.c: warning C4013: 'setPaletteAndGetValue' sin definir; se supone que extern devuelve como resultado int
+1	ui\shopScreen.c: warning C4013: 'setPaletteValueWithFloats' sin definir; se supone que extern devuelve como resultado int
+1	ui\shopScreen.c: warning C4013: 'setUndergroundMarketPrices' sin definir; se supone que extern devuelve como resultado int
+1	ui\shopScreen.c: warning C4013: 'sub_4224E0' sin definir; se supone que extern devuelve como resultado int
+1	ui\shopScreen.c: warning C4013: 'sub_42C4A0' sin definir; se supone que extern devuelve como resultado int
+1	ui\shopScreen.c: warning C4013: 'waitWithRefresh' sin definir; se supone que extern devuelve como resultado int
+10	ui\shopScreen.c: warning C4018: '>': no coinciden signed/unsigned
+1	ui\shopScreen.c: warning C4024: '_itoa': tipos distintos para el par├ímetro formal y el par├ímetro real 2
+10	ui\shopScreen.c: warning C4024: 'drawMenuAnimation': tipos distintos para el par├ímetro formal y el par├ímetro real 5
+1	ui\shopScreen.c: warning C4047: '=': 'char' es distinto en los niveles de direccionamiento indirecto de 'char [2]'
+1	ui\shopScreen.c: warning C4047: 'funci├│n': 'char *' es distinto en los niveles de direccionamiento indirecto de 'char (*)[100]'
+10	ui\shopScreen.c: warning C4047: 'funci├│n': 'int *' es distinto en los niveles de direccionamiento indirecto de 'int'
+1	ui\shopScreen.c: warning C4101: 'v101': variable local sin referencia
+1	ui\shopScreen.c: warning C4101: 'v33': variable local sin referencia
+1	ui\shopScreen.c: warning C4101: 'v57': variable local sin referencia
+1	ui\shopScreen.c: warning C4101: 'v58': variable local sin referencia
+1	ui\shopScreen.c: warning C4101: 'v60': variable local sin referencia
+1	ui\shopScreen.c: warning C4101: 'v77': variable local sin referencia
+1	ui\shopScreen.c: warning C4101: 'v80': variable local sin referencia
+1	ui\shopScreen.c: warning C4101: 'v83': variable local sin referencia
+6	ui\shopScreen.c: warning C4244: '=': conversi├│n de 'double' a 'float'; posible p├⌐rdida de datos
+6	ui\shopScreen.c: warning C4244: '=': conversi├│n de 'unsigned __int64' a 'int'; posible p├⌐rdida de datos
+1	ui\startGameScreen.c: warning C4013: 'colorToPaletteEntry' sin definir; se supone que extern devuelve como resultado int
+1	ui\startGameScreen.c: warning C4013: 'copyImageToBuffer' sin definir; se supone que extern devuelve como resultado int
+1	ui\startGameScreen.c: warning C4013: 'eventDetected' sin definir; se supone que extern devuelve como resultado int
+1	ui\startGameScreen.c: warning C4013: 'getModIntEntry' sin definir; se supone que extern devuelve como resultado int
+1	ui\startGameScreen.c: warning C4013: 'refreshAllScreen' sin definir; se supone que extern devuelve como resultado int
+1	ui\startGameScreen.c: warning C4013: 'setPaletteAndGetValue' sin definir; se supone que extern devuelve como resultado int
+1	ui\startGameScreen.c: warning C4013: 'transitionToBlack' sin definir; se supone que extern devuelve como resultado int
+1	ui\startGameScreen.c: warning C4013: 'transitionToCurrentImage' sin definir; se supone que extern devuelve como resultado int
+1	ui\startGameScreen.c: warning C4013: 'waitWithRefresh' sin definir; se supone que extern devuelve como resultado int
+1	ui\util\anim.c: warning C4013: 'copyImageToBuffer' sin definir; se supone que extern devuelve como resultado int
+1	ui\util\anim.c: warning C4013: 'getArmourBpkById' sin definir; se supone que extern devuelve como resultado int
+1	ui\util\anim.c: warning C4013: 'getCarBpkById' sin definir; se supone que extern devuelve como resultado int
+1	ui\util\anim.c: warning C4013: 'getEngineBpkById' sin definir; se supone que extern devuelve como resultado int
+1	ui\util\anim.c: warning C4013: 'getTireBpkById' sin definir; se supone que extern devuelve como resultado int
+1	ui\util\anim.c: warning C4013: 'setUndergroundMarketPrices' sin definir; se supone que extern devuelve como resultado int
+9	ui\util\anim.c: warning C4024: 'drawMenuAnimation': tipos distintos para el par├ímetro formal y el par├ímetro real 5
+3	ui\util\anim.c: warning C4024: 'itoa': tipos distintos para el par├ímetro formal y el par├ímetro real 2
+3	ui\util\anim.c: warning C4047: 'funci├│n': 'char *' es distinto en los niveles de direccionamiento indirecto de 'char (*)[100]'
+9	ui\util\anim.c: warning C4047: 'funci├│n': 'int *' es distinto en los niveles de direccionamiento indirecto de 'int'
+2	ui\util\anim.c: warning C4101: 'v2': variable local sin referencia
+9	ui\util\anim.c: warning C4996: 'itoa': The POSIX name for this item is deprecated. Instead, use the ISO C and C++ conformant name: _itoa. See online help for details.
+1	ui\util\carRightSide.c: warning C4013: 'getSceneCarBpkById' sin definir; se supone que extern devuelve como resultado int
+1	ui\util\carRightSide.c: warning C4013: 'setPaletteValueWithFloats' sin definir; se supone que extern devuelve como resultado int
+1	ui\util\carRightSide.c: warning C4024: 'itoa': tipos distintos para el par├ímetro formal y el par├ímetro real 1
+1	ui\util\carRightSide.c: warning C4047: '=': 'char' es distinto en los niveles de direccionamiento indirecto de 'char [2]'
+1	ui\util\carRightSide.c: warning C4047: '=': 'int *' es distinto en los niveles de direccionamiento indirecto de 'int'
+1	ui\util\carRightSide.c: warning C4047: 'funci├│n': 'int' es distinto en los niveles de direccionamiento indirecto de 'int *'
+3	ui\util\carRightSide.c: warning C4244: '=': conversi├│n de 'double' a 'float'; posible p├⌐rdida de datos
+4	ui\util\carRightSide.c: warning C4996: 'itoa': The POSIX name for this item is deprecated. Instead, use the ISO C and C++ conformant name: _itoa. See online help for details.
+1	ui\util\input.c: warning C4013: 'drawKeyCursor' sin definir; se supone que extern devuelve como resultado int
+1	ui\util\input.c: warning C4013: 'eventDetected' sin definir; se supone que extern devuelve como resultado int
+1	ui\util\input.c: warning C4013: 'loadMenuSoundEffect' sin definir; se supone que extern devuelve como resultado int
+1	ui\util\input.c: warning C4013: 'setPaletteValueWithFloats' sin definir; se supone que extern devuelve como resultado int
+1	ui\util\input.c: warning C4013: 'sub_42C7F0' sin definir; se supone que extern devuelve como resultado int
+9	ui\util\input.c: warning C4244: '=': conversi├│n de 'double' a 'float'; posible p├⌐rdida de datos
+1	ui\util\menus.c: warning C4013: 'getSaveGameName' sin definir; se supone que extern devuelve como resultado int
+1	ui\util\menus.c: warning C4047: '!=': 'int' es distinto en los niveles de direccionamiento indirecto de 'void *'
+1	ui\util\menus.c: warning C4047: 'return': 'char *' es distinto en los niveles de direccionamiento indirecto de 'int'
+1	ui\util\popup.c: warning C4013: 'drawPopupCursor_42C780' sin definir; se supone que extern devuelve como resultado int
+1	ui\util\popup.c: warning C4013: 'drawYesNoMenu' sin definir; se supone que extern devuelve como resultado int
+1	ui\util\popup.c: warning C4013: 'eventDetected' sin definir; se supone que extern devuelve como resultado int
+1	ui\util\popup.c: warning C4013: 'loadMenuSoundEffect' sin definir; se supone que extern devuelve como resultado int
+1	ui\util\popup.c: warning C4013: 'refreshAllScreen' sin definir; se supone que extern devuelve como resultado int
+1	ui\util\popup.c: warning C4013: 'refreshAndCheckConnection_42A570' sin definir; se supone que extern devuelve como resultado int
+1	ui\util\popup.c: warning C4013: 'SDL_GetTicks' sin definir; se supone que extern devuelve como resultado int
+1	ui\util\popup.c: warning C4013: 'stopSoundChannel_43C3E0' sin definir; se supone que extern devuelve como resultado int
+1	ui\util\popup.c: warning C4013: 'sub_418090' sin definir; se supone que extern devuelve como resultado int
+1	ui\util\raceResults.c: warning C4013: 'convertColorToPaletteColor' sin definir; se supone que extern devuelve como resultado int
+1	ui\util\raceResults.c: warning C4013: 'drawRightPositions' sin definir; se supone que extern devuelve como resultado int
+1	ui\util\raceResults.c: warning C4013: 'refreshAllScreen' sin definir; se supone que extern devuelve como resultado int
+1	ui\util\raceResults.c: warning C4013: 'setPaletteAndGetValue' sin definir; se supone que extern devuelve como resultado int
+1	ui\util\raceResults.c: warning C4013: 'sub_424510' sin definir; se supone que extern devuelve como resultado int
+1	ui\util\raceResults.c: warning C4996: 'itoa': The POSIX name for this item is deprecated. Instead, use the ISO C and C++ conformant name: _itoa. See online help for details.

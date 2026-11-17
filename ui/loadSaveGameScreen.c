@@ -14,14 +14,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "util/menuTexts.h"
 
-_UNKNOWN unk_446C32; // weak
+//Los nombres de las ranuras (unk_446C32, 50 bytes cada una) son las opciones del menu 5, ver
+//menuTexts.h. El original tiene 8; con las 10 del port la ultima cae, como caeria en dr.exe,
+//sobre "Accelerate" del menu de teclado, que sub_41CA40 vuelve a escribir al entrar en el.
 BYTE unk_4455B0[] = { 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 };
 
 void *Str; // idb
-int dword_443D18 = 1953525061; // weak
-char loadSaveScreenaStartANewGam_0[17] = "Start A New Game"; // weak
-char loadSaveScreenaStartRacing[13] = "Start Racing"; // weak
 //----- (0042F2E0) --------------------------------------------------------
 signed int loadGame()
 {
@@ -107,19 +107,19 @@ signed int loadGame()
 
   if ( v6 < 0 )
     return 0;
-  *(_DWORD *)loadSaveScreenaStartANewGam_0 = 1702129221;
-  *(_DWORD *)&loadSaveScreenaStartANewGam_0[4] = 1750343794;
-  *(_DWORD *)&loadSaveScreenaStartANewGam_0[8] = 1750278245;
-  *(_WORD *)&loadSaveScreenaStartANewGam_0[12] = 28783;
-  loadSaveScreenaStartANewGam_0[14] = 0;
-  *(_DWORD *)loadSaveScreenaStartRacing = 1953394499;
+  *(_DWORD *)menuaStartANewGam_0 = 1702129221;
+  *(_DWORD *)&menuaStartANewGam_0[4] = 1750343794;
+  *(_DWORD *)&menuaStartANewGam_0[8] = 1750278245;
+  *(_WORD *)&menuaStartANewGam_0[12] = 28783;
+  menuaStartANewGam_0[14] = 0;
+  *(_DWORD *)menuaStartRacing = 1953394499;
   menuActive_4457F0[1] = 0;
   menuActive_4457F0[10] = 1;
   menuActive_4457F0[11] = 1;
   menuActive_4457F0[13] = 1;
-  *(_DWORD *)&loadSaveScreenaStartRacing[4] = 1702194793;
-  *(_DWORD *)&loadSaveScreenaStartRacing[8] = 1667322400;
-  *(_DWORD *)&loadSaveScreenaStartRacing[12] = 6778473;
+  *(_DWORD *)&menuaStartRacing[4] = 1702194793;
+  *(_DWORD *)&menuaStartRacing[8] = 1667322400;
+  *(_DWORD *)&menuaStartRacing[12] = 6778473;
   showHardWarningRace = 0;
   showMediumWarningRace = 0;
   showUndergroundPopup_456B78 = 0;
@@ -200,7 +200,7 @@ __int16 savegameWithName()
 //  char *v19; // edi@26
 //  char v20; // cl@27
   FILE *v21; // esi@28
-  char *DstBuf=malloc(100); // [sp+10h] [bp-2Ch]@2
+  char DstBuf[100]; // [sp+10h] [bp-2Ch]@2
   int v24; // [sp+14h] [bp-28h]@19
   int v25; // [sp+18h] [bp-24h]@2
   char Filename[8]; // [sp+1Ch] [bp-20h]@2
@@ -248,7 +248,7 @@ __int16 savegameWithName()
       drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&letterSpacing_4458B0, "Enter the name of save game?", 180610);
       refreshAllScreen();
       v7 = (char *)&unk_446C32 + 50 * v6;
-      if ( !memcmp((char *)&unk_446C32 + 50 * v6, &dword_443D18, 0xBu) )
+      if ( !memcmp((char *)&unk_446C32 + 50 * v6, "Empty Slot", 0xBu) )
       {
         v27[0] = 0;
       }

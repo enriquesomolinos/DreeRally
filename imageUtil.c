@@ -4,59 +4,48 @@
 #include "defs.h"
 #include "ui/util/menus.h"
 #include "dr.h"
+#include "imageUtil.h"
 
-const int DEFAULT_BIGLETTER_SPACING_OFFSET = -23;
+const int DEFAULT_BIGLETTER_SPACING_OFFSET = -30;
 
  void *choo2Bpk; // idb
 
- char  unk_445928[] = {9,0xc,
-					  9,9,9,9,9,9,9,9,9,9, 
-					  9,9,9,9,9,9,9,9,9,9, 
-					  9,9,9,9,9,9,9,9,9,9, 
-					  9,9,9,9,9,9,9,9,9,9, 
-					  9,9,9,9,9,9,9,9,9,9,
-					  9,9,9,9,9,9,9,9,9,9, 
-					  9,9 };
-
- char byte_445892[] = { '\x12','\x8','\x0E','\x13','\x10','\x16','\x12','\x12','\x20','\x12',
-	                    '\x12','\x11','\x10','\x12','\x13','\x1A','\x12','\x13','\x10','\x0B',
-						'\x6','\x0B','\x0F','\x14'}; // weak
-//char byte_445892[] = { '\x12','\x8','\x0E','\x13','\x10','\x16','\x12','\x12','\x10','\x12','\x12','\x11','\x10','\x12','\x13','\x1A','\x12','\x13','\x10','\x0B','\x6','\x0B','\x0F','\x14','\x0','\x0','\x0','\x0','\x0','\x0' }; // weak
-
- //char byte_4458B0[] = { '\x10', '\x10', '\x0A', '\x5', '\x8', '\x0B', '\x0B', '\x0D', '\x0B', '\x5', '\x6', '\x6', '\x9', '\x0B', '\x5', '\x0B', '\x4', '\x0A', '\x0B', '\x5', '\x9', '\x0A', '\x0A', '\x0A', '\x0A', '\x0A', '\x0A', '\x0A', '\x4', '\x5', '\x9', '\x0B', '\x8', '\x8', '\x0C', '\x0B', '\x0B', '\x0A', '\x0B', '\x0A', '\x0A', '\x0C', '\x0B', '\x5', '\x9', '\x0B', '\x0A', '\x0E', '\x0B', '\x0B', '\x0A', '\x0B', '\x0B', '\x0A', '\x0A', '\x0B', '\x0C', '\x0F', '\x0B', '\x0B', '\x0A', '\x7', '\x0A', '\x6', '\x0A', '\x0A', '\x5', '\x0B', '\x0A', '\x9', '\x0A', '\x9', '\x9', '\x0A', '\x0A', '\x5', '\x8', '\x0A', '\x9', '\x0C', '\x0A', '\x0A', '\x9', '\x0A', '\x0A', '\x9', '\x9', '\x0A', '\x0A', '\x0E', '\x0A', '\x0A', '\x9', '\x7', '\x4', '\x7', '\x9', '\x0B', '\x10', '\x0D', '\x0E', '\x0D', '\x9', '\x0D', '\x0D', '\x0D', '\x0D', '\x0D', '\x0C', '\x0D', '\x0D', '\x0', '\x0', '\x0', '\x0', '\x0', '\x0', '\x0', '\x9', '\x0C', '\x9', '\x9', '\x9', '\x9', '\x9', '\x9', '\x9', '\x9', '\x9', '\x9', '\x9', '\x9', '\x9', '\x9', '\x9', '\x9', '\x9', '\x9', '\x9', '\x9', '\x9', '\x9', '\x9', '\x9', '\x9', '\x9', '\x9', '\x9', '\x9', '\x9', '\x9', '\x9', '\x9', '\x9', '\x9', '\x9', '\x9', '\x9', '\x9', '\x9', '\x9', '\x9', '\x9', '\x9', '\x9', '\x9', '\x9', '\x9', '\x9', '\x9', '\x9', '\x9', '\x9', '\x9', '\x9', '\x9', '\x9', '\x9', '\x9', '\x9', '\x9', '\x9' };
-//ver porque byte_445892
- char letterSpacing_4458B0[] = { '\x10', '\x10', '\x0A', '\x5', '\x8', '\x0B', '\x0B', '\x0D', '\x09', '\x5',
-					   '\x6',  '\x6',  '\x0B',  '\x0B', '\xB', '\x5', '\x7', '\x07', '\x0B', '\x5', //20
-						'\x5', '\x0A', '\x5', '\x0A', '\x0A', '\x5', '\x09', '\x9', '\xA', '\xA',//ultimo es el numero 5 ascci 53
-						'\x9', '\xA', '\xA', '\x0A', '\x5', '\x0B', '\x0B', '\x0A', '\x0B', '\x0A', //40
-						'\x0A', '\x0C', '\x0B', '\xA', '\x0B', '\x0A', '\x0A', '\x0E', '\x0B', '\x05', 
-						'\x0A', '\x0B', '\x0B', '\x0D', '\x0B', '\x0B', '\x0A', '\x0F', '\x0B', '\x0A',//60
-						'\x0A', '\xB',  '\x0A', '\x0F',  '\x0A', '\x0B', '\xA', '\x0B', '\x0A', '\x9', //ascci 93
-						'\x0A', '\x9',  '\x9',  '\x0B', '\x0A', '\x09', '\x0A',  '\x09', '\x9', '\x0A', //80
-						'\x0A', '\x5', '\x9', '\x0A', '\x09', '\x0C', '\x0A', '\x0A', '\x09', '\x0E', 
-						'\x0A', '\x09', '\x9', '\xA', '\xA', '\x0E', '\x9', '\x0A', '\x10', '\x0D', //100  ascii 123
-						'\x0E', '\x0D', '\x9', '\x0D', '\x0D', '\x0D', '\x0D', '\x0D', '\x0C', '\x0D', 
-						'\x0D', '\x0D',  '\x0D', '\x0D',  '\x0D',  '\x0D',  '\x0D',  '\x0D',  '\x9',  '\x0C',//120
-						'\x9', '\x9', '\x9', '\x9', '\x9', '\x9', '\x9', '\x9', '\x9', '\x9',
-						'\x9', '\x9', '\x9', '\x9', '\x9', '\x9', '\x9', '\x9', '\x9', '\x9', //140
-						'\x9', '\x9', '\x9', '\x9', '\x9', '\x9', '\x9', '\x9', '\x9', '\x9', 
-						'\x9', '\x9', '\x9',  '\x9', '\x9', '\x9', '\x9', '\x9', '\x9', '\x9', //160
-						'\x9', '\x9', '\x9', '\x9', '\x9', '\x9', '\x9', '\x9', '\x9', '\x9', 
-						'\x9', '\x9', '\x9', '\x9', '\x9','\x9', '\x9', '\x9', '\x9', '\x9', '\x9', '\x9' };
- char bigLetterSpacing_445848[] ={ '\x20','\x20','\x14','\x9','\x0E','\x14','\x15','\x18','\x15','\x0A','\x0C','\x0B','\x10','\x15','\x9','\x14','\x8','\x13',
-						'\x15','\x0A','\x14','\x13','\x14','\x14','\x13','\x12','\x13','\x12','\x8','\x9','\x10',
-                         '\x15','\x10','\x0F','\x16','\x16','\x15','\x14','\x16','\x13','\x12','\x16','\x16','\x0A','\x11','\x15','\x13','\x1B','\x15','\x16','\x14',
-						'\x16','\x15','\x14','\x14','\x16','\x18','\x1F','\x16','\x17',
-	                    '\x13','\x0C','\x14','\x0C','\x14','\x13','\x9','\x14','\x12','\x11','\x12','\x10','\x0F','\x13',
-						'\x12','\x8','\x0E','\x13','\x10','\x16','\x12','\x12','\x10','\x12','\x12','\x11','\x10','\x12','\x13','\x1A','\x12','\x13',
-						'\x10','\x0B','\x6','\x0B','\x0F','\x14','\x0','\x0','\x0','\x0','\x0','\x0','\x10','\x10','\x0A','\x5','\x8','\x0B',
-						'\x0B','\x0D','\x0B','\x5','\x6','\x6','\x9','\x0B','\x5','\x0B','\x4','\x0A','\x0B','\x5','\x9','\x0A','\x0A',
-						'\x0A','\x0A','\x0A','\x0A','\x0A','\x4','\x5','\x9','\x0B','\x8','\x8','\x0C','\x0B','\x0B','\x0A','\x0B','\x0A',
-						'\x0A','\x0C','\x0B','\x5','\x9','\x0B','\x0A','\x0E','\x0B','\x0B','\x0A','\x0B','\x0B','\x0A','\x0A','\x0B',
-						'\x0C','\x0F','\x0B','\x0B','\x0A','\x7','\x0A','\x6','\x0A','\x0A','\x5','\x0B','\x0A','\x9','\x0A','\x9','\x9',
-						'\x0A','\x0A','\x5','\x8','\x0A','\x9','\x0C','\x0A','\x0A','\x9','\x0A','\x0A','\x9','\x9','\x0A','\x0A','\x0E',
-						'\x0A','\x0A','\x9','\x7','\x4','\x7','\x9','\x0B','\x10','\x0D','\x0E','\x0D','\x9','\x0D','\x0D','\x0D','\x0D',
-						'\x0D','\x0C','\x0D','\x0D','\x0','\x0','\x0','\x0','\x0','\x0','\x0','\x9' }; // weak
+//0x445848.. en dr.exe: las tablas de espaciado de las fuentes, una detras de otra (grande 0x445848,
+//chica 0x4458B0, precios 0x445914, mediana 0x445928). Cada una empieza con el ancho y el alto del
+//glifo; el avance de un caracter c esta en tabla[c - 30] (precios: [c - 45]). El codigo lee unas a
+//traves de otras (letterSpacing_4458B0[90 + c] es la mediana), asi que van juntas como en el
+//original. Upstream las habia tipeado a mano, con valores corridos que compensaba en drawTextWithFont.
+unsigned char fontSpacing_445848[0x1C8] = {
+  0x20, 0x20, 0x14, 0x09, 0x0E, 0x14, 0x15, 0x18, 0x15, 0x0A, 0x0C, 0x0B, 0x10, 0x15, 0x09, 0x14,
+  0x08, 0x13, 0x15, 0x0A, 0x14, 0x13, 0x14, 0x14, 0x13, 0x12, 0x13, 0x12, 0x08, 0x09, 0x10, 0x15,
+  0x10, 0x0F, 0x16, 0x16, 0x15, 0x14, 0x16, 0x13, 0x12, 0x16, 0x16, 0x0A, 0x11, 0x15, 0x13, 0x1B,
+  0x15, 0x16, 0x14, 0x16, 0x15, 0x14, 0x14, 0x16, 0x18, 0x1F, 0x16, 0x17, 0x13, 0x0C, 0x14, 0x0C,
+  0x14, 0x13, 0x09, 0x14, 0x12, 0x11, 0x12, 0x10, 0x0F, 0x13, 0x12, 0x08, 0x0E, 0x13, 0x10, 0x16,
+  0x12, 0x12, 0x10, 0x12, 0x12, 0x11, 0x10, 0x12, 0x13, 0x1A, 0x12, 0x13, 0x10, 0x0B, 0x06, 0x0B,
+  0x0F, 0x14, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x10, 0x10, 0x0A, 0x05, 0x08, 0x0B, 0x0B, 0x0D,
+  0x0B, 0x05, 0x06, 0x06, 0x09, 0x0B, 0x05, 0x0B, 0x04, 0x0A, 0x0B, 0x05, 0x09, 0x0A, 0x0A, 0x0A,
+  0x0A, 0x0A, 0x0A, 0x0A, 0x04, 0x05, 0x09, 0x0B, 0x08, 0x08, 0x0C, 0x0B, 0x0B, 0x0A, 0x0B, 0x0A,
+  0x0A, 0x0C, 0x0B, 0x05, 0x09, 0x0B, 0x0A, 0x0E, 0x0B, 0x0B, 0x0A, 0x0B, 0x0B, 0x0A, 0x0A, 0x0B,
+  0x0C, 0x0F, 0x0B, 0x0B, 0x0A, 0x07, 0x0A, 0x06, 0x0A, 0x0A, 0x05, 0x0B, 0x0A, 0x09, 0x0A, 0x09,
+  0x09, 0x0A, 0x0A, 0x05, 0x08, 0x0A, 0x09, 0x0C, 0x0A, 0x0A, 0x09, 0x0A, 0x0A, 0x09, 0x09, 0x0A,
+  0x0A, 0x0E, 0x0A, 0x0A, 0x09, 0x07, 0x04, 0x07, 0x09, 0x0B, 0x00, 0x00, 0x10, 0x0D, 0x0E, 0x0D,
+  0x09, 0x0D, 0x0D, 0x0D, 0x0D, 0x0D, 0x0C, 0x0D, 0x0D, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+  0x09, 0x0C, 0x09, 0x09, 0x09, 0x09, 0x09, 0x09, 0x09, 0x09, 0x09, 0x09, 0x09, 0x09, 0x09, 0x09,
+  0x09, 0x09, 0x09, 0x09, 0x09, 0x09, 0x09, 0x09, 0x09, 0x09, 0x09, 0x09, 0x09, 0x09, 0x09, 0x09,
+  0x09, 0x09, 0x09, 0x09, 0x09, 0x09, 0x09, 0x09, 0x09, 0x09, 0x09, 0x09, 0x09, 0x09, 0x09, 0x09,
+  0x09, 0x09, 0x09, 0x09, 0x09, 0x09, 0x09, 0x09, 0x09, 0x09, 0x09, 0x09, 0x09, 0x09, 0x09, 0x09,
+  0xA7, 0x06, 0x00, 0x00, 0xB5, 0x06, 0x00, 0x00, 0xD3, 0x06, 0x00, 0x00, 0xE1, 0x06, 0x00, 0x00,
+  0xDE, 0x06, 0x00, 0x00, 0xCA, 0x06, 0x00, 0x00, 0xD6, 0x06, 0x00, 0x00, 0xB5, 0x06, 0x00, 0x00,
+  0xC6, 0x06, 0x00, 0x00, 0xAD, 0x06, 0x00, 0x00, 0xAA, 0x06, 0x00, 0x00, 0xBB, 0x06, 0x00, 0x00,
+  0xAB, 0x06, 0x00, 0x00, 0xC0, 0x06, 0x00, 0x00, 0xA5, 0x06, 0x00, 0x00, 0xB6, 0x06, 0x00, 0x00,
+  0xA2, 0x06, 0x00, 0x00, 0xAD, 0x06, 0x00, 0x00, 0xB1, 0x06, 0x00, 0x00, 0xC3, 0x06, 0x00, 0x00,
+  0xC3, 0x06, 0x00, 0x00, 0xD1, 0x06, 0x00, 0x00, 0xC1, 0x06, 0x00, 0x00, 0xB8, 0x06, 0x00, 0x00,
+  0xBC, 0x06, 0x00, 0x00, 0xBB, 0x06, 0x00, 0x00, 0xBD, 0x06, 0x00, 0x00, 0xC3, 0x06, 0x00, 0x00,
+  0xB8, 0x06, 0x00, 0x00, 0xB0, 0x06, 0x00, 0x00, 0x95, 0x06, 0x00, 0x00, 0x68, 0x06, 0x00, 0x00,
+  0x94, 0x06, 0x00, 0x00, 0x97, 0x06, 0x00, 0x00, 0xA7, 0x06, 0x00, 0x00, 0xC6, 0x06, 0x00, 0x00,
+  0xD5, 0x06, 0x00, 0x00, 0xC1, 0x06, 0x00, 0x00, 0xAD, 0x06, 0x00, 0x00, 0x86, 0x06, 0x00, 0x00,
+  0x97, 0x06, 0x00, 0x00, 0x81, 0x06, 0x00, 0x00,
+};
 
  //----- (0041A370) --------------------------------------------------------
  
@@ -168,12 +157,7 @@ LABEL_12:
           }
           v7 = text;
 		  
-          if (text[v3] == 'z') {
-              v6 += 10;
-          }
-          else {
-              v6 += (unsigned __int8)byte_445892[text[v3]];
-          }
+          v6 += (unsigned __int8)byte_445892[(unsigned __int8)text[v3]];
          
 		  //cambiado para que se vea algo mejor pero lo comentado es lo que habia
 		 // v6 += (unsigned __int8)letterSpacing_4458B0[45+text[v3]];
@@ -593,19 +577,8 @@ unsigned int   drawTextWithFont(int font, int a2, const char *text, int screenPo
 		  }
         drawImageWithPosition(font + width * height * ((unsigned __int8)v9 - 32), width, height, (int)((char *)screenBuffer + screenPositionOffset));
 		height = v10;
-		//aqui era -24 pero se ve mal!
-		if(*(BYTE *)a2== *(BYTE *)bigLetterSpacing_445848){
-			
-			screenPositionOffset += *(BYTE *)(text[v6] + a2 - 30);
-		}else{
-			
-            if (text[v6] == 'Z') {
-                screenPositionOffset += *(BYTE*)(text[v6] + a2 - 30);
-            }
-            else {
-                screenPositionOffset += *(BYTE*)(text[v6] + a2 - 24);
-            }
-		}
+		//0x41A2D0: el avance del caracter esta en tabla[c - 30] para todas las fuentes
+		screenPositionOffset += *(unsigned __int8 *)(a2 + (unsigned __int8)text[v6] - 30);
 		
       }
       ++v6;

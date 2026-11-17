@@ -2,6 +2,7 @@
 #include "lightSystem.h"
 #include "../defs.h"
 #include "../dr.h"
+#include <math.h>
 
 
 int trxSHA8Bpk_46E8E0[1024]; // weak
@@ -12,6 +13,7 @@ int trxSHA3Bpk_479280[4096]; // weak
 int trxSHA2Bpk_501A80; // weak
 //_UNKNOWN unk_4669C0; // weak
 int trxVARJOTab_466F00[257]; // weak
+extern int trxSHA1Bpk_50E718; //vertices de la malla de sombras
 
 //----- (0043D530) --------------------------------------------------------
 int   iluminateTriangle_43D530(int pos1x, int pos1y, int pos2x, int pos2y, int pos3x, int pos3y, int a7)
@@ -155,8 +157,8 @@ int   iluminateTriangle_43D530(int pos1x, int pos1y, int pos2x, int pos2y, int p
                         v28 = v35;
                         v43 = v36;
                     }
-                    v29 = (unsigned __int64)floor(v28 + 0.40000001);
-                    v30 = (unsigned __int64)floor(v43 + 0.60000002);
+                    v29 = (signed int)floor(v28 + 0.40000001);
+                    v30 = (signed int)floor(v43 + 0.60000002);
                     v31 = v30;
                     if (v29 < 0)
                         v29 = 0;
@@ -168,7 +170,7 @@ int   iluminateTriangle_43D530(int pos1x, int pos1y, int pos2x, int pos2y, int p
                         for (i = v11 << 9; ; i = v11 << 9)
                         {
                             v34 = dword_464F14 + i + v32++ + 96;
-                            *(BYTE*)v34 = *(BYTE*)(*(BYTE*)v34 + a7);
+                            *(uint8*)v34 = *(uint8*)(*(uint8*)v34 + a7); //movzx en dr.exe (0x43D6FF): BYTE tiene signo en defs.h y los pixeles >= 128 leian antes de la tabla
                             if (v32 >= v31)
                                 break;
                         }
@@ -205,8 +207,8 @@ int   iluminateTriangle_43D530(int pos1x, int pos1y, int pos2x, int pos2y, int p
                     v21 = v35;
                     v40 = v36;
                 }
-                v22 = (unsigned __int64)floor(v21 + 0.40000001);
-                v23 = (unsigned __int64)floor(v40 + 0.60000002);
+                v22 = (signed int)floor(v21 + 0.40000001);
+                v23 = (signed int)floor(v40 + 0.60000002);
                 v24 = v22;
                 v25 = v23;
                 if (v22 < 0)
@@ -218,7 +220,7 @@ int   iluminateTriangle_43D530(int pos1x, int pos1y, int pos2x, int pos2y, int p
                     for (j = v11 << 9; ; j = v11 << 9)
                     {
                         v27 = dword_464F14 + j + v24++ + 96;
-                        *(BYTE*)v27 = *(BYTE*)(*(BYTE*)v27 + a7);
+                        *(uint8*)v27 = *(uint8*)(*(uint8*)v27 + a7); //movzx en dr.exe (0x43D6FF): BYTE tiene signo en defs.h y los pixeles >= 128 leian antes de la tabla
                         if (v24 >= v25)
                             break;
                     }
@@ -265,8 +267,11 @@ int drawShadows_40D7B0()
             v4 = trxSHA8Bpk_46E8E0[v1];
             //v2 *= 4;
 
-            //TODO FIX 
-            if (v2 > 200) v2 = 0;
+            //Aqui habia un "if (v2 > 200) v2 = 0": en los diez SHA.BPK todos los indices son menores
+            //que el numero de vertices, y el parche unia al vertice 0 las caras con un indice mayor a
+            //200 (hasta 42 por pista), que se estiraban por la pantalla oscureciendo lo que tapaban.
+            if (v2 < 0 || v2 >= trxSHA1Bpk_50E718 || v3 < 0 || v3 >= trxSHA1Bpk_50E718 || v4 < 0 || v4 >= trxSHA1Bpk_50E718)
+                goto nextFace;
             v5 = trxSHA3Bpk_479280[v3] - circuitImageOffsetX_456ABC;
             v6 = trxSHA3Bpk_479280[v2] - circuitImageOffsetX_456ABC;
             v7 = trxSHA3Bpk_479280[v4] - circuitImageOffsetX_456ABC;
@@ -287,6 +292,7 @@ int drawShadows_40D7B0()
                     || abs(dword_46ECE4 - raceEffectiveHalfHeight_44501C) < raceEffectiveHalfHeight_44501C))
                 iluminateTriangle_43D530(v5 + leftMenuInRaceWidth_456AA0, v8, leftMenuInRaceWidth_456AA0 + v6, v9, leftMenuInRaceWidth_456AA0 + v7, dword_46ECE4, (int)&trxVARJOTab_466F00);
 
+        nextFace:
             result = dword_481BE8++ + 1;
             if (dword_481BE8 >= trxSHA2Bpk_501A80)
                 break;

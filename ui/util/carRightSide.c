@@ -5,6 +5,7 @@
 #include "../../drivers.h"
 #include "../../dr.h"
 #include <SDL_stdinc.h>
+#include <math.h>
 
 //----- (0041FC20) --------------------------------------------------------
 int drawCarRightSide()
@@ -14,9 +15,6 @@ int drawCarRightSide()
     //  char v2; // cl@2
     int namePosition; // eax@3
     int* v4; // eax@3
-    unsigned int v5; // eax@5
-    char* v6; // edi@5
-    char v7; // cl@6
     int money; // eax@7
   //  unsigned int v9; // eax@9
   //  char *v10; // edi@9
@@ -55,6 +53,7 @@ int drawCarRightSide()
     int v43; // edi@41
     int v44; // esi@41
     int v45; // [sp+1Ch] [bp-2Ch]@5
+    int damagePercent;
 
     char* DstBuf = malloc(20); // [sp+34h] [bp-14h]@
     char* Str = malloc(20); // [sp+20h] [bp-28h]@1
@@ -107,12 +106,8 @@ int drawCarRightSide()
     memcpy(&moneyCount[1], DstBuf, strlen(DstBuf));
     memset(&moneyCount[strlen(DstBuf) + 1], '\0', 1);
 
-    v5 = strlen(DstBuf) + 1;
-    v6 = (char*)&v45 + 3;
-    do
-        v7 = (v6++)[1];
-    while (v7);
-    memcpy(v6, DstBuf, v5);
+    // The original appended DstBuf to "$" searching from the local before it; moneyCount
+    // already holds the text, and that copy only wrote over the stack.
     money = sub_41FA50(moneyCount);//size small text
     drawTextWithFont((int)graphicsGeneral.fsma3aBpk, (int)&letterSpacing_4458B0, moneyCount, money + 131744);
 
@@ -151,9 +146,16 @@ int drawCarRightSide()
     //pinta #20
     drawTextWithFont(v18, (int)&unk_445928, Str, 214368);
     v19 = 0;
+    //la barra mide 44 px (100 de dano * 0.44). Se acota el dano por si un guardado
+    //trae un valor fuera de rango: aqui se escribe directo sobre screenBuffer.
+    damagePercent = drivers[driverId].damage;
+    if (damagePercent < 0)
+        damagePercent = 0;
+    if (damagePercent > 100)
+        damagePercent = 100;
     do
     {
-        v20 = (unsigned __int64)ceil((double)drivers[driverId].damage * 0.44);
+        v20 = (unsigned __int64)ceil((double)damagePercent * 0.44);
         v21 = (char*)screenBuffer + v19 + 196388;
         memset(v21, 0x3Fu, 4 * ((unsigned int)v20 >> 2));
         v19 += 640;

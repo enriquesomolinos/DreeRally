@@ -71,4 +71,6 @@ extern int armourAnimCurrentFrame_461288; // weak
 extern int engineAnimCurrentFrame_462D80; // weak
 extern int armourAnimFrameDirection_45F034;
 
+extern ShopMessages shopMessages;
+
 #endif

@@ -251,7 +251,9 @@ int stopAndOpenMusic()
     FSOUND_Stream_Close(soundStream);
 	#ifndef _NO_MINIFMOD
 	 FMUSIC_FreeSong_43D940(musicModuleModified_456C24);
-	 result = FMUSIC_FreeSong_43D940(musicModule);
+	 //La musica la carga fmod.dll (FMUSIC_LoadSongEx): el original la libera con el
+	 //FMUSIC_FreeSong de la DLL (0x43F89A), no con el minifmod interno.
+	 result = FMUSIC_FreeSong(musicModule);
 	#endif
 	musicModule = NULL;
     musicModuleModified_456C24 = 0;
@@ -265,10 +267,13 @@ int freeMusic()
   int result; // eax@1
 
   result = mainArgs.configNoSound;
+  //0x43C4D0: el original cierra FMOD. Sin esto, al salir el hilo de fmod.dll seguia llamando al
+  //callback del stream mientras el proceso liberaba la memoria (cierre en VCRUNTIME al salir).
   if ( !mainArgs.configNoSound )
-  //TODO
-	result = 0;
-    //result = FSOUND_Close();
+  {
+    FSOUND_Close();
+    result = 0;
+  }
   return result;
 }
 
@@ -289,9 +294,7 @@ void   loadMusic(int a1, char * music1, int a3, char* soundEffect)
 	if (!mainArgs.configNoSound)
 	{
 		musicSize = getSizeMusic(music1);
-		musicStream = malloc(musicSize);
 		soundEffectSize = getSizeMusic(soundEffect);
-		soundEffectStream = malloc(soundEffectSize);
 
 		soundEffectStream = getMusicStream(soundEffect);
 		
@@ -335,7 +338,10 @@ void   loadMusic(int a1, char * music1, int a3, char* soundEffect)
 			
 
 				FMUSIC_PlaySong_43DA40(musicModuleModified_456C24);
-				sound_stream = FSOUND_Stream_Create(sub_43C220, 4096, FSOUND_UNSIGNED, 44100, 0); //int length,unsigned int mode 80,int samplerate,int userdata
+				//0x43CCE3: modo 50h = FSOUND_16BITS | FSOUND_STEREO (con signo), que es lo que entrega
+				//FSOUND_MixerClipCopy. El "80" del comentario era decimal y se habia leido como
+				//FSOUND_UNSIGNED (0x80): la mezcla con signo se leia sin signo.
+				sound_stream = FSOUND_Stream_Create(sub_43C220, 4096, FSOUND_16BITS | FSOUND_STEREO, 44100, 0);
 				soundStream = sound_stream;
 				channel = FSOUND_Stream_Play(-1, sound_stream);
 				channel_456C10 = channel;
@@ -346,7 +352,8 @@ void   loadMusic(int a1, char * music1, int a3, char* soundEffect)
 				}
 			#endif
 		}
-		//free(musicStream);
-		//free(soundEffectStream);
+		//El original libera los dos archivos al terminar (0x43CD3B): FMOD y minifmod copian lo que usan.
+		free(musicStream);
+		free(soundEffectStream);
 	}
 }

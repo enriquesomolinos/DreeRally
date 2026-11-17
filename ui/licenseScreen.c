@@ -10,6 +10,7 @@
 #include "../drivers.h"
 #include "../config.h"
 #include "../cars.h"
+#include "../diagnostics.h"
 #include "util/popup.h"
 #include "../i18n/i18n.h"
 
@@ -58,7 +59,7 @@ int   licenseScreen(int useWeapons_mal)
   signed int v30; // edx@49
   char *v31; // edi@50
   int v32; // ebp@74
-  char *v33; // al@74
+  char v33; // al@74
   char *v34; // ecx@74
   int v35; // ebx@77
   char *v36; // eax@77
@@ -87,8 +88,8 @@ int   licenseScreen(int useWeapons_mal)
   __int16 v59; // [sp+24h] [bp-24h]@9
   
   char v61[120]; // [sp+3Ch] [bp-Ch]@16
-  char* DstBuf; // [sp+30h] [bp-18h]@9
-  DstBuf = (char*)malloc(0x1000);
+  char price[32];
+  diagnosticLog("license screen: weapons=%d", useWeapons_mal);
   extractFromBpa("MENU.BPA", tsahpeBpk_45EB5C, (int)"licence3.bpk");
   copyImageToBuffer((int)tsahpeBpk_45EB5C, (int)textureTemp);
   carAnimCurrentFrame_45FBA0 = 0;
@@ -127,18 +128,10 @@ int   licenseScreen(int useWeapons_mal)
   }
   drawImageWithPosition2((int)carbas2Bpk, 96, 96, (int)((char *)screenBuffer + 113119));
   drawImageWithPosition2((int)carnameBpk, 96, 16, (int)((char *)screenBuffer + 113119));
-  SDL_itoa(cars[0].cost, &DstBuf, 10);
-
-   //v8 = strlen(&DstBuf) + 1;
-
-	v9 = malloc(v3); //coste + el $
-	strcpy(v9,"$"); /* copy name into the new var */
-	strcat(v9, &DstBuf);
-
-  v11 = getBoxTextOffset(v9);
-  drawInGamePrices(v9, v11 + 165599);
+  snprintf(price, sizeof(price), "$%d", cars[0].cost);
+  v11 = getBoxTextOffset(price);
+  drawInGamePrices(price, v11 + 165599);
   v12 = 0;
-  free(v9);
   for ( j = 0; j < carAnimCurrentFrame_45FBA0; ++j )
     v12 += carAnimFrameSize_45FBA0[j];
   copyImageToBuffer((int)((char *)kuplaBpk + v12), (int)dword_461EA4);
@@ -152,30 +145,13 @@ int   licenseScreen(int useWeapons_mal)
   sub_418090();
   //v17 = &byte_460840[108 * driverId];
   //v18 = &byte_460840[108 * driverId];
-  v17 = (char *)&drivers[driverId];
-  v18 = (char *)&drivers[driverId];
-
- 
-  do
-  {
-    v19 = *v18;
-    v18[v61 - v17] = *v18;
-    ++v18;
-  }
-  while ( v19 );
+  v17 = drivers[driverId].name;
+  memcpy(v61, v17, sizeof(drivers[driverId].name));
   *v17 = 0;
   if ( !readKeyboard(v17, 173, 208, (int)&unk_4455B0_2, 0xAu, 300, 0, 1, 1) )
   {
     loadMenuSoundEffect(1u, 25, 0, configuration.effectsVolume, dword_445194);
-    v47 = v61;
-    v48 = (char *)&drivers[driverId - (signed int)v61];
-    do
-    {
-      v49 = *v47;
-      v48[(_DWORD)v47] = *v47;
-      ++v47;
-    }
-    while ( v49 );
+    memcpy(drivers[driverId].name, v61, sizeof(drivers[driverId].name));
     v46 = 0;
     goto LABEL_86;
   }
@@ -197,16 +173,9 @@ int   licenseScreen(int useWeapons_mal)
   drawImageWithPosition2((int)*(&graphicsGeneral.face01Bpk + drivers[driverId].face), 64, 64, (int)((char *)screenBuffer + 122330));
   drawImageWithPosition2((int)carbas2Bpk, 96, 96, (int)((char *)screenBuffer + 113119));
   drawImageWithPosition2((int)carnameBpk, 96, 16, (int)((char *)screenBuffer + 113119));
-  SDL_itoa(cars[0].cost, &DstBuf, 10);
-  v59 = 36;
-  v21 = strlen(&DstBuf) + 1;
-  v22 = (char *)&v58 + 3;
-  do
-    v23 = (v22++)[1];
-  while ( v23 );
-  memcpy(v22, &DstBuf, v21);
-  v24 = getBoxTextOffset((const char *)&v59);
-  drawInGamePrices((const char *)&v59, v24 + 165599);
+  snprintf(price, sizeof(price), "$%d", cars[0].cost);
+  v24 = getBoxTextOffset(price);
+  drawInGamePrices(price, v24 + 165599);
   drawMenuAnimation(479, 192, carAnimCurrentFrame_45FBA0, (int)kuplaBpk, (int)carAnimFrameSize_45FBA0);
   drawKeyCursor(123359, (char *)screenBuffer + 123359, 0x60u, 64);
   carAnimCurrentFrame_45FBA0 = (carAnimCurrentFrame_45FBA0 + 1) % 64;
@@ -374,7 +343,9 @@ LABEL_74:
   //strlwr(&byte_460840[108 * v20]);
   //v32 = 27 * driverId;
   //v33 = byte_460840[108 * driverId];
-  v33 = drivers[driverId].name;
+  //Es la primera letra (al@74), no el puntero: se comparaba el byte bajo de la direccion del nombre
+  //y, si caia entre a y z (en Release cae en "d"), se escribia como inicial: "Dariano".
+  v33 = drivers[driverId].name[0];
   v34 = drivers[driverId].name;
   //v34 = &byte_460840[108 * driverId];
   if ( (unsigned __int8)v33 > 0x60u && (unsigned __int8)v33 < 0x7Bu )

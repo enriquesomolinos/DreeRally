@@ -34,6 +34,7 @@ Follow us on [Dreerally](http://www.dreerally.com)
 
 # Building with Visual Studio 2010-2017
 - Open the project solution `DreeRally.sln`, choose `Debug` or `Release`, and then `Build Solution`.
+- Or, with Visual Studio 2019/2022 or just its Build Tools, run `scripts\Build.ps1`. See [doc/DEVELOPMENT.md](doc/DEVELOPMENT.md) for the scripts, diagnostics and the pitfalls of the decompiled code.
 
 # Building under Linux
 - Run make -f Makefile.linux
@@ -94,6 +95,7 @@ And a special thanks to all the support and people who work on this project to m
 - tools/Music.py: once music.bpk file is extracted, with this script you can decrypt the music files and play with VLC.
 - tools/SavegameDecrypt.py: takes a savegame and decrypts its contents. A tthis moment it's very easy to modify your savegame :)
 - tools/SavegameCrypt.py: takes a decrypted savegame and returns it to the original format. The original death rally must open this file :)
+- tools/savegame.py: shows, decrypts, encrypts and edits DR.SGn savegames (Python 3). Format in [doc/SAVEGAME.md](doc/SAVEGAME.md).
 - tools/Bpkdecryptor.py: takes a BPK file and his Pal file to generate a gif file.
 
 

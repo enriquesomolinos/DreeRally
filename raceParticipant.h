@@ -55,7 +55,7 @@ typedef struct RaceParticipant2 {
 	int carType;
 	float efectiveEngine_4A6884;
 	float efectiveEngineBackup_4A6888;//backup del motor porque cambia en medio de carrera
-	int efectiveTire_4A688C;
+	float efectiveTire_4A688C;//float en dr.exe (0x401E00): como int, 0.5/0.3/0.1 quedaban en 0 y ningun coche derrapaba
 	float carSize_4A6890;
 	float steeringCapacity_4A6894;//parece que es la oposicin al giro del coche (cuanto peor coche es mas alto)
 	int damageBar_4A6898;
@@ -256,9 +256,11 @@ typedef struct RaceParticipantIngame {
 	double carVelocity_4A7DB0; // weak //parece la velocidad que llevas
 	float absolutePositionX_4A7DB4; // weak
 	float absolutePositionY_4A7DB8; // weak
-	int dword_4A7DBC;//este no venia
-	int dword_4A7DC0;//este no venia  parece como el tiempo que llevas girando
-	int dword_4A7DC4; //este n venia  estos son para el calculo del mobvimiento dle usuario
+	//float en el original (fld/fstp dword en 0x40BCBE..0x40C33E). Como int el deslizamiento
+	//lateral se truncaba y los puntos de muestreo del terreno quedaban corridos un pixel.
+	float dword_4A7DBC;//deslizamiento lateral: DC0 * velocidad * gomas / motor
+	float dword_4A7DC0;//tiempo que llevas girando, de -36 a 36
+	float dword_4A7DC4;//punto de muestreo del terreno a +26 grados del frente, X relativa (Y en DC8)
 	float dword_4A7DC8; //este no venia
 	float dword_4A7DCC;//float
 	float dword_4A7DD0;
@@ -271,32 +273,32 @@ typedef struct RaceParticipantIngame {
 	float dword_4A7DEC;
 	float dword_4A7DF0;
 	
-	int dword_4A7DF4;//est eno venia
-	int dword_4A7DF8;//este no venia
-	int unk_4A7DFC; // weak  modificador del avance ejex
-	int unk_4A7E00; // weak modificador del avance eje y sobre todo para choques
-	int unk_4A7E04; // weak modificador del angulo con choques y terreno.
+	float dword_4A7DF4;//punto de muestreo en el centro del frente, X relativa
+	float dword_4A7DF8;//idem, Y relativa
+	float unk_4A7DFC; // weak  modificador del avance ejex
+	float unk_4A7E00; // weak modificador del avance eje y sobre todo para choques
+	float unk_4A7E04; // weak modificador del angulo con choques y terreno.
 	char currentLap_4A7E08; // weak
 	char racePosition_4A7E09; // weak
 	int hasFinishedTheRace_4A7E0C; // weak
 	int frontLeftAbsoluteXPosition_4A7E10; // weak
 	int frontLeftAbsoluteYPosition_4A7E14; // weak
-	int lastFrontLeftAbsoluteXPosition_4A7E18; // weak  relacionado con la anterios
- 	int lastFrontLeftAbsoluteYPosition_4A7E1C; // weak relacionado con la anterios
+	float lastFrontLeftAbsoluteXPosition_4A7E18; // weak  relacionado con la anterios
+ 	float lastFrontLeftAbsoluteYPosition_4A7E1C; // weak relacionado con la anterios
 	int frontRightAbsoluteXPosition_4A7E20;
 	int frontRightAbsoluteYPosition_4A7E24; // weak
-	int lastFrontRightAbsoluteXPosition_4A7E28; // weak relacionado con la anterios
-	int lastFrontRightAbsoluteYPosition_4A7E2C; // weak relacionado con la anterios
+	float lastFrontRightAbsoluteXPosition_4A7E28; // weak relacionado con la anterios
+	float lastFrontRightAbsoluteYPosition_4A7E2C; // weak relacionado con la anterios
 	int backLeftAbsoluteXPosition_4A7E30; // weak  //esquina de atras izquierda
 	int backLeftAbsoluteYPosition_4A7E34; // weak
-	int lastBackLeftAbsoluteXPosition_4A7E38; // weak
-	int lastBackLeftAbsoluteYPosition_4A7E3C; // weak  
+	float lastBackLeftAbsoluteXPosition_4A7E38; // weak
+	float lastBackLeftAbsoluteYPosition_4A7E3C; // weak  
 	int backRightAbsoluteXPosition_4A7E40; // weak//esquina de atras derecha
 	int backRightAbsoluteYPosition_4A7E44; // weak
-	int lastBackRightAbsoluteXPosition_4A7E48; // weak 
-	int lastBackRightAbsoluteYPosition_4A7E4C; // weak
-	int dword_4A7E50; // weak
-	int dword_4A7E54; // weak
+	float lastBackRightAbsoluteXPosition_4A7E48; // weak 
+	float lastBackRightAbsoluteYPosition_4A7E4C; // weak
+	float dword_4A7E50; // weak
+	float dword_4A7E54; // weak
 	float flt_4A7E58; // weak//parece algo relacionado con el angulo del coche
 	float advanceXAxis_4A7E5C; // weak   //avance eje x    parece que son float
 	float advanceYAxis_4A7E60; // weak   //avance eje y 

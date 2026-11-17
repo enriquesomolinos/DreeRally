@@ -1,5 +1,6 @@
 #menus
 Start Racing=Começar Corrida
+Continue Racing=Continuar Corrida
 Multiplayer Race=Corrida Multiplayer
 Configure=Configuração
 See hall of fame=Ver Hall da Fama
@@ -10,6 +11,7 @@ no=não
 Are you sure?=¿Tem certeza?
 
 Start a new game=Começar um novo jogo
+Enter The Shop=Entrar na Loja
 End current Game=Finalizar jogo atual
 See current Stadistics=Ver estatísticas
 Load game=Carregar jogo
@@ -21,6 +23,7 @@ Effect volume=Volume dos efeitos
 define Keyboard=Configuração do telcado
 Define Gamepad/Joystick=Configuração de gamepad/joystick
 Gamepad/Joystick Disabled=gamepad/joystick Desativados
+Gamepad/Joystick Enabled=gamepad/joystick Ativados
 
 Empty slot=Slot vazio
 Quicksave slot=Save rápido

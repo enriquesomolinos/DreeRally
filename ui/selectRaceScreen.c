@@ -17,6 +17,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "../diagnostics.h"
 
 char byte_461F00[256]; // weak
 int lastCircuitsSelected_456780[3];
@@ -206,9 +207,10 @@ int calculateNextRaces()
   lastCircuitsSelected_456780[0] = (unsigned __int8)circuitsToSelect_46126C[0];
   do
   {
-    circuitsToSelect_46126C[1] = circuitOrder_45673C[rand() % 6];
-	//circuitsToSelect_46126C[1] = byte_45673E[rand() % 6];
-	//byte_46126D = byte_45673E[rand() % 6];
+    //Cada dificultad toma su tramo de la tabla: medio desde la posicion 2 (0x4241A1) y dificil
+    //desde la 5 (0x4241F5). Tomandolas todas desde 0, en dificil salian los circuitos faciles
+    //y Downtown, Bogota y Velodrome (y sus invertidos) no salian nunca.
+    circuitsToSelect_46126C[1] = circuitOrder_45673C[2 + rand() % 6];
     v8 = rand() & 0x80000001;
     v7 = v8 == 0;
     if ( (v8 & 0x80000000) != 0 )
@@ -227,8 +229,7 @@ int calculateNextRaces()
   lastCircuitsSelected_456780[1] = (unsigned __int8)v9;
   do
   {
-    circuitsToSelect_46126C[2] = circuitOrder_45673C[rand() % 4];
-	//byte_46126E = byte_456741[rand() % 4];
+    circuitsToSelect_46126C[2] = circuitOrder_45673C[5 + rand() % 4];
     result = rand() % 2;
     v5 = result == 0;
     LOBYTE(result) = circuitsToSelect_46126C[2];
@@ -244,6 +245,9 @@ int calculateNextRaces()
   //while ( dword_456788 == (unsigned __int8)result || byte_46126D == (BYTE)result );
   while (lastCircuitsSelected_456780[2] == (unsigned __int8)result || circuitsToSelect_46126C[1] == (BYTE)result);
   lastCircuitsSelected_456780[2] = (unsigned __int8)result;
+  diagnosticLog("circuitos: facil=%s medio=%s dificil=%s",
+                circuits[(unsigned __int8)circuitsToSelect_46126C[0]], circuits[(unsigned __int8)circuitsToSelect_46126C[1]],
+                circuits[(unsigned __int8)circuitsToSelect_46126C[2]]);
 
   //TODO esto es para que salgan fijas
 if(debug==1){
@@ -260,6 +264,7 @@ if(debug==1){
 //----- (004357F0) --------------------------------------------------------
 void selectRaceScreen()
 {
+  diagnosticLog("pantalla: selectRaceScreen");
   unsigned __int8 v0; // di@1
 //  signed int v1; // esi@1
   int v2; // ST48_4@2
@@ -291,31 +296,15 @@ void selectRaceScreen()
 //  char v28; // cl@56
   int v29; // ecx@57
   unsigned __int8 v30; // al@57
-  signed int v31; // edx@61
-  char v32; // cl@62
-  char v33; // bl@62
-  char v34; // al@62
-  char v35; // cl@62
   signed int v36; // esi@62
   signed int v37; // edi@62
   signed int v38; // ebp@62
-  char *v39; // ecx@63
   signed int v40; // eax@64
-  bool v41; // zf@74
   signed int v42; // esi@78
 //  const char **v43; // [sp+0h] [bp-6Ch]@0
 //  const char **v44; // [sp+4h] [bp-68h]@0
-  char Str; // [sp+10h] [bp-5Ch]@53
-  char v46; // [sp+11h] [bp-5Bh]@62
-  char v47; // [sp+12h] [bp-5Ah]@62
-  char v48; // [sp+13h] [bp-59h]@62
-  char DstBuf[256]; // [sp+1Ch] [bp-50h]@45
-  int v50; // [sp+20h] [bp-4Ch]@62
-  int v51; // [sp+24h] [bp-48h]@62
-  int v52; // [sp+28h] [bp-44h]@62
-  int v53; // [sp+2Ch] [bp-40h]@46
-  char *name =malloc(100); // [sp+30h] [bp-3Ch]@45
-  int index = 176;
+  char name[100]; // [sp+30h] [bp-3Ch]@45
+  int index = 528; // palette1[528] es el color 176 (0x460480)
   selectedRace_462CE8 = -1;
   calculateNextRaces();
   v0 = -80;
@@ -339,7 +328,8 @@ void selectRaceScreen()
 	index+=3;
   }
   //while ( v1 < (signed int)&unk_4604D8 );
-  while (index < 176+16);
+  //0x43586A: hasta 0x4604D8, colores 176 a 182 (antes leia los colores 58 a 63)
+  while (index < 549);
 
   
   memcpy((void *)dword_45FC00, graphicsGeneral.menubg5Bpk, 0x4B000u);
@@ -364,7 +354,7 @@ void selectRaceScreen()
     refreshAndCheckConnection_42A570();
     refreshAndCheckConnection_42A570();
     addParticipantToRace(75);
-    switch ( eventDetected() )
+    switch ( (unsigned __int8)eventDetected() )
     {
       case KEY_LEFT:
       case 0xCB:
@@ -552,49 +542,26 @@ void selectRaceScreen()
         }
         while (participantsRace[0] < 4u || participantsRace[2] < 4u );
 		///while (HIBYTE(word_461EB4) < 4u || (unsigned __int8)byte_461EB6 < 4u);
-		//este codigo ordena los participantes en la parrilla
-        v31 = &dword_45EB50[2];//45EB52
-        do
+		//Ordena la parrilla de cada carrera de mayor a menor indice de piloto (drivers[] esta en
+		//orden de ranking, asi que el peor clasificado sale primero) y anota el puesto del jugador.
+		//El original lo hacia sobre los bytes de dword_45EB50 con cuatro locales contiguos en su
+		//pila; aqui dword_45EB50 ya no se llena y esos locales no son contiguos: se leia basura
+		//de la pila y userRaceOrder_45FC20 podia quedar apuntando a otro coche.
+        for ( v36 = 0; v36 < 3; ++v36 )
         {
-          v32 = *(BYTE *)(v31 - 2);
-          v33 = *(BYTE *)(v31 + 1);
-          *(_DWORD *)DstBuf = 0;
-          v50 = 0;
-          v51 = 0;
-          v52 = 0;
-          v53 = 0;
-          v34 = *(BYTE *)(v31 - 1);
-          Str = v32;
-          v35 = *(BYTE *)v31;
-          v48 = v33;
-          v46 = v34;
-          v47 = v35;
-          v36 = 0;
-          v37 = (unsigned __int8)v34;
-          v38 = (unsigned __int8)v35;
-          do
+          for ( v37 = 1; v37 < 4; ++v37 )
           {
-            v39 = &Str;
-            do
-              v40 = (unsigned __int8)*v39++;
-            while ( DstBuf[v40] );
-            if ( v37 > v40 && !DstBuf[v37] )
-              v40 = v37;
-            if ( v38 > v40 && !DstBuf[v38] )
-              v40 = v38;
-            if ( (unsigned __int8)v33 > v40 && !DstBuf[(unsigned __int8)v33] )
-              v40 = (unsigned __int8)v33;
-            v41 = v40 == driverId;
-            DstBuf[v40] = 1;
-           //>TODO FIX LO HE QUITADO PORQU PETA *(BYTE *)(v31 + v36 - 2) = v40;
-            if ( v41 )
-              userRaceOrder_45FC20 = v36;
-            ++v36;
+            v40 = racePositions[v36][v37];
+            for ( v38 = v37; v38 > 0 && racePositions[v36][v38 - 1] < v40; --v38 )
+              racePositions[v36][v38] = racePositions[v36][v38 - 1];
+            racePositions[v36][v38] = v40;
           }
-          while ( v36 < 4 );
-          v31 += 4;
+          for ( v37 = 0; v37 < 4; ++v37 )
+          {
+            if ( racePositions[v36][v37] == driverId )
+              userRaceOrder_45FC20 = v37;
+          }
         }
-        while ( v31 < 4582238 );
 		/*v31 = 4582226;//45EB52
         do
         {

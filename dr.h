@@ -9,28 +9,57 @@
 int __SETS__(int x);
 int __OFSUB__(int x, int y);
 
-extern char byte_463E00[256]; // weak
-extern _UNKNOWN unk_462096; // weak
+//Sin estos prototipos, los llamadores que pasan un unsigned __int64 (p. ej. el porcentaje
+//de dano en leftBar.c) empujan 8 bytes y corren todos los argumentos siguientes.
+int drawSprite_402590(int baseImage, int width, int height, signed int a4, int spriteNumber, int a6, int a7, int a8);
+int drawImageInRace_43B240(int filename, int width, int height, int offset);
+int drawInRaceImageToBuffer_43B160(int a1, int a2, int a3, int a4);
+//Ranking: ordena drivers[] por puntos y recalcula los puestos.
+int sub_423C90(int a1, int a2);
+void recalcRank(int a1);
+int updateScreenPtr(int a1);
 
-extern __int16 word_461ED4; // weak
+extern char byte_463E00[256]; // weak
 extern void *volcur2Bpk; // idb
 
+//Noticias del menu. En el original son dos bloques contiguos: el color de cada linea
+//(0x461EC0, 22 bytes) y las lineas (0x462000, 22 x 150 bytes). El decompilado los partio en
+//globales sueltas y los bucles que desplazan las lineas corrian hasta &blacktx1Bpk, que aqui
+//esta en cualquier lado: pisaban memoria cada 150 bytes (drivers[] tras una carrera).
+#define MENU_NEWS_LINES 22
+#define MENU_NEWS_LINE_SIZE 150
 extern char unk_461EC0[256]; // idb
-extern _UNKNOWN unk_461EC1; // weak
-extern _UNKNOWN unk_461EC2; // weak
-extern _UNKNOWN unk_461EC3; // weak
-extern __int16 word_461EC4; // weak
-extern _UNKNOWN unk_461EC6; // weak
-extern _UNKNOWN unk_461EC7; // weak
-extern __int16 word_461EC8; // weak
-extern _UNKNOWN unk_461ECA; // weak
-extern _UNKNOWN unk_461ECB; // weak
-extern __int16 word_461ECC; // weak
-extern _UNKNOWN unk_461ECE; // weak
-extern _UNKNOWN unk_461ECF; // weak
-extern __int16 word_461ED0; // weak
-extern _UNKNOWN unk_461ED2; // weak
-extern _UNKNOWN unk_461ED3; // weak
+#define unk_461EC1 (unk_461EC0[1])
+#define unk_461EC2 (unk_461EC0[2])
+#define unk_461EC3 (unk_461EC0[3])
+#define word_461EC4 (*(__int16 *)&unk_461EC0[4])
+#define unk_461EC6 (unk_461EC0[6])
+#define unk_461EC7 (unk_461EC0[7])
+#define word_461EC8 (*(__int16 *)&unk_461EC0[8])
+#define unk_461ECA (unk_461EC0[10])
+#define unk_461ECB (unk_461EC0[11])
+#define word_461ECC (*(__int16 *)&unk_461EC0[12])
+#define unk_461ECE (unk_461EC0[14])
+#define unk_461ECF (unk_461EC0[15])
+#define word_461ED0 (*(__int16 *)&unk_461EC0[16])
+#define unk_461ED2 (unk_461EC0[18])
+#define unk_461ED3 (unk_461EC0[19])
+#define word_461ED4 (*(__int16 *)&unk_461EC0[20])
+extern char unk_462000[MENU_NEWS_LINES * MENU_NEWS_LINE_SIZE];
+#define MENU_NEWS_LINE(n) (&unk_462000[(n) * MENU_NEWS_LINE_SIZE])
+#define MENU_NEWS_END_462CE4 MENU_NEWS_LINE(MENU_NEWS_LINES)
+#define unk_462096 (*MENU_NEWS_LINE(1))
+#define unk_462960 (*MENU_NEWS_LINE(16))
+#define byte_4629F6 MENU_NEWS_LINE(17)
+#define byte_462A8C MENU_NEWS_LINE(18)
+#define byte_462B22 MENU_NEWS_LINE(19)
+#define byte_462BB8 MENU_NEWS_LINE(20)
+#define dword_462C4E (*(int *)MENU_NEWS_LINE(21))
+#define dword_462C52 (*(int *)(MENU_NEWS_LINE(21) + 4))
+#define dword_462C56 (*(int *)(MENU_NEWS_LINE(21) + 8))
+#define dword_462C5A (*(int *)(MENU_NEWS_LINE(21) + 12))
+#define dword_462C5E (*(int *)(MENU_NEWS_LINE(21) + 16))
+#define word_462C62 (*(__int16 *)(MENU_NEWS_LINE(21) + 20))
 extern int joystick_y_axis_default_4A9EA0;
 extern int joystick_y_axis_4A9EB8;
 extern int joystick_x_axis_default_4AA3E0; // weak
@@ -39,19 +68,17 @@ extern char byte_456B00;
 extern void *slidmus2Bpk; // idb
 extern char byte_456B01;
 extern char byte_44512A;
-extern char byte_4629F6[256]; // weak
-extern char byte_462A8C[256]; // weak
-extern char byte_462B22[256]; // weak
-extern char byte_462BB8[256]; // weak
 
-extern __int16 word_45F010; // weak
-
-extern int dword_45F000; // weak
-extern int dword_45F004; // weak
-extern int dword_45F008; // weak
-extern int dword_45F00C; // weak
+//Juegos de noticias de True Tom ya usados (0x45F000, un byte por cada uno de los 19). El decompilado
+//los partio en globales sueltas y sub_4279C0 marcaba el usado escribiendo mas alla del primer int.
+extern char newsSetUsed_45F000[19];
+#define dword_45F000 (*(int *)&newsSetUsed_45F000[0])
+#define dword_45F004 (*(int *)&newsSetUsed_45F000[4])
+#define dword_45F008 (*(int *)&newsSetUsed_45F000[8])
+#define dword_45F00C (*(int *)&newsSetUsed_45F000[12])
+#define word_45F010 (*(__int16 *)&newsSetUsed_45F000[16])
+#define byte_45F012 (newsSetUsed_45F000[18])
 extern char byte_45FB84; // weak
-extern char byte_45F012; // weak
 extern char aGamepadDisable[50];
 extern int menuOptionSelected_463DF0; // weak
 extern int debug;
@@ -92,7 +119,10 @@ extern int dword_45F050; // idb
 extern int dword_45F054; // idb
 extern int dword_456BD8;
 extern int dword_456730;
-extern int dword_445724;
+//En dr.exe cada menu es un registro de 7 enteros desde 0x4456F0; el port lo partio en un arreglo
+//por campo. 0x445724 es el cursor del menu 1 (partida), que una variable suelta no movia.
+extern int dword_445708[];
+#define dword_445724 (dword_445708[1])
 extern int dword_4456E8;
 extern int dword_45FA74; // weak
 extern int dword_45FC00;
@@ -261,10 +291,10 @@ typedef struct RacePopupMemory
 	int unk_479EE4; // weak  -28 posicion y donde pintar
 int unk_479EE8; // weak 24
 int unk_479EEC; // weak 20
-int * unk_479EF0; // weak 16 puntero que contiene la imagen a mostras :)
-int unk_479EF4; // weak 12
-int unk_479EF8; // weak 8
-int unk_479EFC; // weak 4
+//Pedazo de 4x4 pixeles del cartel, guardado dentro del struct (0x479EF0..0x479EFF).
+//Estaba tipado como puntero con malloc(4): sub_43AE80 copia 16 bytes y desbordaba el heap
+//en cada uno de los 969 pedazos (basura en el cartel y cierre al liberar al terminar).
+int unk_479EF0[4];
 
 char unk_479F00; // weak
 

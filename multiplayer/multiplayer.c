@@ -2033,7 +2033,6 @@ int   multiplayer_406D30(int a1)
 	  racePopupMemory[v7].unk_479EE4= 0;
 	  racePopupMemory[v7].unk_479EEC = 0;
 	  racePopupMemory[v7].unk_479EE8 = 0;
-	  racePopupMemory[v7].unk_479EF0 = malloc(4); ///TODO FIX puesto por mi
     v7 += 1;
   }
   while(v7<969);
@@ -2158,7 +2157,7 @@ LABEL_33:
     v21 = dword_503220;
     v22 = 204 * dword_464F18;
 	racePopupMemory[v19].unk_479EE8 = (v20 - 2) << 16;
-	sub_43AE80(racePopupMemory[v19].unk_479EF0, (int)((char *)inRaceMessagePopup_479690 + v22 + v21), 4, 204);
+	sub_43AE80((int)racePopupMemory[v19].unk_479EF0, (int)((char *)inRaceMessagePopup_479690 + v22 + v21), 4, 204);
     dword_464F18 += 4;
     if ( dword_464F18 == 76 )
     {

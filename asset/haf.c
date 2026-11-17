@@ -291,14 +291,7 @@ void decryptAnimFrame()
 void   openAnimation(const char *animFile, int a2, char * music, int a4, char * effect, char onKeyPressExit, char screenResolution)
 {
 	
-  unsigned int v7; // eax@2
-  char *v8; // edi@2
-  char v9; // cl@3
-  unsigned int v10; // eax@5
-  char *v11; // edi@5
-  char v12; // cl@6
 //  void *v13 =malloc(0xFA00u); // eax@7
-  void *v14 = malloc(0xFA00u); // eax@7
   int (  *v15)(FILE *); // ebx@11
   FILE *fAnimFile; // ebp@11
   unsigned __int8 v17; // ST3F_1@11
@@ -328,8 +321,7 @@ void   openAnimation(const char *animFile, int a2, char * music, int a4, char * 
   signed int v41; // esi@37
   signed int v42; // esi@39
   int v43; // [sp+Ch] [bp-404h]@1
-  char Filename; // [sp+10h] [bp-400h]@1
-  char *v45 = malloc(768); // [sp+110h] [bp-300h]@17
+  char v45[768]; // [sp+110h] [bp-300h]@17
   //char v46; // [sp+111h] [bp-2FFh]@17
   int frames;
   int currentFrame;
@@ -341,32 +333,23 @@ void   openAnimation(const char *animFile, int a2, char * music, int a4, char * 
       return;
   }
   v43 = 1;
-  Filename = 0;
-  if ( byte_462D50 == 2 )
-  {
-    v7 = strlen(byte_45FAA0) + 1;
-    v8 = (char *)&v43 + 3;
-    do
-      v9 = (v8++)[1];
-    while ( v9 );
-    memcpy(v8, byte_45FAA0, v7);
-  }
-  v10 = strlen(animFile) + 1;
-  v11 = (char *)&v43 + 3;
-  do
-    v12 = (v11++)[1];
-  while ( v12 );
-  memcpy(v11, animFile, v10);
+  // The original built the CD path plus animFile in Filename, searching from the local before it;
+  // in the port that wrote over the stack, and Filename is not used (the file opens below).
   //allocateMemory(0xFA00u);
   //allocateMemoryPtr((void*)&v13,0xFA00u); //esto huele a un frame
   anim_currentFrameData = malloc(0xFA00u);
   //allocateMemory(0xFA00u);
   //allocateMemoryPtr((void*)&v14, 0xFA00u);
-  DstBuf = v14;
   if ( (BYTE)a2 )
     loadMusic(a2, music, a4, effect);
   nullsub_1();
   setWindowCaption3(19);
+  //Los cuadros se escriben en screenPtr y la pantalla 320x200 se lee desde el inicio del buffer.
+  //setWindowCaption3 solo lo devuelve al inicio cuando cambia de modo; tras ganarle al Adversary el
+  //juego sigue en modo carrera y addParticipantToRace acaba de refrescar el menu (refreshAllScreen
+  //deja screenPtr en el bloque 4), asi que el final se dibujaba fuera de la vista: audio y pantalla
+  //negra. Pasa igual en dr.exe 1.0 (0x423C7A, 0x43BD70, 0x4188BC); en DOS el modo 13h no tiene bloques.
+  updateScreenPtr(0);
   recalculateSDLTicks_43C740();
   if ( (BYTE)a2 )
   {
@@ -505,7 +488,7 @@ void   openAnimation(const char *animFile, int a2, char * music, int a4, char * 
   do
     stopSoundChannel_43C3E0(v42++);
   while ( v42 <= 6 );
-  //free(anim_currentFrameData);
+  free(anim_currentFrameData);
   free(DstBuf);
   free(animationSoundEffectByFrame_45EEA4);
   free(framesDelay);
@@ -514,31 +497,13 @@ void   openAnimation(const char *animFile, int a2, char * music, int a4, char * 
 //----- (004278E0) --------------------------------------------------------
 FILE *checkAndOpenAnimation()
 {
-  unsigned int v0; // eax@2
-  void *v1; // edi@2
-  char v2; // cl@3
-  char *v3; // edi@5
 //  char v4; // al@6
   FILE *result; // eax@7
   FILE *v6; // esi@7
   __int32 v7; // edi@8
-  char v8; // [sp+7h] [bp-65h]@2
-  char Filename; // [sp+8h] [bp-64h]@1
 
-  Filename = 0;
-  if ( byte_462D50 == 2 )
-  {
-    v0 = strlen(byte_45FAA0) + 1;
-    v1 = &v8;
-    do
-    {
-      v2 = *((BYTE *)v1 + 1);
-      v1 = (char *)v1 + 1;
-    }
-    while ( v2 );
-    memcpy(v1, byte_45FAA0, v0);
-  }
-  v3 = &v8;
+  // The original built the CD path plus "sanim.haf" in Filename, searching from the local before
+  // it; upstream opens "SANIM.haf" directly and the half that was left only wrote over the stack.
  /* do
     v4 = (v3++)[1];
   while ( v4 );
